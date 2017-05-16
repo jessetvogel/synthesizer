@@ -7,9 +7,24 @@ Controller::Controller() {
     input = new Input(this);
     output = new Output(this);
     midiState = new MidiState();
+    settings = new Settings();
     
     // Set default values
     active = false;
+    inputDevice = -1;
+    outputDevice = -1;
+    sampleRate = 44100;
+    framesPerBuffer = 64;
+}
+
+Controller::~Controller() {
+    delete input;
+    delete output;
+    delete midiState;
+    delete settings;
+    
+    for(auto it = instruments.begin(); it != instruments.end(); ++it)
+        delete (*it);
 }
 
 void Controller::start() {
@@ -17,6 +32,8 @@ void Controller::start() {
         Log::warning("Tried to start Controller, but already started");
         return;
     }
+    
+    buffer = new float[framesPerBuffer];
     
     input->start();
     output->start();
@@ -26,25 +43,89 @@ void Controller::start() {
 
 void Controller::stop() {
     if(!active) {
-        Log::warning("Tried to stop Contorller, but wasn't started yet");
+        Log::warning("Tried to stop Controller, but wasn't started yet");
     }
     
     output->stop();
     input->stop();
     
+    delete[] buffer;
+    
     active = false;
+}
+
+float* Controller::update() {
+    input->update();
+
+    // TODO: something with nodes or so?
+    
+    memset(buffer, 0, sizeof(float) * framesPerBuffer);
+    
+    for(auto it = instruments.begin(); it != instruments.end(); ++it) {
+        (*it)->update(midiState);
+        (*it)->addBuffer(buffer);
+    }
+    
+    return buffer;
 }
 
 MidiState* Controller::getMidiState() {
     return midiState;
 }
 
-void Controller::setInputDevice(int n) {
-    input->setInputDevice(n);
+Settings* Controller::getSettings() {
+    return settings;
 }
 
-void Controller::setOutputDevice(int n) {
-    output->setOutputDevice(n);
+bool Controller::setInputDevice(int n) {
+    if(active)
+        return false;
+    
+    inputDevice = n;
+    return true;
+}
+
+bool Controller::setOutputDevice(int n) {
+    if(active)
+        return false;
+    
+    outputDevice = n;
+    return true;
+    
+}
+
+bool Controller::setSampleRate(double sampleRate) {
+    if(active)
+        return false;
+    
+    this->sampleRate = sampleRate;
+    return true;
+    
+}
+
+bool Controller::setFramesPerBuffer(unsigned long framesPerBuffer) {
+    if(active)
+        return false;
+    
+    this->framesPerBuffer = framesPerBuffer;
+    return true;
+    
+}
+
+int Controller::getInputDevice() {
+    return inputDevice;
+}
+
+int Controller::getOutputDevice() {
+    return outputDevice;
+}
+
+double Controller::getSampleRate() {
+    return sampleRate;
+}
+
+unsigned long Controller::getFramesPerBuffer() {
+    return framesPerBuffer;
 }
 
 void Controller::listInputDevices() {
@@ -63,13 +144,6 @@ void Controller::listOutputDevices() {
     }
 }
 
-void Controller::update() {
-    input->update();
-    // TODO: update nodes and instruments etc
-}
-
-Controller::~Controller() {
-    delete input;
-    delete output;
-    delete midiState;
+void Controller::addInstrument(Instrument* instrument) {
+    instruments.push_back(instrument);
 }

@@ -2,8 +2,7 @@
 #define midistate_hpp
 
 #include <portmidi.h>
-
-#define AMOUNT_OF_NOTES (128)
+#include "settings.hpp"
 
 #define MIDI_NOTE_OFF (0x8)
 #define MIDI_NOTE_ON (0x9)
@@ -21,13 +20,14 @@
 
 class MidiState {
 
+public:
+    
     unsigned char velocity[AMOUNT_OF_NOTES];
     double pitchWheel;
     double modulationWheel;
     double mainVolume;
     double sustainPedal;
     
-public:
     MidiState();
     void update(unsigned char, unsigned char, unsigned char);
     

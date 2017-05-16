@@ -9,7 +9,6 @@ Input::Input(Controller* controller) {
     
     // Set default values
     active = false;
-    inputDevice = -1;
 }
 
 int Input::amountOfDevices() {
@@ -25,20 +24,13 @@ bool Input::isInput(int n) {
     return Pm_GetDeviceInfo(n)->input > 0;
 }
 
-void Input::setInputDevice(int n) {
-    if(active) {
-        Log::warning("Cannot set input device while running");
-        return;
-    }
-    
-    inputDevice = n;
-}
-
 void Input::start() {
     if(active) {
         Log::warning("Input already started");
         return;
     }
+    
+    int inputDevice = controller->getInputDevice();
     
     if(inputDevice == -1)
         inputDevice = Pm_GetDefaultInputDeviceID();

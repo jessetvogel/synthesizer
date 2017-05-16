@@ -9,9 +9,6 @@ Output::Output(Controller* controller) {
     
     // Set default values
     active = false;
-    outputDevice = -1;
-    sampleRate = 44100;
-    framesPerBuffer = 64;
 }
 
 int Output::amountOfDevices() {
@@ -27,20 +24,13 @@ bool Output::isOutput(int n) {
     return Pa_GetDeviceInfo(n)->maxOutputChannels > 0;
 }
 
-void Output::setOutputDevice(int n) {
-    if(active) {
-        Log::warning("Cannot set output device while running");
-        return;
-    }
-    
-    outputDevice = n;
-}
-
 void Output::start() {
     if(active) {
         Log::warning("Output already started");
         return;
     }
+    
+    int outputDevice = controller->getOutputDevice();
     
     if(outputDevice == -1)
         outputDevice = Pa_GetDefaultOutputDevice();
@@ -66,8 +56,8 @@ void Output::start() {
                         &outputStream,
                         NULL,
                         &outputParameters,
-                        sampleRate,
-                        framesPerBuffer,
+                        controller->getSampleRate(),
+                        controller->getFramesPerBuffer(),
                         paClipOff,
                         callback,
                         (void*) this);
@@ -75,24 +65,6 @@ void Output::start() {
     err = Pa_StartStream(outputStream);
     
     active = true;
-}
-
-void Output::setSampleRate(double sampleRate) {
-    if(active) {
-        Log::warning("Cannot change the sample rate of Output when active");
-        return;
-    }
-    
-    this->sampleRate = sampleRate;
-}
-
-void Output::setFramesPerBuffer(unsigned long framesPerBuffer) {
-    if(active) {
-        Log::warning("Cannot change the frames per buffer of Output when active");
-        return;
-    }
-    
-    this->framesPerBuffer = framesPerBuffer;
 }
 
 void Output::stop() {
@@ -104,10 +76,6 @@ void Output::stop() {
 //    PaError err = // TODO: check for errors
     Pa_CloseStream(outputStream);
 }
-
-int z = 0;
-
-#include <cmath>
 
 int Output::callback(const void* inputBuffer,
                         void* outputBuffer,
@@ -122,13 +90,12 @@ int Output::callback(const void* inputBuffer,
 
     // Get Output object
     Output* output = (Output*) userData;
-    output->controller->update();
+    float* buffer = output->controller->update();
     
     float* out = (float*) outputBuffer;
     for(int i = 0;i < framesPerBuffer;i ++) {
-        *(out++) = sin((double) z / 44100.0 * 6.28 * 440.0);
-        *(out++) = sin((double) z / 44100.0 * 6.28 * 440.0 * 1.5);
-        z ++;
+        *(out++) = buffer[i];
+        *(out++) = buffer[i];
     }
     
     return paContinue;

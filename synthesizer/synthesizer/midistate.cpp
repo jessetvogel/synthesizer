@@ -34,11 +34,11 @@ void MidiState::update(unsigned char status, unsigned char data1, unsigned char 
         case MIDI_CONTROL_CHANGE:
             switch(data1) {
                 case MIDI_MODULATION_WHEEL:
-                    modulationWheel = data2 / 127.0;
+                    modulationWheel = (double) data2 / 127.0;
                     break;
                     
                 case MIDI_MAIN_VOLUME:
-                    mainVolume = data2 / 127.0;
+                    mainVolume = (double) data2 / 127.0;
                     break;
                     
                 case MIDI_PAN:

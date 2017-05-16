@@ -13,20 +13,20 @@ class Input {
     PmStream* inputStream;
     
     bool active;
-    int inputDevice;
 
 public:
     
     Input(Controller*);
+//    ~Input();
+    
+    void start();
+    void stop();
+    
+    void update();
+    
     int amountOfDevices();
     const char* deviceName(int);
     bool isInput(int);
-    
-    void setInputDevice(int);
-    
-    void start();
-    void update();
-    void stop();
     
 };
 
