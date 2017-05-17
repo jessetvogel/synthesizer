@@ -11,7 +11,7 @@ MidiState::MidiState() {
     pitchWheel = 0.0;
     modulationWheel = 0.0;
     mainVolume = 1.0;
-    sustainPedal = 0.0;
+    sustainPedal = 1.0;
 }
 
 void MidiState::update(unsigned char status, unsigned char data1, unsigned char data2) {
@@ -50,7 +50,7 @@ void MidiState::update(unsigned char status, unsigned char data1, unsigned char 
                     break;
                 
                 case MIDI_SUSTAIN_PEDAL:
-                    sustainPedal = data2 / 127.0;
+                    sustainPedal = (double) data2 / 127.0;
                     break;
             }
             break;

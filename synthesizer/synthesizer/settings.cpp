@@ -8,4 +8,5 @@ Settings::Settings() {
     }
     
     pitchWheelRange = 2;
+    invertedSustainPedal = true;
 }

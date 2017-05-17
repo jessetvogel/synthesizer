@@ -2,6 +2,7 @@
 #include <portaudio.h>
 #include <portmidi.h>
 #include "controller.hpp"
+#include "ADSR.hpp"
 #include "log.hpp"
 
 #include <cmath>
@@ -10,17 +11,8 @@ int main(int argc, char *argv[]) {
     // Initialize stuff (TODO: put this in some audio class or something, and check for errors)
     Pm_Initialize();
     Pa_Initialize();
-    
-    // Create samples
-    float dataSine[512];
-    float dataSquare[512];
-    for(int i = 0;i < 512;i ++) {
-        dataSine[i] = sin((double) i / 512 * 2.0 * M_PI);
-        dataSquare[i] = i < 256 ? -1.0 : 1.0;
-    }
-    Sample* sine = new Sample(512, dataSine);
-    Sample* square = new Sample(512, dataSquare);
-    Sample* sample = new Sample(sine, square, 0.5);
+    Sample::initialize();
+    Envelope::initialize();
     
     // Setup
     Controller* controller = new Controller();
@@ -34,7 +26,15 @@ int main(int argc, char *argv[]) {
     Log::output("");
     
     Instrument* instrument = new Instrument(controller);
-    instrument->setSample(sine);
+    instrument->setSample(Sample::triangle);
+    ADSR* adsr = new ADSR();
+    adsr->attack = 0.01;
+    adsr->decay = 0.5;
+    adsr->sustain = 0.5f;
+    adsr->release = 0.05;
+
+    instrument->setEnvelope(adsr);
+    
     controller->addInstrument(instrument);
     
     controller->start();
@@ -47,9 +47,7 @@ int main(int argc, char *argv[]) {
     // Cleanup stuff
     delete controller;
     
-    delete sine;
-    delete square;
-    delete sample;
+    // TODO: cleanup samples and envelopes
     
     Pm_Terminate();
     Pa_Terminate();

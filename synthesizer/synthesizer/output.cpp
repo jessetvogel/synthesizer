@@ -58,7 +58,7 @@ void Output::start() {
                         &outputParameters,
                         controller->getSampleRate(),
                         controller->getFramesPerBuffer(),
-                        paClipOff,
+                        paNoFlag,
                         callback,
                         (void*) this);
     

@@ -15,6 +15,11 @@ public:
     
     float getValue(double);
     
+    static void initialize();
+    static Sample* sine;
+    static Sample* square;
+    static Sample* triangle;
+    static Sample* sawtooth;
 };
 
 #endif

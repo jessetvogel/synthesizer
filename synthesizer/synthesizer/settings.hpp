@@ -10,6 +10,7 @@ public:
     
     double frequencies[AMOUNT_OF_NOTES];
     int pitchWheelRange;
+    bool invertedSustainPedal;
     
     Settings();
     
