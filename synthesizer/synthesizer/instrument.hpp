@@ -1,42 +1,53 @@
 #ifndef instrument_hpp
 #define instrument_hpp
 
-#include "midistate.hpp"
-#include "controller.hpp"
-#include "sample.hpp"
-#include "envelope.hpp"
-
 class Controller;
+class Unit;
+class KeyUnit;
+class MidiState;
 
 class Instrument {
   
+public:
+
     enum Stage { Off, Press, Sustain, Released };
     
+private:
+    
     Controller* controller;
-
-    Sample* sample;
-    Envelope* envelope;
+    
+    KeyUnit* keyOutput;
+    Unit* output;
     
     float* buffer;
-    void updateNote(MidiState*, int);
+    
     Stage* stage;
     unsigned char* velocity;
     double* duration;
     double* release;
-    double* phase;
+    
+    double releaseTime;
+    
+    void updateNote(MidiState*, int);
     
 public:
+    
+    Stage currentStage;
+    unsigned char currentVelocity;
+    double currentDuration;
+    double currentRelease;
+    double currentFrequency;
+    int currentKey;
     
     Instrument(Controller*);
     ~Instrument();
     
-    void setSample(Sample*);
-    void setEnvelope(Envelope*);
+    void setReleaseTime(double);
+    void setOutput(Unit*);
+    void setKeyOutput(KeyUnit*);
     
     void update(MidiState*);
     void addBuffer(float*);
-    
-    
     
 };
 

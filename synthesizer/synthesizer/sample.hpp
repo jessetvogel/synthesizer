@@ -1,17 +1,18 @@
 #ifndef sample_hpp
 #define sample_hpp
 
+#include <string>
+
 class Sample {
 
     int resolution;
-    float* data;
+    int periods;
+    double* data;
     
 public:
     
-    Sample(int, float*);
+    Sample(int, int, double*);
     ~Sample();
-    
-    Sample(Sample*, Sample*, float);
     
     float getValue(double);
     
@@ -20,6 +21,8 @@ public:
     static Sample* square;
     static Sample* triangle;
     static Sample* sawtooth;
+    
+    static Sample* fromString(std::string);
 };
 
 #endif

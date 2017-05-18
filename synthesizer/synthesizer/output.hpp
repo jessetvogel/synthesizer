@@ -1,7 +1,6 @@
 #ifndef output_hpp
 #define output_hpp
 
-#include "controller.hpp"
 #include <portaudio.h>
 
 class Controller;

@@ -1,13 +1,23 @@
-#include "controller.hpp"
 #include <iostream>
+
+#include "controller.hpp"
+#include "input.hpp"
+#include "output.hpp"
+#include "settings.hpp"
+#include "midistate.hpp"
+#include "instrument.hpp"
+#include "unit.hpp"
+#include "keyunit.hpp"
+#include "keyfrequency.hpp"
+
 #include "log.hpp"
 
 Controller::Controller() {
     // Create instances
     input = new Input(this);
     output = new Output(this);
-    midiState = new MidiState();
     settings = new Settings();
+    midiState = new MidiState(settings);
     
     // Set default values
     active = false;
@@ -15,6 +25,9 @@ Controller::Controller() {
     outputDevice = -1;
     sampleRate = 44100;
     framesPerBuffer = 64;
+    
+    // Instantiate constant values
+    keyUnits["key_frequency"] = new KeyFrequency(this);
 }
 
 Controller::~Controller() {
@@ -24,14 +37,17 @@ Controller::~Controller() {
     delete settings;
     
     for(auto it = instruments.begin(); it != instruments.end(); ++it)
-        delete (*it);
+        delete it->second;
+    
+    for(auto it = units.begin(); it != units.end(); ++it)
+        delete it->second;
+    
+    for(auto it = keyUnits.begin(); it != keyUnits.end(); ++it)
+        delete it->second;
 }
 
-void Controller::start() {
-    if(active) {
-        Log::warning("Tried to start Controller, but already started");
-        return;
-    }
+bool Controller::start() {
+    if(active) return false;
     
     buffer = new float[framesPerBuffer];
     
@@ -39,12 +55,12 @@ void Controller::start() {
     output->start();
         
     active = true;
+    
+    return true;
 }
 
-void Controller::stop() {
-    if(!active) {
-        Log::warning("Tried to stop Controller, but wasn't started yet");
-    }
+bool Controller::stop() {
+    if(!active) return false;
     
     output->stop();
     input->stop();
@@ -52,18 +68,24 @@ void Controller::stop() {
     delete[] buffer;
     
     active = false;
+    
+    return true;
 }
 
 float* Controller::update() {
+    // Update all MIDI data
     input->update();
 
-    // TODO: something with nodes or so?
+    // Reset all units
+    resetUnits();
     
+    // Clear buffer
     memset(buffer, 0, sizeof(float) * framesPerBuffer);
     
+    // Update all instruments, and add their result to the buffer
     for(auto it = instruments.begin(); it != instruments.end(); ++it) {
-        (*it)->update(midiState);
-        (*it)->addBuffer(buffer);
+        it->second->update(midiState);
+        it->second->addBuffer(buffer);
     }
     
     return buffer;
@@ -78,16 +100,14 @@ Settings* Controller::getSettings() {
 }
 
 bool Controller::setInputDevice(int n) {
-    if(active)
-        return false;
+    if(active) return false;
     
     inputDevice = n;
     return true;
 }
 
 bool Controller::setOutputDevice(int n) {
-    if(active)
-        return false;
+    if(active) return false;
     
     outputDevice = n;
     return true;
@@ -95,8 +115,7 @@ bool Controller::setOutputDevice(int n) {
 }
 
 bool Controller::setSampleRate(double sampleRate) {
-    if(active)
-        return false;
+    if(active) return false;
     
     this->sampleRate = sampleRate;
     return true;
@@ -104,8 +123,7 @@ bool Controller::setSampleRate(double sampleRate) {
 }
 
 bool Controller::setFramesPerBuffer(unsigned long framesPerBuffer) {
-    if(active)
-        return false;
+    if(active) return false;
     
     this->framesPerBuffer = framesPerBuffer;
     return true;
@@ -144,6 +162,72 @@ void Controller::listOutputDevices() {
     }
 }
 
-void Controller::addInstrument(Instrument* instrument) {
-    instruments.push_back(instrument);
+bool Controller::addInstrument(Instrument* instrument, std::string label) {
+    if(instruments.find(label) != instruments.end()) return false;
+    
+    instruments[label] = instrument;
+    return true;
+}
+
+bool Controller::addUnit(Unit* unit, std::string label) {
+    if(units.find(label) != units.end()) return false;
+    
+    units[label] = unit;
+    return true;
+}
+
+bool Controller::addKeyUnit(KeyUnit* keyUnit, std::string label) {
+    if(keyUnits.find(label) != keyUnits.end()) return false;
+    
+    keyUnits[label] = keyUnit;
+    return true;
+}
+
+bool Controller::deleteInstrument(std::string label) {
+    Instrument* instrument = instruments[label];
+    if(instrument == NULL) return false;
+    
+    delete instrument;
+    instruments.erase(label);
+    return true;
+}
+
+bool Controller::deleteUnit(std::string label) {
+    Unit* unit = units[label];
+    if(unit == NULL) return false;
+    
+    delete unit;
+    units.erase(label);
+    return true;
+}
+
+bool Controller::deleteKeyUnit(std::string label) {
+    KeyUnit* keyUnit = keyUnits[label];
+    if(keyUnit == NULL) return false;
+    
+    delete keyUnit;
+    keyUnits.erase(label);
+    return true;
+}
+
+Instrument* Controller::getInstrument(std::string label) {
+    return instruments[label];
+}
+
+Unit* Controller::getUnit(std::string label) {
+    return units[label];
+}
+
+KeyUnit* Controller::getKeyUnit(std::string label) {
+    return keyUnits[label];
+}
+
+void Controller::resetUnits() {
+    for(auto it = units.begin(); it != units.end(); ++it)
+        it->second->reset();
+}
+
+void Controller::resetKeyUnits() {
+    for(auto it = keyUnits.begin(); it != keyUnits.end(); ++it)
+        it->second->reset();
 }

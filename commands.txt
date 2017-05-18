@@ -1,0 +1,14 @@
+instrument_create <label>
+instrument_delete <instrument>
+instrument_set_output <instrument> <unit>
+instrument_key_set_output <instrument> <key_unit>
+instrument_key_set_release_time <instrument> <seconds>
+
+unit_create <unit_type> <label>
+unit_delete <unit>
+unit_set_value <unit> <parameter> <value>
+
+key_unit_create <key_unit_type> <label>
+key_unit_delete <key_unit>
+key_unit_set_value <key_unit> <parameter> <value>
+

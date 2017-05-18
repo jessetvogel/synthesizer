@@ -1,17 +1,22 @@
-#include "midistate.hpp"
-
 #include <iostream>
+
+#include "midistate.hpp"
+#include "settings.hpp"
+
 #include "log.hpp"
 
-MidiState::MidiState() {
+MidiState::MidiState(Settings* settings) {
+    // Store settings pointer
+    this->settings = settings;
+    
     // Set default values
-    for(int i = 0;i < AMOUNT_OF_NOTES;i ++)
+    for(int i = 0;i < AMOUNT_OF_KEYS;i ++)
         velocity[i] = 0;
     
     pitchWheel = 0.0;
     modulationWheel = 0.0;
     mainVolume = 1.0;
-    sustainPedal = 1.0;
+    sustainPedal = 0.0;
 }
 
 void MidiState::update(unsigned char status, unsigned char data1, unsigned char data2) {
@@ -51,6 +56,8 @@ void MidiState::update(unsigned char status, unsigned char data1, unsigned char 
                 
                 case MIDI_SUSTAIN_PEDAL:
                     sustainPedal = (double) data2 / 127.0;
+                    if(settings->invertedSustainPedal)
+                        sustainPedal = 1.0 - sustainPedal;
                     break;
             }
             break;

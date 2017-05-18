@@ -1,6 +1,6 @@
-#include "log.hpp"
-
 #include <iostream>
+
+#include "log.hpp"
 
 void Log::output(const char* message) {
     std::cout << message << std::endl;

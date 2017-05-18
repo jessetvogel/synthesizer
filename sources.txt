@@ -1,0 +1,11 @@
+About portmidi:
+https://github.com/marcdinkum/midi_io/
+
+Synthesizers:
+http://tweakheadz.com/programmer/
+https://en.wikipedia.org/wiki/Synthesizer#Attack_Decay_Sustain_Release_.28ADSR.29_envelope
+http://gizmodo.com/a-beginners-guide-to-the-synth-1736978695
+http://beausievers.com/synth/synthbasics/
+
+C++:
+http://www.sgi.com/tech/stl/hash_map.html

@@ -2,7 +2,6 @@
 #define input_hpp
 
 #include <portmidi.h>
-#include "controller.hpp"
 
 class Controller;
 

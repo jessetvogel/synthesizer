@@ -1,16 +1,19 @@
+// TODO: maybe put all header files into one single file, so that we don't get problems with references etc.
+
 #ifndef controller_hpp
 #define controller_hpp
 
 #include <vector>
-#include "input.hpp"
-#include "output.hpp"
-#include "midistate.hpp"
-#include "settings.hpp"
-#include "instrument.hpp"
+#include <string>
+#include <unordered_map>
 
+class MidiState;
+class Settings;
 class Input;
 class Output;
 class Instrument;
+class Unit;
+class KeyUnit;
 
 class Controller {
     
@@ -19,7 +22,9 @@ class Controller {
     MidiState* midiState;
     Settings* settings;
     
-    std::vector<Instrument*> instruments;
+    std::unordered_map<std::string, Instrument*> instruments;
+    std::unordered_map<std::string, Unit*> units;
+    std::unordered_map<std::string, KeyUnit*> keyUnits;
     
     int inputDevice;
     int outputDevice;
@@ -36,8 +41,8 @@ public:
     Controller();
     ~Controller();
     
-    void start();
-    void stop();
+    bool start();
+    bool stop();
     
     float* update();
     
@@ -59,7 +64,20 @@ public:
     double getSampleRate();
     unsigned long getFramesPerBuffer();
     
-    void addInstrument(Instrument*);
+    bool addInstrument(Instrument*, std::string);
+    bool addUnit(Unit*, std::string);
+    bool addKeyUnit(KeyUnit*, std::string);
+    
+    bool deleteInstrument(std::string);
+    bool deleteUnit(std::string);
+    bool deleteKeyUnit(std::string);
+    
+    Instrument* getInstrument(std::string);
+    Unit* getUnit(std::string);
+    KeyUnit* getKeyUnit(std::string);
+    
+    void resetUnits();
+    void resetKeyUnits();
 };
 
 #endif

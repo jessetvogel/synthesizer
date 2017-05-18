@@ -1,7 +1,9 @@
-#include "output.hpp"
-#include "log.hpp"
 #include <portaudio.h>
-#include <iostream>
+
+#include "output.hpp"
+#include "controller.hpp"
+
+#include "log.hpp"
 
 Output::Output(Controller* controller) {
     // Store pointer to controller object
@@ -41,12 +43,9 @@ void Output::start() {
         return;
     }
     
-    // TODO: remove this
-    std::cout << "Opening output device " <<  info->name << "; inputs: " << info->maxInputChannels << "; outputs: " << info->maxOutputChannels << std::endl;
-    
     PaStreamParameters outputParameters;
     bzero(&outputParameters, sizeof(outputParameters));
-    outputParameters.channelCount = 2;
+    outputParameters.channelCount = info->maxOutputChannels;
     outputParameters.device = outputDevice;
     outputParameters.hostApiSpecificStreamInfo = NULL;
     outputParameters.sampleFormat = paFloat32;

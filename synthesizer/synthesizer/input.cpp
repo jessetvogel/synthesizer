@@ -1,7 +1,11 @@
-#include "input.hpp"
-#include "log.hpp"
-#include <portmidi.h>
 #include <iostream>
+#include <portmidi.h>
+
+#include "input.hpp"
+#include "controller.hpp"
+#include "midistate.hpp"
+
+#include "log.hpp"
 
 Input::Input(Controller* controller) {
     // Store pointer to controller object

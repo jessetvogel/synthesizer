@@ -2,27 +2,20 @@
 #include <cstring>
 #include <cmath>
 
-Sample::Sample(int resolution, float* data) {
-    // Store the resolution and data
+Sample::Sample(int resolution, int periods, double* data) {
+    // Store all information
     this->resolution = resolution;
-    this->data = new float[resolution];
-    memcpy(this->data, data, sizeof(float) * resolution);
+    this->periods = periods;
+    this->data = new double[resolution];
+    memcpy(this->data, data, sizeof(double) * resolution);
 }
 
 Sample::~Sample() {
     delete[] data;
 }
 
-Sample::Sample(Sample* sample1, Sample* sample2, float mix) {
-    // Combine the two given samples to create a new one
-    resolution = sample1->resolution;
-    data = new float[resolution];
-    for(int i = 0;i < resolution;i ++)
-        data[i] = sample1->data[i] * mix + sample2->getValue((double) i / resolution * 2.0 * M_PI);
-}
-
 float Sample::getValue(double phase) {
-    // Wrap phase into 0, 2Pi interval
+    // Wrap phase into 0, 2Pi interval TODO: extend to (0, periods * 2 * pi) interval. This works now because all samples have periods = 2
     long qpd = phase / M_PI;
     if (qpd >= 0) qpd += qpd & 1;
     else qpd -= qpd & 1;
@@ -43,11 +36,12 @@ Sample* Sample::triangle;
 Sample* Sample::sawtooth;
 
 void Sample::initialize() {
-    int resolution = 512;
-    float dataSine[resolution];
-    float dataSquare[resolution];
-    float dataTriangle[resolution];
-    float dataSawtooth[resolution];
+    int resolution = 64;
+    double dataSine[resolution];
+    double dataSquare[resolution];
+    double dataTriangle[resolution];
+    double dataSawtooth[resolution];
+
     for(int i = 0;i < resolution;i ++) {
         dataSine[i] = sin((double) i / resolution * 2.0 * M_PI);
         dataSquare[i] = i < (resolution / 2) ? 1.0 : -1.0;
@@ -55,8 +49,16 @@ void Sample::initialize() {
         dataSawtooth[i] = i < (resolution / 2) ? 2.0 * i / resolution : 2.0 * i / resolution - 2.0;
     }
 
-    sine = new Sample(resolution, dataSine);
-    square = new Sample(resolution, dataSquare);
-    triangle = new Sample(resolution, dataTriangle);
-    sawtooth = new Sample(resolution, dataSawtooth);
+    sine = new Sample(resolution, 1, dataSine);
+    square = new Sample(resolution, 1, dataSquare);
+    triangle = new Sample(resolution, 1, dataTriangle);
+    sawtooth = new Sample(resolution, 1, dataSawtooth);
+}
+
+Sample* Sample::fromString(std::string str) {
+    if(str.compare("sine") == 0) return sine;
+    if(str.compare("square") == 0) return square;
+    if(str.compare("triangle") == 0) return triangle;
+    if(str.compare("sawtooth") == 0) return sawtooth;
+    return NULL;
 }

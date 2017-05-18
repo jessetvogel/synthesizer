@@ -1,20 +1,29 @@
 #ifndef ADSR_hpp
 #define ADSR_hpp
 
-#include "envelope.hpp"
+#include "keyunit.hpp"
+#include "interpolation.hpp"
 
-class ADSR : public Envelope {
+class ADSR : public KeyUnit {
+    
+    double attackTime;
+    double decayTime;
+    double sustainLevel;
+    double releaseTime;
+    
+    Interpolation::Type attackType;
+    Interpolation::Type decayType;
+    Interpolation::Type releaseType;
+    
+    KeyUnit* input;
     
 public:
     
-    ADSR();
+    ADSR(Controller*);
+    ~ADSR();
     
-    double attack;
-    double decay;
-    float sustain;
-    double release;
-    
-    float value(bool, double, double);
+    void apply(Instrument*);
+    bool setValue(std::string, std::string);
     
 };
 

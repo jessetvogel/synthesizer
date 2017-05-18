@@ -18,17 +18,21 @@
 #define MIDI_PAN (0x0A)
 #define MIDI_SUSTAIN_PEDAL (0x40)
 
+class Settings;
+
 class MidiState {
 
+    Settings* settings;
+    
 public:
     
-    unsigned char velocity[AMOUNT_OF_NOTES];
+    unsigned char velocity[AMOUNT_OF_KEYS];
     double pitchWheel;
     double modulationWheel;
     double mainVolume;
     double sustainPedal;
     
-    MidiState();
+    MidiState(Settings*);
     void update(unsigned char, unsigned char, unsigned char);
     
 };

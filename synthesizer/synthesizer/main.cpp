@@ -2,8 +2,12 @@
 #include <portaudio.h>
 #include <portmidi.h>
 #include "controller.hpp"
+#include "instrument.hpp"
 #include "ADSR.hpp"
+#include "keyoscillator.hpp"
+#include "sample.hpp"
 #include "log.hpp"
+#include "parser.hpp"
 
 #include <cmath>
 
@@ -12,7 +16,6 @@ int main(int argc, char *argv[]) {
     Pm_Initialize();
     Pa_Initialize();
     Sample::initialize();
-    Envelope::initialize();
     
     // Setup
     Controller* controller = new Controller();
@@ -25,18 +28,8 @@ int main(int argc, char *argv[]) {
     controller->setOutputDevice(1);
     Log::output("");
     
-    Instrument* instrument = new Instrument(controller);
-    instrument->setSample(Sample::triangle);
-    ADSR* adsr = new ADSR();
-    adsr->attack = 0.01;
-    adsr->decay = 0.5;
-    adsr->sustain = 0.5f;
-    adsr->release = 0.05;
+    Parser parser(controller, "/Users/jessetvogel/Desktop/synthesizer.txt");
 
-    instrument->setEnvelope(adsr);
-    
-    controller->addInstrument(instrument);
-    
     controller->start();
     
     Log::output("Press enter to stop");
