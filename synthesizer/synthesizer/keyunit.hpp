@@ -18,6 +18,8 @@ protected:
     virtual void apply(Instrument*);
     
 public:
+
+    virtual bool deleteOnRemove();
     
     float* output;
     
@@ -27,6 +29,7 @@ public:
     void update(Instrument*);
     
     static KeyUnit* create(Controller*, std::string);
+    static bool set(Controller*, KeyUnit**, std::string);
 };
 
 #endif

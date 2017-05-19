@@ -40,7 +40,8 @@ Instrument::~Instrument() {
 
 void Instrument::update(MidiState* midiState) {
     // First clear the buffer
-    memset(buffer, 0, sizeof(float) * controller->getFramesPerBuffer());
+//    memset(buffer, 0, sizeof(float) * controller->getFramesPerBuffer()); TODO
+    for(int x = 0;x < controller->getFramesPerBuffer(); ++x) buffer[x] = 0.0f;
     
     for(int i = 0;i < AMOUNT_OF_KEYS;i ++) {
         // Update duration and release time

@@ -57,7 +57,7 @@ void Output::start() {
                         &outputParameters,
                         controller->getSampleRate(),
                         controller->getFramesPerBuffer(),
-                        paNoFlag,
+                        paClipOff,
                         callback,
                         (void*) this);
     
@@ -76,6 +76,8 @@ void Output::stop() {
     Pa_CloseStream(outputStream);
 }
 
+#include <iostream>
+
 int Output::callback(const void* inputBuffer,
                         void* outputBuffer,
                         unsigned long framesPerBuffer,
@@ -90,7 +92,7 @@ int Output::callback(const void* inputBuffer,
     // Get Output object
     Output* output = (Output*) userData;
     float* buffer = output->controller->update();
-    
+        
     float* out = (float*) outputBuffer;
     for(int i = 0;i < framesPerBuffer;i ++) {
         *(out++) = buffer[i];

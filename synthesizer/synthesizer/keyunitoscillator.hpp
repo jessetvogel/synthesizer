@@ -5,17 +5,19 @@
 
 class Sample;
 
-class KeyOscillator : public KeyUnit {
+class KeyUnitOscillator : public KeyUnit {
     
     Sample* sample;
-    KeyUnit* frequency;
+    KeyUnit* frequency = NULL;
+    KeyUnit* amplitude = NULL;
+    KeyUnit* mean = NULL;
     
     double* phase;
     
 public:
     
-    KeyOscillator(Controller*);
-    ~KeyOscillator();
+    KeyUnitOscillator(Controller*);
+    ~KeyUnitOscillator();
     
     void apply(Instrument*);
     bool setValue(std::string, std::string);

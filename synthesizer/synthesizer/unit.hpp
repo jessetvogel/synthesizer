@@ -2,29 +2,17 @@
 #define unit_hpp
 
 #include <string>
-#include "controller.hpp"
+#include "keyunit.hpp"
 
-class Unit {
+class Controller;
 
-private:
-    
-    bool updated;
-    
-protected:
-    
-    Controller* controller;
-    virtual void apply();
+class Unit : public KeyUnit {
     
 public:
-    
-    float* output;
-    
-    virtual bool setValue(std::string, std::string);
-    
-    void reset();
-    void update();
-    
+        
     static Unit* create(Controller*, std::string);
+    static bool set(Controller*, Unit**, std::string);
+    
 };
 
 #endif

@@ -28,11 +28,8 @@ bool Input::isInput(int n) {
     return Pm_GetDeviceInfo(n)->input > 0;
 }
 
-void Input::start() {
-    if(active) {
-        Log::warning("Input already started");
-        return;
-    }
+bool Input::start() {
+    if(active) return false;
     
     int inputDevice = controller->getInputDevice();
     
@@ -40,13 +37,7 @@ void Input::start() {
         inputDevice = Pm_GetDefaultInputDeviceID();
     
     const PmDeviceInfo* info = Pm_GetDeviceInfo(inputDevice);
-    if(info == NULL) {
-        Log::error("Failed to open input device");
-        return;
-    }
-    
-    // TODO: remove this
-    std::cout << "Opening input device " << info->interf << "," <<  info->name << std::endl;
+    if(info == NULL) return false;
     
     Pm_OpenInput(&inputStream,
                  inputDevice,
@@ -63,6 +54,7 @@ void Input::start() {
     Pm_SetFilter(inputStream, PM_FILT_REALTIME);
     
     active = true;
+    return true;
 }
 
 void Input::update() {
@@ -84,11 +76,9 @@ void Input::update() {
     }
 }
 
-void Input::stop() {
-    if(!active) {
-        Log::warning("Tried to stop stream, but it wasn't running");
-        return;
-    }
+bool Input::stop() {
+    if(!active) return false;
     
     Pm_Close(inputStream);
+    return true;
 }

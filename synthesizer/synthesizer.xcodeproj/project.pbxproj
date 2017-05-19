@@ -18,16 +18,21 @@
 		310EFDF31ECA384100F28034 /* midistate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 310EFDF11ECA384100F28034 /* midistate.cpp */; };
 		31D719571ECB04BA00A4C9E0 /* settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719551ECB04BA00A4C9E0 /* settings.cpp */; };
 		31D7195A1ECB0BAE00A4C9E0 /* sample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719581ECB0BAE00A4C9E0 /* sample.cpp */; };
-		31D719601ECC4E5700A4C9E0 /* ADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D7195E1ECC4E5700A4C9E0 /* ADSR.cpp */; };
+		31D719601ECC4E5700A4C9E0 /* keyunitADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D7195E1ECC4E5700A4C9E0 /* keyunitADSR.cpp */; };
 		31D719631ECC9D9800A4C9E0 /* interpolation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719611ECC9D9800A4C9E0 /* interpolation.cpp */; };
 		31D719651ECCDCAC00A4C9E0 /* libfftw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D719641ECCDCAC00A4C9E0 /* libfftw3.a */; };
-		31D719681ECCDEB100A4C9E0 /* filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719661ECCDEB100A4C9E0 /* filter.cpp */; };
 		31D7196B1ECDEE2E00A4C9E0 /* unit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719691ECDEE2E00A4C9E0 /* unit.cpp */; };
 		31D7196E1ECDEE7E00A4C9E0 /* keyunit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D7196C1ECDEE7E00A4C9E0 /* keyunit.cpp */; };
-		31D719731ECE116500A4C9E0 /* keyoscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719711ECE116500A4C9E0 /* keyoscillator.cpp */; };
-		31D719761ECE1BE000A4C9E0 /* keyfrequency.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719741ECE1BE000A4C9E0 /* keyfrequency.cpp */; };
+		31D719731ECE116500A4C9E0 /* keyunitoscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719711ECE116500A4C9E0 /* keyunitoscillator.cpp */; };
+		31D719761ECE1BE000A4C9E0 /* keyunitfrequency.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719741ECE1BE000A4C9E0 /* keyunitfrequency.cpp */; };
 		31D7197E1ECE2E4500A4C9E0 /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D7197C1ECE2E4500A4C9E0 /* parser.cpp */; };
 		31D719811ECE317B00A4C9E0 /* commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D7197F1ECE317B00A4C9E0 /* commands.cpp */; };
+		31EC60321ECF264F004671E2 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC60301ECF264F004671E2 /* util.cpp */; };
+		31EC60351ECF2811004671E2 /* unitconstant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC60331ECF2811004671E2 /* unitconstant.cpp */; };
+		31EC60381ECF3169004671E2 /* unitoscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC60361ECF3169004671E2 /* unitoscillator.cpp */; };
+		31EC603B1ECF3CC1004671E2 /* unitmodulationwheel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC60391ECF3CC1004671E2 /* unitmodulationwheel.cpp */; };
+		31EC60411ECF45BE004671E2 /* unitadder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC603F1ECF45BD004671E2 /* unitadder.cpp */; };
+		31EC60441ECF9267004671E2 /* keyunitadder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC60421ECF9267004671E2 /* keyunitadder.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,25 +68,35 @@
 		31D719561ECB04BA00A4C9E0 /* settings.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = settings.hpp; sourceTree = "<group>"; };
 		31D719581ECB0BAE00A4C9E0 /* sample.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sample.cpp; sourceTree = "<group>"; };
 		31D719591ECB0BAE00A4C9E0 /* sample.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sample.hpp; sourceTree = "<group>"; };
-		31D7195E1ECC4E5700A4C9E0 /* ADSR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ADSR.cpp; sourceTree = "<group>"; };
-		31D7195F1ECC4E5700A4C9E0 /* ADSR.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ADSR.hpp; sourceTree = "<group>"; };
+		31D7195E1ECC4E5700A4C9E0 /* keyunitADSR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = keyunitADSR.cpp; sourceTree = "<group>"; };
+		31D7195F1ECC4E5700A4C9E0 /* keyunitADSR.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keyunitADSR.hpp; sourceTree = "<group>"; };
 		31D719611ECC9D9800A4C9E0 /* interpolation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = interpolation.cpp; sourceTree = "<group>"; };
 		31D719621ECC9D9800A4C9E0 /* interpolation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = interpolation.hpp; sourceTree = "<group>"; };
 		31D719641ECCDCAC00A4C9E0 /* libfftw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfftw3.a; path = ../../../../../usr/local/lib/libfftw3.a; sourceTree = "<group>"; };
-		31D719661ECCDEB100A4C9E0 /* filter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = filter.cpp; sourceTree = "<group>"; };
-		31D719671ECCDEB100A4C9E0 /* filter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = filter.hpp; sourceTree = "<group>"; };
 		31D719691ECDEE2E00A4C9E0 /* unit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unit.cpp; sourceTree = "<group>"; };
 		31D7196A1ECDEE2E00A4C9E0 /* unit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unit.hpp; sourceTree = "<group>"; };
 		31D7196C1ECDEE7E00A4C9E0 /* keyunit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = keyunit.cpp; sourceTree = "<group>"; };
 		31D7196D1ECDEE7E00A4C9E0 /* keyunit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keyunit.hpp; sourceTree = "<group>"; };
-		31D719711ECE116500A4C9E0 /* keyoscillator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = keyoscillator.cpp; sourceTree = "<group>"; };
-		31D719721ECE116500A4C9E0 /* keyoscillator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keyoscillator.hpp; sourceTree = "<group>"; };
-		31D719741ECE1BE000A4C9E0 /* keyfrequency.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = keyfrequency.cpp; sourceTree = "<group>"; };
-		31D719751ECE1BE000A4C9E0 /* keyfrequency.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keyfrequency.hpp; sourceTree = "<group>"; };
+		31D719711ECE116500A4C9E0 /* keyunitoscillator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = keyunitoscillator.cpp; sourceTree = "<group>"; };
+		31D719721ECE116500A4C9E0 /* keyunitoscillator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keyunitoscillator.hpp; sourceTree = "<group>"; };
+		31D719741ECE1BE000A4C9E0 /* keyunitfrequency.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = keyunitfrequency.cpp; sourceTree = "<group>"; };
+		31D719751ECE1BE000A4C9E0 /* keyunitfrequency.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keyunitfrequency.hpp; sourceTree = "<group>"; };
 		31D7197C1ECE2E4500A4C9E0 /* parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parser.cpp; sourceTree = "<group>"; };
 		31D7197D1ECE2E4500A4C9E0 /* parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = parser.hpp; sourceTree = "<group>"; };
 		31D7197F1ECE317B00A4C9E0 /* commands.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = commands.cpp; sourceTree = "<group>"; };
 		31D719801ECE317B00A4C9E0 /* commands.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = commands.hpp; sourceTree = "<group>"; };
+		31EC60301ECF264F004671E2 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
+		31EC60311ECF264F004671E2 /* util.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = util.hpp; sourceTree = "<group>"; };
+		31EC60331ECF2811004671E2 /* unitconstant.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitconstant.cpp; sourceTree = "<group>"; };
+		31EC60341ECF2811004671E2 /* unitconstant.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitconstant.hpp; sourceTree = "<group>"; };
+		31EC60361ECF3169004671E2 /* unitoscillator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitoscillator.cpp; sourceTree = "<group>"; };
+		31EC60371ECF3169004671E2 /* unitoscillator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitoscillator.hpp; sourceTree = "<group>"; };
+		31EC60391ECF3CC1004671E2 /* unitmodulationwheel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitmodulationwheel.cpp; sourceTree = "<group>"; };
+		31EC603A1ECF3CC1004671E2 /* unitmodulationwheel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitmodulationwheel.hpp; sourceTree = "<group>"; };
+		31EC603F1ECF45BD004671E2 /* unitadder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitadder.cpp; sourceTree = "<group>"; };
+		31EC60401ECF45BD004671E2 /* unitadder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitadder.hpp; sourceTree = "<group>"; };
+		31EC60421ECF9267004671E2 /* keyunitadder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = keyunitadder.cpp; sourceTree = "<group>"; };
+		31EC60431ECF9267004671E2 /* keyunitadder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keyunitadder.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,12 +151,14 @@
 			children = (
 				31D7196C1ECDEE7E00A4C9E0 /* keyunit.cpp */,
 				31D7196D1ECDEE7E00A4C9E0 /* keyunit.hpp */,
-				31D7195E1ECC4E5700A4C9E0 /* ADSR.cpp */,
-				31D7195F1ECC4E5700A4C9E0 /* ADSR.hpp */,
-				31D719711ECE116500A4C9E0 /* keyoscillator.cpp */,
-				31D719721ECE116500A4C9E0 /* keyoscillator.hpp */,
-				31D719741ECE1BE000A4C9E0 /* keyfrequency.cpp */,
-				31D719751ECE1BE000A4C9E0 /* keyfrequency.hpp */,
+				31D7195E1ECC4E5700A4C9E0 /* keyunitADSR.cpp */,
+				31D7195F1ECC4E5700A4C9E0 /* keyunitADSR.hpp */,
+				31D719711ECE116500A4C9E0 /* keyunitoscillator.cpp */,
+				31D719721ECE116500A4C9E0 /* keyunitoscillator.hpp */,
+				31D719741ECE1BE000A4C9E0 /* keyunitfrequency.cpp */,
+				31D719751ECE1BE000A4C9E0 /* keyunitfrequency.hpp */,
+				31EC60421ECF9267004671E2 /* keyunitadder.cpp */,
+				31EC60431ECF9267004671E2 /* keyunitadder.hpp */,
 			);
 			name = keyunits;
 			sourceTree = "<group>";
@@ -151,8 +168,14 @@
 			children = (
 				31D719691ECDEE2E00A4C9E0 /* unit.cpp */,
 				31D7196A1ECDEE2E00A4C9E0 /* unit.hpp */,
-				31D719661ECCDEB100A4C9E0 /* filter.cpp */,
-				31D719671ECCDEB100A4C9E0 /* filter.hpp */,
+				31EC60331ECF2811004671E2 /* unitconstant.cpp */,
+				31EC60341ECF2811004671E2 /* unitconstant.hpp */,
+				31EC60361ECF3169004671E2 /* unitoscillator.cpp */,
+				31EC60371ECF3169004671E2 /* unitoscillator.hpp */,
+				31EC60391ECF3CC1004671E2 /* unitmodulationwheel.cpp */,
+				31EC603A1ECF3CC1004671E2 /* unitmodulationwheel.hpp */,
+				31EC603F1ECF45BD004671E2 /* unitadder.cpp */,
+				31EC60401ECF45BD004671E2 /* unitadder.hpp */,
 			);
 			name = units;
 			sourceTree = "<group>";
@@ -185,6 +208,8 @@
 				31D719591ECB0BAE00A4C9E0 /* sample.hpp */,
 				31D719611ECC9D9800A4C9E0 /* interpolation.cpp */,
 				31D719621ECC9D9800A4C9E0 /* interpolation.hpp */,
+				31EC60301ECF264F004671E2 /* util.cpp */,
+				31EC60311ECF264F004671E2 /* util.hpp */,
 			);
 			name = tools;
 			sourceTree = "<group>";
@@ -274,21 +299,26 @@
 				310285601EC8E7E300B4A5F6 /* controller.cpp in Sources */,
 				31D719811ECE317B00A4C9E0 /* commands.cpp in Sources */,
 				310285701EC8F7FC00B4A5F6 /* instrument.cpp in Sources */,
-				31D719761ECE1BE000A4C9E0 /* keyfrequency.cpp in Sources */,
+				31D719761ECE1BE000A4C9E0 /* keyunitfrequency.cpp in Sources */,
 				310EFDF31ECA384100F28034 /* midistate.cpp in Sources */,
 				31D7197E1ECE2E4500A4C9E0 /* parser.cpp in Sources */,
-				31D719681ECCDEB100A4C9E0 /* filter.cpp in Sources */,
-				31D719601ECC4E5700A4C9E0 /* ADSR.cpp in Sources */,
+				31D719601ECC4E5700A4C9E0 /* keyunitADSR.cpp in Sources */,
 				31D7196E1ECDEE7E00A4C9E0 /* keyunit.cpp in Sources */,
 				310285661EC8E9A600B4A5F6 /* input.cpp in Sources */,
-				31D719731ECE116500A4C9E0 /* keyoscillator.cpp in Sources */,
+				31D719731ECE116500A4C9E0 /* keyunitoscillator.cpp in Sources */,
+				31EC60351ECF2811004671E2 /* unitconstant.cpp in Sources */,
 				310285691EC8F0A600B4A5F6 /* log.cpp in Sources */,
+				31EC60381ECF3169004671E2 /* unitoscillator.cpp in Sources */,
 				31D7196B1ECDEE2E00A4C9E0 /* unit.cpp in Sources */,
+				31EC60411ECF45BE004671E2 /* unitadder.cpp in Sources */,
+				31EC60321ECF264F004671E2 /* util.cpp in Sources */,
 				31D719571ECB04BA00A4C9E0 /* settings.cpp in Sources */,
 				31D719631ECC9D9800A4C9E0 /* interpolation.cpp in Sources */,
+				31EC60441ECF9267004671E2 /* keyunitadder.cpp in Sources */,
 				3102856A1EC8F7C300B4A5F6 /* main.cpp in Sources */,
 				310285631EC8E87400B4A5F6 /* output.cpp in Sources */,
 				31D7195A1ECB0BAE00A4C9E0 /* sample.cpp in Sources */,
+				31EC603B1ECF3CC1004671E2 /* unitmodulationwheel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

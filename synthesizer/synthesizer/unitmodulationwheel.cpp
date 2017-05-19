@@ -1,23 +1,21 @@
-#include "keyfrequency.hpp"
+#include "unitmodulationwheel.hpp"
 #include "controller.hpp"
 #include "instrument.hpp"
+#include "midistate.hpp"
 
-KeyFrequency::KeyFrequency(Controller* controller) {
+UnitModulationWheel::UnitModulationWheel(Controller* controller) {
     // Store pointer to controller
     this->controller = controller;
-    
-    // Set default values
-    // ...
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
 }
 
-KeyFrequency::~KeyFrequency() {
+UnitModulationWheel::~UnitModulationWheel() {
     delete[] output;
 }
 
-void KeyFrequency::apply(Instrument* instrument) {
+void UnitModulationWheel::apply(Instrument* instrument) {
     for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
-        output[x] = instrument->currentFrequency;
+        output[x] = controller->getMidiState()->modulationWheel;
 }

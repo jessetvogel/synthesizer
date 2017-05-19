@@ -1,15 +1,12 @@
 #include <iostream>
 #include <portaudio.h>
 #include <portmidi.h>
-#include "controller.hpp"
-#include "instrument.hpp"
-#include "ADSR.hpp"
-#include "keyoscillator.hpp"
-#include "sample.hpp"
-#include "log.hpp"
-#include "parser.hpp"
 
-#include <cmath>
+#include "controller.hpp"
+#include "parser.hpp"
+#include "sample.hpp"
+
+#include "log.hpp"
 
 int main(int argc, char *argv[]) {
     // Initialize stuff (TODO: put this in some audio class or something, and check for errors)

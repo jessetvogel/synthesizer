@@ -8,7 +8,8 @@
 #include "instrument.hpp"
 #include "unit.hpp"
 #include "keyunit.hpp"
-#include "keyfrequency.hpp"
+#include "keyunitfrequency.hpp"
+#include "unitmodulationwheel.hpp"
 
 #include "log.hpp"
 
@@ -27,7 +28,8 @@ Controller::Controller() {
     framesPerBuffer = 64;
     
     // Instantiate constant values
-    keyUnits["key_frequency"] = new KeyFrequency(this);
+    addKeyUnit(new KeyUnitFrequency(this), "key_frequency");
+    addUnit(new UnitModulationWheel(this), "modulation_wheel");
 }
 
 Controller::~Controller() {
@@ -87,7 +89,7 @@ float* Controller::update() {
         it->second->update(midiState);
         it->second->addBuffer(buffer);
     }
-    
+        
     return buffer;
 }
 
@@ -184,41 +186,44 @@ bool Controller::addKeyUnit(KeyUnit* keyUnit, std::string label) {
 }
 
 bool Controller::deleteInstrument(std::string label) {
+    if(instruments.find(label) == instruments.end()) return false;
+
     Instrument* instrument = instruments[label];
-    if(instrument == NULL) return false;
-    
     delete instrument;
     instruments.erase(label);
     return true;
 }
 
 bool Controller::deleteUnit(std::string label) {
+    if(units.find(label) == units.end()) return false;
+
     Unit* unit = units[label];
-    if(unit == NULL) return false;
-    
     delete unit;
     units.erase(label);
     return true;
 }
 
 bool Controller::deleteKeyUnit(std::string label) {
-    KeyUnit* keyUnit = keyUnits[label];
-    if(keyUnit == NULL) return false;
+    if(keyUnits.find(label) == keyUnits.end()) return false;
     
+    KeyUnit* keyUnit = keyUnits[label];
     delete keyUnit;
     keyUnits.erase(label);
     return true;
 }
 
 Instrument* Controller::getInstrument(std::string label) {
+    if(instruments.find(label) == instruments.end()) return NULL;
     return instruments[label];
 }
 
 Unit* Controller::getUnit(std::string label) {
+    if(units.find(label) == units.end()) return NULL;
     return units[label];
 }
 
 KeyUnit* Controller::getKeyUnit(std::string label) {
+    if(keyUnits.find(label) == keyUnits.end()) return NULL;
     return keyUnits[label];
 }
 

@@ -4,23 +4,22 @@
 #include "keyunit.hpp"
 #include "interpolation.hpp"
 
-class ADSR : public KeyUnit {
+class KeyUnitADSR : public KeyUnit {
     
-    double attackTime;
-    double decayTime;
-    double sustainLevel;
-    double releaseTime;
+    KeyUnit* attackTime = NULL;
+    KeyUnit* decayTime = NULL;
+    KeyUnit* sustainLevel = NULL;
+    KeyUnit* releaseTime = NULL;
+    KeyUnit* input = NULL;
     
     Interpolation::Type attackType;
     Interpolation::Type decayType;
     Interpolation::Type releaseType;
     
-    KeyUnit* input;
-    
 public:
     
-    ADSR(Controller*);
-    ~ADSR();
+    KeyUnitADSR(Controller*);
+    ~KeyUnitADSR();
     
     void apply(Instrument*);
     bool setValue(std::string, std::string);

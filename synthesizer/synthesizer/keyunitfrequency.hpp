@@ -3,12 +3,12 @@
 
 #include "keyunit.hpp"
 
-class KeyFrequency : public KeyUnit {
+class KeyUnitFrequency : public KeyUnit {
 
 public:
     
-    KeyFrequency(Controller*);
-    ~KeyFrequency();
+    KeyUnitFrequency(Controller*);
+    ~KeyUnitFrequency();
     
     void apply(Instrument*);
 };

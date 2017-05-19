@@ -106,7 +106,7 @@ bool Parser::parse(std::string line) {
         Unit* unit = controller->getUnit(cm[1]);
         if(unit == NULL) return false;
         
-        return unit->setValue(cm[1], cm[2]);
+        return unit->setValue(cm[2], cm[3]);
     }
     
     // key_unit_create <type> <label>

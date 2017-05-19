@@ -18,8 +18,8 @@ public:
     Input(Controller*);
 //    ~Input();
     
-    void start();
-    void stop();
+    bool start();
+    bool stop();
     
     void update();
     
