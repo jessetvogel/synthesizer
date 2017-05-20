@@ -1,0 +1,37 @@
+unit_key_create ADSR A
+unit_set_value A attack_time    0.05
+unit_set_value A decay_time     0.1
+unit_set_value A sustain_level  0.5
+unit_set_value A release_time   0.5
+unit_set_value A attack_type    quartout
+unit_set_value A decay_type     quartout
+unit_set_value A release_type   quartout
+
+unit_key_create oscillator      wave
+unit_set_value wave sample      square
+unit_set_value wave amplitude   A
+unit_set_value wave frequency   key_frequency
+
+unit_create adder_1 t
+unit_set_value t input_1        modulation_wheel
+unit_set_value t gain_1         2
+
+unit_create function p
+unit_set_value p input          t
+unit_set_value p function       pow10
+
+unit_create adder_1 f
+unit_set_value f input_1        p
+unit_set_value f gain_1         50
+
+unit_key_create lowpass l1
+unit_set_value l1 input          wave
+unit_set_value l1 cutoff         f
+
+unit_key_create highpass h1
+unit_set_value h1 input          l1
+unit_set_value h1 cutoff         f
+
+instrument_create instrument
+instrument_set_key_output instrument h1
+instrument_set_key_release_time instrument 1.0

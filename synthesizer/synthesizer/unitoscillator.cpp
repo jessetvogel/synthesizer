@@ -12,10 +12,10 @@ UnitOscillator::UnitOscillator(Controller* controller, bool keyDependent) {
     this->keyDependent = keyDependent;
     
     // Set default values
+    sample = Sample::sine;
     Unit::set(controller, &frequency, "0.0", keyDependent);
     Unit::set(controller, &amplitude, "1.0", keyDependent);
     Unit::set(controller, &mean, "0.0", keyDependent);
-    sample = Sample::sine;
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];

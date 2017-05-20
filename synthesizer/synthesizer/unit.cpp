@@ -7,7 +7,10 @@
 #include "unitoscillator.hpp"
 #include "unitconstant.hpp"
 #include "unitadder.hpp"
+#include "unitfunction.hpp"
 #include "unitADSR.hpp"
+#include "unitlowpass.hpp"
+#include "unithighpass.hpp"
 
 bool Unit::setValue(std::string parameter, std::string value) { return false; };
 
@@ -33,10 +36,22 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent) 
             return new UnitAdder(controller, keyDependent, n);
     }
     
+    // Function
+    if(type.compare("function") == 0)
+        return new UnitFunction(controller, keyDependent);
+    
     // ADSR envelope (requires to be keyDependent)
     if(type.compare("ADSR") == 0 && keyDependent)
         return new UnitADSR(controller);
     
+    // Low-pass filter
+    if(type.compare("lowpass") == 0)
+        return new UnitLowpass(controller, keyDependent);
+    
+    // High-pass filter
+    if(type.compare("highpass") == 0)
+        return new UnitHighpass(controller, keyDependent);
+
     // If no match was found, return NULL
     return NULL;
 }

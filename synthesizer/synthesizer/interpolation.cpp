@@ -26,11 +26,11 @@ double Interpolation::quartOut(double x) {
     return 1.0 - x*x*x*x;
 }
 
-bool Interpolation::set(Controller* controller, Type* type, std::string value) {
-    if(value.compare("linear") == 0) { *type = Linear; return true; }
-    if(value.compare("sine") == 0) { *type = Sine; return true; }
-    if(value.compare("quartin") == 0) { *type = QuartIn; return true; }
-    if(value.compare("quartout") == 0) { *type = QuartOut; return true; }
+bool Interpolation::set(Controller* controller, Type* parameterAddr, std::string value) {
+    if(value.compare("linear") == 0) { *parameterAddr = Linear; return true; }
+    if(value.compare("sine") == 0) { *parameterAddr = Sine; return true; }
+    if(value.compare("quartin") == 0) { *parameterAddr = QuartIn; return true; }
+    if(value.compare("quartout") == 0) { *parameterAddr = QuartOut; return true; }
     
     return false;
 }

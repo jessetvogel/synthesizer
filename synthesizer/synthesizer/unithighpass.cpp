@@ -1,9 +1,9 @@
-#include "unitlowpass.hpp"
+#include "unithighpass.hpp"
 #include "controller.hpp"
 #include "instrument.hpp"
 #include "settings.hpp"
 
-UnitLowpass::UnitLowpass(Controller* controller, bool keyDependent) {
+UnitHighpass::UnitHighpass(Controller* controller, bool keyDependent) {
     // Store pointer to controller
     this->controller = controller;
     
@@ -20,14 +20,18 @@ UnitLowpass::UnitLowpass(Controller* controller, bool keyDependent) {
     if(keyDependent) {
         lastOutput = new float[AMOUNT_OF_KEYS];
         memset(lastOutput, 0, sizeof(float) * AMOUNT_OF_KEYS);
+        lastInputOutput = new float[AMOUNT_OF_KEYS];
+        memset(lastInputOutput, 0, sizeof(float) * AMOUNT_OF_KEYS);
     }
     else {
         lastOutput = new float[1];
+        lastInputOutput = new float[1];
+        lastInputOutput[0] = 0.0;
         lastOutput[0] = 0.0;
     }
 }
 
-void UnitLowpass::apply(Instrument* instrument) {
+void UnitHighpass::apply(Instrument* instrument) {
     input->update(instrument);
     cutOffFrequency->update(instrument);
     
@@ -35,14 +39,15 @@ void UnitLowpass::apply(Instrument* instrument) {
     
     unsigned long framesPerBuffer = controller->getFramesPerBuffer();
     for(int x = 0;x < framesPerBuffer; ++x) {
-        // Clearly, this makes total sense! (for those who do not understand: https://en.wikipedia.org/wiki/Low-pass_filter, and use that RC = 1/(2*pi*f_c) and dt = 1/sampleRate )
-        double alpha = 1.0 / (1.0 + controller->getSampleRate() / (2.0 * M_PI * cutOffFrequency->output[x]));
-        output[x] = alpha * input->output[x] + (1.0 - alpha) * (x == 0 ? lastOutput[i] : output[x - 1]);
+        // Clearly, this makes total sense! (for those who do not understand: https://en.wikipedia.org/wiki/High-pass_filter, and use that RC = 1/(2*pi*f_c) and dt = 1/sampleRate )
+        double alpha = 1.0 / (1.0 + (2.0 * M_PI * cutOffFrequency->output[x]) / controller->getSampleRate());
+        output[x] = alpha * ((x == 0 ? lastOutput[i] : output[x - 1]) + input->output[x] - (x == 0 ? lastInputOutput[i] : input->output[x - 1]));
     }
     lastOutput[i] = output[framesPerBuffer - 1];
+    lastInputOutput[i] = input->output[framesPerBuffer - 1];
 }
 
-bool UnitLowpass::setValue(std::string parameter, std::string value) {
+bool UnitHighpass::setValue(std::string parameter, std::string value) {
     if(parameter.compare("input") == 0)
         return Unit::set(controller, &input, value, keyDependent);
     

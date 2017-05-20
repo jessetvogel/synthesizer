@@ -19,6 +19,9 @@
 		311049A21ED068F2000E89F1 /* unitkeyvelocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 311049A01ED068F2000E89F1 /* unitkeyvelocity.cpp */; };
 		311049A51ED07DC9000E89F1 /* basic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 311049A31ED07DC9000E89F1 /* basic.cpp */; };
 		311049A81ED0C873000E89F1 /* unitlowpass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 311049A61ED0C873000E89F1 /* unitlowpass.cpp */; };
+		311049AB1ED0D375000E89F1 /* unithighpass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 311049A91ED0D375000E89F1 /* unithighpass.cpp */; };
+		311049AE1ED0D8DE000E89F1 /* unitfunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 311049AC1ED0D8DE000E89F1 /* unitfunction.cpp */; };
+		311049B11ED0D93D000E89F1 /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 311049AF1ED0D93D000E89F1 /* function.cpp */; };
 		31D719571ECB04BA00A4C9E0 /* settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719551ECB04BA00A4C9E0 /* settings.cpp */; };
 		31D7195A1ECB0BAE00A4C9E0 /* sample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719581ECB0BAE00A4C9E0 /* sample.cpp */; };
 		31D719601ECC4E5700A4C9E0 /* unitADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D7195E1ECC4E5700A4C9E0 /* unitADSR.cpp */; };
@@ -70,6 +73,12 @@
 		311049A41ED07DC9000E89F1 /* basic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = basic.hpp; sourceTree = "<group>"; };
 		311049A61ED0C873000E89F1 /* unitlowpass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitlowpass.cpp; sourceTree = "<group>"; };
 		311049A71ED0C873000E89F1 /* unitlowpass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitlowpass.hpp; sourceTree = "<group>"; };
+		311049A91ED0D375000E89F1 /* unithighpass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unithighpass.cpp; sourceTree = "<group>"; };
+		311049AA1ED0D375000E89F1 /* unithighpass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unithighpass.hpp; sourceTree = "<group>"; };
+		311049AC1ED0D8DE000E89F1 /* unitfunction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitfunction.cpp; sourceTree = "<group>"; };
+		311049AD1ED0D8DE000E89F1 /* unitfunction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitfunction.hpp; sourceTree = "<group>"; };
+		311049AF1ED0D93D000E89F1 /* function.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = function.cpp; sourceTree = "<group>"; };
+		311049B01ED0D93D000E89F1 /* function.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = function.hpp; sourceTree = "<group>"; };
 		31D719551ECB04BA00A4C9E0 /* settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = settings.cpp; sourceTree = "<group>"; };
 		31D719561ECB04BA00A4C9E0 /* settings.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = settings.hpp; sourceTree = "<group>"; };
 		31D719581ECB0BAE00A4C9E0 /* sample.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sample.cpp; sourceTree = "<group>"; };
@@ -166,6 +175,10 @@
 				311049A11ED068F2000E89F1 /* unitkeyvelocity.hpp */,
 				311049A61ED0C873000E89F1 /* unitlowpass.cpp */,
 				311049A71ED0C873000E89F1 /* unitlowpass.hpp */,
+				311049A91ED0D375000E89F1 /* unithighpass.cpp */,
+				311049AA1ED0D375000E89F1 /* unithighpass.hpp */,
+				311049AC1ED0D8DE000E89F1 /* unitfunction.cpp */,
+				311049AD1ED0D8DE000E89F1 /* unitfunction.hpp */,
 			);
 			name = units;
 			sourceTree = "<group>";
@@ -200,6 +213,8 @@
 				31D719621ECC9D9800A4C9E0 /* interpolation.hpp */,
 				31EC60301ECF264F004671E2 /* util.cpp */,
 				31EC60311ECF264F004671E2 /* util.hpp */,
+				311049AF1ED0D93D000E89F1 /* function.cpp */,
+				311049B01ED0D93D000E89F1 /* function.hpp */,
 			);
 			name = tools;
 			sourceTree = "<group>";
@@ -288,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				311049AE1ED0D8DE000E89F1 /* unitfunction.cpp in Sources */,
 				310285601EC8E7E300B4A5F6 /* controller.cpp in Sources */,
 				31D719811ECE317B00A4C9E0 /* commands.cpp in Sources */,
 				310285701EC8F7FC00B4A5F6 /* instrument.cpp in Sources */,
@@ -302,8 +318,10 @@
 				311049A21ED068F2000E89F1 /* unitkeyvelocity.cpp in Sources */,
 				31EC60381ECF3169004671E2 /* unitoscillator.cpp in Sources */,
 				31D7196B1ECDEE2E00A4C9E0 /* unit.cpp in Sources */,
+				311049B11ED0D93D000E89F1 /* function.cpp in Sources */,
 				311049A81ED0C873000E89F1 /* unitlowpass.cpp in Sources */,
 				31EC60411ECF45BE004671E2 /* unitadder.cpp in Sources */,
+				311049AB1ED0D375000E89F1 /* unithighpass.cpp in Sources */,
 				31EC60321ECF264F004671E2 /* util.cpp in Sources */,
 				31D719571ECB04BA00A4C9E0 /* settings.cpp in Sources */,
 				31D719631ECC9D9800A4C9E0 /* interpolation.cpp in Sources */,
