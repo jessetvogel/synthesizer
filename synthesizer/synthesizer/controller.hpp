@@ -13,7 +13,6 @@ class Input;
 class Output;
 class Instrument;
 class Unit;
-class KeyUnit;
 
 class Controller {
     
@@ -24,7 +23,6 @@ class Controller {
     
     std::unordered_map<std::string, Instrument*> instruments;
     std::unordered_map<std::string, Unit*> units;
-    std::unordered_map<std::string, KeyUnit*> keyUnits;
     
     int inputDevice;
     int outputDevice;
@@ -66,18 +64,14 @@ public:
     
     bool addInstrument(Instrument*, std::string);
     bool addUnit(Unit*, std::string);
-    bool addKeyUnit(KeyUnit*, std::string);
     
     bool deleteInstrument(std::string);
     bool deleteUnit(std::string);
-    bool deleteKeyUnit(std::string);
     
     Instrument* getInstrument(std::string);
     Unit* getUnit(std::string);
-    KeyUnit* getKeyUnit(std::string);
     
-    void resetUnits();
-    void resetKeyUnits();
+    void resetUnits(bool);
 };
 
 #endif

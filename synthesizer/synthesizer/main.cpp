@@ -4,15 +4,17 @@
 
 #include "controller.hpp"
 #include "parser.hpp"
-#include "sample.hpp"
+#include "basic.hpp"
 
 #include "log.hpp"
+
+#define MAIN_FILE "/Users/jessetvogel/Projects/synthesizer/synth/main.synth"
 
 int main(int argc, char *argv[]) {
     // Initialize stuff (TODO: put this in some audio class or something, and check for errors)
     Pm_Initialize();
     Pa_Initialize();
-    Sample::initialize();
+    Basic::initialize();
     
     // Setup
     Controller* controller = new Controller();
@@ -25,20 +27,17 @@ int main(int argc, char *argv[]) {
     controller->setOutputDevice(1);
     Log::output("");
     
-    Parser parser(controller, "/Users/jessetvogel/Desktop/synthesizer.txt");
+    Parser parser(controller, MAIN_FILE);
 
     controller->start();
-    
     Log::output("Press enter to stop");
     getchar();
-    
     controller->stop();
     
     // Cleanup stuff
     delete controller;
     
-    // TODO: cleanup samples and envelopes
-    
+    Basic::destruct();
     Pm_Terminate();
     Pa_Terminate();
     

@@ -2,16 +2,37 @@
 #define unit_hpp
 
 #include <string>
-#include "keyunit.hpp"
 
 class Controller;
+class Instrument;
 
-class Unit : public KeyUnit {
+class Unit {
     
+private:
+    
+    bool updated;
+    bool constant = false;
+    
+protected:
+    
+    Controller* controller;
+    bool keyDependent;
+    
+    virtual void apply(Instrument*);
+
 public:
-        
-    static Unit* create(Controller*, std::string);
-    static bool set(Controller*, Unit**, std::string);
+    
+    float* output;
+    
+    virtual bool setValue(std::string, std::string);
+    
+    void reset();
+    void update(Instrument*);
+    
+    bool isKeyDependent();
+    
+    static Unit* create(Controller*, std::string, bool);
+    static bool set(Controller*, Unit**, std::string, bool);
     
 };
 

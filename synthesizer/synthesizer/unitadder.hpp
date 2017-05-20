@@ -11,7 +11,7 @@ class UnitAdder : public Unit {
     
 public:
     
-    UnitAdder(Controller*, int);
+    UnitAdder(Controller*, bool, int);
     ~UnitAdder();
     
     void apply(Instrument*);

@@ -26,7 +26,7 @@ class MidiState {
     
 public:
     
-    unsigned char velocity[AMOUNT_OF_KEYS];
+    double velocity[AMOUNT_OF_KEYS];
     double pitchWheel;
     double modulationWheel;
     double mainVolume;

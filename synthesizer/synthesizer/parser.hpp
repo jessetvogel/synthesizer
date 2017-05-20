@@ -11,6 +11,7 @@ class Parser {
     static std::regex regexNeglect;
     
     Controller* controller;
+    std::string directory;
     
     bool parse(std::string);
     

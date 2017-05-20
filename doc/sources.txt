@@ -9,3 +9,8 @@ http://beausievers.com/synth/synthbasics/
 
 C++:
 http://www.sgi.com/tech/stl/hash_map.html
+
+Filters / FX:
+https://en.wikipedia.org/wiki/Low-pass_filter
+https://en.wikipedia.org/wiki/High-pass_filter
+Audio Effects, Theory, Implementation and Application - Joshua D. Reiss & Andrew P. McPherson

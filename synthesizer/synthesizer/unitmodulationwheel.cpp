@@ -7,6 +7,9 @@ UnitModulationWheel::UnitModulationWheel(Controller* controller) {
     // Store pointer to controller
     this->controller = controller;
     
+    // The modulation wheel is not key dependent
+    keyDependent = false;
+    
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
 }

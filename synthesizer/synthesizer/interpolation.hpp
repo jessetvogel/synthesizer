@@ -3,6 +3,8 @@
 
 #include <string>
 
+class Controller;
+
 class Interpolation {
 
 public:
@@ -21,7 +23,7 @@ public:
     static double quartIn(double);
     static double quartOut(double);
     
-    static Type fromString(std::string);
+    static bool set(Controller*, Type*, std::string);
 
 };
 

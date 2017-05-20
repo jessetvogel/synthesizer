@@ -3,6 +3,8 @@
 
 #include <string>
 
+class Controller;
+
 class Sample {
 
     int resolution;
@@ -17,12 +19,14 @@ public:
     float getValue(double);
     
     static void initialize();
+    static void destruct();
+
     static Sample* sine;
     static Sample* square;
     static Sample* triangle;
     static Sample* sawtooth;
     
-    static Sample* fromString(std::string);
+    static bool set(Controller*, Sample**, std::string);
 };
 
 #endif

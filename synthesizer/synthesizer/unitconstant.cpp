@@ -8,6 +8,9 @@ UnitConstant::UnitConstant(Controller* controller, double value) {
     // Store value
     this->value = value;
     
+    // Constants are not key dependent
+    keyDependent = false;
+    
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
     for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
@@ -15,5 +18,3 @@ UnitConstant::UnitConstant(Controller* controller, double value) {
 }
 
 void UnitConstant::apply(Instrument* instrument) { }
-
-bool UnitConstant::deleteOnRemove() { return true; }

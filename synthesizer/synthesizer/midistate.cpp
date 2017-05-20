@@ -11,7 +11,7 @@ MidiState::MidiState(Settings* settings) {
     
     // Set default values
     for(int i = 0;i < AMOUNT_OF_KEYS;i ++)
-        velocity[i] = 0;
+        velocity[i] = 0.0;
     
     pitchWheel = 0.0;
     modulationWheel = 0.0;
@@ -25,11 +25,11 @@ void MidiState::update(unsigned char status, unsigned char data1, unsigned char 
     
     switch(type) {
         case MIDI_NOTE_OFF:
-            velocity[data1] = 0;
+            velocity[data1] = 0.0;
             break;
             
         case MIDI_NOTE_ON:
-            velocity[data1] = data2;
+            velocity[data1] = (double) data2 / 127.0;
             break;    
             
         case MIDI_POLYPHONIC_AFTERTOUCH:

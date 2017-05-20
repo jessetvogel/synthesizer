@@ -1,5 +1,5 @@
-#ifndef oscillator_hpp
-#define oscillator_hpp
+#ifndef unitoscillator_hpp
+#define unitoscillator_hpp
 
 #include "unit.hpp"
 
@@ -12,11 +12,11 @@ class UnitOscillator : public Unit {
     Unit* amplitude = NULL;
     Unit* mean = NULL;
     
-    double phase;
+    double* phase;
     
 public:
     
-    UnitOscillator(Controller*);
+    UnitOscillator(Controller*, bool);
     ~UnitOscillator();
     
     void apply(Instrument*);

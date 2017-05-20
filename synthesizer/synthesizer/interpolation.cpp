@@ -26,13 +26,12 @@ double Interpolation::quartOut(double x) {
     return 1.0 - x*x*x*x;
 }
 
-Interpolation::Type Interpolation::fromString(std::string str) {
-    if(str.compare("linear") == 0) return Linear;
-    if(str.compare("sine") == 0) return Sine;
-    if(str.compare("quartin") == 0) return QuartIn;
-    if(str.compare("quartout") == 0) return QuartOut;
+bool Interpolation::set(Controller* controller, Type* type, std::string value) {
+    if(value.compare("linear") == 0) { *type = Linear; return true; }
+    if(value.compare("sine") == 0) { *type = Sine; return true; }
+    if(value.compare("quartin") == 0) { *type = QuartIn; return true; }
+    if(value.compare("quartout") == 0) { *type = QuartOut; return true; }
     
-    // TODO: what to do if no match?
-    return Linear;
+    return false;
 }
 

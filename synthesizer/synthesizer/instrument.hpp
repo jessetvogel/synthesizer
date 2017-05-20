@@ -3,7 +3,6 @@
 
 class Controller;
 class Unit;
-class KeyUnit;
 class MidiState;
 
 class Instrument {
@@ -16,24 +15,24 @@ private:
     
     Controller* controller;
     
-    KeyUnit* keyOutput;
+    Unit* keyOutput;
     Unit* output;
     
     float* buffer;
     
     Stage* stage;
-    unsigned char* velocity;
+    double* velocity;
     double* duration;
     double* release;
     
-    double releaseTime;
+    double keyReleaseTime;
     
     void updateNote(MidiState*, int);
     
 public:
     
     Stage currentStage;
-    unsigned char currentVelocity;
+    double currentVelocity;
     double currentDuration;
     double currentRelease;
     double currentFrequency;
@@ -42,9 +41,9 @@ public:
     Instrument(Controller*);
     ~Instrument();
     
-    void setReleaseTime(double);
-    void setOutput(Unit*);
-    void setKeyOutput(KeyUnit*);
+    bool setOutput(Unit*);
+    bool setKeyOutput(Unit*);
+    bool setKeyReleaseTime(double);
     
     void update(MidiState*);
     void addBuffer(float*);

@@ -1,0 +1,44 @@
+# Starting frequency
+unit_key_create adder_1 s
+unit_set_value s input_1        key_frequency
+unit_set_value s gain_1         0.5
+
+# Attack frequency
+unit_key_create adder_1 a
+unit_set_value a input_1        key_frequency
+unit_set_value a gain_1         2.0
+
+# Release frequency
+unit_key_create adder_1 r
+unit_set_value r input_1        key_frequency
+unit_set_value r gain_1         0.5
+
+unit_key_create ADSR F
+unit_set_value F start_level    s
+unit_set_value F attack_level   a
+unit_set_value F sustain_level  key_frequency
+unit_set_value F release_level  r
+unit_set_value F attack_time    0.05
+unit_set_value F decay_time     0.05
+unit_set_value F release_time   0.1
+unit_set_value F attack_type    quartout
+unit_set_value F decay_type     quartout
+unit_set_value F release_type   quartout
+
+unit_key_create ADSR A
+unit_set_value A attack_time    0.05
+unit_set_value A decay_time     0.1
+unit_set_value A sustain_level  0.5
+unit_set_value A release_time   0.1
+unit_set_value A attack_type    quartout
+unit_set_value A decay_type     quartout
+unit_set_value A release_type   quartout
+
+unit_key_create oscillator      wave
+unit_set_value wave sample      sine
+unit_set_value wave amplitude   A
+unit_set_value wave frequency   F
+
+instrument_create instrument
+instrument_set_key_output instrument wave
+instrument_set_key_release_time instrument 1.0

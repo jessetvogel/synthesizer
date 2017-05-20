@@ -6,7 +6,6 @@
 #include "input.hpp"
 #include "midistate.hpp"
 #include "unit.hpp"
-#include "keyunit.hpp"
 
 #include "log.hpp"
 
@@ -18,7 +17,7 @@ Instrument::Instrument(Controller* controller) {
     buffer = new float[controller->getFramesPerBuffer()];
     stage = new Stage[AMOUNT_OF_KEYS];
     memset(stage, 0, sizeof(Stage) * AMOUNT_OF_KEYS);
-    velocity = new unsigned char[AMOUNT_OF_KEYS];
+    velocity = new double[AMOUNT_OF_KEYS];
     memset(velocity, 0, sizeof(unsigned char) * AMOUNT_OF_KEYS);
     duration = new double[AMOUNT_OF_KEYS];
     memset(duration, 0, sizeof(double) * AMOUNT_OF_KEYS);
@@ -26,7 +25,7 @@ Instrument::Instrument(Controller* controller) {
     memset(release, 0, sizeof(double) * AMOUNT_OF_KEYS);
     
     // Default values
-    releaseTime = 0.0;
+    keyReleaseTime = 0.0;
     keyOutput = NULL;
 }
 
@@ -40,8 +39,7 @@ Instrument::~Instrument() {
 
 void Instrument::update(MidiState* midiState) {
     // First clear the buffer
-//    memset(buffer, 0, sizeof(float) * controller->getFramesPerBuffer()); TODO
-    for(int x = 0;x < controller->getFramesPerBuffer(); ++x) buffer[x] = 0.0f;
+    memset(buffer, 0, sizeof(float) * controller->getFramesPerBuffer());
     
     for(int i = 0;i < AMOUNT_OF_KEYS;i ++) {
         // Update duration and release time
@@ -76,12 +74,18 @@ void Instrument::update(MidiState* midiState) {
         }
         
         // Check if done
-        if(stage[i] == Released && release[i] > releaseTime)
+        if(stage[i] == Released && release[i] > keyReleaseTime)
             stage[i] = Off;
         
         // Update all active notes. Note: stage will be set to Off if the envelope indicates so
         if(stage[i] != Off) updateNote(midiState, i);
     }
+    
+    // TODO: something with units
+    
+    // Adjust total output with main volume
+    for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
+        buffer[x] *= midiState->mainVolume;
 }
 
 void Instrument::updateNote(MidiState* midiState, int i) {
@@ -93,10 +97,8 @@ void Instrument::updateNote(MidiState* midiState, int i) {
     if(midiState->pitchWheel != 0.0)
         frequency *= pow(2.0, midiState->pitchWheel * settings->pitchWheelRange / 12.0);
 
-    double amplitude = sqrt((velocity[i] + 1) / 128.0) * midiState->mainVolume;
-
     if(keyOutput != NULL) {
-        // Store information
+        // Store information that units can use
         currentStage = stage[i];
         currentVelocity = velocity[i];
         currentDuration = duration[i];
@@ -104,25 +106,31 @@ void Instrument::updateNote(MidiState* midiState, int i) {
         currentFrequency = frequency;
         currentKey = i;
         
-        controller->resetKeyUnits();
+        controller->resetUnits(true);
         keyOutput->update(this);
     
-        // Add output to the buffer
+        // Add output of keyOutput to the buffer
         for(int x = 0;x < framesPerBuffer; ++x)
-            buffer[x] += amplitude * keyOutput->output[x];
+            buffer[x] += keyOutput->output[x];
     }
 }
 
-void Instrument::setReleaseTime(double releaseTime) {
-    this->releaseTime = releaseTime;
+bool Instrument::setKeyReleaseTime(double keyReleaseTime) {
+    if(keyReleaseTime < 0) return false;
+    this->keyReleaseTime = keyReleaseTime;
+    return true;
 }
 
-void Instrument::setKeyOutput(KeyUnit* keyUnit) {
-    this->keyOutput = keyUnit;
+bool Instrument::setKeyOutput(Unit* unit) {
+    this->keyOutput = unit;
+    return true;
 }
 
-void Instrument::setOutput(Unit* unit) {
+bool Instrument::setOutput(Unit* unit) {
+    // We only allow here for non key dependent units
+    if(unit->isKeyDependent()) return false;
     this->output = unit;
+    return true;
 }
 
 void Instrument::addBuffer(float* buffer) {

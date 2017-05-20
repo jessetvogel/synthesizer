@@ -1,0 +1,36 @@
+var documentation = {
+
+  commands: [
+    { name: "include", example: "include <filename>", description: "Includes the provided file." },
+
+    { name: "instrument_create", example: "instrument_create <label>", description: "Creates a new instrument, and gives it the provided label." },
+    { name: "instrument_delete", example: "instrument_delete <instrument>", description: "Delete the provided instrument." },
+    { name: "instrument_set_output", example: "instrument_set_output <instrument> <unit>", description: "Set the output of the instrument." },
+    { name: "instrument_set_key_output", example: "instrument_set_key_output <instrument> <unit>", description: "Set key output of the instrument." },
+    { name: "instrument_set_key_release_time", example: "instrument_set_key_release_time <instrument> <seconds>", description: "Set the release time for the instrument." },
+
+    { name: "unit_create", example: "unit_create <unit_type> <label>", description: "Creates a new unit of the specified type, and gives it the provided label." },
+    { name: "unit_key_create", example: "unit_key_create <unit_type> <label>", description: "Creates a new key dependent unit of the specified type, and gives it the provided label." },
+    { name: "unit_delete", example: "unit_delete <unit>", description: "Delete the provided unit." },
+    { name: "unit_set_value", example: "unit_set_value <unit> <parameter> <value>", description: "Set the value of the specified parameter of the given unit." },
+  ],
+
+  units: [{
+      name: "oscillator",
+      parameters: [
+        { name: "sample", value: "sample", default: "sine" },
+        { name: "mean", value: "unit", default: "0.0" },
+        { name: "amplitude", value: "unit", default: "1.0" },
+        { name: "frequency", value: "unit", default: "0.0" },
+      ],
+      description: "Outputs a wave."
+    }, {
+      name: "adder_n",
+      parameters: [
+        { name: "input_k", value: "unit", default: "0.0" },
+        { name: "gain_k", value: "unit", default: "1.0" }
+      ],
+      description: "Adds all inputs, i.e. input_1 up til input_n, weighted with the values of gain_1 up til gain_n."
+    }
+  ]
+};

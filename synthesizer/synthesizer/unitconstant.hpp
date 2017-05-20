@@ -8,8 +8,6 @@ class UnitConstant : public Unit {
     double value;
 
 public:
-
-    bool deleteOnRemove();
     
     UnitConstant(Controller*, double);
     

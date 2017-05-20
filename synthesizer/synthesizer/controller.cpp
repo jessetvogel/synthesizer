@@ -6,9 +6,10 @@
 #include "settings.hpp"
 #include "midistate.hpp"
 #include "instrument.hpp"
+
 #include "unit.hpp"
-#include "keyunit.hpp"
-#include "keyunitfrequency.hpp"
+#include "unitkeyfrequency.hpp"
+#include "unitkeyvelocity.hpp"
 #include "unitmodulationwheel.hpp"
 
 #include "log.hpp"
@@ -28,7 +29,8 @@ Controller::Controller() {
     framesPerBuffer = 64;
     
     // Instantiate constant values
-    addKeyUnit(new KeyUnitFrequency(this), "key_frequency");
+    addUnit(new UnitKeyFrequency(this), "key_frequency");
+    addUnit(new UnitKeyVelocity(this), "key_velocity");
     addUnit(new UnitModulationWheel(this), "modulation_wheel");
 }
 
@@ -42,9 +44,6 @@ Controller::~Controller() {
         delete it->second;
     
     for(auto it = units.begin(); it != units.end(); ++it)
-        delete it->second;
-    
-    for(auto it = keyUnits.begin(); it != keyUnits.end(); ++it)
         delete it->second;
 }
 
@@ -78,8 +77,8 @@ float* Controller::update() {
     // Update all MIDI data
     input->update();
 
-    // Reset all units
-    resetUnits();
+    // Reset all units (i.e. onlyKeyDependents = false)
+    resetUnits(false);
     
     // Clear buffer
     memset(buffer, 0, sizeof(float) * framesPerBuffer);
@@ -93,13 +92,9 @@ float* Controller::update() {
     return buffer;
 }
 
-MidiState* Controller::getMidiState() {
-    return midiState;
-}
+MidiState* Controller::getMidiState() { return midiState; }
 
-Settings* Controller::getSettings() {
-    return settings;
-}
+Settings* Controller::getSettings() { return settings; }
 
 bool Controller::setInputDevice(int n) {
     if(active) return false;
@@ -132,21 +127,13 @@ bool Controller::setFramesPerBuffer(unsigned long framesPerBuffer) {
     
 }
 
-int Controller::getInputDevice() {
-    return inputDevice;
-}
+int Controller::getInputDevice() { return inputDevice; }
 
-int Controller::getOutputDevice() {
-    return outputDevice;
-}
+int Controller::getOutputDevice() { return outputDevice; }
 
-double Controller::getSampleRate() {
-    return sampleRate;
-}
+double Controller::getSampleRate() { return sampleRate; }
 
-unsigned long Controller::getFramesPerBuffer() {
-    return framesPerBuffer;
-}
+unsigned long Controller::getFramesPerBuffer() { return framesPerBuffer; }
 
 void Controller::listInputDevices() {
     int N = input->amountOfDevices();
@@ -178,13 +165,6 @@ bool Controller::addUnit(Unit* unit, std::string label) {
     return true;
 }
 
-bool Controller::addKeyUnit(KeyUnit* keyUnit, std::string label) {
-    if(keyUnits.find(label) != keyUnits.end()) return false;
-    
-    keyUnits[label] = keyUnit;
-    return true;
-}
-
 bool Controller::deleteInstrument(std::string label) {
     if(instruments.find(label) == instruments.end()) return false;
 
@@ -203,15 +183,6 @@ bool Controller::deleteUnit(std::string label) {
     return true;
 }
 
-bool Controller::deleteKeyUnit(std::string label) {
-    if(keyUnits.find(label) == keyUnits.end()) return false;
-    
-    KeyUnit* keyUnit = keyUnits[label];
-    delete keyUnit;
-    keyUnits.erase(label);
-    return true;
-}
-
 Instrument* Controller::getInstrument(std::string label) {
     if(instruments.find(label) == instruments.end()) return NULL;
     return instruments[label];
@@ -222,17 +193,9 @@ Unit* Controller::getUnit(std::string label) {
     return units[label];
 }
 
-KeyUnit* Controller::getKeyUnit(std::string label) {
-    if(keyUnits.find(label) == keyUnits.end()) return NULL;
-    return keyUnits[label];
-}
-
-void Controller::resetUnits() {
-    for(auto it = units.begin(); it != units.end(); ++it)
-        it->second->reset();
-}
-
-void Controller::resetKeyUnits() {
-    for(auto it = keyUnits.begin(); it != keyUnits.end(); ++it)
-        it->second->reset();
+void Controller::resetUnits(bool onlyKeyDepenent) {
+    for(auto it = units.begin(); it != units.end(); ++it) {
+        if(!onlyKeyDepenent || it->second->isKeyDependent())
+            it->second->reset();
+    }
 }

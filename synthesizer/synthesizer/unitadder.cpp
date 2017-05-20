@@ -3,10 +3,13 @@
 
 const int UnitAdder::maxN = 8;
 
-UnitAdder::UnitAdder(Controller* controller, int n) {
+UnitAdder::UnitAdder(Controller* controller, bool keyDependent, int n) {
     // Store pointer to controller and other variables
     this->controller = controller;
     this->n = n;
+    
+    // Adders may or may not be key dependent
+    this->keyDependent = keyDependent;
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
@@ -17,8 +20,8 @@ UnitAdder::UnitAdder(Controller* controller, int n) {
     for(int i = 0;i < n; i ++) {
         gains[i] = NULL;
         inputs[i] = NULL;
-        Unit::set(controller, &(gains[i]), "1.0");
-        Unit::set(controller, &(inputs[i]), "0.0");
+        Unit::set(controller, &(gains[i]), "1.0", keyDependent);
+        Unit::set(controller, &(inputs[i]), "0.0", keyDependent);
     }
 }
 
@@ -46,10 +49,10 @@ bool UnitAdder::setValue(std::string parameter, std::string value) {
         sprintf(strInput, "input_%d", i+1);
         sprintf(strGain, "gain_%d", i+1);
         if(parameter.compare(strInput) == 0)
-            return Unit::set(controller, &(inputs[i]), value);
+            return Unit::set(controller, &(inputs[i]), value, keyDependent);
         
         if(parameter.compare(strGain) == 0)
-            return Unit::set(controller, &(gains[i]), value);
+            return Unit::set(controller, &(gains[i]), value, keyDependent);
     }
     
     return false;

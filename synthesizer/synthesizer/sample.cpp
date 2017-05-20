@@ -16,8 +16,8 @@ Sample::~Sample() {
 
 float Sample::getValue(double phase) {
     // Wrap phase into 0, 2Pi interval TODO: extend to (0, periods * 2 * pi) interval. This works now because all samples have periods = 2
-    long n = phase / (2.0 * M_PI);
-    phase -= 2.0 * M_PI * floor(n);
+    long n = phase / (2.0 * M_PI * periods);
+    phase -= 2.0 * M_PI * periods * floor(n);
     
     // Linear interpolation
     double x = phase / (2.0 * M_PI) * resolution;
@@ -52,11 +52,18 @@ void Sample::initialize() {
     sawtooth = new Sample(resolution, 1, dataSawtooth);
 }
 
-Sample* Sample::fromString(std::string str) {
-    if(str.compare("sine") == 0) return sine;
-    if(str.compare("square") == 0) return square;
-    if(str.compare("triangle") == 0) return triangle;
-    if(str.compare("sawtooth") == 0) return sawtooth;
+void Sample::destruct() {
+    delete sine;
+    delete square;
+    delete triangle;
+    delete sawtooth;
+}
+
+bool Sample::set(Controller* controller, Sample** parameterAddr, std::string value) {
+    if(value.compare("sine") == 0)      { *parameterAddr = sine; return true; }
+    if(value.compare("square") == 0)    { *parameterAddr = square; return true; }
+    if(value.compare("triangle") == 0)  { *parameterAddr = triangle; return true; }
+    if(value.compare("sawtooth") == 0)  { *parameterAddr = sawtooth; return true; }
     
-    return NULL;
+    return false;
 }
