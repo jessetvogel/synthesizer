@@ -11,13 +11,15 @@ class Parser {
     static std::regex regexNeglect;
     
     Controller* controller;
+    std::string filepath;
     std::string directory;
     
-    bool parse(std::string);
+    bool parseLine(std::string);
     
 public:
     
     Parser(Controller*, std::string);
+    bool parse();
     
 };
 

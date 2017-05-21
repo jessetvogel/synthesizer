@@ -18,8 +18,8 @@ UnitLowpass::UnitLowpass(Controller* controller, bool keyDependent) {
     output = new float[controller->getFramesPerBuffer()];
     
     if(keyDependent) {
-        lastOutput = new float[AMOUNT_OF_KEYS];
-        memset(lastOutput, 0, sizeof(float) * AMOUNT_OF_KEYS);
+        lastOutput = new float[MAX_AMOUNT_OF_IDS];
+        memset(lastOutput, 0, sizeof(float) * MAX_AMOUNT_OF_IDS);
     }
     else {
         lastOutput = new float[1];
@@ -31,7 +31,7 @@ void UnitLowpass::apply(Instrument* instrument) {
     input->update(instrument);
     cutOffFrequency->update(instrument);
     
-    int i = keyDependent ? instrument->currentKey : 0;
+    int i = keyDependent ? instrument->currentKey->id : 0;
     
     unsigned long framesPerBuffer = controller->getFramesPerBuffer();
     for(int x = 0;x < framesPerBuffer; ++x) {

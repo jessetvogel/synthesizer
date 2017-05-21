@@ -3,6 +3,7 @@
 
 #include <portmidi.h>
 #include "settings.hpp"
+#include "keyevent.hpp"
 
 #define MIDI_NOTE_OFF (0x8)
 #define MIDI_NOTE_ON (0x9)
@@ -18,22 +19,35 @@
 #define MIDI_PAN (0x0A)
 #define MIDI_SUSTAIN_PEDAL (0x40)
 
+class Controller;
 class Settings;
 
 class MidiState {
+    
+    Controller* controller;
+    
+    unsigned char velocity[AMOUNT_OF_KEYS];
+    unsigned char previousVelocity[AMOUNT_OF_KEYS];
 
-    Settings* settings;
-    
 public:
+
+    enum Stage { Off, Press, Sustain, Released };
     
-    double velocity[AMOUNT_OF_KEYS];
+    Stage keyStage[AMOUNT_OF_KEYS];
+    double keyVelocity[AMOUNT_OF_KEYS];
+    double keyFrequency[AMOUNT_OF_KEYS];
+
     double pitchWheel;
     double modulationWheel;
     double mainVolume;
     double sustainPedal;
     
-    MidiState(Settings*);
-    void update(unsigned char, unsigned char, unsigned char);
+    KeyEvent leadKey;
+    
+    MidiState(Controller*);
+    void addEvent(unsigned char, unsigned char, unsigned char);
+    void update();
+    void updateKeyEvent(KeyEvent*);
     
 };
 

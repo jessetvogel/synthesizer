@@ -15,23 +15,33 @@ Parser::Parser(Controller* controller, std::string filepath) {
     // Store pointer to controller
     this->controller = controller;
     
+    // Store filepath
+    this->filepath = filepath;
+    
     // Determine directory
     directory = filepath.substr(0, filepath.find_last_of(DIRECTORY_SEPARATOR));
-    
+}
+
+bool Parser::parse() {
     // Read file line by line, and parse them
+    int lineNumber = 1;
     std::ifstream input(filepath);
     std::string line;
     while(std::getline(input, line)) {
-        if(!parse(line)) {
-            Log::error("Unable to parse to parse the following line:");
+        if(!parseLine(line)) {
+            char message[32];
+            sprintf(message, "An error occured in line %d", lineNumber);
+            Log::error(message);
             Log::error(line.c_str());
-            Log::error("");
+            return false;
         }
+        ++ lineNumber;
     }
     input.close();
+    return true;
 }
 
-bool Parser::parse(std::string line) {
+bool Parser::parseLine(std::string line) {
     const char* str = line.c_str();
     std::cmatch cm;
 
@@ -42,7 +52,7 @@ bool Parser::parse(std::string line) {
     // include <filename>
     if(std::regex_search(str, cm, Commands::regexInclude)) {
         Parser parser(controller, directory + DIRECTORY_SEPARATOR + std::string(cm[1]));
-        return true;
+        return parser.parse();
     }
     
     // instrument_create <label>

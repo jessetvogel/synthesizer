@@ -1,13 +1,5 @@
 Ideas: (not in order of priority)
 
-- Implement units called 'lead_key_frequency', 'lead_key_velocity' oid, which outputs the frequency/velocity of the note that you last played (leading key). Like a lead instrument
-
-- Create a bandpass filter unit
-
-- Bandpass filter as keyunit? How to implement, is FFT to slow, how would we implement IIR?
-
-- Think about difference between units and keyunits. Are they really different, can the program be simplified so that for e.g. an oscillator we only need one C++ class?
-
 - How do we change values during run-time? Using an interface? Command-line? There probably are parameters that we want to change while playing.
 
 - Unit like delay effect
@@ -16,6 +8,8 @@ Ideas: (not in order of priority)
 
 Working on:
 
+- Implement units called 'lead_key_frequency', 'lead_key_velocity' oid, which outputs the frequency/velocity of the note that you last played (leading key). Like a lead instrument
+
 - Create documentation, in some years you might want to use this, but don't know how it works..
 
 - Oh, maybe it's a cool idea to put all documentation in xml or json format, and then using a webpage render it in a cool way
@@ -23,6 +17,14 @@ Working on:
 ---------------------------------------------------------------
 
 Done:
+
+- Instrument should have some sort of list of key events, so that it is possible that two key events of the same note overlap whenever a note is pressed twice
+
+- Bandpass filter as keyunit? How to implement, is FFT to slow, how would we implement IIR?
+
+- Think about difference between units and keyunits. Are they really different, can the program be simplified so that for e.g. an oscillator we only need one C++ class?
+
+- Create a bandpass filter unit
 
 - Implement a command like 'include' which loads other (relative) files
 

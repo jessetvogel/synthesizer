@@ -1,6 +1,7 @@
 #include "unitADSR.hpp"
 #include "controller.hpp"
 #include "instrument.hpp"
+#include "midistate.hpp"
 
 UnitADSR::UnitADSR(Controller* controller) {
     // Store pointer to controller
@@ -40,7 +41,7 @@ void UnitADSR::apply(Instrument* instrument) {
     decayTime->update(instrument);
     releaseTime->update(instrument);
     
-    Instrument::Stage stage = instrument->currentStage;
+    KeyEvent::Stage stage = instrument->currentKey->stage;
     double t = 1.0 / controller->getSampleRate();
     
     for(int x = 0;x < controller->getFramesPerBuffer(); ++x) {
@@ -49,11 +50,11 @@ void UnitADSR::apply(Instrument* instrument) {
         double decay = decayTime->output[x];
         double release = releaseTime->output[x];
         
-        double d = instrument->currentDuration;
-        double r = instrument->currentRelease;
+        double d = instrument->currentKey->duration;
+        double r = instrument->currentKey->release;
         
-        if(stage == Instrument::Press || stage == Instrument::Sustain) d += t * x;
-        if(stage == Instrument::Released) r += t * x;
+        if(stage == KeyEvent::Press || stage == KeyEvent::Sustain) d += t * x;
+        if(stage == KeyEvent::Released) r += t * x;
         
         float amplitude;
         
@@ -69,7 +70,7 @@ void UnitADSR::apply(Instrument* instrument) {
         else amplitude = sustainLevel->output[x];
         
         // Release stage
-        if(stage != Instrument::Press && stage != Instrument::Sustain) {
+        if(stage != KeyEvent::Press && stage != KeyEvent::Sustain) {
             if(r >= release)
                 amplitude = releaseLevel->output[x];
             else

@@ -19,5 +19,5 @@ UnitKeyVelocity::~UnitKeyVelocity() {
 
 void UnitKeyVelocity::apply(Instrument* instrument) {
     for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
-        output[x] = instrument->currentVelocity;
+        output[x] = instrument->currentKey->velocity;
 }

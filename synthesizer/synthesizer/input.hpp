@@ -21,7 +21,7 @@ public:
     bool start();
     bool stop();
     
-    void update();
+    bool update();
     
     int amountOfDevices();
     const char* deviceName(int);

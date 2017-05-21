@@ -16,7 +16,7 @@ bool Unit::setValue(std::string parameter, std::string value) { return false; };
 
 void Unit::reset() { updated = false; };
 
-void Unit::update(Instrument* instrument) { if(updated) return; updated = true; apply(instrument); };
+void Unit::update(Instrument* instrument) { if(updated) return; if(!applyAlways) updated = true; apply(instrument); };
 
 void Unit::apply(Instrument* instrument) { }
 

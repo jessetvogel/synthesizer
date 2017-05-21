@@ -1,42 +1,33 @@
 #ifndef instrument_hpp
 #define instrument_hpp
 
+#include <vector>
+#include "keyevent.hpp"
+
 class Controller;
 class Unit;
-class MidiState;
 
 class Instrument {
   
 public:
-
-    enum Stage { Off, Press, Sustain, Released };
     
 private:
     
     Controller* controller;
     
-    Unit* keyOutput;
-    Unit* output;
+    Unit* keyOutput = NULL;
+    Unit* output = NULL;
+    
+    std::vector<KeyEvent*> keyEvents;
     
     float* buffer;
-    
-    Stage* stage;
-    double* velocity;
-    double* duration;
-    double* release;
+    float* keyBuffer;
     
     double keyReleaseTime;
     
-    void updateNote(MidiState*, int);
-    
 public:
     
-    Stage currentStage;
-    double currentVelocity;
-    double currentDuration;
-    double currentRelease;
-    double currentFrequency;
-    int currentKey;
+    KeyEvent* currentKey;
     
     Instrument(Controller*);
     ~Instrument();
@@ -45,9 +36,14 @@ public:
     bool setKeyOutput(Unit*);
     bool setKeyReleaseTime(double);
     
-    void update(MidiState*);
-    void addBuffer(float*);
+    Unit* getOutput();
+    Unit* getKeyOutput();
     
+    void addKeyEvent(KeyEvent*);
+    
+    void update();
+    float* getBuffer();
+    float* getKeyBuffer();
 };
 
 #endif

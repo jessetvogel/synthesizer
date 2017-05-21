@@ -28,11 +28,14 @@ int main(int argc, char *argv[]) {
     Log::output("");
     
     Parser parser(controller, MAIN_FILE);
+    if(parser.parse()) {
 
-    controller->start();
-    Log::output("Press enter to stop");
-    getchar();
-    controller->stop();
+        controller->start();
+        Log::output("Press enter to stop");
+        getchar();
+        controller->stop();
+
+    }
     
     // Cleanup stuff
     delete controller;

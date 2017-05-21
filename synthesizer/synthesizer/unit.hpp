@@ -17,9 +17,10 @@ protected:
     
     Controller* controller;
     bool keyDependent;
+    bool applyAlways = false;
     
     virtual void apply(Instrument*);
-
+    
 public:
     
     float* output;

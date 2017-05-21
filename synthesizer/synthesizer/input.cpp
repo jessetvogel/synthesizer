@@ -57,11 +57,8 @@ bool Input::start() {
     return true;
 }
 
-void Input::update() {
-    if(!active) {
-        Log::warning("Cannot update if not active");
-        return;
-    }
+bool Input::update() {
+    if(!active) return false;
     
     PmError result;
     PmEvent event;
@@ -72,8 +69,13 @@ void Input::update() {
         unsigned char status = Pm_MessageStatus(message);
         unsigned char data1 = Pm_MessageData1(message);
         unsigned char data2 = Pm_MessageData2(message);
-        controller->getMidiState()->update(status, data1, data2);
+        controller->getMidiState()->addEvent(status, data1, data2);
     }
+    
+    // TODO: check for errors?
+    
+    controller->getMidiState()->update();
+    return true;
 }
 
 bool Input::stop() {

@@ -88,16 +88,27 @@ int Output::callback(const void* inputBuffer,
     (void) inputBuffer;
     (void) timeInfo;
     (void) statusFlags;
-
-    // Get Output object
-    Output* output = (Output*) userData;
-    float* buffer = output->controller->update();
-        
-    float* out = (float*) outputBuffer;
-    for(int i = 0;i < framesPerBuffer;i ++) {
-        *(out++) = buffer[i];
-        *(out++) = buffer[i];
-    }
     
-    return paContinue;
+    // Get output object
+    Output* output = (Output*) userData;
+    
+    // Update everything
+    float* out = (float*) outputBuffer;
+    if(output->controller->update()) {
+        // Output the buffer
+        float* buffer = output->controller->getBuffer();
+        for(int i = 0;i < framesPerBuffer;i ++) {
+            *(out++) = buffer[i];
+            *(out++) = buffer[i];
+        }
+        return paContinue;
+    }
+    else {
+        // On failure, send silence and abort
+        for(int i = 0;i < framesPerBuffer;i ++) {
+            *(out++) = 0.0;
+            *(out++) = 0.0;
+        }
+        return paAbort;
+    }
 }

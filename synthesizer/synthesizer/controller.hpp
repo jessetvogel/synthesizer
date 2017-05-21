@@ -7,6 +7,8 @@
 #include <string>
 #include <unordered_map>
 
+#include "keyevent.hpp"
+
 class MidiState;
 class Settings;
 class Input;
@@ -26,7 +28,6 @@ class Controller {
     
     int inputDevice;
     int outputDevice;
-    
     double sampleRate;
     unsigned long framesPerBuffer;
     
@@ -41,37 +42,35 @@ public:
     
     bool start();
     bool stop();
-    
-    float* update();
-    
-    MidiState* getMidiState();
-    Settings* getSettings();
-    
+    bool update();
+
     bool setInputDevice(int);
     bool setOutputDevice(int);
-    
     bool setSampleRate(double);
     bool setFramesPerBuffer(unsigned long);
     
-    void listInputDevices();
-    void listOutputDevices();
-    
+    MidiState* getMidiState();
+    Settings* getSettings();
     int getInputDevice();
     int getOutputDevice();
-    
     double getSampleRate();
     unsigned long getFramesPerBuffer();
-    
+
+    void listInputDevices();
+    void listOutputDevices();
+
     bool addInstrument(Instrument*, std::string);
     bool addUnit(Unit*, std::string);
-    
-    bool deleteInstrument(std::string);
-    bool deleteUnit(std::string);
     
     Instrument* getInstrument(std::string);
     Unit* getUnit(std::string);
     
+    bool deleteInstrument(std::string);
+    bool deleteUnit(std::string);
+    
     void resetUnits(bool);
+    void addKeyEvent(KeyEvent*);
+    float* getBuffer();
 };
 
 #endif

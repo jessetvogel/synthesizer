@@ -11,6 +11,7 @@
 #include "unitkeyfrequency.hpp"
 #include "unitkeyvelocity.hpp"
 #include "unitmodulationwheel.hpp"
+#include "unitkeyoutput.hpp"
 
 #include "log.hpp"
 
@@ -18,19 +19,20 @@ Controller::Controller() {
     // Create instances
     input = new Input(this);
     output = new Output(this);
+    midiState = new MidiState(this);
     settings = new Settings();
-    midiState = new MidiState(settings);
     
     // Set default values
-    active = false;
     inputDevice = -1;
     outputDevice = -1;
     sampleRate = 44100;
     framesPerBuffer = 64;
+    active = false;
     
     // Instantiate constant values
     addUnit(new UnitKeyFrequency(this), "key_frequency");
     addUnit(new UnitKeyVelocity(this), "key_velocity");
+    addUnit(new UnitKeyOutput(this), "key_output");
     addUnit(new UnitModulationWheel(this), "modulation_wheel");
 }
 
@@ -73,9 +75,9 @@ bool Controller::stop() {
     return true;
 }
 
-float* Controller::update() {
+bool Controller::update() {
     // Update all MIDI data
-    input->update();
+    if(!input->update()) return false;
 
     // Reset all units (i.e. onlyKeyDependents = false)
     resetUnits(false);
@@ -85,16 +87,16 @@ float* Controller::update() {
     
     // Update all instruments, and add their result to the buffer
     for(auto it = instruments.begin(); it != instruments.end(); ++it) {
-        it->second->update(midiState);
-        it->second->addBuffer(buffer);
+        it->second->update();
+        
+        // Add output of the instrument to our buffer
+        float* instrumentBuffer = it->second->getBuffer();
+        for(int x = 0;x < framesPerBuffer; ++x)
+            buffer[x] += instrumentBuffer[x];
     }
         
-    return buffer;
+    return true;
 }
-
-MidiState* Controller::getMidiState() { return midiState; }
-
-Settings* Controller::getSettings() { return settings; }
 
 bool Controller::setInputDevice(int n) {
     if(active) return false;
@@ -127,6 +129,10 @@ bool Controller::setFramesPerBuffer(unsigned long framesPerBuffer) {
     
 }
 
+MidiState* Controller::getMidiState() { return midiState; }
+
+Settings* Controller::getSettings() { return settings; }
+
 int Controller::getInputDevice() { return inputDevice; }
 
 int Controller::getOutputDevice() { return outputDevice; }
@@ -135,6 +141,7 @@ double Controller::getSampleRate() { return sampleRate; }
 
 unsigned long Controller::getFramesPerBuffer() { return framesPerBuffer; }
 
+// TODO: remove this at some point
 void Controller::listInputDevices() {
     int N = input->amountOfDevices();
     for(int n = 0;n < N;n ++) {
@@ -165,6 +172,16 @@ bool Controller::addUnit(Unit* unit, std::string label) {
     return true;
 }
 
+Instrument* Controller::getInstrument(std::string label) {
+    if(instruments.find(label) == instruments.end()) return NULL;
+    return instruments[label];
+}
+
+Unit* Controller::getUnit(std::string label) {
+    if(units.find(label) == units.end()) return NULL;
+    return units[label];
+}
+
 bool Controller::deleteInstrument(std::string label) {
     if(instruments.find(label) == instruments.end()) return false;
 
@@ -183,19 +200,25 @@ bool Controller::deleteUnit(std::string label) {
     return true;
 }
 
-Instrument* Controller::getInstrument(std::string label) {
-    if(instruments.find(label) == instruments.end()) return NULL;
-    return instruments[label];
-}
-
-Unit* Controller::getUnit(std::string label) {
-    if(units.find(label) == units.end()) return NULL;
-    return units[label];
-}
-
 void Controller::resetUnits(bool onlyKeyDepenent) {
     for(auto it = units.begin(); it != units.end(); ++it) {
         if(!onlyKeyDepenent || it->second->isKeyDependent())
             it->second->reset();
     }
 }
+
+void Controller::addKeyEvent(KeyEvent* keyEvent) {
+    // Add a copy of this key event to all instruments
+    for(auto it = instruments.begin(); it != instruments.end(); ++it) {
+        KeyEvent* k = new KeyEvent();
+        k->key = keyEvent->key;
+        k->stage = keyEvent->stage;
+        k->velocity = keyEvent->velocity;
+        k->frequency = keyEvent->frequency;
+        k->duration = keyEvent->duration;
+        k->release = keyEvent->release;
+        it->second->addKeyEvent(k);
+    }
+}
+
+float* Controller::getBuffer() { return buffer; }

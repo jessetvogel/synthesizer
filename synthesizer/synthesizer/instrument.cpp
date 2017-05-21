@@ -15,115 +15,20 @@ Instrument::Instrument(Controller* controller) {
     
     // Initialize arrays
     buffer = new float[controller->getFramesPerBuffer()];
-    stage = new Stage[AMOUNT_OF_KEYS];
-    memset(stage, 0, sizeof(Stage) * AMOUNT_OF_KEYS);
-    velocity = new double[AMOUNT_OF_KEYS];
-    memset(velocity, 0, sizeof(unsigned char) * AMOUNT_OF_KEYS);
-    duration = new double[AMOUNT_OF_KEYS];
-    memset(duration, 0, sizeof(double) * AMOUNT_OF_KEYS);
-    release = new double[AMOUNT_OF_KEYS];
-    memset(release, 0, sizeof(double) * AMOUNT_OF_KEYS);
+    keyBuffer = new float[controller->getFramesPerBuffer()];
     
     // Default values
+    Unit::set(controller, &output, "0.0", false);
+    Unit::set(controller, &keyOutput, "0.0", true);
     keyReleaseTime = 0.0;
-    keyOutput = NULL;
 }
 
 Instrument::~Instrument() {
     delete[] buffer;
-    delete[] stage;
-    delete[] velocity;
-    delete[] duration;
-    delete[] release;
-}
-
-void Instrument::update(MidiState* midiState) {
-    // First clear the buffer
-    memset(buffer, 0, sizeof(float) * controller->getFramesPerBuffer());
+    delete[] keyBuffer;
     
-    for(int i = 0;i < AMOUNT_OF_KEYS;i ++) {
-        // Update duration and release time
-        if(stage[i] == Press || stage[i] == Sustain)
-            duration[i] += controller->getFramesPerBuffer() / controller->getSampleRate();
-
-        if(stage[i] == Released)
-            release[i] += controller->getFramesPerBuffer() / controller->getSampleRate();
-        
-        // Check if notes should be 'activated'
-        if(stage[i] == Off && midiState->velocity[i] > 0) {
-            stage[i] = Press;
-            velocity[i] = midiState->velocity[i];
-            duration[i] = 0.0;
-            release[i] = 0.0;
-        }
-
-        // Check if we should go to the sustain or release stage
-        if((stage[i] == Press || stage[i] == Sustain) && midiState->velocity[i] == 0) {
-            if(midiState->sustainPedal < 0.5)
-                stage[i] = Released;
-            else
-                stage[i] = Sustain;
-        }
-        
-        // Check if pressed again while being in sustain stage
-        if((stage[i] == Sustain || stage[i] == Released) && midiState->velocity[i] > 0) {
-            stage[i] = Press;
-            velocity[i] = midiState->velocity[i];
-            duration[i] = 0.0;
-            release[i] = 0.0;
-        }
-        
-        // Check if done
-        if(stage[i] == Released && release[i] > keyReleaseTime)
-            stage[i] = Off;
-        
-        // Update all active notes. Note: stage will be set to Off if the envelope indicates so
-        if(stage[i] != Off) updateNote(midiState, i);
-    }
-    
-    // TODO: something with units
-    
-    // Adjust total output with main volume
-    for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
-        buffer[x] *= midiState->mainVolume;
-}
-
-void Instrument::updateNote(MidiState* midiState, int i) {
-    Settings* settings = controller->getSettings();
-    unsigned long framesPerBuffer = controller->getFramesPerBuffer();
-    
-    // Determine information for this part
-    double frequency = settings->frequencies[i];
-    if(midiState->pitchWheel != 0.0)
-        frequency *= pow(2.0, midiState->pitchWheel * settings->pitchWheelRange / 12.0);
-
-    if(keyOutput != NULL) {
-        // Store information that units can use
-        currentStage = stage[i];
-        currentVelocity = velocity[i];
-        currentDuration = duration[i];
-        currentRelease = release[i];
-        currentFrequency = frequency;
-        currentKey = i;
-        
-        controller->resetUnits(true);
-        keyOutput->update(this);
-    
-        // Add output of keyOutput to the buffer
-        for(int x = 0;x < framesPerBuffer; ++x)
-            buffer[x] += keyOutput->output[x];
-    }
-}
-
-bool Instrument::setKeyReleaseTime(double keyReleaseTime) {
-    if(keyReleaseTime < 0) return false;
-    this->keyReleaseTime = keyReleaseTime;
-    return true;
-}
-
-bool Instrument::setKeyOutput(Unit* unit) {
-    this->keyOutput = unit;
-    return true;
+    for(auto it = keyEvents.begin();it != keyEvents.end(); ++it)
+        delete *it;
 }
 
 bool Instrument::setOutput(Unit* unit) {
@@ -133,8 +38,59 @@ bool Instrument::setOutput(Unit* unit) {
     return true;
 }
 
-void Instrument::addBuffer(float* buffer) {
-    unsigned long framesPerBuffer = controller->getFramesPerBuffer();
-    for(int i = 0;i < framesPerBuffer; ++i)
-        buffer[i] += this->buffer[i];
+bool Instrument::setKeyOutput(Unit* unit) {
+    this->keyOutput = unit;
+    return true;
 }
+
+bool Instrument::setKeyReleaseTime(double keyReleaseTime) {
+    if(keyReleaseTime < 0) return false;
+    this->keyReleaseTime = keyReleaseTime;
+    return true;
+}
+
+Unit* Instrument::getOutput() { return output; }
+
+Unit* Instrument::getKeyOutput() { return keyOutput; }
+
+void Instrument::addKeyEvent(KeyEvent* keyEvent) {
+    // Simply add it to the list
+    keyEvents.push_back(keyEvent);
+}
+
+void Instrument::update() {
+    // Clear the buffer
+    memset(keyBuffer, 0, sizeof(float) * controller->getFramesPerBuffer());
+    
+    // Loop through the list of key events
+    for(auto it = keyEvents.end() - 1;it != keyEvents.begin() - 1; --it) {
+        KeyEvent* keyEvent = *it;
+        if(keyEvent->release > keyReleaseTime) {
+            keyEvents.erase(it);
+            delete keyEvent;
+            continue;
+        }
+        
+        // Update the output of this event
+        controller->getMidiState()->updateKeyEvent(keyEvent);
+        currentKey = keyEvent;
+        controller->resetUnits(true);
+        keyOutput->update(this);
+
+        // Add output of keyOutput to the buffer
+        for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
+            keyBuffer[x] += keyOutput->output[x];
+    }
+    
+    // Now, update the total output of this instrument
+    output->update(this);
+    
+    // Set output, and adjust total output with main volume
+    double volume = controller->getMidiState()->mainVolume;
+    for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
+        buffer[x] = output->output[x] * volume;
+}
+
+float* Instrument::getBuffer() { return buffer; }
+
+float* Instrument::getKeyBuffer() { return keyBuffer; }

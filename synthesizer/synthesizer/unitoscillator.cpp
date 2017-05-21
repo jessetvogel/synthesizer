@@ -20,8 +20,8 @@ UnitOscillator::UnitOscillator(Controller* controller, bool keyDependent) {
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
     if(keyDependent) {
-        phase = new double[AMOUNT_OF_KEYS];
-        memset(phase, 0, sizeof(double) * AMOUNT_OF_KEYS);
+        phase = new double[MAX_AMOUNT_OF_IDS];
+        memset(phase, 0, sizeof(double) * MAX_AMOUNT_OF_IDS);
     }
     else {
         phase = new double[1];
@@ -40,7 +40,7 @@ void UnitOscillator::apply(Instrument* instrument) {
     mean->update(instrument);
     
     double t = 1.0 / controller->getSampleRate();
-    int i = keyDependent ? instrument->currentKey : 0;
+    int i = keyDependent ? instrument->currentKey->id : 0;
     
     for(int x = 0;x < controller->getFramesPerBuffer(); ++x) {
         output[x] = mean->output[x] + amplitude->output[x] * sample->getValue(phase[i]);

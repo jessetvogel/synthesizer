@@ -22,6 +22,8 @@
 		311049AB1ED0D375000E89F1 /* unithighpass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 311049A91ED0D375000E89F1 /* unithighpass.cpp */; };
 		311049AE1ED0D8DE000E89F1 /* unitfunction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 311049AC1ED0D8DE000E89F1 /* unitfunction.cpp */; };
 		311049B11ED0D93D000E89F1 /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 311049AF1ED0D93D000E89F1 /* function.cpp */; };
+		312D2EA71ED1C6F1005B4508 /* keyevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312D2EA61ED1C6F1005B4508 /* keyevent.cpp */; };
+		312D2EAA1ED1CE83005B4508 /* unitkeyoutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312D2EA81ED1CE83005B4508 /* unitkeyoutput.cpp */; };
 		31D719571ECB04BA00A4C9E0 /* settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719551ECB04BA00A4C9E0 /* settings.cpp */; };
 		31D7195A1ECB0BAE00A4C9E0 /* sample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719581ECB0BAE00A4C9E0 /* sample.cpp */; };
 		31D719601ECC4E5700A4C9E0 /* unitADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D7195E1ECC4E5700A4C9E0 /* unitADSR.cpp */; };
@@ -79,6 +81,10 @@
 		311049AD1ED0D8DE000E89F1 /* unitfunction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitfunction.hpp; sourceTree = "<group>"; };
 		311049AF1ED0D93D000E89F1 /* function.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = function.cpp; sourceTree = "<group>"; };
 		311049B01ED0D93D000E89F1 /* function.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = function.hpp; sourceTree = "<group>"; };
+		312D2EA41ED1B72D005B4508 /* keyevent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keyevent.hpp; sourceTree = "<group>"; };
+		312D2EA61ED1C6F1005B4508 /* keyevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = keyevent.cpp; sourceTree = "<group>"; };
+		312D2EA81ED1CE83005B4508 /* unitkeyoutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitkeyoutput.cpp; sourceTree = "<group>"; };
+		312D2EA91ED1CE83005B4508 /* unitkeyoutput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitkeyoutput.hpp; sourceTree = "<group>"; };
 		31D719551ECB04BA00A4C9E0 /* settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = settings.cpp; sourceTree = "<group>"; };
 		31D719561ECB04BA00A4C9E0 /* settings.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = settings.hpp; sourceTree = "<group>"; };
 		31D719581ECB0BAE00A4C9E0 /* sample.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sample.cpp; sourceTree = "<group>"; };
@@ -179,6 +185,8 @@
 				311049AA1ED0D375000E89F1 /* unithighpass.hpp */,
 				311049AC1ED0D8DE000E89F1 /* unitfunction.cpp */,
 				311049AD1ED0D8DE000E89F1 /* unitfunction.hpp */,
+				312D2EA81ED1CE83005B4508 /* unitkeyoutput.cpp */,
+				312D2EA91ED1CE83005B4508 /* unitkeyoutput.hpp */,
 			);
 			name = units;
 			sourceTree = "<group>";
@@ -232,6 +240,8 @@
 				310EFDF21ECA384100F28034 /* midistate.hpp */,
 				311049A31ED07DC9000E89F1 /* basic.cpp */,
 				311049A41ED07DC9000E89F1 /* basic.hpp */,
+				312D2EA61ED1C6F1005B4508 /* keyevent.cpp */,
+				312D2EA41ED1B72D005B4508 /* keyevent.hpp */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -321,6 +331,8 @@
 				311049B11ED0D93D000E89F1 /* function.cpp in Sources */,
 				311049A81ED0C873000E89F1 /* unitlowpass.cpp in Sources */,
 				31EC60411ECF45BE004671E2 /* unitadder.cpp in Sources */,
+				312D2EA71ED1C6F1005B4508 /* keyevent.cpp in Sources */,
+				312D2EAA1ED1CE83005B4508 /* unitkeyoutput.cpp in Sources */,
 				311049AB1ED0D375000E89F1 /* unithighpass.cpp in Sources */,
 				31EC60321ECF264F004671E2 /* util.cpp in Sources */,
 				31D719571ECB04BA00A4C9E0 /* settings.cpp in Sources */,

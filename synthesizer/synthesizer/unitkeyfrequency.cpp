@@ -19,5 +19,5 @@ UnitKeyFrequency::~UnitKeyFrequency() {
 
 void UnitKeyFrequency::apply(Instrument* instrument) {
     for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
-        output[x] = instrument->currentFrequency;
+        output[x] = instrument->currentKey->frequency;
 }

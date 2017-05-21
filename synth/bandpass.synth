@@ -1,0 +1,24 @@
+include basic.synth
+
+unit_create adder_2 decade
+unit_set_value decade input_1           1.3
+unit_set_value decade input_2           modulation_wheel
+unit_set_value decade gain_2            4.0
+
+# freq ranges from about 50Hz to about 20kHz
+unit_create function freq
+unit_set_value freq input               decade
+unit_set_value freq function            pow10
+
+unit_create lowpass l
+unit_set_value l input                  key_output
+unit_set_value l cutoff                 freq
+
+unit_create highpass h
+unit_set_value h input                  l
+unit_set_value h cutoff                 freq
+
+# Overwrite some settings from basic.synth
+unit_set_value envelope release_time    0.2
+unit_set_value wave sample              square
+instrument_set_output i                 h

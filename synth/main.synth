@@ -1,3 +1,5 @@
-# include modulation.synth
+# include basic.synth
+# include bandpass.synth
+include overtones.synth
+# include vibrato.synth
 # include pitch_envelope.synth
-include bandpass_filter_test.synth
