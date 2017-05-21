@@ -1,5 +1,19 @@
 # include basic.synth
 # include bandpass.synth
-include overtones.synth
+# include overtones.synth
 # include vibrato.synth
 # include pitch_envelope.synth
+
+
+
+include hammond.synth
+
+unit_set_value drawbar_1 input_1      1.0
+unit_set_value drawbar_2 input_1      1.0
+unit_set_value drawbar_3 input_1      1.0
+unit_set_value drawbar_4 input_1      1.0
+unit_set_value drawbar_5 input_1      1.0
+unit_set_value drawbar_6 input_1      1.0
+unit_set_value drawbar_7 input_1      1.0
+unit_set_value drawbar_8 input_1      1.0
+unit_set_value drawbar_9 input_1      1.0

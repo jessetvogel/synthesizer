@@ -1,7 +1,7 @@
 #include "unitadder.hpp"
 #include "controller.hpp"
 
-const int UnitAdder::maxN = 8;
+const int UnitAdder::maxN = 16;
 
 UnitAdder::UnitAdder(Controller* controller, bool keyDependent, int n) {
     // Store pointer to controller and other variables
