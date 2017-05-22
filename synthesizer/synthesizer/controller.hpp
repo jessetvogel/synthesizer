@@ -37,7 +37,7 @@ class Controller {
     
 public:
     
-    Controller();
+    Controller(Settings*);
     ~Controller();
     
     bool start();
@@ -49,15 +49,12 @@ public:
     bool setSampleRate(double);
     bool setFramesPerBuffer(unsigned long);
     
-    MidiState* getMidiState();
-    Settings* getSettings();
-    int getInputDevice();
-    int getOutputDevice();
-    double getSampleRate();
-    unsigned long getFramesPerBuffer();
-
-    void listInputDevices();
-    void listOutputDevices();
+    inline MidiState* getMidiState() { return midiState; };
+    inline Settings* getSettings() { return settings; };
+    inline int getInputDevice() { return inputDevice; };
+    inline int getOutputDevice() { return outputDevice; };
+    inline double getSampleRate() { return sampleRate; };
+    inline unsigned long getFramesPerBuffer() { return framesPerBuffer; };
 
     bool addInstrument(Instrument*, std::string);
     bool addUnit(Unit*, std::string);
@@ -70,7 +67,13 @@ public:
     
     void resetUnits(bool);
     void addKeyEvent(KeyEvent*);
-    float* getBuffer();
+    inline float* getBuffer() { return buffer; };
+    
+    
+    
+    // TODO: remove this at some point
+    void listInputDevices();
+    void listOutputDevices();
 };
 
 #endif

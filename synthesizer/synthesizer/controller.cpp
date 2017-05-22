@@ -15,18 +15,18 @@
 
 #include "log.hpp"
 
-Controller::Controller() {
+Controller::Controller(Settings* settings) {
     // Create instances
+    this->settings = settings;
     input = new Input(this);
     output = new Output(this);
     midiState = new MidiState(this);
-    settings = new Settings();
     
-    // Set default values
+    // Set some values
     inputDevice = -1;
     outputDevice = -1;
-    sampleRate = 44100;
-    framesPerBuffer = 64;
+    sampleRate = settings->sampleRate;
+    framesPerBuffer = settings->bufferSize;
     active = false;
     
     // Instantiate constant values
@@ -40,7 +40,6 @@ Controller::~Controller() {
     delete input;
     delete output;
     delete midiState;
-    delete settings;
     
     for(auto it = instruments.begin(); it != instruments.end(); ++it)
         delete it->second;
@@ -100,6 +99,7 @@ bool Controller::update() {
 
 bool Controller::setInputDevice(int n) {
     if(active) return false;
+    if(!(input->isInput(n))) return false;
     
     inputDevice = n;
     return true;
@@ -107,6 +107,7 @@ bool Controller::setInputDevice(int n) {
 
 bool Controller::setOutputDevice(int n) {
     if(active) return false;
+    if(!(output->isOutput(n))) return false;
     
     outputDevice = n;
     return true;
@@ -127,35 +128,6 @@ bool Controller::setFramesPerBuffer(unsigned long framesPerBuffer) {
     this->framesPerBuffer = framesPerBuffer;
     return true;
     
-}
-
-MidiState* Controller::getMidiState() { return midiState; }
-
-Settings* Controller::getSettings() { return settings; }
-
-int Controller::getInputDevice() { return inputDevice; }
-
-int Controller::getOutputDevice() { return outputDevice; }
-
-double Controller::getSampleRate() { return sampleRate; }
-
-unsigned long Controller::getFramesPerBuffer() { return framesPerBuffer; }
-
-// TODO: remove this at some point
-void Controller::listInputDevices() {
-    int N = input->amountOfDevices();
-    for(int n = 0;n < N;n ++) {
-        if(input->isInput(n))
-            std::cout << "(" << n << ") " << input->deviceName(n) << std::endl;
-    }
-}
-
-void Controller::listOutputDevices() {
-    int N = output->amountOfDevices();
-    for(int n = 0;n < N;n ++) {
-        if(output->isOutput(n))
-            std::cout << "(" << n << ") " << output->deviceName(n) << std::endl;
-    }
 }
 
 bool Controller::addInstrument(Instrument* instrument, std::string label) {
@@ -221,4 +193,24 @@ void Controller::addKeyEvent(KeyEvent* keyEvent) {
     }
 }
 
-float* Controller::getBuffer() { return buffer; }
+
+
+
+
+
+// TODO: remove this at some point
+void Controller::listInputDevices() {
+    int N = input->amountOfDevices();
+    for(int n = 0;n < N;n ++) {
+        if(input->isInput(n))
+            std::cout << "(" << n << ") " << input->deviceName(n) << std::endl;
+    }
+}
+
+void Controller::listOutputDevices() {
+    int N = output->amountOfDevices();
+    for(int n = 0;n < N;n ++) {
+        if(output->isOutput(n))
+            std::cout << "(" << n << ") " << output->deviceName(n) << std::endl;
+    }
+}

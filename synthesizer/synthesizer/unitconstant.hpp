@@ -11,7 +11,7 @@ public:
     
     UnitConstant(Controller*, double);
     
-    void apply(Instrument*);
+    inline void apply(Instrument*) {};
 };
 
 #endif

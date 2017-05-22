@@ -2,25 +2,23 @@
 #define parser_hpp
 
 #include <string>
-#include <regex>
 
 class Controller;
 
 class Parser {
 
-    static std::regex regexNeglect;
-    
     Controller* controller;
     std::string filepath;
     std::string directory;
     
-    bool parseLine(std::string);
-    
 public:
     
-    Parser(Controller*, std::string);
-    bool parse();
+    Parser(Controller*);
     
+    inline void setDirectory(std::string directory) { this->directory = directory; };
+    
+    bool parseFile(std::string);
+    bool parseLine(std::string);
 };
 
 #endif

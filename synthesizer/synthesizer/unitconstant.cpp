@@ -16,5 +16,3 @@ UnitConstant::UnitConstant(Controller* controller, double value) {
     for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
         output[x] = value;
 }
-
-void UnitConstant::apply(Instrument* instrument) { }

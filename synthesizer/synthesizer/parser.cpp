@@ -6,31 +6,35 @@
 #include "controller.hpp"
 #include "instrument.hpp"
 #include "unit.hpp"
+#include "settings.hpp"
 
 #include "log.hpp"
 
-std::regex Parser::regexNeglect("^(\\s*|\\s*#.*)$");
-
-Parser::Parser(Controller* controller, std::string filepath) {
+Parser::Parser(Controller* controller) {
     // Store pointer to controller
     this->controller = controller;
-    
-    // Store filepath
-    this->filepath = filepath;
-    
-    // Determine directory
-    directory = filepath.substr(0, filepath.find_last_of(DIRECTORY_SEPARATOR));
 }
 
-bool Parser::parse() {
+bool Parser::parseFile(std::string filepath) {
+    // Store filepath and determine the directory
+    this->filepath = filepath;
+    directory = filepath.substr(0, filepath.find_last_of(DIRECTORY_SEPARATOR));
+    
     // Read file line by line, and parse them
-    int lineNumber = 1;
     std::ifstream input(filepath);
+    if(input.fail()) {
+        char message[128 + filepath.length()];
+        sprintf(message, "Was not able to open file %s", filepath.c_str());
+        Log::error(message);
+        return false;
+    }
+    
+    int lineNumber = 1;
     std::string line;
     while(std::getline(input, line)) {
         if(!parseLine(line)) {
-            char message[32];
-            sprintf(message, "An error occured in line %d", lineNumber);
+            char message[128 + filepath.length()];
+            sprintf(message, "An error occured in line %d of file %s", lineNumber, filepath.c_str());
             Log::error(message);
             Log::error(line.c_str());
             return false;
@@ -46,13 +50,63 @@ bool Parser::parseLine(std::string line) {
     std::cmatch cm;
 
     // Empty lines or comments
-    if(std::regex_search(str, cm, regexNeglect))
+    if(std::regex_search(str, cm, Commands::regexNeglect))
         return true;
+    
+    // Settings
+
+    // settings_set_input_device <input_device>
+    if(std::regex_search(str, cm, Commands::regexSetInputDevice)) {
+        return controller->setInputDevice(stoi(cm[1]));
+    }
+    
+    // settings_set_output_device <output_device>
+    if(std::regex_search(str, cm, Commands::regexSetOutputDevice)) {
+        return controller->setOutputDevice(stoi(cm[1]));
+    }
+    
+    // settings_set_sample_rate <value>
+    if(std::regex_search(str, cm, Commands::regexSetSampleRate)) {
+        controller->getSettings()->sampleRate = stod(cm[1]);
+        return true;
+    }
+    
+    // settings_set_buffer_size <value>
+    if(std::regex_search(str, cm, Commands::regexSetBufferSize)) {
+        controller->getSettings()->bufferSize = stoi(cm[1]);
+        return true;
+    }
+    
+    // settings_set_sustain_pedal_polarity <normal|inverted>
+    if(std::regex_search(str, cm, Commands::regexSetSustainPedalPolarity)) {
+        controller->getSettings()->sustainPedalPolarity = (cm[0].compare("inverted") == 0);
+        return true;
+    }
+    
+    // settings_set_pitch_wheel_range <semitones>
+    if(std::regex_search(str, cm, Commands::regexSetPitchWheelRange)) {
+        controller->getSettings()->pitchWheelRange = stod(cm[1]);
+        return true;
+    }
+    
+    // Controller
+    
+    // start
+    if(std::regex_search(str, cm, Commands::regexStart)) {
+        return controller->start();
+    }
+    
+    // stop
+    if(std::regex_search(str, cm, Commands::regexStop)) {
+        return controller->stop();
+    }
+    
+    // Synths
     
     // include <filename>
     if(std::regex_search(str, cm, Commands::regexInclude)) {
-        Parser parser(controller, directory + DIRECTORY_SEPARATOR + std::string(cm[1]));
-        return parser.parse();
+        Parser parser(controller);
+        return parser.parseFile(directory + DIRECTORY_SEPARATOR + std::string(cm[1]));
     }
     
     // instrument_create <label>
@@ -137,9 +191,8 @@ bool Parser::parseLine(std::string line) {
         
         return unit->setValue(cm[2], cm[3]);
     }
-        
     
-    
+
     
     
     

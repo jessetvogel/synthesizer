@@ -15,16 +15,19 @@ Sample::~Sample() {
 }
 
 float Sample::getValue(double phase) {
-    // Wrap phase into 0, 2Pi interval TODO: extend to (0, periods * 2 * pi) interval. This works now because all samples have periods = 2
-    long n = phase / (2.0 * M_PI * periods);
-    phase -= 2.0 * M_PI * periods * floor(n);
+    // Optimized, but slightly less accurate implementation
+    return data[((int) (phase * 0.1591549430919 * resolution)) % resolution];
     
-    // Linear interpolation
-    double x = phase / (2.0 * M_PI) * resolution;
-    int low = floor(x);
-    double z = (double) x - low;
-    
-    return data[low] * (1.0 - z) + data[(low + 1) % resolution] * z;
+//    // Wrap phase into 0, 2Pi interval TODO: extend to (0, periods * 2 * pi) interval. This works now because all samples have periods = 2
+//    long n = phase / (2.0 * M_PI * periods);
+//    phase -= 2.0 * M_PI * periods * floor(n);
+//    
+//    // Linear interpolation
+//    double x = phase / (2.0 * M_PI) * resolution;
+//    int low = floor(x);
+//    double z = (double) x - low;
+//    
+//    return data[low] * (1.0 - z) + data[(low + 1) % resolution] * z;
 }
 
 Sample* Sample::sine;
@@ -33,7 +36,7 @@ Sample* Sample::triangle;
 Sample* Sample::sawtooth;
 
 void Sample::initialize() {
-    int resolution = 64;
+    int resolution = 512;
     double dataSine[resolution];
     double dataSquare[resolution];
     double dataTriangle[resolution];

@@ -5,10 +5,13 @@
 #include "controller.hpp"
 #include "parser.hpp"
 #include "basic.hpp"
+#include "settings.hpp"
+#include "commands.hpp"
 
 #include "log.hpp"
 
-#define MAIN_FILE "/Users/jessetvogel/Projects/synthesizer/synth/main.synth"
+#define MAIN_DIRECTORY "/Users/jessetvogel/Projects/synthesizer/files"
+#define SETTINGS_FILE "settings.txt"
 
 int main(int argc, char *argv[]) {
     // Initialize stuff (TODO: put this in some audio class or something, and check for errors)
@@ -16,33 +19,39 @@ int main(int argc, char *argv[]) {
     Pa_Initialize();
     Basic::initialize();
     
-    // Setup
-    Controller* controller = new Controller();
+    // Load settings
+    Settings settings;
     
-    Log::output("Input devices");
-    controller->listInputDevices();
-    Log::output("\nOutput devices");
-    controller->listOutputDevices();
-    controller->setInputDevice(1);
-    controller->setOutputDevice(1);
-    Log::output("");
+    // Create a new controller object
+    Controller controller(&settings);
     
-    Parser parser(controller, MAIN_FILE);
-    if(parser.parse()) {
-
-        controller->start();
-        Log::output("Press enter to stop");
-        getchar();
-        controller->stop();
-
+                        // Show input/output devices
+                        Log::output("Input devices");
+                        controller.listInputDevices();
+                        Log::output("\nOutput devices");
+                        controller.listOutputDevices();
+                        Log::output("");
+    
+    // Load settings
+    Parser parser(&controller);
+    parser.parseFile(MAIN_DIRECTORY DIRECTORY_SEPARATOR SETTINGS_FILE);
+    
+    // Wait for input
+    parser.setDirectory(MAIN_DIRECTORY);
+    std::string line;
+    while(std::getline(std::cin, line)) {
+        // Check for exit command
+        if(line.compare("exit") == 0) break;
+        
+        // Try to parse the given line
+        if(!parser.parseLine(line)) {
+            std::cout << "Was not able to parse '" << line << "'" << std::endl;
+        }
     }
     
-    // Cleanup stuff
-    delete controller;
-    
     Basic::destruct();
-    Pm_Terminate();
     Pa_Terminate();
+    Pm_Terminate();
     
     return 0;
 }

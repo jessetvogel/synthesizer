@@ -1,0 +1,24 @@
+# include basic.synth
+# include bandpass.synth
+# include overtones.synth
+# include vibrato.synth
+# include pitch_envelope.synth
+
+
+
+include hammond.synth
+
+unit_set_value drawbar_1 value      1.0
+unit_set_value drawbar_2 value      1.0
+unit_set_value drawbar_3 value      1.0
+unit_set_value drawbar_4 value      1.0
+unit_set_value drawbar_5 value      1.0
+unit_set_value drawbar_6 value      1.0
+unit_set_value drawbar_7 value      1.0
+unit_set_value drawbar_8 value      1.0
+unit_set_value drawbar_9 value      1.0
+
+# unit_set_value envelope attack_time   0.2
+# unit_set_value envelope decay_time    0.5
+# unit_set_value envelope sustain_level 0.5
+# unit_set_value envelope release_time  0.05

@@ -65,7 +65,7 @@ void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned cha
                 
                 case MIDI_SUSTAIN_PEDAL:
                     sustainPedal = (double) data2 / 127.0;
-                    if(controller->getSettings()->invertedSustainPedal)
+                    if(controller->getSettings()->sustainPedalPolarity)
                         sustainPedal = 1.0 - sustainPedal;
                     break;
             }

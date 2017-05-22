@@ -39,7 +39,7 @@ void UnitAdder::apply(Instrument* instrument) {
 
         for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
             output[x] += inputs[i]->output[x] * gains[i]->output[x];
-        }
+    }
 }
 
 bool UnitAdder::setValue(std::string parameter, std::string value) {

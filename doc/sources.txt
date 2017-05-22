@@ -14,3 +14,12 @@ Filters / FX:
 https://en.wikipedia.org/wiki/Low-pass_filter
 https://en.wikipedia.org/wiki/High-pass_filter
 Audio Effects, Theory, Implementation and Application - Joshua D. Reiss & Andrew P. McPherson
+
+
+
+Hammond organ:
+http://www.hammond-organ.com/product_support/drawbars.htm
+https://en.wikipedia.org/wiki/Hammond_organ
+http://www.stefanv.com/electronics/hammond_drawbar_science.html
+
+http://keyboardservice.com/Drawbars.asp

@@ -19,18 +19,18 @@ protected:
     bool keyDependent;
     bool applyAlways = false;
     
-    virtual void apply(Instrument*);
+    inline virtual void apply(Instrument*) { };
     
 public:
     
     float* output;
     
-    virtual bool setValue(std::string, std::string);
+    inline virtual bool setValue(std::string, std::string) { return false; };
     
-    void reset();
-    void update(Instrument*);
+    inline void reset() { updated = false; };
+    inline void update(Instrument* instrument) { if(updated) return; if(!applyAlways) updated = true; apply(instrument); };
     
-    bool isKeyDependent();
+    inline bool isKeyDependent() { return keyDependent; };
     
     static Unit* create(Controller*, std::string, bool);
     static bool set(Controller*, Unit**, std::string, bool);

@@ -11,22 +11,13 @@
 #include "unitADSR.hpp"
 #include "unitlowpass.hpp"
 #include "unithighpass.hpp"
-
-bool Unit::setValue(std::string parameter, std::string value) { return false; };
-
-void Unit::reset() { updated = false; };
-
-void Unit::update(Instrument* instrument) { if(updated) return; if(!applyAlways) updated = true; apply(instrument); };
-
-void Unit::apply(Instrument* instrument) { }
-
-bool Unit::isKeyDependent() { return keyDependent; }
+#include "unitvariable.hpp"
 
 Unit* Unit::create(Controller* controller, std::string type, bool keyDependent) {
 
-    // Oscillator
-    if(type.compare("oscillator") == 0)
-        return new UnitOscillator(controller, keyDependent);
+    // Variable
+    if(type.compare("variable") == 0)
+        return new UnitVariable(controller);
     
     // Adder of size n in {1, 2, ... , UnitAdder::maxN}
     for(int n = 1;n <= UnitAdder::maxN;n ++) {
@@ -35,6 +26,10 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent) 
         if(type.compare(typeName) == 0)
             return new UnitAdder(controller, keyDependent, n);
     }
+    
+    // Oscillator
+    if(type.compare("oscillator") == 0)
+        return new UnitOscillator(controller, keyDependent);
     
     // Function
     if(type.compare("function") == 0)

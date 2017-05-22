@@ -1,30 +1,30 @@
 # Define drawbars
-unit_create adder_1 drawbar_1
-unit_set_value drawbar_1 input_1      1.0
+unit_create variable drawbar_1
+unit_set_value drawbar_1 value      1.0
 
-unit_create adder_1 drawbar_2
-unit_set_value drawbar_2 input_1      1.0
+unit_create variable drawbar_2
+unit_set_value drawbar_2 value      1.0
 
-unit_create adder_1 drawbar_3
-unit_set_value drawbar_3 input_1      1.0
+unit_create variable drawbar_3
+unit_set_value drawbar_3 value      1.0
 
-unit_create adder_1 drawbar_4
-unit_set_value drawbar_4 input_1      1.0
+unit_create variable drawbar_4
+unit_set_value drawbar_4 value      1.0
 
-unit_create adder_1 drawbar_5
-unit_set_value drawbar_5 input_1      1.0
+unit_create variable drawbar_5
+unit_set_value drawbar_5 value      1.0
 
-unit_create adder_1 drawbar_6
-unit_set_value drawbar_6 input_1      1.0
+unit_create variable drawbar_6
+unit_set_value drawbar_6 value      1.0
 
-unit_create adder_1 drawbar_7
-unit_set_value drawbar_7 input_1      1.0
+unit_create variable drawbar_7
+unit_set_value drawbar_7 value      1.0
 
-unit_create adder_1 drawbar_8
-unit_set_value drawbar_8 input_1      1.0
+unit_create variable drawbar_8
+unit_set_value drawbar_8 value      1.0
 
-unit_create adder_1 drawbar_9
-unit_set_value drawbar_9 input_1      1.0
+unit_create variable drawbar_9
+unit_set_value drawbar_9 value      1.0
 
 # Define frequencies
 unit_key_create adder_1 frequency_1
@@ -126,7 +126,7 @@ unit_key_create ADSR envelope
 unit_set_value envelope attack_time   0.05
 unit_set_value envelope decay_time    0.05
 unit_set_value envelope sustain_level 0.5
-unit_set_value envelope release_time  0.1
+unit_set_value envelope release_time  0.05
 unit_set_value envelope attack_type   quartout
 unit_set_value envelope decay_type    quartout
 unit_set_value envelope release_type  quartout
@@ -136,6 +136,6 @@ unit_set_value x input_1              sum
 unit_set_value x gain_1               envelope
 
 instrument_create i
-instrument_set_key_release_time i     1.0
+instrument_set_key_release_time i     0.05
 instrument_set_key_output i           x
 instrument_set_output i               key_output

@@ -1,0 +1,17 @@
+#log {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	background-color: #47484B;
+	font-family: Menlo, Consolas, Courier;
+	font-size: 14px;
+	opacity: 0.5;
+}
+
+#log div {
+	height: 32px;
+	overflow-y: scroll;
+	padding-top: 8px;
+	margin-left: 32px;
+}

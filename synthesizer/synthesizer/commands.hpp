@@ -14,6 +14,23 @@ class Commands {
 
 public:
     
+    // Comments or empty lines
+    static std::regex regexNeglect;
+    
+    // Commands for settings
+    static std::regex regexSetInputDevice;
+    static std::regex regexSetOutputDevice;
+    
+    static std::regex regexSetSampleRate;
+    static std::regex regexSetBufferSize;
+    static std::regex regexSetSustainPedalPolarity;
+    static std::regex regexSetPitchWheelRange;
+    
+    // Commands for controller
+    static std::regex regexStart;
+    static std::regex regexStop;
+    
+    // Commands for synths
     static std::regex regexInclude;
     
     static std::regex regexInstrumentCreate;
@@ -26,7 +43,6 @@ public:
     static std::regex regexUnitKeyCreate;
     static std::regex regexUnitDelete;
     static std::regex regexUnitSetValue;
-    
     
     
     // TODO: remove this
