@@ -4,6 +4,8 @@ Ideas: (not in order of priority)
 
 - Unit like delay effect
 
+- Classes like Unit(Lead)KeyFrequency/Velocity/Duration etc, can be put in just one class, and then it will be given a type parameter
+
 ---------------------------------------------------------------
 
 Working on:

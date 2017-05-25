@@ -39,6 +39,10 @@
 		31EC60381ECF3169004671E2 /* unitoscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC60361ECF3169004671E2 /* unitoscillator.cpp */; };
 		31EC603B1ECF3CC1004671E2 /* unitmodulationwheel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC60391ECF3CC1004671E2 /* unitmodulationwheel.cpp */; };
 		31EC60411ECF45BE004671E2 /* unitadder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC603F1ECF45BD004671E2 /* unitadder.cpp */; };
+		886F98A51ED7245E003B8235 /* unitleadkeyfrequency.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886F98A31ED7245E003B8235 /* unitleadkeyfrequency.cpp */; };
+		886F98A81ED72641003B8235 /* unitleadkeyvelocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886F98A61ED72641003B8235 /* unitleadkeyvelocity.cpp */; };
+		886F98B01ED72FFC003B8235 /* unitleadkeyduration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886F98AE1ED72FFC003B8235 /* unitleadkeyduration.cpp */; };
+		886F98B31ED7304D003B8235 /* unitkeyduration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886F98B11ED7304D003B8235 /* unitkeyduration.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -115,6 +119,14 @@
 		31EC603A1ECF3CC1004671E2 /* unitmodulationwheel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitmodulationwheel.hpp; sourceTree = "<group>"; };
 		31EC603F1ECF45BD004671E2 /* unitadder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitadder.cpp; sourceTree = "<group>"; };
 		31EC60401ECF45BD004671E2 /* unitadder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitadder.hpp; sourceTree = "<group>"; };
+		886F98A31ED7245E003B8235 /* unitleadkeyfrequency.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitleadkeyfrequency.cpp; sourceTree = "<group>"; };
+		886F98A41ED7245E003B8235 /* unitleadkeyfrequency.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitleadkeyfrequency.hpp; sourceTree = "<group>"; };
+		886F98A61ED72641003B8235 /* unitleadkeyvelocity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitleadkeyvelocity.cpp; sourceTree = "<group>"; };
+		886F98A71ED72641003B8235 /* unitleadkeyvelocity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitleadkeyvelocity.hpp; sourceTree = "<group>"; };
+		886F98AE1ED72FFC003B8235 /* unitleadkeyduration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitleadkeyduration.cpp; sourceTree = "<group>"; };
+		886F98AF1ED72FFC003B8235 /* unitleadkeyduration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitleadkeyduration.hpp; sourceTree = "<group>"; };
+		886F98B11ED7304D003B8235 /* unitkeyduration.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitkeyduration.cpp; sourceTree = "<group>"; };
+		886F98B21ED7304D003B8235 /* unitkeyduration.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitkeyduration.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,30 +180,21 @@
 			children = (
 				31D719691ECDEE2E00A4C9E0 /* unit.cpp */,
 				31D7196A1ECDEE2E00A4C9E0 /* unit.hpp */,
-				31EC60331ECF2811004671E2 /* unitconstant.cpp */,
-				31EC60341ECF2811004671E2 /* unitconstant.hpp */,
 				31EC603F1ECF45BD004671E2 /* unitadder.cpp */,
 				31EC60401ECF45BD004671E2 /* unitadder.hpp */,
 				31EC60361ECF3169004671E2 /* unitoscillator.cpp */,
 				31EC60371ECF3169004671E2 /* unitoscillator.hpp */,
 				31D7195E1ECC4E5700A4C9E0 /* unitADSR.cpp */,
 				31D7195F1ECC4E5700A4C9E0 /* unitADSR.hpp */,
-				31EC60391ECF3CC1004671E2 /* unitmodulationwheel.cpp */,
-				31EC603A1ECF3CC1004671E2 /* unitmodulationwheel.hpp */,
-				31D719741ECE1BE000A4C9E0 /* unitkeyfrequency.cpp */,
-				31D719751ECE1BE000A4C9E0 /* unitkeyfrequency.hpp */,
-				311049A01ED068F2000E89F1 /* unitkeyvelocity.cpp */,
-				311049A11ED068F2000E89F1 /* unitkeyvelocity.hpp */,
-				311049A61ED0C873000E89F1 /* unitlowpass.cpp */,
-				311049A71ED0C873000E89F1 /* unitlowpass.hpp */,
-				311049A91ED0D375000E89F1 /* unithighpass.cpp */,
-				311049AA1ED0D375000E89F1 /* unithighpass.hpp */,
 				311049AC1ED0D8DE000E89F1 /* unitfunction.cpp */,
 				311049AD1ED0D8DE000E89F1 /* unitfunction.hpp */,
 				312D2EA81ED1CE83005B4508 /* unitkeyoutput.cpp */,
 				312D2EA91ED1CE83005B4508 /* unitkeyoutput.hpp */,
-				31DE9FF71ED337D4003F5291 /* unitvariable.cpp */,
-				31DE9FF81ED337D4003F5291 /* unitvariable.hpp */,
+				886F98AD1ED72840003B8235 /* constant */,
+				886F98AC1ED7281A003B8235 /* midi */,
+				886F98AB1ED72799003B8235 /* bandpass */,
+				886F98AA1ED7275E003B8235 /* key */,
+				886F98A91ED72646003B8235 /* leadkey */,
 			);
 			name = units;
 			sourceTree = "<group>";
@@ -262,6 +265,63 @@
 			name = files;
 			sourceTree = "<group>";
 		};
+		886F98A91ED72646003B8235 /* leadkey */ = {
+			isa = PBXGroup;
+			children = (
+				886F98A31ED7245E003B8235 /* unitleadkeyfrequency.cpp */,
+				886F98A41ED7245E003B8235 /* unitleadkeyfrequency.hpp */,
+				886F98A61ED72641003B8235 /* unitleadkeyvelocity.cpp */,
+				886F98A71ED72641003B8235 /* unitleadkeyvelocity.hpp */,
+				886F98AE1ED72FFC003B8235 /* unitleadkeyduration.cpp */,
+				886F98AF1ED72FFC003B8235 /* unitleadkeyduration.hpp */,
+			);
+			name = leadkey;
+			sourceTree = "<group>";
+		};
+		886F98AA1ED7275E003B8235 /* key */ = {
+			isa = PBXGroup;
+			children = (
+				31D719741ECE1BE000A4C9E0 /* unitkeyfrequency.cpp */,
+				31D719751ECE1BE000A4C9E0 /* unitkeyfrequency.hpp */,
+				311049A01ED068F2000E89F1 /* unitkeyvelocity.cpp */,
+				311049A11ED068F2000E89F1 /* unitkeyvelocity.hpp */,
+				886F98B11ED7304D003B8235 /* unitkeyduration.cpp */,
+				886F98B21ED7304D003B8235 /* unitkeyduration.hpp */,
+			);
+			name = key;
+			sourceTree = "<group>";
+		};
+		886F98AB1ED72799003B8235 /* bandpass */ = {
+			isa = PBXGroup;
+			children = (
+				311049A61ED0C873000E89F1 /* unitlowpass.cpp */,
+				311049A71ED0C873000E89F1 /* unitlowpass.hpp */,
+				311049A91ED0D375000E89F1 /* unithighpass.cpp */,
+				311049AA1ED0D375000E89F1 /* unithighpass.hpp */,
+			);
+			name = bandpass;
+			sourceTree = "<group>";
+		};
+		886F98AC1ED7281A003B8235 /* midi */ = {
+			isa = PBXGroup;
+			children = (
+				31EC60391ECF3CC1004671E2 /* unitmodulationwheel.cpp */,
+				31EC603A1ECF3CC1004671E2 /* unitmodulationwheel.hpp */,
+			);
+			name = midi;
+			sourceTree = "<group>";
+		};
+		886F98AD1ED72840003B8235 /* constant */ = {
+			isa = PBXGroup;
+			children = (
+				31EC60331ECF2811004671E2 /* unitconstant.cpp */,
+				31EC60341ECF2811004671E2 /* unitconstant.hpp */,
+				31DE9FF71ED337D4003F5291 /* unitvariable.cpp */,
+				31DE9FF81ED337D4003F5291 /* unitvariable.hpp */,
+			);
+			name = constant;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -322,6 +382,7 @@
 				310285601EC8E7E300B4A5F6 /* controller.cpp in Sources */,
 				31DE9FF91ED337D4003F5291 /* unitvariable.cpp in Sources */,
 				31D719811ECE317B00A4C9E0 /* commands.cpp in Sources */,
+				886F98A81ED72641003B8235 /* unitleadkeyvelocity.cpp in Sources */,
 				310285701EC8F7FC00B4A5F6 /* instrument.cpp in Sources */,
 				31D719761ECE1BE000A4C9E0 /* unitkeyfrequency.cpp in Sources */,
 				311049A51ED07DC9000E89F1 /* basic.cpp in Sources */,
@@ -330,6 +391,7 @@
 				31D719601ECC4E5700A4C9E0 /* unitADSR.cpp in Sources */,
 				310285661EC8E9A600B4A5F6 /* input.cpp in Sources */,
 				31EC60351ECF2811004671E2 /* unitconstant.cpp in Sources */,
+				886F98B01ED72FFC003B8235 /* unitleadkeyduration.cpp in Sources */,
 				310285691EC8F0A600B4A5F6 /* log.cpp in Sources */,
 				311049A21ED068F2000E89F1 /* unitkeyvelocity.cpp in Sources */,
 				31EC60381ECF3169004671E2 /* unitoscillator.cpp in Sources */,
@@ -338,6 +400,8 @@
 				311049A81ED0C873000E89F1 /* unitlowpass.cpp in Sources */,
 				31EC60411ECF45BE004671E2 /* unitadder.cpp in Sources */,
 				312D2EA71ED1C6F1005B4508 /* keyevent.cpp in Sources */,
+				886F98B31ED7304D003B8235 /* unitkeyduration.cpp in Sources */,
+				886F98A51ED7245E003B8235 /* unitleadkeyfrequency.cpp in Sources */,
 				312D2EAA1ED1CE83005B4508 /* unitkeyoutput.cpp in Sources */,
 				311049AB1ED0D375000E89F1 /* unithighpass.cpp in Sources */,
 				31EC60321ECF264F004671E2 /* util.cpp in Sources */,

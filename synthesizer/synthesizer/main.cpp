@@ -10,7 +10,7 @@
 
 #include "log.hpp"
 
-#define MAIN_DIRECTORY "/Users/jessetvogel/Projects/synthesizer/files"
+#define MAIN_DIRECTORY "/Users/Jesse/Projects/synthesizer/files"
 #define SETTINGS_FILE "settings.txt"
 
 int main(int argc, char *argv[]) {

@@ -1,0 +1,7 @@
+unit_create oscillator x
+unit_set_value x sample square
+unit_set_value x frequency lead_key_frequency
+unit_set_value x amplitude lead_key_velocity
+
+instrument_create i
+instrument_set_output i x

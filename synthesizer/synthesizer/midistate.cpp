@@ -17,6 +17,7 @@ MidiState::MidiState(Controller* controller) {
         keyStage[i] = Off;
         keyFrequency[i] = 0.0;
         keyVelocity[i] = 0.0;
+        keyDuration[i] = 0.0;
     }
     
     pitchWheel = 0.0;
@@ -90,12 +91,15 @@ void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned cha
 void MidiState::update() {
     Settings* settings = controller->getSettings();
 
-    for(int i = 0;i < AMOUNT_OF_KEYS;i ++) {
+    for(int i = 0;i < AMOUNT_OF_KEYS; ++i) {
         // Update frequencies
         keyFrequency[i] = (pitchWheel == 0.0) ? settings->frequencies[i] : settings->frequencies[i] * pow(2.0, pitchWheel * settings->pitchWheelRange / 12.0);
         
         // Update velocities
         if(velocity[i] > 0) keyVelocity[i] = (double) velocity[i] / 127.0;
+        
+        // Update durations
+        if(keyVelocity[i] > 0) keyDuration[i] += controller->getFramesPerBuffer() / controller->getSampleRate();
         
         // If we just now pressed key i, create a new key event
         if(previousVelocity[i] == 0 && velocity[i] > 0) {
@@ -106,6 +110,9 @@ void MidiState::update() {
             keyEvent.release = 0.0;
             controller->addKeyEvent(&keyEvent);
             
+            // Whenever pressed, reset the keyDuration
+            keyDuration[i] = 0.0;
+            
             // Use this key as the leading key
             leadKey.key = i;
             leadKey.stage = KeyEvent::Press;
@@ -113,10 +120,25 @@ void MidiState::update() {
             leadKey.release = 0.0;
         }
         previousVelocity[i] = velocity[i];
-        
-        // Update lead key
-        updateKeyEvent(&leadKey);
     }
+    
+    // If lead key was released, but other keys are pressed, use the one that is pressed shortest ago
+    if(velocity[leadKey.key] == 0 && sustainPedal < 0.5) {
+        leadKey.velocity = 0.0;
+        double minDuration = 99999.0; // TODO: less magic..
+        for(int i = 0;i < AMOUNT_OF_KEYS; ++i) {
+            if(velocity[i] > 0 && keyDuration[i] < minDuration) {
+                leadKey.key = i;
+                leadKey.stage = KeyEvent::Press;
+                leadKey.duration = keyDuration[i];
+                leadKey.release = 0.0;
+                minDuration = keyDuration[i];
+            }
+        }
+    }
+    
+    // Update lead key
+    updateKeyEvent(&leadKey);
 }
 
 void MidiState::updateKeyEvent(KeyEvent* keyEvent) {

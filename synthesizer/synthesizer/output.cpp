@@ -73,6 +73,7 @@ void Output::stop() {
     }
     
 //    PaError err = // TODO: check for errors
+    active = false;
     Pa_CloseStream(outputStream);
 }
 
@@ -94,7 +95,7 @@ int Output::callback(const void* inputBuffer,
     
     // Update everything
     float* out = (float*) outputBuffer;
-    if(output->controller->update()) {
+    if(output->controller->update() && output->active) {
         // Output the buffer
         float* buffer = output->controller->getBuffer();
         for(int i = 0;i < framesPerBuffer;i ++) {

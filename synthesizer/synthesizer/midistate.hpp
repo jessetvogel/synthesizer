@@ -36,7 +36,8 @@ public:
     Stage keyStage[AMOUNT_OF_KEYS];
     double keyVelocity[AMOUNT_OF_KEYS];
     double keyFrequency[AMOUNT_OF_KEYS];
-
+    double keyDuration[AMOUNT_OF_KEYS];
+    
     double pitchWheel;
     double modulationWheel;
     double mainVolume;

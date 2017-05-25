@@ -10,6 +10,8 @@
 #include "unit.hpp"
 #include "unitkeyfrequency.hpp"
 #include "unitkeyvelocity.hpp"
+#include "unitleadkeyfrequency.hpp"
+#include "unitleadkeyvelocity.hpp"
 #include "unitmodulationwheel.hpp"
 #include "unitkeyoutput.hpp"
 
@@ -32,6 +34,8 @@ Controller::Controller(Settings* settings) {
     // Instantiate constant values
     addUnit(new UnitKeyFrequency(this), "key_frequency");
     addUnit(new UnitKeyVelocity(this), "key_velocity");
+    addUnit(new UnitLeadKeyFrequency(this), "lead_key_frequency");
+    addUnit(new UnitLeadKeyVelocity(this), "lead_key_velocity");
     addUnit(new UnitKeyOutput(this), "key_output");
     addUnit(new UnitModulationWheel(this), "modulation_wheel");
 }
