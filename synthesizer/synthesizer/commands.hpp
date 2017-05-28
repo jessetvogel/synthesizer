@@ -29,6 +29,7 @@ public:
     // Commands for controller
     static std::regex regexStart;
     static std::regex regexStop;
+    static std::regex regexReset;
     
     // Commands for synths
     static std::regex regexInclude;

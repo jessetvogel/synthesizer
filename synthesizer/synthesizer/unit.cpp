@@ -36,8 +36,8 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent) 
         return new UnitFunction(controller, keyDependent);
     
     // ADSR envelope (requires to be keyDependent)
-    if(type.compare("ADSR") == 0 && keyDependent)
-        return new UnitADSR(controller);
+    if(type.compare("ADSR") == 0)
+        return new UnitADSR(controller, keyDependent);
     
     // Low-pass filter
     if(type.compare("lowpass") == 0)

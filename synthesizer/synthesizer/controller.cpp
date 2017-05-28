@@ -8,10 +8,8 @@
 #include "instrument.hpp"
 
 #include "unit.hpp"
-#include "unitkeyfrequency.hpp"
-#include "unitkeyvelocity.hpp"
-#include "unitleadkeyfrequency.hpp"
-#include "unitleadkeyvelocity.hpp"
+#include "unitkeyinfo.hpp"
+#include "unitleadkeyinfo.hpp"
 #include "unitmodulationwheel.hpp"
 #include "unitkeyoutput.hpp"
 
@@ -31,13 +29,8 @@ Controller::Controller(Settings* settings) {
     framesPerBuffer = settings->bufferSize;
     active = false;
     
-    // Instantiate constant values
-    addUnit(new UnitKeyFrequency(this), "key_frequency");
-    addUnit(new UnitKeyVelocity(this), "key_velocity");
-    addUnit(new UnitLeadKeyFrequency(this), "lead_key_frequency");
-    addUnit(new UnitLeadKeyVelocity(this), "lead_key_velocity");
-    addUnit(new UnitKeyOutput(this), "key_output");
-    addUnit(new UnitModulationWheel(this), "modulation_wheel");
+    // Initialize
+    reset();
 }
 
 Controller::~Controller() {
@@ -57,9 +50,9 @@ bool Controller::start() {
     
     buffer = new float[framesPerBuffer];
     
-    input->start();
-    output->start();
-        
+    if(!input->start()) return false;
+    if(!output->start()) return false;
+    
     active = true;
     
     return true;
@@ -68,12 +61,41 @@ bool Controller::start() {
 bool Controller::stop() {
     if(!active) return false;
     
-    output->stop();
-    input->stop();
+    if(!output->stop()) return false;
+    if(!input->stop()) return false;
     
     delete[] buffer;
     
     active = false;
+    
+    return true;
+}
+
+bool Controller::reset() {
+    if(active) return false;
+    
+    // Clear all instruments and units
+    for(auto it = instruments.begin(); it != instruments.end(); ++it)
+        delete it->second;
+    
+    for(auto it = units.begin(); it != units.end(); ++it)
+        delete it->second;
+    
+    instruments.clear();
+    units.clear();
+    
+    // Instantiate constant values
+    addUnit(new UnitKeyInfo(this, UnitKeyInfo::Frequency), "key_frequency");
+    addUnit(new UnitKeyInfo(this, UnitKeyInfo::Velocity), "key_velocity");
+    addUnit(new UnitKeyInfo(this, UnitKeyInfo::Duration), "key_duration");
+    addUnit(new UnitKeyInfo(this, UnitKeyInfo::Release), "key_release");
+    
+    addUnit(new UnitLeadKeyInfo(this, UnitLeadKeyInfo::Frequency), "lead_key_frequency");
+    addUnit(new UnitLeadKeyInfo(this, UnitLeadKeyInfo::Velocity), "lead_key_velocity");
+    addUnit(new UnitLeadKeyInfo(this, UnitLeadKeyInfo::Duration), "lead_key_duration");
+    addUnit(new UnitLeadKeyInfo(this, UnitLeadKeyInfo::Release), "lead_key_release");
+    addUnit(new UnitKeyOutput(this), "key_output");
+    addUnit(new UnitModulationWheel(this), "modulation_wheel");
     
     return true;
 }

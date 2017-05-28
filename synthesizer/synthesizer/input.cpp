@@ -81,6 +81,7 @@ bool Input::update() {
 bool Input::stop() {
     if(!active) return false;
     
+    active = false;
     Pm_Close(inputStream);
     return true;
 }

@@ -15,6 +15,7 @@ std::regex Commands::regexSetPitchWheelRange("^settings_set_pitch_wheel_range\\s
 // Commands for controller
 std::regex Commands::regexStart("^start$");
 std::regex Commands::regexStop("^stop$");
+std::regex Commands::regexReset("^reset$");
 
 // Commands for synths
 std::regex Commands::regexInclude("^include\\s+((?:\\w+" REGEX_DIRECTORY_SEPARATOR ")*\\w+(?:.\\w+)?)$");

@@ -4,20 +4,21 @@
 
 #include "controller.hpp"
 #include "parser.hpp"
-#include "basic.hpp"
 #include "settings.hpp"
+#include "sample.hpp"
 #include "commands.hpp"
 
 #include "log.hpp"
 
-#define MAIN_DIRECTORY "/Users/Jesse/Projects/synthesizer/files"
+#define MAIN_DIRECTORY "/Users/jessetvogel/Projects/synthesizer/files"
 #define SETTINGS_FILE "settings.txt"
+
+void initialize();
+void destruct();
 
 int main(int argc, char *argv[]) {
     // Initialize stuff (TODO: put this in some audio class or something, and check for errors)
-    Pm_Initialize();
-    Pa_Initialize();
-    Basic::initialize();
+    initialize();
     
     // Load settings
     Settings settings;
@@ -49,9 +50,20 @@ int main(int argc, char *argv[]) {
         }
     }
     
-    Basic::destruct();
-    Pa_Terminate();
-    Pm_Terminate();
+    // Clean up
+    destruct();
     
     return 0;
+}
+
+void initialize() {
+    Pm_Initialize();
+    Pa_Initialize();
+    Sample::initialize();
+}
+
+void destruct() {
+    Sample::destruct();
+    Pa_Terminate();
+    Pm_Terminate();
 }

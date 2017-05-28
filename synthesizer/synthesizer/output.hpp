@@ -20,8 +20,8 @@ public:
     Output(Controller*);
 //    ~Output();
     
-    void start();
-    void stop();
+    bool start();
+    bool stop();
     
     int amountOfDevices();
     const char* deviceName(int);

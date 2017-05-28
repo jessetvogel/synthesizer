@@ -3,12 +3,12 @@
 #include "instrument.hpp"
 #include "midistate.hpp"
 
-UnitADSR::UnitADSR(Controller* controller) {
+UnitADSR::UnitADSR(Controller* controller, bool keyDependent) {
     // Store pointer to controller
     this->controller = controller;
     
-    // An ADSR is key dependent
-    keyDependent = true;
+    // An ADSR may or may not be key dependent
+    this->keyDependent = keyDependent;
     
     // Set default values
     Unit::set(controller, &startLevel, "0.0", keyDependent);
@@ -19,6 +19,15 @@ UnitADSR::UnitADSR(Controller* controller) {
     Unit::set(controller, &attackTime, "0.0", keyDependent);
     Unit::set(controller, &decayTime, "0.0", keyDependent);
     Unit::set(controller, &releaseTime, "0.0", keyDependent);
+    
+    if(keyDependent) {
+        Unit::set(controller, &duration, "key_duration", keyDependent);
+        Unit::set(controller, &release, "key_release", keyDependent);
+    }
+    else {
+        Unit::set(controller, &duration, "lead_key_duration", keyDependent);
+        Unit::set(controller, &release, "lead_key_release", keyDependent);
+    }
     
     attackType = Interpolation::Linear;
     decayType = Interpolation::Linear;
@@ -40,21 +49,17 @@ void UnitADSR::apply(Instrument* instrument) {
     attackTime->update(instrument);
     decayTime->update(instrument);
     releaseTime->update(instrument);
-    
-    KeyEvent::Stage stage = instrument->currentKey->stage;
-    double t = 1.0 / controller->getSampleRate();
+    duration->update(instrument);
+    release->update(instrument);
     
     for(int x = 0;x < controller->getFramesPerBuffer(); ++x) {
         
         double attack = attackTime->output[x];
         double decay = decayTime->output[x];
-        double release = releaseTime->output[x];
+        double releaseT = releaseTime->output[x];
         
-        double d = instrument->currentKey->duration;
-        double r = instrument->currentKey->release;
-        
-        if(stage == KeyEvent::Press || stage == KeyEvent::Sustain) d += t * x;
-        if(stage == KeyEvent::Released) r += t * x;
+        double d = duration->output[x];
+        double r = release->output[x];
         
         float amplitude;
         
@@ -70,11 +75,11 @@ void UnitADSR::apply(Instrument* instrument) {
         else amplitude = sustainLevel->output[x];
         
         // Release stage
-        if(stage != KeyEvent::Press && stage != KeyEvent::Sustain) {
-            if(r >= release)
+        if(r > 0) { // TODO: better way to see this?
+            if(r >= releaseT)
                 amplitude = releaseLevel->output[x];
             else
-                amplitude += (releaseLevel->output[x] - amplitude) * Interpolation::ease(releaseType, r / release);
+                amplitude += (releaseLevel->output[x] - amplitude) * Interpolation::ease(releaseType, r / releaseT);
         }
         
         output[x] = amplitude;

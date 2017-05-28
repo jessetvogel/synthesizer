@@ -101,6 +101,11 @@ bool Parser::parseLine(std::string line) {
         return controller->stop();
     }
     
+    // reset
+    if(std::regex_search(str, cm, Commands::regexReset)) {
+        return controller->reset();
+    }
+    
     // Synths
     
     // include <filename>

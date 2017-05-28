@@ -17,13 +17,16 @@ class UnitADSR : public Unit {
     Unit* decayTime = NULL;
     Unit* releaseTime = NULL;
     
+    Unit* duration = NULL;
+    Unit* release = NULL;
+    
     Interpolation::Type attackType;
     Interpolation::Type decayType;
     Interpolation::Type releaseType;
     
 public:
     
-    UnitADSR(Controller*);
+    UnitADSR(Controller*, bool);
     ~UnitADSR();
     
     void apply(Instrument*);

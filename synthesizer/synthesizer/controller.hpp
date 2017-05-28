@@ -42,6 +42,7 @@ public:
     
     bool start();
     bool stop();
+    bool reset();
     bool update();
 
     bool setInputDevice(int);

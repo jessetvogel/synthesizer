@@ -3,8 +3,6 @@
 #include "output.hpp"
 #include "controller.hpp"
 
-#include "log.hpp"
-
 Output::Output(Controller* controller) {
     // Store pointer to controller object
     this->controller = controller;
@@ -26,11 +24,10 @@ bool Output::isOutput(int n) {
     return Pa_GetDeviceInfo(n)->maxOutputChannels > 0;
 }
 
-void Output::start() {
-    if(active) {
-        Log::warning("Output already started");
-        return;
-    }
+#include <iostream>
+
+bool Output::start() {
+    if(active) return false;
     
     int outputDevice = controller->getOutputDevice();
     
@@ -38,10 +35,7 @@ void Output::start() {
         outputDevice = Pa_GetDefaultOutputDevice();
     
     const PaDeviceInfo* info = Pa_GetDeviceInfo(outputDevice);
-    if(info == NULL) {
-        Log::error("Failed to open output device");
-        return;
-    }
+    if(info == NULL) return false;
     
     PaStreamParameters outputParameters;
     bzero(&outputParameters, sizeof(outputParameters));
@@ -64,20 +58,19 @@ void Output::start() {
     err = Pa_StartStream(outputStream);
     
     active = true;
+    
+    return true;
 }
 
-void Output::stop() {
-    if(!active) {
-        Log::warning("Tried to stop stream, but it wasn't running");
-        return;
-    }
+bool Output::stop() {
+    if(!active) return false;
     
 //    PaError err = // TODO: check for errors
     active = false;
     Pa_CloseStream(outputStream);
-}
 
-#include <iostream>
+    return true;
+}
 
 int Output::callback(const void* inputBuffer,
                         void* outputBuffer,
