@@ -1,20 +1,58 @@
-unit_create ADSR envelope
-unit_set_value envelope attack_time     0.05
-unit_set_value envelope decay_time      0.1
-unit_set_value envelope sustain_level   0.5
-unit_set_value envelope release_time    1.0
-unit_set_value envelope attack_type     quartout
-unit_set_value envelope decay_type      quartout
-unit_set_value envelope release_type    quartout
+# Let the lead frequency 'glide', depending on whether the lead note is being pressed
+unit_create conditional lead_pressing
+unit_set_value lead_pressing input      lead_key_velocity
+unit_set_value lead_pressing low        -1.0
+unit_set_value lead_pressing high       0.0
+unit_set_value lead_pressing output_middle 0.0
+unit_set_value lead_pressing output_high 1.0
 
-unit_create adder_1 a
-unit_set_value a input_1                lead_key_velocity
-unit_set_value a gain_1                 envelope
+# Some magic with numbers
+unit_create adder_2 y
+unit_create conditional z
+unit_set_value y input_1                z
+unit_set_value y input_2                lead_pressing
+unit_set_value z input                  y
+unit_set_value z low                    1.0
+unit_set_value z high                   1.33
+unit_set_value z output_low             0.25
+unit_set_value z output_middle          0.50
+unit_set_value z output_high            0.75
+unit_create conditional alpha
+unit_set_value alpha input              z
+unit_set_value alpha low                0.67
+unit_set_value alpha high               0.67
+unit_set_value alpha output_low         1.0
+unit_create adder_2 oneminusalpha
+unit_set_value oneminusalpha input_1    1.0
+unit_set_value oneminusalpha input_2    alpha
+unit_set_value oneminusalpha gain_2     -1.0
+unit_create adder_2 freq
+unit_set_value freq input_1             freq
+unit_set_value freq gain_1              oneminusalpha
+unit_set_value freq input_2             lead_key_frequency
+unit_set_value freq gain_2              alpha
 
-unit_create oscillator x
-unit_set_value x sample                 square
-unit_set_value x frequency              lead_key_frequency
-unit_set_value x amplitude              a
+# Gliding constant
+unit_set_value alpha output_high        0.06
+
+# Oscillator and amplitude envelope
+unit_create ADSR e_amp
+unit_set_value e_amp attack_time        0.0
+unit_set_value e_amp decay_time         0.05
+unit_set_value e_amp sustain_level      0.5
+unit_set_value e_amp release_time       0.0
+unit_set_value e_amp attack_type        quartout
+unit_set_value e_amp decay_type         quartout
+unit_set_value e_amp release_type       quartout
+
+unit_create adder_1 amp
+unit_set_value amp input_1              lead_key_velocity
+unit_set_value amp gain_1               e_amp
+
+unit_create oscillator lead
+unit_set_value lead sample              square
+unit_set_value lead frequency           freq
+unit_set_value lead amplitude           amp
 
 instrument_create i
-instrument_set_output i x
+instrument_set_output i                 lead

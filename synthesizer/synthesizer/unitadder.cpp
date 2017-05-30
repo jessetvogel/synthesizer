@@ -13,6 +13,7 @@ UnitAdder::UnitAdder(Controller* controller, bool keyDependent, int n) {
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
+    memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
     inputs = new Unit*[n];
     gains = new Unit*[n];
     
@@ -32,14 +33,16 @@ UnitAdder::~UnitAdder() {
 }
 
 void UnitAdder::apply(Instrument* instrument) {
-    memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
+    float buffer[controller->getFramesPerBuffer()];
+    memset(buffer, 0, sizeof(float) * controller->getFramesPerBuffer());
     for(int i = 0;i < n; i++) {
         inputs[i]->update(instrument);
         gains[i]->update(instrument);
 
         for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
-            output[x] += inputs[i]->output[x] * gains[i]->output[x];
+            buffer[x] += inputs[i]->output[x] * gains[i]->output[x];
     }
+    memcpy(output, buffer, sizeof(float) * controller->getFramesPerBuffer());
 }
 
 bool UnitAdder::setValue(std::string parameter, std::string value) {

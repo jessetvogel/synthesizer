@@ -35,6 +35,7 @@ UnitADSR::UnitADSR(Controller* controller, bool keyDependent) {
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
+    memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
 }
 
 UnitADSR::~UnitADSR() {

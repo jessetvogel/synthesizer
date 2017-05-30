@@ -12,6 +12,7 @@
 #include "unitlowpass.hpp"
 #include "unithighpass.hpp"
 #include "unitvariable.hpp"
+#include "unitconditional.hpp"
 
 Unit* Unit::create(Controller* controller, std::string type, bool keyDependent) {
 
@@ -35,7 +36,7 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent) 
     if(type.compare("function") == 0)
         return new UnitFunction(controller, keyDependent);
     
-    // ADSR envelope (requires to be keyDependent)
+    // ADSR envelope
     if(type.compare("ADSR") == 0)
         return new UnitADSR(controller, keyDependent);
     
@@ -46,6 +47,10 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent) 
     // High-pass filter
     if(type.compare("highpass") == 0)
         return new UnitHighpass(controller, keyDependent);
+    
+    // Conditional
+    if(type.compare("conditional") == 0)
+        return new UnitConditional(controller, keyDependent);
 
     // If no match was found, return NULL
     return NULL;

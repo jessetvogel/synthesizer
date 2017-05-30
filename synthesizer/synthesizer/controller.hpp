@@ -35,6 +35,8 @@ class Controller {
     
     float* buffer;
     
+    void updateSettings();
+    
 public:
     
     Controller(Settings*);

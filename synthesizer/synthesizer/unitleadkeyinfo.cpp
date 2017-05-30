@@ -15,6 +15,7 @@ UnitLeadKeyInfo::UnitLeadKeyInfo(Controller* controller, Type type) {
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
+    memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
 }
 
 UnitLeadKeyInfo::~UnitLeadKeyInfo() {

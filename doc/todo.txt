@@ -1,16 +1,15 @@
 Ideas: (not in order of priority)
 
+- When reading/parsing commands, first strip away all preceding whitespace, and all leading whitespace, (and maybe comments). That allows e.g. for comments after commands. Something like /^\s*(.*?)\s*(?:#.*)$/
+
 - How do we change values during run-time? Using an interface? Command-line? There probably are parameters that we want to change while playing.
 
 - Unit like delay effect
 
-- Classes like Unit(Lead)KeyFrequency/Velocity/Duration etc, can be put in just one class, and then it will be given a type parameter
 
 ---------------------------------------------------------------
 
 Working on:
-
-- Implement units called 'lead_key_frequency', 'lead_key_velocity' oid, which outputs the frequency/velocity of the note that you last played (leading key). Like a lead instrument
 
 - Create documentation, in some years you might want to use this, but don't know how it works..
 
@@ -35,3 +34,7 @@ Done:
 - Implement a keyunit called 'key_velocity', returning the key velocity
 
 - An ADSR envelope should also have an 'start_level', 'attack_level', 'release_level'. This way we can use these envelopes also as pitch envelopes, and for example as a vibrato envelope.
+
+- Classes like Unit(Lead)KeyFrequency/Velocity/Duration etc, can be put in just one class, and then it will be given a type parameter
+
+- Implement units called 'lead_key_frequency', 'lead_key_velocity' oid, which outputs the frequency/velocity of the note that you last played (leading key). Like a lead instrument

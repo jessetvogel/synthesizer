@@ -16,6 +16,7 @@ UnitLowpass::UnitLowpass(Controller* controller, bool keyDependent) {
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
+    memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
     
     if(keyDependent) {
         lastOutput = new float[MAX_AMOUNT_OF_IDS];

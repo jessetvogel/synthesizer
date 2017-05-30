@@ -38,6 +38,7 @@
 		31EC603B1ECF3CC1004671E2 /* unitmodulationwheel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC60391ECF3CC1004671E2 /* unitmodulationwheel.cpp */; };
 		31EC60411ECF45BE004671E2 /* unitadder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC603F1ECF45BD004671E2 /* unitadder.cpp */; };
 		886F98A51ED7245E003B8235 /* unitleadkeyinfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886F98A31ED7245E003B8235 /* unitleadkeyinfo.cpp */; };
+		88B0640D1EDDA86C00DE06E7 /* unitconditional.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B0640B1EDDA86C00DE06E7 /* unitconditional.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -112,6 +113,8 @@
 		31EC60401ECF45BD004671E2 /* unitadder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitadder.hpp; sourceTree = "<group>"; };
 		886F98A31ED7245E003B8235 /* unitleadkeyinfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitleadkeyinfo.cpp; sourceTree = "<group>"; };
 		886F98A41ED7245E003B8235 /* unitleadkeyinfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitleadkeyinfo.hpp; sourceTree = "<group>"; };
+		88B0640B1EDDA86C00DE06E7 /* unitconditional.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitconditional.cpp; sourceTree = "<group>"; };
+		88B0640C1EDDA86C00DE06E7 /* unitconditional.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitconditional.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +178,8 @@
 				311049AD1ED0D8DE000E89F1 /* unitfunction.hpp */,
 				312D2EA81ED1CE83005B4508 /* unitkeyoutput.cpp */,
 				312D2EA91ED1CE83005B4508 /* unitkeyoutput.hpp */,
+				88B0640B1EDDA86C00DE06E7 /* unitconditional.cpp */,
+				88B0640C1EDDA86C00DE06E7 /* unitconditional.hpp */,
 				886F98AD1ED72840003B8235 /* constant */,
 				886F98AA1ED7275E003B8235 /* info */,
 				886F98AB1ED72799003B8235 /* bandpass */,
@@ -307,7 +312,7 @@
 		310285481EC8DB5600B4A5F6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Jesse Vogel";
 				TargetAttributes = {
 					3102854F1EC8DB5600B4A5F6 = {
@@ -347,6 +352,7 @@
 				31D7197E1ECE2E4500A4C9E0 /* parser.cpp in Sources */,
 				31D719601ECC4E5700A4C9E0 /* unitADSR.cpp in Sources */,
 				310285661EC8E9A600B4A5F6 /* input.cpp in Sources */,
+				88B0640D1EDDA86C00DE06E7 /* unitconditional.cpp in Sources */,
 				31EC60351ECF2811004671E2 /* unitconstant.cpp in Sources */,
 				310285691EC8F0A600B4A5F6 /* log.cpp in Sources */,
 				31EC60381ECF3169004671E2 /* unitoscillator.cpp in Sources */,

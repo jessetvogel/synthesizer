@@ -19,6 +19,8 @@ UnitOscillator::UnitOscillator(Controller* controller, bool keyDependent) {
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
+    memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
+    
     if(keyDependent) {
         phase = new double[MAX_AMOUNT_OF_IDS];
         memset(phase, 0, sizeof(double) * MAX_AMOUNT_OF_IDS);
