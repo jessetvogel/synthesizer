@@ -21,6 +21,8 @@ public:
     
     static bool set(Controller*, Type*, std::string);
     
+    static double fuzz(double, double);
+    
 };
 
 #endif

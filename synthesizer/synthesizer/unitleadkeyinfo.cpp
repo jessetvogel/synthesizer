@@ -24,7 +24,7 @@ UnitLeadKeyInfo::~UnitLeadKeyInfo() {
 
 void UnitLeadKeyInfo::apply(Instrument* instrument) {
     KeyEvent keyEvent = controller->getMidiState()->leadKey;
-    double frequency, velocity, duration, release, t;
+    double frequency, velocity, duration, release, t, pressing;
     
     
     switch(type) {
@@ -52,6 +52,12 @@ void UnitLeadKeyInfo::apply(Instrument* instrument) {
             t = (keyEvent.stage == KeyEvent::Released) ? 1.0 / controller->getSampleRate() : 0.0;
             for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
                 output[x] = release + t * x;
+            break;
+            
+        case Pressing:
+            pressing = keyEvent.stage == KeyEvent::Press ? 1.0 : 0.0;
+            for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
+                output[x] = pressing;
             break;
     }
 }

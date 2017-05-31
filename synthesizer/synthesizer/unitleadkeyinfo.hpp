@@ -7,7 +7,7 @@ class UnitLeadKeyInfo : public Unit {
     
 public:
 
-    enum Type { Frequency, Velocity, Duration, Release };
+    enum Type { Frequency, Velocity, Duration, Release, Pressing };
     
 private:
     

@@ -1,16 +1,8 @@
 # Let the lead frequency 'glide', depending on whether the lead note is being pressed
-unit_create conditional lead_pressing
-unit_set_value lead_pressing input      lead_key_velocity
-unit_set_value lead_pressing low        -1.0
-unit_set_value lead_pressing high       0.0
-unit_set_value lead_pressing output_middle 0.0
-unit_set_value lead_pressing output_high 1.0
-
-# Some magic with numbers
 unit_create adder_2 y
 unit_create conditional z
 unit_set_value y input_1                z
-unit_set_value y input_2                lead_pressing
+unit_set_value y input_2                lead_key_pressing
 unit_set_value z input                  y
 unit_set_value z low                    1.0
 unit_set_value z high                   1.33
@@ -37,10 +29,10 @@ unit_set_value alpha output_high        0.06
 
 # Oscillator and amplitude envelope
 unit_create ADSR e_amp
-unit_set_value e_amp attack_time        0.0
+unit_set_value e_amp attack_time        0.01
 unit_set_value e_amp decay_time         0.05
 unit_set_value e_amp sustain_level      0.5
-unit_set_value e_amp release_time       0.0
+unit_set_value e_amp release_time       0.1
 unit_set_value e_amp attack_type        quartout
 unit_set_value e_amp decay_type         quartout
 unit_set_value e_amp release_type       quartout
@@ -50,9 +42,37 @@ unit_set_value amp input_1              lead_key_velocity
 unit_set_value amp gain_1               e_amp
 
 unit_create oscillator lead
-unit_set_value lead sample              square
+unit_set_value lead sample              sine
 unit_set_value lead frequency           freq
 unit_set_value lead amplitude           amp
 
+# Additional harmonic(s)
+unit_create adder_1 freq2
+unit_set_value freq2 input_1            freq
+unit_set_value freq2 gain_1             3.0
+
+unit_create oscillator lead2
+unit_set_value lead2 sample             sine
+unit_set_value lead2 frequency          freq2
+unit_set_value lead2 amplitude          amp
+
+unit_create adder_2 leads
+unit_set_value leads input_1            lead
+unit_set_value leads input_2            lead2
+
+# Add fuzz depending on modulation wheel
+unit_create adder_2 m
+unit_set_value m input_1                -1.0
+unit_set_value m input_2                modulation_wheel
+unit_set_value m gain_2                 3.0
+
+unit_create function fuzz_gain
+unit_set_value fuzz_gain function       pow10
+unit_set_value fuzz_gain input          m
+
+unit_create fuzz fuzzed
+unit_set_value fuzzed input             leads
+unit_set_value fuzzed input_gain        fuzz_gain
+
 instrument_create i
-instrument_set_output i                 lead
+instrument_set_output i                 fuzzed

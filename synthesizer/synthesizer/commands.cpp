@@ -30,8 +30,3 @@ std::regex Commands::regexUnitCreate("^unit_create\\s+(\\w+)\\s+(\\w+)$");
 std::regex Commands::regexUnitKeyCreate("^unit_key_create\\s+(\\w+)\\s+(\\w+)$");
 std::regex Commands::regexUnitDelete("^unit_delete\\s+(\\w+)$");
 std::regex Commands::regexUnitSetValue("^unit_set_value\\s+(\\w+)\\s+(\\w+)\\s+(\\w+|[-+]?[0-9]+(?:\\.[0-9]+)?)$");
-
-
-
-// TODO: remove this
-std::regex Commands::regexPrint("^print\\s+(.+)$");

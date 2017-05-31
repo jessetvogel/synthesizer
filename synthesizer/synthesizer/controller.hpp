@@ -1,5 +1,3 @@
-// TODO: maybe put all header files into one single file, so that we don't get problems with references etc.
-
 #ifndef controller_hpp
 #define controller_hpp
 

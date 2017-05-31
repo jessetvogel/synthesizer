@@ -16,15 +16,18 @@ int Output::amountOfDevices() {
 }
 
 const char* Output::deviceName(int n) {
-    // TODO: maybe check if it is null
+    const PaDeviceInfo* info = Pa_GetDeviceInfo(n);
+    if(info == NULL) return NULL;
+    
     return Pa_GetDeviceInfo(n)->name;
 }
 
 bool Output::isOutput(int n) {
+    const PaDeviceInfo* info = Pa_GetDeviceInfo(n);
+    if(info == NULL) return NULL;
+    
     return Pa_GetDeviceInfo(n)->maxOutputChannels > 0;
 }
-
-#include <iostream>
 
 bool Output::start() {
     if(active) return false;

@@ -197,17 +197,5 @@ bool Parser::parseLine(std::string line) {
         return unit->setValue(cm[2], cm[3]);
     }
     
-
-    
-    
-    
-    
-    // TODO: remove this
-    // print <message>
-    if(std::regex_search(str, cm, Commands::regexPrint)) {
-        Log::output(std::string(cm[1]).c_str());
-        return true;
-    }
-    
     return false;
 }

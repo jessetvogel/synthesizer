@@ -94,6 +94,8 @@ bool Controller::reset() {
     addUnit(new UnitLeadKeyInfo(this, UnitLeadKeyInfo::Velocity), "lead_key_velocity");
     addUnit(new UnitLeadKeyInfo(this, UnitLeadKeyInfo::Duration), "lead_key_duration");
     addUnit(new UnitLeadKeyInfo(this, UnitLeadKeyInfo::Release), "lead_key_release");
+    addUnit(new UnitLeadKeyInfo(this, UnitLeadKeyInfo::Pressing), "lead_key_pressing");
+    
     addUnit(new UnitKeyOutput(this), "key_output");
     addUnit(new UnitModulationWheel(this), "modulation_wheel");
     

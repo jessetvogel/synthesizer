@@ -23,3 +23,7 @@ bool Function::set(Controller* controller, Type* parameterAddr, std::string valu
     
     return false;
 }
+
+double Function::fuzz(double input, double inputGain) {
+    return ((input > 0.0) ? 1.0 : ((input < 0.0) ? -1.0 : 0.0)) * (1.0 - std::exp(- inputGain * std::abs(input))) / (1.0 - std::exp(- inputGain));
+}

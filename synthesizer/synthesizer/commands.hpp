@@ -44,10 +44,6 @@ public:
     static std::regex regexUnitKeyCreate;
     static std::regex regexUnitDelete;
     static std::regex regexUnitSetValue;
-    
-    
-    // TODO: remove this
-    static std::regex regexPrint;
 };
 
 #endif

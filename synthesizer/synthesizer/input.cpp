@@ -20,11 +20,16 @@ int Input::amountOfDevices() {
 }
 
 const char* Input::deviceName(int n) {
-    // TODO: maybe check if it is null
+    const PmDeviceInfo* info = Pm_GetDeviceInfo(n);
+    if(info == NULL) return NULL;
+    
     return Pm_GetDeviceInfo(n)->name;
 }
 
 bool Input::isInput(int n) {
+    const PmDeviceInfo* info = Pm_GetDeviceInfo(n);
+    if(info == NULL) return false;
+    
     return Pm_GetDeviceInfo(n)->input > 0;
 }
 

@@ -13,6 +13,7 @@
 #include "unithighpass.hpp"
 #include "unitvariable.hpp"
 #include "unitconditional.hpp"
+#include "unitfuzz.hpp"
 
 Unit* Unit::create(Controller* controller, std::string type, bool keyDependent) {
 
@@ -51,6 +52,10 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent) 
     // Conditional
     if(type.compare("conditional") == 0)
         return new UnitConditional(controller, keyDependent);
+    
+    // Fuzz
+    if(type.compare("fuzz") == 0)
+        return new UnitFuzz(controller, keyDependent);
 
     // If no match was found, return NULL
     return NULL;

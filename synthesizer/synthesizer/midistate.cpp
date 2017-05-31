@@ -124,7 +124,7 @@ void MidiState::update() {
     
     // If lead key was released, but other keys are pressed, use the one that is pressed shortest ago
     if(velocity[leadKey.key] == 0 && sustainPedal < 0.5) {
-        leadKey.velocity = 0.0;
+//        leadKey.velocity = 0.0;
         double minDuration = 99999.0; // TODO: less magic..
         for(int i = 0;i < AMOUNT_OF_KEYS; ++i) {
             if(velocity[i] > 0 && keyDuration[i] < minDuration) {

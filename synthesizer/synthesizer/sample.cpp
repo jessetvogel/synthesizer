@@ -2,6 +2,9 @@
 #include <cstring>
 #include <cmath>
 
+#define ONE_OVER_TWO_PI (0.1591549430919)
+#define DEFAULT_RESOLUTION (1024)
+
 Sample::Sample(int resolution, int periods, double* data) {
     // Store all information
     this->resolution = resolution;
@@ -16,18 +19,7 @@ Sample::~Sample() {
 
 float Sample::getValue(double phase) {
     // Optimized, but slightly less accurate implementation
-    return data[((int) (phase * 0.1591549430919 * resolution)) % resolution];
-    
-//    // Wrap phase into 0, 2Pi interval TODO: extend to (0, periods * 2 * pi) interval. This works now because all samples have periods = 2
-//    long n = phase / (2.0 * M_PI * periods);
-//    phase -= 2.0 * M_PI * periods * floor(n);
-//    
-//    // Linear interpolation
-//    double x = phase / (2.0 * M_PI) * resolution;
-//    int low = floor(x);
-//    double z = (double) x - low;
-//    
-//    return data[low] * (1.0 - z) + data[(low + 1) % resolution] * z;
+    return data[((int) (phase * ONE_OVER_TWO_PI * resolution)) % resolution]; // TODO: will we have samples with more than one period? If yes, then change this line.
 }
 
 Sample* Sample::sine;
@@ -36,7 +28,7 @@ Sample* Sample::triangle;
 Sample* Sample::sawtooth;
 
 void Sample::initialize() {
-    int resolution = 512;
+    int resolution = DEFAULT_RESOLUTION;
     double dataSine[resolution];
     double dataSquare[resolution];
     double dataTriangle[resolution];
