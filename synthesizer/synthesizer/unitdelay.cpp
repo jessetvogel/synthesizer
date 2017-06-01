@@ -8,7 +8,6 @@ UnitDelay::UnitDelay(Controller* controller, int n, double T) {
     // Store pointer to controller and other variables
     this->controller = controller;
     this->n = n;
-    this->T = T;
     
     // Adders may or may not be key dependent
     this->keyDependent = false;
@@ -44,9 +43,6 @@ UnitDelay::~UnitDelay() {
 }
 
 void UnitDelay::apply(Instrument* instrument) {
-    unsigned long fpb = controller->getFramesPerBuffer();
-    double sr = controller->getSampleRate();
-    double t;
     input->update(instrument);
     gain->update(instrument);
     feedback->update(instrument);
@@ -55,21 +51,20 @@ void UnitDelay::apply(Instrument* instrument) {
         gains[i]->update(instrument);
     }
     
-    memcpy(memory, memory + fpb, sizeof(float) * (memoryLength - fpb));
+    unsigned long fpb = controller->getFramesPerBuffer();
+    double sr = controller->getSampleRate();
+    memmove(memory, memory + fpb, sizeof(float) * (memoryLength - fpb));
     
     float delaysBuffer[fpb];
     memset(delaysBuffer, 0, sizeof(float) * fpb);
     float* ptr = memory + memoryLength - fpb;
     for(int x = 0;x < fpb; ++x, ++ptr) {
         for(int i = 0;i < n;i ++) {
-            t = times[i]->output[x];
-            if(t < T)
-                delaysBuffer[x] += *(ptr - (int) (t * sr)) * gains[i]->output[x];
+            int s = (int) (times[i]->output[x] * sr);
+            if(ptr - s >= memory)
+                delaysBuffer[x] = (*(ptr - s)) * gains[i]->output[x];
         }
-    }
-    
-    ptr = memory + memoryLength - fpb;
-    for(int x = 0;x < fpb; ++x, ++ptr) {
+        
         output[x] = input->output[x] * gain->output[x] + delaysBuffer[x];
         *ptr = input->output[x] + delaysBuffer[x] * feedback->output[x];
     }

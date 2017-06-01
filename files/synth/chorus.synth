@@ -1,0 +1,18 @@
+# For some reason, this still does not work. TODO: see why and correct it
+
+include basic.synth
+
+unit_create oscillator LFO
+unit_set_value LFO sample               triangle
+unit_set_value LFO frequency            0.01
+unit_set_value LFO mean                 0.020
+unit_set_value LFO amplitude            0.010
+
+unit_create delay y 1 1.0
+unit_set_value y input                  key_output
+unit_set_value y time_1                 LFO
+unit_set_value y gain_1                 modulation_wheel
+unit_set_value y feedback               0.0
+
+# Overwrite some settings from basic.synth
+instrument_set_output i                 y

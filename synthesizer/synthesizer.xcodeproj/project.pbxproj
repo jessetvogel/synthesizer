@@ -171,25 +171,15 @@
 			children = (
 				31D719691ECDEE2E00A4C9E0 /* unit.cpp */,
 				31D7196A1ECDEE2E00A4C9E0 /* unit.hpp */,
-				31EC603F1ECF45BD004671E2 /* unitadder.cpp */,
-				31EC60401ECF45BD004671E2 /* unitadder.hpp */,
 				31EC60361ECF3169004671E2 /* unitoscillator.cpp */,
 				31EC60371ECF3169004671E2 /* unitoscillator.hpp */,
 				31D7195E1ECC4E5700A4C9E0 /* unitADSR.cpp */,
 				31D7195F1ECC4E5700A4C9E0 /* unitADSR.hpp */,
-				311049AC1ED0D8DE000E89F1 /* unitfunction.cpp */,
-				311049AD1ED0D8DE000E89F1 /* unitfunction.hpp */,
-				312D2EA81ED1CE83005B4508 /* unitkeyoutput.cpp */,
-				312D2EA91ED1CE83005B4508 /* unitkeyoutput.hpp */,
-				88B0640B1EDDA86C00DE06E7 /* unitconditional.cpp */,
-				88B0640C1EDDA86C00DE06E7 /* unitconditional.hpp */,
-				8888FE1B1EDF5D1000B5D5BC /* unitfuzz.cpp */,
-				8888FE1C1EDF5D1000B5D5BC /* unitfuzz.hpp */,
+				888788021EE0518E007F04EA /* functions */,
+				888788011EE0514C007F04EA /* effects */,
 				886F98AD1ED72840003B8235 /* constant */,
 				886F98AA1ED7275E003B8235 /* info */,
 				886F98AB1ED72799003B8235 /* bandpass */,
-				88A285311EE010B900066E68 /* unitdelay.cpp */,
-				88A285321EE010B900066E68 /* unitdelay.hpp */,
 			);
 			name = units;
 			sourceTree = "<group>";
@@ -267,6 +257,8 @@
 				886F98A41ED7245E003B8235 /* unitleadkeyinfo.hpp */,
 				31EC60391ECF3CC1004671E2 /* unitmodulationwheel.cpp */,
 				31EC603A1ECF3CC1004671E2 /* unitmodulationwheel.hpp */,
+				312D2EA81ED1CE83005B4508 /* unitkeyoutput.cpp */,
+				312D2EA91ED1CE83005B4508 /* unitkeyoutput.hpp */,
 			);
 			name = info;
 			sourceTree = "<group>";
@@ -291,6 +283,30 @@
 				31DE9FF81ED337D4003F5291 /* unitvariable.hpp */,
 			);
 			name = constant;
+			sourceTree = "<group>";
+		};
+		888788011EE0514C007F04EA /* effects */ = {
+			isa = PBXGroup;
+			children = (
+				8888FE1B1EDF5D1000B5D5BC /* unitfuzz.cpp */,
+				8888FE1C1EDF5D1000B5D5BC /* unitfuzz.hpp */,
+				88A285311EE010B900066E68 /* unitdelay.cpp */,
+				88A285321EE010B900066E68 /* unitdelay.hpp */,
+			);
+			name = effects;
+			sourceTree = "<group>";
+		};
+		888788021EE0518E007F04EA /* functions */ = {
+			isa = PBXGroup;
+			children = (
+				31EC603F1ECF45BD004671E2 /* unitadder.cpp */,
+				31EC60401ECF45BD004671E2 /* unitadder.hpp */,
+				311049AC1ED0D8DE000E89F1 /* unitfunction.cpp */,
+				311049AD1ED0D8DE000E89F1 /* unitfunction.hpp */,
+				88B0640B1EDDA86C00DE06E7 /* unitconditional.cpp */,
+				88B0640C1EDDA86C00DE06E7 /* unitconditional.hpp */,
+			);
+			name = functions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

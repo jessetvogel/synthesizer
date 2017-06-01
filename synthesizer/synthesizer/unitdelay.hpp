@@ -6,7 +6,6 @@
 class UnitDelay : public Unit {
     
     int n;
-    double T;
     Unit* input = NULL;
     Unit* gain = NULL;
     Unit* feedback = NULL;
