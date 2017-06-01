@@ -1,15 +1,15 @@
 # Starting frequency
-unit_key_create adder_1 s
+unit_key_create adder s 1
 unit_set_value s input_1            key_frequency
 unit_set_value s gain_1             0.5
 
 # Attack frequency
-unit_key_create adder_1 a
+unit_key_create adder a 1
 unit_set_value a input_1            key_frequency
 unit_set_value a gain_1             2.0
 
 # Release frequency
-unit_key_create adder_1 r
+unit_key_create adder r 1
 unit_set_value r input_1            key_frequency
 unit_set_value r gain_1             0.5
 

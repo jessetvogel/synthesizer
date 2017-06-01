@@ -14,8 +14,8 @@ class Commands {
 
 public:
     
-    // Comments or empty lines
-    static std::regex regexNeglect;
+    // Remove all surrounding whitespace and comments
+    static std::regex regexPreprocess;
     
     // Commands for settings
     static std::regex regexSetInputDevice;

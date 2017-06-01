@@ -12,7 +12,7 @@ unit_set_value wave sample              sine
 unit_set_value wave amplitude           envelope
 unit_set_value wave frequency           key_frequency
 
-unit_key_create adder_1 x
+unit_key_create adder x 1
 unit_set_value x input_1                wave
 unit_set_value x gain_1                 key_velocity
 

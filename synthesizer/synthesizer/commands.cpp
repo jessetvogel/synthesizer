@@ -1,7 +1,7 @@
 #include "commands.hpp"
 
-// Comments or empty lines
-std::regex Commands::regexNeglect("^(\\s*|\\s*#.*)$");
+// Remove all surrounding whitespace and comments
+std::regex Commands::regexPreprocess("^\\s*(.*?)(?:#.*)?$");
 
 // Commands for settings
 std::regex Commands::regexSetInputDevice("^settings_set_input_device\\s+(\\d+)$");
@@ -26,7 +26,7 @@ std::regex Commands::regexInstrumentSetOutput("^instrument_set_output\\s+(\\w+)\
 std::regex Commands::regexInstrumentSetKeyOutput("^instrument_set_key_output\\s+(\\w+)\\s+(\\w+)$");
 std::regex Commands::regexInstrumentSetKeyReleaseTime("^instrument_set_key_release_time\\s+(\\w+)\\s+([-+]?[0-9]+(?:\\.[0-9]+)?)$");
 
-std::regex Commands::regexUnitCreate("^unit_create\\s+(\\w+)\\s+(\\w+)$");
-std::regex Commands::regexUnitKeyCreate("^unit_key_create\\s+(\\w+)\\s+(\\w+)$");
+std::regex Commands::regexUnitCreate("^unit_create\\s+(\\w+)\\s+(\\w+)(?:\\s+([\\w.]+))?(?:\\s+([\\w.]+))?$"); // Currently allows for two arguments
+std::regex Commands::regexUnitKeyCreate("^unit_key_create\\s+(\\w+)\\s+(\\w+)(?:\\s+([\\w.]+))?(?:\\s+([\\w.]+))?$"); // Currently allows for two arguments
 std::regex Commands::regexUnitDelete("^unit_delete\\s+(\\w+)$");
 std::regex Commands::regexUnitSetValue("^unit_set_value\\s+(\\w+)\\s+(\\w+)\\s+(\\w+|[-+]?[0-9]+(?:\\.[0-9]+)?)$");

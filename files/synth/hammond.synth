@@ -27,39 +27,39 @@ unit_create variable drawbar_9
 unit_set_value drawbar_9 value      1.0
 
 # Define frequencies
-unit_key_create adder_1 frequency_1
+unit_key_create adder frequency_1 1
 unit_set_value frequency_1 input_1    key_frequency
 unit_set_value frequency_1 gain_1     0.5
 
-unit_key_create adder_1 frequency_2
+unit_key_create adder frequency_2 1
 unit_set_value frequency_2 input_1    key_frequency
 unit_set_value frequency_2 gain_1     1.4983
 
-unit_key_create adder_1 frequency_3
+unit_key_create adder frequency_3 1
 unit_set_value frequency_3 input_1    key_frequency
 unit_set_value frequency_3 gain_1     1.0
 
-unit_key_create adder_1 frequency_4
+unit_key_create adder frequency_4 1
 unit_set_value frequency_4 input_1    key_frequency
 unit_set_value frequency_4 gain_1     2.0
 
-unit_key_create adder_1 frequency_5
+unit_key_create adder frequency_5 1
 unit_set_value frequency_5 input_1    key_frequency
 unit_set_value frequency_5 gain_1     2.9966
 
-unit_key_create adder_1 frequency_6
+unit_key_create adder frequency_6 1
 unit_set_value frequency_6 input_1    key_frequency
 unit_set_value frequency_6 gain_1     4.0
 
-unit_key_create adder_1 frequency_7
+unit_key_create adder frequency_7 1
 unit_set_value frequency_7 input_1    key_frequency
 unit_set_value frequency_7 gain_1     5.0397
 
-unit_key_create adder_1 frequency_8
+unit_key_create adder frequency_8 1
 unit_set_value frequency_8 input_1    key_frequency
 unit_set_value frequency_8 gain_1     5.9932
 
-unit_key_create adder_1 frequency_9
+unit_key_create adder frequency_9 1
 unit_set_value frequency_9 input_1    key_frequency
 unit_set_value frequency_9 gain_1     8.0
 
@@ -110,7 +110,7 @@ unit_set_value wave_9 frequency       frequency_9
 unit_set_value wave_9 amplitude       drawbar_9
 
 # Add all waves
-unit_key_create adder_9 sum
+unit_key_create adder sum 9
 unit_set_value sum input_1            wave_1
 unit_set_value sum input_2            wave_2
 unit_set_value sum input_3            wave_3
@@ -131,7 +131,7 @@ unit_set_value envelope attack_type   quartout
 unit_set_value envelope decay_type    quartout
 unit_set_value envelope release_type  quartout
 
-unit_key_create adder_1 x
+unit_key_create adder x 1
 unit_set_value x input_1              sum
 unit_set_value x gain_1               envelope
 

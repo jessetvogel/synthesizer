@@ -26,7 +26,6 @@
 		31D7195A1ECB0BAE00A4C9E0 /* sample.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719581ECB0BAE00A4C9E0 /* sample.cpp */; };
 		31D719601ECC4E5700A4C9E0 /* unitADSR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D7195E1ECC4E5700A4C9E0 /* unitADSR.cpp */; };
 		31D719631ECC9D9800A4C9E0 /* interpolation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719611ECC9D9800A4C9E0 /* interpolation.cpp */; };
-		31D719651ECCDCAC00A4C9E0 /* libfftw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 31D719641ECCDCAC00A4C9E0 /* libfftw3.a */; };
 		31D7196B1ECDEE2E00A4C9E0 /* unit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719691ECDEE2E00A4C9E0 /* unit.cpp */; };
 		31D719761ECE1BE000A4C9E0 /* unitkeyinfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D719741ECE1BE000A4C9E0 /* unitkeyinfo.cpp */; };
 		31D7197E1ECE2E4500A4C9E0 /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D7197C1ECE2E4500A4C9E0 /* parser.cpp */; };
@@ -39,17 +38,19 @@
 		31EC60411ECF45BE004671E2 /* unitadder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC603F1ECF45BD004671E2 /* unitadder.cpp */; };
 		886F98A51ED7245E003B8235 /* unitleadkeyinfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886F98A31ED7245E003B8235 /* unitleadkeyinfo.cpp */; };
 		8888FE1D1EDF5D1000B5D5BC /* unitfuzz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8888FE1B1EDF5D1000B5D5BC /* unitfuzz.cpp */; };
+		88A285331EE010B900066E68 /* unitdelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88A285311EE010B900066E68 /* unitdelay.cpp */; };
 		88B0640D1EDDA86C00DE06E7 /* unitconditional.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B0640B1EDDA86C00DE06E7 /* unitconditional.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3102854E1EC8DB5600B4A5F6 /* CopyFiles */ = {
+		3102854E1EC8DB5600B4A5F6 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
+			dstPath = /usr/share/man/man1;
 			dstSubfolderSpec = 0;
 			files = (
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -91,7 +92,6 @@
 		31D7195F1ECC4E5700A4C9E0 /* unitADSR.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitADSR.hpp; sourceTree = "<group>"; };
 		31D719611ECC9D9800A4C9E0 /* interpolation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = interpolation.cpp; sourceTree = "<group>"; };
 		31D719621ECC9D9800A4C9E0 /* interpolation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = interpolation.hpp; sourceTree = "<group>"; };
-		31D719641ECCDCAC00A4C9E0 /* libfftw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfftw3.a; path = ../../../../../usr/local/lib/libfftw3.a; sourceTree = "<group>"; };
 		31D719691ECDEE2E00A4C9E0 /* unit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unit.cpp; sourceTree = "<group>"; };
 		31D7196A1ECDEE2E00A4C9E0 /* unit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unit.hpp; sourceTree = "<group>"; };
 		31D719741ECE1BE000A4C9E0 /* unitkeyinfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitkeyinfo.cpp; sourceTree = "<group>"; };
@@ -116,6 +116,8 @@
 		886F98A41ED7245E003B8235 /* unitleadkeyinfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitleadkeyinfo.hpp; sourceTree = "<group>"; };
 		8888FE1B1EDF5D1000B5D5BC /* unitfuzz.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitfuzz.cpp; sourceTree = "<group>"; };
 		8888FE1C1EDF5D1000B5D5BC /* unitfuzz.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitfuzz.hpp; sourceTree = "<group>"; };
+		88A285311EE010B900066E68 /* unitdelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitdelay.cpp; sourceTree = "<group>"; };
+		88A285321EE010B900066E68 /* unitdelay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitdelay.hpp; sourceTree = "<group>"; };
 		88B0640B1EDDA86C00DE06E7 /* unitconditional.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitconditional.cpp; sourceTree = "<group>"; };
 		88B0640C1EDDA86C00DE06E7 /* unitconditional.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitconditional.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,7 +129,6 @@
 			files = (
 				3102855B1EC8DEC900B4A5F6 /* libportaudio.a in Frameworks */,
 				3102855D1EC8E6D200B4A5F6 /* libportmidi.dylib in Frameworks */,
-				31D719651ECCDCAC00A4C9E0 /* libfftw3.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,7 +138,6 @@
 		310285471EC8DB5600B4A5F6 = {
 			isa = PBXGroup;
 			children = (
-				31D719641ECCDCAC00A4C9E0 /* libfftw3.a */,
 				3102855C1EC8E6D200B4A5F6 /* libportmidi.dylib */,
 				3102855A1EC8DEC900B4A5F6 /* libportaudio.a */,
 				310285521EC8DB5600B4A5F6 /* synthesizer */,
@@ -188,6 +188,8 @@
 				886F98AD1ED72840003B8235 /* constant */,
 				886F98AA1ED7275E003B8235 /* info */,
 				886F98AB1ED72799003B8235 /* bandpass */,
+				88A285311EE010B900066E68 /* unitdelay.cpp */,
+				88A285321EE010B900066E68 /* unitdelay.hpp */,
 			);
 			name = units;
 			sourceTree = "<group>";
@@ -300,7 +302,7 @@
 			buildPhases = (
 				3102854C1EC8DB5600B4A5F6 /* Sources */,
 				3102854D1EC8DB5600B4A5F6 /* Frameworks */,
-				3102854E1EC8DB5600B4A5F6 /* CopyFiles */,
+				3102854E1EC8DB5600B4A5F6 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -352,6 +354,7 @@
 				31DE9FF91ED337D4003F5291 /* unitvariable.cpp in Sources */,
 				31D719811ECE317B00A4C9E0 /* commands.cpp in Sources */,
 				310285701EC8F7FC00B4A5F6 /* instrument.cpp in Sources */,
+				88A285331EE010B900066E68 /* unitdelay.cpp in Sources */,
 				31D719761ECE1BE000A4C9E0 /* unitkeyinfo.cpp in Sources */,
 				310EFDF31ECA384100F28034 /* midistate.cpp in Sources */,
 				31D7197E1ECE2E4500A4C9E0 /* parser.cpp in Sources */,

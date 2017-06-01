@@ -32,7 +32,7 @@ public:
     
     inline bool isKeyDependent() { return keyDependent; };
     
-    static Unit* create(Controller*, std::string, bool);
+    static Unit* create(Controller*, std::string, bool, std::string, std::string);
     static bool set(Controller*, Unit**, std::string, bool);
     
 };

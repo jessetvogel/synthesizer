@@ -12,7 +12,7 @@ unit_set_value wave sample              square
 unit_set_value wave amplitude           envelope
 unit_set_value wave frequency           lead_key_frequency
 
-unit_create adder_1 x
+unit_create adder x 1
 unit_set_value x input_1                wave
 unit_set_value x gain_1                 lead_key_velocity
 

@@ -6,7 +6,7 @@ unit_set_value alpha output_low           1.0
 unit_set_value alpha output_middle        0.0
 unit_set_value alpha output_high          3.0
 
-unit_key_create adder_1 s
+unit_key_create adder s 1
 unit_set_value s input_1                  key_frequency
 unit_set_value s gain_1                   alpha
 
@@ -36,7 +36,7 @@ unit_set_value wave sample                square
 unit_set_value wave amplitude             e_amp
 unit_set_value wave frequency             e_freq
 
-unit_key_create adder_1 x
+unit_key_create adder x 1
 unit_set_value x input_1                  wave
 unit_set_value x gain_1                   key_velocity
 

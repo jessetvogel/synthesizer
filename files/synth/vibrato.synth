@@ -1,13 +1,13 @@
-unit_key_create adder_1 x
+unit_key_create adder x 1
 unit_set_value x input_1              modulation_wheel
 unit_set_value x gain_1               0.05
 
-unit_key_create adder_2 y
+unit_key_create adder y 2
 unit_set_value y input_1              modulation_wheel
 unit_set_value y gain_1               0
 unit_set_value y input_2              10
 
-unit_key_create adder_1 modulated_frequency_amplitude
+unit_key_create adder modulated_frequency_amplitude 1
 unit_set_value modulated_frequency_amplitude input_1 x
 unit_set_value modulated_frequency_amplitude gain_1 key_frequency
 
@@ -30,7 +30,7 @@ unit_set_value wave sample            sine
 unit_set_value wave frequency         modulated_frequency
 unit_set_value wave amplitude         envelope
 
-unit_key_create adder_1 output
+unit_key_create adder output 1
 unit_set_value output input_1         wave
 unit_set_value output gain_1          key_velocity
 

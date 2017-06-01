@@ -14,20 +14,36 @@
 #include "unitvariable.hpp"
 #include "unitconditional.hpp"
 #include "unitfuzz.hpp"
+#include "unitdelay.hpp"
 
-Unit* Unit::create(Controller* controller, std::string type, bool keyDependent) {
-
+Unit* Unit::create(Controller* controller, std::string type, bool keyDependent, std::string arg1, std::string arg2) {
+    // Adder
+    if(type.compare("adder") == 0) {
+        if(arg2.length() != 0) return NULL; // Only requires one argument, not two
+        if(!Util::isInteger(arg1)) return NULL;
+        int n = stoi(arg1);
+        if(n > UnitAdder::maxN) return NULL;
+        return new UnitAdder(controller, keyDependent, n);
+    }
+    
+    // Delay
+    if(type.compare("delay") == 0) {
+        if(keyDependent) return NULL;
+        if(!Util::isInteger(arg1)) return NULL;
+        if(!Util::isNumber(arg2)) return NULL;
+        int n = stoi(arg1);
+        double T = stod(arg2);
+        if(n > UnitDelay::maxN) return NULL;
+        if(T > UnitDelay::maxT) return NULL;
+        return new UnitDelay(controller, n, T);
+    }
+    
+    // All types below have no arguments
+    if(arg1.length() != 0) return NULL;
+    
     // Variable
     if(type.compare("variable") == 0)
         return new UnitVariable(controller);
-    
-    // Adder of size n in {1, 2, ... , UnitAdder::maxN}
-    for(int n = 1;n <= UnitAdder::maxN;n ++) {
-        char typeName[12];
-        sprintf(typeName, "adder_%d", n);
-        if(type.compare(typeName) == 0)
-            return new UnitAdder(controller, keyDependent, n);
-    }
     
     // Oscillator
     if(type.compare("oscillator") == 0)

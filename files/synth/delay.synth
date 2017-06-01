@@ -1,0 +1,10 @@
+include basic.synth
+
+unit_create delay y 1 1.0
+unit_set_value y input                  key_output
+unit_set_value y time_1                 0.25
+unit_set_value y gain_1                 0.5
+unit_set_value y feedback               0.75
+
+# Overwrite some settings from basic.synth
+instrument_set_output i                 y

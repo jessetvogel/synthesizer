@@ -4,8 +4,7 @@ Ideas: (not in order of priority)
 
 - How do we change values during run-time? Using an interface? Command-line? There probably are parameters that we want to change while playing.
 
-- Unit like delay effect
-
+- Make sure that constant units get deallocated in some way
 
 ---------------------------------------------------------------
 
@@ -38,3 +37,6 @@ Done:
 - Classes like Unit(Lead)KeyFrequency/Velocity/Duration etc, can be put in just one class, and then it will be given a type parameter
 
 - Implement units called 'lead_key_frequency', 'lead_key_velocity' oid, which outputs the frequency/velocity of the note that you last played (leading key). Like a lead instrument
+
+- Unit like delay effect
+

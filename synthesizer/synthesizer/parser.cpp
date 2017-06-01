@@ -46,12 +46,16 @@ bool Parser::parseFile(std::string filepath) {
 }
 
 bool Parser::parseLine(std::string line) {
-    const char* str = line.c_str();
+    // Neglect empty lines
+    if(line.length() == 0) return true;
+    
     std::cmatch cm;
 
-    // Empty lines or comments
-    if(std::regex_search(str, cm, Commands::regexNeglect))
-        return true;
+    // Remove all surrounding whitespace and comments
+    if(!std::regex_search(line.c_str(), cm, Commands::regexPreprocess)) return false;
+    std::string command = std::string(cm[1]);
+    if(command.length() == 0) return true;
+    const char* str = command.c_str();
     
     // Settings
 
@@ -158,9 +162,9 @@ bool Parser::parseLine(std::string line) {
         return true;
     }
     
-    // unit_create <unit_type> <label>
+    // unit_create <unit_type> <label> <arg1> <arg2>
     if(std::regex_search(str, cm, Commands::regexUnitCreate)) {
-        Unit* unit = Unit::create(controller, cm[1], false);
+        Unit* unit = Unit::create(controller, cm[1], false, cm[3], cm[4]);
         if(unit == NULL) return false;
         
         if(!(controller->addUnit(unit, cm[2]))) {
@@ -171,9 +175,9 @@ bool Parser::parseLine(std::string line) {
         return true;
     }
     
-    // unit_key_create <unit_type> <label>
+    // unit_key_create <unit_type> <label> <arg1> <arg2>
     if(std::regex_search(str, cm, Commands::regexUnitKeyCreate)) {
-        Unit* unit = Unit::create(controller, cm[1], true);
+        Unit* unit = Unit::create(controller, cm[1], true, cm[3], cm[4]);
         if(unit == NULL) return false;
         
         if(!(controller->addUnit(unit, cm[2]))) {

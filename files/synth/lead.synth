@@ -1,5 +1,5 @@
 # Let the lead frequency 'glide', depending on whether the lead note is being pressed
-unit_create adder_2 y
+unit_create adder y 2
 unit_create conditional z
 unit_set_value y input_1                z
 unit_set_value y input_2                lead_key_pressing
@@ -14,11 +14,11 @@ unit_set_value alpha input              z
 unit_set_value alpha low                0.67
 unit_set_value alpha high               0.67
 unit_set_value alpha output_low         1.0
-unit_create adder_2 oneminusalpha
+unit_create adder oneminusalpha 2
 unit_set_value oneminusalpha input_1    1.0
 unit_set_value oneminusalpha input_2    alpha
 unit_set_value oneminusalpha gain_2     -1.0
-unit_create adder_2 freq
+unit_create adder freq 2
 unit_set_value freq input_1             freq
 unit_set_value freq gain_1              oneminusalpha
 unit_set_value freq input_2             lead_key_frequency
@@ -37,7 +37,7 @@ unit_set_value e_amp attack_type        quartout
 unit_set_value e_amp decay_type         quartout
 unit_set_value e_amp release_type       quartout
 
-unit_create adder_1 amp
+unit_create adder amp 1
 unit_set_value amp input_1              lead_key_velocity
 unit_set_value amp gain_1               e_amp
 
@@ -47,7 +47,7 @@ unit_set_value lead frequency           freq
 unit_set_value lead amplitude           amp
 
 # Additional harmonic(s)
-unit_create adder_1 freq2
+unit_create adder freq2 1
 unit_set_value freq2 input_1            freq
 unit_set_value freq2 gain_1             3.0
 
@@ -56,12 +56,12 @@ unit_set_value lead2 sample             sine
 unit_set_value lead2 frequency          freq2
 unit_set_value lead2 amplitude          amp
 
-unit_create adder_2 leads
+unit_create adder leads 2
 unit_set_value leads input_1            lead
 unit_set_value leads input_2            lead2
 
 # Add fuzz depending on modulation wheel
-unit_create adder_2 m
+unit_create adder m 2
 unit_set_value m input_1                -1.0
 unit_set_value m input_2                modulation_wheel
 unit_set_value m gain_2                 3.0
@@ -74,5 +74,11 @@ unit_create fuzz fuzzed
 unit_set_value fuzzed input             leads
 unit_set_value fuzzed input_gain        fuzz_gain
 
+unit_create delay delayed 1 1.0
+unit_set_value delayed input            fuzzed
+unit_set_value delayed time_1           0.25
+unit_set_value delayed gain_1           0.5
+unit_set_value delayed feedback         0.75
+
 instrument_create i
-instrument_set_output i                 fuzzed
+instrument_set_output i                 delayed

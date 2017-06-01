@@ -1,6 +1,6 @@
 include basic.synth
 
-unit_key_create adder_1 freq2
+unit_key_create adder freq2 1
 unit_set_value freq2 input_1            key_frequency
 unit_set_value freq2 gain_1             1.5
 
@@ -9,7 +9,7 @@ unit_set_value wave2 sample             sine
 unit_set_value wave2 amplitude          envelope
 unit_set_value wave2 frequency          freq2
 
-unit_key_create adder_1 freq3
+unit_key_create adder freq3 1
 unit_set_value freq3 input_1            key_frequency
 unit_set_value freq3 gain_1             2.0
 
@@ -18,7 +18,7 @@ unit_set_value wave3 sample             sine
 unit_set_value wave3 amplitude          envelope
 unit_set_value wave3 frequency          freq3
 
-unit_key_create adder_3 sum
+unit_key_create adder sum 3
 unit_set_value sum input_1              wave
 unit_set_value sum gain_1               0.7
 unit_set_value sum input_2              wave2
