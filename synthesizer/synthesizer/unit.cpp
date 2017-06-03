@@ -15,6 +15,7 @@
 #include "unitconditional.hpp"
 #include "unitfuzz.hpp"
 #include "unitdelay.hpp"
+#include "unitPWM.hpp"
 
 Unit* Unit::create(Controller* controller, std::string type, bool keyDependent, std::string arg1, std::string arg2) {
     // Adder
@@ -72,6 +73,10 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent, 
     // Fuzz
     if(type.compare("fuzz") == 0)
         return new UnitFuzz(controller, keyDependent);
+    
+    // PWM
+    if(type.compare("PWM") == 0)
+        return new UnitPWM(controller, keyDependent);
 
     // If no match was found, return NULL
     return NULL;

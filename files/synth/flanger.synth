@@ -6,12 +6,12 @@ unit_set_value wave amplitude            1.0
 instrument_create i
 instrument_set_key_output i             wave
 
-# ---------------- CHORUS ----------------
+# ---------------- FLANGER ----------------
 
 unit_create oscillator LFO
 unit_set_value LFO sample               sine
 unit_set_value LFO frequency            0.2
-unit_set_value LFO mean                 0.020
+unit_set_value LFO mean                 0.008
 unit_set_value LFO amplitude            0.003
 
 unit_create variable drywet
@@ -21,13 +21,13 @@ unit_set_value wetdry input_1           1.0
 unit_set_value wetdry input_2           drywet
 unit_set_value wetdry gain_2            -1.0
 
-unit_create delay chorus 1 1.0
-unit_set_value chorus input             key_output
-unit_set_value chorus gain              drywet
-unit_set_value chorus time_1            LFO
-unit_set_value chorus gain_1            wetdry
-unit_set_value chorus feedback          0.0
+unit_create delay flanger 1 1.0
+unit_set_value flanger input            key_output
+unit_set_value flanger gain             drywet
+unit_set_value flanger time_1           LFO
+unit_set_value flanger gain_1           wetdry
+unit_set_value flanger feedback         0.0
 
-# ---------------- CHORUS ----------------
+# ---------------- FLANGER ----------------
 
-instrument_set_output i                 chorus
+instrument_set_output i                 flanger

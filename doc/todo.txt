@@ -39,3 +39,5 @@ Done:
 - Unit like delay effect
 
 - When reading/parsing commands, first strip away all preceding whitespace, and all leading whitespace, (and maybe comments). That allows e.g. for comments after commands. Something like /^\s*(.*?)\s*(?:#.*)$/
+
+- Pulse width modulator

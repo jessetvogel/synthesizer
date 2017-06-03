@@ -1,22 +1,29 @@
-include basic.synth
+# -------- EXAMPLES --------
+
+# include basic.synth
 # include bandpass.synth
 # include overtones.synth
 # include vibrato.synth
 # include pitch_envelope.synth
 # include fat.synth
-# include delay.synth
-
 # include lead.synth
+# include PWM.synth
+# include whacky.synth
 
+# -------- EXAMPLES --------
+
+
+# -------- EFFECTS --------
+
+# include delay.synth
 # include chorus.synth
+# include flanger.synth
+
+# -------- EFFECTS --------
 
 
+# -------- HAMMOND ORGAN --------
 
-
-
-# ---------------------------------------
-#              HAMMOND ORGAN
-# ---------------------------------------
 # include hammond.synth
 # unit_set_value drawbar_1 value      1.0
 # unit_set_value drawbar_2 value      1.0
@@ -27,4 +34,5 @@ include basic.synth
 # unit_set_value drawbar_7 value      1.0
 # unit_set_value drawbar_8 value      1.0
 # unit_set_value drawbar_9 value      1.0
-# ---------------------------------------
+
+# -------- HAMMOND ORGAN --------
