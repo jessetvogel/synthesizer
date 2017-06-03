@@ -50,6 +50,11 @@ int main(int argc, char *argv[]) {
         }
     }
     
+    controller.stop();
+    
+    std::cout << "Waiting 100msec for stream to end" << std::endl;
+    Pa_Sleep(100);
+    
     // Clean up
     destruct();
     

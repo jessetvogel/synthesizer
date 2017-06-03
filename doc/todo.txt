@@ -1,8 +1,6 @@
 Ideas: (not in order of priority)
 
-- When reading/parsing commands, first strip away all preceding whitespace, and all leading whitespace, (and maybe comments). That allows e.g. for comments after commands. Something like /^\s*(.*?)\s*(?:#.*)$/
-
-- How do we change values during run-time? Using an interface? Command-line? There probably are parameters that we want to change while playing.
+- How do we change values during run-time? Using an interface? Command-line? There probably are parameters that we want to change while playing. Or: buy a midi keyboard with faders and other wheels on it.
 
 - Make sure that constant units get deallocated in some way
 
@@ -40,3 +38,4 @@ Done:
 
 - Unit like delay effect
 
+- When reading/parsing commands, first strip away all preceding whitespace, and all leading whitespace, (and maybe comments). That allows e.g. for comments after commands. Something like /^\s*(.*?)\s*(?:#.*)$/

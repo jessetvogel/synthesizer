@@ -1,4 +1,4 @@
-# include basic.synth
+include basic.synth
 # include bandpass.synth
 # include overtones.synth
 # include vibrato.synth
@@ -6,11 +6,9 @@
 # include fat.synth
 # include delay.synth
 
-include lead.synth
+# include lead.synth
 
 # include chorus.synth
-
-
 
 
 

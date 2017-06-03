@@ -3,7 +3,7 @@
 #include <cmath>
 
 #define ONE_OVER_TWO_PI (0.1591549430919)
-#define DEFAULT_RESOLUTION (1024)
+#define DEFAULT_RESOLUTION (2048)
 
 Sample::Sample(int resolution, int periods, double* data) {
     // Store all information

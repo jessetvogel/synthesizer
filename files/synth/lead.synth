@@ -76,7 +76,7 @@ unit_set_value fuzzed input_gain        fuzz_gain
 
 unit_create delay delayed 1 1.0
 unit_set_value delayed input            fuzzed
-unit_set_value delayed time_1           0.25
+unit_set_value delayed time_1           0.234375 # For tempo = 128
 unit_set_value delayed gain_1           0.5
 unit_set_value delayed feedback         0.75
 

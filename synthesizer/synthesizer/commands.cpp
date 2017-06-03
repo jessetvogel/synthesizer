@@ -1,7 +1,7 @@
 #include "commands.hpp"
 
 // Remove all surrounding whitespace and comments
-std::regex Commands::regexPreprocess("^\\s*(.*?)(?:#.*)?$");
+std::regex Commands::regexPreprocess("^\\s*(.*?)(?:\\s*#.*)?$");
 
 // Commands for settings
 std::regex Commands::regexSetInputDevice("^settings_set_input_device\\s+(\\d+)$");
