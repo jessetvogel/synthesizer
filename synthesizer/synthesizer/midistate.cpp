@@ -36,56 +36,38 @@ void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned cha
     switch(type) {
         case MIDI_NOTE_OFF:
             velocity[data1] = 0;
-            break;
+            return;
             
         case MIDI_NOTE_ON:
             velocity[data1] = data2;
-            break;    
-            
-        case MIDI_POLYPHONIC_AFTERTOUCH:
-            // TODO, but I don't know what it is
-            break;
+            return;
         
         case MIDI_CONTROL_CHANGE:
             switch(data1) {
                 case MIDI_MODULATION_WHEEL:
                     modulationWheel = (double) data2 / 127.0;
-                    break;
+                    return;
                     
                 case MIDI_MAIN_VOLUME:
                     mainVolume = (double) data2 / 127.0;
-                    break;
-                    
-                case MIDI_PAN:
-                    // TODO, but I don't know what it is
-                    break;
-                    
-                case MIDI_BALANCE:
-                    // TODO, but I don't know what it is
-                    break;
+                    return;
                 
                 case MIDI_SUSTAIN_PEDAL:
                     sustainPedal = (double) data2 / 127.0;
                     if(controller->getSettings()->sustainPedalPolarity)
                         sustainPedal = 1.0 - sustainPedal;
-                    break;
+                    return;
             }
             break;
-            
-        case MIDI_PROGRAM_CHANGE:
-            // TODO, but I don't know what it is
-            break;
-            
-        case MIDI_CHANNEL_AFTERTOUCH:
-            // TODO, but I don't know what it is
-            break;
-            
+        
         case MIDI_PITCH_WHEEL:
             // TODO: make this somewhat cleaner
             pitchWheel = ((data2 << 7) | (data1)) / 8191.5 - 1.0;
             if(pitchWheel < 0.0001 && pitchWheel > -0.0001) pitchWheel = 0.0;
-            break;
+            return;
     }
+ 
+    printf("UNKOWN MIDI:\t%#04x (%d)\t%#04x (%d)\t%#04x (%d)\n", status, status, data1, data1, data2, data2);
 }
 
 void MidiState::update() {
