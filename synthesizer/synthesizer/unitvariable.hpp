@@ -5,14 +5,14 @@
 
 class UnitVariable : public Unit {
     
-    double value;
+    Unit* value = NULL;
     
 public:
     
     UnitVariable(Controller*);
     ~UnitVariable();
     
-    inline void apply(Instrument*) {};
+    void apply(Instrument*);
     bool setValue(std::string, std::string);
 };
 

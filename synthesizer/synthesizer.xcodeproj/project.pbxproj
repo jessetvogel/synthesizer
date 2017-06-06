@@ -41,6 +41,7 @@
 		8888FE1D1EDF5D1000B5D5BC /* unitfuzz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8888FE1B1EDF5D1000B5D5BC /* unitfuzz.cpp */; };
 		88A285331EE010B900066E68 /* unitdelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88A285311EE010B900066E68 /* unitdelay.cpp */; };
 		88B0640D1EDDA86C00DE06E7 /* unitconditional.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B0640B1EDDA86C00DE06E7 /* unitconditional.cpp */; };
+		88F58AC11EE6CBD8004F1945 /* unitparameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88F58ABF1EE6CBD8004F1945 /* unitparameter.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -123,6 +124,8 @@
 		88A285321EE010B900066E68 /* unitdelay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitdelay.hpp; sourceTree = "<group>"; };
 		88B0640B1EDDA86C00DE06E7 /* unitconditional.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitconditional.cpp; sourceTree = "<group>"; };
 		88B0640C1EDDA86C00DE06E7 /* unitconditional.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitconditional.hpp; sourceTree = "<group>"; };
+		88F58ABF1EE6CBD8004F1945 /* unitparameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitparameter.cpp; sourceTree = "<group>"; };
+		88F58AC01EE6CBD8004F1945 /* unitparameter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitparameter.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +289,8 @@
 				31EC60341ECF2811004671E2 /* unitconstant.hpp */,
 				31DE9FF71ED337D4003F5291 /* unitvariable.cpp */,
 				31DE9FF81ED337D4003F5291 /* unitvariable.hpp */,
+				88F58ABF1EE6CBD8004F1945 /* unitparameter.cpp */,
+				88F58AC01EE6CBD8004F1945 /* unitparameter.hpp */,
 			);
 			name = constant;
 			sourceTree = "<group>";
@@ -400,6 +405,7 @@
 				31D719631ECC9D9800A4C9E0 /* interpolation.cpp in Sources */,
 				3102856A1EC8F7C300B4A5F6 /* main.cpp in Sources */,
 				310285631EC8E87400B4A5F6 /* output.cpp in Sources */,
+				88F58AC11EE6CBD8004F1945 /* unitparameter.cpp in Sources */,
 				31D7195A1ECB0BAE00A4C9E0 /* sample.cpp in Sources */,
 				31EC603B1ECF3CC1004671E2 /* unitmodulationwheel.cpp in Sources */,
 			);

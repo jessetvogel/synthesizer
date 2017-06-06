@@ -59,9 +59,14 @@ bool Parser::parseLine(std::string line) {
     
     // Settings
 
-    // settings_set_input_device <input_device>
-    if(std::regex_search(str, cm, Commands::regexSetInputDevice)) {
-        return controller->setInputDevice(stoi(cm[1]));
+    // settings_add_input_device <input_device>
+    if(std::regex_search(str, cm, Commands::regexAddInputDevice)) {
+        return controller->addInputDevice(stoi(cm[1]));
+    }
+    
+    // settings_remove_input_device <input_device>
+    if(std::regex_search(str, cm, Commands::regexRemoveInputDevice)) {
+        return controller->removeInputDevice(stoi(cm[1]));
     }
     
     // settings_set_output_device <output_device>

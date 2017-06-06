@@ -6,8 +6,9 @@
 #include "settings.hpp"
 #include "midistate.hpp"
 #include "instrument.hpp"
-
 #include "unit.hpp"
+#include "unitparameter.hpp"
+
 #include "unitkeyinfo.hpp"
 #include "unitleadkeyinfo.hpp"
 #include "unitmodulationwheel.hpp"
@@ -18,12 +19,10 @@
 Controller::Controller(Settings* settings) {
     // Create instances
     this->settings = settings;
-    input = new Input(this);
     output = new Output(this);
     midiState = new MidiState(this);
     
     // Set some values
-    inputDevice = -1;
     outputDevice = -1;
     sampleRate = settings->sampleRate;
     framesPerBuffer = settings->bufferSize;
@@ -34,7 +33,6 @@ Controller::Controller(Settings* settings) {
 }
 
 Controller::~Controller() {
-    delete input;
     delete output;
     delete midiState;
     
@@ -43,6 +41,9 @@ Controller::~Controller() {
     
     for(auto it = units.begin(); it != units.end(); ++it)
         delete it->second;
+    
+    for(auto it = inputs.begin(); it != inputs.end(); ++it)
+        delete (*it);
 }
 
 bool Controller::start() {
@@ -50,7 +51,9 @@ bool Controller::start() {
     
     buffer = new float[framesPerBuffer];
     
-    if(!input->start()) return false;
+    for(auto it = inputs.begin(); it != inputs.end(); ++it)
+        if(!((*it)->start())) return false;
+    
     if(!output->start()) return false;
     
     active = true;
@@ -62,7 +65,9 @@ bool Controller::stop() {
     if(!active) return false;
     
     if(!output->stop()) return false;
-    if(!input->stop()) return false;
+    
+    for(auto it = inputs.begin(); it != inputs.end(); ++it)
+        if(!((*it)->stop())) return false;
     
     delete[] buffer;
     
@@ -104,7 +109,8 @@ bool Controller::reset() {
 
 bool Controller::update() {
     // Update all MIDI data
-    if(!input->update()) return false;
+    for(auto it = inputs.begin(); it != inputs.end(); ++it)
+        if(!((*it)->update())) return false;
 
     // Reset all units (i.e. onlyKeyDependents = false)
     resetUnits(false);
@@ -125,12 +131,26 @@ bool Controller::update() {
     return true;
 }
 
-bool Controller::setInputDevice(int n) {
+bool Controller::addInputDevice(int n) {
     if(active) return false;
-    if(!(input->isInput(n))) return false;
+    if(!(Input::isInput(n))) return false;
     
-    inputDevice = n;
+    inputs.push_back(new Input(this, n));
     return true;
+}
+
+bool Controller::removeInputDevice(int n) {
+    if(active) return false;
+    
+    for(auto it = inputs.end() - 1; it >= inputs.begin(); --it) {
+        if((*it)->getInputDevice() == n) {
+            delete *it;
+            inputs.erase(it);
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 bool Controller::setOutputDevice(int n) {
@@ -172,6 +192,13 @@ bool Controller::addUnit(Unit* unit, std::string label) {
     return true;
 }
 
+bool Controller::addUnitParameter(UnitParameter* parameter, int MidiCC) {
+    if(parameters.find(MidiCC) != parameters.end()) return false;
+    
+    parameters[MidiCC] = parameter;
+    return true;
+}
+
 Instrument* Controller::getInstrument(std::string label) {
     if(instruments.find(label) == instruments.end()) return NULL;
     return instruments[label];
@@ -180,6 +207,11 @@ Instrument* Controller::getInstrument(std::string label) {
 Unit* Controller::getUnit(std::string label) {
     if(units.find(label) == units.end()) return NULL;
     return units[label];
+}
+
+UnitParameter* Controller::getUnitParameter(int MidiCC) {
+    if(parameters.find(MidiCC) == parameters.end()) return NULL;
+    return parameters[MidiCC];
 }
 
 bool Controller::deleteInstrument(std::string label) {
@@ -193,10 +225,19 @@ bool Controller::deleteInstrument(std::string label) {
 
 bool Controller::deleteUnit(std::string label) {
     if(units.find(label) == units.end()) return false;
-
+    
     Unit* unit = units[label];
     delete unit;
     units.erase(label);
+    return true;
+}
+
+bool Controller::deleteUnitParameter(int MidiCC) {
+    if(parameters.find(MidiCC) == parameters.end()) return false;
+    
+    UnitParameter* parameter = parameters[MidiCC];
+    delete parameter;
+    parameters.erase(MidiCC);
     return true;
 }
 
@@ -228,10 +269,10 @@ void Controller::addKeyEvent(KeyEvent* keyEvent) {
 
 // TODO: remove this at some point
 void Controller::listInputDevices() {
-    int N = input->amountOfDevices();
+    int N = Input::amountOfDevices();
     for(int n = 0;n < N;n ++) {
-        if(input->isInput(n))
-            std::cout << "(" << n << ") " << input->deviceName(n) << std::endl;
+        if(Input::isInput(n))
+            std::cout << "(" << n << ") " << Input::deviceName(n) << std::endl;
     }
 }
 

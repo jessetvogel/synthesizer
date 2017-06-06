@@ -18,7 +18,8 @@ public:
     static std::regex regexPreprocess;
     
     // Commands for settings
-    static std::regex regexSetInputDevice;
+    static std::regex regexAddInputDevice;
+    static std::regex regexRemoveInputDevice;
     static std::regex regexSetOutputDevice;
     
     static std::regex regexSetSampleRate;

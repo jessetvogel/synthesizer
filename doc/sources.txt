@@ -23,3 +23,10 @@ https://en.wikipedia.org/wiki/Hammond_organ
 http://www.stefanv.com/electronics/hammond_drawbar_science.html
 
 http://keyboardservice.com/Drawbars.asp
+
+
+
+General MIDI:
+https://www.midi.org/specifications/item/table-3-control-change-messages-data-bytes-2
+http://www.philrees.co.uk/nrpnq.htm
+http://koti.tnnet.fi/sphujala/axiom/Axiom_UG_EN.pdf

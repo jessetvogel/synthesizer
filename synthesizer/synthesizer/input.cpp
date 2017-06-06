@@ -7,36 +7,17 @@
 
 #include "log.hpp"
 
-Input::Input(Controller* controller) {
+Input::Input(Controller* controller, int inputDevice) {
     // Store pointer to controller object
     this->controller = controller;
+    this->inputDevice = inputDevice;
     
     // Set default values
     active = false;
 }
 
-int Input::amountOfDevices() {
-    return Pm_CountDevices();
-}
-
-const char* Input::deviceName(int n) {
-    const PmDeviceInfo* info = Pm_GetDeviceInfo(n);
-    if(info == NULL) return NULL;
-    
-    return Pm_GetDeviceInfo(n)->name;
-}
-
-bool Input::isInput(int n) {
-    const PmDeviceInfo* info = Pm_GetDeviceInfo(n);
-    if(info == NULL) return false;
-    
-    return Pm_GetDeviceInfo(n)->input > 0;
-}
-
 bool Input::start() {
     if(active) return false;
-    
-    int inputDevice = controller->getInputDevice();
     
     if(inputDevice == -1)
         inputDevice = Pm_GetDefaultInputDeviceID();
@@ -89,4 +70,26 @@ bool Input::stop() {
     active = false;
     Pm_Close(inputStream);
     return true;
+}
+
+int Input::getInputDevice() {
+    return inputDevice;
+}
+
+int Input::amountOfDevices() {
+    return Pm_CountDevices();
+}
+
+const char* Input::deviceName(int n) {
+    const PmDeviceInfo* info = Pm_GetDeviceInfo(n);
+    if(info == NULL) return NULL;
+    
+    return Pm_GetDeviceInfo(n)->name;
+}
+
+bool Input::isInput(int n) {
+    const PmDeviceInfo* info = Pm_GetDeviceInfo(n);
+    if(info == NULL) return false;
+    
+    return Pm_GetDeviceInfo(n)->input > 0;
 }

@@ -11,7 +11,7 @@ UnitVariable::UnitVariable(Controller* controller) {
     keyDependent = false;
     
     // Default value is zero
-    value = 0.0;
+    Unit::set(controller, &value, "0.0", keyDependent);
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
@@ -22,14 +22,16 @@ UnitVariable::~UnitVariable() {
     delete[] output;
 }
 
-bool UnitVariable::setValue(std::string parameter, std::string value) {
-    if(parameter.compare("value") == 0) {
-        if(!Util::isNumber(value))
-            return false;
-        this->value = stod(value);
-        for(int x = 0;x < controller->getFramesPerBuffer(); ++x) output[x] = this->value;
-        return true;
+void UnitVariable::apply(Instrument* instrument) {
+    value->update(instrument);
+    for(int x = 0;x < controller->getFramesPerBuffer(); ++x) {
+        output[x] = value->output[x];
     }
+}
+
+bool UnitVariable::setValue(std::string parameter, std::string value) {
+    if(parameter.compare("value") == 0)
+        return Unit::set(controller, &(this->value), value, keyDependent);
     
     return false;
 }

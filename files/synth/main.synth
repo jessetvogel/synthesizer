@@ -1,3 +1,7 @@
+# Use 18 knobs from Novation Launch Control
+include settings/Novation_Launch_Control.synth
+
+
 # -------- EXAMPLES --------
 
 # include basic.synth
@@ -9,6 +13,8 @@
 # include lead.synth
 # include PWM.synth
 # include whacky.synth
+# include parameter_test.synth
+include hammond.synth
 
 # -------- EXAMPLES --------
 
@@ -20,19 +26,3 @@
 # include flanger.synth
 
 # -------- EFFECTS --------
-
-
-# -------- HAMMOND ORGAN --------
-
-# include hammond.synth
-# unit_set_value drawbar_1 value      1.0
-# unit_set_value drawbar_2 value      1.0
-# unit_set_value drawbar_3 value      1.0
-# unit_set_value drawbar_4 value      1.0
-# unit_set_value drawbar_5 value      1.0
-# unit_set_value drawbar_6 value      1.0
-# unit_set_value drawbar_7 value      1.0
-# unit_set_value drawbar_8 value      1.0
-# unit_set_value drawbar_9 value      1.0
-
-# -------- HAMMOND ORGAN --------

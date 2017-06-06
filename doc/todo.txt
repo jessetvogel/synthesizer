@@ -1,8 +1,16 @@
 Ideas: (not in order of priority)
 
-- How do we change values during run-time? Using an interface? Command-line? There probably are parameters that we want to change while playing. Or: buy a midi keyboard with faders and other wheels on it.
-
 - Make sure that constant units get deallocated in some way
+
+- Add support for play and pause buttons (Sysex stuff)
+
+- Support stereo sound in some way?
+
+- High/lowpass filters with resonance?
+
+In the far future:
+
+- Add support for multiple channels
 
 ---------------------------------------------------------------
 
@@ -11,6 +19,10 @@ Working on:
 - Create documentation, in some years you might want to use this, but don't know how it works..
 
 - Oh, maybe it's a cool idea to put all documentation in xml or json format, and then using a webpage render it in a cool way
+
+- How do we change values during run-time? Using an interface? Command-line? There probably are parameters that we want to change while playing. Or: buy a midi keyboard with faders and other wheels on it.
+
+- Add support for (N)RPN's, to interpret data from faders and wheels etc.
 
 ---------------------------------------------------------------
 

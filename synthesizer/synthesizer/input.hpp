@@ -11,21 +11,23 @@ class Input {
 
     PmStream* inputStream;
     
+    int inputDevice;
     bool active;
 
 public:
     
-    Input(Controller*);
+    Input(Controller*, int);
 //    ~Input();
     
     bool start();
     bool stop();
-    
     bool update();
+
+    int getInputDevice();
     
-    int amountOfDevices();
-    const char* deviceName(int);
-    bool isInput(int);
+    static int amountOfDevices();
+    static const char* deviceName(int);
+    static bool isInput(int);
     
 };
 

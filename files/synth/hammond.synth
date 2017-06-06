@@ -1,30 +1,32 @@
-# Define drawbars
+# Define parameters for drawbars
+unit_set_value knob_1 curve         quadin
+unit_set_value knob_2 curve         quadin
+unit_set_value knob_3 curve         quadin
+unit_set_value knob_4 curve         quadin
+unit_set_value knob_5 curve         quadin
+unit_set_value knob_6 curve         quadin
+unit_set_value knob_7 curve         quadin
+unit_set_value knob_8 curve         quadin
+unit_set_value knob_9 curve         quadin
+
 unit_create variable drawbar_1
-unit_set_value drawbar_1 value      1.0
-
+unit_set_value drawbar_1 value      knob_1
 unit_create variable drawbar_2
-unit_set_value drawbar_2 value      1.0
-
+unit_set_value drawbar_2 value      knob_2
 unit_create variable drawbar_3
-unit_set_value drawbar_3 value      1.0
-
+unit_set_value drawbar_3 value      knob_3
 unit_create variable drawbar_4
-unit_set_value drawbar_4 value      1.0
-
+unit_set_value drawbar_4 value      knob_4
 unit_create variable drawbar_5
-unit_set_value drawbar_5 value      1.0
-
+unit_set_value drawbar_5 value      knob_5
 unit_create variable drawbar_6
-unit_set_value drawbar_6 value      1.0
-
+unit_set_value drawbar_6 value      knob_6
 unit_create variable drawbar_7
-unit_set_value drawbar_7 value      1.0
-
+unit_set_value drawbar_7 value      knob_7
 unit_create variable drawbar_8
-unit_set_value drawbar_8 value      1.0
-
+unit_set_value drawbar_8 value      knob_8
 unit_create variable drawbar_9
-unit_set_value drawbar_9 value      1.0
+unit_set_value drawbar_9 value      knob_9
 
 # Define frequencies
 unit_key_create adder frequency_1 1

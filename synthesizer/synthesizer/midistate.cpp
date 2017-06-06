@@ -3,6 +3,7 @@
 #include "midistate.hpp"
 #include "controller.hpp"
 #include "settings.hpp"
+#include "unitparameter.hpp"
 
 #include "log.hpp"
 
@@ -30,6 +31,8 @@ MidiState::MidiState(Controller* controller) {
 }
 
 void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned char data2) {
+    UnitParameter* parameter;
+    
     unsigned char type = status >> 4;
 //    unsigned char channel = status & 0xF; // Don't need channels for now
     
@@ -58,7 +61,12 @@ void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned cha
                         sustainPedal = 1.0 - sustainPedal;
                     return;
             }
-            break;
+            
+            // If not one of the default, set belonging UnitParameter if it exists
+            parameter = controller->getUnitParameter(data1);
+            if(parameter == NULL) return;
+            parameter->setValue((double) data2 / 127.0);
+            return;
         
         case MIDI_PITCH_WHEEL:
             // TODO: make this somewhat cleaner

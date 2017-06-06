@@ -4,7 +4,8 @@
 std::regex Commands::regexPreprocess("^\\s*(.*?)(?:\\s*#.*)?$");
 
 // Commands for settings
-std::regex Commands::regexSetInputDevice("^settings_set_input_device\\s+(\\d+)$");
+std::regex Commands::regexAddInputDevice("^settings_add_input_device\\s+(\\d+)$");
+std::regex Commands::regexRemoveInputDevice("^settings_remove_input_device\\s+(\\d+)$");
 std::regex Commands::regexSetOutputDevice("^settings_set_output_device\\s+(\\d+)$");
 
 std::regex Commands::regexSetSampleRate("^settings_set_sample_rate\\s+(\\d+)$");

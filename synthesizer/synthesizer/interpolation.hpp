@@ -12,6 +12,8 @@ public:
     enum Type {
         Linear,
         Sine,
+        QuadIn,
+        QuadOut,
         QuartIn,
         QuartOut
     };
@@ -20,6 +22,8 @@ public:
     
     static double linear(double);
     static double sine(double);
+    static double quadIn(double);
+    static double quadOut(double);
     static double quartIn(double);
     static double quartOut(double);
     

@@ -16,6 +16,7 @@
 #include "unitfuzz.hpp"
 #include "unitdelay.hpp"
 #include "unitPWM.hpp"
+#include "unitParameter.hpp"
 
 Unit* Unit::create(Controller* controller, std::string type, bool keyDependent, std::string arg1, std::string arg2) {
     // Adder
@@ -37,6 +38,18 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent, 
         if(n > UnitDelay::maxN) return NULL;
         if(T > UnitDelay::maxT) return NULL;
         return new UnitDelay(controller, n, T);
+    }
+    
+    // Parameter
+    if(type.compare("parameter") == 0) {
+        if(arg2.length() != 0) return NULL; // Only requires one argument, not two
+        if(keyDependent) return NULL;
+        if(!Util::isInteger(arg1)) return NULL;
+        int MidiCC = stoi(arg1);
+        if(MidiCC < 0 || MidiCC > 127) return NULL;
+        UnitParameter* parameter = new UnitParameter(controller, MidiCC);
+        controller->addUnitParameter(parameter, MidiCC);
+        return parameter;
     }
     
     // All types below have no arguments
