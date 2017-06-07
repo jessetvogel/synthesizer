@@ -8,6 +8,7 @@
 #include "unit.hpp"
 #include "settings.hpp"
 
+#include "error.hpp"
 #include "log.hpp"
 
 Parser::Parser(Controller* controller) {
@@ -37,6 +38,7 @@ bool Parser::parseFile(std::string filepath) {
             sprintf(message, "An error occured in line %d of file %s", lineNumber, filepath.c_str());
             Log::error(message);
             Log::error(line.c_str());
+            Error::printLastError();
             return false;
         }
         ++ lineNumber;
@@ -52,27 +54,27 @@ bool Parser::parseLine(std::string line) {
     std::cmatch cm;
 
     // Remove all surrounding whitespace and comments
-    if(!std::regex_search(line.c_str(), cm, Commands::regexPreprocess)) return false;
+    if(!std::regex_search(line.c_str(), cm, Commands::regexPreprocess)) {
+        Error::lastError = Error::COMMAND_NOT_RECOGNISED;
+        return false;
+    }
     std::string command = std::string(cm[1]);
     if(command.length() == 0) return true;
     const char* str = command.c_str();
     
-    // Settings
+    // MIDI
 
-    // settings_add_input_device <input_device>
-    if(std::regex_search(str, cm, Commands::regexAddInputDevice)) {
+    // midi_add_input_device <input_device>
+    if(std::regex_search(str, cm, Commands::regexMidiAddInputDevice)) {
         return controller->addInputDevice(stoi(cm[1]));
     }
     
-    // settings_remove_input_device <input_device>
-    if(std::regex_search(str, cm, Commands::regexRemoveInputDevice)) {
+    // midi_remove_input_device <input_device>
+    if(std::regex_search(str, cm, Commands::regexMidiRemoveInputDevice)) {
         return controller->removeInputDevice(stoi(cm[1]));
     }
     
-    // settings_set_output_device <output_device>
-    if(std::regex_search(str, cm, Commands::regexSetOutputDevice)) {
-        return controller->setOutputDevice(stoi(cm[1]));
-    }
+    // Settings
     
     // settings_set_sample_rate <value>
     if(std::regex_search(str, cm, Commands::regexSetSampleRate)) {
@@ -102,7 +104,8 @@ bool Parser::parseLine(std::string line) {
     
     // start
     if(std::regex_search(str, cm, Commands::regexStart)) {
-        return controller->start();
+        int outputDevice = (std::string(cm[1]).length() == 0) ? -1 : stoi(cm[1]);
+        return controller->start(outputDevice);
     }
     
     // stop
@@ -141,27 +144,40 @@ bool Parser::parseLine(std::string line) {
     // instrument_set_output <instrument> <unit>
     if(std::regex_search(str, cm, Commands::regexInstrumentSetOutput)) {
         Instrument* instrument = controller->getInstrument(cm[1]);
-        if(instrument == NULL) return false;
+        if(instrument == NULL) {
+            Error::lastError = Error::INSTRUMENT_NOT_FOUND;
+            return false;
+        }
         Unit* unit = controller->getUnit(cm[2]);
-        if(unit == NULL) return false;
-        
+        if(unit == NULL) {
+            Error::lastError = Error::UNIT_NOT_FOUND;
+            return false;
+        }
         return instrument->setOutput(unit);
     }
     
     // instrument_set_key_output <instrument> <key_unit>
     if(std::regex_search(str, cm, Commands::regexInstrumentSetKeyOutput)) {
         Instrument* instrument = controller->getInstrument(cm[1]);
-        if(instrument == NULL) return false;
+        if(instrument == NULL) {
+            Error::lastError = Error::INSTRUMENT_NOT_FOUND;
+            return false;
+        }
         Unit* unit = controller->getUnit(cm[2]);
-        if(unit == NULL) return false;
-        
+        if(unit == NULL) {
+            Error::lastError = Error::UNIT_NOT_FOUND;
+            return false;
+        }
         return instrument->setKeyOutput(unit);
     }
     
     // instrument_set_key_release_time <instrument> <seconds>
     if(std::regex_search(str, cm, Commands::regexInstrumentSetKeyReleaseTime)) {
         Instrument* instrument = controller->getInstrument(cm[1]);
-        if(instrument == NULL) return false;
+        if(instrument == NULL) {
+            Error::lastError = Error::INSTRUMENT_NOT_FOUND;
+            return false;
+        }
 
         instrument->setKeyReleaseTime(stod(cm[2]));
         return true;
@@ -170,7 +186,10 @@ bool Parser::parseLine(std::string line) {
     // unit_create <unit_type> <label> <arg1> <arg2>
     if(std::regex_search(str, cm, Commands::regexUnitCreate)) {
         Unit* unit = Unit::create(controller, cm[1], false, cm[3], cm[4]);
-        if(unit == NULL) return false;
+        if(unit == NULL) {
+            Error::lastError = Error::UNIT_NOT_FOUND;
+            return false;
+        }
         
         if(!(controller->addUnit(unit, cm[2]))) {
             delete unit;
@@ -183,7 +202,10 @@ bool Parser::parseLine(std::string line) {
     // unit_key_create <unit_type> <label> <arg1> <arg2>
     if(std::regex_search(str, cm, Commands::regexUnitKeyCreate)) {
         Unit* unit = Unit::create(controller, cm[1], true, cm[3], cm[4]);
-        if(unit == NULL) return false;
+        if(unit == NULL) {
+            Error::lastError = Error::UNIT_NOT_FOUND;
+            return false;
+        }
         
         if(!(controller->addUnit(unit, cm[2]))) {
             delete unit;
@@ -201,10 +223,14 @@ bool Parser::parseLine(std::string line) {
     // unit_set_value <unit> <parameter> <value>
     if(std::regex_search(str, cm, Commands::regexUnitSetValue)) {
         Unit* unit = controller->getUnit(cm[1]);
-        if(unit == NULL) return false;
+        if(unit == NULL) {
+            Error::lastError = Error::UNIT_NOT_FOUND;
+            return false;
+        }
         
         return unit->setValue(cm[2], cm[3]);
     }
     
+    Error::lastError = Error::COMMAND_NOT_RECOGNISED;
     return false;
 }

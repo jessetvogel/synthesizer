@@ -3,9 +3,10 @@
 #include "output.hpp"
 #include "controller.hpp"
 
-Output::Output(Controller* controller) {
-    // Store pointer to controller object
+Output::Output(Controller* controller, int outputDevice) {
+    // Store pointer to controller object and other information
     this->controller = controller;
+    this->outputDevice = outputDevice;
     
     // Set default values
     active = false;
@@ -31,11 +32,6 @@ bool Output::isOutput(int n) {
 
 bool Output::start() {
     if(active) return false;
-    
-    int outputDevice = controller->getOutputDevice();
-    
-    if(outputDevice == -1)
-        outputDevice = Pa_GetDefaultOutputDevice();
     
     const PaDeviceInfo* info = Pa_GetDeviceInfo(outputDevice);
     if(info == NULL) return false;

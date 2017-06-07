@@ -11,5 +11,6 @@ void Log::warning(const char* message) {
 }
 
 void Log::error(const char* message) {
-    std::cout << "[ ERROR ] " << message << std::endl;
+    std::cout << message << std::endl;
+//    std::cout << "[ ERROR ] " << message << std::endl;
 }

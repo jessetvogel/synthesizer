@@ -17,11 +17,11 @@ public:
     // Remove all surrounding whitespace and comments
     static std::regex regexPreprocess;
     
-    // Commands for settings
-    static std::regex regexAddInputDevice;
-    static std::regex regexRemoveInputDevice;
-    static std::regex regexSetOutputDevice;
+    // Commands for MIDI
+    static std::regex regexMidiAddInputDevice;
+    static std::regex regexMidiRemoveInputDevice;
     
+    // Commands for settings
     static std::regex regexSetSampleRate;
     static std::regex regexSetBufferSize;
     static std::regex regexSetSustainPedalPolarity;

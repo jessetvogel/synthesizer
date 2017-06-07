@@ -7,6 +7,7 @@
 #include "settings.hpp"
 #include "sample.hpp"
 #include "commands.hpp"
+#include "error.hpp"
 
 #include "log.hpp"
 
@@ -40,14 +41,16 @@ int main(int argc, char *argv[]) {
     // Wait for input
     parser.setDirectory(MAIN_DIRECTORY);
     std::string line;
+    std::cout << "> "; std::cout.flush();
     while(std::getline(std::cin, line)) {
         // Check for exit command
         if(line.compare("exit") == 0) break;
         
         // Try to parse the given line
-        if(!parser.parseLine(line)) {
-            std::cout << "Was not able to parse '" << line << "'" << std::endl;
-        }
+        if(!parser.parseLine(line))
+            Error::printLastError();
+        
+        std::cout << "> "; std::cout.flush();
     }
     
     controller.stop();

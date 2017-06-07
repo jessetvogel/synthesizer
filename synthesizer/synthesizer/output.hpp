@@ -11,21 +11,22 @@ class Output {
     
     PaStream* outputStream;
     
+    int outputDevice;
     bool active;
     
     static int callback(const void*, void*, unsigned long, const PaStreamCallbackTimeInfo*, PaStreamCallbackFlags, void*);
     
 public:
     
-    Output(Controller*);
+    Output(Controller*, int);
 //    ~Output();
     
     bool start();
     bool stop();
     
-    int amountOfDevices();
-    const char* deviceName(int);
-    bool isOutput(int);
+    static int amountOfDevices();
+    static const char* deviceName(int);
+    static bool isOutput(int);
     
 };
 

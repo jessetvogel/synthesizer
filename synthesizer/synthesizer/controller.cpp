@@ -19,11 +19,9 @@
 Controller::Controller(Settings* settings) {
     // Create instances
     this->settings = settings;
-    output = new Output(this);
     midiState = new MidiState(this);
     
     // Set some values
-    outputDevice = -1;
     sampleRate = settings->sampleRate;
     framesPerBuffer = settings->bufferSize;
     active = false;
@@ -33,7 +31,6 @@ Controller::Controller(Settings* settings) {
 }
 
 Controller::~Controller() {
-    delete output;
     delete midiState;
     
     for(auto it = instruments.begin(); it != instruments.end(); ++it)
@@ -46,33 +43,47 @@ Controller::~Controller() {
         delete (*it);
 }
 
-bool Controller::start() {
+bool Controller::start(int outputDevice) {
+    // Check if not yet started
     if(active) return false;
     
+    // Check if output device is valid
+    if(outputDevice == -1) outputDevice = Pa_GetDefaultOutputDevice();
+    if(!(Output::isOutput(outputDevice))) return false;
+    
+    // Create new buffer
     buffer = new float[framesPerBuffer];
     
+    // Start all inputs TODO: we can also already start these whenever they are added. Also prevents errors probably, if they are disconnected in between.
     for(auto it = inputs.begin(); it != inputs.end(); ++it)
         if(!((*it)->start())) return false;
     
+    // Create new output
+    output = new Output(this, outputDevice);
     if(!output->start()) return false;
     
     active = true;
-    
     return true;
 }
 
 bool Controller::stop() {
+    // Check if we did in fact were active
     if(!active) return false;
     
+    // Try to stop the output stream
     if(!output->stop()) return false;
     
+    // Try to stop all the inputs
     for(auto it = inputs.begin(); it != inputs.end(); ++it)
         if(!((*it)->stop())) return false;
     
+    // Delete the buffer
     delete[] buffer;
     
-    active = false;
+    // Delete the output
+    delete output;
     
+    active = false;
     return true;
 }
 
@@ -151,15 +162,6 @@ bool Controller::removeInputDevice(int n) {
     }
     
     return false;
-}
-
-bool Controller::setOutputDevice(int n) {
-    if(active) return false;
-    if(!(output->isOutput(n))) return false;
-    
-    outputDevice = n;
-    return true;
-    
 }
 
 bool Controller::setSampleRate(double sampleRate) {

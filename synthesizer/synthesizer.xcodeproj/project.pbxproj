@@ -38,6 +38,7 @@
 		31EC603B1ECF3CC1004671E2 /* unitmodulationwheel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC60391ECF3CC1004671E2 /* unitmodulationwheel.cpp */; };
 		31EC60411ECF45BE004671E2 /* unitadder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC603F1ECF45BD004671E2 /* unitadder.cpp */; };
 		886F98A51ED7245E003B8235 /* unitleadkeyinfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886F98A31ED7245E003B8235 /* unitleadkeyinfo.cpp */; };
+		8871C2491EE812690097DDB5 /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8871C2471EE812690097DDB5 /* error.cpp */; };
 		8888FE1D1EDF5D1000B5D5BC /* unitfuzz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8888FE1B1EDF5D1000B5D5BC /* unitfuzz.cpp */; };
 		88A285331EE010B900066E68 /* unitdelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88A285311EE010B900066E68 /* unitdelay.cpp */; };
 		88B0640D1EDDA86C00DE06E7 /* unitconditional.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B0640B1EDDA86C00DE06E7 /* unitconditional.cpp */; };
@@ -118,6 +119,8 @@
 		31EC60401ECF45BD004671E2 /* unitadder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitadder.hpp; sourceTree = "<group>"; };
 		886F98A31ED7245E003B8235 /* unitleadkeyinfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitleadkeyinfo.cpp; sourceTree = "<group>"; };
 		886F98A41ED7245E003B8235 /* unitleadkeyinfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitleadkeyinfo.hpp; sourceTree = "<group>"; };
+		8871C2471EE812690097DDB5 /* error.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = error.cpp; sourceTree = "<group>"; };
+		8871C2481EE812690097DDB5 /* error.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = error.hpp; sourceTree = "<group>"; };
 		8888FE1B1EDF5D1000B5D5BC /* unitfuzz.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitfuzz.cpp; sourceTree = "<group>"; };
 		8888FE1C1EDF5D1000B5D5BC /* unitfuzz.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitfuzz.hpp; sourceTree = "<group>"; };
 		88A285311EE010B900066E68 /* unitdelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitdelay.cpp; sourceTree = "<group>"; };
@@ -224,6 +227,8 @@
 				31EC60311ECF264F004671E2 /* util.hpp */,
 				311049AF1ED0D93D000E89F1 /* function.cpp */,
 				311049B01ED0D93D000E89F1 /* function.hpp */,
+				8871C2471EE812690097DDB5 /* error.cpp */,
+				8871C2481EE812690097DDB5 /* error.hpp */,
 			);
 			name = tools;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 			files = (
 				311049AE1ED0D8DE000E89F1 /* unitfunction.cpp in Sources */,
 				310285601EC8E7E300B4A5F6 /* controller.cpp in Sources */,
+				8871C2491EE812690097DDB5 /* error.cpp in Sources */,
 				31DE9FF91ED337D4003F5291 /* unitvariable.cpp in Sources */,
 				31D719811ECE317B00A4C9E0 /* commands.cpp in Sources */,
 				310285701EC8F7FC00B4A5F6 /* instrument.cpp in Sources */,

@@ -3,18 +3,18 @@
 // Remove all surrounding whitespace and comments
 std::regex Commands::regexPreprocess("^\\s*(.*?)(?:\\s*#.*)?$");
 
-// Commands for settings
-std::regex Commands::regexAddInputDevice("^settings_add_input_device\\s+(\\d+)$");
-std::regex Commands::regexRemoveInputDevice("^settings_remove_input_device\\s+(\\d+)$");
-std::regex Commands::regexSetOutputDevice("^settings_set_output_device\\s+(\\d+)$");
+// Commands for MIDI
+std::regex Commands::regexMidiAddInputDevice("^midi_add_input_device\\s+(\\d+)$");
+std::regex Commands::regexMidiRemoveInputDevice("^midi_remove_input_device\\s+(\\d+)$");
 
+// Commands for settings
 std::regex Commands::regexSetSampleRate("^settings_set_sample_rate\\s+(\\d+)$");
 std::regex Commands::regexSetBufferSize("^settings_set_buffer_size\\s+(\\d+)$");
 std::regex Commands::regexSetSustainPedalPolarity("^settings_set_sustain_pedal_polarity\\s+(normal|inverted)$");
 std::regex Commands::regexSetPitchWheelRange("^settings_set_pitch_wheel_range\\s+(\\d+)$");
 
 // Commands for controller
-std::regex Commands::regexStart("^start$");
+std::regex Commands::regexStart("^start(?:\\s+(\\d+))?$");
 std::regex Commands::regexStop("^stop$");
 std::regex Commands::regexReset("^reset$");
 

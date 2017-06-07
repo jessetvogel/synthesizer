@@ -2,6 +2,8 @@ Ideas: (not in order of priority)
 
 - Make sure that constant units get deallocated in some way
 
+- Make it possible to import custom samples. Maybe in .wav format, or some custom format?
+
 - Add support for play and pause buttons (Sysex stuff)
 
 - Support stereo sound in some way?

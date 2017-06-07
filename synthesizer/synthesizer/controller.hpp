@@ -18,15 +18,15 @@ class UnitParameter;
 class Controller {
     
     std::vector<Input*> inputs;
-    Output* output;
     MidiState* midiState;
     Settings* settings;
+    
+    Output* output;
     
     std::unordered_map<std::string, Instrument*> instruments;
     std::unordered_map<std::string, Unit*> units;
     std::unordered_map<int, UnitParameter*> parameters;
     
-    int outputDevice;
     double sampleRate;
     unsigned long framesPerBuffer;
     
@@ -41,7 +41,7 @@ public:
     Controller(Settings*);
     ~Controller();
     
-    bool start();
+    bool start(int);
     bool stop();
     bool reset();
     bool update();
@@ -49,13 +49,11 @@ public:
     bool addInputDevice(int);
     bool removeInputDevice(int);
     
-    bool setOutputDevice(int);
     bool setSampleRate(double);
     bool setFramesPerBuffer(unsigned long);
     
     inline MidiState* getMidiState() { return midiState; };
     inline Settings* getSettings() { return settings; };
-    inline int getOutputDevice() { return outputDevice; };
     inline double getSampleRate() { return sampleRate; };
     inline unsigned long getFramesPerBuffer() { return framesPerBuffer; };
 
