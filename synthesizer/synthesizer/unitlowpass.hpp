@@ -8,11 +8,11 @@ class UnitLowpass : public Unit {
     Unit* input = NULL;
     Unit* cutOffFrequency = NULL;
     
-    float* lastOutput;
+    float output_1;
     
 public:
     
-    UnitLowpass(Controller*, bool);
+    UnitLowpass(Controller*);
     ~UnitLowpass();
     
     void apply(Instrument*);

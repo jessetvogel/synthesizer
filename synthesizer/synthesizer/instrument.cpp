@@ -87,6 +87,7 @@ void Instrument::update() {
     
     // Set output, and adjust total output with main volume
     double volume = controller->getMidiState()->mainVolume;
+    volume = volume * volume;
     for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
         buffer[x] = output->output[x] * volume;
 }

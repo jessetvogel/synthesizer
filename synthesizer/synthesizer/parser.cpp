@@ -123,7 +123,8 @@ bool Parser::parseLine(std::string line) {
     // include <filename>
     if(std::regex_search(str, cm, Commands::regexInclude)) {
         Parser parser(controller);
-        return parser.parseFile(directory + DIRECTORY_SEPARATOR + std::string(cm[1]));
+        parser.parseFile(directory + DIRECTORY_SEPARATOR + std::string(cm[1]));
+        return true;
     }
     
     // instrument_create <label>

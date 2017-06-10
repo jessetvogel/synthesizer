@@ -5,7 +5,7 @@ include settings/Novation_Launch_Control.synth
 # -------- EXAMPLES --------
 
 # include basic.synth
-# include bandpass.synth
+ include bandpass.synth
 # include overtones.synth
 # include vibrato.synth
 # include pitch_envelope.synth
@@ -14,7 +14,7 @@ include settings/Novation_Launch_Control.synth
 # include PWM.synth
 # include whacky.synth
 # include parameter_test.synth
-include hammond.synth
+# include hammond.synth
 
 # -------- EXAMPLES --------
 

@@ -60,9 +60,12 @@ void UnitDelay::apply(Instrument* instrument) {
     float* ptr = memory + memoryLength - fpb;
     for(int x = 0;x < fpb; ++x, ++ptr) {
         for(int i = 0;i < n;i ++) {
-            int s = (int) (times[i]->output[x] * sr);
-            if(ptr - s >= memory)
-                delaysBuffer[x] = (*(ptr - s)) * gains[i]->output[x];
+            double samples = times[i]->output[x] * sr;
+            int samplesLow = (int) samples;
+            double f = samples - samplesLow;
+            if(ptr - samplesLow >= memory) {
+                delaysBuffer[x] += (*(ptr - samplesLow) * (1.0 - f) + *(ptr - samplesLow + 1) * f) * gains[i]->output[x];
+            }
         }
         
         output[x] = input->output[x] * gain->output[x] + delaysBuffer[x];

@@ -11,7 +11,6 @@ class Unit {
 private:
     
     bool updated;
-    bool constant = false;
     
 protected:
     

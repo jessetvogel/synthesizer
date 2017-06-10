@@ -1,22 +1,26 @@
 Ideas: (not in order of priority)
 
-- Make sure that constant units get deallocated in some way
+- Create interface. Web-based + NodeJS
+
+- Read MIDI input on separate threads?
 
 - Make it possible to import custom samples. Maybe in .wav format, or some custom format?
 
 - Add support for play and pause buttons (Sysex stuff)
 
-- Support stereo sound in some way?
+- Support stereo sound in some way? Maybe: some units can have stereo output, then we can refer to them by "label(channel)", e.g. "pan(1)"
 
 - High/lowpass filters with resonance?
 
 In the far future:
 
-- Add support for multiple channels
+- Add support for multiple MIDI channels, then for example instruments can 'listen to' certain channels. 'instrument_set_channel [1-16]|all'
 
 ---------------------------------------------------------------
 
 Working on:
+
+- Errors
 
 - Create documentation, in some years you might want to use this, but don't know how it works..
 
@@ -55,3 +59,5 @@ Done:
 - When reading/parsing commands, first strip away all preceding whitespace, and all leading whitespace, (and maybe comments). That allows e.g. for comments after commands. Something like /^\s*(.*?)\s*(?:#.*)$/
 
 - Pulse width modulator
+
+- Make sure that constant units get deallocated in some way

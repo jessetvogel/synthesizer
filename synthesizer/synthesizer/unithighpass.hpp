@@ -8,12 +8,12 @@ class UnitHighpass : public Unit {
     Unit* input = NULL;
     Unit* cutOffFrequency = NULL;
     
-    float* lastOutput;
-    float* lastInputOutput;
+    float output_1;
+    float input_1;
     
 public:
     
-    UnitHighpass(Controller*, bool);
+    UnitHighpass(Controller*);
     ~UnitHighpass();
     
     void apply(Instrument*);
