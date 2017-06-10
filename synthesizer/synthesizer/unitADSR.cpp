@@ -66,11 +66,11 @@ void UnitADSR::apply(Instrument* instrument) {
         
         // Attack stage
         if(d < attack)
-            amplitude = startLevel->output[x] + (attackLevel->output[x] - startLevel->output[x]) * Interpolation::ease(attackType, d / attack);
+            amplitude = Interpolation::ease(startLevel->output[x], attackLevel->output[x], d / attack, attackType);
         
         // Decay stage
         else if(d < attack + decay)
-            amplitude = attackLevel->output[x] + (sustainLevel->output[x] - attackLevel->output[x]) * Interpolation::ease(decayType, (d - attack) / decay);
+            amplitude = Interpolation::ease(attackLevel->output[x], sustainLevel->output[x], (d - attack) / decay, decayType);
         
         // Sustain stage
         else amplitude = sustainLevel->output[x];
@@ -80,7 +80,7 @@ void UnitADSR::apply(Instrument* instrument) {
             if(r >= releaseT)
                 amplitude = releaseLevel->output[x];
             else
-                amplitude += (releaseLevel->output[x] - amplitude) * Interpolation::ease(releaseType, r / releaseT);
+                amplitude = Interpolation::ease(amplitude, releaseLevel->output[x], r / releaseT, releaseType);
         }
         
         output[x] = amplitude;

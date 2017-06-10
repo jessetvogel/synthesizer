@@ -38,6 +38,7 @@
 		31EC603B1ECF3CC1004671E2 /* unitmodulationwheel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC60391ECF3CC1004671E2 /* unitmodulationwheel.cpp */; };
 		31EC60411ECF45BE004671E2 /* unitadder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC603F1ECF45BD004671E2 /* unitadder.cpp */; };
 		886F98A51ED7245E003B8235 /* unitleadkeyinfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886F98A31ED7245E003B8235 /* unitleadkeyinfo.cpp */; };
+		8870D9501EEC014600674DFC /* status.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8870D94E1EEC014600674DFC /* status.cpp */; };
 		8871C2491EE812690097DDB5 /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8871C2471EE812690097DDB5 /* error.cpp */; };
 		88846F6A1EE961D000745184 /* unitbandpass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88846F681EE961D000745184 /* unitbandpass.cpp */; };
 		8888FE1D1EDF5D1000B5D5BC /* unitfuzz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8888FE1B1EDF5D1000B5D5BC /* unitfuzz.cpp */; };
@@ -120,6 +121,8 @@
 		31EC60401ECF45BD004671E2 /* unitadder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitadder.hpp; sourceTree = "<group>"; };
 		886F98A31ED7245E003B8235 /* unitleadkeyinfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitleadkeyinfo.cpp; sourceTree = "<group>"; };
 		886F98A41ED7245E003B8235 /* unitleadkeyinfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitleadkeyinfo.hpp; sourceTree = "<group>"; };
+		8870D94E1EEC014600674DFC /* status.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = status.cpp; sourceTree = "<group>"; };
+		8870D94F1EEC014600674DFC /* status.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = status.hpp; sourceTree = "<group>"; };
 		8871C2471EE812690097DDB5 /* error.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = error.cpp; sourceTree = "<group>"; };
 		8871C2481EE812690097DDB5 /* error.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = error.hpp; sourceTree = "<group>"; };
 		88846F681EE961D000745184 /* unitbandpass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitbandpass.cpp; sourceTree = "<group>"; };
@@ -232,6 +235,8 @@
 				311049B01ED0D93D000E89F1 /* function.hpp */,
 				8871C2471EE812690097DDB5 /* error.cpp */,
 				8871C2481EE812690097DDB5 /* error.hpp */,
+				8870D94E1EEC014600674DFC /* status.cpp */,
+				8870D94F1EEC014600674DFC /* status.hpp */,
 			);
 			name = tools;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 				88F58AC11EE6CBD8004F1945 /* unitparameter.cpp in Sources */,
 				31D7195A1ECB0BAE00A4C9E0 /* sample.cpp in Sources */,
 				31EC603B1ECF3CC1004671E2 /* unitmodulationwheel.cpp in Sources */,
+				8870D9501EEC014600674DFC /* status.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

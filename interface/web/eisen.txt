@@ -1,0 +1,9 @@
+- List of input devices, which can be checked on or off
+
+- List of output devices, with start and stop buttons. Once a start button is clicked, all buttons except the stop button must be deactivated.
+
+- Box / list of error messages
+
+- Some way of representing the units. Also one must be able to see and change the parameters / dependencies of the units
+
+- Visualize dependence of units to each other

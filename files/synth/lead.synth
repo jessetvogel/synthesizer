@@ -27,6 +27,7 @@ unit_set_value freq gain_2              alpha
 # Gliding constant
 unit_set_value knob_9 min               0.01
 unit_set_value knob_9 max               0.10
+unit_set_value knob_9 position          0.5
 unit_set_value alpha output_high        knob_9
 
 # Oscillator and amplitude envelope
@@ -63,23 +64,23 @@ unit_set_value leads input_1            lead
 unit_set_value leads input_2            lead2
 
 # Fuzz effect
-unit_set_value knob_1 min               -1.0
-unit_set_value knob_1 max               2.0
-
-unit_create function fuzz_gain
-unit_set_value fuzz_gain function       pow10
-unit_set_value fuzz_gain input          knob_1
+unit_set_value knob_1 min               0.1 # fuzz gain
+unit_set_value knob_1 max               100
+unit_set_value knob_1 curve             exponential
+unit_set_value knob_1 position          0.5
 
 unit_create fuzz fuzzed
 unit_set_value fuzzed input             leads
-unit_set_value fuzzed input_gain        fuzz_gain
+unit_set_value fuzzed input_gain        knob_1
 
 # Delay effect
 unit_set_value knob_2 min               0.0 # delay gain
 unit_set_value knob_2 max               1.0
+unit_set_value knob_2 position          0.5
 
 unit_set_value knob_10 min              0.234375 # delay time
 unit_set_value knob_10 max              0.468750
+unit_set_value knob_10 position         0.0
 
 unit_create delay delayed 1 1.0
 unit_set_value delayed input            fuzzed
@@ -87,28 +88,21 @@ unit_set_value delayed time_1           knob_10
 unit_set_value delayed gain_1           knob_2
 unit_set_value delayed feedback         1.0
 
-# Low- and highpass filters
-unit_set_value knob_3 min               1.3 # cutoff lowpass
-unit_set_value knob_3 max               4.3
+# Bandpass filter
+unit_set_value knob_3 min               20 # center frequency
+unit_set_value knob_3 max               20000
+unit_set_value knob_3 curve             exponential
+unit_set_value knob_3 position          0.5
 
-unit_set_value knob_4 min               1.3 # cutoff highpass
-unit_set_value knob_4 max               4.3
+unit_set_value knob_4 min               0.01 # q factor
+unit_set_value knob_4 max               100
+unit_set_value knob_4 curve             exponential
+unit_set_value knob_4 position          0.5
 
-unit_create function C_low
-unit_set_value C_low function           pow10
-unit_set_value C_low input              knob_3
-
-unit_create function C_high
-unit_set_value C_high function          pow10
-unit_set_value C_high input             knob_4
-
-unit_create lowpass l
-unit_set_value l input                  delayed
-unit_set_value l cutoff                 C_low
-
-unit_create highpass h
-unit_set_value h input                  l
-unit_set_value h cutoff                 C_high
+unit_create bandpass BP
+unit_set_value BP input                 delayed
+unit_set_value BP center                knob_3
+unit_set_value BP q_factor              knob_4
 
 instrument_create i
-instrument_set_output i                 h
+instrument_set_output i                 BP

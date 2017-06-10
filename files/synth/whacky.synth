@@ -1,5 +1,5 @@
 unit_create PWM pwm
-unit_set_value pwm frequency            8.5333 # tempo = 128
+unit_set_value pwm frequency            2.133325 # tempo = 128
 unit_set_value pwm duty                 0.25
 unit_set_value pwm high                 1.0
 unit_set_value pwm low                  0.0

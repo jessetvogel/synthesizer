@@ -15,10 +15,11 @@ public:
         QuadIn,
         QuadOut,
         QuartIn,
-        QuartOut
+        QuartOut,
+        Exponential
     };
     
-    static double ease(Type, double);
+    static double ease(double, double, double, Type);
     
     static double linear(double);
     static double sine(double);

@@ -109,11 +109,11 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent, 
 bool Unit::set(Controller* controller, Unit** parameterAddr, std::string value, bool allowKeyDependent) {
     if(Util::isNumber(value)) {
         // If we are overwriting a unit constant, delete the old constant
-        if(*parameterAddr != NULL && UnitConstant::isUnitConstant(*parameterAddr))
-            UnitConstant::remove((UnitConstant*) *parameterAddr);
+        if(*parameterAddr != NULL && controller->isUnitConstant(*parameterAddr))
+            controller->deleteUnitConstant((UnitConstant*) *parameterAddr);
         
         // Create a new unit constant
-        *parameterAddr = UnitConstant::create(controller, stod(value));
+        *parameterAddr = controller->createUnitConstant(stod(value));
         return true;
     }
     else {
@@ -125,8 +125,8 @@ bool Unit::set(Controller* controller, Unit** parameterAddr, std::string value, 
         if(!allowKeyDependent && unit->keyDependent) { Error::lastError = Error::EXPECTED_KEY_UNDEPENDENT; return false; }
         
         // If we are overwriting a unit constant, delete the old constant
-        if(*parameterAddr != NULL && UnitConstant::isUnitConstant(*parameterAddr))
-            UnitConstant::remove((UnitConstant*) *parameterAddr);
+        if(*parameterAddr != NULL && controller->isUnitConstant(*parameterAddr))
+            controller->deleteUnitConstant((UnitConstant*) *parameterAddr);
         
         *parameterAddr = unit;
         return true;

@@ -27,13 +27,6 @@ int main(int argc, char *argv[]) {
     // Create a new controller object
     Controller controller(&settings);
     
-                        // Show input/output devices
-                        Log::output("Input devices");
-                        controller.listInputDevices();
-                        Log::output("\nOutput devices");
-                        controller.listOutputDevices();
-                        Log::output("");
-    
     // Load settings
     Parser parser(&controller);
     parser.parseFile(MAIN_DIRECTORY DIRECTORY_SEPARATOR SETTINGS_FILE);

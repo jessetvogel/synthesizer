@@ -7,6 +7,7 @@
 #include "instrument.hpp"
 #include "unit.hpp"
 #include "settings.hpp"
+#include "status.hpp"
 
 #include "error.hpp"
 #include "log.hpp"
@@ -116,6 +117,15 @@ bool Parser::parseLine(std::string line) {
     // reset
     if(std::regex_search(str, cm, Commands::regexReset)) {
         return controller->reset();
+    }
+    
+    // Status
+    
+    // status
+    if(std::regex_search(str, cm, Commands::regexStatus)) {
+        Status status(controller);
+        status.print();
+        return true;
     }
     
     // Synths

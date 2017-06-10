@@ -31,9 +31,8 @@ void UnitParameter::apply(Instrument* instrument) {
     max->update(instrument);
     
     // Linearly interpolate between min and max
-    double f = Interpolation::ease(curve, value);
     for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
-        output[x] = min->output[x] * (1.0 - f) + max->output[x] * f;
+        output[x] = Interpolation::ease(min->output[x], max->output[x], value, curve);
 }
 
 bool UnitParameter::setValue(std::string parameter, std::string value) {
@@ -45,6 +44,15 @@ bool UnitParameter::setValue(std::string parameter, std::string value) {
     
     if(parameter.compare("curve") == 0)
         return Interpolation::set(controller, &curve, value);
+    
+    if(parameter.compare("position") == 0) {
+        if(!Util::isNumber(value)) return false;
+        
+        this->value = stod(value);
+        if(this->value < 0.0) this->value = 0.0;
+        if(this->value > 1.0) this->value = 1.0;
+        return true;
+    }
     
     return false;
 }

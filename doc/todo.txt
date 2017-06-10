@@ -1,3 +1,9 @@
+------------------------------------------------------
+
+NOTE: moved to Trello!
+
+------------------------------------------------------
+
 Ideas: (not in order of priority)
 
 - Create interface. Web-based + NodeJS
@@ -9,6 +15,12 @@ Ideas: (not in order of priority)
 - Add support for play and pause buttons (Sysex stuff)
 
 - Support stereo sound in some way? Maybe: some units can have stereo output, then we can refer to them by "label(channel)", e.g. "pan(1)"
+Also:
+	instrument_set_output_left <unit>
+	instrument_set_output_right <unit>
+and then
+	instrument_set_output
+sets them both
 
 - High/lowpass filters with resonance?
 

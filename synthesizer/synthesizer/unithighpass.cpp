@@ -8,7 +8,7 @@ UnitHighpass::UnitHighpass(Controller* controller) {
     this->controller = controller;
     
     // May or may not be key dependent
-    this->keyDependent = keyDependent;
+    this->keyDependent = false;
     
     // Set default values
     Unit::set(controller, &input, "0.0", keyDependent);

@@ -1,4 +1,4 @@
-#include <iostream>
+#include <algorithm>
 
 #include "controller.hpp"
 #include "input.hpp"
@@ -8,6 +8,7 @@
 #include "instrument.hpp"
 #include "unit.hpp"
 #include "unitparameter.hpp"
+#include "unitconstant.hpp"
 
 #include "unitkeyinfo.hpp"
 #include "unitleadkeyinfo.hpp"
@@ -201,6 +202,12 @@ bool Controller::addUnitParameter(UnitParameter* parameter, int MidiCC) {
     return true;
 }
 
+UnitConstant* Controller::createUnitConstant(double value) {
+    UnitConstant* u = new UnitConstant(this, value);
+    unitConstants.push_back(u);
+    return u;
+}
+
 Instrument* Controller::getInstrument(std::string label) {
     if(instruments.find(label) == instruments.end()) return NULL;
     return instruments[label];
@@ -214,6 +221,10 @@ Unit* Controller::getUnit(std::string label) {
 UnitParameter* Controller::getUnitParameter(int MidiCC) {
     if(parameters.find(MidiCC) == parameters.end()) return NULL;
     return parameters[MidiCC];
+}
+
+bool Controller::isUnitConstant(Unit* u) {
+    return std::find(unitConstants.begin(), unitConstants.end(), u) != unitConstants.end();
 }
 
 bool Controller::deleteInstrument(std::string label) {
@@ -243,6 +254,15 @@ bool Controller::deleteUnitParameter(int MidiCC) {
     return true;
 }
 
+bool Controller::deleteUnitConstant(UnitConstant* u) {
+    auto position = std::find(unitConstants.begin(), unitConstants.end(), u);
+    if(position == unitConstants.end()) return false;
+    
+    unitConstants.erase(position);
+    delete u;
+    return true;
+}
+
 void Controller::resetUnits(bool onlyKeyDepenent) {
     for(auto it = units.begin(); it != units.end(); ++it) {
         if(!onlyKeyDepenent || it->second->isKeyDependent())
@@ -261,27 +281,5 @@ void Controller::addKeyEvent(KeyEvent* keyEvent) {
         k->duration = keyEvent->duration;
         k->release = keyEvent->release;
         it->second->addKeyEvent(k);
-    }
-}
-
-
-
-
-
-
-// TODO: remove this at some point
-void Controller::listInputDevices() {
-    int N = Input::amountOfDevices();
-    for(int n = 0;n < N;n ++) {
-        if(Input::isInput(n))
-            std::cout << "(" << n << ") " << Input::deviceName(n) << std::endl;
-    }
-}
-
-void Controller::listOutputDevices() {
-    int N = output->amountOfDevices();
-    for(int n = 0;n < N;n ++) {
-        if(output->isOutput(n))
-            std::cout << "(" << n << ") " << output->deviceName(n) << std::endl;
     }
 }

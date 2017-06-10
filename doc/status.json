@@ -1,0 +1,30 @@
+{
+  "inputDevices": [
+    {
+      "id": 0,
+      "name": "IAC-besturingsbestand Bus 1"
+    },
+    {
+      "id": 1,
+      "name": "AKM320"
+    },
+    {
+      "id": 2,
+      "name": "Launch Control"
+    }
+  ],
+  "outputDevices": [
+    {
+      "id": 1,
+      "name": "Built-in Output"
+    },
+    {
+      "id": 2,
+      "name": "Soundflower (2ch)"
+    },
+    {
+      "id": 3,
+      "name": "Soundflower (64ch)"
+    }
+  ]
+}

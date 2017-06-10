@@ -13,7 +13,7 @@ UnitBandPass::UnitBandPass(Controller* controller) {
     // Set default values
     Unit::set(controller, &input, "0.0", keyDependent);
     Unit::set(controller, &centerFrequency, "1000.0", keyDependent);
-    Unit::set(controller, &qFactor, "0.5", keyDependent); // TODO: come up with some standard values
+    Unit::set(controller, &qFactor, "1.0", keyDependent); // TODO: come up with some standard values
     input_1 = 0.0;
     input_2 = 0.0;
     output_1 = 0.0;

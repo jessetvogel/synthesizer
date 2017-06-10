@@ -1,13 +1,39 @@
+#include <cmath>
+
 #include "interpolation.hpp"
 
-double Interpolation::ease(Type type, double x) {
+double Interpolation::ease(double min, double max, double x, Type type) {
+    double f;
     switch(type) {
-        case Linear: return linear(x);
-        case Sine: return sine(x);
-        case QuadIn: return quadIn(x);
-        case QuadOut: return quadOut(x);
-        case QuartIn: return quartIn(x);
-        case QuartOut: return quartOut(x);
+        case Linear:
+            f = linear(x);
+            return min * (1.0 - f) + max * f;
+            
+        case Sine:
+            f = sine(x);
+            return min * (1.0 - f) + max * f;
+            
+        case QuadIn:
+            f = quadIn(x);
+            return min * (1.0 - f) + max * f;
+            
+        case QuadOut:
+            f = quadOut(x);
+            return min * (1.0 - f) + max * f;
+            
+        case QuartIn:
+            f = quartIn(x);
+            return min * (1.0 - f) + max * f;
+            
+        case QuartOut:
+            f = quartOut(x);
+            return min * (1.0 - f) + max * f;
+            
+        case Exponential:
+            if(min <= 0 || max <= 0) return 1.0;
+            double a = log(min);
+            double b = log(max);
+            return exp(a * (1.0 - x) + b * x);
     }
 }
 
@@ -44,6 +70,7 @@ bool Interpolation::set(Controller* controller, Type* parameterAddr, std::string
     if(value.compare("quadout") == 0) { *parameterAddr = QuadOut; return true; }
     if(value.compare("quartin") == 0) { *parameterAddr = QuartIn; return true; }
     if(value.compare("quartout") == 0) { *parameterAddr = QuartOut; return true; }
+    if(value.compare("exponential") == 0) { *parameterAddr = Exponential; return true; }
     
     return false;
 }

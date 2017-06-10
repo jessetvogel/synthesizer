@@ -14,6 +14,7 @@ class Output;
 class Instrument;
 class Unit;
 class UnitParameter;
+class UnitConstant;
 
 class Controller {
     
@@ -26,6 +27,7 @@ class Controller {
     std::unordered_map<std::string, Instrument*> instruments;
     std::unordered_map<std::string, Unit*> units;
     std::unordered_map<int, UnitParameter*> parameters;
+    std::vector<UnitConstant*> unitConstants;
     
     double sampleRate;
     unsigned long framesPerBuffer;
@@ -60,23 +62,21 @@ public:
     bool addInstrument(Instrument*, std::string);
     bool addUnit(Unit*, std::string);
     bool addUnitParameter(UnitParameter*, int);
+    UnitConstant* createUnitConstant(double);
     
     Instrument* getInstrument(std::string);
     Unit* getUnit(std::string);
     UnitParameter* getUnitParameter(int);
+    bool isUnitConstant(Unit*);
     
     bool deleteInstrument(std::string);
     bool deleteUnit(std::string);
     bool deleteUnitParameter(int);
+    bool deleteUnitConstant(UnitConstant*);
     
     void resetUnits(bool);
     void addKeyEvent(KeyEvent*);
     inline float* getBuffer() { return buffer; };
-    
-    
-    // TODO: remove this at some point
-    void listInputDevices();
-    void listOutputDevices();
 };
 
 #endif

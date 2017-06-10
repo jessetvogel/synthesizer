@@ -18,6 +18,9 @@ std::regex Commands::regexStart("^start(?:\\s+(\\d+))?$");
 std::regex Commands::regexStop("^stop$");
 std::regex Commands::regexReset("^reset$");
 
+// Commands for status
+std::regex Commands::regexStatus("^status$");
+
 // Commands for synths
 std::regex Commands::regexInclude("^include\\s+((?:\\w+" REGEX_DIRECTORY_SEPARATOR ")*\\w+(?:.\\w+)?)$");
 

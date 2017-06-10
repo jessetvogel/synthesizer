@@ -32,6 +32,9 @@ public:
     static std::regex regexStop;
     static std::regex regexReset;
     
+    // Commands for status
+    static std::regex regexStatus;
+    
     // Commands for synths
     static std::regex regexInclude;
     
