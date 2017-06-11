@@ -1,0 +1,132 @@
+* { margin: 0px; padding: 0px; }
+html, body { height: 100%; }
+
+body {
+  color: #f9f9f9;
+  font-family: Museo Sans;
+  font-size: 16px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.12);
+}
+
+#content {
+  min-height: 100%;
+  background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+  background: linear-gradient(141deg, #0f72b8 0%, #47d1ff 51%, #46f1f5 75%);
+}
+
+.tile {
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.12);
+  position: relative;
+  margin: 16px;
+  margin-bottom: 0px;
+  padding: 4px;
+}
+
+.tile-separator {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.25);
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.tile-header {
+  width: 100%;
+  line-height: 48px;
+  text-align: center;
+}
+
+
+
+
+
+/* midi-device */
+.midi-device {
+  display: flex;
+  height: 64px;
+  line-height: 64px;
+}
+
+.midi-device-icon {
+  width: 64px;
+  text-align: center;
+}
+
+.midi-device-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.midi-device-options {
+  margin-left: auto;
+  width: 64px;
+  text-align: center;
+}
+
+/* output-device */
+.output-device {
+  display: flex;
+  height: 64px;
+  line-height: 64px;
+}
+
+.output-device-icon {
+  width: 64px;
+  text-align: center;
+}
+
+.output-device-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.output-device-options {
+  margin-left: auto;
+  width: 64px;
+  text-align: center;
+}
+
+/* units */
+.unit-wrapper {
+  margin: 16px;
+}
+
+.unit {
+  display: flex;
+  height: 64px;
+  line-height: 64px;
+
+  background: rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+}
+
+.unit-type {
+  color: #ff9933;
+  margin-left: 16px;
+}
+
+.unit-type-key-dependent .unit-type { color: #99ff33; }
+.unit-type-parameter .unit-type { color: #ffff33; }
+
+.unit-name {
+  margin-left: 16px;
+}
+
+.unit-options {
+  margin-left: auto;
+  width: 64px;
+  text-align: center;
+}
+
+/* overwrite bootstrap */
+.row-no-padding > [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.label {
+  margin: 0px;
+  padding: 0px;
+}
