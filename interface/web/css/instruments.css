@@ -1,0 +1,37 @@
+.instrument-content {
+  display: flex;
+}
+
+.instrument-list {
+  width: 50%;
+}
+
+.instrument {
+  display: flex;
+  height: 64px;
+  line-height: 64px;
+}
+
+.instrument-name {
+  margin-left: 16px;
+}
+
+.instrument-parameter-container {
+  width: 50%;
+  /*background: rgba(0, 0, 0, 0.24);*/
+}
+
+.instrument-parameter {
+  display: flex;
+  height: 64px;
+  line-height: 64px;
+}
+
+.instrument-parameter-name {
+  margin-left: 16px;
+  width: 50%;
+}
+
+.instrument-parameter-value {
+  width: 50%;
+}

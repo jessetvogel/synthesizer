@@ -1,0 +1,38 @@
+.file-explorer-file {
+  display: flex;
+  height: 48px;
+  line-height: 48px;
+  cursor: pointer;
+}
+
+.file-explorer-path {
+  padding: 16px;
+}
+
+.file-explorer-file-container {
+  height: 480px;
+  overflow-y: scroll;
+}
+
+.file-explorer-file-icon {
+  width: 48px;
+  text-align: center;
+}
+
+.file-explorer-file-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.file-explorer-button-container {
+  display: flex;
+  justify-content: flex-start;
+  height: 64px;
+  line-height: 64px;
+}
+
+.file-explorer-button {
+  text-align: center;
+  width: 96px;
+}

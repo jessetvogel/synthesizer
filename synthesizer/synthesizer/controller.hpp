@@ -69,6 +69,8 @@ public:
     UnitParameter* getUnitParameter(int);
     bool isUnitConstant(Unit*);
     
+    bool renameUnit(std::string, std::string);
+    
     bool deleteInstrument(std::string);
     bool deleteUnit(std::string);
     bool deleteUnitParameter(int);

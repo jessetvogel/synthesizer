@@ -121,11 +121,10 @@ bool Parser::parseLine(std::string line) {
     
     // Status
     
-    // status
+    // status <info>
     if(std::regex_search(str, cm, Commands::regexStatus)) {
         Status status(controller);
-        status.print();
-        return true;
+        return status.print(cm[1]);
     }
     
     // Synths
@@ -198,7 +197,7 @@ bool Parser::parseLine(std::string line) {
     if(std::regex_search(str, cm, Commands::regexUnitCreate)) {
         Unit* unit = Unit::create(controller, cm[1], false, cm[3], cm[4]);
         if(unit == NULL) {
-            Error::lastError = Error::UNIT_NOT_FOUND;
+//            Error::lastError = Error::UNIT_NOT_FOUND;
             return false;
         }
         
@@ -214,16 +213,22 @@ bool Parser::parseLine(std::string line) {
     if(std::regex_search(str, cm, Commands::regexUnitKeyCreate)) {
         Unit* unit = Unit::create(controller, cm[1], true, cm[3], cm[4]);
         if(unit == NULL) {
-            Error::lastError = Error::UNIT_NOT_FOUND;
+//            Error::lastError = Error::UNIT_NOT_FOUND;
             return false;
         }
         
         if(!(controller->addUnit(unit, cm[2]))) {
+            Error::lastError = Error::UNIT_LABEL_ALREADY_USED;
             delete unit;
             return false;
         }
         
         return true;
+    }
+    
+    // unit_rename <unit> <label>
+    if(std::regex_search(str, cm, Commands::regexUnitRename)) {
+        return controller->renameUnit(cm[1], cm[2]);
     }
     
     // unit_delete <unit>

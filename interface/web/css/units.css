@@ -1,0 +1,45 @@
+.unit-content {
+  display: flex;
+}
+
+.unit-list {
+  width: 50%;
+}
+
+.unit {
+  display: flex;
+  height: 64px;
+  line-height: 64px;
+}
+
+.unit-type {
+  color: #ff9933;
+  margin-left: 16px;
+}
+
+.unit-type-key-dependent .unit-type { color: #99ff33; }
+.unit-type-parameter .unit-type { color: #ffff33; }
+
+.unit-name {
+  margin-left: 16px;
+}
+
+.unit-parameter-container {
+  width: 50%;
+  /*background: rgba(0, 0, 0, 0.24);*/
+}
+
+.unit-parameter {
+  display: flex;
+  height: 64px;
+  line-height: 64px;
+}
+
+.unit-parameter-name {
+  margin-left: 16px;
+  width: 50%;
+}
+
+.unit-parameter-value {
+  width: 50%;
+}

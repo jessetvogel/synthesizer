@@ -15,6 +15,7 @@
 #include "unitmodulationwheel.hpp"
 #include "unitkeyoutput.hpp"
 
+#include "error.hpp"
 #include "log.hpp"
 
 Controller::Controller(Settings* settings) {
@@ -225,6 +226,22 @@ UnitParameter* Controller::getUnitParameter(int MidiCC) {
 
 bool Controller::isUnitConstant(Unit* u) {
     return std::find(unitConstants.begin(), unitConstants.end(), u) != unitConstants.end();
+}
+
+bool Controller::renameUnit(std::string oldLabel, std::string newLabel) {
+    if(units.find(oldLabel) == units.end()) {
+        Error::lastError = Error::UNIT_NOT_FOUND;
+        return false;
+    }
+    
+    if(units.find(newLabel) != units.end()) {
+        Error::lastError = Error::UNIT_LABEL_ALREADY_USED;
+        return false;
+    }
+    
+    units[newLabel] = units[oldLabel];
+    units.erase(oldLabel);
+    return true;
 }
 
 bool Controller::deleteInstrument(std::string label) {

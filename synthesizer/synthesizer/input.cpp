@@ -5,7 +5,7 @@
 #include "controller.hpp"
 #include "midistate.hpp"
 
-#include "log.hpp"
+#include "error.hpp"
 
 Input::Input(Controller* controller, int inputDevice) {
     // Store pointer to controller object
@@ -17,34 +17,48 @@ Input::Input(Controller* controller, int inputDevice) {
 }
 
 bool Input::start() {
-    if(active) return false;
+    if(active) {
+        Error::lastError = Error::INPUT_ALREADY_STARTED;
+        return false;
+    }
     
     if(inputDevice == -1)
         inputDevice = Pm_GetDefaultInputDeviceID();
     
     const PmDeviceInfo* info = Pm_GetDeviceInfo(inputDevice);
-    if(info == NULL) return false;
+    if(info == NULL) {
+        Error::lastError = Error::INPUT_DEVICE_NOT_EXISTS;
+        return false;
+    }
     
-    Pm_OpenInput(&inputStream,
+    PmError err = Pm_OpenInput(&inputStream,
                  inputDevice,
                  NULL, // driver info
                  0, // use default input size
                  NULL,
                  (void*) NULL); // void * time_info
     
+    if(err != pmNoError) {
+        Error::lastError = Error::INPUT_CANNOT_OPEN_INPUT;
+        return false;
+    }
+    
     /*
      Pm_SetFilter(midi_in, PM_FILT_REALTIME | PM_FILT_AFTERTOUCH |
      PM_FILT_PROGRAM | PM_FILT_PITCHBEND | PM_FILT_CONTROL);
      */
     
-    Pm_SetFilter(inputStream, PM_FILT_REALTIME);
+    Pm_SetFilter(inputStream, PM_FILT_REALTIME); // TODO: what are these filters?
     
     active = true;
     return true;
 }
 
 bool Input::update() {
-    if(!active) return false;
+    if(!active) {
+        Error::lastError = Error::INPUT_NOT_YET_STARTED;
+        return false;
+    }
     
     PmError result;
     PmEvent event;
@@ -58,17 +72,26 @@ bool Input::update() {
         controller->getMidiState()->addEvent(status, data1, data2);
     }
     
-    // TODO: check for errors?
+    if(result != pmNoError) {
+        Error::lastError = Error::INPUT_READING;
+        return false;
+    }
     
     controller->getMidiState()->update();
     return true;
 }
 
 bool Input::stop() {
-    if(!active) return false;
+    if(!active) {
+        Error::lastError = Error::INPUT_NOT_YET_STARTED;
+        return false;
+    }
     
     active = false;
-    Pm_Close(inputStream);
+    if(Pm_Close(inputStream) != pmNoError) {
+        Error::lastError = Error::INPUT_CANNOT_CLOSE_INPUT;
+        return false;
+    }
     return true;
 }
 
@@ -82,7 +105,10 @@ int Input::amountOfDevices() {
 
 const char* Input::deviceName(int n) {
     const PmDeviceInfo* info = Pm_GetDeviceInfo(n);
-    if(info == NULL) return NULL;
+    if(info == NULL) {
+        Error::lastError = Error::INPUT_DEVICE_NOT_EXISTS;
+        return NULL;
+    }
     
     return Pm_GetDeviceInfo(n)->name;
 }
@@ -90,6 +116,5 @@ const char* Input::deviceName(int n) {
 bool Input::isInput(int n) {
     const PmDeviceInfo* info = Pm_GetDeviceInfo(n);
     if(info == NULL) return false;
-    
     return Pm_GetDeviceInfo(n)->input > 0;
 }

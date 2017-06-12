@@ -10,18 +10,25 @@ Status::Status(Controller* controller) {
     this->controller = controller;
 }
 
-void Status::print() {
-    // Print according as described in doc/status.json
-    std::cout << "{";
+bool Status::print(std::string info) {
+    if(info.compare("midi_devices") == 0) {
+        printMidiDevices();
+        return true;
+    }
     
-    printInputDevices(); std::cout << ",";
-    printOutputDevices();
+    if(info.compare("output_devices") == 0) {
+        printOutputDevices();
+        return true;
+    }
     
-    std::cout << "}" << std::endl;
+    return false;
 }
 
-void Status::printInputDevices() {
-    std::cout << "\"inputDevices\": [";
+void Status::printMidiDevices() {
+    
+    std::cout << "{";
+    
+    std::cout << "\"midiDevices\": [";
     
     int amountOfDevices = Input::amountOfDevices();
     bool comma = false;
@@ -38,9 +45,14 @@ void Status::printInputDevices() {
     }
     
     std::cout << "]";
+    
+    std::cout << "}" << std::endl;
 }
 
 void Status::printOutputDevices() {
+    
+    std::cout << "{";
+    
     std::cout << "\"outputDevices\": [";
     
     int amountOfDevices = Output::amountOfDevices();
@@ -58,4 +70,6 @@ void Status::printOutputDevices() {
     }
     
     std::cout << "]";
+    
+    std::cout << "}" << std::endl;
 }

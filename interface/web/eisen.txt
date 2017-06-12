@@ -7,3 +7,7 @@
 - Some way of representing the units. Also one must be able to see and change the parameters / dependencies of the units
 
 - Visualize dependence of units to each other
+
+- Loading .synth files (and maybe also an export function of the current state)
+
+- Should be able to add and remove units

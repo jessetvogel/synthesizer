@@ -1,20 +1,22 @@
 #ifndef status_hpp
 #define status_hpp
 
+#include <string>
+
 class Controller;
 
 class Status {
 
     Controller* controller;
     
-    void printInputDevices();
+    void printMidiDevices();
     void printOutputDevices();
     
 public:
     
     Status(Controller*);
     
-    void print();
+    bool print(std::string);
     
 };
 

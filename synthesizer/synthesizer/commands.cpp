@@ -19,7 +19,7 @@ std::regex Commands::regexStop("^stop$");
 std::regex Commands::regexReset("^reset$");
 
 // Commands for status
-std::regex Commands::regexStatus("^status$");
+std::regex Commands::regexStatus("^status\\s+(\\w+)$");
 
 // Commands for synths
 std::regex Commands::regexInclude("^include\\s+((?:\\w+" REGEX_DIRECTORY_SEPARATOR ")*\\w+(?:.\\w+)?)$");
@@ -32,5 +32,6 @@ std::regex Commands::regexInstrumentSetKeyReleaseTime("^instrument_set_key_relea
 
 std::regex Commands::regexUnitCreate("^unit_create\\s+(\\w+)\\s+(\\w+)(?:\\s+([\\w.]+))?(?:\\s+([\\w.]+))?$"); // Currently allows for two arguments
 std::regex Commands::regexUnitKeyCreate("^unit_key_create\\s+(\\w+)\\s+(\\w+)(?:\\s+([\\w.]+))?(?:\\s+([\\w.]+))?$"); // Currently allows for two arguments
+std::regex Commands::regexUnitRename("^unit_rename\\s+(\\w+)\\s+(\\w+)$");
 std::regex Commands::regexUnitDelete("^unit_delete\\s+(\\w+)$");
 std::regex Commands::regexUnitSetValue("^unit_set_value\\s+(\\w+)\\s+(\\w+)\\s+(\\w+|[-+]?[0-9]+(?:\\.[0-9]+)?)$");
