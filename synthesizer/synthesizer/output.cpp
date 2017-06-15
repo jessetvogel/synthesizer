@@ -21,7 +21,7 @@ int Output::amountOfDevices() {
 const char* Output::deviceName(int n) {
     const PaDeviceInfo* info = Pa_GetDeviceInfo(n);
     if(info == NULL) {
-        Error::lastError = Error::OUTPUT_DEVICE_NOT_EXISTS;
+        Error::addError(Error::OUTPUT_DEVICE_NOT_EXISTS);
         return NULL;
     }
     
@@ -36,13 +36,13 @@ bool Output::isOutput(int n) {
 
 bool Output::start() {
     if(active) {
-        Error::lastError = Error::OUTPUT_ALREADY_STARTED;
+        Error::addError(Error::OUTPUT_ALREADY_STARTED);
         return NULL;
     }
     
     const PaDeviceInfo* info = Pa_GetDeviceInfo(outputDevice);
     if(info == NULL) {
-        Error::lastError = Error::OUTPUT_DEVICE_NOT_EXISTS;
+        Error::addError(Error::OUTPUT_DEVICE_NOT_EXISTS);
         return false;
     }
     
@@ -66,7 +66,7 @@ bool Output::start() {
     
     err = Pa_StartStream(outputStream);
     if(err != paNoError) {
-        Error::lastError = Error::OUTPUT_CANNOT_START_STREAM;
+        Error::addError(Error::OUTPUT_CANNOT_START_STREAM);
         return false;
     }
     
@@ -76,13 +76,13 @@ bool Output::start() {
 
 bool Output::stop() {
     if(!active) {
-        Error::lastError = Error::OUTPUT_NOT_YET_STARTED;
+        Error::addError(Error::OUTPUT_NOT_YET_STARTED);
         return false;
     }
     active = false;
     PaError err = Pa_CloseStream(outputStream);
     if(err != paNoError) {
-        Error::lastError = Error::OUTPUT_CANNOT_CLOSE_STREAM;
+        Error::addError(Error::OUTPUT_CANNOT_CLOSE_STREAM);
         return false;
     }
     

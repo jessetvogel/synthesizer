@@ -12,7 +12,6 @@
 		310285601EC8E7E300B4A5F6 /* controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3102855E1EC8E7E300B4A5F6 /* controller.cpp */; };
 		310285631EC8E87400B4A5F6 /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 310285611EC8E87400B4A5F6 /* output.cpp */; };
 		310285661EC8E9A600B4A5F6 /* input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 310285641EC8E9A600B4A5F6 /* input.cpp */; };
-		310285691EC8F0A600B4A5F6 /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 310285671EC8F0A600B4A5F6 /* log.cpp */; };
 		3102856A1EC8F7C300B4A5F6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 310285531EC8DB5600B4A5F6 /* main.cpp */; };
 		310285701EC8F7FC00B4A5F6 /* instrument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3102856E1EC8F7FC00B4A5F6 /* instrument.cpp */; };
 		310EFDF31ECA384100F28034 /* midistate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 310EFDF11ECA384100F28034 /* midistate.cpp */; };
@@ -71,8 +70,6 @@
 		310285621EC8E87400B4A5F6 /* output.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = output.hpp; sourceTree = "<group>"; };
 		310285641EC8E9A600B4A5F6 /* input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = input.cpp; sourceTree = "<group>"; };
 		310285651EC8E9A600B4A5F6 /* input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = input.hpp; sourceTree = "<group>"; };
-		310285671EC8F0A600B4A5F6 /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
-		310285681EC8F0A600B4A5F6 /* log.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = log.hpp; sourceTree = "<group>"; };
 		3102856E1EC8F7FC00B4A5F6 /* instrument.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = instrument.cpp; sourceTree = "<group>"; };
 		3102856F1EC8F7FC00B4A5F6 /* instrument.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = instrument.hpp; sourceTree = "<group>"; };
 		310EFDF11ECA384100F28034 /* midistate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = midistate.cpp; sourceTree = "<group>"; };
@@ -223,8 +220,6 @@
 		31D719791ECE2D6300A4C9E0 /* tools */ = {
 			isa = PBXGroup;
 			children = (
-				310285671EC8F0A600B4A5F6 /* log.cpp */,
-				310285681EC8F0A600B4A5F6 /* log.hpp */,
 				31D719581ECB0BAE00A4C9E0 /* sample.cpp */,
 				31D719591ECB0BAE00A4C9E0 /* sample.hpp */,
 				31D719611ECC9D9800A4C9E0 /* interpolation.cpp */,
@@ -405,7 +400,6 @@
 				88B0640D1EDDA86C00DE06E7 /* unitconditional.cpp in Sources */,
 				88846F6A1EE961D000745184 /* unitbandpass.cpp in Sources */,
 				31EC60351ECF2811004671E2 /* unitconstant.cpp in Sources */,
-				310285691EC8F0A600B4A5F6 /* log.cpp in Sources */,
 				31EC60381ECF3169004671E2 /* unitoscillator.cpp in Sources */,
 				31D7196B1ECDEE2E00A4C9E0 /* unit.cpp in Sources */,
 				31BB3B0F1EE33FD80077FA4D /* unitPWM.cpp in Sources */,

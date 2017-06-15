@@ -2,14 +2,18 @@
 #define error_hpp
 
 #include <string>
+#include <vector>
 
 class Error {
     
+    static std::vector<std::string> errors;
+    
 public:
     
-    static std::string lastError;
-    
     static std::string UNKNOWN;
+    
+    // IO errors
+    static std::string CANNOT_OPEN_FILE;
     
     // Parsing errors
     static std::string COMMAND_NOT_RECOGNISED;
@@ -39,8 +43,9 @@ public:
     static std::string OUTPUT_CANNOT_CLOSE_STREAM;
     
     // Methods
-    static void print(std::string);
-    static void printLastError();
+    static bool noErrors();
+    static void printErrors();
+    static void addError(std::string);
 };
 
 #endif

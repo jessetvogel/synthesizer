@@ -24,8 +24,8 @@
 Unit* Unit::create(Controller* controller, std::string type, bool keyDependent, std::string arg1, std::string arg2) {
     // Adder
     if(type.compare("adder") == 0) {
-        if(arg2.length() != 0) { Error::lastError = Error::INVALID_NUMBER_OF_ARGUMENTS; return NULL; } // Only requires one argument, not two
-        if(!Util::isInteger(arg1)) { Error::lastError = Error::INVALID_ARGUMENT; return NULL; }
+        if(arg2.length() != 0) { Error::addError(Error::INVALID_NUMBER_OF_ARGUMENTS); return NULL; } // Only requires one argument, not two
+        if(!Util::isInteger(arg1)) { Error::addError(Error::INVALID_ARGUMENT); return NULL; }
         int n = stoi(arg1);
         if(n > UnitAdder::maxN) return NULL;
         return new UnitAdder(controller, keyDependent, n);
@@ -102,7 +102,7 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent, 
         return new UnitBandPass(controller);
     
     // If no match was found, return NULL
-    Error::lastError = Error::UNIT_TYPE_NOT_FOUND;
+    Error::addError(Error::UNIT_TYPE_NOT_FOUND);
     return NULL;
 }
 
@@ -119,10 +119,10 @@ bool Unit::set(Controller* controller, Unit** parameterAddr, std::string value, 
     else {
         // Check if given unit exists
         Unit* unit = controller->getUnit(value);
-        if(unit == NULL) { Error::lastError = Error::UNIT_NOT_FOUND; return false; }
+        if(unit == NULL) { Error::addError(Error::UNIT_NOT_FOUND); return false; }
         
         // Check for key dependence
-        if(!allowKeyDependent && unit->keyDependent) { Error::lastError = Error::EXPECTED_KEY_UNDEPENDENT; return false; }
+        if(!allowKeyDependent && unit->keyDependent) { Error::addError(Error::EXPECTED_KEY_UNDEPENDENT); return false; }
         
         // If we are overwriting a unit constant, delete the old constant
         if(*parameterAddr != NULL && controller->isUnitConstant(*parameterAddr))

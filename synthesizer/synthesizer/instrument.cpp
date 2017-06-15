@@ -7,8 +7,6 @@
 #include "midistate.hpp"
 #include "unit.hpp"
 
-#include "log.hpp"
-
 Instrument::Instrument(Controller* controller) {
     // Store pointer to controller object
     this->controller = controller;

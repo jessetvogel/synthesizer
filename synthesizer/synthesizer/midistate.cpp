@@ -5,8 +5,6 @@
 #include "settings.hpp"
 #include "unitparameter.hpp"
 
-#include "log.hpp"
-
 MidiState::MidiState(Controller* controller) {
     // Store pointer to controller
     this->controller = controller;

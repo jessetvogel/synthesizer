@@ -9,8 +9,6 @@
 #include "commands.hpp"
 #include "error.hpp"
 
-#include "log.hpp"
-
 #define MAIN_DIRECTORY "/Users/Jesse/Projects/synthesizer/files"
 #define SETTINGS_FILE "settings.txt"
 
@@ -34,16 +32,20 @@ int main(int argc, char *argv[]) {
     // Wait for input
     parser.setDirectory(MAIN_DIRECTORY);
     std::string line;
-    std::cout << "> "; std::cout.flush();
     while(std::getline(std::cin, line)) {
         // Check for exit command
         if(line.compare("exit") == 0) break;
         
-        // Try to parse the given line
-        if(!parser.parseLine(line))
-            Error::printLastError();
+        std::cout << "{";
         
-        std::cout << "> "; std::cout.flush();
+        // Try to parse the given line
+        bool success = parser.parseLine(line);
+        
+        if(!success && Error::noErrors())
+            Error::addError(Error::UNKNOWN);
+        Error::printErrors();
+        
+        std::cout << "}" << std::endl;
     }
     
     controller.stop();

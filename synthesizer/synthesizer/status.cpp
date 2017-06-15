@@ -1,9 +1,12 @@
 #include <iostream>
+#include <sstream>
 
 #include "status.hpp"
 #include "controller.hpp"
 #include "input.hpp"
 #include "output.hpp"
+
+#include "error.hpp"
 
 Status::Status(Controller* controller) {
     // Save pointer to controller
@@ -11,22 +14,32 @@ Status::Status(Controller* controller) {
 }
 
 bool Status::print(std::string info) {
-    if(info.compare("midi_devices") == 0) {
-        printMidiDevices();
-        return true;
+    
+    std::istringstream iss(info);
+    std::string token;
+    bool error = false;
+    while(std::getline(iss, token, ' ')) {
+        
+        if(token.compare("midi_devices") == 0) {
+            printMidiDevices();
+            continue;
+        }
+        
+        if(token.compare("output_devices") == 0) {
+            printOutputDevices();
+            continue;
+        }
+        
+        if(!error) {
+            Error::addError(Error::INVALID_ARGUMENT);
+            error = true;
+        }
     }
     
-    if(info.compare("output_devices") == 0) {
-        printOutputDevices();
-        return true;
-    }
-    
-    return false;
+    return true;
 }
 
 void Status::printMidiDevices() {
-    
-    std::cout << "{";
     
     std::cout << "\"midiDevices\": [";
     
@@ -44,14 +57,11 @@ void Status::printMidiDevices() {
         }
     }
     
-    std::cout << "]";
+    std::cout << "],";
     
-    std::cout << "}" << std::endl;
 }
 
 void Status::printOutputDevices() {
-    
-    std::cout << "{";
     
     std::cout << "\"outputDevices\": [";
     
@@ -69,7 +79,6 @@ void Status::printOutputDevices() {
         }
     }
     
-    std::cout << "]";
+    std::cout << "],";
     
-    std::cout << "}" << std::endl;
 }

@@ -10,7 +10,6 @@
 #include "status.hpp"
 
 #include "error.hpp"
-#include "log.hpp"
 
 Parser::Parser(Controller* controller) {
     // Store pointer to controller
@@ -25,23 +24,16 @@ bool Parser::parseFile(std::string filepath) {
     // Read file line by line, and parse them
     std::ifstream input(filepath);
     if(input.fail()) {
-        char message[128 + filepath.length()];
-        sprintf(message, "Was not able to open file %s", filepath.c_str());
-        Log::error(message);
+        Error::addError(Error::CANNOT_OPEN_FILE);
         return false;
     }
     
     int lineNumber = 1;
     std::string line;
     while(std::getline(input, line)) {
-        if(!parseLine(line)) {
-            char message[128 + filepath.length()];
-            sprintf(message, "An error occured in line %d of file %s", lineNumber, filepath.c_str());
-            Log::error(message);
-            Log::error(line.c_str());
-            Error::printLastError();
+        if(!parseLine(line))
             return false;
-        }
+        
         ++ lineNumber;
     }
     input.close();
@@ -56,7 +48,7 @@ bool Parser::parseLine(std::string line) {
 
     // Remove all surrounding whitespace and comments
     if(!std::regex_search(line.c_str(), cm, Commands::regexPreprocess)) {
-        Error::lastError = Error::COMMAND_NOT_RECOGNISED;
+        Error::addError(Error::COMMAND_NOT_RECOGNISED);
         return false;
     }
     std::string command = std::string(cm[1]);
@@ -155,12 +147,12 @@ bool Parser::parseLine(std::string line) {
     if(std::regex_search(str, cm, Commands::regexInstrumentSetOutput)) {
         Instrument* instrument = controller->getInstrument(cm[1]);
         if(instrument == NULL) {
-            Error::lastError = Error::INSTRUMENT_NOT_FOUND;
+            Error::addError(Error::INSTRUMENT_NOT_FOUND);
             return false;
         }
         Unit* unit = controller->getUnit(cm[2]);
         if(unit == NULL) {
-            Error::lastError = Error::UNIT_NOT_FOUND;
+            Error::addError(Error::UNIT_NOT_FOUND);
             return false;
         }
         return instrument->setOutput(unit);
@@ -170,12 +162,12 @@ bool Parser::parseLine(std::string line) {
     if(std::regex_search(str, cm, Commands::regexInstrumentSetKeyOutput)) {
         Instrument* instrument = controller->getInstrument(cm[1]);
         if(instrument == NULL) {
-            Error::lastError = Error::INSTRUMENT_NOT_FOUND;
+            Error::addError(Error::INSTRUMENT_NOT_FOUND);
             return false;
         }
         Unit* unit = controller->getUnit(cm[2]);
         if(unit == NULL) {
-            Error::lastError = Error::UNIT_NOT_FOUND;
+            Error::addError(Error::UNIT_NOT_FOUND);
             return false;
         }
         return instrument->setKeyOutput(unit);
@@ -185,7 +177,7 @@ bool Parser::parseLine(std::string line) {
     if(std::regex_search(str, cm, Commands::regexInstrumentSetKeyReleaseTime)) {
         Instrument* instrument = controller->getInstrument(cm[1]);
         if(instrument == NULL) {
-            Error::lastError = Error::INSTRUMENT_NOT_FOUND;
+            Error::addError(Error::INSTRUMENT_NOT_FOUND);
             return false;
         }
 
@@ -196,13 +188,12 @@ bool Parser::parseLine(std::string line) {
     // unit_create <unit_type> <label> <arg1> <arg2>
     if(std::regex_search(str, cm, Commands::regexUnitCreate)) {
         Unit* unit = Unit::create(controller, cm[1], false, cm[3], cm[4]);
-        if(unit == NULL) {
-//            Error::lastError = Error::UNIT_NOT_FOUND;
+        if(unit == NULL)
             return false;
-        }
         
         if(!(controller->addUnit(unit, cm[2]))) {
             delete unit;
+            Error::addError(Error::UNIT_LABEL_ALREADY_USED);
             return false;
         }
         
@@ -218,7 +209,7 @@ bool Parser::parseLine(std::string line) {
         }
         
         if(!(controller->addUnit(unit, cm[2]))) {
-            Error::lastError = Error::UNIT_LABEL_ALREADY_USED;
+            Error::addError(Error::UNIT_LABEL_ALREADY_USED);
             delete unit;
             return false;
         }
@@ -240,13 +231,13 @@ bool Parser::parseLine(std::string line) {
     if(std::regex_search(str, cm, Commands::regexUnitSetValue)) {
         Unit* unit = controller->getUnit(cm[1]);
         if(unit == NULL) {
-            Error::lastError = Error::UNIT_NOT_FOUND;
+            Error::addError(Error::UNIT_NOT_FOUND);
             return false;
         }
         
         return unit->setValue(cm[2], cm[3]);
     }
     
-    Error::lastError = Error::COMMAND_NOT_RECOGNISED;
+    Error::addError(Error::COMMAND_NOT_RECOGNISED);
     return false;
 }

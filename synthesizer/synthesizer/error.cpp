@@ -2,10 +2,13 @@
 
 #include "error.hpp"
 
-std::string Error::lastError = "";
+std::vector<std::string> Error::errors;
 
 // Default errors
 std::string Error::UNKNOWN = "Unknown error";
+
+// IO errors
+std::string Error::CANNOT_OPEN_FILE = "Error in opening file";
 
 // Parsing errors
 std::string Error::COMMAND_NOT_RECOGNISED = "The given command was not recognised";
@@ -34,18 +37,26 @@ std::string Error::OUTPUT_NOT_YET_STARTED = "Output device was not yet started";
 std::string Error::OUTPUT_CANNOT_START_STREAM = "Unable to open output stream";
 std::string Error::OUTPUT_CANNOT_CLOSE_STREAM = "Unable to close output stream";
 
-
-void Error::print(std::string message) {
-    // In case of an empty error, say the error is unknown
-    if(message.empty()) print(UNKNOWN);
-    
-    // Print error
-    std::cout << message << std::endl;
-    
-    // Set lastError to default
-    lastError = "";
+void Error::addError(std::string message) {
+    errors.push_back(message);
 }
 
-void Error::printLastError() {
-    print(lastError);
+void Error::printErrors() {
+    // Print error
+    std::cout << "\"errors\": [";
+    
+    bool comma = false;
+    for(auto it = errors.begin(); it != errors.end(); ++it) {
+        if(comma) std::cout << ","; else comma = true; // Make sure errors get separated by commas
+        std::cout << "'" << (*it) << "'";
+    }
+    
+    std::cout << "]";
+    
+    // Clear errors
+    errors.clear();
+}
+
+bool Error::noErrors() {
+    return errors.empty();
 }

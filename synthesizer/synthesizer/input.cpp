@@ -18,7 +18,7 @@ Input::Input(Controller* controller, int inputDevice) {
 
 bool Input::start() {
     if(active) {
-        Error::lastError = Error::INPUT_ALREADY_STARTED;
+        Error::addError(Error::INPUT_ALREADY_STARTED);
         return false;
     }
     
@@ -27,7 +27,7 @@ bool Input::start() {
     
     const PmDeviceInfo* info = Pm_GetDeviceInfo(inputDevice);
     if(info == NULL) {
-        Error::lastError = Error::INPUT_DEVICE_NOT_EXISTS;
+        Error::addError(Error::INPUT_DEVICE_NOT_EXISTS);
         return false;
     }
     
@@ -39,7 +39,7 @@ bool Input::start() {
                  (void*) NULL); // void * time_info
     
     if(err != pmNoError) {
-        Error::lastError = Error::INPUT_CANNOT_OPEN_INPUT;
+        Error::addError(Error::INPUT_CANNOT_OPEN_INPUT);
         return false;
     }
     
@@ -56,7 +56,7 @@ bool Input::start() {
 
 bool Input::update() {
     if(!active) {
-        Error::lastError = Error::INPUT_NOT_YET_STARTED;
+        Error::addError(Error::INPUT_NOT_YET_STARTED);
         return false;
     }
     
@@ -73,7 +73,7 @@ bool Input::update() {
     }
     
     if(result != pmNoError) {
-        Error::lastError = Error::INPUT_READING;
+        Error::addError(Error::INPUT_READING);
         return false;
     }
     
@@ -83,13 +83,13 @@ bool Input::update() {
 
 bool Input::stop() {
     if(!active) {
-        Error::lastError = Error::INPUT_NOT_YET_STARTED;
+        Error::addError(Error::INPUT_NOT_YET_STARTED);
         return false;
     }
     
     active = false;
     if(Pm_Close(inputStream) != pmNoError) {
-        Error::lastError = Error::INPUT_CANNOT_CLOSE_INPUT;
+        Error::addError(Error::INPUT_CANNOT_CLOSE_INPUT);
         return false;
     }
     return true;
@@ -106,7 +106,7 @@ int Input::amountOfDevices() {
 const char* Input::deviceName(int n) {
     const PmDeviceInfo* info = Pm_GetDeviceInfo(n);
     if(info == NULL) {
-        Error::lastError = Error::INPUT_DEVICE_NOT_EXISTS;
+        Error::addError(Error::INPUT_DEVICE_NOT_EXISTS);
         return NULL;
     }
     

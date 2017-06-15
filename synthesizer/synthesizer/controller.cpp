@@ -16,7 +16,6 @@
 #include "unitkeyoutput.hpp"
 
 #include "error.hpp"
-#include "log.hpp"
 
 Controller::Controller(Settings* settings) {
     // Create instances
@@ -230,12 +229,12 @@ bool Controller::isUnitConstant(Unit* u) {
 
 bool Controller::renameUnit(std::string oldLabel, std::string newLabel) {
     if(units.find(oldLabel) == units.end()) {
-        Error::lastError = Error::UNIT_NOT_FOUND;
+        Error::addError(Error::UNIT_NOT_FOUND);
         return false;
     }
     
     if(units.find(newLabel) != units.end()) {
-        Error::lastError = Error::UNIT_LABEL_ALREADY_USED;
+        Error::addError(Error::UNIT_LABEL_ALREADY_USED);
         return false;
     }
     

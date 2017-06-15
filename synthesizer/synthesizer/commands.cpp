@@ -1,7 +1,7 @@
 #include "commands.hpp"
 
 // Remove all surrounding whitespace and comments
-std::regex Commands::regexPreprocess("^\\s*(.*?)(?:\\s*#.*)?$");
+std::regex Commands::regexPreprocess("^\\s*(.*?)\\s*(?:#.*)?$");
 
 // Commands for MIDI
 std::regex Commands::regexMidiAddInputDevice("^midi_add_input_device\\s+(\\d+)$");
@@ -19,7 +19,7 @@ std::regex Commands::regexStop("^stop$");
 std::regex Commands::regexReset("^reset$");
 
 // Commands for status
-std::regex Commands::regexStatus("^status\\s+(\\w+)$");
+std::regex Commands::regexStatus("^status\\s+([\\w\\s]+)$");
 
 // Commands for synths
 std::regex Commands::regexInclude("^include\\s+((?:\\w+" REGEX_DIRECTORY_SEPARATOR ")*\\w+(?:.\\w+)?)$");
