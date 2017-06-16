@@ -35,7 +35,7 @@ function parseResponse(response) {
       case 'errors':
         if(data[key].length == 0) break;
 
-        alert(data[key]);
+        errors.add(data[key]);
         break;
 
       case 'midiDevices':

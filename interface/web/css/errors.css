@@ -1,0 +1,20 @@
+.error-container {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+}
+
+.error {
+  width: 384px;
+  height: 64px;
+  line-height: 64px;
+  margin-left: 16px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.24);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+.error span {
+  width: 64px;
+  text-align: center;
+}
