@@ -23,6 +23,8 @@ $(document).ready(function () {
 
 function parseResponse(response) {
   // Parse the response
+  console.log(response);
+
   var data = JSON.parse(response);
 
   for(var key in data) {

@@ -10,11 +10,11 @@ include settings/Novation_Launch_Control.synth
 # include vibrato.synth
 # include pitch_envelope.synth
 # include fat.synth
-include lead.synth
+# include lead.synth
 # include PWM.synth
 # include whacky.synth
 # include parameter_test.synth
-# include hammond.synth
+include hammond.synth
 
 # -------- EXAMPLES --------
 

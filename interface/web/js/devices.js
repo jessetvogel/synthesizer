@@ -26,15 +26,19 @@ var devices = {
         midiDevice.append($('<div>').addClass('midi-device-id').text(data[i].id));
         midiDevice.append($('<div>').addClass('midi-device-icon').append($('<div>').addClass('glyphicon glyphicon-music')));
         midiDevice.append($('<div>').addClass('midi-device-name').text(data[i].name))
-        midiDevice.append($('<div>').addClass('midi-device-options').append($('<input>').attr('type', 'checkbox').prop('checked', data[i].active)));
+        midiDevice.append($('<div>').addClass('midi-device-options').append((function (device_id) {
+          return $('<input>').attr('type', 'checkbox').prop('checked', data[i].active).change(function () {
+            if($(this).is(":checked"))
+              $.ajax('/api/midi_add_input_device?midi_device=' + device_id).done(parseResponse);
+            else
+              $.ajax('/api/midi_remove_input_device?midi_device=' + device_id).done(parseResponse);
+            });
+        })(data[i].id)));
 
         $('.midi-device-container').append(midiDevice);
     }
 
-    $('.midi-device-container .midi-device-options input').change(function () {
-      // TODO
-      console.log('s');
-    });
+
 
   },
 

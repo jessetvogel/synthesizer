@@ -6,7 +6,7 @@ var controls = {
     // Start button
     $('.controls-button-start').click(function () {
       if(!controls.active) {
-        $.ajax('/api/start' + (devices.outputDevice == -1 ? '' : '?outputDevice=' + devices.outputDevice)).done(parseResponse);
+        $.ajax('/api/start' + (devices.outputDevice == -1 ? '' : '?output_device=' + devices.outputDevice)).done(parseResponse);
         controls.active = true;
 
         $('.controls-button-start').addClass('button-pressed');
@@ -23,6 +23,11 @@ var controls = {
         $('.controls-button-stop').addClass('button-pressed');
         $('.controls-button-start').removeClass('button-pressed');
       }
+    });
+
+    // Fullscreen button
+    $('.controls-button-fullscreen').click(function () {
+      fullscreen.toggle($('body').get(0));
     });
   }
 

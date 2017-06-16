@@ -1,4 +1,3 @@
-#include <iostream>
 #include <fstream>
 #include <regex>
 
@@ -33,7 +32,7 @@ bool Parser::parseFile(std::string filepath) {
     std::string line;
     while(std::getline(input, line)) {
         if(!parseLine(line)) {
-            std::cout << "Error in line '" << line << "'" << std::endl;
+            Error::addError("Error in file"); // TODO
             return false;
         }
         
@@ -86,7 +85,7 @@ bool Parser::parseLine(std::string line) {
     
     // settings_set_sustain_pedal_polarity <normal|inverted>
     if(std::regex_search(str, cm, Commands::regexSetSustainPedalPolarity)) {
-        controller->getSettings()->sustainPedalPolarity = (cm[0].compare("inverted") == 0);
+        controller->getSettings()->sustainPedalPolarity = (cm[1].compare("inverted") == 0);
         return true;
     }
     

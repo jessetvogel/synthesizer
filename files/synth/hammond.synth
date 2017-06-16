@@ -9,23 +9,23 @@ unit_set_value knob_7 curve         quadin
 unit_set_value knob_8 curve         quadin
 unit_set_value knob_9 curve         quadin
 
-unit_create variable drawbar_1
+unit_create label drawbar_1
 unit_set_value drawbar_1 value      knob_1
-unit_create variable drawbar_2
+unit_create label drawbar_2
 unit_set_value drawbar_2 value      knob_2
-unit_create variable drawbar_3
+unit_create label drawbar_3
 unit_set_value drawbar_3 value      knob_3
-unit_create variable drawbar_4
+unit_create label drawbar_4
 unit_set_value drawbar_4 value      knob_4
-unit_create variable drawbar_5
+unit_create label drawbar_5
 unit_set_value drawbar_5 value      knob_5
-unit_create variable drawbar_6
+unit_create label drawbar_6
 unit_set_value drawbar_6 value      knob_6
-unit_create variable drawbar_7
+unit_create label drawbar_7
 unit_set_value drawbar_7 value      knob_7
-unit_create variable drawbar_8
+unit_create label drawbar_8
 unit_set_value drawbar_8 value      knob_8
-unit_create variable drawbar_9
+unit_create label drawbar_9
 unit_set_value drawbar_9 value      knob_9
 
 # Define frequencies
@@ -129,9 +129,9 @@ unit_set_value envelope attack_time   0.05
 unit_set_value envelope decay_time    0.05
 unit_set_value envelope sustain_level 0.5
 unit_set_value envelope release_time  0.05
-unit_set_value envelope attack_type   quartout
-unit_set_value envelope decay_type    quartout
-unit_set_value envelope release_type  quartout
+unit_set_value envelope attack_curve   quartout
+unit_set_value envelope decay_curve    quartout
+unit_set_value envelope release_curve  quartout
 
 unit_key_create adder x 1
 unit_set_value x input_1              sum

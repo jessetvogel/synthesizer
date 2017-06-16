@@ -10,7 +10,7 @@ module.exports = {
     // Listen to port as defined in settings
     server.listen(settings.port, function (error) {
       if(error)
-        console.log(error);
+        console.log('Server error:' + error);
     });
   },
 

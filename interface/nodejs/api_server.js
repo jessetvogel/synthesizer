@@ -22,7 +22,7 @@ module.exports = {
         break;
 
       case 'unit_rename':
-        [oldId, newId] = [query.oldId, query.newId];
+        [oldId, newId] = [query.old_id, query.new_id];
         if(oldId == null || newId == null) { bad_request(response); break; }
         synthesizer.command('unit_rename ' + oldId + ' ' + newId, response);
         break;
@@ -45,15 +45,27 @@ module.exports = {
         synthesizer.command('status ' + info.join(' '), response);
         break;
 
-        case 'start':
-          outputDevice = query.outputDevice;
-          if(outputDevice == null) outputDevice = '';
-          synthesizer.command('start ' + outputDevice, response);
-          break;
+      case 'start':
+        outputDevice = query.output_device;
+        if(outputDevice == null) outputDevice = '';
+        synthesizer.command('start ' + outputDevice, response);
+        break;
 
-        case 'stop':
-          synthesizer.command('stop', response);
-          break;
+      case 'stop':
+        synthesizer.command('stop', response);
+        break;
+
+      case 'midi_add_input_device':
+        midiDevice = query.midi_device;
+        if(midiDevice == null) { bad_request(response); break; }
+        synthesizer.command('midi_add_input_device ' + midiDevice, response);
+        break;
+
+      case 'midi_remove_input_device':
+        midiDevice = query.midi_device;
+        if(midiDevice == null) { bad_request(response); break; }
+        synthesizer.command('midi_remove_input_device ' + midiDevice, response);
+        break;
 
       default:
         bad_request(response);
