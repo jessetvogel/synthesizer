@@ -151,6 +151,14 @@ bool Controller::addInputDevice(int n) {
     return true;
 }
 
+bool Controller::inputActive(int n) {
+    for(auto it = inputs.begin(); it < inputs.end(); ++it) {
+        if((*it)->getInputDevice() == n)
+            return true;
+    }
+    return false;
+}
+
 bool Controller::removeInputDevice(int n) {
     if(active) return false;
     

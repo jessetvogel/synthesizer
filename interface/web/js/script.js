@@ -1,29 +1,18 @@
 $(document).ready(function () {
+  // Initialize controls
+  controls.initialize();
 
   // Refresh all devices
   devices.refreshAllDevices();
 
-  // List item selection
-  $('.list-item').click(function () {
-    $(this).siblings('.list-item').removeClass('list-item-selected');
-    $(this).addClass('list-item-selected');
-  });
+  // Refresh all units
+  units.refreshUnits();
 
   // Unit search field
-  $('.unit-search').on('input', function () {
-    var query = $(this).val();
-    $(this).parent().parent().parent().find('.unit').each(function () {
-      if((query == '') || ($(this).find('.unit-name').text().indexOf(query) != -1))
-        $(this).show();
-      else
-        $(this).hide();
-    });
-  });
+  $('.unit-search').on('input', function () { units.search($(this).val()); });
 
   // Unit sort button
-  $('.unit-button-sort').click(unitsSort);
-
-
+  $('.unit-button-sort').click(units.sort);
 
   // TODO: remove this maybe?
   $('.tile-header').click(function () {
@@ -41,7 +30,9 @@ function parseResponse(response) {
     if (!data.hasOwnProperty(key)) continue;
 
     switch(key) {
-      case 'error':
+      case 'errors':
+        if(data[key].length == 0) break;
+
         alert(data[key]);
         break;
 
@@ -51,6 +42,10 @@ function parseResponse(response) {
 
       case 'outputDevices':
         devices.setOutputDevices(data[key]);
+        break;
+
+      case 'units':
+        units.setUnits(data[key]);
         break;
     }
   }

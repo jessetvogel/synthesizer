@@ -58,7 +58,8 @@ void Status::printMidiDevices() {
             std::cout << "{";
             
             std::cout << "\"id\": " << i << ", ";
-            std::cout << "\"name\": \"" << Input::deviceName(i) << "\"";
+            std::cout << "\"name\": \"" << Input::deviceName(i) << "\", ";
+            std::cout << "\"active\": " << (controller->inputActive(i) ? "true" : "false");
             
             std::cout << "}";
         }
@@ -103,6 +104,7 @@ void Status::printUnits() {
         
         std::cout << "\"id\": \"" << unit->getId() << "\", ";
         std::cout << "\"type\": \"" << unit->getType() << "\", ";
+        std::cout << "\"keyDependent\": \"" << (unit->isKeyDependent() ? "true" : "false") << "\", ";
         std::cout << "\"parameters\": [";
         
         bool comma_p = false;

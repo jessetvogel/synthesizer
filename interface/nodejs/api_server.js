@@ -33,11 +33,27 @@ module.exports = {
         synthesizer.command('unit_delete ' + id, response);
         break;
 
+      case 'unit_set_value':
+        [id, label, value] = [query.id, query.label, query.value];
+        if(id == null || label == null || value == null) { bad_request(response); break; }
+        synthesizer.command('unit_set_value ' + id + ' ' + label + ' ' + value, response);
+        break;
+
       case 'status':
         info = query.info == null ? null : query.info.split(',');
         if(info == null) { bad_request(response); break; }
         synthesizer.command('status ' + info.join(' '), response);
         break;
+
+        case 'start':
+          outputDevice = query.outputDevice;
+          if(outputDevice == null) outputDevice = '';
+          synthesizer.command('start ' + outputDevice, response);
+          break;
+
+        case 'stop':
+          synthesizer.command('stop', response);
+          break;
 
       default:
         bad_request(response);

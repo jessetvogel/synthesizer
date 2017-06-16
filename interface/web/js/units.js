@@ -1,10 +1,75 @@
-function unitsSort() {
+var units = {
 
-  // Sort alphabetically
-  $('.unit-list').append($('.unit-list .unit').sort(function (a, b) {
-    var nameA = $(a).find('.unit-name').text();
-    var nameB = $(b).find('.unit-name').text();
-    return nameA.localeCompare(nameB);
-  }));
+  // Request methods
+  refreshUnits: function () {
+    $.ajax('/api/status?info=units').done(parseResponse);
+  },
 
-}
+  // Handle response methods
+  setUnits: function (data) {
+
+    $('.unit-container').html('');
+
+    for(var i = 0;i < data.length;i ++) {
+      // Skip the ones that cannot be set TODO: find more general solution
+      if(data[i].parameters.length == 0) continue;
+
+      var unit = $('<div>').addClass('unit list-item')
+      if(data[i].keyDependent == 'true')
+        unit.addClass('unit-type-key-dependent');
+      unit.append($('<div>').addClass('unit-type').text(data[i].type));
+      unit.append($('<div>').addClass('unit-id').text(data[i].id));
+
+      (function (id, parameters) {
+        unit.click(function () { units.setParameters(id, parameters); });
+      })(data[i].id, data[i].parameters);
+
+      $('.unit-container').append(unit);
+    }
+
+    $('.unit-container .list-item').click(function () {
+      $(this).siblings('.list-item').removeClass('list-item-selected');
+      $(this).addClass('list-item-selected');
+    });
+
+  },
+
+  setParameters: function (id, parameters) {
+
+    $('.unit-parameter-container').html('');
+
+    for(var i = 0;i < parameters.length;i ++) {
+      var parameter = $('<div>').addClass('unit-parameter');
+      parameter.append($('<div>').addClass('unit-parameter-label').text(parameters[i].label));
+      parameter.append($('<div>').addClass('unit-parameter-value').append(
+        $('<div>').addClass('unit-parameter-input').append(
+          (function (parameter) {
+            return $('<input>').val(parameter.value).change(function () {
+            $.ajax('/api/unit_set_value?id=' + id + '&label=' + parameter.label + '&value=' + $(this).val()).done(parseResponse);
+          })})(parameters[i]))));
+
+      $('.unit-parameter-container').append(parameter);
+    }
+
+  },
+
+  // Other methods
+  sort: function () {
+    // Sort alphabetically
+    $('.unit-container').append($('.unit-container .unit').sort(function (a, b) {
+      var nameA = $(a).find('.unit-id').text();
+      var nameB = $(b).find('.unit-id').text();
+      return nameA.localeCompare(nameB);
+    }));
+  },
+
+  search: function (query) {
+    $('.unit').each(function () {
+      if((query == '') || ($(this).find('.unit-id').text().indexOf(query) != -1))
+        $(this).show();
+      else
+        $(this).hide();
+    });
+  }
+
+};

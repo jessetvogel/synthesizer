@@ -52,7 +52,7 @@ void Error::printErrors() {
     bool comma = false;
     for(auto it = errors.begin(); it != errors.end(); ++it) {
         if(comma) std::cout << ","; else comma = true; // Make sure errors get separated by commas
-        std::cout << "'" << (*it) << "'";
+        std::cout << "\"" << (*it) << "\"";
     }
     
     std::cout << "]";

@@ -1,9 +1,11 @@
-.unit-content {
+.unit-panels {
   display: flex;
 }
 
-.unit-list {
+.unit-container {
   width: 50%;
+  max-height: 640px;
+  overflow-y: scroll;
 }
 
 .unit {
@@ -20,7 +22,7 @@
 .unit-type-key-dependent .unit-type { color: #99ff33; }
 .unit-type-parameter .unit-type { color: #ffff33; }
 
-.unit-name {
+.unit-id {
   margin-left: 16px;
 }
 
@@ -35,11 +37,32 @@
   line-height: 64px;
 }
 
-.unit-parameter-name {
+.unit-parameter-label {
   margin-left: 16px;
   width: 50%;
 }
 
 .unit-parameter-value {
   width: 50%;
+}
+
+.unit-parameter-input {
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-top: 12px;
+  margin-right: 16px;
+  height: 40px;
+  line-height: 40px;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.unit-parameter-input input {
+  width: 100%;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.0);
+  border: 0;
+}
+
+.unit-parameter-input input:focus {
+  outline: none;
 }

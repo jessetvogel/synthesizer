@@ -8,13 +8,9 @@ settings_set_pitch_wheel_range          2
 
 # Set input devices
 
-midi_add_input_device                   1
-midi_add_input_device                   2
+# midi_add_input_device                   1
+midi_add_input_device                   0
 
 # Default files to load
 
 include synth/main.synth
-
-# Start
-
-start # No argument after start indicates that we use the default output device. We could also use 'start 1' to use output device 1

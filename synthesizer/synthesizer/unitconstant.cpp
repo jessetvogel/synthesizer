@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <sstream>
 
 #include "unitconstant.hpp"
 #include "controller.hpp"
@@ -7,6 +8,11 @@ UnitConstant::UnitConstant(Controller* controller, double value) {
     // Store pointer to controller
     this->controller = controller;
     type = "constant";
+    
+    // Set id
+    std::ostringstream oss;
+    oss << value;
+    id = oss.str();
     
     // Store value
     this->value = value;

@@ -50,6 +50,7 @@ public:
     bool update();
 
     bool addInputDevice(int);
+    bool inputActive(int);
     bool removeInputDevice(int);
     
     bool setSampleRate(double);
