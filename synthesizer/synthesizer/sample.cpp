@@ -22,6 +22,14 @@ float Sample::getValue(double phase) {
     return data[((int) (phase * ONE_OVER_TWO_PI * resolution)) % resolution]; // TODO: will we have samples with more than one period? If yes, then change this line.
 }
 
+std::string Sample::getId() {
+    if(this == sine) return "sine";
+    if(this == square) return "square";
+    if(this == triangle) return "triangle";
+    if(this == sawtooth) return "sawtooth";
+    return "undefined";
+}
+
 Sample* Sample::sine;
 Sample* Sample::square;
 Sample* Sample::triangle;
@@ -52,13 +60,4 @@ void Sample::destruct() {
     delete square;
     delete triangle;
     delete sawtooth;
-}
-
-bool Sample::set(Controller* controller, Sample** parameterAddr, std::string value) {
-    if(value.compare("sine") == 0)      { *parameterAddr = sine; return true; }
-    if(value.compare("square") == 0)    { *parameterAddr = square; return true; }
-    if(value.compare("triangle") == 0)  { *parameterAddr = triangle; return true; }
-    if(value.compare("sawtooth") == 0)  { *parameterAddr = sawtooth; return true; }
-    
-    return false;
 }

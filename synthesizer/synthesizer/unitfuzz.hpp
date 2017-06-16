@@ -5,16 +5,14 @@
 
 class UnitFuzz : public Unit {
     
-    Unit* input = NULL;
-    Unit* inputGain = NULL;
+    Parameter* input = NULL;
+    Parameter* inputGain = NULL;
     
 public:
     
     UnitFuzz(Controller*, bool);
-    ~UnitFuzz();
     
     void apply(Instrument*);
-    bool setValue(std::string, std::string);
     
 };
 

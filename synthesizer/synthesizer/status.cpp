@@ -5,6 +5,8 @@
 #include "controller.hpp"
 #include "input.hpp"
 #include "output.hpp"
+#include "unit.hpp"
+#include "parameter.hpp"
 
 #include "error.hpp"
 
@@ -27,6 +29,11 @@ bool Status::print(std::string info) {
         
         if(token.compare("output_devices") == 0) {
             printOutputDevices();
+            continue;
+        }
+        
+        if(token.compare("units") == 0) {
+            printUnits();
             continue;
         }
         
@@ -77,6 +84,44 @@ void Status::printOutputDevices() {
             
             std::cout << "}";
         }
+    }
+    
+    std::cout << "],";
+    
+}
+
+void Status::printUnits() {
+    
+    std::cout << "\"units\": [";
+    
+    bool comma = false;
+    for(auto it = controller->units.begin(); it != controller->units.end(); ++it) {
+        Unit* unit = it->second;
+        
+        if(comma) std::cout << ","; else comma = true; // Make sure units get separated by commas
+        std::cout << "{";
+        
+        std::cout << "\"id\": \"" << unit->getId() << "\", ";
+        std::cout << "\"type\": \"" << unit->getType() << "\", ";
+        std::cout << "\"parameters\": [";
+        
+        bool comma_p = false;
+        for(auto it_p = unit->parameters.begin(); it_p != unit->parameters.end(); ++it_p) {
+            Parameter* parameter = *it_p;
+            
+            if(comma_p) std::cout << ","; else comma_p = true; // Make sure parameters get separated by commas
+            std::cout << "{";
+            
+            std::cout << "\"label\": \"" << parameter->label << "\", ";
+            std::cout << "\"type\": \"" << Parameter::typeToString(parameter->type) << "\", ";
+            std::cout << "\"value\": \"" << parameter->valueToString() << "\"";
+            
+            std::cout << "}";
+        }
+        
+        std::cout << "]";
+        
+        std::cout << "}";
     }
     
     std::cout << "],";

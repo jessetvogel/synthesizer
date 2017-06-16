@@ -5,18 +5,16 @@
 
 class UnitLowpass : public Unit {
 
-    Unit* input = NULL;
-    Unit* cutOffFrequency = NULL;
+    Parameter* input;
+    Parameter* cutOffFrequency;
     
     float output_1;
     
 public:
     
     UnitLowpass(Controller*);
-    ~UnitLowpass();
     
     void apply(Instrument*);
-    bool setValue(std::string, std::string);
     
 };
 

@@ -5,8 +5,8 @@
 
 class UnitHighpass : public Unit {
     
-    Unit* input = NULL;
-    Unit* cutOffFrequency = NULL;
+    Parameter* input;
+    Parameter* cutOffFrequency;
     
     float output_1;
     float input_1;
@@ -14,10 +14,8 @@ class UnitHighpass : public Unit {
 public:
     
     UnitHighpass(Controller*);
-    ~UnitHighpass();
     
     void apply(Instrument*);
-    bool setValue(std::string, std::string);
     
 };
 

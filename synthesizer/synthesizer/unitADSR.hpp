@@ -2,35 +2,30 @@
 #define unitADSR_hpp
 
 #include "unit.hpp"
-#include "interpolation.hpp"
-
-class Unit;
 
 class UnitADSR : public Unit {
 
-    Unit* startLevel = NULL;
-    Unit* attackLevel = NULL;
-    Unit* sustainLevel = NULL;
-    Unit* releaseLevel = NULL;
+    Parameter* startLevel;
+    Parameter* attackLevel;
+    Parameter* sustainLevel;
+    Parameter* releaseLevel;
     
-    Unit* attackTime = NULL;
-    Unit* decayTime = NULL;
-    Unit* releaseTime = NULL;
+    Parameter* attackTime;
+    Parameter* decayTime;
+    Parameter* releaseTime;
     
-    Unit* duration = NULL;
-    Unit* release = NULL;
+    Parameter* duration;
+    Parameter* release;
     
-    Interpolation::Type attackType;
-    Interpolation::Type decayType;
-    Interpolation::Type releaseType;
+    Parameter* attackCurve;
+    Parameter* decayCurve;
+    Parameter* releaseCurve;
     
 public:
     
     UnitADSR(Controller*, bool);
-    ~UnitADSR();
     
     void apply(Instrument*);
-    bool setValue(std::string, std::string);
     
 };
 

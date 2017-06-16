@@ -14,13 +14,17 @@ std::string Error::CANNOT_OPEN_FILE = "Error in opening file";
 std::string Error::COMMAND_NOT_RECOGNISED = "The given command was not recognised";
 std::string Error::INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments given";
 std::string Error::INVALID_ARGUMENT = "Invalid argument given";
-std::string Error::EXPECTED_KEY_UNDEPENDENT = "Given unit is key dependent, which is not allowed";
+std::string Error::EXPECTED_KEY_INDEPENDENT = "Given unit is key dependent, which is not allowed";
 
 // Not found errors
 std::string Error::INSTRUMENT_NOT_FOUND = "The given instrument was not found";
 std::string Error::UNIT_NOT_FOUND = "The given unit was not found";
 std::string Error::UNIT_TYPE_NOT_FOUND = "The given unit type does not exist";
 std::string Error::UNIT_LABEL_ALREADY_USED = "The given label is already used";
+std::string Error::SAMPLE_NOT_FOUND = "The given sample was not found";
+std::string Error::CURVE_NOT_FOUND = "The given curve was not found";
+std::string Error::FUNCTION_NOT_FOUND = "The given function was not found";
+std::string Error::UNKNOWN_PARAMETER = "Unknown parameter";
 
 // Input stream errors
 std::string Error::INPUT_DEVICE_NOT_EXISTS = "Input device does not exist";

@@ -37,6 +37,9 @@ function parse(output) {
 
   // Send output to response
   response.write(output);
-  response.end();
-  response = null;
+
+  if(output.length < 8192) { // TODO: fix this, really. It should check whether this is the full response, or a partial response. Check for some newline maybe?
+    response.end();
+    response = null;
+  }
 }

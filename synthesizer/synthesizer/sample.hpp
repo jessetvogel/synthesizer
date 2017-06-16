@@ -16,17 +16,16 @@ public:
     Sample(int, int, double*);
     ~Sample();
     
-    float getValue(double);
-    
     static void initialize();
     static void destruct();
 
+    float getValue(double);
+    std::string getId();
+    
     static Sample* sine;
     static Sample* square;
     static Sample* triangle;
     static Sample* sawtooth;
-    
-    static bool set(Controller*, Sample**, std::string);
 };
 
 #endif

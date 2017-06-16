@@ -1,40 +1,29 @@
 #include "unitfuzz.hpp"
 #include "controller.hpp"
+#include "parameter.hpp"
 #include "function.hpp"
 
 UnitFuzz::UnitFuzz(Controller* controller, bool keyDependent) {
     // Store pointer to controller
     this->controller = controller;
+    type = "fuzz";
     
     // May or may not be key dependent
     this->keyDependent = keyDependent;
     
     // Set default values
-    Unit::set(controller, &input, "0.0", keyDependent);
-    Unit::set(controller, &inputGain, "1.0", keyDependent);
+    parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
+    parameters.push_back(inputGain = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input_gain", "1.0"));
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
     memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
 }
 
-UnitFuzz::~UnitFuzz() {
-    delete[] output;
-}
-
 void UnitFuzz::apply(Instrument* instrument) {
-    input->update(instrument);
-    inputGain->update(instrument);
+    Unit* input = (Unit*) (this->input->pointer);
+    Unit* inputGain = (Unit*) (this->inputGain->pointer);
+    
     for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
         output[x] = Function::fuzz(input->output[x], inputGain->output[x]);
-}
-
-bool UnitFuzz::setValue(std::string parameter, std::string value) {
-    if(parameter.compare("input") == 0)
-        return Unit::set(controller, &input, value, keyDependent);
-    
-    if(parameter.compare("input_gain") == 0)
-        return Unit::set(controller, &inputGain, value, keyDependent);
-    
-    return false;
 }

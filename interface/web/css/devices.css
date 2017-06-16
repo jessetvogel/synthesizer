@@ -5,6 +5,10 @@
   line-height: 64px;
 }
 
+.midi-device-id {
+  display: none;
+}
+
 .midi-device-icon {
   width: 64px;
   text-align: center;
@@ -27,6 +31,10 @@
   display: flex;
   height: 64px;
   line-height: 64px;
+}
+
+.output-device-id {
+  display: none;
 }
 
 .output-device-icon {

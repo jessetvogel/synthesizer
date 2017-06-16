@@ -6,11 +6,11 @@
 class UnitDelay : public Unit {
     
     int n;
-    Unit* input = NULL;
-    Unit* gain = NULL;
-    Unit* feedback = NULL;
-    Unit** times;
-    Unit** gains;
+    Parameter* input = NULL;
+    Parameter* gain = NULL;
+    Parameter* feedback = NULL;
+    Parameter** times;
+    Parameter** gains;
     
     float* memory;
     int memoryLength;
@@ -21,7 +21,6 @@ public:
     ~UnitDelay();
     
     void apply(Instrument*);
-    bool setValue(std::string, std::string);
     
     static const int maxN;
     static const double maxT;

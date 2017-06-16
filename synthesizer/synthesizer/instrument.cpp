@@ -6,6 +6,7 @@
 #include "input.hpp"
 #include "midistate.hpp"
 #include "unit.hpp"
+#include "unitconstant.hpp"
 
 Instrument::Instrument(Controller* controller) {
     // Store pointer to controller object
@@ -16,8 +17,8 @@ Instrument::Instrument(Controller* controller) {
     keyBuffer = new float[controller->getFramesPerBuffer()];
     
     // Default values
-    Unit::set(controller, &output, "0.0", false);
-    Unit::set(controller, &keyOutput, "0.0", true);
+    output = new UnitConstant(controller, 0.0);
+    keyOutput = new UnitConstant(controller, 0.0);
     keyReleaseTime = 0.0;
 }
 

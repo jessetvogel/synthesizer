@@ -27,7 +27,6 @@ unit_set_value freq gain_2              alpha
 # Gliding constant
 unit_set_value knob_9 min               0.01
 unit_set_value knob_9 max               0.10
-unit_set_value knob_9 position          0.5
 unit_set_value alpha output_high        knob_9
 
 # Oscillator and amplitude envelope
@@ -36,9 +35,9 @@ unit_set_value e_amp attack_time        0.01
 unit_set_value e_amp decay_time         0.05
 unit_set_value e_amp sustain_level      0.5
 unit_set_value e_amp release_time       0.1
-unit_set_value e_amp attack_type        quartout
-unit_set_value e_amp decay_type         quartout
-unit_set_value e_amp release_type       quartout
+unit_set_value e_amp attack_curve        quartout
+unit_set_value e_amp decay_curve         quartout
+unit_set_value e_amp release_curve       quartout
 
 unit_create adder amp 1
 unit_set_value amp input_1              lead_key_velocity
@@ -67,7 +66,6 @@ unit_set_value leads input_2            lead2
 unit_set_value knob_1 min               0.1 # fuzz gain
 unit_set_value knob_1 max               100
 unit_set_value knob_1 curve             exponential
-unit_set_value knob_1 position          0.5
 
 unit_create fuzz fuzzed
 unit_set_value fuzzed input             leads
@@ -76,11 +74,9 @@ unit_set_value fuzzed input_gain        knob_1
 # Delay effect
 unit_set_value knob_2 min               0.0 # delay gain
 unit_set_value knob_2 max               1.0
-unit_set_value knob_2 position          0.5
 
 unit_set_value knob_10 min              0.234375 # delay time
 unit_set_value knob_10 max              0.468750
-unit_set_value knob_10 position         0.0
 
 unit_create delay delayed 1 1.0
 unit_set_value delayed input            fuzzed
@@ -92,12 +88,10 @@ unit_set_value delayed feedback         1.0
 unit_set_value knob_3 min               20 # center frequency
 unit_set_value knob_3 max               20000
 unit_set_value knob_3 curve             exponential
-unit_set_value knob_3 position          0.5
 
 unit_set_value knob_4 min               0.01 # q factor
 unit_set_value knob_4 max               100
 unit_set_value knob_4 curve             exponential
-unit_set_value knob_4 position          0.5
 
 unit_create bandpass BP
 unit_set_value BP input                 delayed

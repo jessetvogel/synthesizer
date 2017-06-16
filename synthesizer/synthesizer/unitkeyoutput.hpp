@@ -8,7 +8,6 @@ class UnitKeyOutput : public Unit {
 public:
     
     UnitKeyOutput(Controller*);
-    ~UnitKeyOutput();
     
     void apply(Instrument*);
 };

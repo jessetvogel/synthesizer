@@ -7,18 +7,18 @@ class UnitKeyInfo : public Unit {
 
 public:
     
-    enum Type { Frequency, Velocity, Duration, Release };
+    enum InfoType { Frequency, Velocity, Duration, Release };
     
 private:
     
-    Type type;
+    InfoType infoType;
     
 public:
     
-    UnitKeyInfo(Controller*, Type);
-    ~UnitKeyInfo();
+    UnitKeyInfo(Controller*, InfoType);
     
     void apply(Instrument*);
+    
 };
 
 #endif

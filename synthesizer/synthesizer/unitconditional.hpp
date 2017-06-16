@@ -5,20 +5,18 @@
 
 class UnitConditional : public Unit {
     
-    Unit* input = NULL;
-    Unit* low = NULL;
-    Unit* high = NULL;
-    Unit* outputLow = NULL;
-    Unit* outputMiddle = NULL;
-    Unit* outputHigh = NULL;
+    Parameter* input;
+    Parameter* low;
+    Parameter* high;
+    Parameter* outputLow;
+    Parameter* outputMiddle;
+    Parameter* outputHigh;
     
 public:
     
     UnitConditional(Controller*, bool);
-    ~UnitConditional();
     
     void apply(Instrument*);
-    bool setValue(std::string, std::string);
 
 };
 

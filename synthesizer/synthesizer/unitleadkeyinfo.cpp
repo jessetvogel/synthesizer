@@ -3,12 +3,13 @@
 #include "instrument.hpp"
 #include "midistate.hpp"
 
-UnitLeadKeyInfo::UnitLeadKeyInfo(Controller* controller, Type type) {
+UnitLeadKeyInfo::UnitLeadKeyInfo(Controller* controller, InfoType infoType) {
     // Store pointer to controller
     this->controller = controller;
+    type = "lead_key_info";
     
     // Store type
-    this->type = type;
+    this->infoType = infoType;
     
     // Not key dependent
     keyDependent = false;
@@ -18,16 +19,11 @@ UnitLeadKeyInfo::UnitLeadKeyInfo(Controller* controller, Type type) {
     memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
 }
 
-UnitLeadKeyInfo::~UnitLeadKeyInfo() {
-    delete[] output;
-}
-
 void UnitLeadKeyInfo::apply(Instrument* instrument) {
     KeyEvent keyEvent = controller->getMidiState()->leadKey;
     double frequency, velocity, duration, release, t, pressing;
     
-    
-    switch(type) {
+    switch(infoType) {
         case Frequency:
             frequency = keyEvent.frequency;
             for(int x = 0;x < controller->getFramesPerBuffer(); ++x)

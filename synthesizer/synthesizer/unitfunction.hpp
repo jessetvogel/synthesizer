@@ -6,16 +6,14 @@
 
 class UnitFunction : public Unit {
     
-    Unit* input = NULL;
-    Function::Type function;
+    Parameter* input;
+    Parameter* function;
     
 public:
     
     UnitFunction(Controller*, bool);
-    ~UnitFunction();
     
     void apply(Instrument*);
-    bool setValue(std::string, std::string);
     
 };
 

@@ -1,38 +1,36 @@
 #include "unitconditional.hpp"
 #include "controller.hpp"
 #include "instrument.hpp"
+#include "parameter.hpp"
 
 UnitConditional::UnitConditional(Controller* controller, bool keyDependent) {
     // Store pointer to controller
     this->controller = controller;
+    type = "conditional";
     
     // May or may not be key dependent
     this->keyDependent = keyDependent;
     
     // Set default values
-    Unit::set(controller, &input, "0.0", keyDependent);
-    Unit::set(controller, &low, "0.0", keyDependent);
-    Unit::set(controller, &high, "0.0", keyDependent);
-    Unit::set(controller, &outputLow, "0.0", keyDependent);
-    Unit::set(controller, &outputMiddle, "0.0", keyDependent);
-    Unit::set(controller, &outputHigh, "0.0", keyDependent);
+    parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
+    parameters.push_back(low = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "low", "0.0"));
+    parameters.push_back(high = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "high", "0.0"));
+    parameters.push_back(outputLow = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "output_low", "0.0"));
+    parameters.push_back(outputMiddle = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "output_middle", "0.0"));
+    parameters.push_back(outputHigh = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "output_high", "0.0"));
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
     memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
 }
 
-UnitConditional::~UnitConditional() {
-    delete[] output;
-}
-
 void UnitConditional::apply(Instrument* instrument) {
-    input->update(instrument);
-    low->update(instrument);
-    high->update(instrument);
-    outputLow->update(instrument);
-    outputMiddle->update(instrument);
-    outputHigh->update(instrument);
+    Unit* input = (Unit*) (this->input->pointer);
+    Unit* low = (Unit*) (this->low->pointer);
+    Unit* high = (Unit*) (this->high->pointer);
+    Unit* outputLow = (Unit*) (this->outputLow->pointer);
+    Unit* outputMiddle = (Unit*) (this->outputMiddle->pointer);
+    Unit* outputHigh = (Unit*) (this->outputHigh->pointer);
     
     for(int x = 0;x < controller->getFramesPerBuffer(); ++x) {
         float y = input->output[x];
@@ -47,25 +45,3 @@ void UnitConditional::apply(Instrument* instrument) {
         output[x] = outputMiddle->output[x];
     }
 }
-
-bool UnitConditional::setValue(std::string parameter, std::string value) {
-    if(parameter.compare("input") == 0)
-        return Unit::set(controller, &input, value, keyDependent);
-    
-    if(parameter.compare("low") == 0)
-        return Unit::set(controller, &low, value, keyDependent);
-    
-    if(parameter.compare("high") == 0)
-        return Unit::set(controller, &high, value, keyDependent);
-    
-    if(parameter.compare("output_low") == 0)
-        return Unit::set(controller, &outputLow, value, keyDependent);
-    
-    if(parameter.compare("output_middle") == 0)
-        return Unit::set(controller, &outputMiddle, value, keyDependent);
-    
-    if(parameter.compare("output_high") == 0)
-        return Unit::set(controller, &outputHigh, value, keyDependent);
-    
-    return false;
-};

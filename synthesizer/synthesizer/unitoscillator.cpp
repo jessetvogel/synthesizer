@@ -1,21 +1,23 @@
 #include "unitoscillator.hpp"
 #include "controller.hpp"
 #include "instrument.hpp"
+#include "parameter.hpp"
 #include "sample.hpp"
 #include "settings.hpp"
 
 UnitOscillator::UnitOscillator(Controller* controller, bool keyDependent) {
     // Store pointer to controller
     this->controller = controller;
+    type = "oscillator";
     
     // May or may not be key dependent
     this->keyDependent = keyDependent;
     
-    // Set default values
-    sample = Sample::sine;
-    Unit::set(controller, &frequency, "0.0", keyDependent);
-    Unit::set(controller, &amplitude, "1.0", keyDependent);
-    Unit::set(controller, &mean, "0.0", keyDependent);
+    // Set default values for parameters
+    parameters.push_back(sample = new Parameter(controller, Parameter::SAMPLE, "sample", "sine"));
+    parameters.push_back(frequency = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "frequency", "0.0"));
+    parameters.push_back(amplitude = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "amplitude", "1.0"));
+    parameters.push_back(mean = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "mean", "0.0"));
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
@@ -33,13 +35,13 @@ UnitOscillator::UnitOscillator(Controller* controller, bool keyDependent) {
 
 UnitOscillator::~UnitOscillator() {
     delete[] phase;
-    delete[] output;
 }
 
 void UnitOscillator::apply(Instrument* instrument) {
-    frequency->update(instrument);
-    amplitude->update(instrument);
-    mean->update(instrument);
+    Sample* sample = (Sample*) (this->sample->pointer);
+    Unit* frequency = (Unit*) (this->frequency->pointer);
+    Unit* amplitude = (Unit*) (this->amplitude->pointer);
+    Unit* mean = (Unit*) (this->mean->pointer);
     
     double t = 1.0 / controller->getSampleRate();
     int i = keyDependent ? instrument->currentKey->id : 0;
@@ -48,20 +50,4 @@ void UnitOscillator::apply(Instrument* instrument) {
         output[x] = mean->output[x] + amplitude->output[x] * sample->getValue(phase[i]);
         phase[i] += t * frequency->output[x] * 2.0 * M_PI;
     }
-}
-
-bool UnitOscillator::setValue(std::string parameter, std::string value) {
-    if(parameter.compare("sample") == 0)
-        return Sample::set(controller, &sample, value);
-    
-    if(parameter.compare("frequency") == 0)
-        return Unit::set(controller, &frequency, value, keyDependent);
-    
-    if(parameter.compare("amplitude") == 0)
-        return Unit::set(controller, &amplitude, value, keyDependent);
-    
-    if(parameter.compare("mean") == 0)
-        return Unit::set(controller, &mean, value, keyDependent);
-    
-    return false;
 }

@@ -19,13 +19,17 @@ public:
     static std::string COMMAND_NOT_RECOGNISED;
     static std::string INVALID_NUMBER_OF_ARGUMENTS;
     static std::string INVALID_ARGUMENT;
-    static std::string EXPECTED_KEY_UNDEPENDENT;
+    static std::string EXPECTED_KEY_INDEPENDENT;
     
     // Not found errors
     static std::string INSTRUMENT_NOT_FOUND;
     static std::string UNIT_NOT_FOUND;
     static std::string UNIT_TYPE_NOT_FOUND;
     static std::string UNIT_LABEL_ALREADY_USED;
+    static std::string SAMPLE_NOT_FOUND;
+    static std::string CURVE_NOT_FOUND;
+    static std::string FUNCTION_NOT_FOUND;
+    static std::string UNKNOWN_PARAMETER;
     
     // Input stream errors
     static std::string INPUT_DEVICE_NOT_EXISTS;

@@ -2,28 +2,35 @@
 
 #include <cmath>
 
-double Function::evaluate(Type type, double x) {
-    switch(type) {
-        case Identity: return identity(x);
-        case Pow10: return pow10(x);
-    }
-}
-
-double Function::identity(double x) {
-    return x;
-}
-
-double Function::pow10(double x) {
-    return pow(10.0, x);
-}
-
-bool Function::set(Controller* controller, Type* parameterAddr, std::string value) {
-    if(value.compare("identity") == 0) { *parameterAddr = Identity; return true; }
-    if(value.compare("pow10") == 0) { *parameterAddr = Pow10; return true; }
+double Function::evaluate(Function* function, double x) {
+    if(function == Identity)
+        return x;
     
-    return false;
+    if(function == Pow10)
+        return pow(10.0, x);
+    
+    return 0.0;
 }
 
 double Function::fuzz(double input, double inputGain) {
     return ((input > 0.0) ? 1.0 : ((input < 0.0) ? -1.0 : 0.0)) * (1.0 - std::exp(- inputGain * std::abs(input))) / (1.0 - std::exp(- inputGain));
+}
+
+std::string Function::getId() {
+    if(this == Identity) return "identity";
+    if(this == Pow10) return "pow10";
+    return "undefined";
+}
+
+Function* Function::Identity;
+Function* Function::Pow10;
+
+void Function::initialize() {
+    Identity = new Function();
+    Pow10 = new Function();
+}
+
+void Function::destruct() {
+    delete Identity;
+    delete Pow10;
 }

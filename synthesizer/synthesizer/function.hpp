@@ -9,17 +9,15 @@ class Function {
 
 public:
     
-    enum Type {
-        Identity,
-        Pow10
-    };
+    static double evaluate(Function*, double);
     
-    static double evaluate(Type, double);
+    static void initialize();
+    static void destruct();
     
-    static double identity(double);
-    static double pow10(double); 
+    std::string getId();
     
-    static bool set(Controller*, Type*, std::string);
+    static Function* Identity;
+    static Function* Pow10;
     
     static double fuzz(double, double);
     

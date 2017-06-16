@@ -6,8 +6,8 @@
 class UnitAdder : public Unit {
 
     int n;
-    Unit** gains;
-    Unit** inputs;
+    Parameter** gains;
+    Parameter** inputs;
     
 public:
     
@@ -15,7 +15,6 @@ public:
     ~UnitAdder();
     
     void apply(Instrument*);
-    bool setValue(std::string, std::string);
     
     static const int maxN;
 };

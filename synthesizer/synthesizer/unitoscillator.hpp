@@ -3,14 +3,14 @@
 
 #include "unit.hpp"
 
-class Sample;
+class Parameter;
 
 class UnitOscillator : public Unit {
     
-    Sample* sample;
-    Unit* frequency = NULL;
-    Unit* amplitude = NULL;
-    Unit* mean = NULL;
+    Parameter* sample;
+    Parameter* frequency;
+    Parameter* amplitude;
+    Parameter* mean;
     
     double* phase;
     
@@ -20,7 +20,6 @@ public:
     ~UnitOscillator();
     
     void apply(Instrument*);
-    bool setValue(std::string, std::string);
     
 };
 

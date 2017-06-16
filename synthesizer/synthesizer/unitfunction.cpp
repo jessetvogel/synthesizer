@@ -1,38 +1,28 @@
 #include "unitfunction.hpp"
 #include "controller.hpp"
+#include "parameter.hpp"
 
 UnitFunction::UnitFunction(Controller* controller, bool keyDependent) {
     // Store pointer to controller
     this->controller = controller;
+    type = "function";
     
     // May or may not be key dependent
     this->keyDependent = keyDependent;
     
     // Set default values
-    Unit::set(controller, &input, "0.0", keyDependent);
-    function = Function::Identity;
+    parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
+    parameters.push_back(function = new Parameter(controller, Parameter::FUNCTION, "function", "identity"));
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
     memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
 }
 
-UnitFunction::~UnitFunction() {
-    delete[] output;
-}
-
 void UnitFunction::apply(Instrument* instrument) {
-    input->update(instrument);
+    Unit* input = (Unit*) (this->input->pointer);
+    Function* function = (Function*) (this->function->pointer);
+    
     for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
         output[x] = Function::evaluate(function, input->output[x]);
-}
-
-bool UnitFunction::setValue(std::string parameter, std::string value) {
-    if(parameter.compare("input") == 0)
-        return Unit::set(controller, &input, value, keyDependent);
-    
-    if(parameter.compare("function") == 0)
-        return Function::set(controller, &function, value);
-    
-    return false;
 }

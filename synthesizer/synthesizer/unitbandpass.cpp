@@ -1,19 +1,21 @@
 #include "unitbandpass.hpp"
 #include "controller.hpp"
 #include "instrument.hpp"
+#include "parameter.hpp"
 #include "settings.hpp"
 
 UnitBandPass::UnitBandPass(Controller* controller) {
     // Store pointer to controller
     this->controller = controller;
+    type = "bandpass";
     
     // May or may not be key dependent
     this->keyDependent = false;
     
     // Set default values
-    Unit::set(controller, &input, "0.0", keyDependent);
-    Unit::set(controller, &centerFrequency, "1000.0", keyDependent);
-    Unit::set(controller, &qFactor, "1.0", keyDependent); // TODO: come up with some standard values
+    parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
+    parameters.push_back(centerFrequency = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "center", "1000.0"));
+    parameters.push_back(qFactor = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "q_factor", "1.0")); // TODO: come up with some standard values
     input_1 = 0.0;
     input_2 = 0.0;
     output_1 = 0.0;
@@ -25,9 +27,9 @@ UnitBandPass::UnitBandPass(Controller* controller) {
 }
 
 void UnitBandPass::apply(Instrument* instrument) {
-    input->update(instrument);
-    centerFrequency->update(instrument);
-    qFactor->update(instrument);
+    Unit* input = (Unit*) (this->input->pointer);
+    Unit* centerFrequency = (Unit*) (this->centerFrequency->pointer);
+    Unit* qFactor = (Unit*) (this->qFactor->pointer);
     
     unsigned long framesPerBuffer = controller->getFramesPerBuffer();
     double i0, i2, o1, o2, alpha, beta;
@@ -49,17 +51,4 @@ void UnitBandPass::apply(Instrument* instrument) {
     input_2 = input->output[framesPerBuffer - 2];
     output_1 = output[framesPerBuffer - 1];
     output_2 = output[framesPerBuffer - 2];
-}
-
-bool UnitBandPass::setValue(std::string parameter, std::string value) {
-    if(parameter.compare("input") == 0)
-        return Unit::set(controller, &input, value, keyDependent);
-    
-    if(parameter.compare("center") == 0)
-        return Unit::set(controller, &centerFrequency, value, keyDependent);
-    
-    if(parameter.compare("q_factor") == 0)
-        return Unit::set(controller, &qFactor, value, keyDependent);
-    
-    return false;
 }

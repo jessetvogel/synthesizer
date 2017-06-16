@@ -5,10 +5,10 @@
 
 class UnitPWM : public Unit {
     
-    Unit* frequency = NULL;
-    Unit* duty = NULL;
-    Unit* high = NULL;
-    Unit* low = NULL;
+    Parameter* frequency;
+    Parameter* duty;
+    Parameter* high;
+    Parameter* low;
     
     double* phase;
     
@@ -18,7 +18,6 @@ public:
     ~UnitPWM();
     
     void apply(Instrument*);
-    bool setValue(std::string, std::string);
     
 };
 

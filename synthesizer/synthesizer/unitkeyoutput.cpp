@@ -5,6 +5,7 @@
 UnitKeyOutput::UnitKeyOutput(Controller* controller) {
     // Store pointer to controller
     this->controller = controller;
+    type = "key_output";
     
     // Not key dependent
     keyDependent = false;
@@ -13,10 +14,6 @@ UnitKeyOutput::UnitKeyOutput(Controller* controller) {
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
     memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
-}
-
-UnitKeyOutput::~UnitKeyOutput() {
-    delete[] output;
 }
 
 void UnitKeyOutput::apply(Instrument* instrument) {

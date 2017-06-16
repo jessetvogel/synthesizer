@@ -191,6 +191,7 @@ bool Controller::addInstrument(Instrument* instrument, std::string label) {
 bool Controller::addUnit(Unit* unit, std::string label) {
     if(units.find(label) != units.end()) return false;
     
+    unit->id = label;
     units[label] = unit;
     return true;
 }
@@ -238,6 +239,7 @@ bool Controller::renameUnit(std::string oldLabel, std::string newLabel) {
         return false;
     }
     
+    units[oldLabel]->id = newLabel;
     units[newLabel] = units[oldLabel];
     units.erase(oldLabel);
     return true;

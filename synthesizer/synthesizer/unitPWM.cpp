@@ -1,20 +1,22 @@
 #include "unitPWM.hpp"
 #include "controller.hpp"
 #include "instrument.hpp"
+#include "parameter.hpp"
 #include "settings.hpp"
 
 UnitPWM::UnitPWM(Controller* controller, bool keyDependent) {
     // Store pointer to controller
     this->controller = controller;
+    type = "PWM";
     
     // May or may not be key dependent
     this->keyDependent = keyDependent;
     
     // Set default values
-    Unit::set(controller, &frequency, "0.0", keyDependent);
-    Unit::set(controller, &duty, "0.0", keyDependent);
-    Unit::set(controller, &low, "0.0", keyDependent);
-    Unit::set(controller, &high, "1.0", keyDependent);
+    parameters.push_back(frequency = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "frequency", "0.0"));
+    parameters.push_back(duty = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "duty", "0.0"));
+    parameters.push_back(low = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "low", "0.0"));
+    parameters.push_back(high = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "high", "1.0"));
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
@@ -32,14 +34,13 @@ UnitPWM::UnitPWM(Controller* controller, bool keyDependent) {
 
 UnitPWM::~UnitPWM() {
     delete[] phase;
-    delete[] output;
 }
 
 void UnitPWM::apply(Instrument* instrument) {
-    frequency->update(instrument);
-    duty->update(instrument);
-    low->update(instrument);
-    high->update(instrument);
+    Unit* frequency = (Unit*) (this->frequency->pointer);
+    Unit* duty = (Unit*) (this->duty->pointer);
+    Unit* low = (Unit*) (this->low->pointer);
+    Unit* high = (Unit*) (this->high->pointer);
    
     double t = 1.0 / controller->getSampleRate();
     int i = keyDependent ? instrument->currentKey->id : 0;
@@ -49,20 +50,4 @@ void UnitPWM::apply(Instrument* instrument) {
         phase[i] += t * frequency->output[x];
         if(phase[i] >= 1.0) phase[i] -= floor(phase[i]);
     }
-}
-
-bool UnitPWM::setValue(std::string parameter, std::string value) {
-    if(parameter.compare("frequency") == 0)
-        return Unit::set(controller, &frequency, value, keyDependent);
-    
-    if(parameter.compare("duty") == 0)
-        return Unit::set(controller, &duty, value, keyDependent);
-
-    if(parameter.compare("low") == 0)
-        return Unit::set(controller, &low, value, keyDependent);
-    
-    if(parameter.compare("high") == 0)
-        return Unit::set(controller, &high, value, keyDependent);
-    
-    return false;
 }

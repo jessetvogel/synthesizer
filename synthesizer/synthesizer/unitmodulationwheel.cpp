@@ -6,6 +6,7 @@
 UnitModulationWheel::UnitModulationWheel(Controller* controller) {
     // Store pointer to controller
     this->controller = controller;
+    type = "modulation_wheel";
     
     // The modulation wheel is not key dependent
     keyDependent = false;
@@ -13,10 +14,6 @@ UnitModulationWheel::UnitModulationWheel(Controller* controller) {
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
     memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
-}
-
-UnitModulationWheel::~UnitModulationWheel() {
-    delete[] output;
 }
 
 void UnitModulationWheel::apply(Instrument* instrument) {

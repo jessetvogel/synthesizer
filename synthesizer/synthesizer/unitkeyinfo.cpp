@@ -2,12 +2,13 @@
 #include "controller.hpp"
 #include "instrument.hpp"
 
-UnitKeyInfo::UnitKeyInfo(Controller* controller, Type type) {
+UnitKeyInfo::UnitKeyInfo(Controller* controller, InfoType infoType) {
     // Store pointer to controller
     this->controller = controller;
+    type = "key_info";
     
     // Store type
-    this->type = type;
+    this->infoType = infoType;
     
     // Obviously key dependent
     keyDependent = true;
@@ -17,15 +18,11 @@ UnitKeyInfo::UnitKeyInfo(Controller* controller, Type type) {
     memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
 }
 
-UnitKeyInfo::~UnitKeyInfo() {
-    delete[] output;
-}
-
 void UnitKeyInfo::apply(Instrument* instrument) {
     KeyEvent* keyEvent = instrument->currentKey;
     double frequency, velocity, duration, release, t;
     
-    switch(type) {
+    switch(infoType) {
         case Frequency:
             frequency = keyEvent->frequency;
             for(int x = 0;x < controller->getFramesPerBuffer(); ++x)

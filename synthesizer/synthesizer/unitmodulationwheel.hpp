@@ -8,9 +8,9 @@ class UnitModulationWheel : public Unit {
 public:
     
     UnitModulationWheel(Controller*);
-    ~UnitModulationWheel();
     
     void apply(Instrument*);
+    
 };
 
 #endif

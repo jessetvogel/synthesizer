@@ -6,6 +6,7 @@
 UnitConstant::UnitConstant(Controller* controller, double value) {
     // Store pointer to controller
     this->controller = controller;
+    type = "constant";
     
     // Store value
     this->value = value;

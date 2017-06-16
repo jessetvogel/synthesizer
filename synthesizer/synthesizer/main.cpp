@@ -6,6 +6,8 @@
 #include "parser.hpp"
 #include "settings.hpp"
 #include "sample.hpp"
+#include "curve.hpp"
+#include "function.hpp"
 #include "commands.hpp"
 #include "error.hpp"
 
@@ -63,9 +65,13 @@ void initialize() {
     Pm_Initialize();
     Pa_Initialize();
     Sample::initialize();
+    Curve::initialize();
+    Function::initialize();
 }
 
 void destruct() {
+    Function::destruct();
+    Curve::destruct();
     Sample::destruct();
     Pa_Terminate();
     Pm_Terminate();

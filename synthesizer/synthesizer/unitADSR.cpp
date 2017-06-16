@@ -1,57 +1,53 @@
 #include "unitADSR.hpp"
 #include "controller.hpp"
 #include "instrument.hpp"
+#include "parameter.hpp"
+#include "curve.hpp"
 #include "midistate.hpp"
 
 UnitADSR::UnitADSR(Controller* controller, bool keyDependent) {
     // Store pointer to controller
     this->controller = controller;
+    type = "ADSR";
     
     // An ADSR may or may not be key dependent
     this->keyDependent = keyDependent;
     
     // Set default values
-    Unit::set(controller, &startLevel, "0.0", keyDependent);
-    Unit::set(controller, &attackLevel, "1.0", keyDependent);
-    Unit::set(controller, &sustainLevel, "1.0", keyDependent);
-    Unit::set(controller, &releaseLevel, "0.0", keyDependent);
+    parameters.push_back(startLevel = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "start_level", "0.0"));
+    parameters.push_back(attackLevel = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "attack_level", "1.0"));
+    parameters.push_back(sustainLevel = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "sustain_level", "1.0"));
+    parameters.push_back(releaseLevel = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "release_level", "0.0"));
     
-    Unit::set(controller, &attackTime, "0.0", keyDependent);
-    Unit::set(controller, &decayTime, "0.0", keyDependent);
-    Unit::set(controller, &releaseTime, "0.0", keyDependent);
+    parameters.push_back(attackTime = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "attack_time", "0.0"));
+    parameters.push_back(decayTime = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "decay_time", "0.0"));
+    parameters.push_back(releaseTime = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "release_time", "0.0"));
     
-    if(keyDependent) {
-        Unit::set(controller, &duration, "key_duration", keyDependent);
-        Unit::set(controller, &release, "key_release", keyDependent);
-    }
-    else {
-        Unit::set(controller, &duration, "lead_key_duration", keyDependent);
-        Unit::set(controller, &release, "lead_key_release", keyDependent);
-    }
+    parameters.push_back(duration = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "duration", keyDependent ? "key_duration" : "lead_key_duration"));
+    parameters.push_back(release = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "release", keyDependent ? "key_release" : "lead_key_release"));
     
-    attackType = Interpolation::Linear;
-    decayType = Interpolation::Linear;
-    releaseType = Interpolation::Linear;
+    parameters.push_back(attackCurve = new Parameter(controller, Parameter::CURVE, "attack_curve", "linear"));
+    parameters.push_back(decayCurve = new Parameter(controller, Parameter::CURVE, "decay_curve", "linear"));
+    parameters.push_back(releaseCurve = new Parameter(controller, Parameter::CURVE, "release_curve", "linear"));
     
     // Create arrays
     output = new float[controller->getFramesPerBuffer()];
     memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
 }
 
-UnitADSR::~UnitADSR() {
-    delete[] output;
-}
-
 void UnitADSR::apply(Instrument* instrument) {
-    startLevel->update(instrument);
-    attackLevel->update(instrument);
-    sustainLevel->update(instrument);
-    releaseLevel->update(instrument);
-    attackTime->update(instrument);
-    decayTime->update(instrument);
-    releaseTime->update(instrument);
-    duration->update(instrument);
-    release->update(instrument);
+    Unit* startLevel = (Unit*) (this->startLevel->pointer);
+    Unit* attackLevel = (Unit*) (this->attackLevel->pointer);
+    Unit* sustainLevel = (Unit*) (this->sustainLevel->pointer);
+    Unit* releaseLevel = (Unit*) (this->releaseLevel->pointer);
+    Unit* attackTime = (Unit*) (this->attackTime->pointer);
+    Unit* decayTime = (Unit*) (this->decayTime->pointer);
+    Unit* releaseTime = (Unit*) (this->releaseTime->pointer);
+    Unit* duration = (Unit*) (this->duration->pointer);
+    Unit* release = (Unit*) (this->release->pointer);
+    Curve* attackCurve = (Curve*) (this->attackCurve->pointer);
+    Curve* decayCurve = (Curve*) (this->decayCurve->pointer);
+    Curve* releaseCurve = (Curve*) (this->releaseCurve->pointer);
     
     for(int x = 0;x < controller->getFramesPerBuffer(); ++x) {
         
@@ -66,11 +62,11 @@ void UnitADSR::apply(Instrument* instrument) {
         
         // Attack stage
         if(d < attack)
-            amplitude = Interpolation::ease(startLevel->output[x], attackLevel->output[x], d / attack, attackType);
+            amplitude = Curve::ease(startLevel->output[x], attackLevel->output[x], d / attack, attackCurve);
         
         // Decay stage
         else if(d < attack + decay)
-            amplitude = Interpolation::ease(attackLevel->output[x], sustainLevel->output[x], (d - attack) / decay, decayType);
+            amplitude = Curve::ease(attackLevel->output[x], sustainLevel->output[x], (d - attack) / decay, decayCurve);
         
         // Sustain stage
         else amplitude = sustainLevel->output[x];
@@ -80,43 +76,9 @@ void UnitADSR::apply(Instrument* instrument) {
             if(r >= releaseT)
                 amplitude = releaseLevel->output[x];
             else
-                amplitude = Interpolation::ease(amplitude, releaseLevel->output[x], r / releaseT, releaseType);
+                amplitude = Curve::ease(amplitude, releaseLevel->output[x], r / releaseT, releaseCurve);
         }
         
         output[x] = amplitude;
     }
 }
-
-bool UnitADSR::setValue(std::string parameter, std::string value) {
-    if(parameter.compare("start_level") == 0)
-        return Unit::set(controller, &startLevel, value, keyDependent);
-    
-    if(parameter.compare("attack_level") == 0)
-        return Unit::set(controller, &attackLevel, value, keyDependent);
-
-    if(parameter.compare("sustain_level") == 0)
-        return Unit::set(controller, &sustainLevel, value, keyDependent);
-    
-    if(parameter.compare("release_level") == 0)
-        return Unit::set(controller, &releaseLevel, value, keyDependent);
-    
-    if(parameter.compare("attack_time") == 0)
-        return Unit::set(controller, &attackTime, value, keyDependent);
-    
-    if(parameter.compare("decay_time") == 0)
-        return Unit::set(controller, &decayTime, value, keyDependent);
-    
-    if(parameter.compare("release_time") == 0)
-        return Unit::set(controller, &releaseTime, value, keyDependent);
-    
-    if(parameter.compare("attack_type") == 0)
-        return Interpolation::set(controller, &attackType, value);
-    
-    if(parameter.compare("decay_type") == 0)
-        return Interpolation::set(controller, &decayType, value);
-    
-    if(parameter.compare("release_type") == 0)
-        return Interpolation::set(controller, &releaseType, value);
-    
-    return false;
-};

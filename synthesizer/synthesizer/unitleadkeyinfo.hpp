@@ -7,18 +7,18 @@ class UnitLeadKeyInfo : public Unit {
     
 public:
 
-    enum Type { Frequency, Velocity, Duration, Release, Pressing };
+    enum InfoType { Frequency, Velocity, Duration, Release, Pressing };
     
 private:
     
-    Type type;
+    InfoType infoType;
     
 public:
     
-    UnitLeadKeyInfo(Controller*, Type);
-    ~UnitLeadKeyInfo();
+    UnitLeadKeyInfo(Controller*, InfoType);
     
     void apply(Instrument*);
+    
 };
 
 

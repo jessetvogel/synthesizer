@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+  // Refresh all devices
+  devices.refreshAllDevices();
+
   // List item selection
   $('.list-item').click(function () {
     $(this).siblings('.list-item').removeClass('list-item-selected');
@@ -28,3 +31,27 @@ $(document).ready(function () {
   });
 
 });
+
+function parseResponse(response) {
+  // Parse the response
+  var data = JSON.parse(response);
+
+  for(var key in data) {
+    // Skip loop if the property is from prototype
+    if (!data.hasOwnProperty(key)) continue;
+
+    switch(key) {
+      case 'error':
+        alert(data[key]);
+        break;
+
+      case 'midiDevices':
+        devices.setMIDIDevices(data[key]);
+        break;
+
+      case 'outputDevices':
+        devices.setOutputDevices(data[key]);
+        break;
+    }
+  }
+}

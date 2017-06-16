@@ -1,3 +1,4 @@
+#include <iostream>
 #include <fstream>
 #include <regex>
 
@@ -31,8 +32,10 @@ bool Parser::parseFile(std::string filepath) {
     int lineNumber = 1;
     std::string line;
     while(std::getline(input, line)) {
-        if(!parseLine(line))
+        if(!parseLine(line)) {
+            std::cout << "Error in line '" << line << "'" << std::endl;
             return false;
+        }
         
         ++ lineNumber;
     }
@@ -235,7 +238,7 @@ bool Parser::parseLine(std::string line) {
             return false;
         }
         
-        return unit->setValue(cm[2], cm[3]);
+        return unit->setParameter(cm[2], cm[3]);
     }
     
     Error::addError(Error::COMMAND_NOT_RECOGNISED);

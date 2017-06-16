@@ -11,7 +11,8 @@ class Status {
     
     void printMidiDevices();
     void printOutputDevices();
-    
+    void printUnits();
+
 public:
     
     Status(Controller*);

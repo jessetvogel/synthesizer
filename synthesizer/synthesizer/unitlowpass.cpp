@@ -1,17 +1,19 @@
 #include "unitlowpass.hpp"
 #include "controller.hpp"
 #include "instrument.hpp"
+#include "parameter.hpp"
 
 UnitLowpass::UnitLowpass(Controller* controller) {
     // Store pointer to controller
     this->controller = controller;
+    type = "lowpass";
     
     // Not key dependent
     this->keyDependent = false;
     
     // Set default values
-    Unit::set(controller, &input, "0.0", keyDependent);
-    Unit::set(controller, &cutOffFrequency, "1000.0", keyDependent);
+    parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
+    parameters.push_back(cutOffFrequency = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "cutoff", "1000.0"));
     output_1 = 0.0;
     
     // Create arrays
@@ -20,8 +22,8 @@ UnitLowpass::UnitLowpass(Controller* controller) {
 }
 
 void UnitLowpass::apply(Instrument* instrument) {
-    input->update(instrument);
-    cutOffFrequency->update(instrument);
+    Unit* input = (Unit*) (this->input->pointer);
+    Unit* cutOffFrequency = (Unit*) (this->cutOffFrequency->pointer);
     
     unsigned long framesPerBuffer = controller->getFramesPerBuffer();
     for(int x = 0;x < framesPerBuffer; ++x) {
@@ -31,14 +33,4 @@ void UnitLowpass::apply(Instrument* instrument) {
     }
     
     output_1 = output[framesPerBuffer - 1];
-}
-
-bool UnitLowpass::setValue(std::string parameter, std::string value) {
-    if(parameter.compare("input") == 0)
-        return Unit::set(controller, &input, value, keyDependent);
-    
-    if(parameter.compare("cutoff") == 0)
-        return Unit::set(controller, &cutOffFrequency, value, keyDependent);
-    
-    return false;
 }

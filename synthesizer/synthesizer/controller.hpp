@@ -25,7 +25,6 @@ class Controller {
     Output* output;
     
     std::unordered_map<std::string, Instrument*> instruments;
-    std::unordered_map<std::string, Unit*> units;
     std::unordered_map<int, UnitParameter*> parameters;
     std::vector<UnitConstant*> unitConstants;
     
@@ -39,6 +38,8 @@ class Controller {
     void updateSettings();
     
 public:
+    
+    std::unordered_map<std::string, Unit*> units; // TODO: make private?
     
     Controller(Settings*);
     ~Controller();

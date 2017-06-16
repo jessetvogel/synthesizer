@@ -3,6 +3,7 @@
 #include "unit.hpp"
 #include "util.hpp"
 #include "controller.hpp"
+#include "parameter.hpp"
 
 #include "unitoscillator.hpp"
 #include "unitconstant.hpp"
@@ -12,7 +13,7 @@
 #include "unitlowpass.hpp"
 #include "unithighpass.hpp"
 #include "unitbandpass.hpp"
-#include "unitvariable.hpp"
+#include "unitlabel.hpp"
 #include "unitconditional.hpp"
 #include "unitfuzz.hpp"
 #include "unitdelay.hpp"
@@ -59,8 +60,8 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent, 
     if(arg1.length() != 0) return NULL;
     
     // Variable
-    if(type.compare("variable") == 0)
-        return new UnitVariable(controller);
+    if(type.compare("label") == 0)
+        return new UnitLabel(controller);
     
     // Oscillator
     if(type.compare("oscillator") == 0)
@@ -106,29 +107,35 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent, 
     return NULL;
 }
 
-bool Unit::set(Controller* controller, Unit** parameterAddr, std::string value, bool allowKeyDependent) {
-    if(Util::isNumber(value)) {
-        // If we are overwriting a unit constant, delete the old constant
-        if(*parameterAddr != NULL && controller->isUnitConstant(*parameterAddr))
-            controller->deleteUnitConstant((UnitConstant*) *parameterAddr);
-        
-        // Create a new unit constant
-        *parameterAddr = controller->createUnitConstant(stod(value));
-        return true;
+void Unit::update(Instrument* instrument) {
+    if(updated)
+        return;
+    
+    if(!applyAlways)
+        updated = true;
+    
+    // Update all unit parameters
+    for(auto it = parameters.begin(); it != parameters.end(); ++it) {
+        if((*it)->type == Parameter::UNIT || (*it)->type == Parameter::UNIT_KEY_INDEPENDENT)
+            ((Unit*) ((*it)->pointer))->update(instrument);
     }
-    else {
-        // Check if given unit exists
-        Unit* unit = controller->getUnit(value);
-        if(unit == NULL) { Error::addError(Error::UNIT_NOT_FOUND); return false; }
-        
-        // Check for key dependence
-        if(!allowKeyDependent && unit->keyDependent) { Error::addError(Error::EXPECTED_KEY_UNDEPENDENT); return false; }
-        
-        // If we are overwriting a unit constant, delete the old constant
-        if(*parameterAddr != NULL && controller->isUnitConstant(*parameterAddr))
-            controller->deleteUnitConstant((UnitConstant*) *parameterAddr);
-        
-        *parameterAddr = unit;
-        return true;
+    
+    apply(instrument);
+};
+
+bool Unit::setParameter(std::string label, std::string value) {
+    for(auto it = parameters.begin(); it != parameters.end(); ++it) {
+        if(label.compare((*it)->label) == 0)
+            return (*it)->set(value);
+    }
+    Error::addError(Error::UNKNOWN_PARAMETER);
+    return false;
+}
+
+Unit::~Unit() {
+    delete output;
+    
+    for(auto it = parameters.begin(); it != parameters.end(); ++it) {
+        delete *it;
     }
 }
