@@ -3,20 +3,16 @@
 #include "instrument.hpp"
 #include "midistate.hpp"
 
-UnitModulationWheel::UnitModulationWheel(Controller* controller) {
-    // Store pointer to controller
-    this->controller = controller;
+UnitModulationWheel::UnitModulationWheel(Controller* controller) : Unit(controller) {
+    // Set type
     type = "modulation_wheel";
     
     // The modulation wheel is not key dependent
     keyDependent = false;
-    
-    // Create arrays
-    output = new float[controller->getFramesPerBuffer()];
-    memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
 }
 
 void UnitModulationWheel::apply(Instrument* instrument) {
-    for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
-        output[x] = controller->getMidiState()->modulationWheel;
+    double value = controller->getMidiState()->modulationWheel;
+    for(int x = 0;x < framesPerBuffer; ++x)
+        output[x] = value;
 }

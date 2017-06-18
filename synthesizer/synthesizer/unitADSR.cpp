@@ -5,9 +5,8 @@
 #include "curve.hpp"
 #include "midistate.hpp"
 
-UnitADSR::UnitADSR(Controller* controller, bool keyDependent) {
-    // Store pointer to controller
-    this->controller = controller;
+UnitADSR::UnitADSR(Controller* controller, bool keyDependent) : Unit(controller) {
+    // Set type
     type = "ADSR";
     
     // An ADSR may or may not be key dependent
@@ -29,10 +28,6 @@ UnitADSR::UnitADSR(Controller* controller, bool keyDependent) {
     parameters.push_back(attackCurve = new Parameter(controller, Parameter::CURVE, "attack_curve", "linear"));
     parameters.push_back(decayCurve = new Parameter(controller, Parameter::CURVE, "decay_curve", "linear"));
     parameters.push_back(releaseCurve = new Parameter(controller, Parameter::CURVE, "release_curve", "linear"));
-    
-    // Create arrays
-    output = new float[controller->getFramesPerBuffer()];
-    memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
 }
 
 void UnitADSR::apply(Instrument* instrument) {
@@ -49,7 +44,7 @@ void UnitADSR::apply(Instrument* instrument) {
     Curve* decayCurve = (Curve*) (this->decayCurve->pointer);
     Curve* releaseCurve = (Curve*) (this->releaseCurve->pointer);
     
-    for(int x = 0;x < controller->getFramesPerBuffer(); ++x) {
+    for(int x = 0;x < framesPerBuffer; ++x) {
         
         double attack = attackTime->output[x];
         double decay = decayTime->output[x];

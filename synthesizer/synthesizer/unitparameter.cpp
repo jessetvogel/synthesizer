@@ -5,9 +5,8 @@
 #include "curve.hpp"
 #include "util.hpp"
 
-UnitParameter::UnitParameter(Controller* controller, int MidiCCNumber) {
-    // Store pointer to controller and other information
-    this->controller = controller;
+UnitParameter::UnitParameter(Controller* controller, int MidiCCNumber) : Unit(controller) {
+    // Set type and other variables
     this->MidiCCNumber = MidiCCNumber;
     type = "parameter";
     
@@ -19,10 +18,6 @@ UnitParameter::UnitParameter(Controller* controller, int MidiCCNumber) {
     parameters.push_back(min = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "min", "0.0"));
     parameters.push_back(max = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "max", "1.0"));
     parameters.push_back(curve = new Parameter(controller, Parameter::CURVE, "curve", "linear"));
-    
-    // Create arrays
-    output = new float[controller->getFramesPerBuffer()];
-    memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
 }
 
 void UnitParameter::apply(Instrument* instrument) {
@@ -31,7 +26,7 @@ void UnitParameter::apply(Instrument* instrument) {
     Curve* curve = (Curve*) (this->curve->pointer);
     
     // Linearly interpolate between min and max
-    for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
+    for(int x = 0;x < framesPerBuffer; ++x)
         output[x] = Curve::ease(min->output[x], max->output[x], value, curve);
 }
 

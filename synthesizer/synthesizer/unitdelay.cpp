@@ -5,9 +5,8 @@
 const int UnitDelay::maxN = 16;
 const double UnitDelay::maxT = 10.0;
 
-UnitDelay::UnitDelay(Controller* controller, int n, double T) {
-    // Store pointer to controller and other variables
-    this->controller = controller;
+UnitDelay::UnitDelay(Controller* controller, int n, double T) : Unit(controller) {
+    // Set type and other variables
     this->n = n;
     type = "delay";
     
@@ -31,10 +30,7 @@ UnitDelay::UnitDelay(Controller* controller, int n, double T) {
     }
     
     // Create arrays
-    output = new float[controller->getFramesPerBuffer()];
-    memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
-    
-    memoryLength = (int) (controller->getSampleRate() * T);
+    memoryLength = (int) (sampleRate * T);
     memory = new float[memoryLength];
     memset(memory, 0, sizeof(float) * memoryLength);
 }
@@ -50,19 +46,17 @@ void UnitDelay::apply(Instrument* instrument) {
     Unit* gain = (Unit*) (this->gain->pointer);
     Unit* feedback = (Unit*) (this->feedback->pointer);
     
-    unsigned long fpb = controller->getFramesPerBuffer();
-    double sr = controller->getSampleRate();
-    memmove(memory, memory + fpb, sizeof(float) * (memoryLength - fpb));
+    memmove(memory, memory + framesPerBuffer, sizeof(float) * (memoryLength - framesPerBuffer));
     
-    float delaysBuffer[fpb];
-    memset(delaysBuffer, 0, sizeof(float) * fpb);
-    float* ptr = memory + memoryLength - fpb;
-    for(int x = 0;x < fpb; ++x, ++ptr) {
+    float delaysBuffer[framesPerBuffer];
+    memset(delaysBuffer, 0, sizeof(float) * framesPerBuffer);
+    float* ptr = memory + memoryLength - framesPerBuffer;
+    for(int x = 0;x < framesPerBuffer; ++x, ++ptr) {
         for(int i = 0;i < n;i ++) {
             Unit* gain = (Unit*) (gains[i]->pointer);
             Unit* time = (Unit*) (times[i]->pointer);
             
-            double samples = time->output[x] * sr;
+            double samples = time->output[x] * sampleRate;
             int samplesLow = (int) samples;
             double f = samples - samplesLow;
             if(ptr - samplesLow >= memory) {

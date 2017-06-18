@@ -1,86 +1,55 @@
 #ifndef controller_hpp
 #define controller_hpp
 
-#include <vector>
-#include <string>
-#include <unordered_map>
+class Settings;
 
-#include "keyevent.hpp"
+class MIDIDevices;
+class AudioDevices;
 
 class MidiState;
-class Settings;
-class Input;
-class Output;
-class Instrument;
-class Unit;
-class UnitParameter;
-class UnitConstant;
+
+class Instruments;
+class Units;
 
 class Controller {
     
-    std::vector<Input*> inputs;
-    MidiState* midiState;
     Settings* settings;
     
-    Output* output;
+    MIDIDevices* midiDevices;
+    AudioDevices* audioDevices;
     
-    std::unordered_map<std::string, Instrument*> instruments;
-    std::unordered_map<int, UnitParameter*> parameters;
-    std::vector<UnitConstant*> unitConstants;
+    MidiState* midiState;
     
-    double sampleRate;
-    unsigned long framesPerBuffer;
+    Instruments* instruments;
+    Units* units;
     
     bool active;
     
-    float* buffer;
-    
-    void updateSettings();
+    float* bufferInput;
+    float* bufferOutput;
     
 public:
-    
-    std::unordered_map<std::string, Unit*> units; // TODO: make private?
     
     Controller(Settings*);
     ~Controller();
     
-    bool start(int);
-    bool stop();
-    bool reset();
-    bool update();
-
-    bool addInputDevice(int);
-    bool inputActive(int);
-    bool removeInputDevice(int);
-    
-    bool setSampleRate(double);
-    bool setFramesPerBuffer(unsigned long);
-    
-    inline MidiState* getMidiState() { return midiState; };
     inline Settings* getSettings() { return settings; };
-    inline double getSampleRate() { return sampleRate; };
-    inline unsigned long getFramesPerBuffer() { return framesPerBuffer; };
+    
+    inline MIDIDevices* getMIDIDevices() { return midiDevices; };
+    inline AudioDevices* getAudioDevices() { return audioDevices; };
 
-    bool addInstrument(Instrument*, std::string);
-    bool addUnit(Unit*, std::string);
-    bool addUnitParameter(UnitParameter*, int);
-    UnitConstant* createUnitConstant(double);
+    inline MidiState* getMidiState() { return midiState; };
     
-    Instrument* getInstrument(std::string);
-    Unit* getUnit(std::string);
-    UnitParameter* getUnitParameter(int);
-    bool isUnitConstant(Unit*);
+    inline Instruments* getInstruments() { return instruments; };
+    inline Units* getUnits() { return units; };
+
+    inline float* getBufferInput() { return bufferInput; };
+    inline float* getBufferOutput() { return bufferOutput; };
     
-    bool renameUnit(std::string, std::string);
+    bool start();
+    bool stop();
+    bool update();
     
-    bool deleteInstrument(std::string);
-    bool deleteUnit(std::string);
-    bool deleteUnitParameter(int);
-    bool deleteUnitConstant(UnitConstant*);
-    
-    void resetUnits(bool);
-    void addKeyEvent(KeyEvent*);
-    inline float* getBuffer() { return buffer; };
 };
 
 #endif

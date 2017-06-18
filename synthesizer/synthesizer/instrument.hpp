@@ -2,7 +2,10 @@
 #define instrument_hpp
 
 #include <vector>
+#include <string>
 #include "keyevent.hpp"
+
+#define INSTRUMENT_DEFAULT_ID "#undefined"
 
 class Controller;
 class Unit;
@@ -14,6 +17,8 @@ public:
 private:
     
     Controller* controller;
+    
+    std::string id = INSTRUMENT_DEFAULT_ID;
     
     Unit* keyOutput = NULL;
     Unit* output = NULL;
@@ -31,6 +36,9 @@ public:
     
     Instrument(Controller*);
     ~Instrument();
+
+    bool setId(std::string);
+    inline std::string getId() { return id; }
     
     bool setOutput(Unit*);
     bool setKeyOutput(Unit*);
@@ -41,9 +49,9 @@ public:
     
     void addKeyEvent(KeyEvent*);
     
-    void update();
-    float* getBuffer();
-    float* getKeyBuffer();
+    bool update();
+    inline float* getBuffer() { return buffer; }
+    inline float* getKeyBuffer() { return keyBuffer; }
 };
 
 #endif

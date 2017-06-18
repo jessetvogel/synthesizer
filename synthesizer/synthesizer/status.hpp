@@ -9,10 +9,6 @@ class Status {
 
     Controller* controller;
     
-    void printMidiDevices();
-    void printOutputDevices();
-    void printUnits();
-
 public:
     
     Status(Controller*);

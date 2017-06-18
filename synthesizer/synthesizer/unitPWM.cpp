@@ -1,12 +1,13 @@
+#include <cmath>
+
 #include "unitPWM.hpp"
 #include "controller.hpp"
 #include "instrument.hpp"
 #include "parameter.hpp"
 #include "settings.hpp"
 
-UnitPWM::UnitPWM(Controller* controller, bool keyDependent) {
-    // Store pointer to controller
-    this->controller = controller;
+UnitPWM::UnitPWM(Controller* controller, bool keyDependent) : Unit(controller) {
+    // Set type
     type = "PWM";
     
     // May or may not be key dependent
@@ -19,9 +20,6 @@ UnitPWM::UnitPWM(Controller* controller, bool keyDependent) {
     parameters.push_back(high = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "high", "1.0"));
     
     // Create arrays
-    output = new float[controller->getFramesPerBuffer()];
-    memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
-    
     if(keyDependent) {
         phase = new double[MAX_AMOUNT_OF_IDS];
         memset(phase, 0, sizeof(double) * MAX_AMOUNT_OF_IDS);
@@ -42,10 +40,10 @@ void UnitPWM::apply(Instrument* instrument) {
     Unit* low = (Unit*) (this->low->pointer);
     Unit* high = (Unit*) (this->high->pointer);
    
-    double t = 1.0 / controller->getSampleRate();
+    double t = 1.0 / sampleRate;
     int i = keyDependent ? instrument->currentKey->id : 0;
     
-    for(int x = 0;x < controller->getFramesPerBuffer(); ++x) {
+    for(int x = 0;x < framesPerBuffer; ++x) {
         output[x] = phase[i] < duty->output[x] ? high->output[x] : low->output[x];
         phase[i] += t * frequency->output[x];
         if(phase[i] >= 1.0) phase[i] -= floor(phase[i]);

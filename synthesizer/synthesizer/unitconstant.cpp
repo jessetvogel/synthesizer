@@ -4,9 +4,8 @@
 #include "unitconstant.hpp"
 #include "controller.hpp"
 
-UnitConstant::UnitConstant(Controller* controller, double value) {
-    // Store pointer to controller
-    this->controller = controller;
+UnitConstant::UnitConstant(Controller* controller, double value) : Unit(controller) {
+    // Set type
     type = "constant";
     
     // Set id
@@ -20,8 +19,7 @@ UnitConstant::UnitConstant(Controller* controller, double value) {
     // Constants are not key dependent
     keyDependent = false;
     
-    // Create arrays
-    output = new float[controller->getFramesPerBuffer()];
-    for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
+    // Fill output with value
+    for(int x = 0;x < framesPerBuffer; ++x)
         output[x] = value;
 }

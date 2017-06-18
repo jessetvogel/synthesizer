@@ -1,5 +1,6 @@
 #include "parameter.hpp"
 #include "controller.hpp"
+#include "units.hpp"
 #include "unit.hpp"
 #include "sample.hpp"
 #include "unitconstant.hpp"
@@ -25,11 +26,11 @@ bool Parameter::set(std::string value) {
             Unit* unit;
             if(Util::isNumber(value)) {
                 // Create a new unit constant
-                unit = controller->createUnitConstant(stod(value));
+                unit = controller->getUnits()->createConstant(stod(value));
             }
             else {
                 // Check if given unit exists
-                unit = controller->getUnit(value);
+                unit = controller->getUnits()->get(value);
                 if(unit == NULL) { Error::addError(Error::UNIT_NOT_FOUND); return false; }
                 
                 // Check for key dependence
@@ -37,8 +38,8 @@ bool Parameter::set(std::string value) {
             }
             
             // If we are overwriting a unit constant, delete the old constant
-            if(pointer != NULL && controller->isUnitConstant((class Unit*) pointer))
-                controller->deleteUnitConstant((UnitConstant*) pointer);
+            if(pointer != NULL && controller->getUnits()->isConstant((class Unit*) pointer))
+                controller->getUnits()->deleteConstant((UnitConstant*) pointer);
             
             pointer = unit;
             return true;

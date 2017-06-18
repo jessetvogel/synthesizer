@@ -2,6 +2,8 @@
 
 #include "midistate.hpp"
 #include "controller.hpp"
+#include "instruments.hpp"
+#include "units.hpp"
 #include "settings.hpp"
 #include "unitparameter.hpp"
 
@@ -61,7 +63,7 @@ void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned cha
             }
             
             // If not one of the default, set belonging UnitParameter if it exists
-            parameter = controller->getUnitParameter(data1);
+            parameter = controller->getUnits()->getParameter(data1);
             if(parameter == NULL) return;
             parameter->setValue((double) data2 / 127.0);
             return;
@@ -87,7 +89,7 @@ void MidiState::update() {
         if(velocity[i] > 0) keyVelocity[i] = (double) velocity[i] / 127.0;
         
         // Update durations
-        if(keyVelocity[i] > 0) keyDuration[i] += controller->getFramesPerBuffer() / controller->getSampleRate();
+        if(keyVelocity[i] > 0) keyDuration[i] += settings->bufferSize / settings->sampleRate;
         
         // If we just now pressed key i, create a new key event
         if(previousVelocity[i] == 0 && velocity[i] > 0) {
@@ -96,7 +98,7 @@ void MidiState::update() {
             keyEvent.stage = KeyEvent::Press;
             keyEvent.duration = 0.0;
             keyEvent.release = 0.0;
-            controller->addKeyEvent(&keyEvent);
+            controller->getInstruments()->addKeyEvent(&keyEvent);
             
             // Whenever pressed, reset the keyDuration
             keyDuration[i] = 0.0;
@@ -130,12 +132,16 @@ void MidiState::update() {
 }
 
 void MidiState::updateKeyEvent(KeyEvent* keyEvent) {
+    // Store local variables
+    unsigned long framesPerBuffer = controller->getSettings()->bufferSize;
+    double sampleRate = controller->getSettings()->sampleRate;
+    
     // Update its duration and release time
     if(keyEvent->stage == KeyEvent::Press || keyEvent->stage == KeyEvent::Sustain)
-        keyEvent->duration += controller->getFramesPerBuffer() / controller->getSampleRate();
+        keyEvent->duration += framesPerBuffer / sampleRate;
     
     if(keyEvent->stage == KeyEvent::Released)
-        keyEvent->release += controller->getFramesPerBuffer() / controller->getSampleRate();
+        keyEvent->release += framesPerBuffer / sampleRate;
     
     // Check if we should go to the sustain or release stage
     if((keyEvent->stage == KeyEvent::Press || keyEvent->stage == KeyEvent::Sustain) && velocity[keyEvent->key] == 0) {

@@ -2,20 +2,15 @@
 #include "controller.hpp"
 #include "instrument.hpp"
 
-UnitKeyInfo::UnitKeyInfo(Controller* controller, InfoType infoType) {
-    // Store pointer to controller
-    this->controller = controller;
+UnitKeyInfo::UnitKeyInfo(Controller* controller, InfoType infoType) : Unit(controller) {
+    // Set type
     type = "key_info";
     
-    // Store type
+    // Store info type
     this->infoType = infoType;
     
     // Obviously key dependent
     keyDependent = true;
-    
-    // Create arrays
-    output = new float[controller->getFramesPerBuffer()];
-    memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
 }
 
 void UnitKeyInfo::apply(Instrument* instrument) {
@@ -25,27 +20,27 @@ void UnitKeyInfo::apply(Instrument* instrument) {
     switch(infoType) {
         case Frequency:
             frequency = keyEvent->frequency;
-            for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
+            for(int x = 0;x < framesPerBuffer; ++x)
                 output[x] = frequency;
             break;
             
         case Velocity:
             velocity = keyEvent->velocity;
-            for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
+            for(int x = 0;x < framesPerBuffer; ++x)
                 output[x] = velocity;
             break;
             
         case Duration:
             duration = keyEvent->duration;
-            t = (keyEvent->stage == KeyEvent::Press || keyEvent->stage == KeyEvent::Sustain) ? 1.0 / controller->getSampleRate() : 0.0;
-            for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
+            t = (keyEvent->stage == KeyEvent::Press || keyEvent->stage == KeyEvent::Sustain) ? 1.0 / sampleRate : 0.0;
+            for(int x = 0;x < framesPerBuffer; ++x)
                 output[x] = duration + t * x;
             break;
             
         case Release:
             release = keyEvent->release;
-            t = (keyEvent->stage == KeyEvent::Released) ? 1.0 / controller->getSampleRate() : 0.0;
-            for(int x = 0;x < controller->getFramesPerBuffer(); ++x)
+            t = (keyEvent->stage == KeyEvent::Released) ? 1.0 / sampleRate : 0.0;
+            for(int x = 0;x < framesPerBuffer; ++x)
                 output[x] = release + t * x;
             break;
     }

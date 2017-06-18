@@ -3,8 +3,9 @@
 
 #include "status.hpp"
 #include "controller.hpp"
-#include "input.hpp"
-#include "output.hpp"
+#include "mididevices.hpp"
+#include "audiodevices.hpp"
+#include "units.hpp"
 #include "unit.hpp"
 #include "parameter.hpp"
 
@@ -23,17 +24,22 @@ bool Status::print(std::string info) {
     while(std::getline(iss, token, ' ')) {
         
         if(token.compare("midi_devices") == 0) {
-            printMidiDevices();
+            controller->getMIDIDevices()->printMIDIDevices();
             continue;
         }
         
+        if(token.compare("input_devices") == 0) {
+            controller->getAudioDevices()->printInputDevices();
+            continue;
+        }
+
         if(token.compare("output_devices") == 0) {
-            printOutputDevices();
+            controller->getAudioDevices()->printOutputDevices();
             continue;
         }
-        
+
         if(token.compare("units") == 0) {
-            printUnits();
+            controller->getUnits()->printUnits();
             continue;
         }
         
@@ -46,20 +52,44 @@ bool Status::print(std::string info) {
     return true;
 }
 
-void Status::printMidiDevices() {
+void MIDIDevices::printMIDIDevices() {
     
     std::cout << "\"midiDevices\": [";
     
-    int amountOfDevices = Input::amountOfDevices();
+    int amountOfDevices = MIDIDevices::amountOfDevices();
     bool comma = false;
     for(int i = 0;i < amountOfDevices;i ++) {
-        if(Input::isInput(i)) {
+        if(MIDIDevices::isInput(i)) {
+            MIDIDevice* midiDevice = controller->getMIDIDevices()->get(i);
+            bool active = (midiDevice != NULL);
+            
             if(comma) std::cout << ","; else comma = true; // Make sure devices get separated by commas
             std::cout << "{";
             
             std::cout << "\"id\": " << i << ", ";
-            std::cout << "\"name\": \"" << Input::deviceName(i) << "\", ";
-            std::cout << "\"active\": " << (controller->inputActive(i) ? "true" : "false");
+            std::cout << "\"name\": \"" << MIDIDevices::deviceName(i) << "\", ";
+            std::cout << "\"active\": " << (active ? "true" : "false");
+            
+            std::cout << "}";
+        }
+    }
+    
+    std::cout << "],";
+    
+}
+void AudioDevices::printInputDevices() {
+    
+    std::cout << "\"inputDevices\": [";
+    
+    int amountOfDevices = AudioDevices::amountOfDevices();
+    bool comma = false;
+    for(int i = 0;i < amountOfDevices;i ++) {
+        if(AudioDevices::isInput(i)) {
+            if(comma) std::cout << ","; else comma = true; // Make sure devices get separated by commas
+            std::cout << "{";
+            
+            std::cout << "\"id\": " << i << ", ";
+            std::cout << "\"name\": \"" << AudioDevices::deviceName(i) << "\"";
             
             std::cout << "}";
         }
@@ -69,19 +99,19 @@ void Status::printMidiDevices() {
     
 }
 
-void Status::printOutputDevices() {
+void AudioDevices::printOutputDevices() {
     
     std::cout << "\"outputDevices\": [";
     
-    int amountOfDevices = Output::amountOfDevices();
+    int amountOfDevices = AudioDevices::amountOfDevices();
     bool comma = false;
     for(int i = 0;i < amountOfDevices;i ++) {
-        if(Output::isOutput(i)) {
+        if(AudioDevices::isOutput(i)) {
             if(comma) std::cout << ","; else comma = true; // Make sure devices get separated by commas
             std::cout << "{";
             
             std::cout << "\"id\": " << i << ", ";
-            std::cout << "\"name\": \"" << Output::deviceName(i) << "\"";
+            std::cout << "\"name\": \"" << AudioDevices::deviceName(i) << "\"";
             
             std::cout << "}";
         }
@@ -91,14 +121,13 @@ void Status::printOutputDevices() {
     
 }
 
-void Status::printUnits() {
+void Units::printUnits() {
     
     std::cout << "\"units\": [";
     
     bool comma = false;
-    for(auto it = controller->units.begin(); it != controller->units.end(); ++it) {
-        Unit* unit = it->second;
-        
+    for(auto it = units.begin(); it != units.end(); ++it) {
+        Unit* unit = *it;
         if(comma) std::cout << ","; else comma = true; // Make sure units get separated by commas
         std::cout << "{";
         

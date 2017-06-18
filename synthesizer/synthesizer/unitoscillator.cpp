@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "unitoscillator.hpp"
 #include "controller.hpp"
 #include "instrument.hpp"
@@ -5,9 +7,8 @@
 #include "sample.hpp"
 #include "settings.hpp"
 
-UnitOscillator::UnitOscillator(Controller* controller, bool keyDependent) {
-    // Store pointer to controller
-    this->controller = controller;
+UnitOscillator::UnitOscillator(Controller* controller, bool keyDependent) : Unit(controller) {
+    // Set type
     type = "oscillator";
     
     // May or may not be key dependent
@@ -20,9 +21,6 @@ UnitOscillator::UnitOscillator(Controller* controller, bool keyDependent) {
     parameters.push_back(mean = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "mean", "0.0"));
     
     // Create arrays
-    output = new float[controller->getFramesPerBuffer()];
-    memset(output, 0, sizeof(float) * controller->getFramesPerBuffer());
-    
     if(keyDependent) {
         phase = new double[MAX_AMOUNT_OF_IDS];
         memset(phase, 0, sizeof(double) * MAX_AMOUNT_OF_IDS);
@@ -43,10 +41,10 @@ void UnitOscillator::apply(Instrument* instrument) {
     Unit* amplitude = (Unit*) (this->amplitude->pointer);
     Unit* mean = (Unit*) (this->mean->pointer);
     
-    double t = 1.0 / controller->getSampleRate();
+    double t = 1.0 / sampleRate;
     int i = keyDependent ? instrument->currentKey->id : 0;
     
-    for(int x = 0;x < controller->getFramesPerBuffer(); ++x) {
+    for(int x = 0;x < framesPerBuffer; ++x) {
         output[x] = mean->output[x] + amplitude->output[x] * sample->getValue(phase[i]);
         phase[i] += t * frequency->output[x] * 2.0 * M_PI;
     }

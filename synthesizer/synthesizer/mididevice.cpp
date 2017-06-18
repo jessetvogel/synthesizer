@@ -1,42 +1,41 @@
-#include <iostream>
-#include <portmidi.h>
-
-#include "input.hpp"
+#include "mididevice.hpp"
 #include "controller.hpp"
 #include "midistate.hpp"
 
 #include "error.hpp"
 
-Input::Input(Controller* controller, int inputDevice) {
-    // Store pointer to controller object
+int MIDIDevice::DEVICE_ID_DEFAULT = -1;
+
+MIDIDevice::MIDIDevice(Controller* controller, int deviceId) {
+    // Store info
     this->controller = controller;
-    this->inputDevice = inputDevice;
     
-    // Set default values
+    // Device id -1 indicates default device id
+    this->deviceId = (deviceId == DEVICE_ID_DEFAULT) ? Pm_GetDefaultInputDeviceID() : deviceId;
+    
+    // By default, not active
     active = false;
 }
 
-bool Input::start() {
+bool MIDIDevice::start() {
+    // Make sure device did not already start
     if(active) {
         Error::addError(Error::INPUT_ALREADY_STARTED);
         return false;
     }
     
-    if(inputDevice == -1)
-        inputDevice = Pm_GetDefaultInputDeviceID();
-    
-    const PmDeviceInfo* info = Pm_GetDeviceInfo(inputDevice);
+    const PmDeviceInfo* info = Pm_GetDeviceInfo(deviceId);
     if(info == NULL) {
         Error::addError(Error::INPUT_DEVICE_NOT_EXISTS);
         return false;
     }
     
     PmError err = Pm_OpenInput(&inputStream,
-                 inputDevice,
-                 NULL, // driver info
-                 0, // use default input size
-                 NULL,
-                 (void*) NULL); // void * time_info
+                               deviceId,
+                               NULL, // driver info
+                               0, // use default input size
+                               NULL,
+                               (void*) NULL); // void * time_info
     
     if(err != pmNoError) {
         Error::addError(Error::INPUT_CANNOT_OPEN_INPUT);
@@ -54,12 +53,26 @@ bool Input::start() {
     return true;
 }
 
-bool Input::update() {
+bool MIDIDevice::stop() {
+    // Try to close the stream
+    bool success = true;
+    if(Pm_Close(inputStream) != pmNoError) {
+        Error::addError(Error::INPUT_CANNOT_CLOSE_INPUT);
+        success = false;
+    }
+    
+    active = false;
+    return success;
+}
+
+bool MIDIDevice::update() {
+    // Make sure device started
     if(!active) {
         Error::addError(Error::INPUT_NOT_YET_STARTED);
         return false;
     }
     
+    // Read all incoming messages
     PmError result;
     PmEvent event;
     
@@ -79,42 +92,4 @@ bool Input::update() {
     
     controller->getMidiState()->update();
     return true;
-}
-
-bool Input::stop() {
-    if(!active) {
-        Error::addError(Error::INPUT_NOT_YET_STARTED);
-        return false;
-    }
-    
-    active = false;
-    if(Pm_Close(inputStream) != pmNoError) {
-        Error::addError(Error::INPUT_CANNOT_CLOSE_INPUT);
-        return false;
-    }
-    return true;
-}
-
-int Input::getInputDevice() {
-    return inputDevice;
-}
-
-int Input::amountOfDevices() {
-    return Pm_CountDevices();
-}
-
-const char* Input::deviceName(int n) {
-    const PmDeviceInfo* info = Pm_GetDeviceInfo(n);
-    if(info == NULL) {
-        Error::addError(Error::INPUT_DEVICE_NOT_EXISTS);
-        return NULL;
-    }
-    
-    return Pm_GetDeviceInfo(n)->name;
-}
-
-bool Input::isInput(int n) {
-    const PmDeviceInfo* info = Pm_GetDeviceInfo(n);
-    if(info == NULL) return false;
-    return Pm_GetDeviceInfo(n)->input > 0;
 }
