@@ -27,6 +27,12 @@ Controller::Controller(Settings* settings) {
     
     midiState = new MidiState(this);
     
+    // Create new buffers
+    bufferInput = new float[settings->bufferSize];
+    bufferOutput = new float[settings->bufferSize];
+    memset(bufferInput, 0, sizeof(float) * settings->bufferSize);
+    memset(bufferOutput, 0, sizeof(float) * settings->bufferSize);
+    
     // Default values
     active = false;
 }
@@ -39,14 +45,13 @@ Controller::~Controller() {
     delete units;
     
     delete midiState;
+    
+    delete[] bufferInput;
+    delete[] bufferOutput;
 }
 
 bool Controller::start() {
     if(active) return false;
-    
-    // Create new buffers
-    bufferInput = new float[settings->bufferSize];
-    bufferOutput = new float[settings->bufferSize];
     
     // Start all devices
     bool success = true;
@@ -65,15 +70,14 @@ bool Controller::stop() {
     success = success && midiDevices->stop();
     success = success && audioDevices->stop();
     
-    // Delete the buffers
-    delete[] bufferInput;
-    delete[] bufferOutput;
-    
     active = false;
     return success;
 }
 
 bool Controller::update() {
+    // If active was set to false, just stop, no errors need to be given
+    if(!active) return false;
+    
     // Update midi devices
     bool success = true;
     success = success && midiDevices->update();

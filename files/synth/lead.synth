@@ -18,11 +18,28 @@ unit_create adder oneminusalpha 2
 unit_set_value oneminusalpha input_1    1.0
 unit_set_value oneminusalpha input_2    alpha
 unit_set_value oneminusalpha gain_2     -1.0
-unit_create adder freq 2
-unit_set_value freq input_1             freq
-unit_set_value freq gain_1              oneminusalpha
-unit_set_value freq input_2             lead_key_frequency
-unit_set_value freq gain_2              alpha
+unit_create adder main_freq 2
+unit_set_value main_freq input_1        main_freq
+unit_set_value main_freq gain_1         oneminusalpha
+unit_set_value main_freq input_2        lead_key_frequency
+unit_set_value main_freq gain_2         alpha
+
+# Vibrato
+unit_create adder vibrato_amp 1
+unit_set_value vibrato_amp input_1      modulation_wheel
+unit_set_value vibrato_amp gain_1       0.059463
+unit_create adder vibrato_freq 2
+unit_set_value vibrato_freq input_1     modulation_wheel
+unit_set_value vibrato_freq gain_1      3.0
+unit_set_value vibrato_freq input_2     3
+unit_create oscillator vibrato
+unit_set_value vibrato sample           sine
+unit_set_value vibrato mean             1.0
+unit_set_value vibrato amplitude        vibrato_amp
+unit_set_value vibrato frequency        vibrato_freq
+unit_create adder freq 1
+unit_set_value freq input_1             main_freq
+unit_set_value freq gain_1              vibrato
 
 # Gliding constant
 unit_set_value knob_9 min               0.01

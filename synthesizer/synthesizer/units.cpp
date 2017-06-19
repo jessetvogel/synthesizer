@@ -10,6 +10,7 @@
 #include "unitleadkeyinfo.hpp"
 #include "unitkeyoutput.hpp"
 #include "unitmodulationwheel.hpp"
+#include "unitinput.hpp"
 
 Units::Units(Controller* controller) {
     // Store controller
@@ -29,6 +30,8 @@ Units::Units(Controller* controller) {
 
     add((new UnitKeyOutput(controller))->setId("key_output"));
     add((new UnitModulationWheel(controller))->setId("modulation_wheel"));
+    
+    add((new UnitInput(controller))->setId("audio_input"));
 }
 
 Units::~Units() {

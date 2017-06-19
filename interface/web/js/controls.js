@@ -6,7 +6,7 @@ var controls = {
     // Start button
     $('.controls-button-start').click(function () {
       if(!controls.active) {
-        $.ajax('/api/start' + (devices.outputDevice == -1 ? '' : '?output_device=' + devices.outputDevice)).done(parseResponse);
+        api.send('/api/start');
         controls.active = true;
 
         $('.controls-button-start').addClass('button-pressed');
@@ -17,7 +17,7 @@ var controls = {
     // Stop button
     $('.controls-button-stop').click(function () {
       if(controls.active) {
-        $.ajax('/api/stop').done(parseResponse);
+        api.send('/api/stop');
         controls.active = false;
 
         $('.controls-button-stop').addClass('button-pressed');

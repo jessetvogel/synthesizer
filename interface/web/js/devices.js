@@ -1,19 +1,20 @@
 var devices = {
 
-  // Constants
-  outputDevice: -1,
-
   // Request methods
   refreshMIDIDevices: function () {
-    $.ajax('/api/status?info=midi_devices').done(parseResponse);
+    api.send('/api/status?info=midi_devices');
+  },
+
+  refreshInputDevices: function () {
+    api.send('/api/status?info=input_devices');
   },
 
   refreshOutputDevices: function () {
-    $.ajax('/api/status?info=midi_devices').done(parseResponse);
+    api.send('/api/status?info=output_devices');
   },
 
   refreshAllDevices: function () {
-    $.ajax('/api/status?info=midi_devices,output_devices').done(parseResponse);
+    api.send('/api/status?info=midi_devices,input_devices,output_devices');
   },
 
   // Handle response methods
@@ -32,11 +33,11 @@ var devices = {
           return $('<input>').attr('type', 'checkbox').prop('checked', data[i].active).change(function () {
             if($(this).is(":checked")) {
               $(this).parent().parent().addClass('midi-device-active');
-              $.ajax('/api/midi_add_input_device?midi_device=' + device_id).done(parseResponse);
+              api.send('/api/midi_add_device?midi_device=' + device_id);
             }
             else {
               $(this).parent().parent().removeClass('midi-device-active');
-              $.ajax('/api/midi_remove_input_device?midi_device=' + device_id).done(parseResponse);
+              api.send('/api/midi_remove_device?midi_device=' + device_id);
             }
             });
         })(data[i].id)));
@@ -44,7 +45,32 @@ var devices = {
         $('.midi-device-container').append(midiDevice);
     }
 
+  },
 
+  setInputDevices: function (data) {
+
+    $('.input-device-container').html('');
+
+    for(var i = 0;i < data.length;i ++) {
+        var inputDevice = $('<div>').addClass('audio-device list-item');
+        inputDevice.append($('<div>').addClass('audio-device-id').text(data[i].id));
+        inputDevice.append($('<div>').addClass('audio-device-icon').append($('<div>').addClass('glyphicon glyphicon-volume-up')));
+        inputDevice.append($('<div>').addClass('audio-device-name').text(data[i].name))
+        inputDevice.append($('<div>').addClass('audio-device-options'));
+
+        (function (n) {
+          inputDevice.click(function () {
+            api.send('/api/audio_set_input_device?input_device=' + n);
+          });
+        })(data[i].id);
+
+        $('.input-device-container').append(inputDevice);
+    }
+
+    $('.input-device-container .list-item').click(function () {
+      $(this).siblings('.list-item').removeClass('list-item-selected');
+      $(this).addClass('list-item-selected');
+    });
 
   },
 
@@ -53,15 +79,15 @@ var devices = {
     $('.output-device-container').html('');
 
     for(var i = 0;i < data.length;i ++) {
-        var outputDevice = $('<div>').addClass('output-device list-item');
-        outputDevice.append($('<div>').addClass('output-device-id').text(data[i].id));
-        outputDevice.append($('<div>').addClass('output-device-icon').append($('<div>').addClass('glyphicon glyphicon-volume-up')));
-        outputDevice.append($('<div>').addClass('output-device-name').text(data[i].name))
-        outputDevice.append($('<div>').addClass('output-device-options'));
+        var outputDevice = $('<div>').addClass('audio-device list-item');
+        outputDevice.append($('<div>').addClass('audio-device-id').text(data[i].id));
+        outputDevice.append($('<div>').addClass('audio-device-icon').append($('<div>').addClass('glyphicon glyphicon-volume-up')));
+        outputDevice.append($('<div>').addClass('audio-device-name').text(data[i].name))
+        outputDevice.append($('<div>').addClass('audio-device-options'));
 
         (function (n) {
           outputDevice.click(function () {
-            devices.outputDevice = n;
+            api.send('/api/audio_set_output_device?output_device=' + n);
           });
         })(data[i].id);
 

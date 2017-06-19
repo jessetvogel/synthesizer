@@ -2,7 +2,7 @@ var units = {
 
   // Request methods
   refreshUnits: function () {
-    $.ajax('/api/status?info=units').done(parseResponse);
+    api.send('/api/status?info=units');
   },
 
   // Handle response methods
@@ -43,10 +43,10 @@ var units = {
       parameter.append($('<div>').addClass('unit-parameter-label').text(parameters[i].label));
       parameter.append($('<div>').addClass('unit-parameter-value').append(
         $('<div>').addClass('unit-parameter-input').append(
-          (function (parameter) {
+          (function (id, parameter) {
             return $('<input>').val(parameter.value).change(function () {
-            $.ajax('/api/unit_set_value?id=' + id + '&label=' + parameter.label + '&value=' + $(this).val()).done(parseResponse);
-          })})(parameters[i]))));
+            api.send('/api/unit_set_value?id=' + id + '&label=' + parameter.label + '&value=' + $(this).val());
+          })})(id, parameters[i]))));
 
       $('.unit-parameter-container').append(parameter);
     }

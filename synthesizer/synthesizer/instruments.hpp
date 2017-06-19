@@ -30,6 +30,8 @@ public:
     
     void addKeyEvent(KeyEvent*);
     
+    void printInstruments();
+    
 };
 
 #endif

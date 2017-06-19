@@ -1,0 +1,15 @@
+unit_create adder z 2
+unit_set_value z input_1           -2.0
+unit_set_value z input_2           modulation_wheel
+unit_set_value z gain_2            4.0
+
+unit_create function y
+unit_set_value y function          pow10
+unit_set_value y input             z
+
+unit_create fuzz x
+unit_set_value x input             audio_input
+unit_set_value x input_gain        y
+
+instrument_create i
+instrument_set_output i x

@@ -19,8 +19,10 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/fullscreen.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript" src="js/errors.js"></script>
     <script type="text/javascript" src="js/controls.js"></script>
+    <script type="text/javascript" src="js/instruments.js"></script>
     <script type="text/javascript" src="js/units.js"></script>
     <script type="text/javascript" src="js/file-explorer.js"></script>
     <script type="text/javascript" src="js/devices.js"></script>
@@ -67,23 +69,45 @@
             </div>
 
             <div class="tile">
+              <div class="tile-header">Input devices</div>
+              <!-- <div class="tile-separator"></div> -->
+              <div class="input-device-container">
+                <div class="audio-device list-item">
+                  <div class="audio-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
+                  <div class="audio-device-name">Built-in Input</div>
+                  <div class="audio-device-options"></div>
+                </div>
+                <div class="audio-device list-item">
+                  <div class="audio-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
+                  <div class="audio-device-name">Soundflower (2ch)</div>
+                  <div class="audio-device-options"></div>
+                </div>
+                <div class="audio-device list-item">
+                  <div class="audio-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
+                  <div class="audio-device-name">Soundflower (64ch)</div>
+                  <div class="audio-device-options"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tile">
               <div class="tile-header">Output devices</div>
               <!-- <div class="tile-separator"></div> -->
               <div class="output-device-container">
-                <div class="output-device list-item">
-                  <div class="output-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
-                  <div class="output-device-name">Built-in Output</div>
-                  <div class="output-device-options"></div>
+                <div class="audio-device list-item">
+                  <div class="audio-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
+                  <div class="audio-device-name">Built-in Output</div>
+                  <div class="audio-device-options"></div>
                 </div>
-                <div class="output-device list-item">
-                  <div class="output-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
-                  <div class="output-device-name">Soundflower (2ch)</div>
-                  <div class="output-device-options"></div>
+                <div class="audio-device list-item">
+                  <div class="audio-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
+                  <div class="audio-device-name">Soundflower (2ch)</div>
+                  <div class="audio-device-options"></div>
                 </div>
-                <div class="output-device list-item">
-                  <div class="output-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
-                  <div class="output-device-name">Soundflower (64ch)</div>
-                  <div class="output-device-options"></div>
+                <div class="audio-device list-item">
+                  <div class="audio-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
+                  <div class="audio-device-name">Soundflower (64ch)</div>
+                  <div class="audio-device-options"></div>
                 </div>
               </div>
             </div>
@@ -138,20 +162,20 @@
             <div class="tile">
               <div class="tile-header">Instruments</div>
               <!-- <div class="tile-separator"></div> -->
-              <div class="instrument-container">
+              <div class="instrument-content">
                 <div class="toolbar">
                   <div class="toolbar-button button"><span class="glyphicon glyphicon-plus"></span></div>
                   <div class="toolbar-button button toolbar-button-sort"><span class="glyphicon glyphicon-sort"></span></div>
                   <div class="toolbar-input"><input class="instrument-search" /><span class="glyphicon glyphicon-search"></span></div>
                 </div>
 
-                <div class="instrument-content">
-                  <div class="instrument-list">
+                <div class="instrument-panels">
+                  <div class="instrument-container">
                     <div class="instrument list-item">
-                      <div class="instrument-name">synth 1</div>
+                      <div class="instrument-id">synth 1</div>
                     </div>
                     <div class="instrument list-item">
-                      <div class="instrument-name">synth 2</div>
+                      <div class="instrument-id">synth 2</div>
                     </div>
                   </div>
                   <div class="instrument-parameter-container">

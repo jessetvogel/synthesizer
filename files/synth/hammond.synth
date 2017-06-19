@@ -28,41 +28,58 @@ unit_set_value drawbar_8 value      knob_8
 unit_create label drawbar_9
 unit_set_value drawbar_9 value      knob_9
 
+# Vibrato
+unit_create adder vibrato_amp 1
+unit_set_value vibrato_amp input_1      modulation_wheel
+unit_set_value vibrato_amp gain_1       0.059463
+unit_create adder vibrato_freq 2
+unit_set_value vibrato_freq input_1     modulation_wheel
+unit_set_value vibrato_freq gain_1      3.0
+unit_set_value vibrato_freq input_2     3
+unit_create oscillator vibrato
+unit_set_value vibrato sample           sine
+unit_set_value vibrato mean             1.0
+unit_set_value vibrato amplitude        vibrato_amp
+unit_set_value vibrato frequency        vibrato_freq
+unit_key_create adder main_frequency 1
+unit_set_value main_frequency input_1   key_frequency
+unit_set_value main_frequency gain_1    vibrato
+
 # Define frequencies
 unit_key_create adder frequency_1 1
-unit_set_value frequency_1 input_1    key_frequency
+unit_set_value frequency_1 input_1    main_frequency
 unit_set_value frequency_1 gain_1     0.5
 
 unit_key_create adder frequency_2 1
-unit_set_value frequency_2 input_1    key_frequency
+unit_set_value frequency_2 input_1    main_frequency
 unit_set_value frequency_2 gain_1     1.4983
 
 unit_key_create adder frequency_3 1
-unit_set_value frequency_3 input_1    key_frequency
+unit_set_value frequency_3 input_1    main_frequency
 unit_set_value frequency_3 gain_1     1.0
 
 unit_key_create adder frequency_4 1
-unit_set_value frequency_4 input_1    key_frequency
+unit_set_value frequency_4 input_1    main_frequency
 unit_set_value frequency_4 gain_1     2.0
 
 unit_key_create adder frequency_5 1
-unit_set_value frequency_5 input_1    key_frequency
+unit_set_value frequency_5 input_1    main_frequency
 unit_set_value frequency_5 gain_1     2.9966
 
 unit_key_create adder frequency_6 1
-unit_set_value frequency_6 input_1    key_frequency
+unit_set_value frequency_6 input_1    main_frequency
 unit_set_value frequency_6 gain_1     4.0
 
 unit_key_create adder frequency_7 1
-unit_set_value frequency_7 input_1    key_frequency
+unit_set_value frequency_7 input_1    main_frequency
 unit_set_value frequency_7 gain_1     5.0397
 
 unit_key_create adder frequency_8 1
-unit_set_value frequency_8 input_1    key_frequency
+unit_set_value frequency_8 input_1    main_frequency
 unit_set_value frequency_8 gain_1     5.9932
 
 unit_key_create adder frequency_9 1
-unit_set_value frequency_9 input_1    key_frequency
+unit_set_value frequency_9 input_1    main_frequency
 unit_set_value frequency_9 gain_1     8.0
 
 # Create waves

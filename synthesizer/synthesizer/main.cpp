@@ -11,7 +11,7 @@
 #include "commands.hpp"
 #include "error.hpp"
 
-#define MAIN_DIRECTORY "/Users/jessetvogel/Projects/synthesizer/files"
+#define MAIN_DIRECTORY "/Users/Jesse/Projects/synthesizer/files"
 #define SETTINGS_FILE "settings.txt"
 
 void initialize();
@@ -48,6 +48,7 @@ int main(int argc, char *argv[]) {
         Error::printErrors();
         
         std::cout << "}" << std::endl;
+        std::cout.flush();
     }
     
     controller.stop();

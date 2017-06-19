@@ -1,8 +1,8 @@
-.instrument-content {
+.instrument-panels {
   display: flex;
 }
 
-.instrument-list {
+.instrument-container {
   width: 50%;
 }
 
@@ -12,7 +12,7 @@
   line-height: 64px;
 }
 
-.instrument-name {
+.instrument-id {
   margin-left: 16px;
 }
 
@@ -27,11 +27,32 @@
   line-height: 64px;
 }
 
-.instrument-parameter-name {
+.instrument-parameter-label {
   margin-left: 16px;
   width: 50%;
 }
 
 .instrument-parameter-value {
   width: 50%;
+}
+
+.instrument-parameter-input {
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-top: 12px;
+  margin-right: 16px;
+  height: 40px;
+  line-height: 40px;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.instrument-parameter-input input {
+  width: 100%;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.0);
+  border: 0;
+}
+
+.instrument-parameter-input input:focus {
+  outline: none;
 }

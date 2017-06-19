@@ -55,16 +55,28 @@ module.exports = {
         synthesizer.command('stop', response);
         break;
 
-      case 'midi_add_input_device':
+      case 'midi_add_device':
         midiDevice = query.midi_device;
         if(midiDevice == null) { bad_request(response); break; }
-        synthesizer.command('midi_add_input_device ' + midiDevice, response);
+        synthesizer.command('midi_add_device ' + midiDevice, response);
         break;
 
-      case 'midi_remove_input_device':
+      case 'midi_remove_device':
         midiDevice = query.midi_device;
         if(midiDevice == null) { bad_request(response); break; }
-        synthesizer.command('midi_remove_input_device ' + midiDevice, response);
+        synthesizer.command('midi_remove_device ' + midiDevice, response);
+        break;
+
+      case 'audio_set_output_device':
+        outputDevice = query.output_device;
+        if(outputDevice == null) { bad_request(response); break; }
+        synthesizer.command('audio_set_output_device ' + outputDevice, response);
+        break;
+
+      case 'audio_set_input_device':
+        inputDevice = query.input_device;
+        if(inputDevice == null) { bad_request(response); break; }
+        synthesizer.command('audio_set_input_device ' + inputDevice, response);
         break;
 
       default:

@@ -8,6 +8,9 @@ $(document).ready(function () {
   // Refresh all units
   units.refreshUnits();
 
+  // Refresh all instruments
+  instruments.refreshInstruments();
+
   // Unit search field
   $('.unit-search').on('input', function () { units.search($(this).val()); });
 
@@ -42,8 +45,16 @@ function parseResponse(response) {
         devices.setMIDIDevices(data[key]);
         break;
 
+      case 'inputDevices':
+        devices.setInputDevices(data[key]);
+        break;
+
       case 'outputDevices':
         devices.setOutputDevices(data[key]);
+        break;
+
+      case 'instruments':
+        instruments.setInstruments(data[key]);
         break;
 
       case 'units':

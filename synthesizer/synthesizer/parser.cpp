@@ -65,14 +65,26 @@ bool Parser::parseLine(std::string line) {
     
     // MIDI
 
-    // midi_add_input_device <input_device>
-    if(std::regex_search(str, cm, Commands::regexMidiAddInputDevice)) {
+    // midi_add_device <input_device>
+    if(std::regex_search(str, cm, Commands::regexMidiAddDevice)) {
         return controller->getMIDIDevices()->add(stoi(cm[1]));
     }
     
-    // midi_remove_input_device <input_device>
-    if(std::regex_search(str, cm, Commands::regexMidiRemoveInputDevice)) {
+    // midi_remove_device <input_device>
+    if(std::regex_search(str, cm, Commands::regexMidiRemoveDevice)) {
         return controller->getMIDIDevices()->remove(stoi(cm[1]));
+    }
+    
+    // Audio
+    
+    // audio_set_input_device <input_device>
+    if(std::regex_search(str, cm, Commands::regexAudioSetInputDevice)) {
+        return controller->getAudioDevices()->setInputDeviceId(stoi(cm[1]));
+    }
+    
+    // audio_set_output_device <input_device>
+    if(std::regex_search(str, cm, Commands::regexAudioSetOutputDevice)) {
+        return controller->getAudioDevices()->setOutputDeviceId(stoi(cm[1]));
     }
     
     // Settings

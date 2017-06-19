@@ -18,8 +18,12 @@ public:
     static std::regex regexPreprocess;
     
     // Commands for MIDI
-    static std::regex regexMidiAddInputDevice;
-    static std::regex regexMidiRemoveInputDevice;
+    static std::regex regexMidiAddDevice;
+    static std::regex regexMidiRemoveDevice;
+    
+    // Commands for audio
+    static std::regex regexAudioSetInputDevice;
+    static std::regex regexAudioSetOutputDevice;
     
     // Commands for settings
     static std::regex regexSetSampleRate;

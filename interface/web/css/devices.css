@@ -32,29 +32,29 @@
   text-align: center;
 }
 
-/* output-device */
-.output-device {
+/* audio-device */
+.audio-device {
   display: flex;
   height: 64px;
   line-height: 64px;
 }
 
-.output-device-id {
+.audio-device-id {
   display: none;
 }
 
-.output-device-icon {
+.audio-device-icon {
   width: 64px;
   text-align: center;
 }
 
-.output-device-name {
+.audio-device-name {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.output-device-options {
+.audio-device-options {
   margin-left: auto;
   width: 64px;
   text-align: center;

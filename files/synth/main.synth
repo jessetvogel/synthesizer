@@ -15,6 +15,7 @@ include lead.synth
 # include whacky.synth
 # include parameter_test.synth
 # include hammond.synth
+# include audio_input_test.synth
 
 # -------- EXAMPLES --------
 

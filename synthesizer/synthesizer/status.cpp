@@ -3,6 +3,8 @@
 
 #include "status.hpp"
 #include "controller.hpp"
+#include "instruments.hpp"
+#include "instrument.hpp"
 #include "mididevices.hpp"
 #include "audiodevices.hpp"
 #include "units.hpp"
@@ -35,6 +37,11 @@ bool Status::print(std::string info) {
 
         if(token.compare("output_devices") == 0) {
             controller->getAudioDevices()->printOutputDevices();
+            continue;
+        }
+        
+        if(token.compare("instruments") == 0) {
+            controller->getInstruments()->printInstruments();
             continue;
         }
 
@@ -118,6 +125,28 @@ void AudioDevices::printOutputDevices() {
     }
     
     std::cout << "],";
+    
+}
+
+void Instruments::printInstruments() {
+    
+    std::cout << "\"instruments\": [";
+    
+    bool comma = false;
+    for(auto it = instruments.begin(); it != instruments.end(); ++it) {
+        Instrument* instrument = *it;
+        if(comma) std::cout << ","; else comma = true; // Make sure instruments get separated by commas
+        
+        std::cout << "{";
+        
+        std::cout << "\"id\": \"" << instrument->getId() << "\", ";
+        std::cout << "\"key_output\": \"" << instrument->getKeyOutput()->getId() << "\", ";
+        std::cout << "\"output\": \"" << instrument->getOutput()->getId() << "\"";
+        
+        std::cout << "}";
+    }
+    
+    std::cout << "], ";
     
 }
 
