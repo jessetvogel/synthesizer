@@ -1,6 +1,7 @@
 #include "instruments.hpp"
 #include "controller.hpp"
 #include "instrument.hpp"
+#include "units.hpp"
 #include "settings.hpp"
 #include "keyevent.hpp"
 
@@ -57,6 +58,9 @@ bool Instruments::apply() {
     unsigned long framesPerBuffer = controller->getSettings()->bufferSize;
     float* buffer = controller->getBufferOutput();
     memset(buffer, 0, sizeof(float) * framesPerBuffer);
+    
+    // Reset all units
+    controller->getUnits()->resetUnits();
     
     // Update all instruments, and add their result to the buffer
     bool success = true;

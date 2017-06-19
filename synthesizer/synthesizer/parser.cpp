@@ -1,3 +1,4 @@
+#include <iostream>
 #include <fstream>
 #include <regex>
 
@@ -37,6 +38,7 @@ bool Parser::parseFile(std::string filepath) {
     while(std::getline(input, line)) {
         if(!parseLine(line)) {
             Error::addError("Error in file"); // TODO
+            std::cout << "Error in line: " << line << std::endl;
             return false;
         }
         
@@ -220,8 +222,8 @@ bool Parser::parseLine(std::string line) {
     // unit_key_create <unit_type> <label> <arg1> <arg2>
     if(std::regex_search(str, cm, Commands::regexUnitKeyCreate)) {
         Unit* unit = controller->getUnits()->get(cm[2]);
-        if(unit == NULL) {
-            Error::addError(Error::UNIT_NOT_FOUND);
+        if(unit != NULL) {
+            Error::addError(Error::UNIT_LABEL_ALREADY_USED);
             return false;
         }
         

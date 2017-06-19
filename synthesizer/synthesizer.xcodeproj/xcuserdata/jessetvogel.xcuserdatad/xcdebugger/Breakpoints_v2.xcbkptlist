@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "synthesizer/instrument.cpp"
-            timestampString = "519518594.661328"
+            filePath = "synthesizer/unitoscillator.cpp"
+            timestampString = "519558521.726491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "Instrument::update()"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "UnitOscillator::~UnitOscillator()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

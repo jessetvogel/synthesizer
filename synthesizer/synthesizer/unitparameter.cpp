@@ -7,14 +7,14 @@
 
 UnitParameter::UnitParameter(Controller* controller, int MidiCCNumber) : Unit(controller) {
     // Set type and other variables
-    this->MidiCCNumber = MidiCCNumber;
     type = "parameter";
+    this->MidiCCNumber = MidiCCNumber;
     
     // Not key dependent
     keyDependent = false;
     
     // Set default values
-    value = 0.5;
+    value = 0.5; // TODO
     parameters.push_back(min = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "min", "0.0"));
     parameters.push_back(max = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "max", "1.0"));
     parameters.push_back(curve = new Parameter(controller, Parameter::CURVE, "curve", "linear"));

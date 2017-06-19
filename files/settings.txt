@@ -8,4 +8,4 @@ settings_set_pitch_wheel_range          2
 
 # Default files to load
 
-include test.synth
+include synth/main.synth

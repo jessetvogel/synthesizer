@@ -38,9 +38,7 @@ Units::~Units() {
 
     for(auto it = constants.begin(); it != constants.end(); ++it)
         delete *it;
-
-    for(auto it = parameters.begin(); it != parameters.end(); ++it)
-        delete it->second;
+    // Note that the parameters are a subset of units, hence they need not be deallocated (in fact, it will result in errors)
     mutexUnits.unlock();
 }
 
@@ -140,6 +138,14 @@ bool Units::deleteParameter(int MIDICC) {
     }
     mutexParameters.unlock();
     return success;
+}
+
+void Units::resetUnits() {
+    mutexUnits.lock();
+    for(auto it = units.begin(); it != units.end(); ++it) {
+        (*it)->reset();
+    }
+    mutexUnits.unlock();
 }
 
 void Units::resetUnitsKeyDependent() {

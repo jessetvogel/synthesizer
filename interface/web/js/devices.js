@@ -22,16 +22,22 @@ var devices = {
     $('.midi-device-container').html('');
 
     for(var i = 0;i < data.length;i ++) {
-        var midiDevice = $('<div>').addClass('midi-device');
+        var midiDevice = $('<label>').addClass('midi-device');
+        if(data[i].active)
+          midiDevice.addClass('midi-device-active');
         midiDevice.append($('<div>').addClass('midi-device-id').text(data[i].id));
         midiDevice.append($('<div>').addClass('midi-device-icon').append($('<div>').addClass('glyphicon glyphicon-music')));
         midiDevice.append($('<div>').addClass('midi-device-name').text(data[i].name))
         midiDevice.append($('<div>').addClass('midi-device-options').append((function (device_id) {
           return $('<input>').attr('type', 'checkbox').prop('checked', data[i].active).change(function () {
-            if($(this).is(":checked"))
+            if($(this).is(":checked")) {
+              $(this).parent().parent().addClass('midi-device-active');
               $.ajax('/api/midi_add_input_device?midi_device=' + device_id).done(parseResponse);
-            else
+            }
+            else {
+              $(this).parent().parent().removeClass('midi-device-active');
               $.ajax('/api/midi_remove_input_device?midi_device=' + device_id).done(parseResponse);
+            }
             });
         })(data[i].id)));
 

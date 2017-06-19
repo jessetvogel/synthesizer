@@ -27,6 +27,7 @@ module.exports = {
     // Send command, and save response
     responses.push(r);
     child.stdin.write(command + '\n');
+    console.log('WAITING FOR OUTPUT');
     return true;
   }
 
@@ -53,8 +54,9 @@ function parse(data) {
     responses[0].end();
     responses.splice(0, 1);
     buffer = "";
+    console.log('DONE');
   }
   catch(e) {
-    
+
   }
 }

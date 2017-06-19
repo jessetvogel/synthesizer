@@ -39,6 +39,7 @@ public:
     UnitParameter* getParameter(int);
     bool deleteParameter(int);
     
+    void resetUnits();
     void resetUnitsKeyDependent();
     
     void printUnits();

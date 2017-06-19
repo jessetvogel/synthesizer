@@ -68,7 +68,7 @@ bool AudioDevices::setOutputDeviceId(int n) {
 bool AudioDevices::start() {
     if(active) {
         Error::addError(Error::OUTPUT_ALREADY_STARTED);
-        return NULL;
+        return false;
     }
     
     PaStreamParameters inputParameters;
@@ -138,13 +138,13 @@ bool AudioDevices::stop() {
         return false;
     }
     
-    active = false;
     PaError err = Pa_CloseStream(stream);
     if(err != paNoError) {
         Error::addError(Error::OUTPUT_CANNOT_CLOSE_STREAM);
         return false;
     }
-    
+
+    active = false;
     return true;
 }
 
