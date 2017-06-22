@@ -1,3 +1,8 @@
+# TODO: Create program that generates this file by number of bands
+
+
+
+
 # Use 16 knobs from Novation Launch Control
 include settings/Novation_Launch_Control.synth
 
@@ -32,19 +37,6 @@ unit_set_value BP_MOD_9 input                       audio_input
 unit_set_value BP_MOD_10 input                      audio_input
 unit_set_value BP_MOD_11 input                      audio_input
 unit_set_value BP_MOD_12 input                      audio_input
-
-unit_set_value BP_MOD_1 cutoff                      100
-unit_set_value BP_MOD_2 center                      154
-unit_set_value BP_MOD_3 center                      208
-unit_set_value BP_MOD_4 center                      285
-unit_set_value BP_MOD_5 center                      395
-unit_set_value BP_MOD_6 center                      542
-unit_set_value BP_MOD_7 center                      720
-unit_set_value BP_MOD_8 center                      1013
-unit_set_value BP_MOD_9 center                      1495
-unit_set_value BP_MOD_10 center                     2001
-unit_set_value BP_MOD_11 center                     2546
-unit_set_value BP_MOD_12 cutoff                     3330
 
 
 # Volume
@@ -102,24 +94,39 @@ unit_set_value BP_CAR_10 input                      key_output
 unit_set_value BP_CAR_11 input                      key_output
 unit_set_value BP_CAR_12 input                      key_output
 
-unit_set_value BP_CAR_1 cutoff                      100
-unit_set_value BP_CAR_2 center                      154
-unit_set_value BP_CAR_3 center                      208
-unit_set_value BP_CAR_4 center                      285
-unit_set_value BP_CAR_5 center                      395
-unit_set_value BP_CAR_6 center                      542
-unit_set_value BP_CAR_7 center                      720
-unit_set_value BP_CAR_8 center                      1013
-unit_set_value BP_CAR_9 center                      1495
-unit_set_value BP_CAR_10 center                     2001
-unit_set_value BP_CAR_11 center                     2546
-unit_set_value BP_CAR_12 cutoff                     3330
+
+# Frequencies
+
+unit_set_value BP_MOD_1 cutoff                      50
+unit_set_value BP_CAR_1 cutoff                      50
+unit_set_value BP_MOD_2 center                      83
+unit_set_value BP_CAR_2 center                      83
+unit_set_value BP_MOD_3 center                      137
+unit_set_value BP_CAR_3 center                      137
+unit_set_value BP_MOD_4 center                      227
+unit_set_value BP_CAR_4 center                      227
+unit_set_value BP_MOD_5 center                      376
+unit_set_value BP_CAR_5 center                      376
+unit_set_value BP_MOD_6 center                      622
+unit_set_value BP_CAR_6 center                      622
+unit_set_value BP_MOD_7 center                      1029
+unit_set_value BP_CAR_7 center                      1029
+unit_set_value BP_MOD_8 center                      1704
+unit_set_value BP_CAR_8 center                      1704
+unit_set_value BP_MOD_9 center                      2821
+unit_set_value BP_CAR_9 center                      2821
+unit_set_value BP_MOD_10 center                     4670
+unit_set_value BP_CAR_10 center                     4670
+unit_set_value BP_MOD_11 center                     7731
+unit_set_value BP_CAR_11 center                     7731
+unit_set_value BP_MOD_12 cutoff                     12800
+unit_set_value BP_CAR_12 cutoff                     12800
 
 
 # Q factor
-unit_set_value knob_16 min                           0.01 # q factor
-unit_set_value knob_16 max                           1000
-unit_set_value knob_16 curve                         exponential
+unit_set_value knob_16 min                          0.01 # q factor
+unit_set_value knob_16 max                          1000
+unit_set_value knob_16 curve                        exponential
 
 unit_set_value BP_CAR_2 q_factor                    knob_16
 unit_set_value BP_CAR_3 q_factor                    knob_16
@@ -176,7 +183,7 @@ unit_set_value vocoder_output gain_12               BP_MOD_12_VOLUME
 
 unit_create adder vocoder_output_total 1
 unit_set_value vocoder_output_total input_1         vocoder_output
-unit_set_value vocoder_output_total gain_1          5.0
+unit_set_value vocoder_output_total gain_1          15.0
 
 
 # Key output
@@ -187,7 +194,7 @@ unit_set_value wave amplitude                       key_velocity
 
 # Instrument
 instrument_create vocoder
-instrument_set_key_output vocoder                   x
+instrument_set_key_output vocoder                   wave
 instrument_set_output vocoder                       vocoder_output_total
 
 
