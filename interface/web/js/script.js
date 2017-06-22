@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 function parseResponse(response) {
   // Parse the response
-  console.log(response);
+  // console.log(response);
 
   var data = JSON.parse(response);
 
@@ -35,10 +35,16 @@ function parseResponse(response) {
     if (!data.hasOwnProperty(key)) continue;
 
     switch(key) {
+      case 'info':
+        if(data[key].length == 0) break;
+        for(var i = 0;i < data[key].length;i ++)
+            messages.addInfo(data[key][i]);
+        break;
+
       case 'errors':
         if(data[key].length == 0) break;
-
-        errors.add(data[key]);
+        for(var i = 0;i < data[key].length;i ++)
+            messages.addError(data[key][i]);
         break;
 
       case 'midiDevices':

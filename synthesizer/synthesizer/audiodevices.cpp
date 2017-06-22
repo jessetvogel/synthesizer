@@ -13,8 +13,8 @@ AudioDevices::AudioDevices(Controller* controller) {
     
     // Set default values
     active = false;
-    inputDeviceId = DEVICE_ID_NONE;
-    outputDeviceId = DEVICE_ID_DEFAULT;
+    setInputDeviceId(DEVICE_ID_NONE);
+    setOutputDeviceId(DEVICE_ID_DEFAULT);
 }
 
 bool AudioDevices::setInputDeviceId(int n) {
@@ -67,7 +67,7 @@ bool AudioDevices::setOutputDeviceId(int n) {
 
 bool AudioDevices::start() {
     if(active) {
-        Error::addError(Error::OUTPUT_ALREADY_STARTED);
+        Error::addError("Stream already started");
         return false;
     }
     

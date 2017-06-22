@@ -20,7 +20,8 @@
 #include "unitfuzz.hpp"
 #include "unitdelay.hpp"
 #include "unitPWM.hpp"
-#include "unitParameter.hpp"
+#include "unitparameter.hpp"
+#include "unitvolumemeter.hpp"
 
 #include "error.hpp"
 
@@ -61,10 +62,6 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent, 
     // All types below have no arguments
     if(arg1.length() != 0) return NULL;
     
-    // Variable
-    if(type.compare("label") == 0)
-        return new UnitLabel(controller);
-    
     // Oscillator
     if(type.compare("oscillator") == 0)
         return new UnitOscillator(controller, keyDependent);
@@ -89,8 +86,16 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent, 
     if(type.compare("PWM") == 0)
         return new UnitPWM(controller, keyDependent);
 
+    // Volume meter
+    if(type.compare("volumemeter") == 0)
+        return new UnitVolumeMeter(controller, keyDependent);
+    
     // Types below are not allowed to be key dependent
     if(keyDependent) return NULL;
+    
+    // Label
+    if(type.compare("label") == 0)
+        return new UnitLabel(controller);
     
     // Low-pass filter
     if(type.compare("lowpass") == 0)

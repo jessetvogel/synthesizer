@@ -13,6 +13,9 @@ UnitParameter::UnitParameter(Controller* controller, int MidiCCNumber) : Unit(co
     // Not key dependent
     keyDependent = false;
     
+    // Hidden
+    hidden = true;
+    
     // Set default values
     value = 0.5; // TODO
     parameters.push_back(min = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "min", "0.0"));

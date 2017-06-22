@@ -154,7 +154,7 @@ unit_key_create adder x 1
 unit_set_value x input_1              sum
 unit_set_value x gain_1               envelope
 
-instrument_create i
-instrument_set_key_release_time i     0.05
-instrument_set_key_output i           x
-instrument_set_output i               key_output
+instrument_create hammond
+instrument_set_key_release_time hammond 0.05
+instrument_set_key_output hammond     x
+instrument_set_output hammond         key_output

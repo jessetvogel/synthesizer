@@ -79,6 +79,12 @@ module.exports = {
         synthesizer.command('audio_set_input_device ' + inputDevice, response);
         break;
 
+      case 'include':
+        path = query.path;
+        if(path == null) { bad_request(response); break; }
+        synthesizer.command('include ' + path, response);
+        break;
+
       default:
         bad_request(response);
         break;

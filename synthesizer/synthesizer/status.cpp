@@ -18,6 +18,28 @@ Status::Status(Controller* controller) {
     this->controller = controller;
 }
 
+void Status::start() {
+    
+    std::cout << "{";
+    
+    std::cout << "\"info\": [\"Program started\"]";
+    
+    std::cout << "}" << std::endl;
+    std::cout.flush();
+    
+}
+
+void Status::stop() {
+    
+    std::cout << "{";
+    
+    std::cout << "\"info\": [\"Program stopped\"]";
+    
+    std::cout << "}" << std::endl;
+    std::cout.flush();
+    
+}
+
 bool Status::print(std::string info) {
     
     std::istringstream iss(info);
@@ -157,6 +179,8 @@ void Units::printUnits() {
     bool comma = false;
     for(auto it = units.begin(); it != units.end(); ++it) {
         Unit* unit = *it;
+        if(unit->isHidden()) continue;
+        
         if(comma) std::cout << ","; else comma = true; // Make sure units get separated by commas
         std::cout << "{";
         

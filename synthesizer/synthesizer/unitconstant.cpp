@@ -19,6 +19,9 @@ UnitConstant::UnitConstant(Controller* controller, double value) : Unit(controll
     // Constants are not key dependent
     keyDependent = false;
     
+    // Hidden
+    hidden = true;
+    
     // Fill output with value
     for(int x = 0;x < framesPerBuffer; ++x)
         output[x] = value;

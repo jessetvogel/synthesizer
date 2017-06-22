@@ -2,6 +2,7 @@
 #define controller_hpp
 
 class Settings;
+class Options;
 
 class MIDIDevices;
 class AudioDevices;
@@ -14,6 +15,7 @@ class Units;
 class Controller {
     
     Settings* settings;
+    Options* options;
     
     MIDIDevices* midiDevices;
     AudioDevices* audioDevices;
@@ -34,6 +36,7 @@ public:
     ~Controller();
     
     inline Settings* getSettings() { return settings; };
+    inline Options* getOptions() { return options; };
     
     inline MIDIDevices* getMIDIDevices() { return midiDevices; };
     inline AudioDevices* getAudioDevices() { return audioDevices; };

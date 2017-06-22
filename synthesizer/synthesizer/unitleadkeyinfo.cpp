@@ -10,6 +10,9 @@ UnitLeadKeyInfo::UnitLeadKeyInfo(Controller* controller, InfoType infoType) : Un
     // Store info type
     this->infoType = infoType;
     
+    // Hidden
+    hidden = true;
+    
     // Not key dependent
     keyDependent = false;
 }

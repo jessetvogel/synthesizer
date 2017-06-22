@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>synthesizer</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/devices.css" />
+    <link rel="stylesheet" type="text/css" href="css/units.css" />
+    <link rel="stylesheet" type="text/css" href="css/instruments.css" />
+    <link rel="stylesheet" type="text/css" href="css/file-explorer.css" />
+    <link rel="stylesheet" type="text/css" href="css/messages.css" />
+
+    <!-- JS -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/fullscreen.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/messages.js"></script>
+    <script type="text/javascript" src="js/controls.js"></script>
+    <script type="text/javascript" src="js/instruments.js"></script>
+    <script type="text/javascript" src="js/units.js"></script>
+    <script type="text/javascript" src="js/file-explorer.js"></script>
+    <script type="text/javascript" src="js/devices.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
+  </head>
+  <body>
+    <div id="content" >
+
+      <div class="container-fluid">
+        <div class="row row-no-padding">
+          <div class="col-sm-12">
+            <div class="tile">
+              <div class="controls">
+                <div class="controls-button button controls-button-reset"><span class="glyphicon glyphicon-file"></span></div>
+                <div class="controls-button button controls-button-load"><span class="glyphicon glyphicon-folder-open"></span></div>
+                <div class="controls-button button controls-button-save"><span class="glyphicon glyphicon-floppy-disk"></span></div>
+                <div class="vertical-separator"></div>
+                <div class="controls-button button controls-button-start"><span class="glyphicon glyphicon-play"></span></div>
+                <div class="controls-button button controls-button-stop button-pressed"><span class="glyphicon glyphicon-stop"></span></div>
+                <div class="vertical-separator"></div>
+                <div class="controls-button button controls-button-settings"><span class="glyphicon glyphicon-cog"></span></div>
+                <div class="controls-button button controls-button-fullscreen"><span class="glyphicon glyphicon-fullscreen"></span></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+
+            <div class="tile">
+              <div class="tile-header">MIDI devices</div>
+              <!-- <div class="tile-separator"></div> -->
+              <div class="midi-device-container">
+                <div class="midi-device">
+                  <div class="midi-device-icon"><span class="glyphicon glyphicon-music"></span></div>
+                  <div class="midi-device-name">AKM320</div>
+                  <div class="midi-device-options"><input type="checkbox" value=""></div>
+                </div>
+                <div class="midi-device">
+                  <div class="midi-device-icon"><span class="glyphicon glyphicon-music"></span></div>
+                  <div class="midi-device-name">Launch Control</div>
+                  <div class="midi-device-options"><input type="checkbox" value=""></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tile">
+              <div class="tile-header">Input devices</div>
+              <!-- <div class="tile-separator"></div> -->
+              <div class="input-device-container">
+                <div class="audio-device list-item">
+                  <div class="audio-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
+                  <div class="audio-device-name">Built-in Input</div>
+                  <div class="audio-device-options"></div>
+                </div>
+                <div class="audio-device list-item">
+                  <div class="audio-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
+                  <div class="audio-device-name">Soundflower (2ch)</div>
+                  <div class="audio-device-options"></div>
+                </div>
+                <div class="audio-device list-item">
+                  <div class="audio-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
+                  <div class="audio-device-name">Soundflower (64ch)</div>
+                  <div class="audio-device-options"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tile">
+              <div class="tile-header">Output devices</div>
+              <!-- <div class="tile-separator"></div> -->
+              <div class="output-device-container">
+                <div class="audio-device list-item">
+                  <div class="audio-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
+                  <div class="audio-device-name">Built-in Output</div>
+                  <div class="audio-device-options"></div>
+                </div>
+                <div class="audio-device list-item">
+                  <div class="audio-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
+                  <div class="audio-device-name">Soundflower (2ch)</div>
+                  <div class="audio-device-options"></div>
+                </div>
+                <div class="audio-device list-item">
+                  <div class="audio-device-icon"><span class="glyphicon glyphicon-volume-up"></span></div>
+                  <div class="audio-device-name">Soundflower (64ch)</div>
+                  <div class="audio-device-options"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-sm-10">
+            <div class="tile">
+              <div class="tile-header">Units</div>
+              <!-- <div class="tile-separator"></div> -->
+              <div class="unit-content">
+                <div class="toolbar">
+                  <div class="toolbar-button button"><span class="glyphicon glyphicon-plus"></span></div>
+                  <div class="toolbar-button button unit-button-sort"><span class="glyphicon glyphicon-sort"></span></div>
+                  <div class="toolbar-input"><input class="unit-search" /><span class="glyphicon glyphicon-search"></span></div>
+                </div>
+
+                <div class="unit-panels">
+                  <div class="unit-container">
+                    <div class="unit unit-type-key-dependent list-item">
+                      <div class="unit-type">oscillator</div>
+                      <div class="unit-id">wave</div>
+                    </div>
+
+                    <div class="unit list-item">
+                      <div class="unit-type">oscillator</div>
+                      <div class="unit-id">LFO</div>
+                    </div>
+
+                    <div class="unit unit-type-parameter list-item">
+                      <div class="unit-type">parameter</div>
+                      <div class="unit-id">knob_1</div>
+                    </div>
+
+                    <div class="unit list-item">
+                      <div class="unit-type">adder</div>
+                      <div class="unit-id">freq</div>
+                    </div>
+
+                    <div class="unit list-item">
+                      <div class="unit-type">adder</div>
+                      <div class="unit-id">alpha</div>
+                    </div>
+                  </div>
+
+                  <div class="unit-parameter-container"></div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="tile">
+              <div class="tile-header">Instruments</div>
+              <!-- <div class="tile-separator"></div> -->
+              <div class="instrument-content">
+                <div class="toolbar">
+                  <div class="toolbar-button button"><span class="glyphicon glyphicon-plus"></span></div>
+                  <div class="toolbar-button button toolbar-button-sort"><span class="glyphicon glyphicon-sort"></span></div>
+                  <div class="toolbar-input"><input class="instrument-search" /><span class="glyphicon glyphicon-search"></span></div>
+                </div>
+
+                <div class="instrument-panels">
+                  <div class="instrument-container">
+                    <div class="instrument list-item">
+                      <div class="instrument-id">synth 1</div>
+                    </div>
+                    <div class="instrument list-item">
+                      <div class="instrument-id">synth 2</div>
+                    </div>
+                  </div>
+                  <div class="instrument-parameter-container">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 512px;"></div>
+
+      <div class="content-header">Open file</div>
+
+      <div class="file-explorer container-fluid">
+        <div class="row row-no-padding">
+          <div class="col-xs-12">
+            <div class="tile">
+              <div class="file-explorer-path">/Users/jessetvogel/Projects/synthesizer/files/synth/</div>
+            </div>
+          </div>
+        </div>
+        <div class="row row-no-padding">
+          <div class="col-sm-12">
+            <div class="tile">
+              <div class="file-explorer-file-container">
+                <div class="file-explorer-file list-item">
+                  <div class="file-explorer-file-icon"><span class="glyphicon glyphicon-file"></span></div>
+                  <div class="file-explorer-file-name">example_file_1.txt</div>
+                </div>
+                <div class="file-explorer-file list-item">
+                  <div class="file-explorer-file-icon"><span class="glyphicon glyphicon-folder-close"></span></div>
+                  <div class="file-explorer-file-name">directory 25</div>
+                </div>
+                <div class="file-explorer-file list-item">
+                  <div class="file-explorer-file-icon"><span class="glyphicon glyphicon-file"></span></div>
+                  <div class="file-explorer-file-name">sample.wav</div>
+                </div>
+                <div class="file-explorer-file list-item">
+                  <div class="file-explorer-file-icon"><span class="glyphicon glyphicon-file"></span></div>
+                  <div class="file-explorer-file-name">awesome preset.synth</div>
+                </div>
+
+                <div class="file-explorer-file list-item"><div class="file-explorer-file-icon"><span class="glyphicon glyphicon-file"></span></div><div class="file-explorer-file-name">placeholder</div></div>
+                <div class="file-explorer-file list-item"><div class="file-explorer-file-icon"><span class="glyphicon glyphicon-file"></span></div><div class="file-explorer-file-name">placeholder</div></div>
+                <div class="file-explorer-file list-item"><div class="file-explorer-file-icon"><span class="glyphicon glyphicon-file"></span></div><div class="file-explorer-file-name">placeholder</div></div>
+                <div class="file-explorer-file list-item"><div class="file-explorer-file-icon"><span class="glyphicon glyphicon-file"></span></div><div class="file-explorer-file-name">placeholder</div></div>
+                <div class="file-explorer-file list-item"><div class="file-explorer-file-icon"><span class="glyphicon glyphicon-file"></span></div><div class="file-explorer-file-name">placeholder</div></div>
+                <div class="file-explorer-file list-item"><div class="file-explorer-file-icon"><span class="glyphicon glyphicon-file"></span></div><div class="file-explorer-file-name">placeholder</div></div>
+                <div class="file-explorer-file list-item"><div class="file-explorer-file-icon"><span class="glyphicon glyphicon-file"></span></div><div class="file-explorer-file-name">placeholder</div></div>
+                <div class="file-explorer-file list-item"><div class="file-explorer-file-icon"><span class="glyphicon glyphicon-file"></span></div><div class="file-explorer-file-name">placeholder</div></div>
+                <div class="file-explorer-file list-item"><div class="file-explorer-file-icon"><span class="glyphicon glyphicon-file"></span></div><div class="file-explorer-file-name">placeholder</div></div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row row-no-padding">
+          <div class="col-sm-12">
+            <div class="tile">
+              <div class="file-explorer-button-container">
+                <div class="file-explorer-button button">Open</div>
+                <div class="file-explorer-button button">Cancel</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="message-container"></div>
+
+    </div>
+  </body>
+</html>

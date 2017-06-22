@@ -28,6 +28,9 @@ public:
     // Commands for settings
     static std::regex regexSetSampleRate;
     static std::regex regexSetBufferSize;
+    static std::regex regexSetRootDirectory;
+    
+    // Commands for options
     static std::regex regexSetSustainPedalPolarity;
     static std::regex regexSetPitchWheelRange;
     

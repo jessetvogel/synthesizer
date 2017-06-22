@@ -3,6 +3,7 @@
 #include "controller.hpp"
 
 #include "settings.hpp"
+#include "options.hpp"
 
 #include "mididevices.hpp"
 #include "audiodevices.hpp"
@@ -19,6 +20,8 @@ Controller::Controller(Settings* settings) {
     this->settings = settings;
     
     // Create instances
+    options = new Options(this);
+    
     midiDevices = new MIDIDevices(this);
     audioDevices = new AudioDevices(this);
     

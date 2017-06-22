@@ -8,6 +8,9 @@ UnitInput::UnitInput(Controller* controller) : Unit(controller) {
     
     // Obviously not key dependent
     keyDependent = false;
+    
+    // Hidden
+    hidden = true;
 }
 
 void UnitInput::apply(Instrument* instrument) {

@@ -9,6 +9,9 @@ UnitKeyInfo::UnitKeyInfo(Controller* controller, InfoType infoType) : Unit(contr
     // Store info type
     this->infoType = infoType;
     
+    // Hidden
+    hidden = true;
+    
     // Obviously key dependent
     keyDependent = true;
 }

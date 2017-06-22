@@ -14,8 +14,11 @@ std::regex Commands::regexAudioSetOutputDevice("^audio_set_output_device\\s+(\\d
 // Commands for settings
 std::regex Commands::regexSetSampleRate("^settings_set_sample_rate\\s+(\\d+)$");
 std::regex Commands::regexSetBufferSize("^settings_set_buffer_size\\s+(\\d+)$");
-std::regex Commands::regexSetSustainPedalPolarity("^settings_set_sustain_pedal_polarity\\s+(normal|inverted)$");
-std::regex Commands::regexSetPitchWheelRange("^settings_set_pitch_wheel_range\\s+(\\d+)$");
+std::regex Commands::regexSetRootDirectory("^settings_set_root_directory\\s+(.+)$");
+
+// Commands for options
+std::regex Commands::regexSetSustainPedalPolarity("^options_set_sustain_pedal_polarity\\s+(normal|inverted)$");
+std::regex Commands::regexSetPitchWheelRange("^options_set_pitch_wheel_range\\s+(\\d+)$");
 
 // Commands for controller
 std::regex Commands::regexStart("^start$");

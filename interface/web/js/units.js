@@ -11,9 +11,6 @@ var units = {
     $('.unit-container').html('');
 
     for(var i = 0;i < data.length;i ++) {
-      // Skip the ones that cannot be set TODO: find more general solution
-      if(data[i].parameters.length == 0) continue;
-
       var unit = $('<div>').addClass('unit list-item')
       if(data[i].keyDependent == 'true')
         unit.addClass('unit-type-key-dependent');

@@ -13,6 +13,9 @@ public:
     
     Status(Controller*);
     
+    static void start();
+    static void stop();
+    
     bool print(std::string);
     
 };

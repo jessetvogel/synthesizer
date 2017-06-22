@@ -11,7 +11,7 @@
 #include "instrument.hpp"
 #include "units.hpp"
 #include "unit.hpp"
-#include "settings.hpp"
+#include "options.hpp"
 #include "status.hpp"
 
 #include "error.hpp"
@@ -87,29 +87,17 @@ bool Parser::parseLine(std::string line) {
         return controller->getAudioDevices()->setOutputDeviceId(stoi(cm[1]));
     }
     
-    // Settings
+    // Options
     
-    // settings_set_sample_rate <value>
-    if(std::regex_search(str, cm, Commands::regexSetSampleRate)) {
-        controller->getSettings()->sampleRate = stod(cm[1]);
-        return true;
-    }
-    
-    // settings_set_buffer_size <value>
-    if(std::regex_search(str, cm, Commands::regexSetBufferSize)) {
-        controller->getSettings()->bufferSize = stoi(cm[1]);
-        return true;
-    }
-    
-    // settings_set_sustain_pedal_polarity <normal|inverted>
+    // options_set_sustain_pedal_polarity <normal|inverted>
     if(std::regex_search(str, cm, Commands::regexSetSustainPedalPolarity)) {
-        controller->getSettings()->sustainPedalPolarity = (cm[1].compare("inverted") == 0);
+        controller->getOptions()->sustainPedalPolarity = (cm[1].compare("inverted") == 0);
         return true;
     }
     
-    // settings_set_pitch_wheel_range <semitones>
+    // options_set_pitch_wheel_range <semitones>
     if(std::regex_search(str, cm, Commands::regexSetPitchWheelRange)) {
-        controller->getSettings()->pitchWheelRange = stod(cm[1]);
+        controller->getOptions()->pitchWheelRange = stod(cm[1]);
         return true;
     }
     
@@ -117,9 +105,6 @@ bool Parser::parseLine(std::string line) {
     
     // start
     if(std::regex_search(str, cm, Commands::regexStart)) {
-        int deviceId = (std::string(cm[1]).length() == 0) ? -1 : stoi(cm[1]);
-        if(!controller->getAudioDevices()->setOutputDeviceId(deviceId))
-            return false;
         return controller->start();
     }
     
@@ -286,6 +271,7 @@ bool Parser::parseLine(std::string line) {
         }
         return unit->setParameter(cm[2], cm[3]);
     }
+    
     Error::addError(Error::COMMAND_NOT_RECOGNISED);
     return false;
 }

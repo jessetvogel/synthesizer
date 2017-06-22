@@ -2,27 +2,28 @@
 #define settings_hpp
 
 #define AMOUNT_OF_KEYS (128)
-#define NOTE_A4 (69)
 
 #define DEFAULT_SAMPLE_RATE (44100)
 #define DEFAULT_BUFFER_SIZE (64)
+#define DEFAULT_ROOT_DIRECTORY "/Users/Jesse/Projects/synthesizer/files"
 
-#define DEFAULT_PITCH_WHEEL_RANGE (2.0)
-#define DEFAULT_SUSTAIN_PEDAL_POLARITY (false)
+#define SETTINGS_PATH "settings.txt"
+
+#include <string>
 
 class Settings {
    
+    bool load();
+    bool parseLine(std::string);
+    
 public:
     
     Settings();
     
-    double frequencies[AMOUNT_OF_KEYS];
-    
     double sampleRate;
     unsigned long bufferSize;
     
-    double pitchWheelRange;
-    bool sustainPedalPolarity;
+    std::string rootDirectory;
     
 };
 

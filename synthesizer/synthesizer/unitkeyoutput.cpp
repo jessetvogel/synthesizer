@@ -6,6 +6,9 @@ UnitKeyOutput::UnitKeyOutput(Controller* controller) : Unit(controller) {
     // Set type
     type = "key_output";
     
+    // Hidden
+    hidden = true;
+    
     // Not key dependent
     keyDependent = false;
     applyAlways = true;

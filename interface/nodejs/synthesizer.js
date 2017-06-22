@@ -39,6 +39,7 @@ function parse(data) {
   // If no response, print it to console. TODO: save it, and return it whenever it is asked for?
   if(responses.length == 0) {
     console.log('No response set!');
+    console.log(output);
     return;
   }
 

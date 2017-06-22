@@ -1,0 +1,203 @@
+# Use 16 knobs from Novation Launch Control
+include settings/Novation_Launch_Control.synth
+
+include hammond.synth
+instrument_delete hammond
+
+# Source: http://musicfromouterspace.com/analogsynth_new/VOCODER2013/images/vocoderblockdiag.gif
+
+# Modulator
+unit_create lowpass BP_MOD_1
+unit_create bandpass BP_MOD_2
+unit_create bandpass BP_MOD_3
+unit_create bandpass BP_MOD_4
+unit_create bandpass BP_MOD_5
+unit_create bandpass BP_MOD_6
+unit_create bandpass BP_MOD_7
+unit_create bandpass BP_MOD_8
+unit_create bandpass BP_MOD_9
+unit_create bandpass BP_MOD_10
+unit_create bandpass BP_MOD_11
+unit_create highpass BP_MOD_12
+
+unit_set_value BP_MOD_1 input                       audio_input
+unit_set_value BP_MOD_2 input                       audio_input
+unit_set_value BP_MOD_3 input                       audio_input
+unit_set_value BP_MOD_4 input                       audio_input
+unit_set_value BP_MOD_5 input                       audio_input
+unit_set_value BP_MOD_6 input                       audio_input
+unit_set_value BP_MOD_7 input                       audio_input
+unit_set_value BP_MOD_8 input                       audio_input
+unit_set_value BP_MOD_9 input                       audio_input
+unit_set_value BP_MOD_10 input                      audio_input
+unit_set_value BP_MOD_11 input                      audio_input
+unit_set_value BP_MOD_12 input                      audio_input
+
+unit_set_value BP_MOD_1 cutoff                      100
+unit_set_value BP_MOD_2 center                      154
+unit_set_value BP_MOD_3 center                      208
+unit_set_value BP_MOD_4 center                      285
+unit_set_value BP_MOD_5 center                      395
+unit_set_value BP_MOD_6 center                      542
+unit_set_value BP_MOD_7 center                      720
+unit_set_value BP_MOD_8 center                      1013
+unit_set_value BP_MOD_9 center                      1495
+unit_set_value BP_MOD_10 center                     2001
+unit_set_value BP_MOD_11 center                     2546
+unit_set_value BP_MOD_12 cutoff                     3330
+
+
+# Volume
+unit_create volumemeter BP_MOD_1_VOLUME
+unit_create volumemeter BP_MOD_2_VOLUME
+unit_create volumemeter BP_MOD_3_VOLUME
+unit_create volumemeter BP_MOD_4_VOLUME
+unit_create volumemeter BP_MOD_5_VOLUME
+unit_create volumemeter BP_MOD_6_VOLUME
+unit_create volumemeter BP_MOD_7_VOLUME
+unit_create volumemeter BP_MOD_8_VOLUME
+unit_create volumemeter BP_MOD_9_VOLUME
+unit_create volumemeter BP_MOD_10_VOLUME
+unit_create volumemeter BP_MOD_11_VOLUME
+unit_create volumemeter BP_MOD_12_VOLUME
+
+unit_set_value BP_MOD_1_VOLUME input                BP_MOD_1
+unit_set_value BP_MOD_2_VOLUME input                BP_MOD_2
+unit_set_value BP_MOD_3_VOLUME input                BP_MOD_3
+unit_set_value BP_MOD_4_VOLUME input                BP_MOD_4
+unit_set_value BP_MOD_5_VOLUME input                BP_MOD_5
+unit_set_value BP_MOD_6_VOLUME input                BP_MOD_6
+unit_set_value BP_MOD_7_VOLUME input                BP_MOD_7
+unit_set_value BP_MOD_8_VOLUME input                BP_MOD_8
+unit_set_value BP_MOD_9_VOLUME input                BP_MOD_9
+unit_set_value BP_MOD_10_VOLUME input               BP_MOD_10
+unit_set_value BP_MOD_11_VOLUME input               BP_MOD_11
+unit_set_value BP_MOD_12_VOLUME input               BP_MOD_12
+
+
+# Carrier
+unit_create lowpass BP_CAR_1
+unit_create bandpass BP_CAR_2
+unit_create bandpass BP_CAR_3
+unit_create bandpass BP_CAR_4
+unit_create bandpass BP_CAR_5
+unit_create bandpass BP_CAR_6
+unit_create bandpass BP_CAR_7
+unit_create bandpass BP_CAR_8
+unit_create bandpass BP_CAR_9
+unit_create bandpass BP_CAR_10
+unit_create bandpass BP_CAR_11
+unit_create highpass BP_CAR_12
+
+unit_set_value BP_CAR_1 input                       key_output
+unit_set_value BP_CAR_2 input                       key_output
+unit_set_value BP_CAR_3 input                       key_output
+unit_set_value BP_CAR_4 input                       key_output
+unit_set_value BP_CAR_5 input                       key_output
+unit_set_value BP_CAR_6 input                       key_output
+unit_set_value BP_CAR_7 input                       key_output
+unit_set_value BP_CAR_8 input                       key_output
+unit_set_value BP_CAR_9 input                       key_output
+unit_set_value BP_CAR_10 input                      key_output
+unit_set_value BP_CAR_11 input                      key_output
+unit_set_value BP_CAR_12 input                      key_output
+
+unit_set_value BP_CAR_1 cutoff                      100
+unit_set_value BP_CAR_2 center                      154
+unit_set_value BP_CAR_3 center                      208
+unit_set_value BP_CAR_4 center                      285
+unit_set_value BP_CAR_5 center                      395
+unit_set_value BP_CAR_6 center                      542
+unit_set_value BP_CAR_7 center                      720
+unit_set_value BP_CAR_8 center                      1013
+unit_set_value BP_CAR_9 center                      1495
+unit_set_value BP_CAR_10 center                     2001
+unit_set_value BP_CAR_11 center                     2546
+unit_set_value BP_CAR_12 cutoff                     3330
+
+
+# Q factor
+unit_set_value knob_16 min                           0.01 # q factor
+unit_set_value knob_16 max                           1000
+unit_set_value knob_16 curve                         exponential
+
+unit_set_value BP_CAR_2 q_factor                    knob_16
+unit_set_value BP_CAR_3 q_factor                    knob_16
+unit_set_value BP_CAR_4 q_factor                    knob_16
+unit_set_value BP_CAR_5 q_factor                    knob_16
+unit_set_value BP_CAR_6 q_factor                    knob_16
+unit_set_value BP_CAR_7 q_factor                    knob_16
+unit_set_value BP_CAR_8 q_factor                    knob_16
+unit_set_value BP_CAR_9 q_factor                    knob_16
+unit_set_value BP_CAR_10 q_factor                   knob_16
+unit_set_value BP_CAR_11 q_factor                   knob_16
+
+unit_set_value BP_MOD_2 q_factor                    knob_16
+unit_set_value BP_MOD_3 q_factor                    knob_16
+unit_set_value BP_MOD_4 q_factor                    knob_16
+unit_set_value BP_MOD_5 q_factor                    knob_16
+unit_set_value BP_MOD_6 q_factor                    knob_16
+unit_set_value BP_MOD_7 q_factor                    knob_16
+unit_set_value BP_MOD_8 q_factor                    knob_16
+unit_set_value BP_MOD_9 q_factor                    knob_16
+unit_set_value BP_MOD_10 q_factor                   knob_16
+unit_set_value BP_MOD_11 q_factor                   knob_16
+
+
+# Output
+unit_create adder vocoder_output 12
+
+unit_set_value vocoder_output input_1               BP_CAR_1
+unit_set_value vocoder_output input_2               BP_CAR_2
+unit_set_value vocoder_output input_3               BP_CAR_3
+unit_set_value vocoder_output input_4               BP_CAR_4
+unit_set_value vocoder_output input_5               BP_CAR_5
+unit_set_value vocoder_output input_6               BP_CAR_6
+unit_set_value vocoder_output input_7               BP_CAR_7
+unit_set_value vocoder_output input_8               BP_CAR_8
+unit_set_value vocoder_output input_9               BP_CAR_9
+unit_set_value vocoder_output input_10              BP_CAR_10
+unit_set_value vocoder_output input_11              BP_CAR_11
+unit_set_value vocoder_output input_12              BP_CAR_12
+
+unit_set_value vocoder_output gain_1                BP_MOD_1_VOLUME
+unit_set_value vocoder_output gain_2                BP_MOD_2_VOLUME
+unit_set_value vocoder_output gain_3                BP_MOD_3_VOLUME
+unit_set_value vocoder_output gain_4                BP_MOD_4_VOLUME
+unit_set_value vocoder_output gain_5                BP_MOD_5_VOLUME
+unit_set_value vocoder_output gain_6                BP_MOD_6_VOLUME
+unit_set_value vocoder_output gain_7                BP_MOD_7_VOLUME
+unit_set_value vocoder_output gain_8                BP_MOD_8_VOLUME
+unit_set_value vocoder_output gain_9                BP_MOD_9_VOLUME
+unit_set_value vocoder_output gain_10               BP_MOD_10_VOLUME
+unit_set_value vocoder_output gain_11               BP_MOD_11_VOLUME
+unit_set_value vocoder_output gain_12               BP_MOD_12_VOLUME
+
+
+unit_create adder vocoder_output_total 1
+unit_set_value vocoder_output_total input_1         vocoder_output
+unit_set_value vocoder_output_total gain_1          5.0
+
+
+# Key output
+unit_key_create oscillator wave
+unit_set_value wave sample                          sawtooth
+unit_set_value wave frequency                       key_frequency
+unit_set_value wave amplitude                       key_velocity
+
+# Instrument
+instrument_create vocoder
+instrument_set_key_output vocoder                   x
+instrument_set_output vocoder                       vocoder_output_total
+
+
+
+
+
+
+# Additional for testing
+midi_add_device 1
+midi_add_device 2
+audio_set_input_device 2
+audio_set_output_device 1
+start

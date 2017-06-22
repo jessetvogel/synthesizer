@@ -26,6 +26,7 @@ protected:
     
     bool keyDependent;
     bool applyAlways = false;
+    bool hidden = false;
     
     unsigned long framesPerBuffer;
     double sampleRate;
@@ -52,6 +53,7 @@ public:
     inline void reset() { updated = false; };
     void update(Instrument*);
     inline bool isKeyDependent() { return keyDependent; };
+    inline bool isHidden() { return hidden; };
   
 };
 

@@ -7,6 +7,9 @@ UnitModulationWheel::UnitModulationWheel(Controller* controller) : Unit(controll
     // Set type
     type = "modulation_wheel";
     
+    // Hidden
+    hidden = true;
+    
     // The modulation wheel is not key dependent
     keyDependent = false;
 }
