@@ -36,6 +36,8 @@ public:
     
     Instrument(Controller*);
     ~Instrument();
+    
+    bool active;
 
     bool setId(std::string);
     inline std::string getId() { return id; }

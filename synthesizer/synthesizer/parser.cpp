@@ -158,6 +158,16 @@ bool Parser::parseLine(std::string line) {
         return controller->getInstruments()->remove(instrument);
     }
     
+    // instrument_set_active <instrument> <true|false>
+    if(std::regex_search(str, cm, Commands::regexInstrumentSetActive)) {
+        Instrument* instrument = controller->getInstruments()->get(cm[1]);
+        if(instrument == NULL) {
+            Error::addError(Error::INSTRUMENT_NOT_FOUND);
+            return false;
+        }
+        return instrument->active = (cm[2].compare("true") == 0);;
+    }
+    
     // instrument_set_output <instrument> <unit>
     if(std::regex_search(str, cm, Commands::regexInstrumentSetOutput)) {
         Instrument* instrument = controller->getInstruments()->get(cm[1]);

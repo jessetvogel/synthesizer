@@ -23,6 +23,9 @@ Instrument::Instrument(Controller* controller) {
     output = new UnitConstant(controller, 0.0);
     keyOutput = new UnitConstant(controller, 0.0);
     keyReleaseTime = 0.0;
+    
+    // By default, active
+    active = true;
 }
 
 Instrument::~Instrument() {

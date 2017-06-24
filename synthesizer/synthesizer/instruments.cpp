@@ -65,6 +65,7 @@ bool Instruments::apply() {
     // Update all instruments, and add their result to the buffer
     bool success = true;
     for(auto it = instruments.begin(); it != instruments.end(); ++it) {
+        if(!((*it)->active)) continue;
         success = success && (*it)->update();
         float* instrumentBuffer = (*it)->getBuffer();
         for(int x = 0;x < framesPerBuffer; ++x)
