@@ -3,18 +3,28 @@
 
 #include "unit.hpp"
 
+class IIRFilter;
+
 class UnitLowpass : public Unit {
 
     Parameter* input;
     Parameter* cutOffFrequency;
     
-    float output_1;
+    int order;
+    double omegaC;
+    
+    IIRFilter* filter;
+    
+    void updateFilter();
     
 public:
     
-    UnitLowpass(Controller*);
+    UnitLowpass(Controller*, int);
+    ~UnitLowpass();
     
     void apply(Instrument*);
+    
+    static const int maxOrder;
     
 };
 

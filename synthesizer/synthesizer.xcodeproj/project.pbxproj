@@ -21,6 +21,7 @@
 		311049B11ED0D93D000E89F1 /* function.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 311049AF1ED0D93D000E89F1 /* function.cpp */; };
 		312D2EA71ED1C6F1005B4508 /* keyevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312D2EA61ED1C6F1005B4508 /* keyevent.cpp */; };
 		312D2EAA1ED1CE83005B4508 /* unitkeyoutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312D2EA81ED1CE83005B4508 /* unitkeyoutput.cpp */; };
+		3174D24E1EFEB8EF00A229A8 /* IIRfilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3174D24C1EFEB8EF00A229A8 /* IIRfilter.cpp */; };
 		319C90071EF6EB900041705D /* mididevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 319C90051EF6EB900041705D /* mididevice.cpp */; };
 		319C900A1EF70B150041705D /* instruments.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 319C90081EF70B150041705D /* instruments.cpp */; };
 		319C900D1EF70C3D0041705D /* units.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 319C900B1EF70C3D0041705D /* units.cpp */; };
@@ -93,6 +94,8 @@
 		312D2EA61ED1C6F1005B4508 /* keyevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = keyevent.cpp; sourceTree = "<group>"; };
 		312D2EA81ED1CE83005B4508 /* unitkeyoutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitkeyoutput.cpp; sourceTree = "<group>"; };
 		312D2EA91ED1CE83005B4508 /* unitkeyoutput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitkeyoutput.hpp; sourceTree = "<group>"; };
+		3174D24C1EFEB8EF00A229A8 /* IIRfilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IIRfilter.cpp; sourceTree = "<group>"; };
+		3174D24D1EFEB8EF00A229A8 /* IIRfilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IIRfilter.hpp; sourceTree = "<group>"; };
 		319C90051EF6EB900041705D /* mididevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mididevice.cpp; sourceTree = "<group>"; };
 		319C90061EF6EB900041705D /* mididevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mididevice.hpp; sourceTree = "<group>"; };
 		319C90081EF70B150041705D /* instruments.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = instruments.cpp; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 				31D719791ECE2D6300A4C9E0 /* tools */,
 				31D719701ECE0F5F00A4C9E0 /* units */,
 				31D7197B1ECE2E1500A4C9E0 /* files */,
+				3174D24C1EFEB8EF00A229A8 /* IIRfilter.cpp */,
+				3174D24D1EFEB8EF00A229A8 /* IIRfilter.hpp */,
 			);
 			path = synthesizer;
 			sourceTree = "<group>";
@@ -225,13 +230,13 @@
 				31D7195F1ECC4E5700A4C9E0 /* unitADSR.hpp */,
 				8835ABAF1EF82EF7006C3F91 /* unitinput.cpp */,
 				8835ABB01EF82EF7006C3F91 /* unitinput.hpp */,
+				885048831EFBE4560045B9C8 /* unitvolumemeter.cpp */,
+				885048841EFBE4560045B9C8 /* unitvolumemeter.hpp */,
 				888788021EE0518E007F04EA /* functions */,
 				888788011EE0514C007F04EA /* effects */,
 				886F98AD1ED72840003B8235 /* constant */,
 				886F98AA1ED7275E003B8235 /* info */,
 				886F98AB1ED72799003B8235 /* filters */,
-				885048831EFBE4560045B9C8 /* unitvolumemeter.cpp */,
-				885048841EFBE4560045B9C8 /* unitvolumemeter.hpp */,
 			);
 			name = units;
 			sourceTree = "<group>";
@@ -430,6 +435,7 @@
 			files = (
 				311049AE1ED0D8DE000E89F1 /* unitfunction.cpp in Sources */,
 				319C90071EF6EB900041705D /* mididevice.cpp in Sources */,
+				3174D24E1EFEB8EF00A229A8 /* IIRfilter.cpp in Sources */,
 				310285601EC8E7E300B4A5F6 /* controller.cpp in Sources */,
 				319C900D1EF70C3D0041705D /* units.cpp in Sources */,
 				885048821EFBCF420045B9C8 /* options.cpp in Sources */,

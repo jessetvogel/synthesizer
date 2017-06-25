@@ -21,7 +21,7 @@ void UnitVolumeMeter::apply(Instrument* instrument) {
     Unit* input = (Unit*) (this->input->pointer);
     
     for(int x = 0;x < framesPerBuffer; ++x) {
-        RMSAverage = 0.995f * RMSAverage + 0.005f * (input->output[x]*input->output[x]);
+        RMSAverage = 0.998f * RMSAverage + 0.002f * (input->output[x]*input->output[x]); // TODO: coefficients?
         output[x] = std::sqrt(RMSAverage);
     }
 }

@@ -1,12 +1,14 @@
 #include <cmath>
 
-#include "unitbandpass.hpp"
+#include "UnitBandpass.hpp"
 #include "controller.hpp"
 #include "instrument.hpp"
 #include "parameter.hpp"
 #include "settings.hpp"
 
-UnitBandPass::UnitBandPass(Controller* controller) : Unit(controller) {
+const int UnitBandpass::maxOrder = 5;
+
+UnitBandpass::UnitBandpass(Controller* controller, int order) : Unit(controller) {
     // Set type
     type = "bandpass";
     
@@ -23,7 +25,7 @@ UnitBandPass::UnitBandPass(Controller* controller) : Unit(controller) {
     output_2 = 0.0;
 }
 
-void UnitBandPass::apply(Instrument* instrument) {
+void UnitBandpass::apply(Instrument* instrument) {
     Unit* input = (Unit*) (this->input->pointer);
     Unit* centerFrequency = (Unit*) (this->centerFrequency->pointer);
     Unit* qFactor = (Unit*) (this->qFactor->pointer);

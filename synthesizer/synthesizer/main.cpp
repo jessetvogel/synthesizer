@@ -17,11 +17,11 @@ void initialize();
 void destruct();
 
 int main(int argc, char *argv[]) {
-    // Initialize stuff (TODO: put this in some audio class or something, and check for errors)
-    initialize();
-    
     // Load settings
     Settings settings;
+    
+    // Initialize stuff (TODO: put this in some audio class or something, and check for errors)
+    initialize();
     
     // Create a new controller object
     Controller controller(&settings);

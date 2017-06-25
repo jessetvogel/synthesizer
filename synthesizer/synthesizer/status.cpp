@@ -22,7 +22,9 @@ void Status::start() {
     
     std::cout << "{";
     
-    std::cout << "\"info\": [\"Program started\"]";
+    std::cout << "\"info\": [\"Program started\"],";
+    
+    Error::printErrors();
     
     std::cout << "}" << std::endl;
     std::cout.flush();

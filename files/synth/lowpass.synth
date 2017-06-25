@@ -1,0 +1,12 @@
+unit_key_create oscillator wave
+unit_set_value wave sample              sawtooth
+unit_set_value wave frequency           key_frequency
+unit_set_value wave amplitude           key_velocity
+
+unit_create lowpass L 2
+unit_set_value L input                  key_output
+unit_set_value L cutoff                 1000
+
+instrument_create i
+instrument_set_key_output i             wave
+instrument_set_output i                 L

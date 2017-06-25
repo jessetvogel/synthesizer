@@ -47,6 +47,36 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent, 
         return new UnitDelay(controller, n, T);
     }
     
+    // Low-pass filter
+    if(type.compare("lowpass") == 0) {
+        if(keyDependent) return NULL;
+        if(arg2.length() != 0) { Error::addError(Error::INVALID_NUMBER_OF_ARGUMENTS); return NULL; } // Only requires one argument, not two
+        if(!Util::isInteger(arg1)) { Error::addError(Error::INVALID_ARGUMENT); return NULL; }
+        int order = stoi(arg1);
+        if(order > UnitLowpass::maxOrder) return NULL;
+        return new UnitLowpass(controller, order);
+    }
+    
+    // High-pass filter
+    if(type.compare("highpass") == 0) {
+        if(keyDependent) return NULL;
+        if(arg2.length() != 0) { Error::addError(Error::INVALID_NUMBER_OF_ARGUMENTS); return NULL; } // Only requires one argument, not two
+        if(!Util::isInteger(arg1)) { Error::addError(Error::INVALID_ARGUMENT); return NULL; }
+        int order = stoi(arg1);
+        if(order > UnitHighpass::maxOrder) return NULL;
+        return new UnitHighpass(controller, order);
+    }
+
+    // Band-pass filter
+    if(type.compare("bandpass") == 0) {
+        if(keyDependent) return NULL;
+        if(arg2.length() != 0) { Error::addError(Error::INVALID_NUMBER_OF_ARGUMENTS); return NULL; } // Only requires one argument, not two
+        if(!Util::isInteger(arg1)) { Error::addError(Error::INVALID_ARGUMENT); return NULL; }
+        int order = stoi(arg1);
+        if(order > UnitBandpass::maxOrder) return NULL;
+        return new UnitBandpass(controller, order);
+    }
+    
     // Parameter
     if(type.compare("parameter") == 0) {
         if(arg2.length() != 0) return NULL; // Only requires one argument, not two
@@ -96,18 +126,6 @@ Unit* Unit::create(Controller* controller, std::string type, bool keyDependent, 
     // Label
     if(type.compare("label") == 0)
         return new UnitLabel(controller);
-    
-    // Low-pass filter
-    if(type.compare("lowpass") == 0)
-        return new UnitLowpass(controller);
-    
-    // High-pass filter
-    if(type.compare("highpass") == 0)
-        return new UnitHighpass(controller);
-    
-    // Band-pass filter
-    if(type.compare("bandpass") == 0)
-        return new UnitBandPass(controller);
     
     // If no match was found, return NULL
     Error::addError(Error::UNIT_TYPE_NOT_FOUND);

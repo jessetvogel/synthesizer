@@ -3,7 +3,7 @@
 
 #include "unit.hpp"
 
-class UnitBandPass : public Unit {
+class UnitBandpass : public Unit {
     
     Parameter* input;
     Parameter* centerFrequency;
@@ -16,9 +16,11 @@ class UnitBandPass : public Unit {
     
 public:
     
-    UnitBandPass(Controller*);
+    UnitBandpass(Controller*, int);
     
     void apply(Instrument*);
+    
+    static const int maxOrder;
     
 };
 
