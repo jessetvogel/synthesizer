@@ -6,19 +6,19 @@ class IIRFilter {
     int FFFO; // Feedforward filter order
     int FBFO; // Feedback filter order
     
-    float* input;
-    float* output;
+    double* input;
+    double* output;
     
 public:
     
     IIRFilter(int, int);
     ~IIRFilter();
     
-    float* alpha;
-    float* beta;
-    float gain;
+    double* alpha;
+    double* beta;
+    double gain;
     
-    float apply(float);
+    double apply(double);
     
 };
 

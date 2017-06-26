@@ -10,7 +10,12 @@ class UnitHighpass : public Unit {
     Parameter* input;
     Parameter* cutOffFrequency;
     
+    int order;
+    double omegaC;
+    
     IIRFilter* filter;
+    
+    void updateFilter();
     
 public:
     

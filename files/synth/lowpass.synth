@@ -3,10 +3,53 @@ unit_set_value wave sample              sawtooth
 unit_set_value wave frequency           key_frequency
 unit_set_value wave amplitude           key_velocity
 
-unit_create lowpass L 2
+unit_key_create adder key_frequency2 1
+unit_set_value key_frequency2 input_1   key_frequency
+unit_set_value key_frequency2 gain_1    3.0
+
+unit_key_create oscillator wave2
+unit_set_value wave2 sample             sawtooth
+unit_set_value wave2 frequency          key_frequency2
+unit_set_value wave2 amplitude          key_velocity
+
+unit_key_create adder sum 2
+unit_set_value sum input_1              wave
+unit_set_value sum gain_1               0.1
+unit_set_value sum input_2              wave2
+unit_set_value sum gain_2               0.1
+
+unit_create oscillator zzzL
+unit_create oscillator zzzH
+unit_set_value zzzL sample              sine
+unit_set_value zzzH sample              sine
+unit_set_value zzzL frequency           0.3
+unit_set_value zzzH frequency           0.25
+unit_set_value zzzL amplitude           0.5
+unit_set_value zzzH amplitude           0.5
+unit_set_value zzzL mean                2.65
+unit_set_value zzzH mean                2.85
+
+unit_create function FL
+unit_set_value FL function              pow10
+unit_set_value FL input                 zzzL
+
+unit_create function FH
+unit_set_value FH function              pow10
+unit_set_value FH input                 zzzH
+
+unit_create lowpass L 5
 unit_set_value L input                  key_output
-unit_set_value L cutoff                 1000
+unit_set_value L cutoff                 FL
+
+unit_create highpass H 5
+unit_set_value H input                  L
+unit_set_value H cutoff                 FH
 
 instrument_create i
-instrument_set_key_output i             wave
-instrument_set_output i                 L
+instrument_set_key_output i             sum
+instrument_set_output i                 H
+
+
+# For testing purposes
+midi_add_device 1
+start

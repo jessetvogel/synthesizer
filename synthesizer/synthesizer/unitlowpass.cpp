@@ -21,7 +21,7 @@ UnitLowpass::UnitLowpass(Controller* controller, int order) : Unit(controller) {
     parameters.push_back(cutOffFrequency = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "cutoff", "1000.0"));
     
     // Create filter
-    filter = new IIRFilter(0, 1);
+    filter = new IIRFilter(order, order);
 }
 
 UnitLowpass::~UnitLowpass() {
@@ -43,8 +43,6 @@ void UnitLowpass::apply(Instrument* instrument) {
     for(int x = 0;x < framesPerBuffer; ++x)
         output[x] = filter->apply(input->output[x]);
 }
-
-#include <iostream>
 
 void UnitLowpass::updateFilter() {
     // See: 'Audio Effects - Theory, Implementation and Application' pp. 59--87
@@ -77,10 +75,13 @@ void UnitLowpass::updateFilter() {
         p2Imag[n] = tan(gamma);
     }
     
-    //  (  If HPF: q |--> -q  )
+    // Bound omegaC
+    double wc = omegaC;
+    if(wc < 0.01) wc = 0.01;
+    if(wc > M_PI - 0.001) wc = M_PI - 0.001;
     
     // Change cut-off frequency
-    double beta = 2.0 / (1.0 + tan(0.5 * omegaC)) - 1.0;
+    double beta = 2.0 / (1.0 + tan(0.5 * wc)) - 1.0;
     
     for(int n = 0;n < qLength; ++n) {
         // Update roots
@@ -144,12 +145,7 @@ void UnitLowpass::updateFilter() {
     for(int n = 0;n <= order; ++n) {
         filter->alpha[n] = a[order - n];
         filter->beta[n] = b[order - n];
-        
-        std::cout << "alpha[" << n << "] = " << filter->alpha[n] << std::endl;
-        std::cout << "beta[" << n << "] = " << filter->beta[n] << std::endl;
     }
-    
-    std::cout << "gain = " << gain << std::endl;
     
     filter->gain = gain;
 }
