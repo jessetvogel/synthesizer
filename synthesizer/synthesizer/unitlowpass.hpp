@@ -8,7 +8,7 @@ class IIRFilter;
 class UnitLowpass : public Unit {
 
     Parameter* input;
-    Parameter* cutOffFrequency;
+    Parameter* cutOff;
     
     int order;
     double omegaC;

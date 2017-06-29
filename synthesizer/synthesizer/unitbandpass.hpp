@@ -3,16 +3,21 @@
 
 #include "unit.hpp"
 
+class IIRFilter;
+
 class UnitBandpass : public Unit {
     
     Parameter* input;
-    Parameter* centerFrequency;
-    Parameter* qFactor;
+    Parameter* center;
+    Parameter* bandwidth;
     
-    float input_1;
-    float input_2;
-    float output_1;
-    float output_2;
+    int order;
+    double omegaL;
+    double omegaH;
+    
+    IIRFilter* filter;
+    
+    void updateFilter();
     
 public:
     

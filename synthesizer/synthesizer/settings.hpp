@@ -5,7 +5,7 @@
 
 #define DEFAULT_SAMPLE_RATE (44100)
 #define DEFAULT_BUFFER_SIZE (64)
-#define DEFAULT_ROOT_DIRECTORY "/Users/jessetvogel/Projects/synthesizer/files/synth"
+#define DEFAULT_ROOT_DIRECTORY "/Users/Jesse/Projects/synthesizer/files/synth"
 
 #define SETTINGS_PATH "settings.txt"
 
