@@ -1,5 +1,5 @@
 unit_key_create oscillator wave
-unit_set_value wave sample              sawtooth
+unit_set_value wave sample              triangle
 unit_set_value wave frequency           key_frequency
 unit_set_value wave amplitude           key_velocity
 
@@ -8,7 +8,7 @@ unit_set_value key_frequency2 input_1   key_frequency
 unit_set_value key_frequency2 gain_1    3.0
 
 unit_key_create oscillator wave2
-unit_set_value wave2 sample             sawtooth
+unit_set_value wave2 sample             triangle
 unit_set_value wave2 frequency          key_frequency2
 unit_set_value wave2 amplitude          key_velocity
 
