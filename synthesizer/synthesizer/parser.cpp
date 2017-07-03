@@ -66,59 +66,32 @@ bool Parser::parseLine(std::string line) {
     // MIDI
 
     // midi_add_device <input_device>
-    if(std::regex_search(str, cm, Commands::regexMidiAddDevice)) {
-        return controller->getMIDIDevices()->add(stoi(cm[1]));
-    }
-    
+    if(std::regex_search(str, cm, Commands::regexMidiAddDevice))            return controller->getMIDIDevices()->add(stoi(cm[1]));
     // midi_remove_device <input_device>
-    if(std::regex_search(str, cm, Commands::regexMidiRemoveDevice)) {
-        return controller->getMIDIDevices()->remove(stoi(cm[1]));
-    }
+    if(std::regex_search(str, cm, Commands::regexMidiRemoveDevice))         return controller->getMIDIDevices()->remove(stoi(cm[1]));
     
     // Audio
     
     // audio_set_input_device <input_device>
-    if(std::regex_search(str, cm, Commands::regexAudioSetInputDevice)) {
-        return controller->getAudioDevices()->setInputDeviceId(stoi(cm[1]));
-    }
-    
+    if(std::regex_search(str, cm, Commands::regexAudioSetInputDevice))      return controller->getAudioDevices()->setInputDeviceId(stoi(cm[1]));
     // audio_set_output_device <input_device>
-    if(std::regex_search(str, cm, Commands::regexAudioSetOutputDevice)) {
-        return controller->getAudioDevices()->setOutputDeviceId(stoi(cm[1]));
-    }
+    if(std::regex_search(str, cm, Commands::regexAudioSetOutputDevice))     return controller->getAudioDevices()->setOutputDeviceId(stoi(cm[1]));
     
     // Options
     
     // options_set_sustain_pedal_polarity <normal|inverted>
-    if(std::regex_search(str, cm, Commands::regexSetSustainPedalPolarity)) {
-        controller->getOptions()->sustainPedalPolarity = (cm[1].compare("inverted") == 0);
-        return true;
-    }
-    
+    if(std::regex_search(str, cm, Commands::regexSetSustainPedalPolarity))  return controller->getOptions()->setSustainPedalPolarity(cm[1]);
     // options_set_pitch_wheel_range <semitones>
-    if(std::regex_search(str, cm, Commands::regexSetPitchWheelRange)) {
-        controller->getOptions()->pitchWheelRange = stod(cm[1]);
-        return true;
-    }
+    if(std::regex_search(str, cm, Commands::regexSetPitchWheelRange))       return controller->getOptions()->setPitchWheelRange(stod(cm[1]));
     
     // Controller
     
     // start
-    if(std::regex_search(str, cm, Commands::regexStart)) {
-        return controller->start();
-    }
-    
+    if(std::regex_search(str, cm, Commands::regexStart))                    return controller->start();
     // stop
-    if(std::regex_search(str, cm, Commands::regexStop)) {
-        return controller->stop();
-    }
-    
+    if(std::regex_search(str, cm, Commands::regexStop))                     return controller->stop();
     // reset
-    if(std::regex_search(str, cm, Commands::regexReset)) {
-        // TODO!!
-//        return controller->reset();
-        return true;
-    }
+    if(std::regex_search(str, cm, Commands::regexReset)) /* TODO!! return controller->reset(); */ return true;
     
     // Status
     
@@ -136,151 +109,32 @@ bool Parser::parseLine(std::string line) {
         parser.parseFile(directory + DIRECTORY_SEPARATOR + std::string(cm[1]));
         return true;
     }
+        
+    // Instruments
     
     // instrument_create <label>
-    if(std::regex_search(str, cm, Commands::regexInstrumentCreate)) {
-        Instrument* instrument = new Instrument(controller);
-        instrument->setId(cm[1]);
-        if(!(controller->getInstruments()->add(instrument))) {
-            delete instrument;
-            return false;
-        };
-        return true;
-    }
-    
+    if(std::regex_search(str, cm, Commands::regexInstrumentCreate))         return controller->getInstruments()->create(cm[1]);    
     // instrument_delete <instrument>
-    if(std::regex_search(str, cm, Commands::regexInstrumentDelete)) {
-        Instrument* instrument = controller->getInstruments()->get(cm[1]);
-        if(instrument == NULL) {
-            Error::addError(Error::INSTRUMENT_NOT_FOUND);
-            return false;
-        }
-        return controller->getInstruments()->remove(instrument);
-    }
-    
+    if(std::regex_search(str, cm, Commands::regexInstrumentDelete))         return controller->getInstruments()->remove(cm[1]);
     // instrument_set_active <instrument> <true|false>
-    if(std::regex_search(str, cm, Commands::regexInstrumentSetActive)) {
-        Instrument* instrument = controller->getInstruments()->get(cm[1]);
-        if(instrument == NULL) {
-            Error::addError(Error::INSTRUMENT_NOT_FOUND);
-            return false;
-        }
-        return instrument->active = (cm[2].compare("true") == 0);;
-    }
-    
+    if(std::regex_search(str, cm, Commands::regexInstrumentSetActive))      return controller->getInstruments()->setActive(cm[1], cm[2].compare("true") == 0);
     // instrument_set_output <instrument> <unit>
-    if(std::regex_search(str, cm, Commands::regexInstrumentSetOutput)) {
-        Instrument* instrument = controller->getInstruments()->get(cm[1]);
-        if(instrument == NULL) {
-            Error::addError(Error::INSTRUMENT_NOT_FOUND);
-            return false;
-        }
-        Unit* unit = controller->getUnits()->get(cm[2]);
-        if(unit == NULL) {
-            Error::addError(Error::UNIT_NOT_FOUND);
-            return false;
-        }
-        return instrument->setOutput(unit);
-    }
-    
+    if(std::regex_search(str, cm, Commands::regexInstrumentSetOutput))      return controller->getInstruments()->setOutput(cm[1], cm[2]);
     // instrument_set_key_output <instrument> <key_unit>
-    if(std::regex_search(str, cm, Commands::regexInstrumentSetKeyOutput)) {
-        Instrument* instrument = controller->getInstruments()->get(cm[1]);
-        if(instrument == NULL) {
-            Error::addError(Error::INSTRUMENT_NOT_FOUND);
-            return false;
-        }
-        Unit* unit = controller->getUnits()->get(cm[2]);
-        if(unit == NULL) {
-            Error::addError(Error::UNIT_NOT_FOUND);
-            return false;
-        }
-        return instrument->setKeyOutput(unit);
-    }
-    
+    if(std::regex_search(str, cm, Commands::regexInstrumentSetKeyOutput))   return controller->getInstruments()->setKeyOutput(cm[1], cm[2]);    
     // instrument_set_key_release_time <instrument> <seconds>
-    if(std::regex_search(str, cm, Commands::regexInstrumentSetKeyReleaseTime)) {
-        Instrument* instrument = controller->getInstruments()->get(cm[1]);
-        if(instrument == NULL) {
-            Error::addError(Error::INSTRUMENT_NOT_FOUND);
-            return false;
-        }
+    if(std::regex_search(str, cm, Commands::regexInstrumentSetKeyReleaseTime)) return controller->getInstruments()->setKeyReleaseTime(cm[1], stod(cm[2]));
 
-        instrument->setKeyReleaseTime(stod(cm[2]));
-        return true;
-    }
+    // Units
     
-    // unit_create <unit_type> <label> <arg1> <arg2>
-    if(std::regex_search(str, cm, Commands::regexUnitCreate)) {
-        Unit* unit = Unit::create(controller, cm[1], false, cm[3], cm[4]);
-        if(unit == NULL)
-            return false;
-        
-        unit->setId(cm[2]);
-        if(!(controller->getUnits()->add(unit))) {
-            delete unit;
-            Error::addError(Error::UNIT_LABEL_ALREADY_USED);
-            return false;
-        }
-        
-        return true;
-    }
-    
-    // unit_key_create <unit_type> <label> <arg1> <arg2>
-    if(std::regex_search(str, cm, Commands::regexUnitKeyCreate)) {
-        Unit* unit = controller->getUnits()->get(cm[2]);
-        if(unit != NULL) {
-            Error::addError(Error::UNIT_LABEL_ALREADY_USED);
-            return false;
-        }
-        
-        unit = Unit::create(controller, cm[1], true, cm[3], cm[4]);
-        if(unit == NULL) {
-//            Error::lastError = Error::UNIT_NOT_FOUND;
-            return false;
-        }
-        
-        unit->setId(cm[2]);
-        controller->getUnits()->add(unit);
-        return true;
-    }
-    
-    // unit_rename <unit> <label>
-    if(std::regex_search(str, cm, Commands::regexUnitRename)) {
-        Unit* unit = controller->getUnits()->get(cm[1]);
-        if(unit == NULL) {
-            Error::addError(Error::UNIT_NOT_FOUND);
-            return false;
-        }
-        
-        Unit* unitNew = controller->getUnits()->get(cm[2]);
-        if(unitNew != NULL) {
-            Error::addError(Error::UNIT_LABEL_ALREADY_USED);
-            return false;
-        }
-        
-        return unit->setId(cm[2]);
-    }
-    
+    // unit_create <unit_type> <label> <args>
+    if(std::regex_search(str, cm, Commands::regexUnitCreate))               return controller->getUnits()->create(cm[1], cm[2], cm[3]);
     // unit_delete <unit>
-    if(std::regex_search(str, cm, Commands::regexUnitDelete)) {
-        Unit* unit = controller->getUnits()->get(cm[1]);
-        if(unit == NULL) {
-            Error::addError(Error::UNIT_NOT_FOUND);
-            return false;
-        }
-        return controller->getUnits()->remove(unit);
-    }
-    
+    if(std::regex_search(str, cm, Commands::regexUnitDelete))               return controller->getUnits()->remove(cm[1]);
+    // unit_rename <unit> <label>
+    if(std::regex_search(str, cm, Commands::regexUnitRename))               return controller->getUnits()->rename(cm[1], cm[2]);
     // unit_set_value <unit> <parameter> <value>
-    if(std::regex_search(str, cm, Commands::regexUnitSetValue)) {
-        Unit* unit = controller->getUnits()->get(cm[1]);
-        if(unit == NULL) {
-            Error::addError(Error::UNIT_NOT_FOUND);
-            return false;
-        }
-        return unit->setParameter(cm[2], cm[3]);
-    }
+    if(std::regex_search(str, cm, Commands::regexUnitSetValue))             return controller->getUnits()->setValue(cm[1], cm[2], cm[3]);
     
     Error::addError(Error::COMMAND_NOT_RECOGNISED);
     return false;

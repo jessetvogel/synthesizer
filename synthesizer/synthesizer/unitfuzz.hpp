@@ -10,7 +10,7 @@ class UnitFuzz : public Unit {
     
 public:
     
-    UnitFuzz(Controller*, bool);
+    UnitFuzz(Controller*, Arguments);
     
     void apply(Instrument*);
     

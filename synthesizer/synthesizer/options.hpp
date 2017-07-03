@@ -6,6 +6,8 @@
 #define DEFAULT_PITCH_WHEEL_RANGE (2.0)
 #define DEFAULT_SUSTAIN_PEDAL_POLARITY (false)
 
+#include <string>
+
 #include "settings.hpp"
 
 class Controller;
@@ -23,6 +25,8 @@ public:
     double pitchWheelRange;
     bool sustainPedalPolarity;
     
+    bool setSustainPedalPolarity(std::string);
+    bool setPitchWheelRange(int);
     
     
 //    enum Tuning { EQUAL_TEMPERAMENT, PYTHAGOREAN };

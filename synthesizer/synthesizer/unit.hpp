@@ -10,6 +10,7 @@
 class Controller;
 class Instrument;
 class Parameter;
+class Arguments;
 
 class Unit {
     

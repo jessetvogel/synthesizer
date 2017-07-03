@@ -4,11 +4,14 @@
 #include "parameter.hpp"
 #include "curve.hpp"
 #include "util.hpp"
+#include "arguments.hpp"
 
-UnitParameter::UnitParameter(Controller* controller, int MidiCCNumber) : Unit(controller) {
-    // Set type and other variables
+UnitParameter::UnitParameter(Controller* controller, Arguments arguments) : Unit(controller) {
+    // Set type
     type = "parameter";
-    this->MidiCCNumber = MidiCCNumber;
+    
+    // Set arguments
+    MidiCCNumber = arguments.getInteger("midiCC", -1);
     
     // Not key dependent
     keyDependent = false;
@@ -16,7 +19,7 @@ UnitParameter::UnitParameter(Controller* controller, int MidiCCNumber) : Unit(co
     // Hidden
     hidden = true;
     
-    // Set default values
+    // Set parameters
     value = 0.5; // TODO
     parameters.push_back(min = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "min", "0.0"));
     parameters.push_back(max = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "max", "1.0"));

@@ -1,16 +1,17 @@
 #include "unitfuzz.hpp"
 #include "controller.hpp"
 #include "parameter.hpp"
+#include "arguments.hpp"
 #include "function.hpp"
 
-UnitFuzz::UnitFuzz(Controller* controller, bool keyDependent) : Unit(controller) {
+UnitFuzz::UnitFuzz(Controller* controller, Arguments arguments) : Unit(controller) {
     // Set type
     type = "fuzz";
     
-    // May or may not be key dependent
-    this->keyDependent = keyDependent;
+    // Set arguments
+    keyDependent = arguments.getBool("key", false);
     
-    // Set default values
+    // Set parameters
     parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
     parameters.push_back(inputGain = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input_gain", "1.0"));
 }

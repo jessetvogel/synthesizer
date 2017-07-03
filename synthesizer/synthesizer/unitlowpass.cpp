@@ -5,18 +5,21 @@
 #include "instrument.hpp"
 #include "parameter.hpp"
 #include "IIRfilter.hpp"
+#include "arguments.hpp"
 
 const int UnitLowpass::maxOrder = 5;
 
-UnitLowpass::UnitLowpass(Controller* controller, int order) : Unit(controller) {
-    // Set type and other variables
+UnitLowpass::UnitLowpass(Controller* controller, Arguments arguments) : Unit(controller) {
+    // Set type
     type = "lowpass";
-    this->order = order; // TODO: check for valid values
+    
+    // Set arguments
+    order = arguments.getInteger("order", 1); // TODO: check for valid values
     
     // Not key dependent
-    this->keyDependent = false;
+    keyDependent = false;
     
-    // Set default values
+    // Set parameters
     parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
     parameters.push_back(cutOff = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "cutoff", "1000.0"));
     

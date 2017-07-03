@@ -14,7 +14,7 @@ class UnitPWM : public Unit {
     
 public:
     
-    UnitPWM(Controller*, bool);
+    UnitPWM(Controller*, Arguments);
     ~UnitPWM();
     
     void apply(Instrument*);

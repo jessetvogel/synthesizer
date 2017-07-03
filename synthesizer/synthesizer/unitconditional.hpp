@@ -14,7 +14,7 @@ class UnitConditional : public Unit {
     
 public:
     
-    UnitConditional(Controller*, bool);
+    UnitConditional(Controller*, Arguments);
     
     void apply(Instrument*);
 

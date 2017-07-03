@@ -6,18 +6,21 @@
 #include "parameter.hpp"
 #include "settings.hpp"
 #include "IIRfilter.hpp"
+#include "arguments.hpp"
 
 const int UnitHighpass::maxOrder = 5;
 
-UnitHighpass::UnitHighpass(Controller* controller, int order) : Unit(controller) {
-    // Set type and save stuff
+UnitHighpass::UnitHighpass(Controller* controller, Arguments arguments) : Unit(controller) {
+    // Set type
     type = "highpass";
-    this->order = order;
     
-    // May or may not be key dependent
-    this->keyDependent = false;
+    // Set arguments
+    order = arguments.getInteger("order", 1);
     
-    // Set default values
+    // Not key dependent
+    keyDependent = false;
+    
+    // Set parameters
     parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
     parameters.push_back(cutOff = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "cutoff", "1000.0"));
 

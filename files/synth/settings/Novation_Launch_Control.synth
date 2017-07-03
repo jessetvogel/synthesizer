@@ -1,18 +1,18 @@
 # Geleend van Erwin, thanks!
-unit_create parameter knob_1 21
-unit_create parameter knob_2 22
-unit_create parameter knob_3 23
-unit_create parameter knob_4 24
-unit_create parameter knob_5 25
-unit_create parameter knob_6 26
-unit_create parameter knob_7 27
-unit_create parameter knob_8 28
+unit_create parameter knob_1 [midiCC = 21]
+unit_create parameter knob_2 [midiCC = 22]
+unit_create parameter knob_3 [midiCC = 23]
+unit_create parameter knob_4 [midiCC = 24]
+unit_create parameter knob_5 [midiCC = 25]
+unit_create parameter knob_6 [midiCC = 26]
+unit_create parameter knob_7 [midiCC = 27]
+unit_create parameter knob_8 [midiCC = 28]
 
-unit_create parameter knob_9 41
-unit_create parameter knob_10 42
-unit_create parameter knob_11 43
-unit_create parameter knob_12 44
-unit_create parameter knob_13 45
-unit_create parameter knob_14 46
-unit_create parameter knob_15 47
-unit_create parameter knob_16 48
+unit_create parameter knob_9 [midiCC = 41]
+unit_create parameter knob_10 [midiCC = 42]
+unit_create parameter knob_11 [midiCC = 43]
+unit_create parameter knob_12 [midiCC = 44]
+unit_create parameter knob_13 [midiCC = 45]
+unit_create parameter knob_14 [midiCC = 46]
+unit_create parameter knob_15 [midiCC = 47]
+unit_create parameter knob_16 [midiCC = 48]

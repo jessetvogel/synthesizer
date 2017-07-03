@@ -5,18 +5,19 @@
 
 class UnitAdder : public Unit {
 
+    static const int maxN;
+    
     int n;
     Parameter** gains;
     Parameter** inputs;
     
 public:
     
-    UnitAdder(Controller*, bool, int);
+    UnitAdder(Controller*, Arguments);
     ~UnitAdder();
     
     void apply(Instrument*);
     
-    static const int maxN;
 };
 
 #endif

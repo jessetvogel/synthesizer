@@ -6,32 +6,15 @@
 #include "unitconstant.hpp"
 #include "unitparameter.hpp"
 
-#include "unitkeyinfo.hpp"
-#include "unitleadkeyinfo.hpp"
-#include "unitkeyoutput.hpp"
-#include "unitmodulationwheel.hpp"
-#include "unitinput.hpp"
+#include "unitfactory.hpp"
+#include "arguments.hpp"
 
 Units::Units(Controller* controller) {
     // Store controller
     this->controller = controller;
     
     // Default units
-    add((new UnitKeyInfo(controller, UnitKeyInfo::Frequency))->setId("key_frequency"));
-    add((new UnitKeyInfo(controller, UnitKeyInfo::Velocity))->setId("key_velocity"));
-    add((new UnitKeyInfo(controller, UnitKeyInfo::Duration))->setId("key_duration"));
-    add((new UnitKeyInfo(controller, UnitKeyInfo::Release))->setId("key_release"));
-
-    add((new UnitLeadKeyInfo(controller, UnitLeadKeyInfo::Frequency))->setId("lead_key_frequency"));
-    add((new UnitLeadKeyInfo(controller, UnitLeadKeyInfo::Velocity))->setId("lead_key_velocity"));
-    add((new UnitLeadKeyInfo(controller, UnitLeadKeyInfo::Duration))->setId("lead_key_duration"));
-    add((new UnitLeadKeyInfo(controller, UnitLeadKeyInfo::Release))->setId("lead_key_release"));
-    add((new UnitLeadKeyInfo(controller, UnitLeadKeyInfo::Pressing))->setId("lead_key_pressing"));
-
-    add((new UnitKeyOutput(controller))->setId("key_output"));
-    add((new UnitModulationWheel(controller))->setId("modulation_wheel"));
-    
-    add((new UnitInput(controller))->setId("audio_input"));
+    UnitFactory::createDefaultUnits(controller, this);
 }
 
 Units::~Units() {
@@ -45,6 +28,52 @@ Units::~Units() {
     mutexUnits.unlock();
 }
 
+bool Units::create(std::string type, std::string id, std::string arguments) {
+    Unit* unit = get(id);
+    if(unit != NULL) return false; // TODO: (search for 'return false')
+    
+    Arguments args(controller, arguments);
+    unit = UnitFactory::create(controller, type, id, args);
+    if(unit == NULL) return false;
+    
+    mutexUnits.lock();
+    units.push_back(unit);
+    mutexUnits.unlock();
+    return true;
+}
+
+bool Units::remove(std::string id) {
+    mutexUnits.lock();
+    bool found = false;
+    for(auto it = units.begin(); it != units.end(); ++it) {
+        if(id.compare((*it)->getId()) == 0) {
+            units.erase(it);
+            delete *it;
+            found = true;
+            break;
+        }
+    }
+    mutexUnits.unlock();
+    return found;
+}
+
+bool Units::rename(std::string oldId, std::string newId) {
+    Unit* unit = get(oldId);
+    if(unit == NULL) return false; // TODO
+    
+    Unit* unitNew = get(newId);
+    if(unitNew != NULL) return false;
+    
+    return unit->setId(newId);
+}
+
+bool Units::setValue(std::string id, std::string parameter, std::string value) {
+    Unit* unit = get(id);
+    if(unit == NULL) return false; // TODO
+    
+    return unit->setParameter(parameter, value);
+}
+
 bool Units::add(Unit* unit) {
     mutexUnits.lock();
     units.push_back(unit);
@@ -53,18 +82,7 @@ bool Units::add(Unit* unit) {
 }
 
 bool Units::remove(Unit* unit) {
-    mutexUnits.lock();
-    bool found = false;
-    for(auto it = units.begin(); it != units.end(); ++it) {
-        if((*it) == unit) {
-            units.erase(it);
-            delete unit;
-            found = true;
-            break;
-        }
-    }
-    mutexUnits.unlock();
-    return found;
+    return remove(unit->getId()); // TODO: yeahh... should be a better way to structure this
 }
 
 Unit* Units::get(std::string id) {

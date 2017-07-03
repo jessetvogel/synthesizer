@@ -1,16 +1,16 @@
 #include "unitfunction.hpp"
 #include "controller.hpp"
 #include "parameter.hpp"
+#include "arguments.hpp"
 
-UnitFunction::UnitFunction(Controller* controller, bool keyDependent) : Unit(controller) {
-    // Store pointer to controller
-    this->controller = controller;
+UnitFunction::UnitFunction(Controller* controller, Arguments arguments) : Unit(controller) {
+    // Set type
     type = "function";
     
-    // May or may not be key dependent
-    this->keyDependent = keyDependent;
+    // Set arguments
+    keyDependent = arguments.getBool("key", false);
     
-    // Set default values
+    // Set parameters
     parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
     parameters.push_back(function = new Parameter(controller, Parameter::FUNCTION, "function", "identity"));
 }

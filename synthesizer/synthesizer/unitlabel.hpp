@@ -9,7 +9,7 @@ class UnitLabel : public Unit {
     
 public:
     
-    UnitLabel(Controller*);
+    UnitLabel(Controller*, Arguments);
     
     void apply(Instrument*);
     

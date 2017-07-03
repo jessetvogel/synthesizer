@@ -15,7 +15,7 @@ public:
     
     int MidiCCNumber;
     
-    UnitParameter(Controller*, int);
+    UnitParameter(Controller*, Arguments);
     
     void apply(Instrument*);
     void setValue(double);

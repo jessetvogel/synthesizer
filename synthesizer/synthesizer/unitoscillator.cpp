@@ -6,15 +6,16 @@
 #include "parameter.hpp"
 #include "sample.hpp"
 #include "settings.hpp"
+#include "arguments.hpp"
 
-UnitOscillator::UnitOscillator(Controller* controller, bool keyDependent) : Unit(controller) {
+UnitOscillator::UnitOscillator(Controller* controller, Arguments arguments) : Unit(controller) {
     // Set type
     type = "oscillator";
     
-    // May or may not be key dependent
-    this->keyDependent = keyDependent;
+    // Set arguments
+    keyDependent = arguments.getBool("key", false);
     
-    // Set default values for parameters
+    // Set parameters
     parameters.push_back(sample = new Parameter(controller, Parameter::SAMPLE, "sample", "sine"));
     parameters.push_back(frequency = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "frequency", "0.0"));
     parameters.push_back(amplitude = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "amplitude", "1.0"));

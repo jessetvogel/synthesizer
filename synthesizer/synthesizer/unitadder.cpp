@@ -1,20 +1,21 @@
 #include "unitadder.hpp"
 #include "controller.hpp"
 #include "parameter.hpp"
+#include "arguments.hpp"
 
 const int UnitAdder::maxN = 16;
 
-UnitAdder::UnitAdder(Controller* controller, bool keyDependent, int n) : Unit(controller) {
-    // Set type and other variables
-    this->n = n;
+UnitAdder::UnitAdder(Controller* controller, Arguments arguments) : Unit(controller) {
+    // Set arguments
+    n = arguments.getInteger("n", 1);
+    keyDependent = arguments.getBool("key", false);
+    
+    // Set type
     char strType[12];
     sprintf(strType, "adder_%d", n);
     type = std::string(strType);
     
-    // Adders may or may not be key dependent
-    this->keyDependent = keyDependent;
-    
-    // Set default values
+    // Create arrays and set parameters
     inputs = new Parameter*[n];
     gains = new Parameter*[n];
     for(int i = 0;i < n; i ++) {

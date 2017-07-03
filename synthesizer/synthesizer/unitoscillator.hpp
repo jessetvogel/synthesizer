@@ -16,7 +16,7 @@ class UnitOscillator : public Unit {
     
 public:
     
-    UnitOscillator(Controller*, bool);
+    UnitOscillator(Controller*, Arguments);
     ~UnitOscillator();
     
     void apply(Instrument*);

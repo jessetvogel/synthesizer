@@ -23,7 +23,7 @@ class UnitADSR : public Unit {
     
 public:
     
-    UnitADSR(Controller*, bool);
+    UnitADSR(Controller*, Arguments);
     
     void apply(Instrument*);
     

@@ -28,8 +28,6 @@ private:
     float* buffer;
     float* keyBuffer;
     
-    double keyReleaseTime;
-    
 public:
     
     KeyEvent* currentKey;
@@ -38,7 +36,8 @@ public:
     ~Instrument();
     
     bool active;
-
+    double keyReleaseTime;
+    
     bool setId(std::string);
     inline std::string getId() { return id; }
     

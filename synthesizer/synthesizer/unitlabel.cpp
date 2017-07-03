@@ -2,8 +2,9 @@
 #include "controller.hpp"
 #include "instrument.hpp"
 #include "parameter.hpp"
+#include "arguments.hpp"
 
-UnitLabel::UnitLabel(Controller* controller) : Unit(controller) {
+UnitLabel::UnitLabel(Controller* controller, Arguments) : Unit(controller) {
     // Set type
     type = "label";
     

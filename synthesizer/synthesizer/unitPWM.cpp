@@ -5,15 +5,16 @@
 #include "instrument.hpp"
 #include "parameter.hpp"
 #include "settings.hpp"
+#include "arguments.hpp"
 
-UnitPWM::UnitPWM(Controller* controller, bool keyDependent) : Unit(controller) {
+UnitPWM::UnitPWM(Controller* controller, Arguments arguments) : Unit(controller) {
     // Set type
     type = "PWM";
     
-    // May or may not be key dependent
-    this->keyDependent = keyDependent;
+    // Set arguments
+    keyDependent = arguments.getBool("key", false);
     
-    // Set default values
+    // Set parameters
     parameters.push_back(frequency = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "frequency", "0.0"));
     parameters.push_back(duty = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "duty", "0.0"));
     parameters.push_back(low = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "low", "0.0"));

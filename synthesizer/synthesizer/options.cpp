@@ -14,3 +14,22 @@ Options::Options(Controller* controller) {
     pitchWheelRange = DEFAULT_PITCH_WHEEL_RANGE;
     sustainPedalPolarity = DEFAULT_SUSTAIN_PEDAL_POLARITY;
 }
+
+bool Options::setSustainPedalPolarity(std::string polarity) {
+    if(polarity.compare("inverted") == 0) {
+        sustainPedalPolarity = true;
+        return true;
+    }
+    
+    if(polarity.compare("normal") == 0) {
+        sustainPedalPolarity = false;
+        return true;
+    }
+    
+    return false;
+}
+
+bool Options::setPitchWheelRange(int range) {
+    pitchWheelRange = range;
+    return true;
+}

@@ -4,15 +4,16 @@
 #include "controller.hpp"
 #include "instrument.hpp"
 #include "parameter.hpp"
+#include "arguments.hpp"
 
-UnitVolumeMeter::UnitVolumeMeter(Controller* controller, bool keyDependent) : Unit(controller) {
+UnitVolumeMeter::UnitVolumeMeter(Controller* controller, Arguments arguments) : Unit(controller) {
     // Set type
     type = "volumemeter";
     
-    // May or may not be key dependent
-    this->keyDependent = keyDependent;
+    // Set arguments
+    keyDependent = arguments.getBool("key", false);
     
-    // Set default values
+    // Set parameters
     parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
     RMSAverage = 0.0;
 }

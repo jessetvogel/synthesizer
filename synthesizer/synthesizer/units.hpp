@@ -27,6 +27,12 @@ public:
     Units(Controller*);
     ~Units();
     
+    // Commands
+    bool create(std::string, std::string, std::string);
+    bool remove(std::string);
+    bool rename(std::string, std::string);
+    bool setValue(std::string, std::string, std::string);
+    
     bool add(Unit*);
     bool remove(Unit*);
     Unit* get(std::string);

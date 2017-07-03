@@ -17,7 +17,7 @@ class UnitDelay : public Unit {
     
 public:
     
-    UnitDelay(Controller*, int, double);
+    UnitDelay(Controller*, Arguments);
     ~UnitDelay();
     
     void apply(Instrument*);

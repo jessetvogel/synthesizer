@@ -21,7 +21,7 @@ class UnitBandpass : public Unit {
     
 public:
     
-    UnitBandpass(Controller*, int);
+    UnitBandpass(Controller*, Arguments);
     
     void apply(Instrument*);
     

@@ -10,7 +10,7 @@ class UnitVolumeMeter : public Unit {
     
 public:
     
-    UnitVolumeMeter(Controller*, bool);
+    UnitVolumeMeter(Controller*, Arguments);
     
     void apply(Instrument*);
     

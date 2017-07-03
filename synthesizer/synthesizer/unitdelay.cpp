@@ -1,19 +1,23 @@
 #include "unitdelay.hpp"
 #include "controller.hpp"
 #include "parameter.hpp"
+#include "arguments.hpp"
 
 const int UnitDelay::maxN = 16;
 const double UnitDelay::maxT = 10.0;
 
-UnitDelay::UnitDelay(Controller* controller, int n, double T) : Unit(controller) {
-    // Set type and other variables
-    this->n = n;
+UnitDelay::UnitDelay(Controller* controller, Arguments arguments) : Unit(controller) {
+    // Set type
     type = "delay";
+
+    // Set arguments
+    n = arguments.getInteger("n", 1);
+    double T = arguments.getDouble("T", 1.0);
     
-    // Adders may or may not be key dependent
-    this->keyDependent = false;
+    // Delay's are not allowed to be key dependent
+    keyDependent = false;
     
-    // Set default values
+    // Set parameters
     parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
     parameters.push_back(gain = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "gain", "1.0"));
     parameters.push_back(feedback = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "feedback", "0.0"));

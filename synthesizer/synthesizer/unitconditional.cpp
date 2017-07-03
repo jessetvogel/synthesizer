@@ -2,15 +2,16 @@
 #include "controller.hpp"
 #include "instrument.hpp"
 #include "parameter.hpp"
+#include "arguments.hpp"
 
-UnitConditional::UnitConditional(Controller* controller, bool keyDependent) : Unit(controller) {
+UnitConditional::UnitConditional(Controller* controller, Arguments arguments) : Unit(controller) {
     // Set type
     type = "conditional";
     
-    // May or may not be key dependent
-    this->keyDependent = keyDependent;
+    // Set arguments
+    keyDependent = arguments.getBool("key", false);
     
-    // Set default values
+    // Set parameters
     parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
     parameters.push_back(low = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "low", "0.0"));
     parameters.push_back(high = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "high", "0.0"));

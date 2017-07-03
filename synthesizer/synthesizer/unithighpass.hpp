@@ -19,7 +19,7 @@ class UnitHighpass : public Unit {
     
 public:
     
-    UnitHighpass(Controller*, int);
+    UnitHighpass(Controller*, Arguments);
     ~UnitHighpass();
     
     void apply(Instrument*);

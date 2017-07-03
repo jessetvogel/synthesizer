@@ -11,7 +11,7 @@ class UnitFunction : public Unit {
     
 public:
     
-    UnitFunction(Controller*, bool);
+    UnitFunction(Controller*, Arguments);
     
     void apply(Instrument*);
     

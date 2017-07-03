@@ -19,7 +19,7 @@ class UnitLowpass : public Unit {
     
 public:
     
-    UnitLowpass(Controller*, int);
+    UnitLowpass(Controller*, Arguments);
     ~UnitLowpass();
     
     void apply(Instrument*);

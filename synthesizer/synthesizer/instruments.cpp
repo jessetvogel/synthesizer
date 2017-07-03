@@ -18,28 +18,6 @@ Instruments::~Instruments() {
     mutex.unlock();
 }
 
-bool Instruments::add(Instrument* instrument) {
-    mutex.lock();
-    instruments.push_back(instrument);
-    mutex.unlock();
-    return true;
-}
-
-bool Instruments::remove(Instrument* instrument) {
-    mutex.lock();
-    bool found = false;
-    for(auto it = instruments.begin(); it != instruments.end(); ++it) {
-        if((*it) == instrument) {
-            instruments.erase(it);
-            delete instrument;
-            found = true;
-            break;
-        }
-    }
-    mutex.unlock();
-    return found;
-}
-
 Instrument* Instruments::get(std::string id) {
     mutex.lock();
     Instrument* instrument = NULL;
@@ -51,6 +29,67 @@ Instrument* Instruments::get(std::string id) {
     }
     mutex.unlock();
     return instrument;
+}
+
+bool Instruments::create(std::string id) {
+    mutex.lock();
+    // TODO: check if instrument with 'id' already exists
+    Instrument* instrument = new Instrument(controller);
+    instrument->setId(id);
+    instruments.push_back(instrument);
+    mutex.unlock();
+    return true;
+}
+
+bool Instruments::remove(std::string id) {
+    mutex.lock();
+    bool found = false;
+    for(auto it = instruments.begin(); it != instruments.end(); ++it) {
+        if((*it)->getId().compare(id) == 0) {
+            instruments.erase(it);
+            delete *it;
+            found = true;
+            break;
+        }
+    }
+    mutex.unlock();
+    return found;
+}
+
+bool Instruments::setActive(std::string id, bool active) {
+    Instrument* instrument = get(id);
+    if(instrument == NULL) return false; // TODO: errorzzz..
+    
+    instrument->active = active;
+    return true;
+}
+
+bool Instruments::setOutput(std::string id, std::string output) {
+    Instrument* instrument = get(id);
+    if(instrument == NULL) return false; // TODO: errorzz.
+    
+    Unit* unit = controller->getUnits()->get(output);
+    if(unit == NULL) return false;
+    
+    return instrument->setOutput(unit);
+}
+
+bool Instruments::setKeyOutput(std::string id, std::string keyOutput) {
+    Instrument* instrument = get(id);
+    if(instrument == NULL) return false; // TODO: errorzz.
+    
+    Unit* unit = controller->getUnits()->get(keyOutput);
+    if(unit == NULL) return false;
+    
+    return instrument->setKeyOutput(unit);
+}
+
+bool Instruments::setKeyReleaseTime(std::string id, double keyReleaseTime) {
+    Instrument* instrument = get(id);
+    if(instrument == NULL) return false; // TODO: errorzz.
+    
+    instrument->keyReleaseTime = keyReleaseTime;
+    return true;
 }
 
 bool Instruments::apply() {

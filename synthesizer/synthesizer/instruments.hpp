@@ -17,20 +17,26 @@ class Instruments {
     
     std::mutex mutex;
     
+    Instrument* get(std::string);
+    
 public:
     
     Instruments(Controller*);
     ~Instruments();
     
-    bool add(Instrument*);
-    bool remove(Instrument*);
-    Instrument* get(std::string);
+    // Commands
+    bool create(std::string);
+    bool remove(std::string);
+    bool setActive(std::string, bool);
+    bool setOutput(std::string, std::string);
+    bool setKeyOutput(std::string, std::string);
+    bool setKeyReleaseTime(std::string, double keyReleaseTime);
+    
+    // Status
+    void printInstruments();
     
     bool apply();
-    
     void addKeyEvent(KeyEvent*);
-    
-    void printInstruments();
     
 };
 

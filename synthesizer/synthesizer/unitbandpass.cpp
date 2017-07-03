@@ -6,18 +6,21 @@
 #include "IIRfilter.hpp"
 #include "parameter.hpp"
 #include "settings.hpp"
+#include "arguments.hpp"
 
 const int UnitBandpass::maxOrder = 5;
 
-UnitBandpass::UnitBandpass(Controller* controller, int order) : Unit(controller) {
+UnitBandpass::UnitBandpass(Controller* controller, Arguments arguments) : Unit(controller) {
     // Set type and store order
     type = "bandpass";
-    this->order = order;
     
-    // May or may not be key dependent
-    this->keyDependent = false;
+    // Set arguments
+    order = arguments.getInteger("order", 1);
     
-    // Set default values
+    // Not key dependent
+    keyDependent = false;
+    
+    // Set parameters
     parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
     parameters.push_back(center = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "center", "1000.0"));
     parameters.push_back(bandwidth = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "bandwidth", "0.5")); // TODO: come up with some standard values
@@ -32,8 +35,9 @@ void UnitBandpass::apply(Instrument* instrument) {
     
     // Compute and bound cutoff frequencies
     double wc = 2.0 * M_PI * center->output[0] / sampleRate;
-    double wl = wc * (1.0 - bandwidth->output[0]);
-    double wh = wc * (1.0 + bandwidth->output[0]);
+    double tmp = sqrt(bandwidth->output[0]);
+    double wl = wc / tmp;
+    double wh = wc * tmp;
     if(wl < 0.01) wl = 0.01;
     if(wl > M_PI - 0.001) wl = M_PI - 0.001;
     if(wh < 0.01) wh = 0.01;

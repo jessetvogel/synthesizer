@@ -4,15 +4,16 @@
 #include "parameter.hpp"
 #include "curve.hpp"
 #include "midistate.hpp"
+#include "arguments.hpp"
 
-UnitADSR::UnitADSR(Controller* controller, bool keyDependent) : Unit(controller) {
+UnitADSR::UnitADSR(Controller* controller, Arguments arguments) : Unit(controller) {
     // Set type
     type = "ADSR";
     
-    // An ADSR may or may not be key dependent
-    this->keyDependent = keyDependent;
+    // Set arguments
+    keyDependent = arguments.getBool("key", false);
     
-    // Set default values
+    // Set parameters
     parameters.push_back(startLevel = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "start_level", "0.0"));
     parameters.push_back(attackLevel = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "attack_level", "1.0"));
     parameters.push_back(sustainLevel = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "sustain_level", "1.0"));
