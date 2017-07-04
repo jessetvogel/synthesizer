@@ -2,6 +2,7 @@
 #include "controller.hpp"
 #include "instrument.hpp"
 #include "units.hpp"
+#include "parameter.hpp"
 #include "settings.hpp"
 #include "keyevent.hpp"
 
@@ -18,7 +19,7 @@ Instruments::~Instruments() {
     mutex.unlock();
 }
 
-Instrument* Instruments::get(std::string id) {
+Instrument* Instruments::getInstrument(std::string id) {
     mutex.lock();
     Instrument* instrument = NULL;
     for(auto it = instruments.begin(); it != instruments.end(); ++it) {
@@ -41,7 +42,7 @@ bool Instruments::create(std::string id) {
     return true;
 }
 
-bool Instruments::remove(std::string id) {
+bool Instruments::destroy(std::string id) {
     mutex.lock();
     bool found = false;
     for(auto it = instruments.begin(); it != instruments.end(); ++it) {
@@ -57,7 +58,7 @@ bool Instruments::remove(std::string id) {
 }
 
 bool Instruments::setActive(std::string id, bool active) {
-    Instrument* instrument = get(id);
+    Instrument* instrument = getInstrument(id);
     if(instrument == NULL) return false; // TODO: errorzzz..
     
     instrument->active = active;
@@ -65,27 +66,21 @@ bool Instruments::setActive(std::string id, bool active) {
 }
 
 bool Instruments::setOutput(std::string id, std::string output) {
-    Instrument* instrument = get(id);
+    Instrument* instrument = getInstrument(id);
     if(instrument == NULL) return false; // TODO: errorzz.
     
-    Unit* unit = controller->getUnits()->get(output);
-    if(unit == NULL) return false;
-    
-    return instrument->setOutput(unit);
+    return instrument->getOutput()->set(output);
 }
 
 bool Instruments::setKeyOutput(std::string id, std::string keyOutput) {
-    Instrument* instrument = get(id);
+    Instrument* instrument = getInstrument(id);
     if(instrument == NULL) return false; // TODO: errorzz.
     
-    Unit* unit = controller->getUnits()->get(keyOutput);
-    if(unit == NULL) return false;
-    
-    return instrument->setKeyOutput(unit);
+    return instrument->getKeyOutput()->set(keyOutput);
 }
 
 bool Instruments::setKeyReleaseTime(std::string id, double keyReleaseTime) {
-    Instrument* instrument = get(id);
+    Instrument* instrument = getInstrument(id);
     if(instrument == NULL) return false; // TODO: errorzz.
     
     instrument->keyReleaseTime = keyReleaseTime;

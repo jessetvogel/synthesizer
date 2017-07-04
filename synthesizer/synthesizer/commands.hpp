@@ -58,14 +58,15 @@ public:
     static std::regex regexUnitKeyCreate;
     static std::regex regexUnitRename;
     static std::regex regexUnitDelete;
-    static std::regex regexUnitSetValue;
+    static std::regex regexUnitHide;
+    static std::regex regexUnitSet;
     
     // Commands for blocks
     static std::regex regexBlockCreate;
     static std::regex regexBlockDelete;
     static std::regex regexBlockAddInput;
     static std::regex regexBlockAddOutput;
-    static std::regex regexBlockAttachUnit;
+    static std::regex regexBlockSet;
 
 };
 

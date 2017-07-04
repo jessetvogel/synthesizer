@@ -10,6 +10,7 @@
 
 #include "instruments.hpp"
 #include "units.hpp"
+#include "blocks.hpp"
 
 #include "midistate.hpp"
 
@@ -27,6 +28,7 @@ Controller::Controller(Settings* settings) {
     
     instruments = new Instruments(this);
     units = new Units(this);
+    blocks = new Blocks(this);
     
     midiState = new MidiState(this);
     
@@ -46,6 +48,7 @@ Controller::~Controller() {
     
     delete instruments;
     delete units;
+    delete blocks;
     
     delete midiState;
     
@@ -75,6 +78,11 @@ bool Controller::stop() {
     
     active = false;
     return success;
+}
+
+bool Controller::reset() {
+    // TODO
+    return true;
 }
 
 bool Controller::update() {

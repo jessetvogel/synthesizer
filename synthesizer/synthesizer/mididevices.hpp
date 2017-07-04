@@ -34,6 +34,7 @@ public:
     static const char* deviceName(int);
     static bool isInput(int);
     
+    // Status
     void printMIDIDevices();
     
 };

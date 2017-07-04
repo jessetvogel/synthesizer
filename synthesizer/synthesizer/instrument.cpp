@@ -9,6 +9,7 @@
 #include "unit.hpp"
 #include "units.hpp"
 #include "unitconstant.hpp"
+#include "parameter.hpp"
 
 Instrument::Instrument(Controller* controller) {
     // Store pointer to controller object
@@ -20,8 +21,8 @@ Instrument::Instrument(Controller* controller) {
     keyBuffer = new float[framesPerBuffer];
     
     // Default values
-    output = new UnitConstant(controller, 0.0);
-    keyOutput = new UnitConstant(controller, 0.0);
+    output = new Parameter(controller, Parameter::UNIT_KEY_INDEPENDENT, "output", "0.0");
+    keyOutput = new Parameter(controller, Parameter::UNIT, "key_output", "0.0");
     keyReleaseTime = 0.0;
     
     // By default, active
@@ -45,27 +46,11 @@ bool Instrument::setId(std::string id) {
     return true;
 }
 
-bool Instrument::setOutput(Unit* unit) {
-    // We only allow here for non key dependent units
-    if(unit->isKeyDependent()) return false;
-    this->output = unit;
-    return true;
-}
-
-bool Instrument::setKeyOutput(Unit* unit) {
-    this->keyOutput = unit;
-    return true;
-}
-
 bool Instrument::setKeyReleaseTime(double keyReleaseTime) {
     if(keyReleaseTime < 0) return false;
     this->keyReleaseTime = keyReleaseTime;
     return true;
 }
-
-Unit* Instrument::getOutput() { return output; }
-
-Unit* Instrument::getKeyOutput() { return keyOutput; }
 
 void Instrument::addKeyEvent(KeyEvent* keyEvent) {
     // Simply add it to the list
@@ -93,21 +78,23 @@ bool Instrument::update() {
         midiState->updateKeyEvent(keyEvent);
         currentKey = keyEvent;
         units->resetUnitsKeyDependent();
-        keyOutput->update(this);
+        Unit* keyOutputUnit = (Unit*) (keyOutput->pointer);
+        keyOutputUnit->update(this);
         
         // Add output of keyOutput to the buffer
         for(int x = 0;x < framesPerBuffer; ++x)
-            keyBuffer[x] += keyOutput->output[x];
+            keyBuffer[x] += keyOutputUnit->output[x];
     }
     
     // Now, update the total output of this instrument
-    output->update(this);
+    Unit* outputUnit = (Unit*) (output->pointer);
+    outputUnit->update(this);
     
     // Set output, and adjust total output with main volume
     double volume = controller->getMidiState()->mainVolume;
     volume = volume * volume; // TODO
     for(int x = 0;x < framesPerBuffer; ++x)
-        buffer[x] = output->output[x] * volume;
+        buffer[x] = outputUnit->output[x] * volume;
     
     return true;
 }

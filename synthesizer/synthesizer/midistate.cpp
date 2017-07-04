@@ -46,6 +46,7 @@ void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned cha
             return;
         
         case MIDI_CONTROL_CHANGE:
+            
             switch(data1) {
                 case MIDI_MODULATION_WHEEL:
                     modulationWheel = (double) data2 / 127.0;

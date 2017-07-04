@@ -1,30 +1,30 @@
 include basic.synth
 
 unit_key_create adder freq2 1
-unit_set_value freq2 input_1            key_frequency
-unit_set_value freq2 gain_1             1.5
+unit_set freq2 input_1            key_frequency
+unit_set freq2 gain_1             1.5
 
 unit_key_create oscillator wave2
-unit_set_value wave2 sample             sine
-unit_set_value wave2 amplitude          envelope
-unit_set_value wave2 frequency          freq2
+unit_set wave2 sample             sine
+unit_set wave2 amplitude          envelope
+unit_set wave2 frequency          freq2
 
 unit_key_create adder freq3 1
-unit_set_value freq3 input_1            key_frequency
-unit_set_value freq3 gain_1             2.0
+unit_set freq3 input_1            key_frequency
+unit_set freq3 gain_1             2.0
 
 unit_key_create oscillator wave3
-unit_set_value wave3 sample             sine
-unit_set_value wave3 amplitude          envelope
-unit_set_value wave3 frequency          freq3
+unit_set wave3 sample             sine
+unit_set wave3 amplitude          envelope
+unit_set wave3 frequency          freq3
 
 unit_key_create adder sum 3
-unit_set_value sum input_1              wave
-unit_set_value sum gain_1               0.7
-unit_set_value sum input_2              wave2
-unit_set_value sum gain_2               0.5
-unit_set_value sum input_3              wave3
-unit_set_value sum gain_3               0.3
+unit_set sum input_1              wave
+unit_set sum gain_1               0.7
+unit_set sum input_2              wave2
+unit_set sum gain_2               0.5
+unit_set sum input_3              wave3
+unit_set sum gain_3               0.3
 
 # Overwrite some settings from basic.synth
-unit_set_value x input_1                sum
+unit_set x input_1                sum

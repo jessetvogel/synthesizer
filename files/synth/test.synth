@@ -1,5 +1,5 @@
 unit_create oscillator x
-unit_set_value x frequency          lead_key_frequency
+unit_set x frequency          lead_key_frequency
 
 instrument_create i
 instrument_set_output i x

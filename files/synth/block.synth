@@ -1,0 +1,18 @@
+unit_create oscillator wave [key = true]
+unit_set wave sample              sine
+unit_set wave amplitude           1.0
+unit_set wave frequency           key_frequency
+
+
+block_create block123
+block_add_output block123 outputLabel wave
+block_add_input block123 inputLabel wave frequency
+unit_hide wave
+
+instrument_create i
+instrument_set_key_output i             block123:outputLabel
+instrument_set_key_release_time i       0.0
+instrument_set_output i                 key_output
+
+midi_add_device 1
+start

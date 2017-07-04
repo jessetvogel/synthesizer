@@ -1,13 +1,13 @@
 unit_create variable pwm_duty
-unit_set_value pwm_duty value           knob_1
-unit_set_value knob_1 min               0.0
-unit_set_value knob_1 max               1.0
+unit_set pwm_duty value           knob_1
+unit_set knob_1 min               0.0
+unit_set knob_1 max               1.0
 
 unit_key_create PWM pwm
-unit_set_value pwm frequency            key_frequency
-unit_set_value pwm duty                 pwm_duty
-unit_set_value pwm low                  -0.5
-unit_set_value pwm high                  0.5
+unit_set pwm frequency            key_frequency
+unit_set pwm duty                 pwm_duty
+unit_set pwm low                  -0.5
+unit_set pwm high                  0.5
 
 instrument_create i
 instrument_set_key_output i             pwm

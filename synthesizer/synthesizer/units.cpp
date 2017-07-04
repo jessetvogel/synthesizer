@@ -29,7 +29,7 @@ Units::~Units() {
 }
 
 bool Units::create(std::string type, std::string id, std::string arguments) {
-    Unit* unit = get(id);
+    Unit* unit = getUnit(id);
     if(unit != NULL) return false; // TODO: (search for 'return false')
     
     Arguments args(controller, arguments);
@@ -42,7 +42,7 @@ bool Units::create(std::string type, std::string id, std::string arguments) {
     return true;
 }
 
-bool Units::remove(std::string id) {
+bool Units::destroy(std::string id) {
     mutexUnits.lock();
     bool found = false;
     for(auto it = units.begin(); it != units.end(); ++it) {
@@ -58,34 +58,42 @@ bool Units::remove(std::string id) {
 }
 
 bool Units::rename(std::string oldId, std::string newId) {
-    Unit* unit = get(oldId);
+    Unit* unit = getUnit(oldId);
     if(unit == NULL) return false; // TODO
     
-    Unit* unitNew = get(newId);
+    Unit* unitNew = getUnit(newId);
     if(unitNew != NULL) return false;
     
     return unit->setId(newId);
 }
 
-bool Units::setValue(std::string id, std::string parameter, std::string value) {
-    Unit* unit = get(id);
+bool Units::hide(std::string id) {
+    Unit* unit = getUnit(id);
+    if(unit == NULL) return false; // TODO
+    
+    unit->hide();
+    return true;
+}
+
+bool Units::set(std::string id, std::string parameter, std::string value) {
+    Unit* unit = getUnit(id);
     if(unit == NULL) return false; // TODO
     
     return unit->setParameter(parameter, value);
 }
 
-bool Units::add(Unit* unit) {
+bool Units::addUnit(Unit* unit) {
     mutexUnits.lock();
     units.push_back(unit);
     mutexUnits.unlock();
     return true;
 }
 
-bool Units::remove(Unit* unit) {
-    return remove(unit->getId()); // TODO: yeahh... should be a better way to structure this
+bool Units::deleteUnit(Unit* unit) {
+    return destroy(unit->getId()); // TODO: yeahh... should be a better way to structure this
 }
 
-Unit* Units::get(std::string id) {
+Unit* Units::getUnit(std::string id) {
     mutexUnits.lock();
     Unit* unit = NULL;
     for(auto it = units.begin(); it != units.end(); ++it) {
@@ -127,31 +135,31 @@ bool Units::isConstant(Unit* unit) {
     return found;
 }
 
-bool Units::addParameter(UnitParameter* parameter, int MIDICC) {
+bool Units::addParameter(UnitParameter* parameter, int midiCC) {
     mutexParameters.lock();
     bool success = false;
-    if(parameters.find(MIDICC) == parameters.end()) {
-        parameters[MIDICC] = parameter;
+    if(parameters.find(midiCC) == parameters.end()) {
+        parameters[midiCC] = parameter;
         success = true;
     }
     mutexParameters.unlock();
     return success;
 }
 
-UnitParameter* Units::getParameter(int MIDICC) {
+UnitParameter* Units::getParameter(int midiCC) {
     mutexParameters.lock();
     UnitParameter* parameter = NULL;
-    auto position = parameters.find(MIDICC);
+    auto position = parameters.find(midiCC);
     if(position != parameters.end())
         parameter = position->second;
     mutexParameters.unlock();
     return parameter;
 }
 
-bool Units::deleteParameter(int MIDICC) {
+bool Units::deleteParameter(int midiCC) {
     mutexParameters.lock();
     bool success = false;
-    auto position = parameters.find(MIDICC);
+    auto position = parameters.find(midiCC);
     if(position != parameters.end()) {
         delete position->second;
         parameters.erase(position);

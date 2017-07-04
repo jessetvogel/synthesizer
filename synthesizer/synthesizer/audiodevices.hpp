@@ -24,9 +24,6 @@ public:
     
     AudioDevices(Controller*);
     
-    bool setInputDeviceId(int);
-    bool setOutputDeviceId(int);
-    
     bool start();
     bool stop();
     
@@ -35,6 +32,11 @@ public:
     static bool isInput(int);
     static bool isOutput(int);
     
+    // Commands
+    bool setInputDeviceId(int);
+    bool setOutputDeviceId(int);
+    
+    // Status
     void printInputDevices();
     void printOutputDevices();
     

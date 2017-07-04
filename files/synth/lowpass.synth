@@ -1,49 +1,49 @@
 unit_key_create oscillator wave
-unit_set_value wave sample              triangle
-unit_set_value wave frequency           key_frequency
-unit_set_value wave amplitude           key_velocity
+unit_set wave sample              triangle
+unit_set wave frequency           key_frequency
+unit_set wave amplitude           key_velocity
 
 unit_key_create adder key_frequency2 1
-unit_set_value key_frequency2 input_1   key_frequency
-unit_set_value key_frequency2 gain_1    3.0
+unit_set key_frequency2 input_1   key_frequency
+unit_set key_frequency2 gain_1    3.0
 
 unit_key_create oscillator wave2
-unit_set_value wave2 sample             triangle
-unit_set_value wave2 frequency          key_frequency2
-unit_set_value wave2 amplitude          key_velocity
+unit_set wave2 sample             triangle
+unit_set wave2 frequency          key_frequency2
+unit_set wave2 amplitude          key_velocity
 
 unit_key_create adder sum 2
-unit_set_value sum input_1              wave
-unit_set_value sum gain_1               0.1
-unit_set_value sum input_2              wave2
-unit_set_value sum gain_2               0.1
+unit_set sum input_1              wave
+unit_set sum gain_1               0.1
+unit_set sum input_2              wave2
+unit_set sum gain_2               0.1
 
 unit_create oscillator zzzL
 unit_create oscillator zzzH
-unit_set_value zzzL sample              sine
-unit_set_value zzzH sample              sine
-unit_set_value zzzL frequency           0.3
-unit_set_value zzzH frequency           0.25
-unit_set_value zzzL amplitude           0.5
-unit_set_value zzzH amplitude           0.5
-unit_set_value zzzL mean                2.65
-unit_set_value zzzH mean                2.85
+unit_set zzzL sample              sine
+unit_set zzzH sample              sine
+unit_set zzzL frequency           0.3
+unit_set zzzH frequency           0.25
+unit_set zzzL amplitude           0.5
+unit_set zzzH amplitude           0.5
+unit_set zzzL mean                2.65
+unit_set zzzH mean                2.85
 
 unit_create function FL
-unit_set_value FL function              pow10
-unit_set_value FL input                 zzzL
+unit_set FL function              pow10
+unit_set FL input                 zzzL
 
 unit_create function FH
-unit_set_value FH function              pow10
-unit_set_value FH input                 zzzH
+unit_set FH function              pow10
+unit_set FH input                 zzzH
 
 unit_create lowpass L 5
-unit_set_value L input                  key_output
-unit_set_value L cutoff                 FL
+unit_set L input                  key_output
+unit_set L cutoff                 FL
 
 unit_create highpass H 5
-unit_set_value H input                  L
-unit_set_value H cutoff                 FH
+unit_set H input                  L
+unit_set H cutoff                 FH
 
 instrument_create i
 instrument_set_key_output i             sum

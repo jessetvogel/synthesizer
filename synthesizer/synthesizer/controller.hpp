@@ -11,6 +11,7 @@ class MidiState;
 
 class Instruments;
 class Units;
+class Blocks;
 
 class Controller {
     
@@ -24,6 +25,7 @@ class Controller {
     
     Instruments* instruments;
     Units* units;
+    Blocks* blocks;
     
     bool active;
     
@@ -45,12 +47,14 @@ public:
     
     inline Instruments* getInstruments() { return instruments; };
     inline Units* getUnits() { return units; };
+    inline Blocks* getBlocks() { return blocks; };
 
     inline float* getBufferInput() { return bufferInput; };
     inline float* getBufferOutput() { return bufferOutput; };
     
     bool start();
     bool stop();
+    bool reset();
     bool update();
     
 };

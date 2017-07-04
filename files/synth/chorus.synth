@@ -1,7 +1,7 @@
 unit_key_create oscillator wave
-unit_set_value wave sample               sawtooth
-unit_set_value wave frequency            key_frequency
-unit_set_value wave amplitude            1.0
+unit_set wave sample               sawtooth
+unit_set wave frequency            key_frequency
+unit_set wave amplitude            1.0
 
 instrument_create i
 instrument_set_key_output i             wave
@@ -9,37 +9,37 @@ instrument_set_key_output i             wave
 # ---------------- CHORUS ----------------
 
 unit_create oscillator LFO
-unit_set_value LFO sample               sine
+unit_set LFO sample               sine
 
-unit_set_value LFO frequency            knob_4
-unit_set_value knob_4 curve             exponential
-unit_set_value knob_4 min               0.2
-unit_set_value knob_4 max               5.0
+unit_set LFO frequency            knob_4
+unit_set knob_4 curve             exponential
+unit_set knob_4 min               0.2
+unit_set knob_4 max               5.0
 
-unit_set_value LFO mean                 knob_2
-unit_set_value knob_2 min               0.010
-unit_set_value knob_2 max               0.040
+unit_set LFO mean                 knob_2
+unit_set knob_2 min               0.010
+unit_set knob_2 max               0.040
 
-unit_set_value LFO amplitude            knob_3
-unit_set_value knob_3 min               0.005
-unit_set_value knob_3 max               0.010
+unit_set LFO amplitude            knob_3
+unit_set knob_3 min               0.005
+unit_set knob_3 max               0.010
 
 unit_create variable drywet
-unit_set_value drywet value             knob_1
-unit_set_value knob_1 min               0.0
-unit_set_value knob_1 max               1.0
+unit_set drywet value             knob_1
+unit_set knob_1 min               0.0
+unit_set knob_1 max               1.0
 
 unit_create adder wetdry 2
-unit_set_value wetdry input_1           1.0
-unit_set_value wetdry input_2           drywet
-unit_set_value wetdry gain_2            -1.0
+unit_set wetdry input_1           1.0
+unit_set wetdry input_2           drywet
+unit_set wetdry gain_2            -1.0
 
 unit_create delay chorus 1 1.0
-unit_set_value chorus input             key_output
-unit_set_value chorus gain              drywet
-unit_set_value chorus time_1            LFO
-unit_set_value chorus gain_1            wetdry
-unit_set_value chorus feedback          0.0
+unit_set chorus input             key_output
+unit_set chorus gain              drywet
+unit_set chorus time_1            LFO
+unit_set chorus gain_1            wetdry
+unit_set chorus feedback          0.0
 
 # ---------------- CHORUS ----------------
 

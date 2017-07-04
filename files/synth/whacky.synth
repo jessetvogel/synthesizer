@@ -1,42 +1,42 @@
 unit_create PWM pwm
-unit_set_value pwm frequency            2.133325 # tempo = 128
-unit_set_value pwm duty                 0.25
-unit_set_value pwm high                 1.0
-unit_set_value pwm low                  0.0
+unit_set pwm frequency            2.133325 # tempo = 128
+unit_set pwm duty                 0.25
+unit_set pwm high                 1.0
+unit_set pwm low                  0.0
 
 unit_create PWM pwm2
-unit_set_value pwm2 frequency           4.2667 # tempo = 128
-unit_set_value pwm2 duty                0.2
-unit_set_value pwm2 high                1.0
-unit_set_value pwm2 low                 2.0
+unit_set pwm2 frequency           4.2667 # tempo = 128
+unit_set pwm2 duty                0.2
+unit_set pwm2 high                1.0
+unit_set pwm2 low                 2.0
 
 unit_key_create adder kf 1
-unit_set_value kf input_1               key_frequency
-unit_set_value kf gain_1                pwm2
+unit_set kf input_1               key_frequency
+unit_set kf gain_1                pwm2
 
 unit_key_create oscillator wave
-unit_set_value wave sample              sawtooth
-unit_set_value wave frequency           kf
-unit_set_value wave amplitude           pwm
+unit_set wave sample              sawtooth
+unit_set wave frequency           kf
+unit_set wave amplitude           pwm
 
 # freq ranges from about 50Hz to about 20kHz
 unit_create oscillator LFO
-unit_set_value LFO sample               sawtooth
-unit_set_value LFO frequency            2.1333
-unit_set_value LFO mean                 3.3
-unit_set_value LFO amplitude            2.0
+unit_set LFO sample               sawtooth
+unit_set LFO frequency            2.1333
+unit_set LFO mean                 3.3
+unit_set LFO amplitude            2.0
 
 unit_create function freq
-unit_set_value freq input               LFO
-unit_set_value freq function            pow10
+unit_set freq input               LFO
+unit_set freq function            pow10
 
 unit_create highpass h
-unit_set_value h input                  key_output
-unit_set_value h cutoff                 freq
+unit_set h input                  key_output
+unit_set h cutoff                 freq
 
 unit_create lowpass l
-unit_set_value l input                  h
-unit_set_value l cutoff                 freq
+unit_set l input                  h
+unit_set l cutoff                 freq
 
 instrument_create i
 instrument_set_key_output i             wave

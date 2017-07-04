@@ -1,32 +1,32 @@
 unit_create parameter P 21
-unit_set_value P min                0.0
-unit_set_value P max                1.0
+unit_set P min                0.0
+unit_set P max                1.0
 
 unit_create parameter Q 22
-unit_set_value Q min                1.3
-unit_set_value Q max                4.3
+unit_set Q min                1.3
+unit_set Q max                4.3
 
 unit_create parameter R 23
-unit_set_value R min                2.3
-unit_set_value R max                3.3
+unit_set R min                2.3
+unit_set R max                3.3
 
 unit_create function F
-unit_set_value F function           pow10
-unit_set_value F input              R
+unit_set F function           pow10
+unit_set F input              R
 
 unit_create function C
-unit_set_value C function           pow10
-unit_set_value C input              Q
+unit_set C function           pow10
+unit_set C input              Q
 
 unit_create oscillator wave
-unit_set_value wave sample          sawtooth
-unit_set_value wave frequency       F
-unit_set_value wave amplitude       P
+unit_set wave sample          sawtooth
+unit_set wave frequency       F
+unit_set wave amplitude       P
 
 
 unit_create lowpass l
-unit_set_value l input              wave
-unit_set_value l cutoff             C
+unit_set l input              wave
+unit_set l cutoff             C
 
 instrument_create i
 instrument_set_output i             l

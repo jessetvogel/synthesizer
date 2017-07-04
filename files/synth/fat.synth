@@ -1,44 +1,44 @@
 unit_key_create conditional alpha
-unit_set_value alpha input                key_velocity
-unit_set_value alpha low                  0.75
-unit_set_value alpha high                 0.7499
-unit_set_value alpha output_low           1.0
-unit_set_value alpha output_middle        0.0
-unit_set_value alpha output_high          3.0
+unit_set alpha input                key_velocity
+unit_set alpha low                  0.75
+unit_set alpha high                 0.7499
+unit_set alpha output_low           1.0
+unit_set alpha output_middle        0.0
+unit_set alpha output_high          3.0
 
 unit_key_create adder s 1
-unit_set_value s input_1                  key_frequency
-unit_set_value s gain_1                   alpha
+unit_set s input_1                  key_frequency
+unit_set s gain_1                   alpha
 
 unit_key_create ADSR e_freq
-unit_set_value e_freq start_level         s
-unit_set_value e_freq attack_level        key_frequency
-unit_set_value e_freq sustain_level       key_frequency
-unit_set_value e_freq release_level       key_frequency
-unit_set_value e_freq attack_time         0.05
-unit_set_value e_freq decay_time          0.0
-unit_set_value e_freq release_time        0.0
-unit_set_value e_freq attack_type         quartout
-unit_set_value e_freq decay_type          quartout
-unit_set_value e_freq release_type        quartout
+unit_set e_freq start_level         s
+unit_set e_freq attack_level        key_frequency
+unit_set e_freq sustain_level       key_frequency
+unit_set e_freq release_level       key_frequency
+unit_set e_freq attack_time         0.05
+unit_set e_freq decay_time          0.0
+unit_set e_freq release_time        0.0
+unit_set e_freq attack_type         quartout
+unit_set e_freq decay_type          quartout
+unit_set e_freq release_type        quartout
 
 unit_key_create ADSR e_amp
-unit_set_value e_amp sustain_level        0.5
-unit_set_value e_amp attack_time          0.1
-unit_set_value e_amp decay_time           0.5
-unit_set_value e_amp release_time         0.1
-unit_set_value e_amp attack_type          quartout
-unit_set_value e_amp decay_type           quartout
-unit_set_value e_amp release_type         quartout
+unit_set e_amp sustain_level        0.5
+unit_set e_amp attack_time          0.1
+unit_set e_amp decay_time           0.5
+unit_set e_amp release_time         0.1
+unit_set e_amp attack_type          quartout
+unit_set e_amp decay_type           quartout
+unit_set e_amp release_type         quartout
 
 unit_key_create oscillator                wave
-unit_set_value wave sample                square
-unit_set_value wave amplitude             e_amp
-unit_set_value wave frequency             e_freq
+unit_set wave sample                square
+unit_set wave amplitude             e_amp
+unit_set wave frequency             e_freq
 
 unit_key_create adder x 1
-unit_set_value x input_1                  wave
-unit_set_value x gain_1                   key_velocity
+unit_set x input_1                  wave
+unit_set x gain_1                   key_velocity
 
 instrument_create i
 instrument_set_key_output i               x

@@ -5,6 +5,7 @@
 #include <string>
 
 #define UNIT_DEFAULT_ID "#undefined"
+#define UNIT_HIDDEN_ID "#hidden"
 #define UNIT_DEFAULT_TYPE "#undefined"
 
 class Controller;
@@ -24,6 +25,8 @@ protected:
     
     std::string id = UNIT_DEFAULT_ID;
     std::string type = UNIT_DEFAULT_TYPE;
+    
+    std::vector<Parameter*> parameters;
     
     bool keyDependent;
     bool applyAlways = false;
@@ -45,17 +48,21 @@ public:
     inline std::string getId() { return id; }
     inline std::string getType() { return type; }
     
-    std::vector<Parameter*> parameters;
+    inline void hide() { hidden = true; id = UNIT_HIDDEN_ID; }
     
     float* output;
     
     bool setParameter(std::string, std::string);
+    Parameter* getParameter(std::string);
     
     inline void reset() { updated = false; };
     void update(Instrument*);
     inline bool isKeyDependent() { return keyDependent; };
     inline bool isHidden() { return hidden; };
   
+    // Status
+    void printUnit();
+    
 };
 
 #endif

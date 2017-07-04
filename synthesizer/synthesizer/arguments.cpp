@@ -1,4 +1,5 @@
 #include "arguments.hpp"
+#include "util.hpp"
 
 std::regex Arguments::regexArgument("(\\w+)\\s*=\\s*(\\w+)");
 
@@ -25,7 +26,10 @@ int Arguments::getInteger(std::string key, int standard) {
     auto position = map.find(key);
     if(position == map.end()) return standard;
     
-    return stoi(position->second);
+    std::string value = position->second;
+    if(!Util::isInteger(value)) return standard;
+    
+    return stoi(value);
 }
 
 double Arguments::getDouble(std::string key, double standard) {

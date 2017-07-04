@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
+#include <mutex>
 
 class Controller;
 class Parameter;
@@ -15,16 +16,27 @@ class Block {
     
     std::unordered_map<std::string, Parameter*> inputs;
     std::unordered_map<std::string, Unit*> outputs;
-    std::vector<Unit*> attachments;
+    
+    std::mutex mutexInputs;
+    std::mutex mutexOutputs;
+    
+    std::string id;
     
 public:
     
     Block(Controller*);
-    ~Block();
+    
+    inline std::string getId() { return id; }
+    inline Block* setId(std::string id) { this->id = id; return this; }
     
     bool addInput(std::string, Parameter*);
     bool addOutput(std::string, Unit*);
-    bool attachUnit(Unit*);
+    
+    Parameter* getInput(std::string);
+    Unit* getOutput(std::string);
+    
+    // Status
+    void printBlock();
     
 };
 

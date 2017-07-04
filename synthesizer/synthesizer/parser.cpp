@@ -11,6 +11,7 @@
 #include "instrument.hpp"
 #include "units.hpp"
 #include "unit.hpp"
+#include "blocks.hpp"
 #include "options.hpp"
 #include "status.hpp"
 
@@ -91,7 +92,7 @@ bool Parser::parseLine(std::string line) {
     // stop
     if(std::regex_search(str, cm, Commands::regexStop))                     return controller->stop();
     // reset
-    if(std::regex_search(str, cm, Commands::regexReset)) /* TODO!! return controller->reset(); */ return true;
+    if(std::regex_search(str, cm, Commands::regexReset))                    return controller->reset();
     
     // Status
     
@@ -115,7 +116,7 @@ bool Parser::parseLine(std::string line) {
     // instrument_create <label>
     if(std::regex_search(str, cm, Commands::regexInstrumentCreate))         return controller->getInstruments()->create(cm[1]);    
     // instrument_delete <instrument>
-    if(std::regex_search(str, cm, Commands::regexInstrumentDelete))         return controller->getInstruments()->remove(cm[1]);
+    if(std::regex_search(str, cm, Commands::regexInstrumentDelete))         return controller->getInstruments()->destroy(cm[1]);
     // instrument_set_active <instrument> <true|false>
     if(std::regex_search(str, cm, Commands::regexInstrumentSetActive))      return controller->getInstruments()->setActive(cm[1], cm[2].compare("true") == 0);
     // instrument_set_output <instrument> <unit>
@@ -129,13 +130,29 @@ bool Parser::parseLine(std::string line) {
     
     // unit_create <unit_type> <label> <args>
     if(std::regex_search(str, cm, Commands::regexUnitCreate))               return controller->getUnits()->create(cm[1], cm[2], cm[3]);
-    // unit_delete <unit>
-    if(std::regex_search(str, cm, Commands::regexUnitDelete))               return controller->getUnits()->remove(cm[1]);
     // unit_rename <unit> <label>
     if(std::regex_search(str, cm, Commands::regexUnitRename))               return controller->getUnits()->rename(cm[1], cm[2]);
-    // unit_set_value <unit> <parameter> <value>
-    if(std::regex_search(str, cm, Commands::regexUnitSetValue))             return controller->getUnits()->setValue(cm[1], cm[2], cm[3]);
+    // unit_delete <unit>
+    if(std::regex_search(str, cm, Commands::regexUnitDelete))               return controller->getUnits()->destroy(cm[1]);
+    // unit_hide <unit>
+    if(std::regex_search(str, cm, Commands::regexUnitHide))                 return controller->getUnits()->hide(cm[1]);
+    // unit_set <unit> <parameter> <value>
+    if(std::regex_search(str, cm, Commands::regexUnitSet))                  return controller->getUnits()->set(cm[1], cm[2], cm[3]);
     
+    // Blocks
+    
+    // block_create <id>
+    if(std::regex_search(str, cm, Commands::regexBlockCreate))              return controller->getBlocks()->create(cm[1]);
+    // block_delete <id>
+    if(std::regex_search(str, cm, Commands::regexBlockDelete))              return controller->getBlocks()->destroy(cm[1]);
+    // block_add_input <id> <label> <unit> <parameter>
+    if(std::regex_search(str, cm, Commands::regexBlockAddInput))            return controller->getBlocks()->addInput(cm[1], cm[2], cm[3], cm[4]);
+    // block_add_output <id> <label> <unit>
+    if(std::regex_search(str, cm, Commands::regexBlockAddOutput))           return controller->getBlocks()->addOutput(cm[1], cm[2], cm[3]);
+    // block_set <id> <parameter> <value>
+    if(std::regex_search(str, cm, Commands::regexBlockSet))                 return controller->getBlocks()->set(cm[1], cm[2], cm[3]);
+
+    // Unknown command
     Error::addError(Error::COMMAND_NOT_RECOGNISED);
     return false;
 }

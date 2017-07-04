@@ -1,119 +1,119 @@
 # Let the lead frequency 'glide', depending on whether the lead note is being pressed
-unit_create adder y 2
+unit_create adder y [n = 2]
 unit_create conditional z
-unit_set_value y input_1                z
-unit_set_value y input_2                lead_key_pressing
-unit_set_value z input                  y
-unit_set_value z low                    1.0
-unit_set_value z high                   1.33
-unit_set_value z output_low             0.25
-unit_set_value z output_middle          0.50
-unit_set_value z output_high            0.75
+unit_set y input_1                z
+unit_set y input_2                lead_key_pressing
+unit_set z input                  y
+unit_set z low                    1.0
+unit_set z high                   1.33
+unit_set z output_low             0.25
+unit_set z output_middle          0.50
+unit_set z output_high            0.75
 unit_create conditional alpha
-unit_set_value alpha input              z
-unit_set_value alpha low                0.67
-unit_set_value alpha high               0.67
-unit_set_value alpha output_low         1.0
-unit_create adder oneminusalpha 2
-unit_set_value oneminusalpha input_1    1.0
-unit_set_value oneminusalpha input_2    alpha
-unit_set_value oneminusalpha gain_2     -1.0
-unit_create adder main_freq 2
-unit_set_value main_freq input_1        main_freq
-unit_set_value main_freq gain_1         oneminusalpha
-unit_set_value main_freq input_2        lead_key_frequency
-unit_set_value main_freq gain_2         alpha
+unit_set alpha input              z
+unit_set alpha low                0.67
+unit_set alpha high               0.67
+unit_set alpha output_low         1.0
+unit_create adder oneminusalpha [n = 2]
+unit_set oneminusalpha input_1    1.0
+unit_set oneminusalpha input_2    alpha
+unit_set oneminusalpha gain_2     -1.0
+unit_create adder main_freq [n = 2]
+unit_set main_freq input_1        main_freq
+unit_set main_freq gain_1         oneminusalpha
+unit_set main_freq input_2        lead_key_frequency
+unit_set main_freq gain_2         alpha
 
 # Vibrato
-unit_create adder vibrato_amp 1
-unit_set_value vibrato_amp input_1      modulation_wheel
-unit_set_value vibrato_amp gain_1       0.059463
-unit_create adder vibrato_freq 2
-unit_set_value vibrato_freq input_1     modulation_wheel
-unit_set_value vibrato_freq gain_1      3.0
-unit_set_value vibrato_freq input_2     3
+unit_create adder vibrato_amp
+unit_set vibrato_amp input_1      modulation_wheel
+unit_set vibrato_amp gain_1       0.059463
+unit_create adder vibrato_freq [n = 2]
+unit_set vibrato_freq input_1     modulation_wheel
+unit_set vibrato_freq gain_1      3.0
+unit_set vibrato_freq input_2     3
 unit_create oscillator vibrato
-unit_set_value vibrato sample           sine
-unit_set_value vibrato mean             1.0
-unit_set_value vibrato amplitude        vibrato_amp
-unit_set_value vibrato frequency        vibrato_freq
-unit_create adder freq 1
-unit_set_value freq input_1             main_freq
-unit_set_value freq gain_1              vibrato
+unit_set vibrato sample           sine
+unit_set vibrato mean             1.0
+unit_set vibrato amplitude        vibrato_amp
+unit_set vibrato frequency        vibrato_freq
+unit_create adder freq [n = 1]
+unit_set freq input_1             main_freq
+unit_set freq gain_1              vibrato
 
 # Gliding constant
-unit_set_value knob_9 min               0.01
-unit_set_value knob_9 max               0.10
-unit_set_value alpha output_high        knob_9
+unit_set knob_9 min               0.01
+unit_set knob_9 max               0.10
+unit_set alpha output_high        knob_9
 
 # Oscillator and amplitude envelope
 unit_create ADSR e_amp
-unit_set_value e_amp attack_time        0.01
-unit_set_value e_amp decay_time         0.05
-unit_set_value e_amp sustain_level      0.5
-unit_set_value e_amp release_time       0.1
-unit_set_value e_amp attack_curve        quartout
-unit_set_value e_amp decay_curve         quartout
-unit_set_value e_amp release_curve       quartout
+unit_set e_amp attack_time        0.01
+unit_set e_amp decay_time         0.05
+unit_set e_amp sustain_level      0.5
+unit_set e_amp release_time       0.1
+unit_set e_amp attack_curve        quartout
+unit_set e_amp decay_curve         quartout
+unit_set e_amp release_curve       quartout
 
-unit_create adder amp 1
-unit_set_value amp input_1              lead_key_velocity
-unit_set_value amp gain_1               e_amp
+unit_create adder amp
+unit_set amp input_1              lead_key_velocity
+unit_set amp gain_1               e_amp
 
 unit_create oscillator lead
-unit_set_value lead sample              sine
-unit_set_value lead frequency           freq
-unit_set_value lead amplitude           amp
+unit_set lead sample              sine
+unit_set lead frequency           freq
+unit_set lead amplitude           amp
 
 # Additional harmonic(s)
-unit_create adder freq2 1
-unit_set_value freq2 input_1            freq
-unit_set_value freq2 gain_1             3.0
+unit_create adder freq2
+unit_set freq2 input_1            freq
+unit_set freq2 gain_1             3.0
 
 unit_create oscillator lead2
-unit_set_value lead2 sample             sine
-unit_set_value lead2 frequency          freq2
-unit_set_value lead2 amplitude          amp
+unit_set lead2 sample             sine
+unit_set lead2 frequency          freq2
+unit_set lead2 amplitude          amp
 
-unit_create adder leads 2
-unit_set_value leads input_1            lead
-unit_set_value leads input_2            lead2
+unit_create adder leads [n = 2]
+unit_set leads input_1            lead
+unit_set leads input_2            lead2
 
 # Fuzz effect
-unit_set_value knob_1 min               0.1 # fuzz gain
-unit_set_value knob_1 max               100
-unit_set_value knob_1 curve             exponential
+unit_set knob_1 min               0.1 # fuzz gain
+unit_set knob_1 max               100
+unit_set knob_1 curve             exponential
 
 unit_create fuzz fuzzed
-unit_set_value fuzzed input             leads
-unit_set_value fuzzed input_gain        knob_1
+unit_set fuzzed input             leads
+unit_set fuzzed input_gain        knob_1
 
 # Delay effect
-unit_set_value knob_2 min               0.0 # delay gain
-unit_set_value knob_2 max               1.0
+unit_set knob_2 min               0.0 # delay gain
+unit_set knob_2 max               1.0
 
-unit_set_value knob_10 min              0.234375 # delay time
-unit_set_value knob_10 max              0.468750
+unit_set knob_10 min              0.234375 # delay time
+unit_set knob_10 max              0.468750
 
-unit_create delay delayed 1 1.0
-unit_set_value delayed input            fuzzed
-unit_set_value delayed time_1           knob_10
-unit_set_value delayed gain_1           knob_2
-unit_set_value delayed feedback         1.0
+unit_create delay delayed [n = 1, T = 1.0]
+unit_set delayed input            fuzzed
+unit_set delayed time_1           knob_10
+unit_set delayed gain_1           knob_2
+unit_set delayed feedback         1.0
 
 # Bandpass filter
-unit_set_value knob_3 min               20 # center frequency
-unit_set_value knob_3 max               20000
-unit_set_value knob_3 curve             exponential
+unit_set knob_3 min               100 # center frequency
+unit_set knob_3 max               11000
+unit_set knob_3 curve             exponential
 
-unit_set_value knob_4 min               0.01 # q factor
-unit_set_value knob_4 max               100
-unit_set_value knob_4 curve             exponential
+unit_set knob_4 min               1.0 # bandwidth
+unit_set knob_4 max               8.0
+unit_set knob_4 curve             exponential
 
-unit_create bandpass BP
-unit_set_value BP input                 delayed
-unit_set_value BP center                knob_3
-unit_set_value BP q_factor              knob_4
+unit_create bandpass BP [order = 3]
+unit_set BP input                 delayed
+unit_set BP center                knob_3
+unit_set BP bandwidth             knob_4
 
 instrument_create i
-instrument_set_output i                 BP
+instrument_set_output i           BP

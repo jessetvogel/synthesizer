@@ -11,9 +11,10 @@ UnitAdder::UnitAdder(Controller* controller, Arguments arguments) : Unit(control
     keyDependent = arguments.getBool("key", false);
     
     // Set type
-    char strType[12];
-    sprintf(strType, "adder_%d", n);
-    type = std::string(strType);
+//    char strType[12];
+//    sprintf(strType, "adder_%d", n);
+//    type = std::string(strType);
+    type = "adder";
     
     // Create arrays and set parameters
     inputs = new Parameter*[n];

@@ -63,3 +63,11 @@ bool Unit::setParameter(std::string label, std::string value) {
     return false;
 }
 
+Parameter* Unit::getParameter(std::string label) {
+    for(auto it = parameters.begin(); it != parameters.end(); ++it) {
+        if(label.compare((*it)->label) == 0)
+            return *it;
+    }
+    return NULL;
+}
+

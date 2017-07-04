@@ -22,9 +22,9 @@
 #define REGEX_BOOLEAN "true|false"
 #define REGEX_NUMBER "[-+]?[0-9]+(?:\\.[0-9]+)?"
 
-#define REGEX_ARGUMENTS "\\[\\w+\\s*=\\s*\\w+(?:,\\s*\\w+\\s*=\\s*\\w+)*\\]"
+#define REGEX_ARGUMENTS "\\[\\w+\\s*=\\s*[\\w.\\-+]+(?:,\\s*\\w+\\s*=\\s*[\\w.\\-+]+)*\\]"
 
-#define REGEX_PARAMETER_VALUE REGEX_UNIT_ID "|" REGEX_NUMBER
+#define REGEX_PARAMETER_VALUE REGEX_UNIT_ID "|" REGEX_NUMBER "|" REGEX_BLOCK_ID ":" REGEX_BLOCK_OUTPUT
 
 // Remove all surrounding whitespace and comments
 std::regex Commands::regexPreprocess("^\\s*(.*?)\\s*(?:#.*)?$");
@@ -69,11 +69,12 @@ std::regex Commands::regexInstrumentSetKeyReleaseTime("^instrument_set_key_relea
 std::regex Commands::regexUnitCreate("^unit_create\\s+(" REGEX_UNIT_TYPE ")\\s+(" REGEX_UNIT_ID ")\\s*(" REGEX_ARGUMENTS ")?$");
 std::regex Commands::regexUnitRename("^unit_rename\\s+(" REGEX_UNIT_ID ")\\s+(" REGEX_UNIT_ID ")$");
 std::regex Commands::regexUnitDelete("^unit_delete\\s+(" REGEX_UNIT_ID ")$");
-std::regex Commands::regexUnitSetValue("^unit_set_value\\s+(" REGEX_UNIT_ID ")\\s+(" REGEX_UNIT_PARAMETER ")\\s+(" REGEX_PARAMETER_VALUE ")$");
+std::regex Commands::regexUnitHide("^unit_hide\\s+(" REGEX_UNIT_ID ")$");
+std::regex Commands::regexUnitSet("^unit_set\\s+(" REGEX_UNIT_ID ")\\s+(" REGEX_UNIT_PARAMETER ")\\s+(" REGEX_PARAMETER_VALUE ")$");
 
 // Commands for blocks
 std::regex Commands::regexBlockCreate("^block_create\\s+(" REGEX_BLOCK_ID ")$");
 std::regex Commands::regexBlockDelete("^block_delete\\s+(" REGEX_BLOCK_ID ")$");
 std::regex Commands::regexBlockAddInput("^block_add_input\\s+(" REGEX_BLOCK_ID ")\\s+(" REGEX_BLOCK_INPUT ")\\s+(" REGEX_UNIT_ID ")\\s+(" REGEX_UNIT_PARAMETER ")$");
 std::regex Commands::regexBlockAddOutput("^block_add_output\\s+(" REGEX_BLOCK_ID ")\\s+(" REGEX_BLOCK_OUTPUT ")\\s+(" REGEX_UNIT_ID ")$");
-std::regex Commands::regexBlockAttachUnit("^block_attach_unit\\s+(" REGEX_BLOCK_ID ")\\s+(" REGEX_UNIT_ID ")$");
+std::regex Commands::regexBlockSet("^block_set\\s+(" REGEX_BLOCK_ID ")\\s+(" REGEX_BLOCK_INPUT ")\\s+(" REGEX_PARAMETER_VALUE ")$");

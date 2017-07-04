@@ -22,29 +22,29 @@ unit_create bandpass BP_MOD_10  [order = 3]
 unit_create bandpass BP_MOD_11  [order = 3]
 unit_create highpass BP_MOD_12  [order = 3]
 
-unit_set_value BP_MOD_2 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_MOD_3 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_MOD_4 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_MOD_5 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_MOD_6 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_MOD_7 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_MOD_8 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_MOD_9 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_MOD_10 bandwidth                  1.2 # BANDWIDTH
-unit_set_value BP_MOD_11 bandwidth                  1.2 # BANDWIDTH
+unit_set BP_MOD_2 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_MOD_3 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_MOD_4 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_MOD_5 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_MOD_6 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_MOD_7 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_MOD_8 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_MOD_9 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_MOD_10 bandwidth                  1.2 # BANDWIDTH
+unit_set BP_MOD_11 bandwidth                  1.2 # BANDWIDTH
 
-unit_set_value BP_MOD_1 input                       audio_input
-unit_set_value BP_MOD_2 input                       audio_input
-unit_set_value BP_MOD_3 input                       audio_input
-unit_set_value BP_MOD_4 input                       audio_input
-unit_set_value BP_MOD_5 input                       audio_input
-unit_set_value BP_MOD_6 input                       audio_input
-unit_set_value BP_MOD_7 input                       audio_input
-unit_set_value BP_MOD_8 input                       audio_input
-unit_set_value BP_MOD_9 input                       audio_input
-unit_set_value BP_MOD_10 input                      audio_input
-unit_set_value BP_MOD_11 input                      audio_input
-unit_set_value BP_MOD_12 input                      audio_input
+unit_set BP_MOD_1 input                       audio_input
+unit_set BP_MOD_2 input                       audio_input
+unit_set BP_MOD_3 input                       audio_input
+unit_set BP_MOD_4 input                       audio_input
+unit_set BP_MOD_5 input                       audio_input
+unit_set BP_MOD_6 input                       audio_input
+unit_set BP_MOD_7 input                       audio_input
+unit_set BP_MOD_8 input                       audio_input
+unit_set BP_MOD_9 input                       audio_input
+unit_set BP_MOD_10 input                      audio_input
+unit_set BP_MOD_11 input                      audio_input
+unit_set BP_MOD_12 input                      audio_input
 
 
 # Volume
@@ -61,18 +61,18 @@ unit_create volumemeter BP_MOD_10_VOLUME
 unit_create volumemeter BP_MOD_11_VOLUME
 unit_create volumemeter BP_MOD_12_VOLUME
 
-unit_set_value BP_MOD_1_VOLUME input                BP_MOD_1
-unit_set_value BP_MOD_2_VOLUME input                BP_MOD_2
-unit_set_value BP_MOD_3_VOLUME input                BP_MOD_3
-unit_set_value BP_MOD_4_VOLUME input                BP_MOD_4
-unit_set_value BP_MOD_5_VOLUME input                BP_MOD_5
-unit_set_value BP_MOD_6_VOLUME input                BP_MOD_6
-unit_set_value BP_MOD_7_VOLUME input                BP_MOD_7
-unit_set_value BP_MOD_8_VOLUME input                BP_MOD_8
-unit_set_value BP_MOD_9_VOLUME input                BP_MOD_9
-unit_set_value BP_MOD_10_VOLUME input               BP_MOD_10
-unit_set_value BP_MOD_11_VOLUME input               BP_MOD_11
-unit_set_value BP_MOD_12_VOLUME input               BP_MOD_12
+unit_set BP_MOD_1_VOLUME input                BP_MOD_1
+unit_set BP_MOD_2_VOLUME input                BP_MOD_2
+unit_set BP_MOD_3_VOLUME input                BP_MOD_3
+unit_set BP_MOD_4_VOLUME input                BP_MOD_4
+unit_set BP_MOD_5_VOLUME input                BP_MOD_5
+unit_set BP_MOD_6_VOLUME input                BP_MOD_6
+unit_set BP_MOD_7_VOLUME input                BP_MOD_7
+unit_set BP_MOD_8_VOLUME input                BP_MOD_8
+unit_set BP_MOD_9_VOLUME input                BP_MOD_9
+unit_set BP_MOD_10_VOLUME input               BP_MOD_10
+unit_set BP_MOD_11_VOLUME input               BP_MOD_11
+unit_set BP_MOD_12_VOLUME input               BP_MOD_12
 
 
 # Carrier
@@ -89,97 +89,97 @@ unit_create bandpass BP_CAR_10  [order = 3]
 unit_create bandpass BP_CAR_11  [order = 3]
 unit_create highpass BP_CAR_12  [order = 3]
 
-unit_set_value BP_CAR_2 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_CAR_3 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_CAR_4 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_CAR_5 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_CAR_6 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_CAR_7 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_CAR_8 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_CAR_9 bandwidth                   1.2 # BANDWIDTH
-unit_set_value BP_CAR_10 bandwidth                  1.2 # BANDWIDTH
-unit_set_value BP_CAR_11 bandwidth                  1.2 # BANDWIDTH
+unit_set BP_CAR_2 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_CAR_3 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_CAR_4 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_CAR_5 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_CAR_6 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_CAR_7 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_CAR_8 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_CAR_9 bandwidth                   1.2 # BANDWIDTH
+unit_set BP_CAR_10 bandwidth                  1.2 # BANDWIDTH
+unit_set BP_CAR_11 bandwidth                  1.2 # BANDWIDTH
 
-unit_set_value BP_CAR_1 input                       key_output
-unit_set_value BP_CAR_2 input                       key_output
-unit_set_value BP_CAR_3 input                       key_output
-unit_set_value BP_CAR_4 input                       key_output
-unit_set_value BP_CAR_5 input                       key_output
-unit_set_value BP_CAR_6 input                       key_output
-unit_set_value BP_CAR_7 input                       key_output
-unit_set_value BP_CAR_8 input                       key_output
-unit_set_value BP_CAR_9 input                       key_output
-unit_set_value BP_CAR_10 input                      key_output
-unit_set_value BP_CAR_11 input                      key_output
-unit_set_value BP_CAR_12 input                      key_output
+unit_set BP_CAR_1 input                       key_output
+unit_set BP_CAR_2 input                       key_output
+unit_set BP_CAR_3 input                       key_output
+unit_set BP_CAR_4 input                       key_output
+unit_set BP_CAR_5 input                       key_output
+unit_set BP_CAR_6 input                       key_output
+unit_set BP_CAR_7 input                       key_output
+unit_set BP_CAR_8 input                       key_output
+unit_set BP_CAR_9 input                       key_output
+unit_set BP_CAR_10 input                      key_output
+unit_set BP_CAR_11 input                      key_output
+unit_set BP_CAR_12 input                      key_output
 
 
 # Frequencies
-unit_set_value BP_MOD_1 cutoff                      50
-unit_set_value BP_CAR_1 cutoff                      50
-unit_set_value BP_MOD_2 center                      83
-unit_set_value BP_CAR_2 center                      83
-unit_set_value BP_MOD_3 center                      137
-unit_set_value BP_CAR_3 center                      137
-unit_set_value BP_MOD_4 center                      227
-unit_set_value BP_CAR_4 center                      227
-unit_set_value BP_MOD_5 center                      376
-unit_set_value BP_CAR_5 center                      376
-unit_set_value BP_MOD_6 center                      622
-unit_set_value BP_CAR_6 center                      622
-unit_set_value BP_MOD_7 center                      1029
-unit_set_value BP_CAR_7 center                      1029
-unit_set_value BP_MOD_8 center                      1704
-unit_set_value BP_CAR_8 center                      1704
-unit_set_value BP_MOD_9 center                      2821
-unit_set_value BP_CAR_9 center                      2821
-unit_set_value BP_MOD_10 center                     4670
-unit_set_value BP_CAR_10 center                     4670
-unit_set_value BP_MOD_11 center                     7731
-unit_set_value BP_CAR_11 center                     7731
-unit_set_value BP_MOD_12 cutoff                     12800
-unit_set_value BP_CAR_12 cutoff                     12800
+unit_set BP_MOD_1 cutoff                      50
+unit_set BP_CAR_1 cutoff                      50
+unit_set BP_MOD_2 center                      83
+unit_set BP_CAR_2 center                      83
+unit_set BP_MOD_3 center                      137
+unit_set BP_CAR_3 center                      137
+unit_set BP_MOD_4 center                      227
+unit_set BP_CAR_4 center                      227
+unit_set BP_MOD_5 center                      376
+unit_set BP_CAR_5 center                      376
+unit_set BP_MOD_6 center                      622
+unit_set BP_CAR_6 center                      622
+unit_set BP_MOD_7 center                      1029
+unit_set BP_CAR_7 center                      1029
+unit_set BP_MOD_8 center                      1704
+unit_set BP_CAR_8 center                      1704
+unit_set BP_MOD_9 center                      2821
+unit_set BP_CAR_9 center                      2821
+unit_set BP_MOD_10 center                     4670
+unit_set BP_CAR_10 center                     4670
+unit_set BP_MOD_11 center                     7731
+unit_set BP_CAR_11 center                     7731
+unit_set BP_MOD_12 cutoff                     12800
+unit_set BP_CAR_12 cutoff                     12800
 
 
 # Output
 unit_create adder vocoder_output [n = 12]
 
-unit_set_value vocoder_output input_1               BP_CAR_1
-unit_set_value vocoder_output input_2               BP_CAR_2
-unit_set_value vocoder_output input_3               BP_CAR_3
-unit_set_value vocoder_output input_4               BP_CAR_4
-unit_set_value vocoder_output input_5               BP_CAR_5
-unit_set_value vocoder_output input_6               BP_CAR_6
-unit_set_value vocoder_output input_7               BP_CAR_7
-unit_set_value vocoder_output input_8               BP_CAR_8
-unit_set_value vocoder_output input_9               BP_CAR_9
-unit_set_value vocoder_output input_10              BP_CAR_10
-unit_set_value vocoder_output input_11              BP_CAR_11
-unit_set_value vocoder_output input_12              BP_CAR_12
+unit_set vocoder_output input_1               BP_CAR_1
+unit_set vocoder_output input_2               BP_CAR_2
+unit_set vocoder_output input_3               BP_CAR_3
+unit_set vocoder_output input_4               BP_CAR_4
+unit_set vocoder_output input_5               BP_CAR_5
+unit_set vocoder_output input_6               BP_CAR_6
+unit_set vocoder_output input_7               BP_CAR_7
+unit_set vocoder_output input_8               BP_CAR_8
+unit_set vocoder_output input_9               BP_CAR_9
+unit_set vocoder_output input_10              BP_CAR_10
+unit_set vocoder_output input_11              BP_CAR_11
+unit_set vocoder_output input_12              BP_CAR_12
 
-unit_set_value vocoder_output gain_1                BP_MOD_1_VOLUME
-unit_set_value vocoder_output gain_2                BP_MOD_2_VOLUME
-unit_set_value vocoder_output gain_3                BP_MOD_3_VOLUME
-unit_set_value vocoder_output gain_4                BP_MOD_4_VOLUME
-unit_set_value vocoder_output gain_5                BP_MOD_5_VOLUME
-unit_set_value vocoder_output gain_6                BP_MOD_6_VOLUME
-unit_set_value vocoder_output gain_7                BP_MOD_7_VOLUME
-unit_set_value vocoder_output gain_8                BP_MOD_8_VOLUME
-unit_set_value vocoder_output gain_9                BP_MOD_9_VOLUME
-unit_set_value vocoder_output gain_10               BP_MOD_10_VOLUME
-unit_set_value vocoder_output gain_11               BP_MOD_11_VOLUME
-unit_set_value vocoder_output gain_12               BP_MOD_12_VOLUME
+unit_set vocoder_output gain_1                BP_MOD_1_VOLUME
+unit_set vocoder_output gain_2                BP_MOD_2_VOLUME
+unit_set vocoder_output gain_3                BP_MOD_3_VOLUME
+unit_set vocoder_output gain_4                BP_MOD_4_VOLUME
+unit_set vocoder_output gain_5                BP_MOD_5_VOLUME
+unit_set vocoder_output gain_6                BP_MOD_6_VOLUME
+unit_set vocoder_output gain_7                BP_MOD_7_VOLUME
+unit_set vocoder_output gain_8                BP_MOD_8_VOLUME
+unit_set vocoder_output gain_9                BP_MOD_9_VOLUME
+unit_set vocoder_output gain_10               BP_MOD_10_VOLUME
+unit_set vocoder_output gain_11               BP_MOD_11_VOLUME
+unit_set vocoder_output gain_12               BP_MOD_12_VOLUME
 
 unit_create adder vocoder_output_total [n = 1]
-unit_set_value vocoder_output_total input_1         vocoder_output
-unit_set_value vocoder_output_total gain_1          25.0
+unit_set vocoder_output_total input_1         vocoder_output
+unit_set vocoder_output_total gain_1          25.0
 
 
 # Key output
 unit_create oscillator wave [key = true]
-unit_set_value wave sample                          sawtooth
-unit_set_value wave frequency                       key_frequency
-unit_set_value wave amplitude                       key_velocity
+unit_set wave sample                          sawtooth
+unit_set wave frequency                       key_frequency
+unit_set wave amplitude                       key_velocity
 
 # Instrument
 instrument_create vocoder

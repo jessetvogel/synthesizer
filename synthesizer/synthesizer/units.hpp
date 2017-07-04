@@ -27,15 +27,9 @@ public:
     Units(Controller*);
     ~Units();
     
-    // Commands
-    bool create(std::string, std::string, std::string);
-    bool remove(std::string);
-    bool rename(std::string, std::string);
-    bool setValue(std::string, std::string, std::string);
-    
-    bool add(Unit*);
-    bool remove(Unit*);
-    Unit* get(std::string);
+    bool addUnit(Unit*);
+    Unit* getUnit(std::string);
+    bool deleteUnit(Unit*);
     
     UnitConstant* createConstant(double);
     bool deleteConstant(UnitConstant*);
@@ -48,6 +42,14 @@ public:
     void resetUnits();
     void resetUnitsKeyDependent();
     
+    // Commands
+    bool create(std::string, std::string, std::string);
+    bool destroy(std::string);
+    bool rename(std::string, std::string);
+    bool hide(std::string);
+    bool set(std::string, std::string, std::string);
+    
+    // Status
     void printUnits();
 };
 

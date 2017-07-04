@@ -8,7 +8,7 @@
 #define INSTRUMENT_DEFAULT_ID "#undefined"
 
 class Controller;
-class Unit;
+class Parameter;
 
 class Instrument {
   
@@ -20,8 +20,8 @@ private:
     
     std::string id = INSTRUMENT_DEFAULT_ID;
     
-    Unit* keyOutput = NULL;
-    Unit* output = NULL;
+    Parameter* keyOutput;
+    Parameter* output;
     
     std::vector<KeyEvent*> keyEvents;
     
@@ -41,12 +41,10 @@ public:
     bool setId(std::string);
     inline std::string getId() { return id; }
     
-    bool setOutput(Unit*);
-    bool setKeyOutput(Unit*);
     bool setKeyReleaseTime(double);
     
-    Unit* getOutput();
-    Unit* getKeyOutput();
+    inline Parameter* getOutput() { return output; };
+    inline Parameter* getKeyOutput() { return keyOutput; };
     
     void addKeyEvent(KeyEvent*);
     
