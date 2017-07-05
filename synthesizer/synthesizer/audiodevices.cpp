@@ -2,7 +2,7 @@
 #include "controller.hpp"
 #include "settings.hpp"
 
-#include "error.hpp"
+#include "status.hpp"
 
 const int AudioDevices::DEVICE_ID_DEFAULT = -1;
 const int AudioDevices::DEVICE_ID_NONE = -2;
@@ -19,7 +19,7 @@ AudioDevices::AudioDevices(Controller* controller) {
 
 bool AudioDevices::setInputDeviceId(int n) {
     if(active) {
-        Error::addError("Cannot change input device when playing");
+        Status::addError("Cannot change input device during play");
         return false;
     }
     
@@ -45,7 +45,7 @@ bool AudioDevices::setInputDeviceId(int n) {
 
 bool AudioDevices::setOutputDeviceId(int n) {
     if(active) {
-        Error::addError("Cannot change output device when playing");
+        Status::addError("Cannot change output device during play");
         return false;
     }
     
@@ -67,7 +67,7 @@ bool AudioDevices::setOutputDeviceId(int n) {
 
 bool AudioDevices::start() {
     if(active) {
-        Error::addError("Stream already started");
+        Status::addError("Stream already started");
         return false;
     }
     
@@ -78,7 +78,7 @@ bool AudioDevices::start() {
 
     const PaDeviceInfo* infoOutputDevice = Pa_GetDeviceInfo(outputDeviceId);
     if(infoOutputDevice == NULL) {
-        Error::addError(Error::OUTPUT_DEVICE_NOT_EXISTS);
+        Status::addError("Output device does not exist");
         return false;
     }
     
@@ -92,7 +92,7 @@ bool AudioDevices::start() {
     if(inputDeviceId != DEVICE_ID_NONE) {
         const PaDeviceInfo* infoInputDevice = Pa_GetDeviceInfo(inputDeviceId);
         if(infoInputDevice == NULL) {
-            Error::addError("Input device does not exist");
+            Status::addError("Input device does not exist");
             return false;
         }
         
@@ -117,14 +117,14 @@ bool AudioDevices::start() {
                         (void*) this);
     
     if(err != paNoError) {
-        Error::addError("Cannot open stream");
+        Status::addError("Failed to open stream");
         return false;
     }
     
     err = Pa_StartStream(stream);
 
     if(err != paNoError) {
-        Error::addError("Cannot start stream");
+        Status::addError("Failed to start stream");
         return false;
     }
     
@@ -134,13 +134,13 @@ bool AudioDevices::start() {
 
 bool AudioDevices::stop() {
     if(!active) {
-        Error::addError(Error::OUTPUT_NOT_YET_STARTED);
+        Status::addError("Stream was not yet started");
         return false;
     }
     
     PaError err = Pa_CloseStream(stream);
     if(err != paNoError) {
-        Error::addError(Error::OUTPUT_CANNOT_CLOSE_STREAM);
+        Status::addError("Failed to close stream");
         return false;
     }
 
@@ -200,7 +200,7 @@ int AudioDevices::amountOfDevices() {
 const char* AudioDevices::deviceName(int n) {
     const PaDeviceInfo* info = Pa_GetDeviceInfo(n);
     if(info == NULL) {
-        Error::addError(Error::OUTPUT_DEVICE_NOT_EXISTS);
+        Status::addError("Output device does not exist");
         return NULL;
     }
     return Pa_GetDeviceInfo(n)->name;

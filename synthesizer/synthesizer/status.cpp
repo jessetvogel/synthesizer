@@ -13,82 +13,140 @@
 #include "block.hpp"
 #include "parameter.hpp"
 
-#include "error.hpp"
+std::vector<Message> Status::info;
+std::vector<Message> Status::warning;
+std::vector<Message> Status::error;
 
-Status::Status(Controller* controller) {
-    // Save pointer to controller
-    this->controller = controller;
+std::vector<std::string> Status::extra;
+
+void Status::addInfo(std::string message) {
+    Message i;
+    i.message = message;
+    info.push_back(i);
 }
 
-void Status::start() {
-    
-    std::cout << "{";
-    
-    std::cout << "\"info\":[\"Program started\"],";
-    
-    Error::printErrors();
-    
-    std::cout << "}" << std::endl;
-    std::cout.flush();
-    
+void Status::addWarning(std::string message) {
+    Message w;
+    w.message = message;
+    warning.push_back(w);
 }
 
-void Status::stop() {
-    
-    std::cout << "{";
-    
-    std::cout << "\"info\":[\"Program stopped\"]";
-    
-    std::cout << "}" << std::endl;
-    std::cout.flush();
-    
+void Status::addError(std::string message) {
+    Message e;
+    e.message = message;
+    error.push_back(e);
 }
 
-bool Status::print(std::string info) {
-    
-    std::istringstream iss(info);
+bool Status::addExtra(std::string tokens) {
+    std::istringstream iss(tokens);
     std::string token;
-    bool error = false;
-    while(std::getline(iss, token, ' ')) {
-        
-        if(token.compare("midi_devices") == 0) {
-            controller->getMIDIDevices()->printMIDIDevices();
-            continue;
-        }
-        
-        if(token.compare("input_devices") == 0) {
-            controller->getAudioDevices()->printInputDevices();
-            continue;
-        }
+    while(std::getline(iss, token, ' '))
+        extra.push_back(token);
+    return true;
+}
 
-        if(token.compare("output_devices") == 0) {
-            controller->getAudioDevices()->printOutputDevices();
-            continue;
-        }
-        
-        if(token.compare("instruments") == 0) {
-            controller->getInstruments()->printInstruments();
-            continue;
-        }
-
-        if(token.compare("units") == 0) {
-            controller->getUnits()->printUnits();
-            continue;
-        }
-        
-        if(token.compare("blocks") == 0) {
-            controller->getBlocks()->printBlocks();
-            continue;
-        }
-        
-        if(!error) {
-            Error::addError(Error::INVALID_ARGUMENT);
-            error = true;
-        }
+bool Status::print(Controller* controller) {
+    
+    std::cout << "{";
+    
+    bool comma = false;
+    
+    // Print messages
+    if(!info.empty()) {
+        if(comma) std::cout << ","; else comma = true;
+        printInfo();
     }
+    
+    if(!warning.empty()) {
+        if(comma) std::cout << ","; else comma = true;
+        printWarning();
+    }
+    
+    if(!error.empty()) {
+        if(comma) std::cout << ","; else comma = true;
+        printError();
+    }
+    
+    for(auto it = extra.begin();it != extra.end(); ++it) {
+        if(comma) std::cout << ","; else comma = true;
+        printExtra(controller, *it);
+    }
+    
+    std::cout << "}" << std::endl;
+    std::cout.flush();
+    
+    info.clear();
+    warning.clear();
+    error.clear();
+    extra.clear();
     
     return true;
 }
+
+void Status::printInfo() {
+    
+    std::cout << "\"info\":[";
+    
+    bool comma = false;
+    for(auto it = info.begin();it != info.end(); ++it) {
+        if(comma) std::cout << ","; else comma = true;
+        
+        std::cout << "{";
+        
+        std::cout << "\"message\":\"" << (*it).message << "\"";
+        
+        std::cout << "}";
+    }
+    
+    std::cout << "]";
+}
+
+void Status::printWarning() {
+    
+    std::cout << "\"warning\":[";
+    
+    bool comma = false;
+    for(auto it = warning.begin();it != warning.end(); ++it) {
+        if(comma) std::cout << ","; else comma = true;
+        
+        std::cout << "{";
+        
+        std::cout << "\"message\":\"" << (*it).message << "\"";
+        
+        std::cout << "}";
+    }
+    
+    std::cout << "]";
+}
+
+void Status::printError() {
+    
+    std::cout << "\"error\":[";
+    
+    bool comma = false;
+    for(auto it = error.begin();it != error.end(); ++it) {
+        if(comma) std::cout << ","; else comma = true;
+        
+        std::cout << "{";
+        
+        std::cout << "\"message\":\"" << (*it).message << "\"";
+        
+        std::cout << "}";
+    }
+    
+    std::cout << "]";
+}
+
+void Status::printExtra(Controller* controller, std::string extra) {
+    if(extra.compare("midi_devices") == 0) return controller->getMIDIDevices()->printMIDIDevices();
+    if(extra.compare("input_devices") == 0) return controller->getAudioDevices()->printInputDevices();
+    if(extra.compare("output_devices") == 0) return controller->getAudioDevices()->printOutputDevices();
+    if(extra.compare("instruments") == 0) return controller->getInstruments()->printInstruments();
+    if(extra.compare("units") == 0) return controller->getUnits()->printUnits();
+    if(extra.compare("blocks") == 0) return controller->getBlocks()->printBlocks();
+}
+
+// ----------------------------------------------------------------
 
 void MIDIDevices::printMIDIDevices() {
     
@@ -104,7 +162,7 @@ void MIDIDevices::printMIDIDevices() {
             if(comma) std::cout << ","; else comma = true;
             std::cout << "{";
             
-            std::cout << "\"id\":" << i << ", ";
+            std::cout << "\"id\":" << i << ",";
             std::cout << "\"name\":\"" << MIDIDevices::deviceName(i) << "\",";
             std::cout << "\"active\":" << (active ? "true" : "false");
             
@@ -112,7 +170,7 @@ void MIDIDevices::printMIDIDevices() {
         }
     }
     
-    std::cout << "],";
+    std::cout << "]";
     
 }
 void AudioDevices::printInputDevices() {
@@ -133,7 +191,7 @@ void AudioDevices::printInputDevices() {
         }
     }
     
-    std::cout << "],";
+    std::cout << "]";
     
 }
 
@@ -155,7 +213,7 @@ void AudioDevices::printOutputDevices() {
         }
     }
     
-    std::cout << "],";
+    std::cout << "]";
     
 }
 
@@ -177,7 +235,7 @@ void Instruments::printInstruments() {
         std::cout << "}";
     }
     
-    std::cout << "],";
+    std::cout << "]";
     
 }
 
@@ -198,7 +256,7 @@ void Units::printUnits() {
         std::cout << "}";
     }
     
-    std::cout << "],";
+    std::cout << "]";
     
 }
 
@@ -218,7 +276,7 @@ void Unit::printUnit() {
         
         std::cout << "\"label\":\"" << parameter->label << "\",";
         std::cout << "\"type\":\"" << Parameter::typeToString(parameter->type) << "\",";
-        std::cout << "\"value\":\"" << parameter->valueToString() << "\"";
+        std::cout << "\"value\":\"" << parameter->strValue << "\"";
         
         std::cout << "}";
     }
@@ -243,7 +301,7 @@ void Blocks::printBlocks() {
         std::cout << "}";
     }
     
-    std::cout << "],";
+    std::cout << "]";
 }
 
 void Block::printBlock() {
@@ -260,7 +318,7 @@ void Block::printBlock() {
         
         std::cout << "\"label\":\"" << it->first << "\",";
         std::cout << "\"type\":\"" << Parameter::typeToString(parameter->type) << "\",";
-        std::cout << "\"value\":\"" << parameter->valueToString() << "\"";
+        std::cout << "\"value\":\"" << parameter->strValue << "\"";
         
         std::cout << "}";
     }

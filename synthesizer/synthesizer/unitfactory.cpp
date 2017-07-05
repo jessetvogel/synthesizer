@@ -25,7 +25,7 @@
 #include "unitmodulationwheel.hpp"
 #include "unitinput.hpp"
 
-#include "error.hpp"
+#include "status.hpp"
 
 void UnitFactory::createDefaultUnits(Controller* controller, Units* units) {
     units->addUnit((new UnitKeyInfo(controller, UnitKeyInfo::Frequency))->setId("key_frequency"));
@@ -70,7 +70,7 @@ Unit* UnitFactory::create(Controller* controller, std::string type, std::string 
     
     if(unit == NULL) {
         // If no match was found, return NULL
-        Error::addError(Error::UNIT_TYPE_NOT_FOUND);
+        Status::addError("Unit type does not exist");
         return NULL;
     }
     

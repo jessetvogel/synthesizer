@@ -2,7 +2,7 @@ var units = {
 
   // Request methods
   refreshUnits: function () {
-    api.send('/api/status?info=units');
+    api.send('status units');
   },
 
   // Handle response methods
@@ -42,7 +42,7 @@ var units = {
         $('<div>').addClass('unit-parameter-input').append(
           (function (id, parameter) {
             return $('<input>').val(parameter.value).change(function () {
-            api.send('/api/unit_set_value?id=' + id + '&label=' + parameter.label + '&value=' + $(this).val());
+            api.send('unit_set ' + id + ' ' + parameter.label + ' ' + $(this).val());
           })})(id, parameters[i]))));
 
       $('.unit-parameter-container').append(parameter);

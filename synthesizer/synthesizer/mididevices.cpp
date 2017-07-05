@@ -5,7 +5,7 @@
 #include "mididevices.hpp"
 #include "mididevice.hpp"
 
-#include "error.hpp"
+#include "status.hpp"
 
 MIDIDevices::MIDIDevices(Controller* controller) {
     // Store pointer to controller object
@@ -111,7 +111,7 @@ int MIDIDevices::amountOfDevices() {
 const char* MIDIDevices::deviceName(int n) {
     const PmDeviceInfo* info = Pm_GetDeviceInfo(n);
     if(info == NULL) {
-        Error::addError(Error::INPUT_DEVICE_NOT_EXISTS);
+        Status::addError("MIDI device does not exist");
         return NULL;
     }
     return Pm_GetDeviceInfo(n)->name;

@@ -2,7 +2,7 @@ var instruments = {
 
   // Request methods
   refreshInstruments: function () {
-    api.send('/api/status?info=instruments');
+    api.send('status instruments');
   },
 
   // Handle response methods
@@ -41,7 +41,7 @@ var instruments = {
           $('<div>').addClass('instrument-parameter-input').append(
             (function (data, parameter) {
               return $('<input>').val(data[parameter]).change(function () {
-              api.send('/api/instrument_set_' + parameter + '?id=' + data.id + '&value=' + $(this).val());
+              api.send('instrument_set_' + parameter + ' ' + data.id + ' ' + $(this).val());
             })})(data, parameters[i]))));
 
       $('.instrument-parameter-container').append(parameter);

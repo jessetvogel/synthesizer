@@ -1,8 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include "settings.hpp"
-#include "error.hpp"
 #include "commands.hpp"
+
+#include "status.hpp"
 
 Settings::Settings() {
     // Set default values
@@ -13,25 +14,22 @@ Settings::Settings() {
     
     // Load settings
     if(!load())
-        Error::addError("Error in loading settings");
+        Status::addError("Failed to load settings");
 }
 
 bool Settings::load() {
     // Read file line by line, and parse them
     std::ifstream input(SETTINGS_PATH);
     if(input.fail()) {
-        Error::addError(Error::CANNOT_OPEN_FILE);
+        Status::addError("Failed to open settings file");
         return false;
     }
     
     int lineNumber = 1;
     std::string line;
     while(std::getline(input, line)) {
-        if(!parseLine(line)) {
-            std::cout << "Error in line: " << line << std::endl;
+        if(!parseLine(line))
             return false;
-        }
-        
         ++ lineNumber;
     }
     input.close();
@@ -46,7 +44,7 @@ bool Settings::parseLine(std::string line) {
     
     // Remove all surrounding whitespace and comments
     if(!std::regex_search(line.c_str(), cm, Commands::regexPreprocess)) {
-        Error::addError(Error::COMMAND_NOT_RECOGNISED);
+        Status::addError("Unable to parse line");
         return false;
     }
     std::string command = std::string(cm[1]);
@@ -73,6 +71,6 @@ bool Settings::parseLine(std::string line) {
         return true;
     }
     
-    Error::addError(Error::COMMAND_NOT_RECOGNISED);
+    Status::addError("Command not recognised");
     return false;
 }

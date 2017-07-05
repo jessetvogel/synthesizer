@@ -7,7 +7,7 @@
 #include "settings.hpp"
 #include "parameter.hpp"
 
-#include "error.hpp"
+#include "status.hpp"
 
 Unit::Unit(Controller* controller) {
     // Store pointer to controller
@@ -59,7 +59,7 @@ bool Unit::setParameter(std::string label, std::string value) {
         if(label.compare((*it)->label) == 0)
             return (*it)->set(value);
     }
-    Error::addError(Error::UNKNOWN_PARAMETER);
+    Status::addError("Parameter not found");
     return false;
 }
 

@@ -5,8 +5,6 @@
 #include "unit.hpp"
 #include "parameter.hpp"
 
-#include "error.hpp"
-
 Blocks::Blocks(Controller* controller) {
     // Store pointer to controller
     this->controller = controller;

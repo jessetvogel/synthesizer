@@ -2,7 +2,7 @@
 #include "controller.hpp"
 #include "midistate.hpp"
 
-#include "error.hpp"
+#include "status.hpp"
 
 int MIDIDevice::DEVICE_ID_DEFAULT = -1;
 
@@ -20,13 +20,13 @@ MIDIDevice::MIDIDevice(Controller* controller, int deviceId) {
 bool MIDIDevice::start() {
     // Make sure device did not already start
     if(active) {
-        Error::addError(Error::INPUT_ALREADY_STARTED);
+        Status::addError("MIDI device already started");
         return false;
     }
     
     const PmDeviceInfo* info = Pm_GetDeviceInfo(deviceId);
     if(info == NULL) {
-        Error::addError(Error::INPUT_DEVICE_NOT_EXISTS);
+        Status::addError("MIDI device does not exist");
         return false;
     }
     
@@ -38,7 +38,7 @@ bool MIDIDevice::start() {
                                (void*) NULL); // void * time_info
     
     if(err != pmNoError) {
-        Error::addError(Error::INPUT_CANNOT_OPEN_INPUT);
+        Status::addError("Failed to open MIDI device");
         return false;
     }
     
@@ -57,7 +57,7 @@ bool MIDIDevice::stop() {
     // Try to close the stream
     bool success = true;
     if(Pm_Close(inputStream) != pmNoError) {
-        Error::addError(Error::INPUT_CANNOT_CLOSE_INPUT);
+        Status::addError("Failed to close MIDI device");
         success = false;
     }
     
@@ -68,7 +68,7 @@ bool MIDIDevice::stop() {
 bool MIDIDevice::update() {
     // Make sure device started
     if(!active) {
-        Error::addError(Error::INPUT_NOT_YET_STARTED);
+        Status::addError("MIDI device not yet started");
         return false;
     }
     
@@ -86,7 +86,7 @@ bool MIDIDevice::update() {
     }
     
     if(result != pmNoError) {
-        Error::addError(Error::INPUT_READING);
+        Status::addError("Error in reading from MIDI device");
         return false;
     }
     

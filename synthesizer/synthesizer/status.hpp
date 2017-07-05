@@ -2,21 +2,43 @@
 #define status_hpp
 
 #include <string>
+#include <vector>
 
 class Controller;
 
+struct Message {
+    
+    std::string message;
+    
+};
+
 class Status {
 
-    Controller* controller;
+    static bool printed;
+    
+    static std::vector<Message> info;
+    static std::vector<Message> warning;
+    static std::vector<Message> error;
+    static std::vector<std::string> extra;
     
 public:
     
-    Status(Controller*);
+    inline static bool noErrors() { return error.empty(); }
     
-    static void start();
-    static void stop();
+    static void reset();
     
-    bool print(std::string);
+    static void addInfo(std::string);
+    static void addWarning(std::string);
+    static void addError(std::string);
+    static bool addExtra(std::string);
+    
+    static void printInfo();
+    static void printWarning();
+    static void printError();
+    static void printExtra(Controller*, std::string);
+
+    
+    static bool print(Controller*);
     
 };
 

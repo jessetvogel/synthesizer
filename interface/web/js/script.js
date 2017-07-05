@@ -36,15 +36,18 @@ function parseResponse(response) {
 
     switch(key) {
       case 'info':
-        if(data[key].length == 0) break;
         for(var i = 0;i < data[key].length;i ++)
-            messages.addInfo(data[key][i]);
+          messages.addInfo(data[key][i]['message']);
         break;
 
-      case 'errors':
-        if(data[key].length == 0) break;
+      case 'warning':
         for(var i = 0;i < data[key].length;i ++)
-            messages.addError(data[key][i]);
+          messages.addWarning(data[key][i]['message']);
+        break;
+
+      case 'error':
+        for(var i = 0;i < data[key].length;i ++)
+          messages.addError(data[key][i]['message']);
         break;
 
       case 'midiDevices':

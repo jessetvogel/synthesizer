@@ -2,7 +2,7 @@
   display: flex;
 }
 
-.unit-container {
+.unit-container, .unit-parameter-container {
   width: 50%;
   max-height: 640px;
   overflow-y: scroll;
@@ -24,11 +24,6 @@
 
 .unit-id {
   margin-left: 16px;
-}
-
-.unit-parameter-container {
-  width: 50%;
-  /*background: rgba(0, 0, 0, 0.24);*/
 }
 
 .unit-parameter {

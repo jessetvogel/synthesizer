@@ -13,9 +13,8 @@
 #include "unit.hpp"
 #include "blocks.hpp"
 #include "options.hpp"
-#include "status.hpp"
 
-#include "error.hpp"
+#include "status.hpp"
 
 Parser::Parser(Controller* controller) {
     // Store pointer to controller
@@ -30,18 +29,15 @@ bool Parser::parseFile(std::string filepath) {
     // Read file line by line, and parse them
     std::ifstream input(filepath);
     if(input.fail()) {
-        Error::addError(Error::CANNOT_OPEN_FILE);
+        Status::addError("Failed to open file");
         return false;
     }
     
     int lineNumber = 1;
     std::string line;
     while(std::getline(input, line)) {
-        if(!parseLine(line)) {
-            Error::addError("Error in file"); // TODO
-            std::cout << "Error in line: " << line << std::endl;
+        if(!parseLine(line))
             return false;
-        }
         
         ++ lineNumber;
     }
@@ -57,7 +53,7 @@ bool Parser::parseLine(std::string line) {
 
     // Remove all surrounding whitespace and comments
     if(!std::regex_search(line.c_str(), cm, Commands::regexPreprocess)) {
-        Error::addError(Error::COMMAND_NOT_RECOGNISED);
+        Status::addError("Unable to parse line");
         return false;
     }
     std::string command = std::string(cm[1]);
@@ -97,10 +93,7 @@ bool Parser::parseLine(std::string line) {
     // Status
     
     // status <info>
-    if(std::regex_search(str, cm, Commands::regexStatus)) {
-        Status status(controller);
-        return status.print(cm[1]);
-    }
+    if(std::regex_search(str, cm, Commands::regexStatus))                   return Status::addExtra(cm[1]);
     
     // Synths
     
@@ -153,6 +146,6 @@ bool Parser::parseLine(std::string line) {
     if(std::regex_search(str, cm, Commands::regexBlockSet))                 return controller->getBlocks()->set(cm[1], cm[2], cm[3]);
 
     // Unknown command
-    Error::addError(Error::COMMAND_NOT_RECOGNISED);
+    Status::addError("Command not recognised");
     return false;
 }

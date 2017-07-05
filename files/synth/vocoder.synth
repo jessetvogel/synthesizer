@@ -185,18 +185,3 @@ unit_set wave amplitude                       key_velocity
 instrument_create vocoder
 instrument_set_key_output vocoder                   wave
 instrument_set_output vocoder                       vocoder_output_total
-
-
-
-
-
-# ----------------------------------------------------------------
-
-# Additional for testing
-midi_add_device 1
-# midi_add_device 2
-audio_set_input_device 2
-audio_set_output_device 1
-start
-
-# ----------------------------------------------------------------

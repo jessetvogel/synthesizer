@@ -20,12 +20,11 @@ public:
     void* pointer;
     const Type type;
     const std::string label;
+    std::string strValue;
     
     Parameter(Controller*, Type, std::string, std::string);
     
     bool set(std::string);
-    
-    std::string valueToString();
     
     static std::string typeToString(Type);
 

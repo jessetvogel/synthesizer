@@ -12,6 +12,18 @@ var messages = {
     })(info);
   },
 
+  addWarning: function (message) {
+    var warning = $('<div>').addClass('message warning');
+    warning.append($('<span>').addClass('	glyphicon glyphicon-exclamation-sign'));
+    warning.append(message);
+    $('.message-container').append(warning);
+    (function (e) {
+      setTimeout(function() {
+        e.fadeOut(1000, function() { $(this).remove(); });
+      }, 2000);
+    })(warning);
+  },
+
   addError: function (message) {
     var error = $('<div>').addClass('message error');
     error.append($('<span>').addClass('glyphicon glyphicon-alert'));

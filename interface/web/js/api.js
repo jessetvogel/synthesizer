@@ -1,7 +1,7 @@
 var api = {
 
-  send: function (url) {
-    $.ajax(url).done(parseResponse);
+  send: function (command) {
+    $.ajax('/api?q=' + command).done(parseResponse);
   }
 
 };

@@ -5,13 +5,12 @@
 #include "controller.hpp"
 #include "parser.hpp"
 #include "settings.hpp"
+
 #include "sample.hpp"
 #include "curve.hpp"
 #include "function.hpp"
-#include "commands.hpp"
-#include "status.hpp"
 
-#include "error.hpp"
+#include "status.hpp"
 
 void initialize();
 void destruct();
@@ -20,7 +19,7 @@ int main(int argc, char *argv[]) {
     // Load settings
     Settings settings;
     
-    // Initialize stuff (TODO: put this in some audio class or something, and check for errors)
+    // Initialize
     initialize();
     
     // Create a new controller object
@@ -30,29 +29,31 @@ int main(int argc, char *argv[]) {
     Parser parser(&controller);
     parser.setDirectory(settings.rootDirectory);
     
+    Status::addInfo("Program started");
+    Status::print(&controller);
+    
     // Wait for input
     std::string line;
     while(std::getline(std::cin, line)) {
         // Check for exit command
         if(line.compare("exit") == 0) break;
         
-        std::cout << "{";
-        
         // Try to parse the given line
         bool success = parser.parseLine(line);
         
-        if(!success && Error::noErrors())
-            Error::addError(Error::UNKNOWN);
-        Error::printErrors();
+        if(!success && Status::noErrors())
+            Status::addError("Unknown error");
         
-        std::cout << "}" << std::endl;
-        std::cout.flush();
+        Status::print(&controller);
     }
     
     controller.stop();
     
     // Clean up
     destruct();
+    
+    Status::addInfo("Program ended");
+    Status::print(&controller);
     
     return 0;
 }
@@ -63,7 +64,6 @@ void initialize() {
     Sample::initialize();
     Curve::initialize();
     Function::initialize();
-    Status::start();
 }
 
 void destruct() {
@@ -72,5 +72,4 @@ void destruct() {
     Sample::destruct();
     Pa_Terminate();
     Pm_Terminate();
-    Status::stop();
 }

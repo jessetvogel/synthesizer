@@ -45,7 +45,6 @@
 		885048851EFBE4560045B9C8 /* unitvolumemeter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 885048831EFBE4560045B9C8 /* unitvolumemeter.cpp */; };
 		886F98A51ED7245E003B8235 /* unitleadkeyinfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886F98A31ED7245E003B8235 /* unitleadkeyinfo.cpp */; };
 		8870D9501EEC014600674DFC /* status.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8870D94E1EEC014600674DFC /* status.cpp */; };
-		8871C2491EE812690097DDB5 /* error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8871C2471EE812690097DDB5 /* error.cpp */; };
 		88846F6A1EE961D000745184 /* unitbandpass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88846F681EE961D000745184 /* unitbandpass.cpp */; };
 		8888FE1D1EDF5D1000B5D5BC /* unitfuzz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8888FE1B1EDF5D1000B5D5BC /* unitfuzz.cpp */; };
 		88A285331EE010B900066E68 /* unitdelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88A285311EE010B900066E68 /* unitdelay.cpp */; };
@@ -146,8 +145,6 @@
 		886F98A41ED7245E003B8235 /* unitleadkeyinfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitleadkeyinfo.hpp; sourceTree = "<group>"; };
 		8870D94E1EEC014600674DFC /* status.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = status.cpp; sourceTree = "<group>"; };
 		8870D94F1EEC014600674DFC /* status.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = status.hpp; sourceTree = "<group>"; };
-		8871C2471EE812690097DDB5 /* error.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = error.cpp; sourceTree = "<group>"; };
-		8871C2481EE812690097DDB5 /* error.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = error.hpp; sourceTree = "<group>"; };
 		88846F681EE961D000745184 /* unitbandpass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitbandpass.cpp; sourceTree = "<group>"; };
 		88846F691EE961D000745184 /* unitbandpass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = unitbandpass.hpp; sourceTree = "<group>"; };
 		8888FE1B1EDF5D1000B5D5BC /* unitfuzz.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = unitfuzz.cpp; sourceTree = "<group>"; };
@@ -206,11 +203,11 @@
 			children = (
 				31D719771ECE2D2200A4C9E0 /* main */,
 				31D7197A1ECE2D9A00A4C9E0 /* core */,
-				88D021D41F0B8561001FBB0C /* data */,
 				31D719701ECE0F5F00A4C9E0 /* units */,
 				88DC88A41F0AC9250083DF20 /* blocks */,
 				31D7197B1ECE2E1500A4C9E0 /* files */,
 				31D719791ECE2D6300A4C9E0 /* tools */,
+				88D021D41F0B8561001FBB0C /* data */,
 			);
 			path = synthesizer;
 			sourceTree = "<group>";
@@ -269,22 +266,8 @@
 		31D719791ECE2D6300A4C9E0 /* tools */ = {
 			isa = PBXGroup;
 			children = (
-				31D719581ECB0BAE00A4C9E0 /* sample.cpp */,
-				31D719591ECB0BAE00A4C9E0 /* sample.hpp */,
-				31D719611ECC9D9800A4C9E0 /* curve.cpp */,
-				31D719621ECC9D9800A4C9E0 /* curve.hpp */,
 				31EC60301ECF264F004671E2 /* util.cpp */,
 				31EC60311ECF264F004671E2 /* util.hpp */,
-				311049AF1ED0D93D000E89F1 /* function.cpp */,
-				311049B01ED0D93D000E89F1 /* function.hpp */,
-				8871C2471EE812690097DDB5 /* error.cpp */,
-				8871C2481EE812690097DDB5 /* error.hpp */,
-				8870D94E1EEC014600674DFC /* status.cpp */,
-				8870D94F1EEC014600674DFC /* status.hpp */,
-				88F6E7701EF3196B006E6D49 /* parameter.cpp */,
-				88F6E7711EF3196B006E6D49 /* parameter.hpp */,
-				3174D24C1EFEB8EF00A229A8 /* IIRfilter.cpp */,
-				3174D24D1EFEB8EF00A229A8 /* IIRfilter.hpp */,
 			);
 			name = tools;
 			sourceTree = "<group>";
@@ -294,6 +277,8 @@
 			children = (
 				3102855E1EC8E7E300B4A5F6 /* controller.cpp */,
 				3102855F1EC8E7E300B4A5F6 /* controller.hpp */,
+				8870D94E1EEC014600674DFC /* status.cpp */,
+				8870D94F1EEC014600674DFC /* status.hpp */,
 				31D719781ECE2D3A00A4C9E0 /* devices */,
 				319C900E1EF70D0C0041705D /* instruments */,
 			);
@@ -391,6 +376,16 @@
 				88DC88AC1F0ADC2A0083DF20 /* arguments.hpp */,
 				885048801EFBCF420045B9C8 /* options.cpp */,
 				885048811EFBCF420045B9C8 /* options.hpp */,
+				31D719581ECB0BAE00A4C9E0 /* sample.cpp */,
+				31D719591ECB0BAE00A4C9E0 /* sample.hpp */,
+				31D719611ECC9D9800A4C9E0 /* curve.cpp */,
+				31D719621ECC9D9800A4C9E0 /* curve.hpp */,
+				311049AF1ED0D93D000E89F1 /* function.cpp */,
+				311049B01ED0D93D000E89F1 /* function.hpp */,
+				88F6E7701EF3196B006E6D49 /* parameter.cpp */,
+				88F6E7711EF3196B006E6D49 /* parameter.hpp */,
+				3174D24C1EFEB8EF00A229A8 /* IIRfilter.cpp */,
+				3174D24D1EFEB8EF00A229A8 /* IIRfilter.hpp */,
 			);
 			name = data;
 			sourceTree = "<group>";
@@ -483,7 +478,6 @@
 				310285601EC8E7E300B4A5F6 /* controller.cpp in Sources */,
 				319C900D1EF70C3D0041705D /* units.cpp in Sources */,
 				885048821EFBCF420045B9C8 /* options.cpp in Sources */,
-				8871C2491EE812690097DDB5 /* error.cpp in Sources */,
 				31DE9FF91ED337D4003F5291 /* unitlabel.cpp in Sources */,
 				31D719811ECE317B00A4C9E0 /* commands.cpp in Sources */,
 				310285701EC8F7FC00B4A5F6 /* instrument.cpp in Sources */,

@@ -14,8 +14,6 @@
 
 #include "midistate.hpp"
 
-#include "error.hpp"
-
 Controller::Controller(Settings* settings) {
     // Store pointer to settings
     this->settings = settings;

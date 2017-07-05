@@ -6,7 +6,7 @@ var controls = {
     // Start button
     $('.controls-button-start').click(function () {
       if(!controls.active) {
-        api.send('/api/start');
+        api.send('start');
         controls.active = true;
 
         $('.controls-button-start').addClass('button-pressed');
@@ -17,7 +17,7 @@ var controls = {
     // Stop button
     $('.controls-button-stop').click(function () {
       if(controls.active) {
-        api.send('/api/stop');
+        api.send('stop');
         controls.active = false;
 
         $('.controls-button-stop').addClass('button-pressed');
