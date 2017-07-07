@@ -8,7 +8,7 @@ UnitAudioInput::UnitAudioInput(Controller* controller, Arguments arguments) : Un
     type = "audio_input";
     
     // Set arguments
-    channel = arguments.getInteger("channel", 0);
+    channel = arguments.getInteger("channel", 0); // TODO: start at channel 0 or at channel 1?
     
     // Hidden
     hidden = true;

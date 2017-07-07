@@ -33,18 +33,20 @@ unit_set BP_MOD_9 bandwidth                   1.2 # BANDWIDTH
 unit_set BP_MOD_10 bandwidth                  1.2 # BANDWIDTH
 unit_set BP_MOD_11 bandwidth                  1.2 # BANDWIDTH
 
-unit_set BP_MOD_1 input                       audio_input
-unit_set BP_MOD_2 input                       audio_input
-unit_set BP_MOD_3 input                       audio_input
-unit_set BP_MOD_4 input                       audio_input
-unit_set BP_MOD_5 input                       audio_input
-unit_set BP_MOD_6 input                       audio_input
-unit_set BP_MOD_7 input                       audio_input
-unit_set BP_MOD_8 input                       audio_input
-unit_set BP_MOD_9 input                       audio_input
-unit_set BP_MOD_10 input                      audio_input
-unit_set BP_MOD_11 input                      audio_input
-unit_set BP_MOD_12 input                      audio_input
+unit_create audio_input modulator
+
+unit_set BP_MOD_1 input                       modulator
+unit_set BP_MOD_2 input                       modulator
+unit_set BP_MOD_3 input                       modulator
+unit_set BP_MOD_4 input                       modulator
+unit_set BP_MOD_5 input                       modulator
+unit_set BP_MOD_6 input                       modulator
+unit_set BP_MOD_7 input                       modulator
+unit_set BP_MOD_8 input                       modulator
+unit_set BP_MOD_9 input                       modulator
+unit_set BP_MOD_10 input                      modulator
+unit_set BP_MOD_11 input                      modulator
+unit_set BP_MOD_12 input                      modulator
 
 
 # Volume
@@ -100,18 +102,20 @@ unit_set BP_CAR_9 bandwidth                   1.2 # BANDWIDTH
 unit_set BP_CAR_10 bandwidth                  1.2 # BANDWIDTH
 unit_set BP_CAR_11 bandwidth                  1.2 # BANDWIDTH
 
-unit_set BP_CAR_1 input                       key_output
-unit_set BP_CAR_2 input                       key_output
-unit_set BP_CAR_3 input                       key_output
-unit_set BP_CAR_4 input                       key_output
-unit_set BP_CAR_5 input                       key_output
-unit_set BP_CAR_6 input                       key_output
-unit_set BP_CAR_7 input                       key_output
-unit_set BP_CAR_8 input                       key_output
-unit_set BP_CAR_9 input                       key_output
-unit_set BP_CAR_10 input                      key_output
-unit_set BP_CAR_11 input                      key_output
-unit_set BP_CAR_12 input                      key_output
+unit_create collector carrier
+
+unit_set BP_CAR_1 input                       carrier
+unit_set BP_CAR_2 input                       carrier
+unit_set BP_CAR_3 input                       carrier
+unit_set BP_CAR_4 input                       carrier
+unit_set BP_CAR_5 input                       carrier
+unit_set BP_CAR_6 input                       carrier
+unit_set BP_CAR_7 input                       carrier
+unit_set BP_CAR_8 input                       carrier
+unit_set BP_CAR_9 input                       carrier
+unit_set BP_CAR_10 input                      carrier
+unit_set BP_CAR_11 input                      carrier
+unit_set BP_CAR_12 input                      carrier
 
 
 # Frequencies
@@ -181,7 +185,7 @@ unit_set wave sample                          sawtooth
 unit_set wave frequency                       key_frequency
 unit_set wave amplitude                       key_velocity
 
-# Instrument
-instrument_create vocoder
-instrument_set_key_output vocoder                   wave
-instrument_set_output vocoder                       vocoder_output_total
+unit_set carrier input                        wave
+
+unit_create audio_output output
+unit_set output channel_1                     vocoder_output_total
