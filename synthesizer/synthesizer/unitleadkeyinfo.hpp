@@ -17,7 +17,7 @@ public:
     
     UnitLeadKeyInfo(Controller*, InfoType);
     
-    void apply(Instrument*);
+    void apply();
     
 };
 

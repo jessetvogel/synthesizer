@@ -9,7 +9,7 @@ public:
     
     UnitModulationWheel(Controller*);
     
-    void apply(Instrument*);
+    void apply();
     
 };
 

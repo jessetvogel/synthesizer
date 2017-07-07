@@ -12,7 +12,7 @@ public:
     
     UnitFuzz(Controller*, Arguments);
     
-    void apply(Instrument*);
+    void apply();
     
 };
 

@@ -2,7 +2,6 @@
 
 #include "unitvolumemeter.hpp"
 #include "controller.hpp"
-#include "instrument.hpp"
 #include "parameter.hpp"
 #include "arguments.hpp"
 
@@ -18,7 +17,7 @@ UnitVolumeMeter::UnitVolumeMeter(Controller* controller, Arguments arguments) : 
     RMSAverage = 0.0;
 }
 
-void UnitVolumeMeter::apply(Instrument* instrument) {
+void UnitVolumeMeter::apply() {
     Unit* input = (Unit*) (this->input->pointer);
     
     for(int x = 0;x < framesPerBuffer; ++x) {

@@ -29,10 +29,10 @@ unit_create label drawbar_9
 unit_set drawbar_9 value      knob_9
 
 # Vibrato
-unit_create adder vibrato_amp 1
+unit_create adder vibrato_amp [n = 1]
 unit_set vibrato_amp input_1      modulation_wheel
 unit_set vibrato_amp gain_1       0.059463
-unit_create adder vibrato_freq 2
+unit_create adder vibrato_freq [n = 2]
 unit_set vibrato_freq input_1     modulation_wheel
 unit_set vibrato_freq gain_1      3.0
 unit_set vibrato_freq input_2     3
@@ -41,95 +41,95 @@ unit_set vibrato sample           sine
 unit_set vibrato mean             1.0
 unit_set vibrato amplitude        vibrato_amp
 unit_set vibrato frequency        vibrato_freq
-unit_key_create adder main_frequency 1
+unit_create adder main_frequency [n = 1, key = true]
 unit_set main_frequency input_1   key_frequency
 unit_set main_frequency gain_1    vibrato
 
 # Define frequencies
-unit_key_create adder frequency_1 1
+unit_create adder frequency_1 [n = 1, key = true]
 unit_set frequency_1 input_1    main_frequency
 unit_set frequency_1 gain_1     0.5
 
-unit_key_create adder frequency_2 1
+unit_create adder frequency_2 [n = 1, key = true]
 unit_set frequency_2 input_1    main_frequency
 unit_set frequency_2 gain_1     1.4983
 
-unit_key_create adder frequency_3 1
+unit_create adder frequency_3 [n = 1, key = true]
 unit_set frequency_3 input_1    main_frequency
 unit_set frequency_3 gain_1     1.0
 
-unit_key_create adder frequency_4 1
+unit_create adder frequency_4 [n = 1, key = true]
 unit_set frequency_4 input_1    main_frequency
 unit_set frequency_4 gain_1     2.0
 
-unit_key_create adder frequency_5 1
+unit_create adder frequency_5 [n = 1, key = true]
 unit_set frequency_5 input_1    main_frequency
 unit_set frequency_5 gain_1     2.9966
 
-unit_key_create adder frequency_6 1
+unit_create adder frequency_6 [n = 1, key = true]
 unit_set frequency_6 input_1    main_frequency
 unit_set frequency_6 gain_1     4.0
 
-unit_key_create adder frequency_7 1
+unit_create adder frequency_7 [n = 1, key = true]
 unit_set frequency_7 input_1    main_frequency
 unit_set frequency_7 gain_1     5.0397
 
-unit_key_create adder frequency_8 1
+unit_create adder frequency_8 [n = 1, key = true]
 unit_set frequency_8 input_1    main_frequency
 unit_set frequency_8 gain_1     5.9932
 
-unit_key_create adder frequency_9 1
+unit_create adder frequency_9 [n = 1, key = true]
 unit_set frequency_9 input_1    main_frequency
 unit_set frequency_9 gain_1     8.0
 
 # Create waves
-unit_key_create oscillator wave_1
+unit_create oscillator wave_1 [key = true]
 unit_set wave_1 sample          sine
 unit_set wave_1 frequency       frequency_1
 unit_set wave_1 amplitude       drawbar_1
 
-unit_key_create oscillator wave_2
+unit_create oscillator wave_2 [key = true]
 unit_set wave_2 sample          sine
 unit_set wave_2 frequency       frequency_2
 unit_set wave_2 amplitude       drawbar_2
 
-unit_key_create oscillator wave_3
+unit_create oscillator wave_3 [key = true]
 unit_set wave_3 sample          sine
 unit_set wave_3 frequency       frequency_3
 unit_set wave_3 amplitude       drawbar_3
 
-unit_key_create oscillator wave_4
+unit_create oscillator wave_4 [key = true]
 unit_set wave_4 sample          sine
 unit_set wave_4 frequency       frequency_4
 unit_set wave_4 amplitude       drawbar_4
 
-unit_key_create oscillator wave_5
+unit_create oscillator wave_5 [key = true]
 unit_set wave_5 sample          sine
 unit_set wave_5 frequency       frequency_5
 unit_set wave_5 amplitude       drawbar_5
 
-unit_key_create oscillator wave_6
+unit_create oscillator wave_6 [key = true]
 unit_set wave_6 sample          sine
 unit_set wave_6 frequency       frequency_6
 unit_set wave_6 amplitude       drawbar_6
 
-unit_key_create oscillator wave_7
+unit_create oscillator wave_7 [key = true]
 unit_set wave_7 sample          sine
 unit_set wave_7 frequency       frequency_7
 unit_set wave_7 amplitude       drawbar_7
 
-unit_key_create oscillator wave_8
+unit_create oscillator wave_8 [key = true]
 unit_set wave_8 sample          sine
 unit_set wave_8 frequency       frequency_8
 unit_set wave_8 amplitude       drawbar_8
 
-unit_key_create oscillator wave_9
+unit_create oscillator wave_9 [key = true]
 unit_set wave_9 sample          sine
 unit_set wave_9 frequency       frequency_9
 unit_set wave_9 amplitude       drawbar_9
 
 # Add all waves
-unit_key_create adder sum 9
+unit_create adder sum [n = 9, key = true]
 unit_set sum input_1            wave_1
 unit_set sum input_2            wave_2
 unit_set sum input_3            wave_3
@@ -141,7 +141,7 @@ unit_set sum input_8            wave_8
 unit_set sum input_9            wave_9
 
 # Envelope
-unit_key_create ADSR envelope
+unit_create ADSR envelope [key = true]
 unit_set envelope attack_time   0.05
 unit_set envelope decay_time    0.05
 unit_set envelope sustain_level 0.5
@@ -150,11 +150,12 @@ unit_set envelope attack_curve   quartout
 unit_set envelope decay_curve    quartout
 unit_set envelope release_curve  quartout
 
-unit_key_create adder x 1
+unit_create adder x [n = 1, key = true]
 unit_set x input_1              sum
 unit_set x gain_1               envelope
 
-instrument_create hammond
-instrument_set_key_release_time hammond 0.05
-instrument_set_key_output hammond     x
-instrument_set_output hammond         key_output
+unit_create collector collector
+unit_set collector input        x
+
+unit_create audio_output output
+unit_set output channel_1       collector

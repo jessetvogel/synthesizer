@@ -17,7 +17,7 @@ public:
     UnitPWM(Controller*, Arguments);
     ~UnitPWM();
     
-    void apply(Instrument*);
+    void apply();
     
 };
 

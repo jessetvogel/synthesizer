@@ -1,6 +1,5 @@
 #include "unitconditional.hpp"
 #include "controller.hpp"
-#include "instrument.hpp"
 #include "parameter.hpp"
 #include "arguments.hpp"
 
@@ -20,7 +19,7 @@ UnitConditional::UnitConditional(Controller* controller, Arguments arguments) : 
     parameters.push_back(outputHigh = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "output_high", "0.0"));
 }
 
-void UnitConditional::apply(Instrument* instrument) {
+void UnitConditional::apply() {
     Unit* input = (Unit*) (this->input->pointer);
     Unit* low = (Unit*) (this->low->pointer);
     Unit* high = (Unit*) (this->high->pointer);

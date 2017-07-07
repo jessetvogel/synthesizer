@@ -12,7 +12,7 @@ public:
     
     UnitVolumeMeter(Controller*, Arguments);
     
-    void apply(Instrument*);
+    void apply();
     
 };
 

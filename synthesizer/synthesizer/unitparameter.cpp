@@ -1,6 +1,5 @@
 #include "unitparameter.hpp"
 #include "controller.hpp"
-#include "instrument.hpp"
 #include "parameter.hpp"
 #include "curve.hpp"
 #include "util.hpp"
@@ -11,10 +10,7 @@ UnitParameter::UnitParameter(Controller* controller, Arguments arguments) : Unit
     type = "parameter";
     
     // Set arguments
-    MidiCCNumber = arguments.getInteger("midiCC", -1);
-    
-    // Not key dependent
-    keyDependent = false;
+    midiCC = arguments.getInteger("midiCC", -1);
     
     // Hidden
     hidden = true;
@@ -26,7 +22,7 @@ UnitParameter::UnitParameter(Controller* controller, Arguments arguments) : Unit
     parameters.push_back(curve = new Parameter(controller, Parameter::CURVE, "curve", "linear"));
 }
 
-void UnitParameter::apply(Instrument* instrument) {
+void UnitParameter::apply() {
     Unit* min = (Unit*) (this->min->pointer);
     Unit* max = (Unit*) (this->max->pointer);
     Curve* curve = (Curve*) (this->curve->pointer);

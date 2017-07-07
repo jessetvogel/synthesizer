@@ -1,6 +1,6 @@
 #include "unitkeyinfo.hpp"
 #include "controller.hpp"
-#include "instrument.hpp"
+#include "units.hpp"
 
 UnitKeyInfo::UnitKeyInfo(Controller* controller, InfoType infoType) : Unit(controller) {
     // Set type
@@ -16,8 +16,8 @@ UnitKeyInfo::UnitKeyInfo(Controller* controller, InfoType infoType) : Unit(contr
     keyDependent = true;
 }
 
-void UnitKeyInfo::apply(Instrument* instrument) {
-    KeyEvent* keyEvent = instrument->currentKey;
+void UnitKeyInfo::apply() {
+    KeyEvent* keyEvent = controller->getUnits()->currentKey;
     double frequency, velocity, duration, release, t;
     
     switch(infoType) {

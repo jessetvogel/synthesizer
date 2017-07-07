@@ -1,34 +1,40 @@
 var controls = {
 
-  active: false,
-
   initialize: function () {
-    // Start button
-    $('.controls-button-start').click(function () {
-      if(!controls.active) {
-        api.send('start');
-        controls.active = true;
-
-        $('.controls-button-start').addClass('button-pressed');
-        $('.controls-button-stop').removeClass('button-pressed');
-      }
+    // Start / stop button
+    $('.controls-button-play').click(function () {
+      api.command('play toggle');
     });
 
-    // Stop button
-    $('.controls-button-stop').click(function () {
-      if(controls.active) {
-        api.send('stop');
-        controls.active = false;
+    // Device button
+    $('.controls-button-devices').click(function () {
+      $('#views > .row').hide();
+      $('#devices').show();
+      $('.button-pressed').removeClass('button-pressed');
+      $(this).addClass('button-pressed');
+    });
 
-        $('.controls-button-stop').addClass('button-pressed');
-        $('.controls-button-start').removeClass('button-pressed');
-      }
+    // Options button
+    $('.controls-button-options').click(function () {
+      $('#views > .row').hide();
+      $('#options').show();
+      $('.button-pressed').removeClass('button-pressed');
+      $(this).addClass('button-pressed');
+    });
+
+    // Components button
+    $('.controls-button-components').click(function () {
+      $('#views > .row').hide();
+      $('#components').show();
+      $('.button-pressed').removeClass('button-pressed');
+      $(this).addClass('button-pressed');
     });
 
     // Fullscreen button
     $('.controls-button-fullscreen').click(function () {
       fullscreen.toggle($('body').get(0));
     });
+
   }
 
 };

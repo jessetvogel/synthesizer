@@ -22,7 +22,7 @@ public:
     UnitHighpass(Controller*, Arguments);
     ~UnitHighpass();
     
-    void apply(Instrument*);
+    void apply();
     
     static const int maxOrder;
     

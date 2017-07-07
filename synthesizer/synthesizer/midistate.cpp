@@ -2,7 +2,6 @@
 
 #include "midistate.hpp"
 #include "controller.hpp"
-#include "instruments.hpp"
 #include "units.hpp"
 #include "options.hpp"
 #include "unitparameter.hpp"
@@ -100,7 +99,7 @@ void MidiState::update() {
             keyEvent.stage = KeyEvent::Press;
             keyEvent.duration = 0.0;
             keyEvent.release = 0.0;
-            controller->getInstruments()->addKeyEvent(&keyEvent);
+            controller->getUnits()->addKeyEvent(&keyEvent);
             
             // Whenever pressed, reset the keyDuration
             keyDuration[i] = 0.0;

@@ -9,7 +9,6 @@
 #define UNIT_DEFAULT_TYPE "#undefined"
 
 class Controller;
-class Instrument;
 class Parameter;
 class Arguments;
 
@@ -28,14 +27,14 @@ protected:
     
     std::vector<Parameter*> parameters;
     
-    bool keyDependent;
-    bool applyAlways = false;
+    bool keyDependent = false;
     bool hidden = false;
+    bool updateParameters = true;
     
     unsigned long framesPerBuffer;
     double sampleRate;
     
-    inline virtual void apply(Instrument*) { };
+    inline virtual void apply() {};
     
 public:
     
@@ -48,16 +47,16 @@ public:
     inline std::string getId() { return id; }
     inline std::string getType() { return type; }
     
-    inline void hide() { hidden = true; id = UNIT_HIDDEN_ID; }
-    
     float* output;
     
     bool setParameter(std::string, std::string);
     Parameter* getParameter(std::string);
     
     inline void reset() { updated = false; };
-    void update(Instrument*);
+    void update();
+    
     inline bool isKeyDependent() { return keyDependent; };
+    inline void hide() { hidden = true; id = UNIT_HIDDEN_ID; }
     inline bool isHidden() { return hidden; };
   
     // Status

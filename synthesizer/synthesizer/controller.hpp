@@ -1,6 +1,8 @@
 #ifndef controller_hpp
 #define controller_hpp
 
+#include <string>
+
 class Settings;
 class Options;
 
@@ -9,7 +11,6 @@ class AudioDevices;
 
 class MidiState;
 
-class Instruments;
 class Units;
 class Blocks;
 
@@ -23,14 +24,10 @@ class Controller {
     
     MidiState* midiState;
     
-    Instruments* instruments;
     Units* units;
     Blocks* blocks;
     
     bool active;
-    
-    float* bufferInput;
-    float* bufferOutput;
     
 public:
     
@@ -45,17 +42,19 @@ public:
 
     inline MidiState* getMidiState() { return midiState; };
     
-    inline Instruments* getInstruments() { return instruments; };
     inline Units* getUnits() { return units; };
     inline Blocks* getBlocks() { return blocks; };
 
-    inline float* getBufferInput() { return bufferInput; };
-    inline float* getBufferOutput() { return bufferOutput; };
-    
     bool start();
     bool stop();
     bool reset();
     bool update();
+    
+    // Commands
+    bool play(std::string);
+
+    // Status
+    void printState();
     
 };
 

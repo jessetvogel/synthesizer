@@ -2,11 +2,11 @@
 
 #include <iostream>
 
-bool KeyEvent::idUsed[MAX_AMOUNT_OF_IDS] = {};
+bool KeyEvent::idUsed[SETTINGS_POLYPHONY] = {};
 
 KeyEvent::KeyEvent() {
     // Look for an unused id
-    for(int i = 0;i < MAX_AMOUNT_OF_IDS; ++i) {
+    for(int i = 0;i < SETTINGS_POLYPHONY; ++i) {
         if(!idUsed[i]) {
             id = i;
             idUsed[i] = true;

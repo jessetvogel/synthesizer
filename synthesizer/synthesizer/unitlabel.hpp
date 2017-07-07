@@ -11,7 +11,7 @@ public:
     
     UnitLabel(Controller*, Arguments);
     
-    void apply(Instrument*);
+    void apply();
     
 };
 

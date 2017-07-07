@@ -2,6 +2,7 @@
 #define settings_hpp
 
 #define AMOUNT_OF_KEYS (128)
+#define SETTINGS_POLYPHONY (256)
 
 #define DEFAULT_SAMPLE_RATE (44100)
 #define DEFAULT_BUFFER_SIZE (64)

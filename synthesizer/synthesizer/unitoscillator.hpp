@@ -19,7 +19,7 @@ public:
     UnitOscillator(Controller*, Arguments);
     ~UnitOscillator();
     
-    void apply(Instrument*);
+    void apply();
     
 };
 

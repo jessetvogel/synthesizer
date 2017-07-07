@@ -1,6 +1,5 @@
 #include "unitADSR.hpp"
 #include "controller.hpp"
-#include "instrument.hpp"
 #include "parameter.hpp"
 #include "curve.hpp"
 #include "midistate.hpp"
@@ -31,7 +30,7 @@ UnitADSR::UnitADSR(Controller* controller, Arguments arguments) : Unit(controlle
     parameters.push_back(releaseCurve = new Parameter(controller, Parameter::CURVE, "release_curve", "linear"));
 }
 
-void UnitADSR::apply(Instrument* instrument) {
+void UnitADSR::apply() {
     Unit* startLevel = (Unit*) (this->startLevel->pointer);
     Unit* attackLevel = (Unit*) (this->attackLevel->pointer);
     Unit* sustainLevel = (Unit*) (this->sustainLevel->pointer);

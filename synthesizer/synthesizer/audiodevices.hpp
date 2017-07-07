@@ -13,7 +13,12 @@ class AudioDevices {
     
     int inputDeviceId;
     int outputDeviceId;
+    int inputChannelCount;
+    int outputChannelCount;
     bool active;
+    
+    float* bufferInput;
+    float* bufferOutput;
     
     static int callback(const void*, void*, unsigned long, const PaStreamCallbackTimeInfo*, PaStreamCallbackFlags, void*);
     
@@ -31,6 +36,12 @@ public:
     static const char* deviceName(int);
     static bool isInput(int);
     static bool isOutput(int);
+    
+    inline int getInputChannelCount() { return inputChannelCount; }
+    inline int getOutputChannelCount() { return outputChannelCount; }
+    
+    inline float* getBufferInput() { return bufferInput; }
+    inline float* getBufferOutput() { return bufferOutput; }
     
     // Commands
     bool setInputDeviceId(int);

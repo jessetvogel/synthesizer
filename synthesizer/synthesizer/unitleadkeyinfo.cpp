@@ -1,6 +1,5 @@
 #include "unitleadkeyinfo.hpp"
 #include "controller.hpp"
-#include "instrument.hpp"
 #include "midistate.hpp"
 
 UnitLeadKeyInfo::UnitLeadKeyInfo(Controller* controller, InfoType infoType) : Unit(controller) {
@@ -12,12 +11,9 @@ UnitLeadKeyInfo::UnitLeadKeyInfo(Controller* controller, InfoType infoType) : Un
     
     // Hidden
     hidden = true;
-    
-    // Not key dependent
-    keyDependent = false;
 }
 
-void UnitLeadKeyInfo::apply(Instrument* instrument) {
+void UnitLeadKeyInfo::apply() {
     KeyEvent keyEvent = controller->getMidiState()->leadKey;
     double frequency, velocity, duration, release, t, pressing;
     

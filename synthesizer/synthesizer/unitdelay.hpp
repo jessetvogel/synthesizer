@@ -20,7 +20,7 @@ public:
     UnitDelay(Controller*, Arguments);
     ~UnitDelay();
     
-    void apply(Instrument*);
+    void apply();
     
     static const int maxN;
     static const double maxT;

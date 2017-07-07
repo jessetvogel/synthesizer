@@ -2,19 +2,19 @@ var devices = {
 
   // Request methods
   refreshMIDIDevices: function () {
-    api.send('status midi_devices');
+    api.command('status midi_devices');
   },
 
   refreshInputDevices: function () {
-    api.send('status input_devices');
+    api.command('status input_devices');
   },
 
   refreshOutputDevices: function () {
-    api.send('status output_devices');
+    api.command('status output_devices');
   },
 
   refreshAllDevices: function () {
-    api.send('status midi_devices input_devices output_devices');
+    api.command('status midi_devices input_devices output_devices');
   },
 
   // Handle response methods
@@ -33,11 +33,11 @@ var devices = {
           return $('<input>').attr('type', 'checkbox').prop('checked', data[i].active).change(function () {
             if($(this).is(":checked")) {
               $(this).parent().parent().addClass('midi-device-active');
-              api.send('midi_add_device ' + device_id);
+              api.command('midi_add_device ' + device_id);
             }
             else {
               $(this).parent().parent().removeClass('midi-device-active');
-              api.send('midi_remove_device ' + device_id);
+              api.command('midi_remove_device ' + device_id);
             }
             });
         })(data[i].id)));
@@ -60,7 +60,7 @@ var devices = {
 
         (function (n) {
           inputDevice.click(function () {
-            api.send('audio_set_input_device ' + n);
+            api.command('audio_set_input_device ' + n);
           });
         })(data[i].id);
 
@@ -87,7 +87,7 @@ var devices = {
 
         (function (n) {
           outputDevice.click(function () {
-            api.send('audio_set_output_device ' + n);
+            api.command('audio_set_output_device ' + n);
           });
         })(data[i].id);
 

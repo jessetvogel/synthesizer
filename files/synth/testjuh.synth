@@ -1,0 +1,15 @@
+unit_create oscillator wave [key = true]
+unit_set wave sample              sine
+unit_set wave frequency           key_frequency
+unit_set wave amplitude           1.0
+
+unit_create collector c
+unit_set c input                  wave
+
+unit_create audio_output output
+unit_set output channel_1         c
+
+
+
+midi_add_device 1
+play start

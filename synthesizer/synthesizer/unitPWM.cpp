@@ -2,7 +2,8 @@
 
 #include "unitPWM.hpp"
 #include "controller.hpp"
-#include "instrument.hpp"
+#include "settings.hpp"
+#include "units.hpp"
 #include "parameter.hpp"
 #include "settings.hpp"
 #include "arguments.hpp"
@@ -22,8 +23,8 @@ UnitPWM::UnitPWM(Controller* controller, Arguments arguments) : Unit(controller)
     
     // Create arrays
     if(keyDependent) {
-        phase = new double[MAX_AMOUNT_OF_IDS];
-        memset(phase, 0, sizeof(double) * MAX_AMOUNT_OF_IDS);
+        phase = new double[SETTINGS_POLYPHONY];
+        memset(phase, 0, sizeof(double) * SETTINGS_POLYPHONY);
     }
     else {
         phase = new double[1];
@@ -35,14 +36,14 @@ UnitPWM::~UnitPWM() {
     delete[] phase;
 }
 
-void UnitPWM::apply(Instrument* instrument) {
+void UnitPWM::apply() {
     Unit* frequency = (Unit*) (this->frequency->pointer);
     Unit* duty = (Unit*) (this->duty->pointer);
     Unit* low = (Unit*) (this->low->pointer);
     Unit* high = (Unit*) (this->high->pointer);
    
     double t = 1.0 / sampleRate;
-    int i = keyDependent ? instrument->currentKey->id : 0;
+    int i = keyDependent ? controller->getUnits()->currentKey->id : 0;
     
     for(int x = 0;x < framesPerBuffer; ++x) {
         output[x] = phase[i] < duty->output[x] ? high->output[x] : low->output[x];

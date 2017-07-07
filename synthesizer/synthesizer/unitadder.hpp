@@ -16,7 +16,7 @@ public:
     UnitAdder(Controller*, Arguments);
     ~UnitAdder();
     
-    void apply(Instrument*);
+    void apply();
     
 };
 

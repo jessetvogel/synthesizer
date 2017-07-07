@@ -2,7 +2,8 @@
 
 #include "unitoscillator.hpp"
 #include "controller.hpp"
-#include "instrument.hpp"
+#include "settings.hpp"
+#include "units.hpp"
 #include "parameter.hpp"
 #include "sample.hpp"
 #include "settings.hpp"
@@ -23,8 +24,8 @@ UnitOscillator::UnitOscillator(Controller* controller, Arguments arguments) : Un
     
     // Create arrays
     if(keyDependent) {
-        phase = new double[MAX_AMOUNT_OF_IDS];
-        memset(phase, 0, sizeof(double) * MAX_AMOUNT_OF_IDS);
+        phase = new double[SETTINGS_POLYPHONY];
+        memset(phase, 0, sizeof(double) * SETTINGS_POLYPHONY);
     }
     else {
         phase = new double[1];
@@ -36,14 +37,14 @@ UnitOscillator::~UnitOscillator() {
     delete[] phase;
 }
 
-void UnitOscillator::apply(Instrument* instrument) {
+void UnitOscillator::apply() {
     Sample* sample = (Sample*) (this->sample->pointer);
     Unit* frequency = (Unit*) (this->frequency->pointer);
     Unit* amplitude = (Unit*) (this->amplitude->pointer);
     Unit* mean = (Unit*) (this->mean->pointer);
     
     double t = 1.0 / sampleRate;
-    int i = keyDependent ? instrument->currentKey->id : 0;
+    int i = keyDependent ? controller->getUnits()->currentKey->id : 0;
     
     for(int x = 0;x < framesPerBuffer; ++x) {
         output[x] = mean->output[x] + amplitude->output[x] * sample->getValue(phase[i]);

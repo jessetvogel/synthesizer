@@ -21,9 +21,10 @@
 #include "unitvolumemeter.hpp"
 #include "unitkeyinfo.hpp"
 #include "unitleadkeyinfo.hpp"
-#include "unitkeyoutput.hpp"
 #include "unitmodulationwheel.hpp"
-#include "unitinput.hpp"
+#include "unitaudioinput.hpp"
+#include "unitaudiooutput.hpp"
+#include "unitcollector.hpp"
 
 #include "status.hpp"
 
@@ -39,10 +40,7 @@ void UnitFactory::createDefaultUnits(Controller* controller, Units* units) {
     units->addUnit((new UnitLeadKeyInfo(controller, UnitLeadKeyInfo::Release))->setId("lead_key_release"));
     units->addUnit((new UnitLeadKeyInfo(controller, UnitLeadKeyInfo::Pressing))->setId("lead_key_pressing"));
     
-    units->addUnit((new UnitKeyOutput(controller))->setId("key_output"));
     units->addUnit((new UnitModulationWheel(controller))->setId("modulation_wheel"));
-    
-    units->addUnit((new UnitInput(controller))->setId("audio_input"));
 }
 
 Unit* UnitFactory::create(Controller* controller, std::string type, std::string id, Arguments arguments) {
@@ -61,12 +59,10 @@ Unit* UnitFactory::create(Controller* controller, std::string type, std::string 
     if(type.compare("PWM") == 0)                unit = new UnitPWM(controller, arguments);
     if(type.compare("volumemeter") == 0)        unit = new UnitVolumeMeter(controller, arguments);
     if(type.compare("label") == 0)              unit = new UnitLabel(controller, arguments);
-    
-    if(type.compare("parameter") == 0) {
-        UnitParameter* parameter = new UnitParameter(controller, arguments);
-        controller->getUnits()->addParameter(parameter, parameter->MidiCCNumber);
-        unit = parameter;
-    }
+    if(type.compare("parameter") == 0)          unit = new UnitParameter(controller, arguments);
+    if(type.compare("collector") == 0)          unit = new UnitCollector(controller, arguments);
+    if(type.compare("audio_input") == 0)        unit = new UnitAudioInput(controller, arguments);
+    if(type.compare("audio_output") == 0)       unit = new UnitAudioOutput(controller, arguments);
     
     if(unit == NULL) {
         // If no match was found, return NULL

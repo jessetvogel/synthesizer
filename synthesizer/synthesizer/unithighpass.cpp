@@ -2,7 +2,6 @@
 
 #include "unithighpass.hpp"
 #include "controller.hpp"
-#include "instrument.hpp"
 #include "parameter.hpp"
 #include "settings.hpp"
 #include "IIRfilter.hpp"
@@ -17,9 +16,6 @@ UnitHighpass::UnitHighpass(Controller* controller, Arguments arguments) : Unit(c
     // Set arguments
     order = arguments.getInteger("order", 1);
     
-    // Not key dependent
-    keyDependent = false;
-    
     // Set parameters
     parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
     parameters.push_back(cutOff = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "cutoff", "1000.0"));
@@ -32,7 +28,7 @@ UnitHighpass::~UnitHighpass() {
     delete filter;
 }
 
-void UnitHighpass::apply(Instrument* instrument) {
+void UnitHighpass::apply() {
     Unit* input = (Unit*) (this->input->pointer);
     Unit* cutOff = (Unit*) (this->cutOff->pointer);
     

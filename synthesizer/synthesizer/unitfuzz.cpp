@@ -16,7 +16,7 @@ UnitFuzz::UnitFuzz(Controller* controller, Arguments arguments) : Unit(controlle
     parameters.push_back(inputGain = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input_gain", "1.0"));
 }
 
-void UnitFuzz::apply(Instrument* instrument) {
+void UnitFuzz::apply() {
     Unit* input = (Unit*) (this->input->pointer);
     Unit* inputGain = (Unit*) (this->inputGain->pointer);
     

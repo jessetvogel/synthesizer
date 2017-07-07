@@ -11,7 +11,6 @@
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/devices.css" />
     <link rel="stylesheet" type="text/css" href="css/units.css" />
-    <link rel="stylesheet" type="text/css" href="css/instruments.css" />
     <link rel="stylesheet" type="text/css" href="css/file-explorer.css" />
     <link rel="stylesheet" type="text/css" href="css/messages.css" />
 
@@ -22,10 +21,10 @@
     <script type="text/javascript" src="js/api.js"></script>
     <script type="text/javascript" src="js/messages.js"></script>
     <script type="text/javascript" src="js/controls.js"></script>
-    <script type="text/javascript" src="js/instruments.js"></script>
     <script type="text/javascript" src="js/units.js"></script>
     <script type="text/javascript" src="js/file-explorer.js"></script>
     <script type="text/javascript" src="js/devices.js"></script>
+    <script type="text/javascript" src="js/state.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 
   </head>
@@ -37,41 +36,49 @@
           <div class="col-sm-12">
             <div class="tile">
               <div class="controls">
-                <div class="controls-button button controls-button-reset"><span class="glyphicon glyphicon-file"></span></div>
                 <div class="controls-button button controls-button-load"><span class="glyphicon glyphicon-folder-open"></span></div>
                 <div class="controls-button button controls-button-save"><span class="glyphicon glyphicon-floppy-disk"></span></div>
                 <div class="vertical-separator"></div>
-                <div class="controls-button button controls-button-start"><span class="glyphicon glyphicon-play"></span></div>
-                <div class="controls-button button controls-button-stop button-pressed"><span class="glyphicon glyphicon-stop"></span></div>
+                <div class="controls-button button controls-button-play"><span class="glyphicon glyphicon-play"></span></div>
                 <div class="vertical-separator"></div>
-                <div class="controls-button button controls-button-settings"><span class="glyphicon glyphicon-cog"></span></div>
+                <div class="controls-button button controls-button-components"><span class="	glyphicon glyphicon-th"></span></div>
+                <div class="controls-button button controls-button-devices"><span class="glyphicon glyphicon-volume-up"></span></div>
+                <div class="controls-button button controls-button-options"><span class="glyphicon glyphicon-cog"></span></div>
+                <div class="vertical-separator"></div>
                 <div class="controls-button button controls-button-fullscreen"><span class="glyphicon glyphicon-fullscreen"></span></div>
               </div>
             </div>
           </div>
-          <div class="col-sm-2">
+        </div>
+      </div>
 
+      <div class="container-fluid" id="views">
+        <div class="row row-no-padding" id="devices">
+          <div class="col-sm-4">
             <div class="tile">
               <div class="tile-header">MIDI devices</div>
               <!-- <div class="tile-separator"></div> -->
               <div class="midi-device-container"></div>
             </div>
-
+          </div>
+          <div class="col-sm-4">
             <div class="tile">
               <div class="tile-header">Output devices</div>
               <!-- <div class="tile-separator"></div> -->
               <div class="output-device-container"></div>
             </div>
-
+          </div>
+          <div class="col-sm-4">
             <div class="tile">
               <div class="tile-header">Input devices</div>
               <!-- <div class="tile-separator"></div> -->
               <div class="input-device-container"></div>
             </div>
-
           </div>
+        </div>
 
-          <div class="col-sm-10">
+        <div class="row row-no-padding" id="components">
+          <div class="col-sm-12">
             <div class="tile">
               <div class="tile-header">Units</div>
               <!-- <div class="tile-separator"></div> -->
@@ -81,34 +88,19 @@
                   <div class="toolbar-button button unit-button-sort"><span class="glyphicon glyphicon-sort"></span></div>
                   <div class="toolbar-input"><input class="unit-search" /><span class="glyphicon glyphicon-search"></span></div>
                 </div>
-
                 <div class="unit-panels">
                   <div class="unit-container"></div>
                   <div class="unit-parameter-container"></div>
                 </div>
               </div>
-
             </div>
-
-            <div class="tile">
-              <div class="tile-header">Instruments</div>
-              <!-- <div class="tile-separator"></div> -->
-              <div class="instrument-content">
-                <div class="toolbar">
-                  <div class="toolbar-button button"><span class="glyphicon glyphicon-plus"></span></div>
-                  <div class="toolbar-button button toolbar-button-sort"><span class="glyphicon glyphicon-sort"></span></div>
-                  <div class="toolbar-input"><input class="instrument-search" /><span class="glyphicon glyphicon-search"></span></div>
-                </div>
-
-                <div class="instrument-panels">
-                  <div class="instrument-container"></div>
-                  <div class="instrument-parameter-container"></div>
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
+
+        <div class="row row-no-padding" id="options">
+          Options. TODO
+        </div>
+
       </div>
 
       <div class="message-container"></div>

@@ -6,7 +6,7 @@ module.exports = {
   handle: function (request, response, synthesizer) {
     // Check if valid request url
     const mUrl = url.parse(request.url, true);
-    const pattern = /^\/api/;
+    const pattern = /^\/api\/command$/;
     var match = pattern.exec(mUrl.pathname);
     if(match == null)
       return false;

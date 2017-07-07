@@ -38,20 +38,23 @@ Unit* Unit::setId(std::string id) {
     return this;
 }
 
-void Unit::update(Instrument* instrument) {
+#include <iostream>
+
+void Unit::update() {
     if(updated)
         return;
     
-    if(!applyAlways)
-        updated = true;
+    updated = true;
     
-    // Update all unit parameters
-    for(auto it = parameters.begin(); it != parameters.end(); ++it) {
-        if((*it)->type == Parameter::UNIT || (*it)->type == Parameter::UNIT_KEY_INDEPENDENT)
-            ((Unit*) ((*it)->pointer))->update(instrument);
+    if(updateParameters) {
+        // Update all unit parameters
+        for(auto it = parameters.begin(); it != parameters.end(); ++it) {
+            if((*it)->type == Parameter::UNIT || (*it)->type == Parameter::UNIT_KEY_INDEPENDENT)
+                ((Unit*) ((*it)->pointer))->update();
+        }
     }
     
-    apply(instrument);
+    apply();
 };
 
 bool Unit::setParameter(std::string label, std::string value) {

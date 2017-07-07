@@ -16,7 +16,11 @@ unit_create adder x [key = true, n = 1]
 unit_set x input_1                wave
 unit_set x gain_1                 key_velocity
 
-instrument_create i
-instrument_set_key_output i             x
-instrument_set_key_release_time i       1.0
-instrument_set_output i                 key_output
+unit_create collector c
+unit_set c input                  x
+
+unit_create audio_output output
+unit_set output channel_1         c
+
+midi_add_device 1
+play start

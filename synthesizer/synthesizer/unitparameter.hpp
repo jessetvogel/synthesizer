@@ -13,11 +13,11 @@ class UnitParameter : public Unit {
     
 public:
     
-    int MidiCCNumber;
+    int midiCC;
     
     UnitParameter(Controller*, Arguments);
     
-    void apply(Instrument*);
+    void apply();
     void setValue(double);
 };
 

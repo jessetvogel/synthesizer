@@ -15,7 +15,7 @@ UnitFunction::UnitFunction(Controller* controller, Arguments arguments) : Unit(c
     parameters.push_back(function = new Parameter(controller, Parameter::FUNCTION, "function", "identity"));
 }
 
-void UnitFunction::apply(Instrument* instrument) {
+void UnitFunction::apply() {
     Unit* input = (Unit*) (this->input->pointer);
     Function* function = (Function*) (this->function->pointer);
     

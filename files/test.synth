@@ -1,7 +1,0 @@
-unit_create oscillator x
-unit_set_value x sample sine
-unit_set_value x frequency 110
-unit_set_value x amplitude 0.2
-
-instrument_create i
-instrument_set_output i x

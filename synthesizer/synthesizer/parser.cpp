@@ -7,8 +7,6 @@
 #include "controller.hpp"
 #include "audiodevices.hpp"
 #include "mididevices.hpp"
-#include "instruments.hpp"
-#include "instrument.hpp"
 #include "units.hpp"
 #include "unit.hpp"
 #include "blocks.hpp"
@@ -36,8 +34,10 @@ bool Parser::parseFile(std::string filepath) {
     int lineNumber = 1;
     std::string line;
     while(std::getline(input, line)) {
-        if(!parseLine(line))
+        if(!parseLine(line)) {
+            Status::addError(line);
             return false;
+        }
         
         ++ lineNumber;
     }
@@ -83,10 +83,8 @@ bool Parser::parseLine(std::string line) {
     
     // Controller
     
-    // start
-    if(std::regex_search(str, cm, Commands::regexStart))                    return controller->start();
-    // stop
-    if(std::regex_search(str, cm, Commands::regexStop))                     return controller->stop();
+    // play <state>
+    if(std::regex_search(str, cm, Commands::regexPlay))                     return controller->play(cm[1]);
     // reset
     if(std::regex_search(str, cm, Commands::regexReset))                    return controller->reset();
     
@@ -103,22 +101,7 @@ bool Parser::parseLine(std::string line) {
         parser.parseFile(directory + DIRECTORY_SEPARATOR + std::string(cm[1]));
         return true;
     }
-        
-    // Instruments
     
-    // instrument_create <label>
-    if(std::regex_search(str, cm, Commands::regexInstrumentCreate))         return controller->getInstruments()->create(cm[1]);    
-    // instrument_delete <instrument>
-    if(std::regex_search(str, cm, Commands::regexInstrumentDelete))         return controller->getInstruments()->destroy(cm[1]);
-    // instrument_set_active <instrument> <true|false>
-    if(std::regex_search(str, cm, Commands::regexInstrumentSetActive))      return controller->getInstruments()->setActive(cm[1], cm[2].compare("true") == 0);
-    // instrument_set_output <instrument> <unit>
-    if(std::regex_search(str, cm, Commands::regexInstrumentSetOutput))      return controller->getInstruments()->setOutput(cm[1], cm[2]);
-    // instrument_set_key_output <instrument> <key_unit>
-    if(std::regex_search(str, cm, Commands::regexInstrumentSetKeyOutput))   return controller->getInstruments()->setKeyOutput(cm[1], cm[2]);    
-    // instrument_set_key_release_time <instrument> <seconds>
-    if(std::regex_search(str, cm, Commands::regexInstrumentSetKeyReleaseTime)) return controller->getInstruments()->setKeyReleaseTime(cm[1], stod(cm[2]));
-
     // Units
     
     // unit_create <unit_type> <label> <args>

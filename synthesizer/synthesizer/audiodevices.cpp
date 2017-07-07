@@ -15,6 +15,8 @@ AudioDevices::AudioDevices(Controller* controller) {
     active = false;
     setInputDeviceId(DEVICE_ID_NONE);
     setOutputDeviceId(DEVICE_ID_DEFAULT);
+    inputChannelCount = 1;
+    outputChannelCount = 1;
 }
 
 bool AudioDevices::setInputDeviceId(int n) {
@@ -83,7 +85,7 @@ bool AudioDevices::start() {
     }
     
     bzero(&outputParameters, sizeof(outputParameters));
-    outputParameters.channelCount = infoOutputDevice->maxOutputChannels;
+    outputParameters.channelCount = outputChannelCount = infoOutputDevice->maxOutputChannels;
     outputParameters.device = outputDeviceId;
     outputParameters.sampleFormat = paFloat32;
     outputParameters.suggestedLatency = infoOutputDevice->defaultLowOutputLatency ;
@@ -96,7 +98,7 @@ bool AudioDevices::start() {
             return false;
         }
         
-        inputParameters.channelCount = infoInputDevice->maxInputChannels;
+        inputParameters.channelCount = inputChannelCount = infoInputDevice->maxInputChannels;
         inputParameters.device = inputDeviceId;
         inputParameters.sampleFormat = paFloat32;
         inputParameters.suggestedLatency = infoInputDevice->defaultLowInputLatency;
@@ -121,6 +123,13 @@ bool AudioDevices::start() {
         return false;
     }
     
+    // Create new buffers
+    unsigned long framesPerBuffer = controller->getSettings()->bufferSize;
+    bufferInput = new float[inputChannelCount * framesPerBuffer];
+    bufferOutput = new float[outputChannelCount * framesPerBuffer];
+    memset(bufferInput, 0, sizeof(float) * inputChannelCount * framesPerBuffer);
+    memset(bufferOutput, 0, sizeof(float) * outputChannelCount * framesPerBuffer);
+    
     err = Pa_StartStream(stream);
 
     if(err != paNoError) {
@@ -144,6 +153,10 @@ bool AudioDevices::stop() {
         return false;
     }
 
+    // Deallocate buffers
+    delete[] bufferInput;
+    delete[] bufferOutput;
+    
     active = false;
     return true;
 }
@@ -165,10 +178,10 @@ int AudioDevices::callback(const void* inputBuffer,
     // Store input, if input device was set
     if(audioDevices->inputDeviceId != DEVICE_ID_NONE) {
         float* in = (float*) inputBuffer;
-        float* buffer = controller->getBufferInput();
-        for(int i = 0;i < framesPerBuffer;i ++) {
-            buffer[i] = *(in++);
-            buffer[i] = *(in++);
+        float* buffer = audioDevices->bufferInput;
+        for(int x = 0;x < framesPerBuffer; ++x) {
+            for(int channel = 0;channel < audioDevices->inputChannelCount; ++channel)
+                buffer[audioDevices->inputChannelCount * x + channel] = *(in++);
         }
     }
     
@@ -176,18 +189,18 @@ int AudioDevices::callback(const void* inputBuffer,
     float* out = (float*) outputBuffer;
     if(controller->update()) {
         // Output the buffer
-        float* buffer = controller->getBufferOutput();
-        for(int i = 0;i < framesPerBuffer;i ++) {
-            *(out++) = buffer[i];
-            *(out++) = buffer[i];
+        float* buffer = audioDevices->bufferOutput;
+        for(int x = 0;x < framesPerBuffer; ++x) {
+            for(int channel = 0;channel < audioDevices->outputChannelCount; ++channel)
+                *(out++) = buffer[audioDevices->outputChannelCount * x + channel];
         }
         return paContinue;
     }
     else {
         // On failure, send silence and abort
         for(int i = 0;i < framesPerBuffer;i ++) {
-            *(out++) = 0.0;
-            *(out++) = 0.0;
+            for(int channel = 0;channel < audioDevices->outputChannelCount; ++channel)
+                *(out++) = 0.0;
         }
         return paAbort;
     }

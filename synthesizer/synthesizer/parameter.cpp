@@ -89,7 +89,7 @@ bool Parameter::set(std::string value) {
             if(unit == NULL) return false; // TODO
             
             // If we are overwriting a unit constant, delete the old constant
-            if(pointer != NULL && controller->getUnits()->isConstant((class Unit*) pointer))
+            if(pointer != NULL && ((class Unit*) pointer)->getType().compare("constant") == 0)
                 controller->getUnits()->deleteConstant((UnitConstant*) pointer);
             
             pointer = unit;

@@ -8,11 +8,12 @@
 #include "mididevices.hpp"
 #include "audiodevices.hpp"
 
-#include "instruments.hpp"
 #include "units.hpp"
 #include "blocks.hpp"
 
 #include "midistate.hpp"
+
+#include "status.hpp"
 
 Controller::Controller(Settings* settings) {
     // Store pointer to settings
@@ -24,18 +25,11 @@ Controller::Controller(Settings* settings) {
     midiDevices = new MIDIDevices(this);
     audioDevices = new AudioDevices(this);
     
-    instruments = new Instruments(this);
     units = new Units(this);
     blocks = new Blocks(this);
     
     midiState = new MidiState(this);
-    
-    // Create new buffers
-    bufferInput = new float[settings->bufferSize];
-    bufferOutput = new float[settings->bufferSize];
-    memset(bufferInput, 0, sizeof(float) * settings->bufferSize);
-    memset(bufferOutput, 0, sizeof(float) * settings->bufferSize);
-    
+        
     // Default values
     active = false;
 }
@@ -44,14 +38,10 @@ Controller::~Controller() {
     delete midiDevices;
     delete audioDevices;
     
-    delete instruments;
     delete units;
     delete blocks;
     
     delete midiState;
-    
-    delete[] bufferInput;
-    delete[] bufferOutput;
 }
 
 bool Controller::start() {
@@ -91,8 +81,19 @@ bool Controller::update() {
     bool success = true;
     success = success && midiDevices->update();
     
-    // Apply instruments
-    success = success && instruments->apply();
+    // Apply units
+    success = success && units->apply();
     
     return true;
+}
+
+bool Controller::play(std::string state) {
+    Status::addExtra("state");
+    
+    if(state.compare("start") == 0)     return start();
+    if(state.compare("stop") == 0)      return stop();
+    if(state.compare("toggle") == 0)    return active ? stop() : start();
+    
+    Status::addError("unknown state. groetjes van controller");
+    return false;
 }

@@ -1,11 +1,11 @@
 #ifndef keyevent_hpp
 #define keyevent_hpp
 
-#define MAX_AMOUNT_OF_IDS (256)
+#include "settings.hpp"
 
 class KeyEvent {
     
-    static bool idUsed[MAX_AMOUNT_OF_IDS];
+    static bool idUsed[SETTINGS_POLYPHONY];
     
 public:
 

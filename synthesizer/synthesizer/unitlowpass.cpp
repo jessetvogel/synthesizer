@@ -2,7 +2,6 @@
 
 #include "unitlowpass.hpp"
 #include "controller.hpp"
-#include "instrument.hpp"
 #include "parameter.hpp"
 #include "IIRfilter.hpp"
 #include "arguments.hpp"
@@ -16,9 +15,6 @@ UnitLowpass::UnitLowpass(Controller* controller, Arguments arguments) : Unit(con
     // Set arguments
     order = arguments.getInteger("order", 1); // TODO: check for valid values
     
-    // Not key dependent
-    keyDependent = false;
-    
     // Set parameters
     parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
     parameters.push_back(cutOff = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "cutoff", "1000.0"));
@@ -31,7 +27,7 @@ UnitLowpass::~UnitLowpass() {
     delete filter;
 }
 
-void UnitLowpass::apply(Instrument* instrument) {
+void UnitLowpass::apply() {
     Unit* input = (Unit*) (this->input->pointer);
     Unit* cutOff = (Unit*) (this->cutOff->pointer);
     

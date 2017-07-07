@@ -11,9 +11,6 @@ UnitAdder::UnitAdder(Controller* controller, Arguments arguments) : Unit(control
     keyDependent = arguments.getBool("key", false);
     
     // Set type
-//    char strType[12];
-//    sprintf(strType, "adder_%d", n);
-//    type = std::string(strType);
     type = "adder";
     
     // Create arrays and set parameters
@@ -34,7 +31,7 @@ UnitAdder::~UnitAdder() {
     delete[] gains;
 }
 
-void UnitAdder::apply(Instrument* instrument) {
+void UnitAdder::apply() {
     float buffer[framesPerBuffer];
     memset(buffer, 0, sizeof(float) * framesPerBuffer);
     for(int i = 0;i < n; i++) {

@@ -115,5 +115,5 @@ unit_set BP input                 delayed
 unit_set BP center                knob_3
 unit_set BP bandwidth             knob_4
 
-instrument_create i
-instrument_set_output i           BP
+unit_create audio_output lead_output
+unit_set lead_output channel_1    BP

@@ -3,8 +3,6 @@
 
 #include "status.hpp"
 #include "controller.hpp"
-#include "instruments.hpp"
-#include "instrument.hpp"
 #include "mididevices.hpp"
 #include "audiodevices.hpp"
 #include "units.hpp"
@@ -141,9 +139,9 @@ void Status::printExtra(Controller* controller, std::string extra) {
     if(extra.compare("midi_devices") == 0) return controller->getMIDIDevices()->printMIDIDevices();
     if(extra.compare("input_devices") == 0) return controller->getAudioDevices()->printInputDevices();
     if(extra.compare("output_devices") == 0) return controller->getAudioDevices()->printOutputDevices();
-    if(extra.compare("instruments") == 0) return controller->getInstruments()->printInstruments();
     if(extra.compare("units") == 0) return controller->getUnits()->printUnits();
     if(extra.compare("blocks") == 0) return controller->getBlocks()->printBlocks();
+    if(extra.compare("state") == 0) return controller->printState();
 }
 
 // ----------------------------------------------------------------
@@ -217,28 +215,6 @@ void AudioDevices::printOutputDevices() {
     
 }
 
-void Instruments::printInstruments() {
-    
-    std::cout << "\"instruments\":[";
-    
-    bool comma = false;
-    for(auto it = instruments.begin(); it != instruments.end(); ++it) {
-        Instrument* instrument = *it;
-        if(comma) std::cout << ","; else comma = true;
-        
-        std::cout << "{";
-        
-        std::cout << "\"id\":\"" << instrument->getId() << "\",";
-        std::cout << "\"key_output\":\"" << ((Unit*) (instrument->getKeyOutput()->pointer))->getId() << "\",";
-        std::cout << "\"output\":\"" << ((Unit*) (instrument->getOutput()->pointer))->getId() << "\"";
-        
-        std::cout << "}";
-    }
-    
-    std::cout << "]";
-    
-}
-
 void Units::printUnits() {
     
     std::cout << "\"units\":[";
@@ -264,7 +240,7 @@ void Unit::printUnit() {
     
     std::cout << "\"id\":\"" << id << "\",";
     std::cout << "\"type\":\"" << type << "\",";
-    std::cout << "\"keyDependent\": \"" << (keyDependent ? "true" : "false") << "\",";
+    std::cout << "\"keyDependent\":" << (keyDependent ? "true" : "false") << ",";
     std::cout << "\"parameters\":[";
     
     bool comma = false;
@@ -339,5 +315,15 @@ void Block::printBlock() {
     }
     
     std::cout << "]";
+    
+}
+
+void Controller::printState() {
+    
+    std::cout << "\"state\":{";
+    
+    std::cout << "\"playing\":" << (active ? "true" : "false");
+    
+    std::cout << "}";
     
 }

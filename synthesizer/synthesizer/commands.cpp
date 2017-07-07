@@ -13,8 +13,6 @@
 #define REGEX_UNIT_ID "\\w+"
 #define REGEX_UNIT_PARAMETER "\\w+"
 
-#define REGEX_INSTRUMENT_ID "\\w+"
-
 #define REGEX_BLOCK_ID "\\w+"
 #define REGEX_BLOCK_INPUT "\\w+"
 #define REGEX_BLOCK_OUTPUT "\\w+"
@@ -47,8 +45,7 @@ std::regex Commands::regexSetSustainPedalPolarity("^options_set_sustain_pedal_po
 std::regex Commands::regexSetPitchWheelRange("^options_set_pitch_wheel_range\\s+(\\d+)$");
 
 // Commands for controller
-std::regex Commands::regexStart("^start$");
-std::regex Commands::regexStop("^stop$");
+std::regex Commands::regexPlay("^play\\s+(start|stop|toggle)$");
 std::regex Commands::regexReset("^reset$");
 
 // Commands for status
@@ -56,14 +53,6 @@ std::regex Commands::regexStatus("^status\\s+([\\w\\s]+)$");
 
 // Commands for synths
 std::regex Commands::regexInclude("^include\\s+((?:\\w+" REGEX_DIRECTORY_SEPARATOR ")*\\w+(?:.\\w+)?)$");
-
-// Commands for instruments
-std::regex Commands::regexInstrumentCreate("^instrument_create\\s+(" REGEX_INSTRUMENT_ID ")$");
-std::regex Commands::regexInstrumentDelete("^instrument_delete\\s+(" REGEX_INSTRUMENT_ID ")$");
-std::regex Commands::regexInstrumentSetActive("^instrument_set_active\\s+(" REGEX_INSTRUMENT_ID ")\\s+(" REGEX_BOOLEAN ")$");
-std::regex Commands::regexInstrumentSetOutput("^instrument_set_output\\s+(" REGEX_INSTRUMENT_ID ")\\s+(" REGEX_PARAMETER_VALUE ")$");
-std::regex Commands::regexInstrumentSetKeyOutput("^instrument_set_key_output\\s+(" REGEX_INSTRUMENT_ID ")\\s+(" REGEX_PARAMETER_VALUE ")$");
-std::regex Commands::regexInstrumentSetKeyReleaseTime("^instrument_set_key_release_time\\s+(" REGEX_INSTRUMENT_ID ")\\s+(" REGEX_NUMBER ")$");
 
 // Commands for units
 std::regex Commands::regexUnitCreate("^unit_create\\s+(" REGEX_UNIT_TYPE ")\\s+(" REGEX_UNIT_ID ")\\s*(" REGEX_ARGUMENTS ")?$");

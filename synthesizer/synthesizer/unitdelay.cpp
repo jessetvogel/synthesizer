@@ -14,9 +14,6 @@ UnitDelay::UnitDelay(Controller* controller, Arguments arguments) : Unit(control
     n = arguments.getInteger("n", 1);
     double T = arguments.getDouble("T", 1.0);
     
-    // Delay's are not allowed to be key dependent
-    keyDependent = false;
-    
     // Set parameters
     parameters.push_back(input = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "input", "0.0"));
     parameters.push_back(gain = new Parameter(controller, keyDependent ? Parameter::UNIT : Parameter::UNIT_KEY_INDEPENDENT, "gain", "1.0"));
@@ -45,7 +42,7 @@ UnitDelay::~UnitDelay() {
     delete[] memory;
 }
 
-void UnitDelay::apply(Instrument* instrument) {
+void UnitDelay::apply() {
     Unit* input = (Unit*) (this->input->pointer);
     Unit* gain = (Unit*) (this->gain->pointer);
     Unit* feedback = (Unit*) (this->feedback->pointer);

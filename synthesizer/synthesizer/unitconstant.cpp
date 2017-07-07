@@ -16,9 +16,6 @@ UnitConstant::UnitConstant(Controller* controller, double value) : Unit(controll
     // Store value
     this->value = value;
     
-    // Constants are not key dependent
-    keyDependent = false;
-    
     // Hidden
     hidden = true;
     

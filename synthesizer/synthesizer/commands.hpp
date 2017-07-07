@@ -35,8 +35,7 @@ public:
     static std::regex regexSetPitchWheelRange;
     
     // Commands for controller
-    static std::regex regexStart;
-    static std::regex regexStop;
+    static std::regex regexPlay;
     static std::regex regexReset;
     
     // Commands for status
@@ -44,15 +43,7 @@ public:
     
     // Commands for synths
     static std::regex regexInclude;
-    
-    // Commands for instruments
-    static std::regex regexInstrumentCreate;
-    static std::regex regexInstrumentDelete;
-    static std::regex regexInstrumentSetActive;
-    static std::regex regexInstrumentSetOutput;
-    static std::regex regexInstrumentSetKeyOutput;
-    static std::regex regexInstrumentSetKeyReleaseTime;
-    
+        
     // Commands for units
     static std::regex regexUnitCreate;
     static std::regex regexUnitKeyCreate;
