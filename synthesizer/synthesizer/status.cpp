@@ -182,8 +182,9 @@ void AudioDevices::printInputDevices() {
             if(comma) std::cout << ","; else comma = true;
             std::cout << "{";
             
-            std::cout << "\"id\":" << i << ", ";
-            std::cout << "\"name\":\"" << AudioDevices::deviceName(i) << "\"";
+            std::cout << "\"id\":" << i << ",";
+            std::cout << "\"name\":\"" << AudioDevices::deviceName(i) << "\",";
+            std::cout << "\"active\":" << (inputDeviceId == i ? "true" : "false") << "";
             
             std::cout << "}";
         }
@@ -205,7 +206,8 @@ void AudioDevices::printOutputDevices() {
             std::cout << "{";
             
             std::cout << "\"id\":" << i << ",";
-            std::cout << "\"name\":\"" << AudioDevices::deviceName(i) << "\"";
+            std::cout << "\"name\":\"" << AudioDevices::deviceName(i) << "\",";
+            std::cout << "\"active\":" << (outputDeviceId == i ? "true" : "false") << "";
             
             std::cout << "}";
         }

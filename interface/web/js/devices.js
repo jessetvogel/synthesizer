@@ -57,6 +57,7 @@ var devices = {
         inputDevice.append($('<div>').addClass('audio-device-icon').append($('<div>').addClass('glyphicon glyphicon-volume-up')));
         inputDevice.append($('<div>').addClass('audio-device-name').text(data[i].name))
         inputDevice.append($('<div>').addClass('audio-device-options'));
+        if(data[i].active) inputDevice.addClass('list-item-selected');
 
         (function (n) {
           inputDevice.click(function () {
@@ -84,6 +85,7 @@ var devices = {
         outputDevice.append($('<div>').addClass('audio-device-icon').append($('<div>').addClass('glyphicon glyphicon-volume-up')));
         outputDevice.append($('<div>').addClass('audio-device-name').text(data[i].name))
         outputDevice.append($('<div>').addClass('audio-device-options'));
+        if(data[i].active) outputDevice.addClass('list-item-selected');
 
         (function (n) {
           outputDevice.click(function () {

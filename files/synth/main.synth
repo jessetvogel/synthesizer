@@ -39,4 +39,5 @@ include lead.synth
 
 # For testing purposes
 midi_add_device 1
-midi_add_device 2
+# midi_add_device 2
+play start

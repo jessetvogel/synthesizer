@@ -1,3 +1,13 @@
+.midi-devices {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.input-devices {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
 /* midi-device */
 .midi-device {
   display: flex;

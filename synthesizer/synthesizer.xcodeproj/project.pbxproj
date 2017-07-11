@@ -320,10 +320,10 @@
 			children = (
 				31D719551ECB04BA00A4C9E0 /* settings.cpp */,
 				31D719561ECB04BA00A4C9E0 /* settings.hpp */,
-				31D7197C1ECE2E4500A4C9E0 /* parser.cpp */,
-				31D7197D1ECE2E4500A4C9E0 /* parser.hpp */,
 				31D7197F1ECE317B00A4C9E0 /* commands.cpp */,
 				31D719801ECE317B00A4C9E0 /* commands.hpp */,
+				31D7197C1ECE2E4500A4C9E0 /* parser.cpp */,
+				31D7197D1ECE2E4500A4C9E0 /* parser.hpp */,
 			);
 			name = files;
 			sourceTree = "<group>";

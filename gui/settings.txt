@@ -1,0 +1,4 @@
+settings_set_sample_rate                44100
+settings_set_buffer_size                64
+
+settings_set_root_directory             /Users/jessetvogel/Projects/synthesizer/files/synth

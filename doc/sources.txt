@@ -30,3 +30,7 @@ General MIDI:
 https://www.midi.org/specifications/item/table-3-control-change-messages-data-bytes-2
 http://www.philrees.co.uk/nrpnq.htm
 http://koti.tnnet.fi/sphujala/axiom/Axiom_UG_EN.pdf
+
+
+Nativefier:
+https://github.com/jiahaog/nativefier

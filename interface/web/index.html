@@ -10,8 +10,9 @@
     <link rel="stylesheet" type="text/css" href="css/fonts.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/devices.css" />
+    <link rel="stylesheet" type="text/css" href="css/files.css" />
     <link rel="stylesheet" type="text/css" href="css/units.css" />
-    <link rel="stylesheet" type="text/css" href="css/file-explorer.css" />
+    <link rel="stylesheet" type="text/css" href="css/components.css" />
     <link rel="stylesheet" type="text/css" href="css/messages.css" />
 
     <!-- JS -->
@@ -22,7 +23,8 @@
     <script type="text/javascript" src="js/messages.js"></script>
     <script type="text/javascript" src="js/controls.js"></script>
     <script type="text/javascript" src="js/units.js"></script>
-    <script type="text/javascript" src="js/file-explorer.js"></script>
+    <script type="text/javascript" src="js/components.js"></script>
+    <script type="text/javascript" src="js/files.js"></script>
     <script type="text/javascript" src="js/devices.js"></script>
     <script type="text/javascript" src="js/state.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
@@ -34,19 +36,17 @@
       <div class="container-fluid">
         <div class="row row-no-padding">
           <div class="col-sm-12">
-            <div class="tile">
-              <div class="controls">
-                <div class="controls-button button controls-button-load"><span class="glyphicon glyphicon-folder-open"></span></div>
-                <div class="controls-button button controls-button-save"><span class="glyphicon glyphicon-floppy-disk"></span></div>
-                <div class="vertical-separator"></div>
-                <div class="controls-button button controls-button-play"><span class="glyphicon glyphicon-play"></span></div>
-                <div class="vertical-separator"></div>
-                <div class="controls-button button controls-button-components"><span class="	glyphicon glyphicon-th"></span></div>
-                <div class="controls-button button controls-button-devices"><span class="glyphicon glyphicon-volume-up"></span></div>
-                <div class="controls-button button controls-button-options"><span class="glyphicon glyphicon-cog"></span></div>
-                <div class="vertical-separator"></div>
-                <div class="controls-button button controls-button-fullscreen"><span class="glyphicon glyphicon-fullscreen"></span></div>
-              </div>
+            <div class="tile controls">
+              <div class="controls-button button controls-button-load"><label><input type="file" id="file-load"/><span class="glyphicon glyphicon-folder-open"></span></label></div>
+              <div class="controls-button button controls-button-save"><span class="glyphicon glyphicon-floppy-disk"></span></div>
+              <div class="vertical-separator"></div>
+              <div class="controls-button button controls-button-play"><span class="glyphicon glyphicon-play"></span></div>
+              <div class="vertical-separator"></div>
+              <div class="controls-button button controls-button-components"><span class="	glyphicon glyphicon-th"></span></div>
+              <div class="controls-button button controls-button-devices"><span class="glyphicon glyphicon-volume-up"></span></div>
+              <div class="controls-button button controls-button-options"><span class="glyphicon glyphicon-cog"></span></div>
+              <div class="vertical-separator"></div>
+              <div class="controls-button button controls-button-fullscreen"><span class="glyphicon glyphicon-fullscreen"></span></div>
             </div>
           </div>
         </div>
@@ -55,21 +55,21 @@
       <div class="container-fluid" id="views">
         <div class="row row-no-padding" id="devices">
           <div class="col-sm-4">
-            <div class="tile">
+            <div class="tile midi-devices">
               <div class="tile-header">MIDI devices</div>
               <!-- <div class="tile-separator"></div> -->
               <div class="midi-device-container"></div>
             </div>
           </div>
           <div class="col-sm-4">
-            <div class="tile">
+            <div class="tile output-devices">
               <div class="tile-header">Output devices</div>
               <!-- <div class="tile-separator"></div> -->
               <div class="output-device-container"></div>
             </div>
           </div>
           <div class="col-sm-4">
-            <div class="tile">
+            <div class="tile input-devices">
               <div class="tile-header">Input devices</div>
               <!-- <div class="tile-separator"></div> -->
               <div class="input-device-container"></div>
@@ -77,11 +77,10 @@
           </div>
         </div>
 
-        <div class="row row-no-padding" id="components">
+        <!-- <div class="row row-no-padding" id="components">
           <div class="col-sm-12">
             <div class="tile">
-              <div class="tile-header">Units</div>
-              <!-- <div class="tile-separator"></div> -->
+              <div class="tile-header">Components</div>
               <div class="unit-content">
                 <div class="toolbar">
                   <div class="toolbar-button button"><span class="glyphicon glyphicon-plus"></span></div>
@@ -95,10 +94,36 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="row row-no-padding" id="options">
           Options. TODO
+        </div>
+
+        <div class="row row-no-padding" id="components">
+          <div class="col-sm-12">
+            <div class="tile component-list-container">
+              <div class="tile-header">Units</div>
+              <div class="component-list">
+                <div class="list-item">oscillator</div>
+                <div class="list-item">adder</div>
+                <div class="list-item">audio_output</div>
+              </div>
+              <div class="tile-separator"></div>
+              <div class="tile-header">Blocks</div>
+              <div class="component-list">
+                <div class="list-item">vocoder</div>
+                <div class="list-item">wahwah</div>
+                <div class="list-item">nogiets?</div>
+              </div>
+            </div>
+            <div class="tile component-view"></div>
+            <div class="tile component-parameters">
+              <div class="tile-header">Parameters</div>
+              <div class="tile-separator"></div>
+              <div class="component-parameter-list"></div>
+            </div>
+          </div>
         </div>
 
       </div>

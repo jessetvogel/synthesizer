@@ -1,9 +1,11 @@
 $(document).ready(function () {
   // Initialize everything
   controls.initialize();
+  files.initialize();
   devices.refreshAllDevices();
   units.refreshUnits();
   state.refreshState();
+  components.initialize();
 
   // By default, click units button
   $('.controls-button-units').click();

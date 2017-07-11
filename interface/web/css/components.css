@@ -1,0 +1,43 @@
+#components > div {
+  display: flex;
+  height: 512px;
+}
+
+.component-list-container {
+  width: 256px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.component-parameters {
+  display: none;
+  width: 256px;
+  margin-right: 16px;
+}
+
+.component-view {
+  flex-grow: 1;
+  height: 100%;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+  background-size: 64px 64px;
+  overflow: hidden;
+  position: relative;
+  margin-right: 16px;
+}
+
+.component-list .list-item {
+  height: 48px;
+  line-height: 48px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.component-view .component {
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  line-height: 65px;
+  background-color: rgb(235, 176, 45);
+  cursor: pointer;
+  text-align: center;
+}

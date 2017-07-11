@@ -1,0 +1,130 @@
+@font-face {
+    src: url('../fonts/museosans-500.otf');
+}
+
+.root {
+    -fx-background-color: linear-gradient(to bottom right, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+    -fx-font-family: 'Museo Sans';
+    -fx-padding: 16;
+}
+
+.menu-wrapper {
+
+}
+
+.menu {
+  -fx-background-color: rgba(0, 0, 0, 0.2);
+  -fx-padding: 0;
+  /*-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 2, 2); TODO */
+}
+
+.menu .button {
+  -fx-min-width: 64;
+  -fx-pref-width: 100000000; /* TODO: change to Double.MAX */
+  -fx-pref-height: 64;
+  /*-fx-border-width: 0;*/
+  -fx-text-fill: transparent;
+
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-color: transparent;
+  -fx-background-size: 20px;
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+}
+
+.menu .button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.24);
+}
+
+.menu .button:pressed {
+    -fx-background-color: rgba(0, 0, 0, 0.24);
+}
+
+#buttonNew { -fx-background-image: url('../img/new.png'); }
+#buttonOpen { -fx-background-image: url('../img/open.png'); }
+#buttonSave { -fx-background-image: url('../img/save.png'); }
+#buttonPlay { -fx-background-image: url('../img/play.png'); }
+#buttonSettings { -fx-background-image: url('../img/settings.png'); }
+#buttonComponents { -fx-background-image: url('../img/grid.png'); }
+#buttonDevices { -fx-background-image: url('../img/volumeup.png'); }
+
+
+
+
+
+
+.component-list-container {
+  -fx-background-color: rgba(0, 0, 0, 0.24);
+  -fx-pref-width: 192;
+}
+
+.component-list-container .choice-box {
+  -fx-pref-width: 192;
+  -fx-pref-height: 48;
+  -fx-padding: 0;
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-color: rgba(255, 255, 255, 0.24);
+  -fx-cursor: hand;
+  -fx-mark-color: white;
+}
+
+.component-list-container .choice-box .list-cell {
+  -fx-pref-width: 192;
+  -fx-pref-height: 48;
+}
+
+.component-list-container .choice-box .label {
+  -fx-font-size: 16;
+  -fx-text-fill: white;
+}
+
+.component-list-container .choice-box .context-menu {
+  -fx-padding: 0;
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-color: rgba(0, 0, 0, 0.24);
+}
+
+.component-list-container .choice-box .menu-item {
+  -fx-pref-height: 48px;
+}
+
+.component-list-container .choice-box .menu-item:hover {
+  -fx-background-color: rgba(255, 255, 255, 0.24);
+}
+
+.list-view {
+  -fx-padding: 0;
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-color: transparent;
+}
+
+.list-cell {
+  -fx-cell-size: 48;
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-color: transparent;
+  -fx-font-size: 16;
+  -fx-text-fill: white;
+  -fx-cursor: hand;
+}
+
+.list-cell:hover {
+  -fx-background-color: rgba(255, 255, 255, 0.24);
+}
+
+.list-view .scroll-bar .increment-arrow,
+.list-view .scroll-bar .decrement-arrow,
+.list-view .scroll-bar .increment-button,
+.list-view .scroll-bar .decrement-button {
+    -fx-padding:0;
+}
+
+.pane {
+  -fx-background-color: rgba(0, 0, 0, 0.24);
+  -fx-background-image: url('../img/background-pane.png');
+  -fx-background-repeat: repeat;
+}
