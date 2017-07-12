@@ -5,21 +5,24 @@
 
 #include "status.hpp"
 
-Settings::Settings() {
+Settings::Settings(std::string filepath) {
     // Set default values
     sampleRate = DEFAULT_SAMPLE_RATE;
     bufferSize = DEFAULT_BUFFER_SIZE;
     
-    rootDirectory = DEFAULT_ROOT_DIRECTORY;
+    if(filepath.length() == 0) {
+        Status::addWarning("No settings were provided");
+        return;
+    }
     
     // Load settings
-    if(!load())
+    if(!load(filepath))
         Status::addError("Failed to load settings");
 }
 
-bool Settings::load() {
+bool Settings::load(std::string filepath) {
     // Read file line by line, and parse them
-    std::ifstream input(SETTINGS_PATH);
+    std::ifstream input(filepath);
     if(input.fail()) {
         Status::addError("Failed to open settings file");
         return false;
@@ -53,22 +56,17 @@ bool Settings::parseLine(std::string line) {
     
     // Settings
     
-    // settings_set_sample_rate <value>
-    if(std::regex_search(str, cm, Commands::regexSetSampleRate)) {
-        sampleRate = stod(cm[1]);
-        return true;
-    }
-    
-    // settings_set_buffer_size <value>
-    if(std::regex_search(str, cm, Commands::regexSetBufferSize)) {
-        bufferSize = stoi(cm[1]);
-        return true;
-    }
-    
-    // settings_set_root_directory <directory>
-    if(std::regex_search(str, cm, Commands::regexSetRootDirectory)) {
-        rootDirectory = cm[1];
-        return true;
+    // settings_set <parameter> <value>
+    if(std::regex_search(str, cm, Commands::regexSettingsSet)) {
+        if(cm[1].compare("sample_rate") == 0) {
+            sampleRate = stod(cm[2]);
+            return true;
+        }
+        
+        if(cm[1].compare("buffer_size") == 0) {
+            bufferSize = stoi(cm[2]);
+            return true;
+        }
     }
     
     Status::addError("Command not recognised");

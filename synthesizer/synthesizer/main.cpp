@@ -17,7 +17,8 @@ void destruct();
 
 int main(int argc, char *argv[]) {
     // Load settings
-    Settings settings;
+    std::string settingsPath = argc > 1 ? argv[1] : "";
+    Settings settings(settingsPath);
     
     // Initialize
     initialize();
@@ -27,7 +28,7 @@ int main(int argc, char *argv[]) {
     
     // Load settings
     Parser parser(&controller);
-    parser.setDirectory(settings.rootDirectory);
+    parser.setDirectory("");
     
     Status::addInfo("Program started");
     Status::print(&controller);

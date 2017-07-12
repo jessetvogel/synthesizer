@@ -26,9 +26,7 @@ public:
     static std::regex regexAudioSetOutputDevice;
     
     // Commands for settings
-    static std::regex regexSetSampleRate;
-    static std::regex regexSetBufferSize;
-    static std::regex regexSetRootDirectory;
+    static std::regex regexSettingsSet;
     
     // Commands for options
     static std::regex regexSetSustainPedalPolarity;

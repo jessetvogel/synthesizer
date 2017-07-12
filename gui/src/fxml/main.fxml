@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -8,29 +9,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="16.0" styleClass="menu-wrapper" stylesheets="@../css/main.css" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.jessevogel.synthesizer.gui.ControllerMain">
-     <children>
-        <HBox styleClass="menu">
-           <children>
-              <Button fx:id="buttonNew" mnemonicParsing="false" onAction="#buttonClick" styleClass="menu-button" text="New" />
-              <Button fx:id="buttonOpen" mnemonicParsing="false" onAction="#buttonClick" styleClass="menu-button" text="Open" />
-              <Button fx:id="buttonSave" mnemonicParsing="false" onAction="#buttonClick" styleClass="menu-button" text="Save" />
-              <Button fx:id="buttonPlay" mnemonicParsing="false" onAction="#buttonClick" styleClass="menu-button" text="Play" />
-              <Button fx:id="buttonComponents" mnemonicParsing="false" onAction="#buttonClick" styleClass="menu-button" text="Components" />
-              <Button fx:id="buttonDevices" mnemonicParsing="false" onAction="#buttonClick" styleClass="menu-button" text="Devices" />
-              <Button fx:id="buttonSettings" mnemonicParsing="false" onAction="#buttonClick" styleClass="menu-button" text="Settings" />
-           </children>
-        </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" spacing="16.0" VBox.vgrow="ALWAYS">
-         <children>
-            <VBox styleClass="component-list-container">
-               <children>
-                  <ChoiceBox prefWidth="150.0" />
-                  <ListView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-               </children>
-            </VBox>
-            <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="pane" HBox.hgrow="ALWAYS" />
-         </children>
-      </HBox>
-     </children>
-  </VBox>
+
+<VBox prefHeight="400.0" prefWidth="600.0" spacing="16.0" styleClass="content" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.jessevogel.synthesizer.gui.controllers.ControllerMain">
+    <children>
+        <fx:include source="menu.fxml" />
+        <fx:include source="components.fxml" />
+    </children>
+</VBox>

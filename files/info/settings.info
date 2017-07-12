@@ -1,0 +1,2 @@
+settings_set sample_rate                44100
+settings_set buffer_size                64

@@ -6,7 +6,6 @@
 
 #define DEFAULT_SAMPLE_RATE (44100)
 #define DEFAULT_BUFFER_SIZE (64)
-#define DEFAULT_ROOT_DIRECTORY "/Users/Jesse/Projects/synthesizer/files/synth"
 
 #define SETTINGS_PATH "settings.txt"
 
@@ -14,17 +13,15 @@
 
 class Settings {
    
-    bool load();
+    bool load(std::string);
     bool parseLine(std::string);
     
 public:
     
-    Settings();
+    Settings(std::string);
     
     double sampleRate;
     unsigned long bufferSize;
-    
-    std::string rootDirectory;
     
 };
 

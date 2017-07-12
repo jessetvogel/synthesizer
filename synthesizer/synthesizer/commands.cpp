@@ -36,9 +36,7 @@ std::regex Commands::regexAudioSetInputDevice("^audio_set_input_device\\s+(" REG
 std::regex Commands::regexAudioSetOutputDevice("^audio_set_output_device\\s+(" REGEX_AUDIO_DEVICE ")$");
 
 // Commands for settings
-std::regex Commands::regexSetSampleRate("^settings_set_sample_rate\\s+(" REGEX_SAMPLE_RATE ")$");
-std::regex Commands::regexSetBufferSize("^settings_set_buffer_size\\s+(" REGEX_BUFFER_SIZE ")$");
-std::regex Commands::regexSetRootDirectory("^settings_set_root_directory\\s+(.+)$");
+std::regex Commands::regexSettingsSet("^settings_set\\s+(\\w+)\\s+(" REGEX_SAMPLE_RATE ")$");
 
 // Commands for options
 std::regex Commands::regexSetSustainPedalPolarity("^options_set_sustain_pedal_polarity\\s+(" REGEX_SUSTAIN_PEDAL_POLARITY ")$");

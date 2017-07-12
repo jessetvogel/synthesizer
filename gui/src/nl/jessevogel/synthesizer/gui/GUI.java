@@ -3,27 +3,39 @@ package nl.jessevogel.synthesizer.gui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import nl.jessevogel.synthesizer.gui.controllers.ControllerComponents;
+import nl.jessevogel.synthesizer.main.Controller;
 
 public class GUI extends Application {
+    public static Controller controller;
+    public static Stage stage;
+
+    public static ControllerComponents controllerComponents;
 
     @Override
-    public void start(Stage window) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
+        // Store stage
+        GUI.stage = primaryStage;
 
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/main.fxml")));
-//        scene.getStylesheets().add("css/main.css");
+        // Load main fxml
+        Pane pane = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
 
-        window.setMaximized(true);
-        window.setMinWidth(640);
-        window.setMinHeight(480);
-        window.setScene(scene);
-        window.show();
+        // Create scene and show window
+        Scene scene = new Scene(pane);
+        primaryStage.setMaximized(true);
+        primaryStage.setMinWidth(640);
+        primaryStage.setMinHeight(480);
+        primaryStage.setScene(scene);
 
-        ControllerMain.stage = window;
+        scene.setOnKeyPressed(event -> KeyboardHandler.handle(event));
 
+        primaryStage.show();
     }
 
-    public static void startup(String[] args) {
+    public static void startup(Controller controller, String[] args) {
+        GUI.controller = controller;
         launch(args);
     }
 }
