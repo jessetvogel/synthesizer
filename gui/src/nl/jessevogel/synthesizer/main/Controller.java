@@ -1,14 +1,16 @@
 package nl.jessevogel.synthesizer.main;
 
-import nl.jessevogel.synthesizer.gui.GUI;
-import nl.jessevogel.synthesizer.synth.Components;
-import nl.jessevogel.synthesizer.synth.Data;
+import nl.jessevogel.synthesizer.synth.data.Components;
+import nl.jessevogel.synthesizer.synth.info.ComponentTypes;
+import nl.jessevogel.synthesizer.synth.info.Info;
 import nl.jessevogel.synthesizer.synth.Interface;
 
 public class Controller {
-    private Data data;
-    private Components components;
+    private Info info;
+    private ComponentTypes componentTypes;
     private Interface inter;
+    private Components components;
+
 
     public Controller() {
         initialize();
@@ -16,12 +18,14 @@ public class Controller {
 
     private void initialize() {
         // Create instances
-        data = new Data(this, "/Users/jessetvogel/Projects/synthesizer/files/");
-        components = new Components(this);
+        info = new Info(this, "/Users/jessetvogel/Projects/synthesizer/files/");
+        componentTypes = new ComponentTypes(this);
         inter = new Interface(this);
+        components = new Components(this);
     }
 
-    public Data getData() {return data; }
-    public Components getComponents() {return components; }
+    public Info getInfo() {return info; }
+    public ComponentTypes getComponentTypes() {return componentTypes; }
     public Interface getInterface() { return inter; }
+    public Components getComponents() { return components; }
 }

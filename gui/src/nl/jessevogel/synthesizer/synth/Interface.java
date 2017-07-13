@@ -20,7 +20,8 @@ public class Interface {
 
     public boolean start() {
         try {
-            String settingsPath = controller.getData().getSettingsPath();
+            String settingsPath = controller.getInfo().getSettingsPath();
+            System.out.println(settingsPath);
             process = Runtime.getRuntime().exec ("./synthesizer " + settingsPath); // TODO
             input = new BufferedReader(new InputStreamReader(process.getInputStream()));
             output = new PrintWriter(process.getOutputStream());
@@ -46,6 +47,7 @@ public class Interface {
     }
 
     public Response command(String command) {
+        System.out.println("[COMMAND] " + command);
         try {
             output.write(command + "\n");
             output.flush();

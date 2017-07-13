@@ -1,15 +1,15 @@
-package nl.jessevogel.synthesizer.synth;
+package nl.jessevogel.synthesizer.synth.info;
 
 import nl.jessevogel.synthesizer.main.Controller;
 
-public class Data {
+public class Info {
     private static final String FILE_SETTINGS = "info/settings.info";
 
     private Controller controller;
     private String directory;
     private String settingsPath;
 
-    public Data(Controller controller, String directory) {
+    public Info(Controller controller, String directory) {
         this.controller = controller;
         this.directory = directory;
         initialize();

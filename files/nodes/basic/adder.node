@@ -1,0 +1,3 @@
+# require (int size "Size", bool key "Key node")
+
+node_create adder $id [n = $size, key = $key]

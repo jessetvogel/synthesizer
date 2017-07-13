@@ -1,0 +1,26 @@
+# require ( int n, double m, bool k )
+
+node_create		custom		$id
+
+...
+
+node_add_input		$id		input_label		abc[@<>!$%^-]frequency
+...
+
+node_add_output		$id		output_label		def:output
+
+
+
+node_attach		$id		abc
+node_attach		$id		def
+...
+
+
+
+------------------------------------------------------------------------------------
+
+# For a basic node (units)
+
+# require (int size "Size", bool key "Key node")
+
+node_create adder $id [n = $size, key = $key]

@@ -34,7 +34,7 @@ public class GUI extends Application {
         primaryStage.show();
     }
 
-    public static void startup(Controller controller, String[] args) {
+    public static void initialize(Controller controller, String[] args) {
         GUI.controller = controller;
         launch(args);
     }
