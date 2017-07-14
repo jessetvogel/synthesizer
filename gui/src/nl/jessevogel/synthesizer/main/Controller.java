@@ -18,7 +18,7 @@ public class Controller {
 
     private void initialize() {
         // Create instances
-        info = new Info(this, "/Users/jessetvogel/Projects/synthesizer/files/");
+        info = new Info(this, "/Users/Jesse/Projects/synthesizer/files/");
         componentTypes = new ComponentTypes(this);
         inter = new Interface(this);
         components = new Components(this);

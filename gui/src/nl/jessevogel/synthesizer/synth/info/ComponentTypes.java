@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class ComponentTypes {
-    private static final String COMPONENTS_DIRECTORY = "components";
+    private static final String COMPONENTS_DIRECTORY = "nodes";
     private static final String EXTENSION = "block";
 
     private Controller controller;

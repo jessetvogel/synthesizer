@@ -1,0 +1,23 @@
+GUI Controllers:
+
+- Main window
+	- Main (?)
+	- Menu
+	- Components (may split up into)
+		- List
+		- Grid
+		- Parameters
+
+- Separate windows
+
+	- Settings
+	- Node options window
+
+
+Node related classes:
+
+	- Node type controller
+	- Node controller
+	- Node (file) loader/importer
+	- Node parameter 'requester' (?)
+
