@@ -1,0 +1,10 @@
+{
+    "name": "oscillator",
+    "group": "basic",
+    "options": [
+        { "label": "key", "type": "bool", "description": "Key node" },
+    ],
+    "files": [
+        "main.node"
+    ]
+}

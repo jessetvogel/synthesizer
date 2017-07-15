@@ -1,15 +1,15 @@
 package nl.jessevogel.synthesizer.main;
 
-import nl.jessevogel.synthesizer.synth.data.Components;
-import nl.jessevogel.synthesizer.synth.info.ComponentTypes;
-import nl.jessevogel.synthesizer.synth.info.Info;
-import nl.jessevogel.synthesizer.synth.Interface;
+import nl.jessevogel.synthesizer.structure.data.Nodes;
+import nl.jessevogel.synthesizer.structure.info.NodeTypes;
+import nl.jessevogel.synthesizer.structure.info.Info;
+import nl.jessevogel.synthesizer.structure.Interface;
 
 public class Controller {
     private Info info;
-    private ComponentTypes componentTypes;
+    private NodeTypes nodeTypes;
     private Interface inter;
-    private Components components;
+    private Nodes nodes;
 
 
     public Controller() {
@@ -18,14 +18,14 @@ public class Controller {
 
     private void initialize() {
         // Create instances
-        info = new Info(this, "/Users/Jesse/Projects/synthesizer/files/");
-        componentTypes = new ComponentTypes(this);
+        info = new Info(this, System.getProperty("user.home") + "/Projects/synthesizer/files/");
+        nodeTypes = new NodeTypes(this);
         inter = new Interface(this);
-        components = new Components(this);
+        nodes = new Nodes(this);
     }
 
     public Info getInfo() {return info; }
-    public ComponentTypes getComponentTypes() {return componentTypes; }
+    public NodeTypes getNodeTypes() {return nodeTypes; }
     public Interface getInterface() { return inter; }
-    public Components getComponents() { return components; }
+    public Nodes getNodes() { return nodes; }
 }

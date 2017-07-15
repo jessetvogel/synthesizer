@@ -1,0 +1,11 @@
+{
+    "name": "adder",
+    "group": "basic",
+    "options": [
+        { "label": "n", "type": "int", "description": "Size of adder" },
+        { "label": "key", "type": "bool", "description": "Key node" },
+    ],
+    "files": [
+        "main.node"
+    ]
+}

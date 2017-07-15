@@ -13,7 +13,7 @@ public class KeyboardHandler {
                 if(event.getCode() == KeyCode.A) dx = 1.0;
                 if(event.getCode() == KeyCode.S) dy = -1.0;
                 if(event.getCode() == KeyCode.D) dx = -1.0;
-                GUI.controllerComponents.shiftView(dx * 64.0, dy * 64.0);
+                GUI.controllerNodeGrid.shift(dx * 32.0, dy * 32.0);
                 break;
         }
     }

@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import nl.jessevogel.synthesizer.gui.controllers.ControllerComponents;
+import nl.jessevogel.synthesizer.gui.controllers.ControllerNodeGrid;
 import nl.jessevogel.synthesizer.main.Controller;
 
 public class GUI extends Application {
@@ -13,6 +14,7 @@ public class GUI extends Application {
     public static Stage stage;
 
     public static ControllerComponents controllerComponents;
+    public static ControllerNodeGrid controllerNodeGrid;
 
     @Override
     public void start(Stage primaryStage) throws Exception {

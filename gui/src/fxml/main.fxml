@@ -13,6 +13,6 @@
 <VBox prefHeight="400.0" prefWidth="600.0" spacing="16.0" styleClass="content" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.jessevogel.synthesizer.gui.controllers.ControllerMain">
     <children>
         <fx:include source="menu.fxml" />
-        <fx:include source="components.fxml" />
+        <fx:include source="nodes.fxml" />
     </children>
 </VBox>
