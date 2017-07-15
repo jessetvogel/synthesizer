@@ -2,9 +2,9 @@
 
 #include "midistate.hpp"
 #include "controller.hpp"
-#include "units.hpp"
+#include "nodes.hpp"
 #include "options.hpp"
-#include "unitparameter.hpp"
+#include "nodeparameter.hpp"
 
 MidiState::MidiState(Controller* controller) {
     // Store pointer to controller
@@ -30,7 +30,7 @@ MidiState::MidiState(Controller* controller) {
 }
 
 void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned char data2) {
-    UnitParameter* parameter;
+    NodeParameter* parameter;
     
     unsigned char type = status >> 4;
 //    unsigned char channel = status & 0xF; // Don't need channels for now
@@ -62,8 +62,8 @@ void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned cha
                     return;
             }
             
-            // If not one of the default, set belonging UnitParameter if it exists
-            parameter = controller->getUnits()->getParameter(data1);
+            // If not one of the default, set belonging NodeParameter if it exists
+            parameter = controller->getNodes()->getNodeParameter(data1);
             if(parameter == NULL) return;
             parameter->setValue((double) data2 / 127.0);
             return;
@@ -99,7 +99,7 @@ void MidiState::update() {
             keyEvent.stage = KeyEvent::Press;
             keyEvent.duration = 0.0;
             keyEvent.release = 0.0;
-            controller->getUnits()->addKeyEvent(&keyEvent);
+            controller->getNodes()->addKeyEvent(&keyEvent);
             
             // Whenever pressed, reset the keyDuration
             keyDuration[i] = 0.0;

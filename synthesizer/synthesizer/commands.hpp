@@ -42,20 +42,18 @@ public:
     // Commands for synths
     static std::regex regexInclude;
         
-    // Commands for units
-    static std::regex regexUnitCreate;
-    static std::regex regexUnitKeyCreate;
-    static std::regex regexUnitRename;
-    static std::regex regexUnitDelete;
-    static std::regex regexUnitHide;
-    static std::regex regexUnitSet;
+    // Commands for nodes
+    static std::regex regexNodeCreate;
+    static std::regex regexNodeKeyCreate;
+    static std::regex regexNodeRename;
+    static std::regex regexNodeDelete;
+    static std::regex regexNodeHide;
+    static std::regex regexNodeSet;
     
-    // Commands for blocks
-    static std::regex regexBlockCreate;
-    static std::regex regexBlockDelete;
-    static std::regex regexBlockAddInput;
-    static std::regex regexBlockAddOutput;
-    static std::regex regexBlockSet;
+    // Commands for custom nodes
+    static std::regex regexNodeAddInput;
+    static std::regex regexNodeAddOutput;
+    static std::regex regexNodeAttach;
 
 };
 

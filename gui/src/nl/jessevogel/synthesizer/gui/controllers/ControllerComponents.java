@@ -23,13 +23,13 @@ public class ControllerComponents {
 
     @FXML public void initialize() {
         GUI.controllerComponents = this;
-        NodeTypes components = GUI.controller.getNodeTypes();
-        choiceBoxComponentGroup.getItems().addAll(components.groups);
+        NodeTypes nodeTypes = GUI.controller.getNodeTypes();
+        choiceBoxComponentGroup.getItems().addAll(nodeTypes.groups);
         choiceBoxComponentGroup.setOnAction(event -> {
             String group = choiceBoxComponentGroup.getValue();
             ObservableList<String> list = listViewComponents.getItems();
             list.clear();
-            for(NodeType nodeType : components.types) {
+            for(NodeType nodeType : nodeTypes.types) {
                 if(!nodeType.group.equals(group)) continue;
                 list.add(nodeType.name);
             }

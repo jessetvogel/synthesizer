@@ -1,26 +1,26 @@
-unit_create ADSR envelope [key = true]
-unit_set envelope attack_time     0.05
-unit_set envelope decay_time      0.1
-unit_set envelope sustain_level   0.5
-unit_set envelope release_time    1.0
-unit_set envelope attack_curve     quartout
-unit_set envelope decay_curve      quartout
-unit_set envelope release_curve    quartout
+node_create ADSR envelope [key = true]
+node_set envelope.attack_time     0.05
+node_set envelope.decay_time      0.1
+node_set envelope.sustain_level   0.5
+node_set envelope.release_time    1.0
+node_set envelope.attack_curve    quartout
+node_set envelope.decay_curve     quartout
+node_set envelope.release_curve   quartout
 
-unit_create oscillator wave [key = true]
-unit_set wave sample              sine
-unit_set wave amplitude           envelope
-unit_set wave frequency           key_frequency
+node_create oscillator wave [key = true]
+node_set wave.sample              sine
+node_set wave.amplitude           envelope
+node_set wave.frequency           key_frequency
 
-unit_create adder x [key = true, n = 1]
-unit_set x input_1                wave
-unit_set x gain_1                 key_velocity
+node_create adder x [key = true, n = 1]
+node_set x.input_1                wave
+node_set x.gain_1                 key_velocity
 
-unit_create collector c
-unit_set c input                  x
+node_create collector c
+node_set c.input                  x
 
-unit_create audio_output output
-unit_set output channel_1         c
+node_create audio_output output
+node_set output.channel_1         c
 
 midi_add_device 1
 play start

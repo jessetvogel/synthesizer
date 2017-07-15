@@ -9,20 +9,19 @@
 
 #define REGEX_SUSTAIN_PEDAL_POLARITY "normal|inverted"
 
-#define REGEX_UNIT_TYPE "\\w+"
-#define REGEX_UNIT_ID "\\w+"
-#define REGEX_UNIT_PARAMETER "\\w+"
+#define REGEX_LABEL "\\w+"
 
-#define REGEX_BLOCK_ID "\\w+"
-#define REGEX_BLOCK_INPUT "\\w+"
-#define REGEX_BLOCK_OUTPUT "\\w+"
+#define REGEX_NODE_TYPE "\\w+"
+#define REGEX_NODE_ID "\\w+"
+#define REGEX_NODE_INPUT REGEX_NODE_ID "\\." REGEX_LABEL
+#define REGEX_NODE_OUTPUT REGEX_NODE_ID "(?::" REGEX_LABEL ")?"
 
 #define REGEX_BOOLEAN "true|false"
 #define REGEX_NUMBER "[-+]?[0-9]+(?:\\.[0-9]+)?"
 
-#define REGEX_ARGUMENTS "\\[\\w+\\s*=\\s*[\\w.\\-+]+(?:,\\s*\\w+\\s*=\\s*[\\w.\\-+]+)*\\]"
+#define REGEX_OPTIONS "\\[\\w+\\s*=\\s*[\\w.\\-+]+(?:,\\s*\\w+\\s*=\\s*[\\w.\\-+]+)*\\]"
 
-#define REGEX_PARAMETER_VALUE REGEX_UNIT_ID "|" REGEX_NUMBER "|" REGEX_BLOCK_ID ":" REGEX_BLOCK_OUTPUT
+#define REGEX_VALUE REGEX_NODE_OUTPUT "|" REGEX_NUMBER "|" REGEX_LABEL
 
 // Remove all surrounding whitespace and comments
 std::regex Commands::regexPreprocess("^\\s*(.*?)\\s*(?:#.*)?$");
@@ -50,18 +49,16 @@ std::regex Commands::regexReset("^reset$");
 std::regex Commands::regexStatus("^status\\s+([\\w\\s]+)$");
 
 // Commands for synths
-std::regex Commands::regexInclude("^include\\s+((?:\\w+" REGEX_DIRECTORY_SEPARATOR ")*\\w+(?:.\\w+)?)$");
+std::regex Commands::regexInclude("^include\\s+(?:" REGEX_DIRECTORY_SEPARATOR ")?((?:\\w+" REGEX_DIRECTORY_SEPARATOR ")*\\w+(?:.\\w+)?)$"); // TODO
 
-// Commands for units
-std::regex Commands::regexUnitCreate("^unit_create\\s+(" REGEX_UNIT_TYPE ")\\s+(" REGEX_UNIT_ID ")\\s*(" REGEX_ARGUMENTS ")?$");
-std::regex Commands::regexUnitRename("^unit_rename\\s+(" REGEX_UNIT_ID ")\\s+(" REGEX_UNIT_ID ")$");
-std::regex Commands::regexUnitDelete("^unit_delete\\s+(" REGEX_UNIT_ID ")$");
-std::regex Commands::regexUnitHide("^unit_hide\\s+(" REGEX_UNIT_ID ")$");
-std::regex Commands::regexUnitSet("^unit_set\\s+(" REGEX_UNIT_ID ")\\s+(" REGEX_UNIT_PARAMETER ")\\s+(" REGEX_PARAMETER_VALUE ")$");
+// Commands for nodes
+std::regex Commands::regexNodeCreate("^node_create\\s+(" REGEX_NODE_TYPE ")\\s+(" REGEX_NODE_ID ")\\s*(" REGEX_OPTIONS ")?$");
+std::regex Commands::regexNodeRename("^node_rename\\s+(" REGEX_NODE_ID ")\\s+(" REGEX_NODE_ID ")$");
+std::regex Commands::regexNodeDelete("^node_delete\\s+(" REGEX_NODE_ID ")$");
+std::regex Commands::regexNodeSet("^node_set\\s+(" REGEX_NODE_INPUT ")\\s+(" REGEX_VALUE ")$");
+std::regex Commands::regexNodeHide("^node_hide\\s+(" REGEX_NODE_ID ")$");
 
-// Commands for blocks
-std::regex Commands::regexBlockCreate("^block_create\\s+(" REGEX_BLOCK_ID ")$");
-std::regex Commands::regexBlockDelete("^block_delete\\s+(" REGEX_BLOCK_ID ")$");
-std::regex Commands::regexBlockAddInput("^block_add_input\\s+(" REGEX_BLOCK_ID ")\\s+(" REGEX_BLOCK_INPUT ")\\s+(" REGEX_UNIT_ID ")\\s+(" REGEX_UNIT_PARAMETER ")$");
-std::regex Commands::regexBlockAddOutput("^block_add_output\\s+(" REGEX_BLOCK_ID ")\\s+(" REGEX_BLOCK_OUTPUT ")\\s+(" REGEX_UNIT_ID ")$");
-std::regex Commands::regexBlockSet("^block_set\\s+(" REGEX_BLOCK_ID ")\\s+(" REGEX_BLOCK_INPUT ")\\s+(" REGEX_PARAMETER_VALUE ")$");
+// Commands for custom nodes
+std::regex Commands::regexNodeAddInput("^node_add_input\\s+(" REGEX_NODE_ID ")\\s+(" REGEX_LABEL ")\\s+(" REGEX_NODE_INPUT ")$");
+std::regex Commands::regexNodeAddOutput("^node_add_output\\s+(" REGEX_NODE_ID ")\\s+(" REGEX_LABEL ")\\s+(" REGEX_NODE_OUTPUT ")$");
+std::regex Commands::regexNodeAttach("^node_attach\\s+(" REGEX_NODE_ID ")\\s+(" REGEX_NODE_ID ")$");

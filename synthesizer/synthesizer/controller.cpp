@@ -8,8 +8,7 @@
 #include "mididevices.hpp"
 #include "audiodevices.hpp"
 
-#include "units.hpp"
-#include "blocks.hpp"
+#include "nodes.hpp"
 
 #include "midistate.hpp"
 
@@ -25,8 +24,7 @@ Controller::Controller(Settings* settings) {
     midiDevices = new MIDIDevices(this);
     audioDevices = new AudioDevices(this);
     
-    units = new Units(this);
-    blocks = new Blocks(this);
+    nodes = new Nodes(this);
     
     midiState = new MidiState(this);
         
@@ -38,8 +36,7 @@ Controller::~Controller() {
     delete midiDevices;
     delete audioDevices;
     
-    delete units;
-    delete blocks;
+    delete nodes;
     
     delete midiState;
 }
@@ -81,10 +78,10 @@ bool Controller::update() {
     bool success = true;
     success = success && midiDevices->update();
     
-    // Apply units
-    success = success && units->apply();
+    // Apply nodes
+    success = success && nodes->apply();
     
-    return true;
+    return success;
 }
 
 bool Controller::play(std::string state) {

@@ -11,8 +11,7 @@ class AudioDevices;
 
 class MidiState;
 
-class Units;
-class Blocks;
+class Nodes;
 
 class Controller {
     
@@ -24,8 +23,7 @@ class Controller {
     
     MidiState* midiState;
     
-    Units* units;
-    Blocks* blocks;
+    Nodes* nodes;
     
     bool active;
     
@@ -34,16 +32,15 @@ public:
     Controller(Settings*);
     ~Controller();
     
-    inline Settings* getSettings() { return settings; };
-    inline Options* getOptions() { return options; };
+    inline Settings* getSettings() { return settings; }
+    inline Options* getOptions() { return options; }
     
-    inline MIDIDevices* getMIDIDevices() { return midiDevices; };
-    inline AudioDevices* getAudioDevices() { return audioDevices; };
+    inline MIDIDevices* getMIDIDevices() { return midiDevices; }
+    inline AudioDevices* getAudioDevices() { return audioDevices; }
 
-    inline MidiState* getMidiState() { return midiState; };
+    inline MidiState* getMidiState() { return midiState; }
     
-    inline Units* getUnits() { return units; };
-    inline Blocks* getBlocks() { return blocks; };
+    inline Nodes* getNodes() { return nodes; }
 
     bool start();
     bool stop();

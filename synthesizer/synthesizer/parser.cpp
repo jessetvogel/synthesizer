@@ -7,9 +7,8 @@
 #include "controller.hpp"
 #include "audiodevices.hpp"
 #include "mididevices.hpp"
-#include "units.hpp"
-#include "unit.hpp"
-#include "blocks.hpp"
+#include "nodes.hpp"
+#include "node.hpp"
 #include "options.hpp"
 
 #include "status.hpp"
@@ -102,32 +101,28 @@ bool Parser::parseLine(std::string line) {
         return true;
     }
     
-    // Units
+    // Nodes
     
-    // unit_create <unit_type> <label> <args>
-    if(std::regex_search(str, cm, Commands::regexUnitCreate))               return controller->getUnits()->create(cm[1], cm[2], cm[3]);
-    // unit_rename <unit> <label>
-    if(std::regex_search(str, cm, Commands::regexUnitRename))               return controller->getUnits()->rename(cm[1], cm[2]);
-    // unit_delete <unit>
-    if(std::regex_search(str, cm, Commands::regexUnitDelete))               return controller->getUnits()->destroy(cm[1]);
-    // unit_hide <unit>
-    if(std::regex_search(str, cm, Commands::regexUnitHide))                 return controller->getUnits()->hide(cm[1]);
-    // unit_set <unit> <parameter> <value>
-    if(std::regex_search(str, cm, Commands::regexUnitSet))                  return controller->getUnits()->set(cm[1], cm[2], cm[3]);
+    // node_create <node type> <id> [<options>]?
+    if(std::regex_search(str, cm, Commands::regexNodeCreate))               return controller->getNodes()->create(cm[1], cm[2], cm[3]);
+    // node_rename <node id> <new node id>
+    if(std::regex_search(str, cm, Commands::regexNodeRename))               return controller->getNodes()->rename(cm[1], cm[2]);
+    // node_delete <node id>
+    if(std::regex_search(str, cm, Commands::regexNodeDelete))               return controller->getNodes()->destroy(cm[1]);
+    // node_hide <node id>
+    if(std::regex_search(str, cm, Commands::regexNodeHide))                 return controller->getNodes()->hide(cm[1]);
+    // node_set <node input> <value>
+    if(std::regex_search(str, cm, Commands::regexNodeSet))                  return controller->getNodes()->set(cm[1], cm[2]);
     
-    // Blocks
+    // Custom nodes
     
-    // block_create <id>
-    if(std::regex_search(str, cm, Commands::regexBlockCreate))              return controller->getBlocks()->create(cm[1]);
-    // block_delete <id>
-    if(std::regex_search(str, cm, Commands::regexBlockDelete))              return controller->getBlocks()->destroy(cm[1]);
-    // block_add_input <id> <label> <unit> <parameter>
-    if(std::regex_search(str, cm, Commands::regexBlockAddInput))            return controller->getBlocks()->addInput(cm[1], cm[2], cm[3], cm[4]);
-    // block_add_output <id> <label> <unit>
-    if(std::regex_search(str, cm, Commands::regexBlockAddOutput))           return controller->getBlocks()->addOutput(cm[1], cm[2], cm[3]);
-    // block_set <id> <parameter> <value>
-    if(std::regex_search(str, cm, Commands::regexBlockSet))                 return controller->getBlocks()->set(cm[1], cm[2], cm[3]);
-
+    // node_add_input <node id> <label> <node input>
+    if(std::regex_search(str, cm, Commands::regexNodeAddInput))             return controller->getNodes()->addInput(cm[1], cm[2], cm[3]);
+    // node_add_output <node id> <label> <node output>
+    if(std::regex_search(str, cm, Commands::regexNodeAddOutput))            return controller->getNodes()->addOutput(cm[1], cm[2], cm[3]);
+    // node_attach <node id> <node id>
+    if(std::regex_search(str, cm, Commands::regexNodeAttach))               return controller->getNodes()->attach(cm[1], cm[2]);
+    
     // Unknown command
     Status::addError("Command not recognised");
     return false;
