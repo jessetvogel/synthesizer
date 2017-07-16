@@ -1,26 +1,26 @@
 #include <cmath>
 
-#include "nodevolumemeter.hpp"
+#include "nodefollower.hpp"
 #include "controller.hpp"
 #include "nodeinput.hpp"
 #include "nodeoutput.hpp"
 #include "arguments.hpp"
 
-NodeVolumeMeter::NodeVolumeMeter(Controller* controller, Arguments arguments) : Node(controller) {
+NodeFollower::NodeFollower(Controller* controller, Arguments arguments) : Node(controller) {
     // Set type
-    type = "volumemeter";
+    type = "follower";
     
     // Set arguments
-    keyDependent = arguments.getBool("key", false);
+    keyNode = arguments.getBool("key", false);
     RMSAverage = 0.0;
     
     // Set inputs and outputs
-    addInput("output", input = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("output", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }
 
-void NodeVolumeMeter::apply() {
+void NodeFollower::apply() {
     float* input = ((NodeOutput*) this->input->pointer)->getBuffer();
     
     float* output = this->output->getBuffer();

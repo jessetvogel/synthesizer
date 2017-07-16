@@ -30,18 +30,26 @@ public class NodeTypes {
     }
 
     private void initialize() {
+        // Load all node types
         File nodesDirectory = new File(controller.getInfo().getDirectory() + NODES_DIRECTORY);
-        for (File f : nodesDirectory.listFiles()) {
-            if (!f.isDirectory()) continue;
+        if(!nodesDirectory.exists() || !nodesDirectory.isDirectory())  return; // TODO
+        scanDirectory(nodesDirectory);
+    }
 
-            // Make sure there is a info.json file
-            String infoPath = f.getAbsolutePath() + "/" + INFO_FILE;
-            File infoFile = new File(infoPath);
-            if (!infoFile.exists() || infoFile.isDirectory()) continue;
+    private void scanDirectory(File directory) {
+        if(!directory.isDirectory()) return;
+
+        for (File file : directory.listFiles()) {
+            if (file.isDirectory()) {
+                scanDirectory(file);
+                continue;
+            }
+
+            if(!file.getName().equals(INFO_FILE)) continue;
 
             // Get all information from file about node type
             try {
-                String text = new String(Files.readAllBytes(Paths.get(infoPath)));
+                String text = new String(Files.readAllBytes(Paths.get(file.getAbsolutePath())));
                 JSONObject info = new JSONObject(text);
 
                 String name = info.getString("name");
@@ -55,6 +63,10 @@ public class NodeTypes {
                     options[i].label = optionObject.getString("label");
                     options[i].type = NodeType.Option.getType(optionObject.getString("type"));
                     options[i].description = optionObject.getString("description");
+                    if(optionObject.has("default"))
+                        options[i].defaultValue = optionObject.getString("default");
+                    else
+                        options[i].defaultValue = NodeType.Option.getDefaultValue(options[i].type);
                 }
 
                 JSONArray filesArray = info.getJSONArray("files");
@@ -68,6 +80,7 @@ public class NodeTypes {
                 nodeType.name = name;
                 nodeType.group = group;
                 nodeType.options = options;
+                nodeType.directory = directory.getAbsolutePath();
                 nodeType.files = files;
                 types.add(nodeType);
 

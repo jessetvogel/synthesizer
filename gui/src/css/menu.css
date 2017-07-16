@@ -31,6 +31,8 @@
 #buttonOpen { -fx-background-image: url('../img/menu/open.png'); }
 #buttonSave { -fx-background-image: url('../img/menu/save.png'); }
 #buttonPlay { -fx-background-image: url('../img/menu/play.png'); }
+#buttonPlay.playing { -fx-background-image: url('../img/menu/stop.png'); }
 #buttonSettings { -fx-background-image: url('../img/menu/settings.png'); }
+
 #buttonComponents { -fx-background-image: url('../img/menu/grid.png'); }
 #buttonDevices { -fx-background-image: url('../img/menu/volumeup.png'); }

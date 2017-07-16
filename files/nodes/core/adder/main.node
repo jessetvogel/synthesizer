@@ -1,0 +1,1 @@
+node_create adder $id [n = $n, key = $key]

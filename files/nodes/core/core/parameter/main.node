@@ -1,0 +1,1 @@
+node_create parameter $id [midiCC = $midiCC, initial = $initial]

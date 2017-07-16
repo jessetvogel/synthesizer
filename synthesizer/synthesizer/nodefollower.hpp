@@ -1,9 +1,9 @@
-#ifndef nodevolumemeter_hpp
-#define nodevolumemeter_hpp
+#ifndef nodefollower_hpp
+#define nodefollower_hpp
 
 #include "node.hpp"
 
-class NodeVolumeMeter : public Node {
+class NodeFollower : public Node {
     
     NodeInput* input;
     
@@ -13,7 +13,7 @@ class NodeVolumeMeter : public Node {
     
 public:
     
-    NodeVolumeMeter(Controller*, Arguments);
+    NodeFollower(Controller*, Arguments);
     
     void apply();
     

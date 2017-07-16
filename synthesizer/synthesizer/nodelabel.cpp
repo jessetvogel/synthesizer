@@ -9,10 +9,10 @@ NodeLabel::NodeLabel(Controller* controller, Arguments arguments) : Node(control
     type = "label";
     
     // Key dependence
-    keyDependent = arguments.getBool("key", false);
+    keyNode = arguments.getBool("key", false);
     
     // Set inputs and outputs
-    addInput("value", value = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("value", value = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }

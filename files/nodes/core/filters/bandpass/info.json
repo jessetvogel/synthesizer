@@ -1,0 +1,10 @@
+{
+    "name": "bandpass",
+    "group": "basic",
+    "options": [
+        { "label": "order", "type": "int", "description": "Order of filter" },
+    ],
+    "files": [
+        "main.node"
+    ]
+}

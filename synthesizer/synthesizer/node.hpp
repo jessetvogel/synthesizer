@@ -33,7 +33,7 @@ protected:
     std::unordered_map<std::string, NodeInput*> inputs;
     std::unordered_map<std::string, NodeOutput*> outputs;
     
-    bool keyDependent = false;
+    bool keyNode = false;
     bool hidden = false;
     bool updateNodeInputs = true;
     
@@ -63,7 +63,7 @@ public:
     inline void reset() { updated = false; };
     void update();
     
-    inline bool isKeyDependent() { return keyDependent; };
+    inline bool isKeyDependent() { return keyNode; };
     inline void hide() { hidden = true; id = NODE_HIDDEN_ID; }
     inline bool isHidden() { return hidden; };
   

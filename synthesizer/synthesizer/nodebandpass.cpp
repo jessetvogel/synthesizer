@@ -18,9 +18,9 @@ NodeBandpass::NodeBandpass(Controller* controller, Arguments arguments) : Node(c
     order = arguments.getInteger("order", 1);
     
     // Set inputs and outputs
-    addInput("input", input = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("center", center = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1000.0"));
-    addInput("bandwidth", bandwidth = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.5")); // TODO: come up with some standard values
+    addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("center", center = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1000.0"));
+    addInput("bandwidth", bandwidth = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.5")); // TODO: come up with some standard values
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
     

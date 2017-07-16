@@ -109,10 +109,12 @@ bool Parser::parseLine(std::string line) {
     if(std::regex_search(str, cm, Commands::regexNodeRename))               return controller->getNodes()->rename(cm[1], cm[2]);
     // node_delete <node id>
     if(std::regex_search(str, cm, Commands::regexNodeDelete))               return controller->getNodes()->destroy(cm[1]);
-    // node_hide <node id>
-    if(std::regex_search(str, cm, Commands::regexNodeHide))                 return controller->getNodes()->hide(cm[1]);
     // node_set <node input> <value>
     if(std::regex_search(str, cm, Commands::regexNodeSet))                  return controller->getNodes()->set(cm[1], cm[2]);
+    // node_hide <node id>
+    if(std::regex_search(str, cm, Commands::regexNodeHide))                 return controller->getNodes()->hide(cm[1]);
+    // node_info <node id>
+    if(std::regex_search(str, cm, Commands::regexNodeInfo))                 return controller->getNodes()->info(cm[1]);
     
     // Custom nodes
     

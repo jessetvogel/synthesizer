@@ -3,35 +3,33 @@ package nl.jessevogel.synthesizer.gui.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.stage.FileChooser;
 import nl.jessevogel.synthesizer.gui.GUI;
-import nl.jessevogel.synthesizer.gui.util.Alert;
-
-import java.io.File;
+import nl.jessevogel.synthesizer.gui.controllers.windows.ControllerWindowSettings;
 
 public class ControllerMenu {
+
     @FXML public Button buttonNew;
     @FXML public Button buttonOpen;
     @FXML public Button buttonSave;
     @FXML public Button buttonPlay;
-    @FXML public Button buttonComponents;
-    @FXML public Button buttonDevices;
     @FXML public Button buttonSettings;
 
-    @FXML
-    public void buttonClick(ActionEvent event) {
-        Object source = event.getSource();
-        if(source == buttonSettings) {
-            Alert.show("Alert!", "Clicked settings.");
-        }
+    @FXML public void initialize() {
+        GUI.controllerMenu = this;
+    }
 
-        if(source == buttonOpen) {
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Open Resource File");
-            File file = fileChooser.showOpenDialog(GUI.stage);
-            if(file != null) {
-                System.out.println(file.getAbsolutePath());
-            }
-        }
+    @FXML public void clickSettings(ActionEvent event) {
+        ControllerWindowSettings.show();
+    }
+
+    @FXML public void clickPlay(ActionEvent event) {
+        GUI.controller.getAudio().toggle();
+    }
+
+    public void updatePlayIcon(boolean playing) {
+        if(playing)
+            buttonPlay.getStyleClass().add("playing");
+        else
+            buttonPlay.getStyleClass().remove("playing");
     }
 }

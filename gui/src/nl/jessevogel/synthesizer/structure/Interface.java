@@ -1,6 +1,7 @@
 package nl.jessevogel.synthesizer.structure;
 
 import nl.jessevogel.synthesizer.main.Controller;
+import nl.jessevogel.synthesizer.structure.response.Response;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,20 +19,18 @@ public class Interface {
         this.controller = controller;
     }
 
-    public boolean start() {
+    public Response start() {
         try {
             String settingsPath = controller.getInfo().getSettingsPath();
-            System.out.println(settingsPath);
             process = Runtime.getRuntime().exec ("./synthesizer " + settingsPath); // TODO
             input = new BufferedReader(new InputStreamReader(process.getInputStream()));
             output = new PrintWriter(process.getOutputStream());
 
             String json = input.readLine();
-            Response response = new Response(json);
-            return true;
+            return new Response(json);
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
@@ -40,7 +39,7 @@ public class Interface {
             command("exit");
             process.waitFor();
             return true;
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

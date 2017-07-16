@@ -1,5 +1,6 @@
 .node-list-container {
   -fx-background-color: rgba(0, 0, 0, 0.24);
+  -fx-min-width: 192;
   -fx-pref-width: 192;
   -fx-spacing: 16;
 }
@@ -73,38 +74,6 @@
   -fx-background-color: rgba(0, 0, 0, 0.24);
   -fx-background-image: url('../img/background-pane.png');
   -fx-background-repeat: repeat;
-}
-
-.node-parameter-container {
-  -fx-background-color: rgba(0, 0, 0, 0.24);
-  -fx-pref-width: 256;
-  -fx-font-size: 16;
-  -fx-padding: 8;
-  -fx-pref-height: 48;
-  -fx-spacing: 8;
-
-  -fx-font-family: 'Museo Sans'; /* TODO: remove this */
-}
-
-.node-parameter-container .label {
-  -fx-pref-height: 48;
-  -fx-padding: 0 8 0 8;
-  -fx-text-fill: white;
-}
-
-.node-parameter-container .text-field {
-  -fx-pref-height: 36;
-  -fx-pref-width: 128;
-  -fx-padding: 0 8 0 8;
-  -fx-background-insets: 0;
-  -fx-background-radius: 0;
-  -fx-background-color: rgba(255, 255, 255, 0.24);
-  -fx-text-fill: white;
-}
-
-.node-parameter {
-  -fx-pref-height: 48;
-  -fx-alignment: center;
 }
 
 .node-grid-item {

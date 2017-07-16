@@ -18,7 +18,7 @@
 #include "nodedelay.hpp"
 #include "nodePWM.hpp"
 #include "nodeparameter.hpp"
-#include "nodevolumemeter.hpp"
+#include "nodefollower.hpp"
 #include "nodekeyinfo.hpp"
 #include "nodeleadkeyinfo.hpp"
 #include "nodemodulationwheel.hpp"
@@ -58,7 +58,7 @@ Node* NodeFactory::create(Controller* controller, std::string type, std::string 
     else if(type.compare("conditional") == 0)       node = new NodeConditional(controller, arguments);
     else if(type.compare("fuzz") == 0)              node = new NodeFuzz(controller, arguments);
     else if(type.compare("PWM") == 0)               node = new NodePWM(controller, arguments);
-    else if(type.compare("volumemeter") == 0)       node = new NodeVolumeMeter(controller, arguments);
+    else if(type.compare("follower") == 0)          node = new NodeFollower(controller, arguments);
     else if(type.compare("label") == 0)             node = new NodeLabel(controller, arguments);
     else if(type.compare("parameter") == 0)         node = new NodeParameter(controller, arguments);
     else if(type.compare("collector") == 0)         node = new NodeCollector(controller, arguments);

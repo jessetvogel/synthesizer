@@ -14,7 +14,7 @@ NodeKeyInfo::NodeKeyInfo(Controller* controller, InfoType infoType) : Node(contr
     hidden = true;
     
     // Obviously key dependent
-    keyDependent = true;
+    keyNode = true;
     
     // Set outputs
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));

@@ -139,6 +139,17 @@ void Status::printExtra(Controller* controller, std::string extra) {
     if(extra.compare("output_devices") == 0) return controller->getAudioDevices()->printOutputDevices();
     if(extra.compare("nodes") == 0) return controller->getNodes()->printNodes();
     if(extra.compare("state") == 0) return controller->printState();
+    
+    std::size_t pos = extra.find(":");
+    if(pos != std::string::npos) {
+        std::string first = extra.substr(0, pos);
+        std::string second = extra.substr(pos + 1);
+        if(first.compare("info") == 0) {
+            Node* node = controller->getNodes()->getNode(second);
+            if(node == NULL) return;
+            return node->printNode();
+        }
+    }
 }
 
 // ----------------------------------------------------------------
@@ -179,7 +190,7 @@ void AudioDevices::printInputDevices() {
             if(comma) std::cout << ","; else comma = true;
             std::cout << "{";
             
-            std::cout << "\"id\":" << i << ",";
+            std::cout << "\"id\":\"" << i << "\",";
             std::cout << "\"name\":\"" << AudioDevices::deviceName(i) << "\",";
             std::cout << "\"active\":" << (inputDeviceId == i ? "true" : "false") << "";
             
@@ -226,7 +237,9 @@ void Nodes::printNodes() {
         if(comma) std::cout << ","; else comma = true;
         std::cout << "{";
         
-        node->printNode();
+        std::cout << "\"id\":\"" << node->getId() << "\",";
+        std::cout << "\"type\":\"" << node->getType() << "\",";
+        std::cout << "\"keyNode\":" << (node->isKeyDependent() ? "true" : "false");
         
         std::cout << "}";
     }
@@ -237,9 +250,11 @@ void Nodes::printNodes() {
 
 void Node::printNode() {
     
+    std::cout << "\"node\":{";
+    
     std::cout << "\"id\":\"" << id << "\",";
     std::cout << "\"type\":\"" << type << "\",";
-    std::cout << "\"keyDependent\":" << (keyDependent ? "true" : "false") << ",";
+    std::cout << "\"keyNode\":" << (keyNode ? "true" : "false") << ",";
     std::cout << "\"inputs\":[";
     
     bool comma = false;
@@ -262,7 +277,7 @@ void Node::printNode() {
     
     comma = false;
     for(auto it = outputs.begin(); it != outputs.end(); ++it) {
-//        NodeOutput* output = it->second;
+        //        NodeOutput* output = it->second;
         
         if(comma) std::cout << ","; else comma = true;
         std::cout << "{";
@@ -273,7 +288,8 @@ void Node::printNode() {
     }
     
     std::cout << "]";
-    
+
+    std::cout << "}";
 }
 
 void Controller::printState() {

@@ -10,11 +10,11 @@ NodeFuzz::NodeFuzz(Controller* controller, Arguments arguments) : Node(controlle
     type = "fuzz";
     
     // Set arguments
-    keyDependent = arguments.getBool("key", false);
+    keyNode = arguments.getBool("key", false);
     
     // Set inputs and outputs
-    addInput("input", input = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("input_gain", inputGain = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
+    addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("input_gain", inputGain = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }

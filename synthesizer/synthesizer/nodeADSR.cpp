@@ -11,20 +11,20 @@ NodeADSR::NodeADSR(Controller* controller, Arguments arguments) : Node(controlle
     type = "ADSR";
     
     // Set arguments
-    keyDependent = arguments.getBool("key", false);
+    keyNode = arguments.getBool("key", false);
     
     // Set inputs and outputs
-    addInput("start_level", startLevel = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("attack_level", attackLevel = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
-    addInput("sustain_level", sustainLevel = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
-    addInput("release_level", releaseLevel = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("start_level", startLevel = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("attack_level", attackLevel = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
+    addInput("sustain_level", sustainLevel = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
+    addInput("release_level", releaseLevel = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
     
-    addInput("attack_time", attackTime = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("decay_time", decayTime = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("release_time", releaseTime = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("attack_time", attackTime = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("decay_time", decayTime = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("release_time", releaseTime = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
     
-    addInput("duration", duration = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, keyDependent ? "key_duration" : "lead_key_duration"));
-    addInput("release", release = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, keyDependent ? "key_release" : "lead_key_release"));
+    addInput("duration", duration = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, keyNode ? "key_duration" : "lead_key_duration"));
+    addInput("release", release = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, keyNode ? "key_release" : "lead_key_release"));
     
     addInput("attack_curve", attackCurve = new NodeInput(controller, NodeInput::CURVE, "linear"));
     addInput("decay_curve", decayCurve = new NodeInput(controller, NodeInput::CURVE, "linear"));

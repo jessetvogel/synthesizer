@@ -63,8 +63,9 @@ public:
     bool create(std::string, std::string, std::string);
     bool destroy(std::string);
     bool rename(std::string, std::string);
-    bool hide(std::string);
     bool set(std::string, std::string);
+    bool hide(std::string);
+    bool info(std::string);
     
     bool addInput(std::string, std::string, std::string);
     bool addOutput(std::string, std::string, std::string);

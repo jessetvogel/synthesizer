@@ -1,0 +1,1 @@
+node_create audio_output output [channels = 1]

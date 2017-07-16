@@ -6,6 +6,7 @@ public class NodeType {
     public String group;
 
     public Option[] options;
+    public String directory;
     public String[] files;
 
     public static class Option {
@@ -14,6 +15,7 @@ public class NodeType {
         public String label;
         public Type type;
         public String description;
+        public String defaultValue;
 
         public static Type getType(String type) throws Exception {
             switch(type) {
@@ -33,6 +35,32 @@ public class NodeType {
                 default:
                     throw new Exception("Invalid type");
             }
+        }
+
+        public static String getDefaultValue(Type type) {
+            switch(type) {
+                case Boolean:
+                    return "false";
+                case Float:
+                    return "0.0";
+                case Integer:
+                    return "1";
+            }
+            return "TODO";
+        }
+
+        public boolean validValue(String value) {
+            switch(type) {
+                case Boolean:
+                    return value.matches("true|false");
+
+                case Integer:
+                    return value.matches("\\d+");
+
+                case Float:
+                    return value.matches("[-+]?[0-9]+(?:\\.[0-9]+)?");
+            }
+            return false;
         }
     }
 }

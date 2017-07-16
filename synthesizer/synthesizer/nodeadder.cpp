@@ -9,7 +9,7 @@ const int NodeAdder::maxN = 16;
 NodeAdder::NodeAdder(Controller* controller, Arguments arguments) : Node(controller) {
     // Set arguments
     n = arguments.getInteger("n", 1);
-    keyDependent = arguments.getBool("key", false);
+    keyNode = arguments.getBool("key", false);
     
     // Set type
     type = "adder";
@@ -22,8 +22,8 @@ NodeAdder::NodeAdder(Controller* controller, Arguments arguments) : Node(control
         char strGain[12];
         sprintf(strInput, "input_%d", i+1);
         sprintf(strGain, "gain_%d", i+1);
-        addInput(strInput, inputs[i] = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-        addInput(strGain, gains[i] = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
+        addInput(strInput, inputs[i] = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+        addInput(strGain, gains[i] = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
     }
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));

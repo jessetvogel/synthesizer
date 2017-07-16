@@ -16,6 +16,8 @@
 #include "nodefactory.hpp"
 #include "arguments.hpp"
 
+#include "status.hpp"
+
 Nodes::Nodes(Controller* controller) {
     // Store controller
     this->controller = controller;
@@ -92,6 +94,13 @@ bool Nodes::rename(std::string oldId, std::string newId) {
     return node->setId(newId);
 }
 
+bool Nodes::set(std::string strNodeInput, std::string value) {
+    NodeInput* nodeInput = getNodeInput(strNodeInput);
+    if(nodeInput == NULL) return false; // TODO
+    
+    return nodeInput->set(value);
+}
+
 bool Nodes::hide(std::string id) {
     Node* node = getNode(id);
     if(node == NULL) return false; // TODO
@@ -100,11 +109,12 @@ bool Nodes::hide(std::string id) {
     return true;
 }
 
-bool Nodes::set(std::string strNodeInput, std::string value) {
-    NodeInput* nodeInput = getNodeInput(strNodeInput);
-    if(nodeInput == NULL) return false; // TODO
-    
-    return nodeInput->set(value);
+bool Nodes::info(std::string id) {
+    Node* node = getNode(id);
+    if(node == NULL) return false; // TODO
+
+    Status::addExtra(std::string("info:").append(id));
+    return true;
 }
 
 bool Nodes::addInput(std::string id, std::string label, std::string nodeInput) {

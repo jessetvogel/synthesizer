@@ -1,0 +1,1 @@
+node_create audio_output $id [channels = $channels]

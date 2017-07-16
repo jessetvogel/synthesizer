@@ -12,14 +12,14 @@ NodeParameter::NodeParameter(Controller* controller, Arguments arguments) : Node
     
     // Set arguments
     midiCC = arguments.getInteger("midiCC", -1);
-    value = arguments.getDouble("initial", 0.5);
+    value = arguments.getDouble("initial", 0.0);
     
     // Hidden
     hidden = true;
     
     // Set inputs and outputs
-    addInput("min", min = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("max", max = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
+    addInput("min", min = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("max", max = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
     addInput("curve", curve = new NodeInput(controller, NodeInput::CURVE, "linear"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));

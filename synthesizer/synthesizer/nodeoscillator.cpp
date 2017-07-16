@@ -15,18 +15,18 @@ NodeOscillator::NodeOscillator(Controller* controller, Arguments arguments) : No
     type = "oscillator";
     
     // Set arguments
-    keyDependent = arguments.getBool("key", false);
+    keyNode = arguments.getBool("key", false);
     
     // Set inputs and outputs
     addInput("sample", sample = new NodeInput(controller, NodeInput::SAMPLE, "sine"));
-    addInput("frequency", frequency = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("amplitude", amplitude = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
-    addInput("mean", mean = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("frequency", frequency = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("amplitude", amplitude = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
+    addInput("mean", mean = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
     
     // Create arrays
-    if(keyDependent) {
+    if(keyNode) {
         phase = new double[SETTINGS_POLYPHONY];
         memset(phase, 0, sizeof(double) * SETTINGS_POLYPHONY);
     }
@@ -49,7 +49,7 @@ void NodeOscillator::apply() {
     float* output = this->output->getBuffer();
     
     double t = 1.0 / sampleRate;
-    int i = keyDependent ? controller->getNodes()->currentKey->id : 0;
+    int i = keyNode ? controller->getNodes()->currentKey->id : 0;
     
     for(int x = 0;x < framesPerBuffer; ++x) {
         output[x] = mean[x] + amplitude[x] * sample->getValue(phase[i]);

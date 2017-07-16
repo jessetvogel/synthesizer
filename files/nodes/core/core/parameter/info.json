@@ -1,0 +1,11 @@
+{
+    "name": "parameter",
+    "group": "basic",
+    "options": [
+        { "label": "midiCC", "type": "int", "description": "MIDI CC" },
+        { "label": "initial", "type": "float", "description": "Initial value" }
+    ],
+    "files": [
+        "main.node"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "name": "audio_output",
+    "group": "basic",
+    "options": [
+        { "label": "channels", "type": "int", "description": "Amount of channels" }
+    ],
+    "files": [
+        "main.node"
+    ]
+}

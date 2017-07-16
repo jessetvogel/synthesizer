@@ -9,7 +9,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import nl.jessevogel.synthesizer.gui.GUI;
-import nl.jessevogel.synthesizer.gui.util.Alert;
+//import nl.jessevogel.synthesizer.gui.util.Alert;
 import nl.jessevogel.synthesizer.structure.data.Node;
 
 import java.util.HashMap;
@@ -65,11 +65,7 @@ public class ControllerNodeGrid {
             stack.setTranslateY(gridShiftY + node.y * 64.0);
 
             stack.setOnMouseClicked(e -> {
-                Alert.show("click!", "groetjes!");
-//                Parameter[] parameters = new Parameter[2];
-//                parameters[0] = new Parameter(); parameters[0].label = "label_1"; parameters[0].value = "value_1";
-//                parameters[1] = new Parameter(); parameters[1].label = "label_2"; parameters[1].value = "value_2";
-//                setParameters(parameters);
+                GUI.controller.getNodes().edit(node);
             });
 
             nodeGrid.getChildren().add(stack);
@@ -85,7 +81,6 @@ public class ControllerNodeGrid {
         gridShiftY += dy;
         for(javafx.scene.Node node : nodeGrid.getChildren()) {
             Node n = map.get(node);
-            System.out.println("n.x = " + n.x + "; n.y = " + n.y);
             node.setTranslateX(gridShiftX + n.x * 64.0);
             node.setTranslateY(gridShiftY + n.y * 64.0);
         }

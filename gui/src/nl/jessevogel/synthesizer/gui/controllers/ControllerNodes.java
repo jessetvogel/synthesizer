@@ -2,27 +2,22 @@ package nl.jessevogel.synthesizer.gui.controllers;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import nl.jessevogel.synthesizer.gui.GUI;
 import nl.jessevogel.synthesizer.structure.info.NodeType;
 import nl.jessevogel.synthesizer.structure.info.NodeTypes;
-import nl.jessevogel.synthesizer.structure.data.Parameter;
 
-public class ControllerComponents {
+public class ControllerNodes {
+
     @FXML public ChoiceBox<String> choiceBoxComponentGroup;
     @FXML public ListView<String> listViewComponents;
-    @FXML public VBox parametersContainer;
 
     @FXML public void initialize() {
-        GUI.controllerComponents = this;
+        GUI.controllerNodes = this;
         NodeTypes nodeTypes = GUI.controller.getNodeTypes();
         choiceBoxComponentGroup.getItems().addAll(nodeTypes.groups);
         choiceBoxComponentGroup.setOnAction(event -> {
@@ -43,18 +38,5 @@ public class ControllerComponents {
         db.setContent(content);
         db.setDragView(new Image("/img/components/template.png"));
         event.consume();
-    }
-
-    public void setParameters(Parameter[] parameters) {
-        try {
-            parametersContainer.getChildren().clear();
-            for (Parameter parameter : parameters) {
-                HBox hbox = FXMLLoader.load(getClass().getResource("/fxml/nodes_parameters.fxml"));
-                ((Label) hbox.getChildren().get(0)).setText(parameter.label);
-                ((TextField) hbox.getChildren().get(2)).setText(parameter.value);
-                parametersContainer.getChildren().add(hbox);
-            }
-        }
-        catch(Exception e) { e.printStackTrace(); /* TODO */ }
     }
 }

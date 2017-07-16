@@ -1,6 +1,5 @@
 package nl.jessevogel.synthesizer.structure.data;
 
-public class Parameter {
+public class NodeOutput {
     public String label;
-    public String value;
 }

@@ -1,0 +1,8 @@
+{
+    "name": "collector",
+    "group": "basic",
+    "options": [],
+    "files": [
+        "main.node"
+    ]
+}

@@ -18,5 +18,8 @@ public class Main {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        // Stop interface
+        controller.getInterface().stop();
     }
 }

@@ -16,9 +16,9 @@ NodeDelay::NodeDelay(Controller* controller, Arguments arguments) : Node(control
     double T = arguments.getDouble("T", 1.0);
     
     // Set inputs and outputs
-    addInput("input", input = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("gain", gain = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
-    addInput("feedback", feedback = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("gain", gain = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
+    addInput("feedback", feedback = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
     
     gains = new NodeInput*[n];
     times = new NodeInput*[n];
@@ -27,8 +27,8 @@ NodeDelay::NodeDelay(Controller* controller, Arguments arguments) : Node(control
         char strTime[12];
         sprintf(strGain, "gain_%d", i+1);
         sprintf(strTime, "time_%d", i+1);
-        addInput(strGain, gains[i] = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-        addInput(strTime, times[i] = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+        addInput(strGain, gains[i] = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+        addInput(strTime, times[i] = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
     }
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));

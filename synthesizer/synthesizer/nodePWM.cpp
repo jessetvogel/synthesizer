@@ -14,18 +14,18 @@ NodePWM::NodePWM(Controller* controller, Arguments arguments) : Node(controller)
     type = "PWM";
     
     // Set arguments
-    keyDependent = arguments.getBool("key", false);
+    keyNode = arguments.getBool("key", false);
     
     // Set inputs and outputs
-    addInput("frequency", frequency = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("duty", duty = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("low", low = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("high", high = new NodeInput(controller, keyDependent ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
+    addInput("frequency", frequency = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("duty", duty = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("low", low = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("high", high = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
     
     // Create arrays
-    if(keyDependent) {
+    if(keyNode) {
         phase = new double[SETTINGS_POLYPHONY];
         memset(phase, 0, sizeof(double) * SETTINGS_POLYPHONY);
     }
@@ -48,7 +48,7 @@ void NodePWM::apply() {
     float* output = this->output->getBuffer();
     
     double t = 1.0 / sampleRate;
-    int i = keyDependent ? controller->getNodes()->currentKey->id : 0;
+    int i = keyNode ? controller->getNodes()->currentKey->id : 0;
     
     for(int x = 0;x < framesPerBuffer; ++x) {
         output[x] = phase[i] < duty[x] ? high[x] : low[x];
