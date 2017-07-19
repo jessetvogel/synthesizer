@@ -1,43 +1,21 @@
 .option-window {
-  -fx-background-color: linear-gradient(to bottom right, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
-  -fx-font-family: 'Museo Sans';
+  -fx-background-color: color-background-main;
   -fx-padding: 16;
   -fx-spacing: 16;
 }
 
-.option-header {
-  -fx-font-size: 24;
-  -fx-text-fill: white;
+.options-list {
+  -fx-spacing: 8;
 }
 
-.option-item-container {
-  -fx-spacing: 16;
-}
-
-.option-item {
-  -fx-spacing: 16;
-  -fx-font-size: 16;
-  -fx-alignment: center;
-}
-
-.option-item .label {
-  -fx-text-fill: white;
-  -fx-pref-width: 128;
-}
-
-.option-item .text-field {
-  -fx-pref-height: 36;
+.options-list .list-item-text-field .label {
+  -fx-min-width: 160;
   -fx-pref-width: 160;
-  -fx-padding: 0 8 0 8;
-  -fx-background-insets: 0;
-  -fx-background-radius: 0;
-  -fx-background-color: rgba(255, 255, 255, 0.24);
-  -fx-text-fill: white;
 }
 
-.option-item .text-field.invalid {
-  -fx-border-color: rgba(255, 0, 0, 0.5);
-  -fx-border-width: 2;
+.options-list .list-item-text-field .text-field {
+  -fx-min-width: 160;
+  -fx-pref-width: 160;
 }
 
 .option-button-container {
@@ -46,19 +24,5 @@
 }
 
 .option-button-container .button {
-  -fx-pref-height: 36;
   -fx-pref-width: 72;
-  -fx-text-fill: white;
-  -fx-font-size: 14;
-
-  -fx-background-insets: 0;
-  -fx-background-radius: 0;
-  -fx-background-color: rgba(0, 0, 0, 0.24);
-  -fx-background-size: 20px;
-  -fx-background-repeat: no-repeat;
-  -fx-background-position: center;
-}
-
-.option-button-container .button:hover {
--fx-background-color: rgba(145, 145, 145, 0.42);
 }

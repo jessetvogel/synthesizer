@@ -24,7 +24,7 @@ public class Nodes {
         NodeType nodeType = controller.getNodeTypes().getNodeType(typeName);
 
         // Ask for options, and abort if not successful
-        HashMap<String, String> map = ControllerWindowOptions.show(nodeType.options);
+        HashMap<String, String> map = ControllerWindowOptions.show(nodeType);
         if(map == null) return;
 
         // Create a node
@@ -64,10 +64,17 @@ public class Nodes {
 
     public boolean set(String nodeId, String inputLabel, String value) {
         Response response = controller.getInterface().command("node_set " + nodeId + "." + inputLabel + " " + value);
+        if(response.getError() == null)
+            return true;
+        return false;
+    }
+
+    public boolean rename(String id, String newId) {
+        Response response = controller.getInterface().command("node_rename " + id + " " + newId);
         if(response.getError() == null) {
+            getNode(id).id = newId;
             return true;
         }
-
         return false;
     }
 }

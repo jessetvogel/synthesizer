@@ -1,15 +1,20 @@
 package nl.jessevogel.synthesizer.gui.controllers.windows;
 
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import nl.jessevogel.synthesizer.gui.FXMLFiles;
 
 public class ControllerWindowSettings {
+
+    @FXML public Button buttonMIDIDevices;
+    @FXML public Button buttonAudioDevices;
+
+    @FXML public Pane content;
 
     public static void show() {
         try {
@@ -20,10 +25,12 @@ public class ControllerWindowSettings {
             window.setResizable(false);
 
             // Load settings.fxml
-            Scene scene = new Scene(FXMLLoader.load(ControllerWindowSettings.class.getResource("/fxml/settings.fxml")));
+            Scene scene = new Scene(FXMLFiles.load("settings.fxml"));
 
             // Show stage
             window.setScene(scene);
+            window.setWidth(600);
+            window.setHeight(400);
             window.showAndWait();
         }
         catch(Exception e) {
@@ -31,4 +38,19 @@ public class ControllerWindowSettings {
         }
     }
 
+    @FXML public void clickMIDIDevices(ActionEvent event) {
+        try {
+            Pane pane = FXMLFiles.load("settings_mididevices.fxml");
+
+            content.getChildren().clear();
+            content.getChildren().add(pane);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML public void clickAudioDevices(ActionEvent event) {
+
+    }
 }

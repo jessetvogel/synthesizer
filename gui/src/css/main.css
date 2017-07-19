@@ -1,13 +1,8 @@
-@font-face {
-    src: url('../fonts/museosans-500.otf');
-}
-
 .root {
   -fx-focus-color: transparent;
 }
 
 .content {
-    -fx-background-color: linear-gradient(to bottom right, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+    -fx-background-color: color-background-main;
     -fx-font-family: 'Museo Sans';
-    -fx-padding: 16;
 }

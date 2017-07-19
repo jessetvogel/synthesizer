@@ -1,0 +1,192 @@
+/* Define colors */
+.root {
+
+  color-background-main: #2f2f2f;
+  color-background-menu: #505050;
+  color-background-highlight: #656565;
+
+  color-text-main: #ffffff;
+}
+
+/* Load fonts */
+@font-face {
+    src: url('../fonts/museosans-500.otf');
+}
+
+.root {
+  -fx-font-family: 'Museo Sans';
+}
+
+/* GUI elements */
+.label {
+  -fx-pref-height: 32;
+  -fx-font-size: 13;
+  -fx-text-fill: white;
+}
+
+.button {
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-repeat: no-repeat;
+  -fx-background-color: color-background-menu;
+  -fx-pref-height: 32;
+  -fx-text-fill: white;
+  -fx-font-size: 13;
+  -fx-alignment: center;
+  -fx-cursor: hand;
+}
+
+.button:hover {
+  -fx-background-color: color-background-highlight;
+}
+
+.text-field {
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-color: color-background-highlight;
+  -fx-padding: 0 8 0 8;
+  -fx-text-fill: white;
+  -fx-pref-height: 32;
+}
+
+.text-field.invalid {
+  -fx-border-color: rgba(255, 0, 0, 0.5);
+  -fx-border-width: 2; /* TODO */
+}
+
+.choice-box {
+  -fx-pref-height: 32;
+  -fx-padding: 0;
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-color: color-background-menu;
+  -fx-mark-color: white;
+}
+
+.choice-box:hover {
+  -fx-background-color: color-background-highlight;
+}
+
+.choice-box .list-cell {
+  -fx-pref-height: 32;
+}
+
+.choice-box .context-menu {
+  -fx-padding: 0;
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-color: transparent;
+  -fx-effect: null;
+}
+
+.choice-box .menu-item {
+  -fx-background-color: white;
+  -fx-pref-height: 32;
+}
+
+.choice-box .menu-item .label {
+  -fx-text-fill: black;
+}
+
+.choice-box .menu-item:hover {
+  -fx-background-color: #c9c9c9;
+}
+
+.scroll-pane, .viewport {
+  -fx-padding: 0;
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-color: transparent;
+  -fx-border-width: 0;
+}
+
+.list-view {
+  -fx-padding: 0;
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-color: transparent;
+}
+
+.list-cell {
+  -fx-cell-size: 32;
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-color: transparent;
+  -fx-text-fill: white;
+}
+
+.list-cell:hover {
+  -fx-background-color: color-background-highlight;
+}
+
+.list-view .scroll-bar .increment-arrow,
+.list-view .scroll-bar .decrement-arrow,
+.list-view .scroll-bar .increment-button,
+.list-view .scroll-bar .decrement-button {
+    -fx-padding:0;
+}
+
+.check-box .box {
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-color: color-background-menu;
+  -fx-min-width: 24;
+  -fx-pref-width: 24;
+  -fx-min-height: 24;
+  -fx-pref-height: 24;
+}
+
+.check-box .mark {
+  -fx-shape:"M14.596,2.055L12.455,0C9.687,2.884,6.011,6.714,5.158,7.602L2.055,4.624L0,6.765l5.242,5.037l0.003-0.004l0.003,0.004L14.596,2.055z";
+  -fx-scale-x: 0.8;
+  -fx-scale-y: 0.7;
+}
+
+.check-box:selected .mark {
+  -fx-background-color: white;
+}
+
+/* Additional (util) classes */
+.horizontal-separator {
+  -fx-background-color: color-background-highlight;
+  -fx-min-height: 1;
+  -fx-pref-height: 1;
+}
+
+.vertical-separator {
+  -fx-background-color: color-background-highlight;
+  -fx-min-width: 1;
+  -fx-pref-width: 1;
+}
+
+/* List items */
+.list-default {
+  -fx-padding: 8 0 8 0;
+  -fx-spacing: 8;
+}
+
+.list-item-label {
+  -fx-padding: 0 8 0 8;
+}
+
+.list-item-draggable {
+  -fx-padding: 0 8 0 8;
+}
+
+.list-item-header .label {
+  -fx-font-size: 16;
+  -fx-padding: 0 8 0 8;
+  -fx-text-fill: #b0b0b0;
+}
+
+.list-item-draggable:hover {
+  -fx-background-color: color-background-highlight;
+}
+
+.list-item-text-field .label {
+  -fx-padding: 0 8 0 8;
+}
+
+.list-item-check-box .label {
+  -fx-padding: 0 8 0 8;
+}

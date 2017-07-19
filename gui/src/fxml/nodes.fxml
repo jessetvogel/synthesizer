@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox prefHeight="100.0" prefWidth="200.0" spacing="16.0" stylesheets="@../css/nodes.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.jessevogel.synthesizer.gui.controllers.ControllerNodes">
+<HBox stylesheets="@../css/node_types.css" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <VBox styleClass="node-list-container">
-            <children>
-                <ChoiceBox fx:id="choiceBoxComponentGroup" prefWidth="150.0" />
-                <ListView fx:id="listViewComponents" onDragDetected="#listDragDetected" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-            </children>
-        </VBox>
-        <fx:include source="nodes_grid.fxml" />
-        <fx:include source="nodes_info.fxml" />
+        <fx:include source="node_types.fxml" />
+        <fx:include source="node_grid.fxml" />
+        <fx:include source="node_info.fxml" />
     </children>
 </HBox>

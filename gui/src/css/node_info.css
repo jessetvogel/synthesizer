@@ -1,0 +1,21 @@
+.node-info {
+  -fx-background-color: color-background-menu;
+  -fx-min-width: 256;
+  -fx-pref-width: 256;
+  /*-fx-font-family: 'Museo Sans'; /* TODO: remove this */
+}
+
+.node-info-list, .node-inputs-list, .node-outputs-list {
+  -fx-padding: 8 0 8 0;
+  -fx-spacing: 8;
+}
+
+.node-info-list .list-item-text-field .text-field {
+  -fx-min-width: 120;
+  -fx-pref-width: 120;
+}
+
+.node-info-list .list-item-text-field .label {
+  -fx-min-width: 112;
+  -fx-pref-width: 112;
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox styleClass="node-info" stylesheets="@../css/node_info.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.jessevogel.synthesizer.gui.controllers.ControllerNodeInfo">
+   <children>
+      <ScrollPane focusTraversable="false" hbarPolicy="NEVER" vbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+         <content>
+            <VBox fx:id="info" styleClass="node-info-list" />
+         </content>
+      </ScrollPane>
+   </children>
+</VBox>

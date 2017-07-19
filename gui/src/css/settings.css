@@ -1,0 +1,31 @@
+.settings-list {
+  -fx-background-color: color-background-menu;
+  -fx-pref-width: 160;
+  -fx-min-width: 160;
+}
+
+.settings-list .button {
+  -fx-pref-width: 160;
+  -fx-min-width: 160;
+  -fx-alignment: center-left;
+}
+
+.settings-content {
+  -fx-background-color: color-background-main;
+}
+
+.settings-content-list {
+  -fx-padding: 0 8 0 8;
+}
+
+.settings-content-list .list-item-check-box .label {
+  -fx-min-width: 160;
+  -fx-pref-width: 160;
+}
+
+
+
+
+.list {
+  -fx-spacing: 8;
+}

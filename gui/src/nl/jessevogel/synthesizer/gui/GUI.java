@@ -1,17 +1,12 @@
 package nl.jessevogel.synthesizer.gui;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import nl.jessevogel.synthesizer.gui.controllers.ControllerMenu;
-import nl.jessevogel.synthesizer.gui.controllers.ControllerNodeInfo;
-import nl.jessevogel.synthesizer.gui.controllers.ControllerNodes;
-import nl.jessevogel.synthesizer.gui.controllers.ControllerNodeGrid;
+import nl.jessevogel.synthesizer.gui.controllers.*;
 import nl.jessevogel.synthesizer.main.Controller;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class GUI extends Application {
@@ -19,9 +14,9 @@ public class GUI extends Application {
     public static Stage stage;
 
     public static ControllerMenu controllerMenu;
-    public static ControllerNodes controllerNodes;
     public static ControllerNodeGrid controllerNodeGrid;
     public static ControllerNodeInfo controllerNodeInfo;
+    public static ControllerNodeTypes controllerNodeTypes;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -29,7 +24,7 @@ public class GUI extends Application {
         GUI.stage = primaryStage;
 
         // Load main fxml
-        Pane pane = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
+        Pane pane = FXMLFiles.load("main.fxml");
 
         // Create scene and show window
         Scene scene = new Scene(pane);

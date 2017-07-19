@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+
+<HBox styleClass="list-item-draggable" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" >
+    <Label />
+</HBox>

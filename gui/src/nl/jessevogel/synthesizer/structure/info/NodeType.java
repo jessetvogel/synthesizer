@@ -8,6 +8,7 @@ public class NodeType {
     public Option[] options;
     public String directory;
     public String[] files;
+    public String image;
 
     public static class Option {
         public enum Type { Boolean, Integer, Float }

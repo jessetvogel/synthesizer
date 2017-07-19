@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:controller="nl.jessevogel.synthesizer.gui.controllers.windows.ControllerWindowOptions" styleClass="option-window" stylesheets="@../css/options.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:controller="nl.jessevogel.synthesizer.gui.controllers.windows.ControllerWindowOptions" styleClass="option-window" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label styleClass="option-header" text="Create Node" />
-      <VBox fx:id="optionItemContainer" styleClass="option-item-container">
-         <children>
-            <HBox styleClass="option-item">
-               <children>
-                  <Label text="id" />
-                  <TextField fx:id="fieldId" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
+      <VBox fx:id="list" styleClass="options-list" />
       <HBox styleClass="option-button-container">
          <children>
             <Button mnemonicParsing="false" onAction="#onClickCancel" text="Cancel" />
@@ -23,4 +14,8 @@
          </children>
       </HBox>
    </children>
+   <stylesheets>
+      <URL value="@../css/style.css" />
+      <URL value="@../css/options.css" />
+   </stylesheets>
 </VBox>

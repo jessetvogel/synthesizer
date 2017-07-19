@@ -1,17 +1,17 @@
 package nl.jessevogel.synthesizer.gui.controllers;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
+import nl.jessevogel.synthesizer.gui.FXMLFiles;
 import nl.jessevogel.synthesizer.gui.GUI;
-//import nl.jessevogel.synthesizer.gui.util.Alert;
 import nl.jessevogel.synthesizer.structure.data.Node;
 
+import java.io.File;
 import java.util.HashMap;
 
 public class ControllerNodeGrid {
@@ -54,12 +54,17 @@ public class ControllerNodeGrid {
 
     public void addNode(Node node) {
         try {
-            StackPane stack = FXMLLoader.load(getClass().getResource("/fxml/nodes_grid_item.fxml"));
-            try {
-                Image image = new Image("/img/components/" + node.type.name + ".png");
-                ((ImageView) stack.getChildren().get(1)).setImage(image);
+            // Load grid item
+            StackPane stack = (StackPane) FXMLFiles.load("node_grid_item.fxml");
+
+            // Try to load image
+            String imagePath = node.type.directory + "/" + node.type.image;
+            if(imagePath != null) {
+                try {
+                    Image image = new Image(new File(imagePath).toURI().toURL().toExternalForm());
+                    ((ImageView) stack.getChildren().get(1)).setImage(image);
+                } catch (Exception ignored) {}
             }
-            catch(Exception e) { }
 
             stack.setTranslateX(gridShiftX + node.x * 64.0);
             stack.setTranslateY(gridShiftY + node.y * 64.0);

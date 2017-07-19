@@ -86,6 +86,7 @@ public class Response {
                 device.id = obj.getInt("id");
                 device.name = obj.getString("name");
                 device.active = obj.getBoolean("active");
+                devices.add(device);
             }
             return devices;
         }
@@ -160,7 +161,7 @@ public class Response {
             int outputsLength = outputs.length();
             nodeInfo.outputs = new NodeOutput[outputsLength];
             for(int i = 0;i < outputsLength; ++i) {
-                JSONObject obj = inputs.getJSONObject(i);
+                JSONObject obj = outputs.getJSONObject(i);
                 nodeInfo.outputs[i] = new NodeOutput();
                 nodeInfo.outputs[i].label = obj.getString("label");
             }

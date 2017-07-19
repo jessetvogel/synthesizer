@@ -1,5 +1,5 @@
 .menu {
-  -fx-background-color: rgba(0, 0, 0, 0.2);
+  -fx-background-color: color-background-menu;
   -fx-padding: 0;
   /*-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 2, 2); TODO */
 }
@@ -7,27 +7,12 @@
 .menu .button {
   -fx-min-width: 64;
   -fx-pref-width: 100000000; /* TODO: change to Double.MAX */
+  -fx-min-height: 64;
   -fx-pref-height: 64;
-  /*-fx-border-width: 0;*/
-  -fx-text-fill: transparent;
-
-  -fx-background-insets: 0;
-  -fx-background-radius: 0;
-  -fx-background-color: transparent;
-  -fx-background-size: 20px;
-  -fx-background-repeat: no-repeat;
-  -fx-background-position: center;
+  -fx-alignment: center;
 }
 
-.menu .button:hover {
-    -fx-background-color: rgba(255, 255, 255, 0.24);
-}
-
-.menu .button:pressed {
-    -fx-background-color: rgba(0, 0, 0, 0.24);
-}
-
-#buttonNew { -fx-background-image: url('../img/menu/new.png'); }
+/*#buttonNew { -fx-background-image: url('../img/menu/new.png'); }
 #buttonOpen { -fx-background-image: url('../img/menu/open.png'); }
 #buttonSave { -fx-background-image: url('../img/menu/save.png'); }
 #buttonPlay { -fx-background-image: url('../img/menu/play.png'); }
@@ -35,4 +20,4 @@
 #buttonSettings { -fx-background-image: url('../img/menu/settings.png'); }
 
 #buttonComponents { -fx-background-image: url('../img/menu/grid.png'); }
-#buttonDevices { -fx-background-image: url('../img/menu/volumeup.png'); }
+#buttonDevices { -fx-background-image: url('../img/menu/volumeup.png'); }*/

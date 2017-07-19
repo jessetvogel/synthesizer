@@ -1,0 +1,14 @@
+.node-types {
+  -fx-background-color: color-background-menu;
+  -fx-min-width: 192;
+  -fx-pref-width: 192;
+  -fx-spacing: 0;
+}
+
+.node-types .choice-box, .node-types .list-cell, .node-types .context-menu {
+  -fx-pref-width: 192;
+}
+
+.node-types .list-item-draggable {
+  -fx-pref-width: 192;
+}

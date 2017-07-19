@@ -1,0 +1,9 @@
+.node-grid {
+  -fx-background-color: color-background-main;
+  -fx-background-image: url('../img/grid.png');
+  -fx-background-repeat: repeat;
+}
+
+.node-grid-item {
+  -fx-cursor: hand;
+}

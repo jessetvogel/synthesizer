@@ -7,7 +7,7 @@
    <children>
       <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" smooth="false">
          <image>
-            <Image url="@../img/components/template.png" />
+            <Image url="@../img/node.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" />

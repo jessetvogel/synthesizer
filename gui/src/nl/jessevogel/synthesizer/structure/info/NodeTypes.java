@@ -54,6 +54,7 @@ public class NodeTypes {
 
                 String name = info.getString("name");
                 String group = info.getString("group");
+                String image = info.has("image") ? info.getString("image") : "image.png";
                 JSONArray optionsArray = info.getJSONArray("options");
                 int optionsLength = optionsArray.length();
                 NodeType.Option[] options = new NodeType.Option[optionsLength];
@@ -82,6 +83,7 @@ public class NodeTypes {
                 nodeType.options = options;
                 nodeType.directory = directory.getAbsolutePath();
                 nodeType.files = files;
+                nodeType.image = image;
                 types.add(nodeType);
 
                 // Add group if not yet
