@@ -25,7 +25,7 @@ public class Nodes {
 
         // Ask for options, and abort if not successful
         HashMap<String, String> map = ControllerWindowOptions.show(nodeType);
-        if(map == null) return;
+        if (map == null) return;
 
         // Create a node
         Node node = new Node();
@@ -36,7 +36,7 @@ public class Nodes {
 
         // Send it to interface
         NodeLoader nodeLoader = new NodeLoader(controller);
-        if(!nodeLoader.load(nodeType, map)) return;
+        if (!nodeLoader.load(nodeType, map)) return;
 
         // Add it to list of nodes
         nodes.add(node);

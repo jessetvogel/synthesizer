@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
@@ -71,6 +72,21 @@ public class ListItems {
         CheckBox checkBox = (CheckBox) item.getChildren().get(1);
         checkBox.setSelected(checked);
         checkBox.setOnAction(event);
+
+        return item;
+    }
+
+    public static Pane createChoiceBox(String description, String[] options, String value, EventHandler<ActionEvent> event) {
+        Pane item = FXMLFiles.load("list_items/choicebox.fxml");
+
+        Label label = (Label) item.getChildren().get(0);
+        label.setText(description);
+
+        ChoiceBox choiceBox = (ChoiceBox) item.getChildren().get(1);
+        for(String option : options)
+            choiceBox.getItems().add(option);
+        choiceBox.setValue(value);
+        choiceBox.setOnAction(event);
 
         return item;
     }

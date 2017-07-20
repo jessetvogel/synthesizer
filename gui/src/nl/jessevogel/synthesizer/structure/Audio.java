@@ -38,4 +38,24 @@ public class Audio {
         GUI.controllerMenu.updatePlayIcon(active);
         return true;
     }
+
+    public void setInputDevice(int id) {
+        boolean wasActive = active;
+        if(active) stop();
+
+        Response response = controller.getInterface().command("audio_set_input_device " + id);
+        handleResponse(response);
+
+        if(wasActive) play();
+    }
+
+    public void setOutputDevice(int id) {
+        boolean wasActive = active;
+        if(active) stop();
+
+        Response response = controller.getInterface().command("audio_set_output_device " + id);
+        handleResponse(response);
+
+        if(wasActive) play();
+    }
 }

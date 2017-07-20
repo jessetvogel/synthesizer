@@ -1,1 +1,1 @@
-node_create oscillator wave [key = true]
+node_create oscillator wave [key = false]

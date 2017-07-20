@@ -108,6 +108,7 @@ public class Response {
                 device.id = obj.getInt("id");
                 device.name = obj.getString("name");
                 device.active = obj.getBoolean("active");
+                devices.add(device);
             }
             return devices;
         }
@@ -129,6 +130,7 @@ public class Response {
                 device.id = obj.getInt("id");
                 device.name = obj.getString("name");
                 device.active = obj.getBoolean("active");
+                devices.add(device);
             }
             return devices;
         }

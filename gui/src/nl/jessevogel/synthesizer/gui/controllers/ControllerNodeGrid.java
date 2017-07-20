@@ -3,7 +3,9 @@ package nl.jessevogel.synthesizer.gui.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
@@ -46,10 +48,25 @@ public class ControllerNodeGrid {
     }
 
     @FXML public void gridDragDropped(DragEvent event) {
-        String type = event.getDragboard().getString();
+        String string = event.getDragboard().getString();
         int x = (int) Math.floor((event.getX() - gridShiftX) / 64.0);
         int y = (int) Math.floor((event.getY() - gridShiftY) / 64.0);
-        GUI.controller.getNodes().create(type, x, y);
+
+        String[] tokens = string.split("\\s+");
+        if(tokens.length <= 1) return;
+
+        if(tokens[0].equals("create")) {
+            GUI.controller.getNodes().create(tokens[1], x, y);
+            return;
+        }
+
+        if(tokens[0].equals("move")) {
+            Node node = GUI.controller.getNodes().getNode(tokens[1]);
+            if(node == null) return;
+            node.x = x;
+            node.y = y;
+            shift(0.0, 0.0);
+        }
     }
 
     public void addNode(Node node) {
@@ -66,15 +83,24 @@ public class ControllerNodeGrid {
                 } catch (Exception ignored) {}
             }
 
-            stack.setTranslateX(gridShiftX + node.x * 64.0);
-            stack.setTranslateY(gridShiftY + node.y * 64.0);
-
+            // Event handlers
             stack.setOnMouseClicked(e -> {
                 GUI.controller.getNodes().edit(node);
             });
 
+            stack.setOnDragDetected(e -> {
+                Dragboard db = ((javafx.scene.Node) e.getSource()).startDragAndDrop(TransferMode.ANY);
+                ClipboardContent content = new ClipboardContent();
+                content.putString("move " + node.id);
+                db.setContent(content);
+//            db.setDragView(new Image("/img/components/node.png"));
+                e.consume();
+            });
+
+            // Add to grid and positioning
             nodeGrid.getChildren().add(stack);
             map.put(stack, node);
+            shift(0.0, 0.0);
         }
         catch(Exception e) {
             e.printStackTrace();

@@ -28,7 +28,7 @@ public class ControllerNodeTypes {
             String group = groups.getValue();
             for(NodeType nodeType : nodeTypes.types) {
                 if(!nodeType.group.equals(group)) continue;
-                Pane pane = ListItems.createDraggable(nodeType.name, nodeType.name);
+                Pane pane = ListItems.createDraggable(nodeType.name, "create " + nodeType.name);
                 nodes.getChildren().add(pane);
             }
         });

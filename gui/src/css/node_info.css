@@ -11,11 +11,11 @@
 }
 
 .node-info-list .list-item-text-field .text-field {
-  -fx-min-width: 120;
-  -fx-pref-width: 120;
+  -fx-min-width: 128;
+  -fx-pref-width: 128;
 }
 
 .node-info-list .list-item-text-field .label {
-  -fx-min-width: 112;
-  -fx-pref-width: 112;
+  -fx-min-width: 120;
+  -fx-pref-width: 120;
 }

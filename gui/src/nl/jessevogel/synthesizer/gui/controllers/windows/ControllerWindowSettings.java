@@ -51,6 +51,14 @@ public class ControllerWindowSettings {
     }
 
     @FXML public void clickAudioDevices(ActionEvent event) {
+        try {
+            Pane pane = FXMLFiles.load("settings_audiodevices.fxml");
 
+            content.getChildren().clear();
+            content.getChildren().add(pane);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }

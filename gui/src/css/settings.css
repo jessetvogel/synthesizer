@@ -16,6 +16,7 @@
 
 .settings-content-list {
   -fx-padding: 0 8 0 8;
+  -fx-spacing: 8;
 }
 
 .settings-content-list .list-item-check-box .label {
@@ -23,9 +24,12 @@
   -fx-pref-width: 160;
 }
 
+.settings-content-list .list-item-choice-box .label {
+  -fx-min-width: 160;
+  -fx-pref-width: 160;
+}
 
-
-
-.list {
-  -fx-spacing: 8;
+.settings-content-list .list-item-choice-box .choice-box {
+  -fx-min-width: 160;
+  -fx-pref-width: 160;
 }
