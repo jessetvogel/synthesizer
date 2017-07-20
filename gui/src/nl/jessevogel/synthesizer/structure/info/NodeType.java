@@ -15,8 +15,8 @@ public class NodeType {
 
         public String label;
         public Type type;
+        public String value;
         public String description;
-        public String defaultValue;
 
         public static Type getType(String type) throws Exception {
             switch(type) {

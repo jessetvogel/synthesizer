@@ -65,9 +65,9 @@ public class NodeTypes {
                     options[i].type = NodeType.Option.getType(optionObject.getString("type"));
                     options[i].description = optionObject.getString("description");
                     if(optionObject.has("default"))
-                        options[i].defaultValue = optionObject.getString("default");
+                        options[i].value = optionObject.getString("default");
                     else
-                        options[i].defaultValue = NodeType.Option.getDefaultValue(options[i].type);
+                        options[i].value = NodeType.Option.getDefaultValue(options[i].type);
                 }
 
                 JSONArray filesArray = info.getJSONArray("files");

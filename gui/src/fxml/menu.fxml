@@ -6,8 +6,8 @@
 <HBox styleClass="menu" stylesheets="@../css/menu.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.jessevogel.synthesizer.gui.controllers.ControllerMenu">
     <children>
         <Button fx:id="buttonNew" mnemonicParsing="false" styleClass="menu-button" text="New" />
-        <Button fx:id="buttonOpen" mnemonicParsing="false" styleClass="menu-button" text="Open" />
-        <Button fx:id="buttonSave" mnemonicParsing="false" styleClass="menu-button" text="Save" />
+        <Button fx:id="buttonLoad" onAction="#clickLoad" mnemonicParsing="false" styleClass="menu-button" text="Open" />
+        <Button fx:id="buttonSave" onAction="#clickSave" mnemonicParsing="false" styleClass="menu-button" text="Save" />
         <Button fx:id="buttonPlay" onAction="#clickPlay" mnemonicParsing="false" styleClass="menu-button" text="Play" />
         <Button fx:id="buttonSettings" onAction="#clickSettings" mnemonicParsing="false" styleClass="menu-button" text="Settings" />
     </children>

@@ -33,10 +33,14 @@ public class Nodes {
         node.id = map.get("id");
         node.x = x;
         node.y = y;
+        node.options = map;
 
         // Send it to interface
         NodeLoader nodeLoader = new NodeLoader(controller);
-        if (!nodeLoader.load(nodeType, map)) return;
+        if(!nodeLoader.load(nodeType, map)) return;
+
+        // Remove id from map
+        map.remove("id");
 
         // Add it to list of nodes
         nodes.add(node);

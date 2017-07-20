@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class ControllerWindowOptions {
 
     private static boolean success;
-    private static HashMap<String, String> map = new HashMap<>();
+    private HashMap<String, String> map;
 
     @FXML public VBox list;
 
@@ -43,15 +43,15 @@ public class ControllerWindowOptions {
 
             VBox list = controllerWindowOptions.list;
 
-            // Clear the map
-            map.clear();
+            // Create a new map
+            controllerWindowOptions.map = new HashMap<>();
 
             // Header
             Pane header = ListItems.createHeader("Create '" + nodeType.name + "'");
             list.getChildren().add(header);
 
             // Option id
-            String defaultId = "node123";
+            String defaultId = "node123"; // TODO
             Pane id = ListItems.createTextField("id", defaultId, event -> {
                 TextField field = (TextField) event.getSource();
                 String value = field.getText();
@@ -59,39 +59,39 @@ public class ControllerWindowOptions {
                     field.getStyleClass().add("invalid");
                 else {
                     field.getStyleClass().remove("invalid");
-                    map.put("id", value);
+                    controllerWindowOptions.map.put("id", value);
                 }
             });
             list.getChildren().add(id);
-            map.put("id", defaultId);
+            controllerWindowOptions.map.put("id", defaultId);
 
             // Node options
             for(NodeType.Option option : nodeType.options) {
-                Pane item = ListItems.createTextField(option.description, option.defaultValue, event -> {
+                Pane item = ListItems.createTextField(option.description, option.value, event -> {
                     TextField field = (TextField) event.getSource();
                     String value = field.getText();
                     if (!option.validValue(value))
                         field.getStyleClass().add("invalid");
                     else {
-                        map.put(option.label, value);
+                        controllerWindowOptions.map.put(option.label, value);
                         field.getStyleClass().remove("invalid");
                     }
                 });
                 list.getChildren().add(item);
-                map.put(option.label, option.defaultValue);
+                controllerWindowOptions.map.put(option.label, option.value);
             }
 
             // Show stage
             window.setScene(scene);
             window.showAndWait();
+
+            if(!success) return null;
+            return controllerWindowOptions.map;
         }
         catch(Exception e) {
             e.printStackTrace();
+            return null;
         }
-
-        if(!success) return null;
-
-        return map;
     }
 
     @FXML public void onClickCreate(ActionEvent event) {
