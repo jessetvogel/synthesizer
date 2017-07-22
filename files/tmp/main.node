@@ -1,1 +1,1 @@
-node_create bandpass bandie [order = 2]
+node_create adder wave_total [n = 3, key = true]

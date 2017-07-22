@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.jessevogel.synthesizer.gui.util.Confirm">
+   <children>
+      <HBox>
+         <children>
+            <Label fx:id="title" styleClass="title" text="Label" />
+         </children>
+      </HBox>
+      <HBox VBox.vgrow="ALWAYS">
+         <children>
+            <Label fx:id="description" styleClass="description" text="Label" />
+         </children>
+      </HBox>
+      <HBox styleClass="button-container">
+         <children>
+            <Button onAction="#clickNo" mnemonicParsing="false" text="No" />
+            <Button onAction="#clickYes" mnemonicParsing="false" text="Yes" />
+         </children>
+      </HBox>
+   </children>
+   <stylesheets>
+       <URL value="@../../css/style.css" />
+       <URL value="@../../css/confirm.css" />
+   </stylesheets>
+</VBox>

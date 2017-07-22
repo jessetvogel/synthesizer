@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import nl.jessevogel.synthesizer.gui.GUI;
 import nl.jessevogel.synthesizer.gui.controllers.windows.ControllerWindowSettings;
+import nl.jessevogel.synthesizer.structure.files.FileLoader;
 import nl.jessevogel.synthesizer.structure.files.FileSaver;
 
 import java.io.File;
@@ -47,7 +48,20 @@ public class ControllerMenu {
     }
 
     @FXML public void clickLoad(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
 
+        // Set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Synth files (*.syn)", "*.syn");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Show load file dialog
+        File file = fileChooser.showOpenDialog(GUI.stage);
+
+        if(file != null) {
+            GUI.controller.reset();
+            FileLoader loader = new FileLoader(GUI.controller);
+            loader.load(file.getAbsolutePath());
+        }
     }
 
     public void updatePlayIcon(boolean playing) {

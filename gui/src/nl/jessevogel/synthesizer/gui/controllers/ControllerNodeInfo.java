@@ -1,18 +1,26 @@
 package nl.jessevogel.synthesizer.gui.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import nl.jessevogel.synthesizer.gui.GUI;
 import nl.jessevogel.synthesizer.gui.ListItems;
+import nl.jessevogel.synthesizer.gui.util.Confirm;
+import nl.jessevogel.synthesizer.structure.data.Node;
 import nl.jessevogel.synthesizer.structure.data.NodeInput;
 import nl.jessevogel.synthesizer.structure.data.NodeOutput;
 import nl.jessevogel.synthesizer.structure.response.NodeInfo;
 
+import java.util.List;
+
 public class ControllerNodeInfo {
 
     @FXML public VBox info;
+
+    private String currentNode;
 
     @FXML public void initialize() {
         GUI.controllerNodeInfo = this;
@@ -21,6 +29,10 @@ public class ControllerNodeInfo {
     public void setInfo(NodeInfo nodeInfo) {
         try {
             info.getChildren().clear();
+            if(nodeInfo == null) {
+                currentNode = null;
+                return;
+            }
 
             // Node id
             Pane id = ListItems.createTextField("id", nodeInfo.id, event -> {
@@ -53,6 +65,18 @@ public class ControllerNodeInfo {
                 Pane pane = ListItems.createLabel(nodeOutput.label);
                 info.getChildren().add(pane);
             }
+
+            // Delete button
+            Pane delete = ListItems.createButton("Delete", event -> {
+                if(Confirm.show("Are you sure you want to delete node '" + currentNode + "'?", "This action cannot be undone.")) {
+                    Node node = GUI.controller.getNodes().getNode(currentNode);
+                    GUI.controller.getNodes().delete(node);
+                }
+            });
+            info.getChildren().add(delete);
+
+            // Set current node id
+            currentNode = nodeInfo.id;
         }
         catch(Exception e) { e.printStackTrace(); /* TODO */ }
     }

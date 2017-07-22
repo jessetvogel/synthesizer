@@ -3,10 +3,7 @@ package nl.jessevogel.synthesizer.gui;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -23,7 +20,7 @@ public class ListItems {
         return item;
     }
 
-    public static Pane createTextField(String description, String value, EventHandler<ActionEvent> eventHandler) {
+    public static Pane createTextField(String description, String value, EventHandler<ActionEvent> handler) {
         Pane item = FXMLFiles.load("list_items/textfield.fxml");
 
         Label label = (Label) item.getChildren().get(0);
@@ -31,7 +28,7 @@ public class ListItems {
 
         TextField textField = (TextField) item.getChildren().get(1);
         textField.setText(value);
-        textField.setOnAction(eventHandler);
+        textField.setOnAction(handler);
 
         return item;
     }
@@ -63,7 +60,7 @@ public class ListItems {
         return item;
     }
 
-    public static Pane createCheckBox(String description, boolean checked, EventHandler<ActionEvent> event) {
+    public static Pane createCheckBox(String description, boolean checked, EventHandler<ActionEvent> handler) {
         Pane item = FXMLFiles.load("list_items/checkbox.fxml");
 
         Label label = (Label) item.getChildren().get(0);
@@ -71,12 +68,12 @@ public class ListItems {
 
         CheckBox checkBox = (CheckBox) item.getChildren().get(1);
         checkBox.setSelected(checked);
-        checkBox.setOnAction(event);
+        checkBox.setOnAction(handler);
 
         return item;
     }
 
-    public static Pane createChoiceBox(String description, String[] options, String value, EventHandler<ActionEvent> event) {
+    public static Pane createChoiceBox(String description, String[] options, String value, EventHandler<ActionEvent> handler) {
         Pane item = FXMLFiles.load("list_items/choicebox.fxml");
 
         Label label = (Label) item.getChildren().get(0);
@@ -86,7 +83,17 @@ public class ListItems {
         for(String option : options)
             choiceBox.getItems().add(option);
         choiceBox.setValue(value);
-        choiceBox.setOnAction(event);
+        choiceBox.setOnAction(handler);
+
+        return item;
+    }
+
+    public static Pane createButton(String text, EventHandler<ActionEvent> handler) {
+        Pane item = FXMLFiles.load("list_items/button.fxml");
+
+        Button button = (Button) item.getChildren().get(0);
+        button.setText(text);
+        button.setOnAction(handler);
 
         return item;
     }

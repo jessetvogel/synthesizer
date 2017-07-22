@@ -31,4 +31,8 @@ public class Controller {
     public Interface getInterface() { return inter; }
     public Nodes getNodes() { return nodes; }
     public Audio getAudio() { return audio; }
+
+    public void reset() {
+        // TODO: implement, reset everything! Clear all nodes, restart interface, etc
+    }
 }

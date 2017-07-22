@@ -52,6 +52,7 @@ public class Interface {
             output.flush();
 
             String response = input.readLine();
+            System.out.println("[RESPONSE]: " + response);
             return new Response(response);
         }
         catch(IOException e) {

@@ -1,0 +1,26 @@
+.root {
+    -fx-background-color: color-background-main;
+    -fx-padding: 16;
+    -fx-min-height: 160;
+    -fx-pref-height: 160;
+    -fx-min-width: 384;
+    -fx-pref-width: 384;
+}
+
+.title {
+    -fx-font-size: 16;
+}
+
+.description {
+    -fx-text-fill: #b0b0b0;
+}
+
+.button-container {
+    -fx-alignment: center-right;
+    -fx-spacing: 8;
+}
+
+.button {
+    -fx-pref-width: 64;
+    -fx-min-width: 64;
+}

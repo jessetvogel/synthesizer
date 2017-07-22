@@ -107,6 +107,16 @@ public class ControllerNodeGrid {
         }
     }
 
+    public void removeNode(Node node) {
+        for(javafx.scene.Node n : nodeGrid.getChildren()) {
+            if(node == map.get(n)) {
+                nodeGrid.getChildren().remove(n);
+                GUI.controllerNodeInfo.setInfo(null);
+                break;
+            }
+        }
+    }
+
     public void shift(double dx, double dy) {
         gridShiftX += dx;
         gridShiftY += dy;

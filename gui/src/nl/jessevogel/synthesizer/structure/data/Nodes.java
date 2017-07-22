@@ -27,6 +27,10 @@ public class Nodes {
         HashMap<String, String> map = ControllerWindowOptions.show(nodeType);
         if (map == null) return;
 
+        create(nodeType, x, y, map);
+    }
+
+    public void create(NodeType nodeType, int x, int y, HashMap<String, String> map) {
         // Create a node
         Node node = new Node();
         node.type = nodeType;
@@ -47,6 +51,13 @@ public class Nodes {
 
         // Add it to the grid
         GUI.controllerNodeGrid.addNode(node);
+    }
+
+    public void delete(Node node) {
+        Response response = controller.getInterface().command("node_delete " + node.id);
+        // TODO
+        GUI.controllerNodeGrid.removeNode(node);
+        nodes.remove(node);
     }
 
     public void edit(Node node) {
