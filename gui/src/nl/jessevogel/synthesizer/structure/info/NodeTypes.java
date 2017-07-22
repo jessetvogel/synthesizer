@@ -31,7 +31,7 @@ public class NodeTypes {
 
     private void initialize() {
         // Load all node types
-        File nodesDirectory = new File(controller.getInfo().getDirectory() + NODES_DIRECTORY);
+        File nodesDirectory = new File(controller.getInfo().getNodesDirectory());
         if(!nodesDirectory.exists() || !nodesDirectory.isDirectory())  return; // TODO
         scanDirectory(nodesDirectory);
     }

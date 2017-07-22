@@ -57,20 +57,30 @@ bool Nodes::create(std::string type, std::string id, std::string arguments) {
 }
 
 bool Nodes::destroy(std::string id) {
-    // Find node with given id (and erase it already from nodes list)
-    mutex.lock();
+    // Find node with given id
     Node* node = NULL;
-    for(auto it = nodes.begin(); it != nodes.end(); ++it) {
+    mutex.lock();
+    auto it = nodes.begin();
+    for(;it != nodes.end(); ++it) {
         if(id.compare((*it)->getId()) == 0) {
-            nodes.erase(it);
             node = *it;
             break;
         }
     }
-    mutex.unlock();
 
     // In case it does not exists, return
     if(node == NULL) return false;
+    
+    // Make sure there are no references to this node
+    bool reference = false;
+    for(auto it = nodes.begin(); it != nodes.end(); ++it) {
+        if((*it)->dependsOn(node)) {
+            reference = true;
+            break;
+        }
+    }
+    mutex.unlock();
+    if(reference) return false;
     
     // Remove node from (other) relevant lists
     std::string nodeType = node->getType();
@@ -78,7 +88,8 @@ bool Nodes::destroy(std::string id) {
     if(nodeType.compare("collector") == 0) removeCollector((NodeCollector*) node);
     if(nodeType.compare("audio_output") == 0) removeAudioOutput((NodeAudioOutput*) node);
     
-    // Delete object
+    // Erase from list and delete object
+    nodes.erase(it);
     delete node;
     
     return true;

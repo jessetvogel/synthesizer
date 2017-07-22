@@ -57,6 +57,18 @@ void Node::update() {
     apply();
 };
 
+bool Node::dependsOn(Node* node) {
+    for(auto it = inputs.begin(); it != inputs.end(); ++it) {
+        NodeInput* input = it->second;
+        if(input->getType() == NodeInput::NODE || input->getType() == NodeInput::NODE_KEY_INDEPENDENT) {
+            NodeOutput* output = (NodeOutput*) input->pointer;
+            if(output->getNode() == node)
+                return true;
+        }
+    }
+    return false;
+}
+
 bool Node::addInput(std::string label, NodeInput* input) {
     auto position = inputs.find(label);
     if(position != inputs.end()) return false; // TODO

@@ -27,9 +27,9 @@ public class ControllerSettingsMIDIDevices {
             try {
                 Pane item = ListItems.createCheckBox(device.name, device.active, event -> {
                     if(((CheckBox) event.getSource()).isSelected())
-                        GUI.controller.getInterface().command("midi_add_device " + device.id);
+                        GUI.controller.getDevices().addMIDIDevice(device);
                     else
-                        GUI.controller.getInterface().command("midi_remove " + device.id);
+                        GUI.controller.getDevices().removeMIDIDevice(device);
                 });
                 list.getChildren().add(item);
             }
@@ -38,5 +38,4 @@ public class ControllerSettingsMIDIDevices {
             }
         }
     }
-
 }

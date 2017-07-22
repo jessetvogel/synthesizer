@@ -67,6 +67,8 @@ public:
     inline void hide() { hidden = true; id = NODE_HIDDEN_ID; }
     inline bool isHidden() { return hidden; };
   
+    bool dependsOn(Node*);
+    
     // Status
     void printNode();
     

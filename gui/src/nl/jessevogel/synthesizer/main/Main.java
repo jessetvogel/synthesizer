@@ -7,7 +7,6 @@ public class Main {
     public static void main(String[] args) {
         // Create controller object
         Controller controller = new Controller();
-        controller.getInterface().start();
 
         // Start GUI and join thread
         Thread thread = new Thread(() -> GUI.initialize(controller, args));

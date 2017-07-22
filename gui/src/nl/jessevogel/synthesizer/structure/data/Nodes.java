@@ -53,11 +53,14 @@ public class Nodes {
         GUI.controllerNodeGrid.addNode(node);
     }
 
-    public void delete(Node node) {
+    public boolean delete(Node node) {
         Response response = controller.getInterface().command("node_delete " + node.id);
-        // TODO
-        GUI.controllerNodeGrid.removeNode(node);
-        nodes.remove(node);
+        if(response.getError() == null) {
+            GUI.controllerNodeGrid.removeNode(node);
+            nodes.remove(node);
+            return true;
+        }
+        return false;
     }
 
     public void edit(Node node) {

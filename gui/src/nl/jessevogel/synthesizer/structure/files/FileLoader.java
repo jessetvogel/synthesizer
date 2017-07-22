@@ -1,6 +1,7 @@
 package nl.jessevogel.synthesizer.structure.files;
 
 import nl.jessevogel.synthesizer.main.Controller;
+import nl.jessevogel.synthesizer.structure.info.NodeType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -21,9 +22,9 @@ public class FileLoader {
         try {
             String text = new String(Files.readAllBytes(Paths.get(path)));
             JSONObject json = new JSONObject(text);
-            Iterator keys = json.keys();
+            Iterator<String> keys = json.keys();
             while(keys.hasNext()) {
-                String key = (String) keys.next();
+                String key = keys.next();
                 switch(key) {
                     case "nodes":
                         parseNodes(json.getJSONArray(key));
@@ -47,12 +48,17 @@ public class FileLoader {
             JSONObject options = node.getJSONObject("options");
             HashMap<String, String> map = new HashMap<>();
             map.put("id", id);
-            Iterator keys = options.keys();
+            Iterator<String> keys = options.keys();
             while(keys.hasNext()) {
-                String key = (String) keys.next();
+                String key = keys.next();
                 map.put(key, options.getString(key));
             }
-            controller.getNodes().create(controller.getNodeTypes().getNodeType(type), x, y, map);
+            NodeType nodeType = controller.getNodeTypes().getNodeType(type);
+            if(nodeType == null) {
+                System.out.println("NodeType '" + type + "' does not exist!");
+            }
+            else
+                controller.getNodes().create(nodeType, x, y, map);
         }
 
         // Then set all inputs
@@ -60,9 +66,9 @@ public class FileLoader {
             JSONObject node = (JSONObject) object;
             String id = node.getString("id");
             JSONObject inputs = node.getJSONObject("inputs");
-            Iterator keys = inputs.keys();
+            Iterator<String> keys = inputs.keys();
             while(keys.hasNext()) {
-                String key = (String) keys.next();
+                String key = keys.next();
                 controller.getNodes().set(id, key, inputs.getString(key));
             }
         }

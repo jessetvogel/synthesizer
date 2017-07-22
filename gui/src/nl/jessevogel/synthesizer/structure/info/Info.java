@@ -6,10 +6,13 @@ import java.io.File;
 
 public class Info {
     private static final String FILE_SETTINGS = "info/settings.info";
+    private static final String FILE_PREFERENCES = "preferences/preferences.info";
+    private static final String DIRECTORY_NODES = "nodes";
 
     private Controller controller;
     private String directory;
     private String settingsPath;
+    private String preferencesPath;
 
     public Info(Controller controller, String directory) {
         this.controller = controller;
@@ -18,7 +21,8 @@ public class Info {
     }
 
     private void initialize() {
-        settingsPath = directory + FILE_SETTINGS;
+        settingsPath = directory + "/" + FILE_SETTINGS;
+        preferencesPath = directory + "/" + FILE_PREFERENCES;
     }
 
     public String getDirectory() {
@@ -26,6 +30,9 @@ public class Info {
     }
     public String getSettingsPath() {
         return settingsPath;
+    }
+    public String getPreferencesPath() {
+        return preferencesPath;
     }
 
     public String getTemporaryDirectory() {
@@ -45,5 +52,9 @@ public class Info {
         }
         // The directory is now empty or this is a file so delete it
         return success && directory.delete();
+    }
+
+    public String getNodesDirectory() {
+        return directory + "/" + DIRECTORY_NODES;
     }
 }

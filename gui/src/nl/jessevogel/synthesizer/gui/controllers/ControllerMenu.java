@@ -28,7 +28,7 @@ public class ControllerMenu {
     }
 
     @FXML public void clickPlay(ActionEvent event) {
-        GUI.controller.getAudio().toggle();
+        GUI.controller.getDevices().toggle();
     }
 
     @FXML public void clickSave(ActionEvent event) {
