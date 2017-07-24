@@ -5,9 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import nl.jessevogel.synthesizer.gui.GUI;
-import nl.jessevogel.synthesizer.gui.controllers.windows.ControllerWindowSettings;
-import nl.jessevogel.synthesizer.structure.files.FileLoader;
-import nl.jessevogel.synthesizer.structure.files.FileSaver;
+import nl.jessevogel.synthesizer.gui.windows.ControllerWindowSettings;
+import nl.jessevogel.synthesizer.structure.files.FileOpen;
+import nl.jessevogel.synthesizer.structure.files.FileSave;
 
 import java.io.File;
 
@@ -42,7 +42,7 @@ public class ControllerMenu {
         File file = fileChooser.showSaveDialog(GUI.stage);
 
         if(file != null) {
-            FileSaver saver = new FileSaver(GUI.controller);
+            FileSave saver = new FileSave(GUI.controller);
             saver.save(file.getAbsolutePath());
         }
     }
@@ -54,13 +54,13 @@ public class ControllerMenu {
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Synth files (*.syn)", "*.syn");
         fileChooser.getExtensionFilters().add(extFilter);
 
-        // Show load file dialog
+        // Show open file dialog
         File file = fileChooser.showOpenDialog(GUI.stage);
 
         if(file != null) {
             GUI.controller.reset();
-            FileLoader loader = new FileLoader(GUI.controller);
-            loader.load(file.getAbsolutePath());
+            FileOpen loader = new FileOpen(GUI.controller);
+            loader.open(file.getAbsolutePath());
         }
     }
 

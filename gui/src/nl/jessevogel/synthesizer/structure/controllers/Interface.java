@@ -1,4 +1,4 @@
-package nl.jessevogel.synthesizer.structure;
+package nl.jessevogel.synthesizer.structure.controllers;
 
 import nl.jessevogel.synthesizer.main.Controller;
 import nl.jessevogel.synthesizer.structure.response.Response;
@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 public class Interface {
 
     private Controller controller;
+
     private Process process;
     private BufferedReader input;
     private PrintWriter output;
@@ -60,4 +61,5 @@ public class Interface {
             return null;
         }
     }
+
 }

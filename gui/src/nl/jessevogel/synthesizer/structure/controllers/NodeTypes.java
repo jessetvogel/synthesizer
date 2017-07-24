@@ -1,31 +1,32 @@
-package nl.jessevogel.synthesizer.structure.info;
+package nl.jessevogel.synthesizer.structure.controllers;
 
-import jdk.nashorn.internal.parser.JSONParser;
 import nl.jessevogel.synthesizer.main.Controller;
+import nl.jessevogel.synthesizer.structure.data.Option;
+import nl.jessevogel.synthesizer.structure.data.NodeType;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileReader;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class NodeTypes {
+
+    private Controller controller;
+
     private static final String NODES_DIRECTORY = "nodes";
     private static final String INFO_FILE = "info.json";
 
-    private Controller controller;
-    public ArrayList<NodeType> types;
-    public ArrayList<String> groups;
+    private ArrayList<NodeType> types;
+    private ArrayList<String> groups;
 
     public NodeTypes(Controller controller) {
+        // Set controller
         this.controller = controller;
 
         types = new ArrayList<>();
         groups = new ArrayList<>();
-
         initialize();
     }
 
@@ -37,14 +38,17 @@ public class NodeTypes {
     }
 
     private void scanDirectory(File directory) {
+        // Does not make sense to scan files
         if(!directory.isDirectory()) return;
 
-        for (File file : directory.listFiles()) {
-            if (file.isDirectory()) {
+        // Scan all subdirectories
+        for(File file : directory.listFiles()) {
+            if(file.isDirectory()) {
                 scanDirectory(file);
                 continue;
             }
 
+            // Search for info files
             if(!file.getName().equals(INFO_FILE)) continue;
 
             // Get all information from file about node type
@@ -57,17 +61,17 @@ public class NodeTypes {
                 String image = info.has("image") ? info.getString("image") : "image.png";
                 JSONArray optionsArray = info.getJSONArray("options");
                 int optionsLength = optionsArray.length();
-                NodeType.Option[] options = new NodeType.Option[optionsLength];
+                Option[] options = new Option[optionsLength];
                 for (int i = 0; i < optionsLength; ++i) {
                     JSONObject optionObject = optionsArray.getJSONObject(i);
-                    options[i] = new NodeType.Option();
+                    options[i] = new Option();
                     options[i].label = optionObject.getString("label");
-                    options[i].type = NodeType.Option.getType(optionObject.getString("type"));
+                    options[i].type = Option.getType(optionObject.getString("type"));
                     options[i].description = optionObject.getString("description");
                     if(optionObject.has("default"))
                         options[i].value = optionObject.getString("default");
                     else
-                        options[i].value = NodeType.Option.getDefaultValue(options[i].type);
+                        options[i].value = Option.getDefaultValue(options[i].type);
                 }
 
                 JSONArray filesArray = info.getJSONArray("files");
@@ -102,5 +106,12 @@ public class NodeTypes {
                 return nodeType;
         }
         return null;
+    }
+
+    public ArrayList<String> getGroups() {
+        return groups;
+    }
+    public ArrayList<NodeType> getTypes() {
+        return types;
     }
 }

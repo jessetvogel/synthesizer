@@ -1,6 +1,6 @@
 {
-    "name": "highpass",
-    "group": "basic",
+    "name": "High-pass filter",
+    "group": "Filters",
     "options": [
         { "label": "order", "type": "int", "description": "Order of filter" },
     ],

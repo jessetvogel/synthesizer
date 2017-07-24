@@ -1,20 +1,24 @@
-package nl.jessevogel.synthesizer.structure.info;
+package nl.jessevogel.synthesizer.structure.controllers;
 
 import nl.jessevogel.synthesizer.main.Controller;
 
 import java.io.File;
 
 public class Info {
-    private static final String FILE_SETTINGS = "info/settings.info";
-    private static final String FILE_PREFERENCES = "preferences/preferences.info";
-    private static final String DIRECTORY_NODES = "nodes";
 
     private Controller controller;
+
+    private static final String FILE_SETTINGS = "info/settings.json";
+    private static final String FILE_PREFERENCES = "info/preferences.json";
+    private static final String DIRECTORY_NODES = "nodes";
+    private static final String DIRECTORY_TMP = "tmp";
+
     private String directory;
     private String settingsPath;
     private String preferencesPath;
 
     public Info(Controller controller, String directory) {
+        // Set controller and directory, and initialize
         this.controller = controller;
         this.directory = directory;
         initialize();
@@ -36,7 +40,7 @@ public class Info {
     }
 
     public String getTemporaryDirectory() {
-        File tmpDirectory = new File(directory + "/tmp");
+        File tmpDirectory = new File(directory + "/" + DIRECTORY_TMP);
         if(tmpDirectory.isDirectory()) deleteDirectory(tmpDirectory);
 
         tmpDirectory.mkdir();
@@ -57,4 +61,5 @@ public class Info {
     public String getNodesDirectory() {
         return directory + "/" + DIRECTORY_NODES;
     }
+
 }

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane styleClass="node-grid" stylesheets="@../css/node_grid.css" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="nl.jessevogel.synthesizer.gui.controllers.ControllerNodeGrid"  prefHeight="400.0" prefWidth="600.0">
+<StackPane fx:id="grid" styleClass="node-grid" stylesheets="@../css/node_grid.css" HBox.hgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.jessevogel.synthesizer.gui.controllers.ControllerNodeGrid">
     <children>
-        <Pane fx:id="nodeGrid" onDragDropped="#gridDragDropped" onDragOver="#gridDragOver" onMouseClicked="#gridMouseClicked" prefHeight="200.0" prefWidth="200.0" />
+        <Pane fx:id="gridBackground" styleClass="node-grid-background" />
+        <Pane fx:id="gridNodes" onDragDropped="#gridDragDropped" onDragOver="#gridDragOver" onMouseClicked="#gridMouseClicked" />
     </children>
 </StackPane>

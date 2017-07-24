@@ -1,50 +1,55 @@
-package nl.jessevogel.synthesizer.structure.data;
+package nl.jessevogel.synthesizer.structure.controllers;
 
 import nl.jessevogel.synthesizer.gui.GUI;
-import nl.jessevogel.synthesizer.gui.controllers.windows.ControllerWindowOptions;
+import nl.jessevogel.synthesizer.gui.windows.ControllerWindowOptions;
 import nl.jessevogel.synthesizer.main.Controller;
-import nl.jessevogel.synthesizer.structure.info.NodeType;
+import nl.jessevogel.synthesizer.structure.data.Node;
+import nl.jessevogel.synthesizer.structure.data.NodePusher;
+import nl.jessevogel.synthesizer.structure.data.Option;
+import nl.jessevogel.synthesizer.structure.data.NodeType;
 import nl.jessevogel.synthesizer.structure.response.NodeInfo;
 import nl.jessevogel.synthesizer.structure.response.Response;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Nodes {
-    public Controller controller;
-    public ArrayList<Node> nodes;
+
+    private Controller controller;
+
+    private ArrayList<Node> nodes;
 
     public Nodes(Controller controller) {
+        // Set controller
         this.controller = controller;
+
         nodes = new ArrayList<>();
     }
 
     public void create(String typeName, int x, int y) {
         // Retrieve node type
         NodeType nodeType = controller.getNodeTypes().getNodeType(typeName);
+        if(nodeType == null) return;
 
         // Ask for options, and abort if not successful
-        HashMap<String, String> map = ControllerWindowOptions.show(nodeType);
-        if (map == null) return;
+        ArrayList<Option> options = ControllerWindowOptions.show(nodeType);
+        if (options == null) return;
 
-        create(nodeType, x, y, map);
+        // Actually create the node
+        create(ControllerWindowOptions.getId(), nodeType, options, x, y);
     }
 
-    public void create(NodeType nodeType, int x, int y, HashMap<String, String> map) {
+    public void create(String id, NodeType nodeType, ArrayList<Option> options, int x, int y) {
         // Create a node
         Node node = new Node();
+        node.id = id;
         node.type = nodeType;
-        node.id = map.get("id");
+        node.options = options;
         node.x = x;
         node.y = y;
-        node.options = map;
 
-        // Send it to interface
-        NodeLoader nodeLoader = new NodeLoader(controller);
-        if(!nodeLoader.load(nodeType, map)) return;
-
-        // Remove id from map
-        map.remove("id");
+        // Push it to interface
+        NodePusher nodePusher = new NodePusher(controller);
+        if(!nodePusher.load(node)) return;
 
         // Add it to list of nodes
         nodes.add(node);
@@ -67,9 +72,12 @@ public class Nodes {
         // Request node info
         Response response = controller.getInterface().command("node_info " + node.id);
         NodeInfo nodeInfo = response.getNodeInfo();
+        node.keyNode = nodeInfo.keyNode;
+        node.inputs = nodeInfo.inputs;
+        node.outputs = nodeInfo.outputs;
 
         // Show node inputs
-        GUI.controllerNodeInfo.setInfo(nodeInfo);
+        GUI.controllerNodeInfo.setInfo(node);
     }
 
     public Node getNode(String id) {
@@ -94,5 +102,16 @@ public class Nodes {
             return true;
         }
         return false;
+    }
+
+    public String newId() {
+        int n = 1;
+        while(getNode("node_" + n) != null)
+            n ++;
+        return "node_" + n;
+    }
+
+    public ArrayList<Node> getNodes() {
+        return nodes;
     }
 }

@@ -8,12 +8,10 @@
   -fx-spacing: 8;
 }
 
-.options-list .list-item-text-field .label {
-  -fx-min-width: 160;
-  -fx-pref-width: 160;
-}
-
-.options-list .list-item-text-field .text-field {
+.options-list .list-item-text-field .label,
+.options-list .list-item-text-field .text-field,
+.options-list .list-item-choice-box .label,
+.options-list .list-item-choice-box .choice-box {
   -fx-min-width: 160;
   -fx-pref-width: 160;
 }

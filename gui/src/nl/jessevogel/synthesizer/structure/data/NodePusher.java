@@ -1,43 +1,44 @@
 package nl.jessevogel.synthesizer.structure.data;
 
 import nl.jessevogel.synthesizer.main.Controller;
-import nl.jessevogel.synthesizer.structure.info.NodeType;
 
 import java.io.*;
-import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NodeLoader {
+public class NodePusher {
 
     private Controller controller;
+    private Node node;
 
-    public NodeLoader(Controller controller) {
+    public NodePusher(Controller controller) {
         this.controller = controller;
     }
 
-    public boolean load(NodeType type, HashMap<String, String> map) {
-        String tmpDirectory = controller.getInfo().getTemporaryDirectory();
+    public boolean load(Node node) {
+        this.node = node;
 
-        for(String file : type.files) {
-            if(!copySubstituted(type.directory + "/" + file, tmpDirectory + "/" + file, map))
+        String tmpDirectory = controller.getInfo().getTemporaryDirectory();
+        NodeType nodeType = node.type;
+        for(String file : nodeType.files) {
+            if(!copySubstituted(nodeType.directory + "/" + file, tmpDirectory + "/" + file))
                 return false;
         }
 
-        // Let the interface load it
-        controller.getInterface().command("include " + tmpDirectory + "/" + type.files[0]);
+        // Let the interface open it
+        controller.getInterface().command("include " + tmpDirectory + "/" + nodeType.files[0]);
         // TODO: check if successful
 
         return true;
     }
 
-    private boolean copySubstituted(String sourcePath, String destinationPath, HashMap<String, String> map) {
+    private boolean copySubstituted(String sourcePath, String destinationPath) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(sourcePath));
             PrintWriter writer = new PrintWriter(destinationPath);
             String line;
             while((line = reader.readLine()) != null) {
-                line = substituteLine(line, map);
+                line = substituteLine(line);
                 if(line == null) { writer.close(); return false; }
                 writer.println(line);
             }
@@ -52,10 +53,15 @@ public class NodeLoader {
     }
 
     private Pattern optionPattern = Pattern.compile("\\$(\\w+)");
-    private String substituteLine(String line, HashMap<String, String> map) {
+    private String substituteLine(String line) {
         Matcher matcher = optionPattern.matcher(line);
         while(matcher.find()) {
-            String replacement = map.get(matcher.group(1));
+            String replacement = null;
+            if(matcher.group(1).equals("id")) replacement = node.id;
+            for(Option option : node.options) {
+                if(option.label.equals(matcher.group(1)))
+                    replacement = option.value;
+            }
             if(replacement == null) return null;
             line = line.replace("$" + matcher.group(1), replacement);
             matcher = optionPattern.matcher(line);

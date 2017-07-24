@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:controller="nl.jessevogel.synthesizer.gui.controllers.windows.ControllerWindowOptions" styleClass="option-window" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:controller="nl.jessevogel.synthesizer.gui.windows.ControllerWindowOptions" styleClass="option-window" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox fx:id="list" styleClass="options-list" />
       <HBox styleClass="option-button-container">

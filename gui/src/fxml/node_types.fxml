@@ -8,6 +8,6 @@
     <HBox styleClass="list-item-header"><children><Label text="Group" /></children></HBox>
     <ChoiceBox fx:id="groups" prefWidth="150.0" />
     <HBox styleClass="list-item-header"><children><Label text="Nodes" /></children></HBox>
-    <VBox fx:id="nodes" VBox.vgrow="ALWAYS" />
+    <VBox fx:id="types" VBox.vgrow="ALWAYS" />
 </children>
 </VBox>

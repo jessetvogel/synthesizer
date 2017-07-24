@@ -1,5 +1,5 @@
 {
-    "name": "adder",
+    "name": "Adder",
     "group": "basic",
     "options": [
         { "label": "n", "type": "int", "description": "Size of adder" },

@@ -1,5 +1,5 @@
 {
-    "name": "parameter",
+    "name": "Parameter",
     "group": "basic",
     "options": [
         { "label": "midiCC", "type": "int", "description": "MIDI CC" },

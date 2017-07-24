@@ -1,5 +1,5 @@
 {
-    "name": "audio_output",
+    "name": "Audio output",
     "group": "basic",
     "options": [
         { "label": "channels", "type": "int", "description": "Amount of channels" }

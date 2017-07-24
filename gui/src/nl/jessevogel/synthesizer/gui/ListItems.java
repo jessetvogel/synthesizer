@@ -20,6 +20,18 @@ public class ListItems {
         return item;
     }
 
+    public static Pane createLabelValue(String description, String value) {
+        Pane item = FXMLFiles.load("list_items/labelvalue.fxml");
+
+        Label labelDescription = (Label) item.getChildren().get(0);
+        labelDescription.setText(description);
+
+        Label labelValue = (Label) item.getChildren().get(2);
+        labelValue.setText(value);
+
+        return item;
+    }
+
     public static Pane createTextField(String description, String value, EventHandler<ActionEvent> handler) {
         Pane item = FXMLFiles.load("list_items/textfield.fxml");
 
@@ -95,6 +107,11 @@ public class ListItems {
         button.setText(text);
         button.setOnAction(handler);
 
+        return item;
+    }
+
+    public static Pane createHr() {
+        Pane item = FXMLFiles.load("list_items/hr.fxml");
         return item;
     }
 }

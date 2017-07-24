@@ -19,7 +19,7 @@
 
 /* GUI elements */
 .label {
-  -fx-pref-height: 32;
+  -fx-min-height: 32;
   -fx-font-size: 13;
   -fx-text-fill: white;
 }
@@ -137,7 +137,7 @@
 }
 
 .check-box .mark {
-  -fx-shape:"M14.596,2.055L12.455,0C9.687,2.884,6.011,6.714,5.158,7.602L2.055,4.624L0,6.765l5.242,5.037l0.003-0.004l0.003,0.004L14.596,2.055z";
+  -fx-shape: "M14.596,2.055L12.455,0C9.687,2.884,6.011,6.714,5.158,7.602L2.055,4.624L0,6.765l5.242,5.037l0.003-0.004l0.003,0.004L14.596,2.055z";
   -fx-scale-x: 0.8;
   -fx-scale-y: 0.7;
 }
@@ -179,6 +179,10 @@
   -fx-text-fill: #b0b0b0;
 }
 
+.list-item-draggable {
+  -fx-cursor: hand; /* TODO: 'move' does not work? */
+}
+
 .list-item-draggable:hover {
   -fx-background-color: color-background-highlight;
 }
@@ -189,4 +193,33 @@
 
 .list-item-check-box .label {
   -fx-padding: 0 8 0 8;
+}
+
+.list-item-button {
+  -fx-alignment: center-right;
+  -fx-padding: 0 8 0 8;
+}
+
+.list-item-button .button {
+  -fx-border-color: color-background-main;
+  -fx-border-width: 1;
+}
+
+.list-item-hr .hr {
+  -fx-background-color: color-background-highlight;
+  -fx-min-height: 1;
+  -fx-pref-height: 1;
+}
+
+.list-item-hr {
+  -fx-padding: 0 8 0 8;
+}
+
+.list-item-label-value .description {
+  -fx-padding: 0 8 0 8;
+}
+
+.list-item-label-value .value {
+  -fx-padding: 0 8 0 8;
+  -fx-text-fill: #c9c9c9;
 }

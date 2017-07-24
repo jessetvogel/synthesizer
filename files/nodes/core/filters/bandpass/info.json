@@ -1,6 +1,6 @@
 {
-    "name": "bandpass",
-    "group": "basic",
+    "name": "Band-pass filter",
+    "group": "Filters",
     "options": [
         { "label": "order", "type": "int", "description": "Order of filter" },
     ],

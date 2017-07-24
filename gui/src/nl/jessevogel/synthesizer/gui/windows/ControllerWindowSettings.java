@@ -1,4 +1,4 @@
-package nl.jessevogel.synthesizer.gui.controllers.windows;
+package nl.jessevogel.synthesizer.gui.windows;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

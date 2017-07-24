@@ -1,5 +1,5 @@
 {
-    "name": "oscillator",
+    "name": "Oscillator",
     "group": "basic",
     "options": [
         { "label": "key", "type": "bool", "description": "Key node" },

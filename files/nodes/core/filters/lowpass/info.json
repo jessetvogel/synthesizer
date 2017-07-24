@@ -1,6 +1,6 @@
 {
-    "name": "lowpass",
-    "group": "basic",
+    "name": "Low-pass filter",
+    "group": "Filters",
     "options": [
         { "label": "order", "type": "int", "description": "Order of filter" }
     ],

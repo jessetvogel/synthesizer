@@ -1,4 +1,4 @@
-package nl.jessevogel.synthesizer.structure;
+package nl.jessevogel.synthesizer.structure.controllers;
 
 import nl.jessevogel.synthesizer.gui.GUI;
 import nl.jessevogel.synthesizer.main.Controller;
@@ -14,13 +14,15 @@ import java.util.Map;
 public class Devices {
 
     private Controller controller;
-    private boolean active;
 
     private Map<Integer, Device> midiDevices;
     private Map<Integer, Device> inputDevices;
     private Map<Integer, Device> outputDevices;
 
+    private boolean active;
+
     public Devices(Controller controller) {
+        // Set controller
         this.controller = controller;
 
         // Create maps
@@ -41,43 +43,39 @@ public class Devices {
     public boolean play() {
         if(active) return false;
         Response response = controller.getInterface().command("play start");
-        return handleResponse(response);
+        if(response.getError() != null) return true;
+        return false;
     }
 
     public boolean stop() {
         if(!active) return false;
         Response response = controller.getInterface().command("play stop");
-        return handleResponse(response);
+        if(response.getError() != null) return true;
+        return false;
     }
 
     public boolean toggle() {
         Response response = controller.getInterface().command("play toggle");
-        return handleResponse(response);
-    }
-
-    // TODO: move this.
-    private boolean handleResponse(Response response) {
-        State state = response.getState();
-        if(state == null) return false;
-        active = state.playing;
-        GUI.controllerMenu.updatePlayIcon(active);
-        return true;
+        if(response.getError() != null) return true;
+        return false;
     }
 
     public void addMIDIDevice(Device device) {
         Response response = controller.getInterface().command("midi_add_device " + device.id);
-        // TODO handle response
-
-        // Update preferences
-        controller.getPreferences().setActiveMIDIDevice(device.name, true);
+        if(response.getError() == null) {
+            device.active = true;
+            // Update preferences
+            controller.getPreferences().setActiveMIDIDevice(device.name, true);
+        }
     }
 
     public void removeMIDIDevice(Device device) {
         Response response = controller.getInterface().command("midi_remove_device " + device.id);
-        // TODO handle response
-
-        // Update preferences
-        controller.getPreferences().setActiveMIDIDevice(device.name, false);
+        if(response.getError() == null) {
+            device.active = false;
+            // Update preferences
+            controller.getPreferences().setActiveMIDIDevice(device.name, false);
+        }
     }
 
     public void setInputDevice(Device device) {
@@ -86,12 +84,13 @@ public class Devices {
         if(active) stop();
 
         Response response = controller.getInterface().command("audio_set_input_device " + device.id);
-        handleResponse(response);
-
+        if(response.getError() == null) {
+            for(Device d : getInputDevices()) d.active = false;
+            device.active = true;
+            // Update preferences
+            controller.getPreferences().setPreferredInputDevice(device.name);
+        }
         if(wasActive) play();
-
-        // Update preferences
-        controller.getPreferences().setPreferredInputDevice(device.name);
     }
 
     public void setOutputDevice(Device device) {
@@ -100,12 +99,14 @@ public class Devices {
         if(active) stop();
 
         Response response = controller.getInterface().command("audio_set_output_device " + device.id);
-        handleResponse(response);
+        if(response.getError() == null) {
+            for(Device d : getOutputDevices()) d.active = false;
+            device.active = true;
+            // Update preferences
+            controller.getPreferences().setPreferredOutputDevice(device.name);
+        }
 
         if(wasActive) play();
-
-        // Update preferences
-        controller.getPreferences().setPreferredOutputDevice(device.name);
     }
 
     public Device getMIDIDevice(int id) {
@@ -131,4 +132,5 @@ public class Devices {
     public Collection<Device> getOutputDevices() {
         return outputDevices.values();
     }
+
 }

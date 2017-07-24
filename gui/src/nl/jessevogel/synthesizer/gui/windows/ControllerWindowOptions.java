@@ -1,12 +1,11 @@
-package nl.jessevogel.synthesizer.gui.controllers.windows;
+package nl.jessevogel.synthesizer.gui.windows;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -14,18 +13,20 @@ import javafx.stage.Stage;
 import nl.jessevogel.synthesizer.gui.FXMLFiles;
 import nl.jessevogel.synthesizer.gui.GUI;
 import nl.jessevogel.synthesizer.gui.ListItems;
-import nl.jessevogel.synthesizer.structure.info.NodeType;
+import nl.jessevogel.synthesizer.structure.data.Option;
+import nl.jessevogel.synthesizer.structure.data.NodeType;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class ControllerWindowOptions {
 
     private static boolean success;
-    private HashMap<String, String> map;
+    private static String id;
+    private ArrayList<Option> options;
 
     @FXML public VBox list;
 
-    public static HashMap<String, String> show(NodeType nodeType) {
+    public static ArrayList<Option> show(NodeType nodeType) {
         // By default, set success to false
         success = false;
 
@@ -33,7 +34,7 @@ public class ControllerWindowOptions {
             // Create new stage
             Stage window = new Stage();
             window.initModality(Modality.APPLICATION_MODAL);
-            window.setTitle("TODO: voer hier titel in");
+            window.setTitle("Create New Node");
             window.setResizable(false);
 
             // Load options.fxml
@@ -43,42 +44,31 @@ public class ControllerWindowOptions {
 
             VBox list = controllerWindowOptions.list;
 
-            // Create a new map
-            controllerWindowOptions.map = new HashMap<>();
+            // Create a new ArrayList
+            controllerWindowOptions.options = nodeType.createOptions();
 
             // Header
             Pane header = ListItems.createHeader("Create '" + nodeType.name + "'");
             list.getChildren().add(header);
 
             // Option id
-            String defaultId = "node123"; // TODO
-            Pane id = ListItems.createTextField("id", defaultId, event -> {
+            id = GUI.controller.getNodes().newId();
+            Pane idField = ListItems.createTextField("id", id, event -> {
                 TextField field = (TextField) event.getSource();
                 String value = field.getText();
                 if(GUI.controller.getNodes().getNode(value) != null)
                     field.getStyleClass().add("invalid");
                 else {
                     field.getStyleClass().remove("invalid");
-                    controllerWindowOptions.map.put("id", value);
+                    id = value;
                 }
             });
-            list.getChildren().add(id);
-            controllerWindowOptions.map.put("id", defaultId);
+            list.getChildren().add(idField);
 
             // Node options
-            for(NodeType.Option option : nodeType.options) {
-                Pane item = ListItems.createTextField(option.description, option.value, event -> {
-                    TextField field = (TextField) event.getSource();
-                    String value = field.getText();
-                    if (!option.validValue(value))
-                        field.getStyleClass().add("invalid");
-                    else {
-                        controllerWindowOptions.map.put(option.label, value);
-                        field.getStyleClass().remove("invalid");
-                    }
-                });
+            for(Option option : controllerWindowOptions.options) {
+                Pane item = listItemFromOption(option);
                 list.getChildren().add(item);
-                controllerWindowOptions.map.put(option.label, option.value);
             }
 
             // Show stage
@@ -86,12 +76,38 @@ public class ControllerWindowOptions {
             window.showAndWait();
 
             if(!success) return null;
-            return controllerWindowOptions.map;
+            return controllerWindowOptions.options;
         }
         catch(Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private static Pane listItemFromOption(Option option) {
+        Pane pane;
+        switch(option.type) {
+            case Boolean:
+                pane = ListItems.createChoiceBox(option.description, new String[] {"true", "false"}, option.value, event -> {
+                    ChoiceBox choiceBox = (ChoiceBox) event.getSource();
+                    option.value = (String) choiceBox.getValue();
+                });
+                return pane;
+            case Float:
+            case Integer:
+                pane = ListItems.createTextField(option.description, option.value, event -> {
+                    TextField field = (TextField) event.getSource();
+                    String value = field.getText();
+                    if (!option.validValue(value))
+                        field.getStyleClass().add("invalid");
+                    else {
+                        option.value = value;
+                        field.getStyleClass().remove("invalid");
+                    }
+                });
+                return pane;
+        }
+        return null;
     }
 
     @FXML public void onClickCreate(ActionEvent event) {
@@ -112,5 +128,9 @@ public class ControllerWindowOptions {
 
         // Close window
         ((Stage) ((Button) event.getSource()).getScene().getWindow()).close();
+    }
+
+    public static String getId() {
+        return id;
     }
 }

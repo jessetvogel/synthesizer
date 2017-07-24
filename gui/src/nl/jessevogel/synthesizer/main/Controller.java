@@ -1,11 +1,11 @@
 package nl.jessevogel.synthesizer.main;
 
-import nl.jessevogel.synthesizer.structure.Devices;
-import nl.jessevogel.synthesizer.structure.Preferences;
-import nl.jessevogel.synthesizer.structure.data.Nodes;
-import nl.jessevogel.synthesizer.structure.info.NodeTypes;
-import nl.jessevogel.synthesizer.structure.info.Info;
-import nl.jessevogel.synthesizer.structure.Interface;
+import nl.jessevogel.synthesizer.structure.controllers.Devices;
+import nl.jessevogel.synthesizer.structure.controllers.Preferences;
+import nl.jessevogel.synthesizer.structure.controllers.Nodes;
+import nl.jessevogel.synthesizer.structure.controllers.NodeTypes;
+import nl.jessevogel.synthesizer.structure.controllers.Info;
+import nl.jessevogel.synthesizer.structure.controllers.Interface;
 
 public class Controller {
     private Info info;

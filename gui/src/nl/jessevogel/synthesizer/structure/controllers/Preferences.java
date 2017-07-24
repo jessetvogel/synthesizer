@@ -1,10 +1,11 @@
-package nl.jessevogel.synthesizer.structure;
+package nl.jessevogel.synthesizer.structure.controllers;
 
 import nl.jessevogel.synthesizer.main.Controller;
 import nl.jessevogel.synthesizer.structure.response.Device;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -20,11 +21,13 @@ public class Preferences {
     private ArrayList<String> outputDevices;
 
     public Preferences(Controller controller) {
+        // Set controller
         this.controller = controller;
+
         midiDevices = new ArrayList<>();
         inputDevices = new ArrayList<>();
         outputDevices = new ArrayList<>();
-        load(controller.getInfo().getPreferencesPath());
+        load();
     }
 
     public void setDevices() {
@@ -42,8 +45,10 @@ public class Preferences {
             devices.setOutputDevice(preferredOutputDevice);
     }
 
-    private void load(String path) {
+    private void load() {
         try {
+            String path = controller.getInfo().getPreferencesPath();
+
             String text = new String(Files.readAllBytes(Paths.get(path)));
             JSONObject object = new JSONObject(text);
             Iterator<String> keys = object.keys();
@@ -127,5 +132,38 @@ public class Preferences {
         // Move this device to preference #1
         outputDevices.remove(device);
         outputDevices.add(0, device);
+    }
+
+    public void save() {
+        try {
+            String path = controller.getInfo().getPreferencesPath();
+
+            PrintWriter writer = new PrintWriter(path);
+            writer.write('{');
+
+            writer.write("\"midiDevices\":[");
+            boolean comma = false;
+            for(String deviceName : midiDevices) {
+                if(comma) writer.write(','); else comma = true;
+                writer.write("\"" + deviceName + "\"");
+            }
+            writer.write("],\"inputDevices\":[");
+            comma = false;
+            for(String deviceName : inputDevices) {
+                if(comma) writer.write(','); else comma = true;
+                writer.write("\"" + deviceName + "\"");
+            }
+            writer.write("],\"outputDevices\":[");
+            comma = false;
+            for(String deviceName : outputDevices) {
+                if(comma) writer.write(','); else comma = true;
+                writer.write("\"" + deviceName + "\"");
+            }
+            writer.write("]}\n");
+            writer.close();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }

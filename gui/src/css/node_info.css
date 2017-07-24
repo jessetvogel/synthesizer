@@ -5,11 +5,18 @@
 }
 
 .node-info-list, .node-inputs-list, .node-outputs-list {
+  -fx-min-width: 256;
+  -fx-pref-width: 256;
   -fx-padding: 8 0 8 0;
   -fx-spacing: 8;
 }
 
 .node-info-list .list-item-text-field .text-field {
+  -fx-min-width: 128;
+  -fx-pref-width: 128;
+}
+
+.node-info-list .list-item-button .button {
   -fx-min-width: 128;
   -fx-pref-width: 128;
 }

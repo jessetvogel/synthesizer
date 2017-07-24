@@ -20,5 +20,8 @@ public class Main {
 
         // Stop interface
         controller.getInterface().stop();
+
+        // Save preferences
+        controller.getPreferences().save();
     }
 }

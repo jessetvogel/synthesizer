@@ -1,5 +1,6 @@
 package nl.jessevogel.synthesizer.gui.controllers;
 
+import javafx.beans.binding.DoubleBinding;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,7 +19,9 @@ import java.util.HashMap;
 
 public class ControllerNodeGrid {
 
-    @FXML public Pane nodeGrid;
+    @FXML public Pane grid;
+    @FXML public Pane gridNodes;
+    @FXML public Pane gridBackground;
 
     private double gridShiftX;
     private double gridShiftY;
@@ -27,10 +30,10 @@ public class ControllerNodeGrid {
     @FXML public void initialize() {
         GUI.controllerNodeGrid = this;
 
-        Rectangle clipRect = new Rectangle(nodeGrid.getWidth(), nodeGrid.getHeight());
-        clipRect.widthProperty().bind(nodeGrid.widthProperty());
-        clipRect.heightProperty().bind(nodeGrid.heightProperty());
-        nodeGrid.setClip(clipRect);
+        Rectangle clipRect = new Rectangle(grid.getWidth(), grid.getHeight());
+        clipRect.widthProperty().bind(grid.widthProperty());
+        clipRect.heightProperty().bind(grid.heightProperty());
+        grid.setClip(clipRect);
 
         gridShiftX = 0.0;
         gridShiftY = 0.0;
@@ -39,7 +42,7 @@ public class ControllerNodeGrid {
     }
 
     @FXML public void gridMouseClicked() {
-        nodeGrid.requestFocus();
+        gridNodes.requestFocus();
     }
 
     @FXML public void gridDragOver(DragEvent event) {
@@ -52,7 +55,7 @@ public class ControllerNodeGrid {
         int x = (int) Math.floor((event.getX() - gridShiftX) / 64.0);
         int y = (int) Math.floor((event.getY() - gridShiftY) / 64.0);
 
-        String[] tokens = string.split("\\s+");
+        String[] tokens = string.split("\n");
         if(tokens.length <= 1) return;
 
         if(tokens[0].equals("create")) {
@@ -74,7 +77,7 @@ public class ControllerNodeGrid {
             // Load grid item
             StackPane stack = (StackPane) FXMLFiles.load("node_grid_item.fxml");
 
-            // Try to load image
+            // Try to open image
             String imagePath = node.type.directory + "/" + node.type.image;
             if(imagePath != null) {
                 try {
@@ -91,14 +94,14 @@ public class ControllerNodeGrid {
             stack.setOnDragDetected(e -> {
                 Dragboard db = ((javafx.scene.Node) e.getSource()).startDragAndDrop(TransferMode.ANY);
                 ClipboardContent content = new ClipboardContent();
-                content.putString("move " + node.id);
+                content.putString("move\n" + node.id);
                 db.setContent(content);
 //            db.setDragView(new Image("/img/components/node.png"));
                 e.consume();
             });
 
             // Add to grid and positioning
-            nodeGrid.getChildren().add(stack);
+            gridNodes.getChildren().add(stack);
             map.put(stack, node);
             shift(0.0, 0.0);
         }
@@ -108,9 +111,9 @@ public class ControllerNodeGrid {
     }
 
     public void removeNode(Node node) {
-        for(javafx.scene.Node n : nodeGrid.getChildren()) {
+        for(javafx.scene.Node n : gridNodes.getChildren()) {
             if(node == map.get(n)) {
-                nodeGrid.getChildren().remove(n);
+                gridNodes.getChildren().remove(n);
                 GUI.controllerNodeInfo.setInfo(null);
                 break;
             }
@@ -120,11 +123,14 @@ public class ControllerNodeGrid {
     public void shift(double dx, double dy) {
         gridShiftX += dx;
         gridShiftY += dy;
-        for(javafx.scene.Node node : nodeGrid.getChildren()) {
+        for(javafx.scene.Node node : gridNodes.getChildren()) {
             Node n = map.get(node);
             node.setTranslateX(gridShiftX + n.x * 64.0);
             node.setTranslateY(gridShiftY + n.y * 64.0);
         }
-        // TODO: move background
+        double x = gridShiftX % 64.0; if(x > 0) x -= 64.0;
+        double y = gridShiftY % 64.0; if(y > 0) y -= 64.0;
+        gridBackground.setTranslateX(x);
+        gridBackground.setTranslateY(y);
     }
 }
