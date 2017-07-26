@@ -1,6 +1,6 @@
 #include "nodecustom.hpp"
 
-NodeCustom::NodeCustom(Controller* controller, Arguments) : Node(controller) {
+NodeCustom::NodeCustom(Controller* controller, Options) : Node(controller) {
     // Set type
     type = "custom";
 }

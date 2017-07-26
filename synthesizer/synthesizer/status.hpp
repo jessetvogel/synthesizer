@@ -36,7 +36,6 @@ public:
     static void printWarning();
     static void printError();
     static void printExtra(Controller*, std::string);
-
     
     static bool print(Controller*);
     

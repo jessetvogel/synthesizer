@@ -13,7 +13,7 @@ class NodeFunction : public Node {
     
 public:
     
-    NodeFunction(Controller*, Arguments);
+    NodeFunction(Controller*, Options);
     
     void apply();
     

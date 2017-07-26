@@ -11,7 +11,7 @@ class NodeCustom : public Node {
     
 public:
     
-    NodeCustom(Controller*, Arguments);
+    NodeCustom(Controller*, Options);
     ~NodeCustom();
     
     bool attach(Node* node);

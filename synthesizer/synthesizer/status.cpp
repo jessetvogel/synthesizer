@@ -8,6 +8,8 @@
 #include "nodes.hpp"
 #include "node.hpp"
 #include "nodeinput.hpp"
+#include "settings.hpp"
+#include "monitor.hpp"
 
 std::vector<Message> Status::info;
 std::vector<Message> Status::warning;
@@ -138,6 +140,8 @@ void Status::printExtra(Controller* controller, std::string extra) {
     if(extra.compare("input_devices") == 0) return controller->getAudioDevices()->printInputDevices();
     if(extra.compare("output_devices") == 0) return controller->getAudioDevices()->printOutputDevices();
     if(extra.compare("nodes") == 0) return controller->getNodes()->printNodes();
+    if(extra.compare("settings") == 0) return controller->getSettings()->printSettings();
+    if(extra.compare("monitor") == 0) return controller->getMonitor()->printMonitor();
     if(extra.compare("state") == 0) return controller->printState();
     
     std::size_t pos = extra.find(":");
@@ -299,5 +303,36 @@ void Controller::printState() {
     std::cout << "\"playing\":" << (active ? "true" : "false");
     
     std::cout << "}";
+    
+}
+
+void Settings::printSettings() {
+    
+    std::cout << "\"settings\":{";
+    
+    std::cout << "\"sampleRate\":" << sampleRate << ",";
+    std::cout << "\"bufferSize\":" << bufferSize << ",";
+    
+    std::cout << "\"sustainPedalPolarity\":\"" << (sustainPedalPolarity ? "inverted" : "normal") << "\",";
+    std::cout << "\"pitchWheelRange\":" << pitchWheelRange << "";
+    
+    std::cout << "}";
+    
+}
+
+void Monitor::printMonitor() {
+    
+    std::cout << "\"monitor\":[";
+    
+    unsigned long framesPerBuffer = controller->getSettings()->bufferSize;
+    float* buffer = nodeOutput->getBuffer();
+    bool comma = false;
+    for(int x = 0;x < framesPerBuffer; ++x) {
+        if(comma) std::cout << ","; else comma = true;
+//        std::cout << buffer[x];
+        printf("%.4f", buffer[x]);
+    }
+    
+    std::cout << "]";
     
 }

@@ -1,38 +1,28 @@
 #ifndef options_hpp
 #define options_hpp
 
-#define NOTE_A4 (69)
-
-#define DEFAULT_PITCH_WHEEL_RANGE (2.0)
-#define DEFAULT_SUSTAIN_PEDAL_POLARITY (false)
-
 #include <string>
-
-#include "settings.hpp"
+#include <unordered_map>
+#include <regex>
 
 class Controller;
 
 class Options {
-    
+
     Controller* controller;
+    
+    std::unordered_map<std::string, std::string> map;
+    
+    static std::regex regexOption;
     
 public:
     
-    Options(Controller*);
+    Options(Controller*, std::string);
     
-    double frequencies[AMOUNT_OF_KEYS];
-    
-    double pitchWheelRange;
-    bool sustainPedalPolarity;
-    
-    bool setSustainPedalPolarity(std::string);
-    bool setPitchWheelRange(int);
-    
-    
-//    enum Tuning { EQUAL_TEMPERAMENT, PYTHAGOREAN };
-//    void setTuning(Tuning); TODO
+    bool getBool(std::string, bool);
+    int getInteger(std::string, int);
+    double getDouble(std::string, double);
     
 };
-
 
 #endif

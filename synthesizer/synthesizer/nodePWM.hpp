@@ -16,7 +16,7 @@ class NodePWM : public Node {
     
 public:
     
-    NodePWM(Controller*, Arguments);
+    NodePWM(Controller*, Options);
     ~NodePWM();
     
     void apply();

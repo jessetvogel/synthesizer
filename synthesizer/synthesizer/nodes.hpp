@@ -22,8 +22,9 @@ class Nodes {
     std::vector<Node*> nodes;
     std::vector<NodeCollector*> collectors;
     std::vector<NodeAudioOutput*> audioOutputs;
-    std::vector<NodeConstant*> constants;
     std::unordered_map<int, NodeParameter*> parameters;
+    
+    std::vector<NodeConstant*> constants;
     
     std::mutex mutex;
     
@@ -58,6 +59,8 @@ public:
     
     NodeInput* getNodeInput(std::string);
     NodeOutput* getNodeOutput(std::string);
+    
+    bool clear();
     
     // Commands
     bool create(std::string, std::string, std::string);

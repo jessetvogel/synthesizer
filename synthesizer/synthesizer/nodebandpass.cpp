@@ -6,16 +6,16 @@
 #include "nodeinput.hpp"
 #include "nodeoutput.hpp"
 #include "settings.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
 const int NodeBandpass::maxOrder = 5;
 
-NodeBandpass::NodeBandpass(Controller* controller, Arguments arguments) : Node(controller) {
+NodeBandpass::NodeBandpass(Controller* controller, Options options) : Node(controller) {
     // Set type and store order
     type = "bandpass";
     
-    // Set arguments
-    order = arguments.getInteger("order", 1);
+    // Set options
+    order = options.getInteger("order", 1);
     
     // Set inputs and outputs
     addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));

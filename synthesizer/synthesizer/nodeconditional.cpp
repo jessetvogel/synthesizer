@@ -2,14 +2,14 @@
 #include "controller.hpp"
 #include "nodeinput.hpp"
 #include "nodeoutput.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
-NodeConditional::NodeConditional(Controller* controller, Arguments arguments) : Node(controller) {
+NodeConditional::NodeConditional(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "conditional";
     
-    // Set arguments
-    keyNode = arguments.getBool("key", false);
+    // Set options
+    keyNode = options.getBool("key", false);
     
     // Set inputs and outputs
     addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));

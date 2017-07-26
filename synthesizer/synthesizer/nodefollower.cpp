@@ -4,14 +4,14 @@
 #include "controller.hpp"
 #include "nodeinput.hpp"
 #include "nodeoutput.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
-NodeFollower::NodeFollower(Controller* controller, Arguments arguments) : Node(controller) {
+NodeFollower::NodeFollower(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "follower";
     
-    // Set arguments
-    keyNode = arguments.getBool("key", false);
+    // Set options
+    keyNode = options.getBool("key", false);
     RMSAverage = 0.0;
     
     // Set inputs and outputs

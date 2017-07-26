@@ -3,7 +3,7 @@
 #include "midistate.hpp"
 #include "controller.hpp"
 #include "nodes.hpp"
-#include "options.hpp"
+#include "settings.hpp"
 #include "nodeparameter.hpp"
 
 MidiState::MidiState(Controller* controller) {
@@ -57,7 +57,7 @@ void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned cha
                 
                 case MIDI_SUSTAIN_PEDAL:
                     sustainPedal = (double) data2 / 127.0;
-                    if(controller->getOptions()->sustainPedalPolarity)
+                    if(controller->getSettings()->sustainPedalPolarity)
                         sustainPedal = 1.0 - sustainPedal;
                     return;
             }
@@ -80,11 +80,10 @@ void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned cha
 
 void MidiState::update() {
     Settings* settings = controller->getSettings();
-    Options* options = controller->getOptions();
 
     for(int i = 0;i < AMOUNT_OF_KEYS; ++i) {
         // Update frequencies
-        keyFrequency[i] = (pitchWheel == 0.0) ? options->frequencies[i] : options->frequencies[i] * pow(2.0, pitchWheel * options->pitchWheelRange / 12.0);
+        keyFrequency[i] = (pitchWheel == 0.0) ? settings->frequencies[i] : settings->frequencies[i] * pow(2.0, pitchWheel * settings->pitchWheelRange / 12.0);
         
         // Update velocities
         if(velocity[i] > 0) keyVelocity[i] = (double) velocity[i] / 127.0;

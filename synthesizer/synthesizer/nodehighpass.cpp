@@ -6,16 +6,16 @@
 #include "nodeoutput.hpp"
 #include "settings.hpp"
 #include "IIRfilter.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
 const int NodeHighpass::maxOrder = 5;
 
-NodeHighpass::NodeHighpass(Controller* controller, Arguments arguments) : Node(controller) {
+NodeHighpass::NodeHighpass(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "highpass";
     
-    // Set arguments
-    order = arguments.getInteger("order", 1);
+    // Set options
+    order = options.getInteger("order", 1);
     
     // Set inputs and outputs
     addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));

@@ -25,7 +25,7 @@ class NodeADSR : public Node {
     
 public:
     
-    NodeADSR(Controller*, Arguments);
+    NodeADSR(Controller*, Options);
     
     void apply();
     

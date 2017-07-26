@@ -27,17 +27,16 @@ public:
     
     // Commands for settings
     static std::regex regexSettingsSet;
-    
-    // Commands for options
-    static std::regex regexSetSustainPedalPolarity;
-    static std::regex regexSetPitchWheelRange;
-    
+        
     // Commands for controller
     static std::regex regexPlay;
-    static std::regex regexReset;
+    static std::regex regexClear;
     
     // Commands for status
     static std::regex regexStatus;
+    
+    // Commands for monitor
+    static std::regex regexMonitor;
     
     // Commands for synths
     static std::regex regexInclude;

@@ -1,35 +1,40 @@
-#include <cmath>
-
 #include "options.hpp"
+#include "util.hpp"
 
-Options::Options(Controller* controller) {
+std::regex Options::regexOption("(\\w+)\\s*=\\s*(\\w+)");
+
+Options::Options(Controller* controller, std::string args) {
     // Store pointer to controller
     this->controller = controller;
     
-    // Set default values
-    for(int i = 0;i < AMOUNT_OF_KEYS; i ++) {
-        frequencies[i] = 440.0 * pow(2.0, (double) (i - NOTE_A4) / 12.0);
+    // Store all options
+    std::smatch m;
+    while(std::regex_search(args, m, regexOption)) {
+        map[m[1]] = m[2];
+        args = m.suffix().str();
     }
-    
-    pitchWheelRange = DEFAULT_PITCH_WHEEL_RANGE;
-    sustainPedalPolarity = DEFAULT_SUSTAIN_PEDAL_POLARITY;
 }
 
-bool Options::setSustainPedalPolarity(std::string polarity) {
-    if(polarity.compare("inverted") == 0) {
-        sustainPedalPolarity = true;
-        return true;
-    }
+bool Options::getBool(std::string key, bool standard) {
+    auto position = map.find(key);
+    if(position == map.end()) return standard;
     
-    if(polarity.compare("normal") == 0) {
-        sustainPedalPolarity = false;
-        return true;
-    }
-    
-    return false;
+    return position->second.compare("true") == 0;
 }
 
-bool Options::setPitchWheelRange(int range) {
-    pitchWheelRange = range;
-    return true;
+int Options::getInteger(std::string key, int standard) {
+    auto position = map.find(key);
+    if(position == map.end()) return standard;
+    
+    std::string value = position->second;
+    if(!Util::isInteger(value)) return standard;
+    
+    return stoi(value);
+}
+
+double Options::getDouble(std::string key, double standard) {
+    auto position = map.find(key);
+    if(position == map.end()) return standard;
+    
+    return stod(position->second);
 }

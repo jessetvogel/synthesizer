@@ -1,17 +1,12 @@
 #include <algorithm>
 
 #include "controller.hpp"
-
 #include "settings.hpp"
-#include "options.hpp"
-
 #include "mididevices.hpp"
 #include "audiodevices.hpp"
-
 #include "nodes.hpp"
-
+#include "monitor.hpp"
 #include "midistate.hpp"
-
 #include "status.hpp"
 
 Controller::Controller(Settings* settings) {
@@ -19,13 +14,10 @@ Controller::Controller(Settings* settings) {
     this->settings = settings;
     
     // Create instances
-    options = new Options(this);
-    
     midiDevices = new MIDIDevices(this);
     audioDevices = new AudioDevices(this);
-    
     nodes = new Nodes(this);
-    
+    monitor = new Monitor(this);
     midiState = new MidiState(this);
         
     // Default values
@@ -35,14 +27,13 @@ Controller::Controller(Settings* settings) {
 Controller::~Controller() {
     delete midiDevices;
     delete audioDevices;
-    
     delete nodes;
-    
+    delete monitor;
     delete midiState;
 }
 
 bool Controller::start() {
-    if(active) return false;
+    if(active) return true;
     
     // Start all devices
     bool success = true;
@@ -65,9 +56,15 @@ bool Controller::stop() {
     return success;
 }
 
-bool Controller::reset() {
-    // TODO
-    return true;
+bool Controller::clear() {
+    // Must be non-active to clear
+    if(active) return false;
+
+    bool success = true;
+    
+    success = success && nodes->clear();
+    
+    return success;
 }
 
 bool Controller::update() {

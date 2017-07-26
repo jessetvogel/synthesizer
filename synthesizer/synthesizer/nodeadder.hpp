@@ -15,7 +15,7 @@ class NodeAdder : public Node {
     
 public:
     
-    NodeAdder(Controller*, Arguments);
+    NodeAdder(Controller*, Options);
     ~NodeAdder();
     
     void apply();

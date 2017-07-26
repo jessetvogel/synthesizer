@@ -2,14 +2,14 @@
 #include "controller.hpp"
 #include "audiodevices.hpp"
 #include "nodeoutput.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
-NodeAudioInput::NodeAudioInput(Controller* controller, Arguments arguments) : Node(controller) {
+NodeAudioInput::NodeAudioInput(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "audio_input";
     
-    // Set arguments
-    channel = arguments.getInteger("channel", 0); // TODO: start at channel 0 or at channel 1?
+    // Set options
+    channel = options.getInteger("channel", 0); // TODO: start at channel 0 or at channel 1?
     
     // Hidden
     hidden = true;

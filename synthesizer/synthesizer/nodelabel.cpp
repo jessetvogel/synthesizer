@@ -2,14 +2,14 @@
 #include "controller.hpp"
 #include "nodeinput.hpp"
 #include "nodeoutput.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
-NodeLabel::NodeLabel(Controller* controller, Arguments arguments) : Node(controller) {
+NodeLabel::NodeLabel(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "label";
     
     // Key dependence
-    keyNode = arguments.getBool("key", false);
+    keyNode = options.getBool("key", false);
     
     // Set inputs and outputs
     addInput("value", value = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));

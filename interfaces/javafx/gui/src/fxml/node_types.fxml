@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox styleClass="node-types" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nl.jessevogel.synthesizer.gui.controllers.ControllerNodeTypes">
+<children>
+    <HBox styleClass="list-item-header"><children><Label text="Group" /></children></HBox>
+    <ChoiceBox fx:id="groups" prefWidth="150.0" />
+    <!--<HBox styleClass="list-item-header"><children><Label text="Nodes" /></children></HBox>-->
+    <HBox styleClass="list-item-hr"><children><Pane styleClass="hr" HBox.hgrow="ALWAYS" /></children><VBox.margin><Insets bottom="8.0" top="8.0" /></VBox.margin></HBox>
+    <VBox fx:id="types" VBox.vgrow="ALWAYS" />
+</children>
+</VBox>

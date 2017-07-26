@@ -11,7 +11,7 @@ class NodeLabel : public Node {
 
 public:
     
-    NodeLabel(Controller*, Arguments);
+    NodeLabel(Controller*, Options);
     
     void apply();
     

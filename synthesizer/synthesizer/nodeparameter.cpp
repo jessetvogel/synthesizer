@@ -4,15 +4,15 @@
 #include "nodeoutput.hpp"
 #include "curve.hpp"
 #include "util.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
-NodeParameter::NodeParameter(Controller* controller, Arguments arguments) : Node(controller) {
+NodeParameter::NodeParameter(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "parameter";
     
-    // Set arguments
-    midiCC = arguments.getInteger("midiCC", -1);
-    value = arguments.getDouble("initial", 0.0);
+    // Set options
+    midiCC = options.getInteger("midiCC", -1);
+    value = options.getDouble("initial", 0.0);
     
     // Hidden
     hidden = true;

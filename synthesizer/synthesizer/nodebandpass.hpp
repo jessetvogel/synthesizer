@@ -23,7 +23,7 @@ class NodeBandpass : public Node {
     
 public:
     
-    NodeBandpass(Controller*, Arguments);
+    NodeBandpass(Controller*, Options);
     
     void apply();
     

@@ -17,7 +17,7 @@ class NodeParameter : public Node {
     
 public:
     
-    NodeParameter(Controller*, Arguments);
+    NodeParameter(Controller*, Options);
 
     inline int getMidiCC() { return midiCC; }
     

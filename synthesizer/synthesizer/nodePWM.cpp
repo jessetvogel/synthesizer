@@ -7,14 +7,14 @@
 #include "nodeinput.hpp"
 #include "nodeoutput.hpp"
 #include "settings.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
-NodePWM::NodePWM(Controller* controller, Arguments arguments) : Node(controller) {
+NodePWM::NodePWM(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "PWM";
     
-    // Set arguments
-    keyNode = arguments.getBool("key", false);
+    // Set options
+    keyNode = options.getBool("key", false);
     
     // Set inputs and outputs
     addInput("frequency", frequency = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));

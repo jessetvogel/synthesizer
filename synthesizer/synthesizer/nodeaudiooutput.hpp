@@ -12,7 +12,7 @@ class NodeAudioOutput : public Node {
     
 public:
     
-    NodeAudioOutput(Controller*, Arguments);
+    NodeAudioOutput(Controller*, Options);
     ~NodeAudioOutput();
     
     NodeOutput* getChannel(int);

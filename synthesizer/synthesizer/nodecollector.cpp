@@ -4,9 +4,9 @@
 #include "nodes.hpp"
 #include "nodeinput.hpp"
 #include "nodeoutput.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
-NodeCollector::NodeCollector(Controller* controller, Arguments arguments) : Node(controller) {
+NodeCollector::NodeCollector(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "collector";
     

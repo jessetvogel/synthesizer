@@ -7,7 +7,10 @@
 #define DEFAULT_SAMPLE_RATE (44100)
 #define DEFAULT_BUFFER_SIZE (64)
 
-#define SETTINGS_PATH "settings.txt"
+#define NOTE_A4 (69)
+
+#define DEFAULT_PITCH_WHEEL_RANGE (2.0)
+#define DEFAULT_SUSTAIN_PEDAL_POLARITY (false)
 
 #include <string>
 
@@ -20,8 +23,20 @@ public:
     
     Settings(std::string);
     
+    // Constant
     double sampleRate;
     unsigned long bufferSize;
+    
+    // Changeable
+    double frequencies[AMOUNT_OF_KEYS];
+    double pitchWheelRange;
+    bool sustainPedalPolarity;
+    
+    // Commands
+    bool set(std::string, std::string);
+
+    // Status
+    void printSettings();
     
 };
 

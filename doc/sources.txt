@@ -34,3 +34,8 @@ http://koti.tnnet.fi/sphujala/axiom/Axiom_UG_EN.pdf
 
 Nativefier:
 https://github.com/jiahaog/nativefier
+
+
+C++ child process:
+https://jineshkj.wordpress.com/2006/12/22/how-to-capture-stdin-stdout-and-stderr-of-child-program/
+(old: http://www.erack.de/download/pipe-fork.c)

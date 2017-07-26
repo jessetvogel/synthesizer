@@ -21,7 +21,7 @@ class NodeLowpass : public Node {
     
 public:
     
-    NodeLowpass(Controller*, Arguments);
+    NodeLowpass(Controller*, Options);
     ~NodeLowpass();
     
     void apply();

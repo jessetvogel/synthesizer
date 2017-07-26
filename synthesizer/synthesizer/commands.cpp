@@ -35,21 +35,20 @@ std::regex Commands::regexAudioSetInputDevice("^audio_set_input_device\\s+(" REG
 std::regex Commands::regexAudioSetOutputDevice("^audio_set_output_device\\s+(" REGEX_AUDIO_DEVICE ")$");
 
 // Commands for settings
-std::regex Commands::regexSettingsSet("^settings_set\\s+(\\w+)\\s+(" REGEX_SAMPLE_RATE ")$");
-
-// Commands for options
-std::regex Commands::regexSetSustainPedalPolarity("^options_set_sustain_pedal_polarity\\s+(" REGEX_SUSTAIN_PEDAL_POLARITY ")$");
-std::regex Commands::regexSetPitchWheelRange("^options_set_pitch_wheel_range\\s+(\\d+)$");
+std::regex Commands::regexSettingsSet("^settings_set\\s+(\\w+)\\s+(" "\\S*" ")$");
 
 // Commands for controller
 std::regex Commands::regexPlay("^play\\s+(start|stop|toggle)$");
-std::regex Commands::regexReset("^reset$");
+std::regex Commands::regexClear("^clear$");
 
 // Commands for status
 std::regex Commands::regexStatus("^status\\s+([\\w\\s]+)$");
 
+// Commands for monitor
+std::regex Commands::regexMonitor("^monitor\\s+(" REGEX_NODE_OUTPUT ")$");
+
 // Commands for synths
-std::regex Commands::regexInclude("^include\\s+(?:" REGEX_DIRECTORY_SEPARATOR ")?((?:\\w+" REGEX_DIRECTORY_SEPARATOR ")*\\w+(?:.\\w+)?)$"); // TODO
+std::regex Commands::regexInclude("^include\\s+(.*)$"); // TODO
 
 // Commands for nodes
 std::regex Commands::regexNodeCreate("^node_create\\s+(" REGEX_NODE_TYPE ")\\s+(" REGEX_NODE_ID ")\\s*(" REGEX_OPTIONS ")?$");

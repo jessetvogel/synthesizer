@@ -15,7 +15,7 @@ class NodeCollector : public Node {
     
 public:
     
-    NodeCollector(Controller*, Arguments);
+    NodeCollector(Controller*, Options);
     
     void addKeyEvent(KeyEvent*);
     inline std::vector<KeyEvent*>* getKeyEvents() { return &keyEvents; }

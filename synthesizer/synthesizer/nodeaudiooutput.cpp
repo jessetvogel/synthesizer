@@ -1,14 +1,14 @@
 #include "nodeaudiooutput.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 #include "nodeinput.hpp"
 #include "nodeoutput.hpp"
 
-NodeAudioOutput::NodeAudioOutput(Controller* controller, Arguments arguments) : Node(controller) {
+NodeAudioOutput::NodeAudioOutput(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "audio_output";
     
-    // Set arguments
-    channelCount = arguments.getInteger("channels", 1);
+    // Set options
+    channelCount = options.getInteger("channels", 1);
     
     // Set inputs and outputs
     channels = new NodeInput*[channelCount];

@@ -1,0 +1,23 @@
+node_create ADSR envelope [key = true]
+node_set envelope.attack_time     0.05
+node_set envelope.decay_time      0.1
+node_set envelope.sustain_level   0.5
+node_set envelope.release_time    1.0
+node_set envelope.attack_curve    quartout
+node_set envelope.decay_curve     quartout
+node_set envelope.release_curve   quartout
+
+node_create oscillator wave [key = true]
+node_set wave.sample              sine
+node_set wave.amplitude           envelope
+node_set wave.frequency           key_frequency
+
+node_create adder x [key = true, n = 1]
+node_set x.input_1                wave
+node_set x.gain_1                 key_velocity
+
+node_create collector c
+node_set c.input                  x
+
+node_create audio_output output
+node_set output.channel_1         c

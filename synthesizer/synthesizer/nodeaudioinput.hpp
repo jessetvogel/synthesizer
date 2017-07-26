@@ -11,7 +11,7 @@ class NodeAudioInput : public Node {
     
 public:
     
-    NodeAudioInput(Controller*, Arguments);
+    NodeAudioInput(Controller*, Options);
     
     void apply();
     

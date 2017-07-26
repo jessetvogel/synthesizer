@@ -1,6 +1,6 @@
-# Options
-options_set_sustain_pedal_polarity     inverted
-options_set_pitch_wheel_range          2
+# Settings
+settings_set sustain_pedal_polarity     inverted
+settings_set pitch_wheel_range          2
 
 
 # Use 18 knobs from Novation Launch Control

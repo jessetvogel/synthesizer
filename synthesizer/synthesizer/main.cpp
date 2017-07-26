@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
     
     // Load settings
     Parser parser(&controller);
-    parser.setDirectory("");
+    parser.setDirectory(".");
     
     Status::addInfo("Program started");
     Status::print(&controller);

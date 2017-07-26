@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
+#include <cmath>
 #include "settings.hpp"
 #include "commands.hpp"
+#include "util.hpp"
 
 #include "status.hpp"
 
@@ -9,6 +11,11 @@ Settings::Settings(std::string filepath) {
     // Set default values
     sampleRate = DEFAULT_SAMPLE_RATE;
     bufferSize = DEFAULT_BUFFER_SIZE;
+    
+    pitchWheelRange = DEFAULT_PITCH_WHEEL_RANGE;
+    sustainPedalPolarity = DEFAULT_SUSTAIN_PEDAL_POLARITY;
+    for(int i = 0;i < AMOUNT_OF_KEYS; i ++)
+        frequencies[i] = 440.0 * std::pow(2.0, (double) (i - NOTE_A4) / 12.0);
     
     if(filepath.length() == 0) {
         Status::addWarning("No settings were provided");
@@ -67,8 +74,36 @@ bool Settings::parseLine(std::string line) {
             bufferSize = stoi(cm[2]);
             return true;
         }
+        
+        return set(cm[1], cm[2]);
     }
     
     Status::addError("Command not recognised");
     return false;
 }
+
+bool Settings::set(std::string key, std::string value) {
+    if(key.compare("sustain_pedal_polarity") == 0) {
+        if(value.compare("inverted") == 0) {
+            sustainPedalPolarity = true;
+            return true;
+        }
+        
+        if(value.compare("normal") == 0) {
+            sustainPedalPolarity = false;
+            return true;
+        }
+        return false;
+    }
+    
+    if(key.compare("pitch_wheel_range") == 0) {
+        if(Util::isNumber(value)) {
+            pitchWheelRange = stod(value);
+            return true;
+        }
+        return false;
+    }
+    
+    return false;
+}
+

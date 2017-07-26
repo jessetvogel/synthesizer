@@ -6,14 +6,14 @@
 class Controller;
 class Nodes;
 class Node;
-class Arguments;
+class Options;
 
 class NodeFactory {
     
 public:
     
-    static void createDefaultNodes(Controller*, Nodes*);
-    static Node* create(Controller*, std::string, std::string, Arguments);
+    static void createDefaultNodes(Controller*, Nodes* nodes); // We do need to pass Nodes* as it is called in the constructor of Nodes
+    static Node* create(Controller*, std::string, std::string, Options);
     
 };
 

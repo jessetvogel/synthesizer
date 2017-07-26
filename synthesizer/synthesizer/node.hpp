@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <string>
 
-#include "arguments.hpp"
+#include "options.hpp"
 #include "nodeinput.hpp"
 #include "nodeoutput.hpp"
 
@@ -15,7 +15,7 @@
 #define NODE_OUTPUT_DEFAULT "default"
 
 class Controller;
-class Arguments;
+class Options;
 
 class Node {
     

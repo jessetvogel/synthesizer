@@ -13,7 +13,7 @@ class NodeFollower : public Node {
     
 public:
     
-    NodeFollower(Controller*, Arguments);
+    NodeFollower(Controller*, Options);
     
     void apply();
     

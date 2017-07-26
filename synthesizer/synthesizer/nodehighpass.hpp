@@ -21,7 +21,7 @@ class NodeHighpass : public Node {
     
 public:
     
-    NodeHighpass(Controller*, Arguments);
+    NodeHighpass(Controller*, Options);
     ~NodeHighpass();
     
     void apply();

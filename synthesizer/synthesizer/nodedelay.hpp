@@ -20,7 +20,7 @@ class NodeDelay : public Node {
     
 public:
     
-    NodeDelay(Controller*, Arguments);
+    NodeDelay(Controller*, Options);
     ~NodeDelay();
     
     void apply();

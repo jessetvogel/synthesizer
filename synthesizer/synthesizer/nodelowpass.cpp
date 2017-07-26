@@ -5,16 +5,16 @@
 #include "nodeinput.hpp"
 #include "nodeoutput.hpp"
 #include "IIRfilter.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
 const int NodeLowpass::maxOrder = 5;
 
-NodeLowpass::NodeLowpass(Controller* controller, Arguments arguments) : Node(controller) {
+NodeLowpass::NodeLowpass(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "lowpass";
     
-    // Set arguments
-    order = arguments.getInteger("order", 1); // TODO: check for valid values
+    // Set options
+    order = options.getInteger("order", 1); // TODO: check for valid values
     
     // Set inputs and outputs
     addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));

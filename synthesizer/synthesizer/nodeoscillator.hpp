@@ -18,7 +18,7 @@ class NodeOscillator : public Node {
     
 public:
     
-    NodeOscillator(Controller*, Arguments);
+    NodeOscillator(Controller*, Options);
     ~NodeOscillator();
     
     void apply();

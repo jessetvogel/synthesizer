@@ -16,7 +16,7 @@ class NodeConditional : public Node {
     
 public:
     
-    NodeConditional(Controller*, Arguments);
+    NodeConditional(Controller*, Options);
     
     void apply();
 

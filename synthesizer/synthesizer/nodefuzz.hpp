@@ -12,7 +12,7 @@ class NodeFuzz : public Node {
     
 public:
     
-    NodeFuzz(Controller*, Arguments);
+    NodeFuzz(Controller*, Options);
     
     void apply();
     

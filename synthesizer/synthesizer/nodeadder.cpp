@@ -2,14 +2,14 @@
 #include "controller.hpp"
 #include "nodeinput.hpp"
 #include "nodeoutput.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
 const int NodeAdder::maxN = 16;
 
-NodeAdder::NodeAdder(Controller* controller, Arguments arguments) : Node(controller) {
-    // Set arguments
-    n = arguments.getInteger("n", 1);
-    keyNode = arguments.getBool("key", false);
+NodeAdder::NodeAdder(Controller* controller, Options options) : Node(controller) {
+    // Set options
+    n = options.getInteger("n", 1);
+    keyNode = options.getBool("key", false);
     
     // Set type
     type = "adder";

@@ -4,14 +4,14 @@
 #include "nodeoutput.hpp"
 #include "curve.hpp"
 #include "midistate.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
-NodeADSR::NodeADSR(Controller* controller, Arguments arguments) : Node(controller) {
+NodeADSR::NodeADSR(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "ADSR";
     
-    // Set arguments
-    keyNode = arguments.getBool("key", false);
+    // Set options
+    keyNode = options.getBool("key", false);
     
     // Set inputs and outputs
     addInput("start_level", startLevel = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));

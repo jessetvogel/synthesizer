@@ -14,7 +14,7 @@
 #include "midistate.hpp"
 
 #include "nodefactory.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
 #include "status.hpp"
 
@@ -30,21 +30,21 @@ Nodes::~Nodes() {
     mutex.lock();
     for(auto it = nodes.begin(); it != nodes.end(); ++it)
         delete *it;
-
+    
     for(auto it = constants.begin(); it != constants.end(); ++it)
         delete *it;
-    // Note that the parameters and collectors are a subset of nodes, hence they need not be deallocated (in fact, double deallocation will result in errors)
+    // Note that all other lists (parameters, collectors, audio_output's, etc.) are subsets of nodes. Only constants is not.
     mutex.unlock();
 }
 
-bool Nodes::create(std::string type, std::string id, std::string arguments) {
+bool Nodes::create(std::string type, std::string id, std::string args) {
     // Check if node with this id already exists
     Node* node = getNode(id);
     if(node != NULL) return false; // TODO: (search for 'return false')
     
     // Create new node
-    Arguments args(controller, arguments);
-    node = NodeFactory::create(controller, type, id, args);
+    Options options(controller, args);
+    node = NodeFactory::create(controller, type, id, options);
     if(node == NULL) return false;
     
     // Append node to relevant lists
@@ -376,6 +376,24 @@ NodeOutput* Nodes::getNodeOutput(std::string str) {
     mutex.unlock();
     if(node == NULL) return NULL;
     return node->getOutput(label);
+}
+
+bool Nodes::clear() {
+    mutex.lock();
+    for(auto it = nodes.begin(); it != nodes.end(); ++it)
+        delete *it;
+    nodes.clear();
+    
+    for(auto it = constants.begin(); it != constants.end(); ++it)
+        delete *it;
+    constants.clear();
+    // Note that all other lists (parameters, collectors, audio_output's, etc.) are subsets of nodes. Only constants is not.
+    mutex.unlock();
+    
+    // Recreate default nodes
+    NodeFactory::createDefaultNodes(controller, this);
+
+    return true;
 }
 
 bool Nodes::apply() {

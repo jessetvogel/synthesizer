@@ -9,7 +9,8 @@
 #include "mididevices.hpp"
 #include "nodes.hpp"
 #include "node.hpp"
-#include "options.hpp"
+#include "monitor.hpp"
+#include "settings.hpp"
 
 #include "status.hpp"
 
@@ -73,24 +74,27 @@ bool Parser::parseLine(std::string line) {
     // audio_set_output_device <input_device>
     if(std::regex_search(str, cm, Commands::regexAudioSetOutputDevice))     return controller->getAudioDevices()->setOutputDeviceId(stoi(cm[1]));
     
-    // Options
+    // Settings
     
-    // options_set_sustain_pedal_polarity <normal|inverted>
-    if(std::regex_search(str, cm, Commands::regexSetSustainPedalPolarity))  return controller->getOptions()->setSustainPedalPolarity(cm[1]);
-    // options_set_pitch_wheel_range <semitones>
-    if(std::regex_search(str, cm, Commands::regexSetPitchWheelRange))       return controller->getOptions()->setPitchWheelRange(stod(cm[1]));
+    // settings_set <parameter> <value>
+    if(std::regex_search(str, cm, Commands::regexSettingsSet))              return controller->getSettings()->set(cm[1], cm[2]);
     
     // Controller
     
     // play <state>
     if(std::regex_search(str, cm, Commands::regexPlay))                     return controller->play(cm[1]);
     // reset
-    if(std::regex_search(str, cm, Commands::regexReset))                    return controller->reset();
+    if(std::regex_search(str, cm, Commands::regexClear))                    return controller->clear();
     
     // Status
     
     // status <info>
     if(std::regex_search(str, cm, Commands::regexStatus))                   return Status::addExtra(cm[1]);
+    
+    // Monitor
+    
+    // monitor <node output>
+    if(std::regex_search(str, cm, Commands::regexMonitor))                  return controller->getMonitor()->monitor(cm[1]);
     
     // Synths
     

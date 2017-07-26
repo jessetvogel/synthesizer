@@ -2,18 +2,18 @@
 #include "controller.hpp"
 #include "nodeinput.hpp"
 #include "nodeoutput.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
 const int NodeDelay::maxN = 16;
 const double NodeDelay::maxT = 10.0;
 
-NodeDelay::NodeDelay(Controller* controller, Arguments arguments) : Node(controller) {
+NodeDelay::NodeDelay(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "delay";
 
-    // Set arguments
-    n = arguments.getInteger("n", 1);
-    double T = arguments.getDouble("T", 1.0);
+    // Set options
+    n = options.getInteger("n", 1);
+    double T = options.getDouble("T", 1.0);
     
     // Set inputs and outputs
     addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));

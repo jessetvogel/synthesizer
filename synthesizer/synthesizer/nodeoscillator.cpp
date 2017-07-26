@@ -8,14 +8,14 @@
 #include "nodeoutput.hpp"
 #include "sample.hpp"
 #include "settings.hpp"
-#include "arguments.hpp"
+#include "options.hpp"
 
-NodeOscillator::NodeOscillator(Controller* controller, Arguments arguments) : Node(controller) {
+NodeOscillator::NodeOscillator(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "oscillator";
     
-    // Set arguments
-    keyNode = arguments.getBool("key", false);
+    // Set options
+    keyNode = options.getBool("key", false);
     
     // Set inputs and outputs
     addInput("sample", sample = new NodeInput(controller, NodeInput::SAMPLE, "sine"));

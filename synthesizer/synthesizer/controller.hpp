@@ -4,26 +4,20 @@
 #include <string>
 
 class Settings;
-class Options;
-
 class MIDIDevices;
 class AudioDevices;
-
 class MidiState;
-
 class Nodes;
+class Monitor;
 
 class Controller {
     
     Settings* settings;
-    Options* options;
-    
     MIDIDevices* midiDevices;
     AudioDevices* audioDevices;
-    
     MidiState* midiState;
-    
     Nodes* nodes;
+    Monitor* monitor;
     
     bool active;
     
@@ -33,18 +27,15 @@ public:
     ~Controller();
     
     inline Settings* getSettings() { return settings; }
-    inline Options* getOptions() { return options; }
-    
     inline MIDIDevices* getMIDIDevices() { return midiDevices; }
     inline AudioDevices* getAudioDevices() { return audioDevices; }
-
     inline MidiState* getMidiState() { return midiState; }
-    
     inline Nodes* getNodes() { return nodes; }
+    inline Monitor* getMonitor() { return monitor; }
 
     bool start();
     bool stop();
-    bool reset();
+    bool clear();
     bool update();
     
     // Commands
