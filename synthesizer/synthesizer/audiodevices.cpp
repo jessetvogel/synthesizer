@@ -20,10 +20,8 @@ AudioDevices::AudioDevices(Controller* controller) {
 }
 
 bool AudioDevices::setInputDeviceId(int n) {
-    if(active) {
-        Status::addError("Cannot change input device during play");
-        return false;
-    }
+    bool wasActive = active;
+    if(active) controller->stop();
     
     int deviceId;
     switch(n) {
@@ -42,14 +40,14 @@ bool AudioDevices::setInputDeviceId(int n) {
     
     if(!isInput(deviceId)) return false;
     inputDeviceId = deviceId;
+    
+    if(wasActive) controller->start();
     return true;
 }
 
 bool AudioDevices::setOutputDeviceId(int n) {
-    if(active) {
-        Status::addError("Cannot change output device during play");
-        return false;
-    }
+    bool wasActive = active;
+    if(active) controller->stop();
     
     int deviceId;
     switch(n) {
@@ -64,6 +62,8 @@ bool AudioDevices::setOutputDeviceId(int n) {
     
     if(!isOutput(deviceId)) return false;
     outputDeviceId = deviceId;
+    
+    if(wasActive) controller->start();
     return true;
 }
 

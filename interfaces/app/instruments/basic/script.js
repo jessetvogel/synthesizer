@@ -1,5 +1,5 @@
 $(document).ready(function () {
 
-  keyboard.set($('#keyboard'));
+  keyboard.set($('#keyboard'), 'A0', 'C8');
 
 });

@@ -35,22 +35,30 @@ Controller::~Controller() {
 bool Controller::start() {
     if(active) return true;
     
+    mutex.lock();
+    
     // Start all devices
     bool success = true;
     success = success && midiDevices->start();
     success = success && audioDevices->start();
+    
+    mutex.unlock();
     
     active = true;
     return success;
 }
 
 bool Controller::stop() {
-    if(!active) return false;
+    if(!active) return true;
+    
+    mutex.lock();
     
     // Stop all devices
     bool success = true;
     success = success && midiDevices->stop();
     success = success && audioDevices->stop();
+    
+    mutex.unlock();
     
     active = false;
     return success;
@@ -71,12 +79,16 @@ bool Controller::update() {
     // If active was set to false, just stop, no errors need to be given
     if(!active) return false;
     
-    // Update midi devices
     bool success = true;
+    mutex.lock();
+
+    // Update midi devices
     success = success && midiDevices->update();
     
     // Apply nodes
     success = success && nodes->apply();
+    
+    mutex.unlock();
     
     return success;
 }

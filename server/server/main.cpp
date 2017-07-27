@@ -6,12 +6,18 @@
 #include "api.hpp"
 #include "web.hpp"
 #include "instrument.hpp"
+#include "data.hpp"
+#include "info.hpp"
+#include "program.hpp"
 #include "error.hpp"
 
 bool callback(Request* request, Response* response) {
     if(API::handle(request, response)) return true;
     if(Web::handle(request, response)) return true;
     if(Instrument::handle(request, response)) return true;
+    if(Data::handle(request, response)) return true;
+    if(Info::handle(request, response)) return true;
+    if(Program::handle(request, response)) return true;
     
     // Show some request information
     std::cout << "----------------" << std::endl;
@@ -31,31 +37,25 @@ int main(int argc, const char * argv[]) {
     // Set references to interface
     API::interface = &interface;
     Instrument::interface = &interface;
+    Program::interface = &interface;
     
     // Start interface
     interface.start();
     
     // Create and start server
     Server server(8080, &callback, 10);
-    if(!server.start()) return 0;
+    if(!server.start()) {
+        interface.stop();
+        return 0;
+    }
 
         std::cout << "Started on port " << server.getPort() << std::endl;
     
-    // Wait for input
-    std::string line;
-    while(std::getline(std::cin, line)) {
-        // Check for quit command
-        if(line.compare("quit") == 0) {
-            std::cout << "received quit" << std::endl;
-            break;
-        }
-    }
-    
-    std::cout << "quitting in " << (interface.child ? "child" : "parent") << " process" << std::endl;
+    // Wait for interface
+    interface.wait();
     
     // Stop server
     server.stop();
-    interface.stop();
     
     return 0;
 }

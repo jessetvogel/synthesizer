@@ -1,10 +1,27 @@
 #include "util.hpp"
 #include <fstream>
 #include <algorithm>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+bool Util::isInteger(std::string string) {
+    for(int i = 0;i < string.length(); ++i) {
+        char c = string[i];
+        if(c < '0' || c > '9') return false;
+    }
+    return true;
+}
+
+bool Util::isFile(std::string path) {
+    struct stat fileStat;
+    ::stat(path.c_str(), &fileStat);
+    return S_ISREG(fileStat.st_mode);
+}
 
 bool Util::fileExists(std::string path) {
     std::ifstream file(path);
-    return file.good(); // TODO is not directory
+    return file.good() && isFile(path);
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types
@@ -14,6 +31,7 @@ std::string Util::MIMEType(std::string extension) {
     if(extension.compare("html") == 0) return "text/html";
     if(extension.compare("css") == 0) return "text/css";
 
+    if(extension.compare("json") == 0) return "application/json";
     if(extension.compare("js") == 0) return "application/javascript";
     if(extension.compare("eot") == 0) return "application/vnd.ms-fontobject";
     

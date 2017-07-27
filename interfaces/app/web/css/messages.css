@@ -1,5 +1,5 @@
 #messages {
-  position: absolute;
+  position: fixed;
   top: 0px;
   right: 0px;
   z-index: 100;
@@ -7,7 +7,7 @@
 
 .message {
   margin: 16px;
-  width: 384px;
+  width: 320px;
   height: 64px;
   line-height: 64px;
   background-color: white;
@@ -17,10 +17,10 @@
 
 .message span {
   margin-right: 16px;
-  color: var(--base07);
+  color: white;
   font-size: 16px;
 }
 
-.message.info { background-color: var(--base0B); }
-.message.warning { background-color: var(--base0A); }
-.message.error { background-color: var(--base08); }
+.message.info { background-color: rgba(153, 204, 153, 0.75); }
+.message.warning { background-color: rgba(255, 204, 102, 0.75); }
+.message.error { background-color: rgba(210, 123, 83, 0.75); }

@@ -1,21 +1,38 @@
 var keyboard = {
 
-  set: function (element) {
+  set: function (element, low, high) {
+    if(low === undefined) low = 'A0';
+    if(high === undefined) high = 'C8';
+
+    // Check if valid notes given
+    var noteLow = notes.fromName(low);
+    var noteHigh = notes.fromName(high);
+    if(noteLow == -1 || noteHigh == -1) return;
+    if(noteLow > noteHigh) return;
+    if(notes.isSharp(noteLow) || notes.isSharp(noteHigh)) return;
+
+    // Create keyboard
     element.addClass('keyboard');
 
-    var margin = 1;
-    var width_white = (element.width() - margin * 51) / 52;
+    // Compute widths
+    var amountOfWhite = 0;
+    for(var i = noteLow;i <= noteHigh;i ++) {
+      if(!notes.isSharp(i)) amountOfWhite ++;
+    }
+    var margin = 0.999; // This seems to work...
+    var width_white = (element.width() - margin * (amountOfWhite - 1)) / amountOfWhite;
     var width_black = width_white / 1.5;
 
+    // Place keys
     var x = 0;
     var previous_key_type = null;
     var current_key_type = null;
 
-    for(var i = 9;i < 9 + 88;i ++) {
-      var id = keyboard.noteToKeyId(i);
-      var key = $('<div>').prop('id', id).addClass('key');
+    for(var i = noteLow;i <= noteHigh;i ++) {
+      // Create key
+      var key = $('<div>').prop('id', keyboard.keyId(i)).addClass('key');
 
-      if(id.indexOf('sharp') !== -1) {
+      if(notes.isSharp(i)) {
         key.addClass('black');
         key.css({ width: width_black + 'px' });
         current_key_type = 'black';
@@ -35,29 +52,21 @@ var keyboard = {
       key.css({ left: x + 'px' });
       element.append(key);
       previous_key_type = current_key_type;
-
-      midi.onMessage(function (event) {
-        console.log(event);
-        if(event.type == 0x9 && event.data2 > 0)
-          element.find('#' + keyboard.noteToKeyId(event.data1)).addClass('pressed');
-
-        if((event.type == 0x9 && event.data2 == 0) || event.type == 0x8)
-          element.find('#' + keyboard.noteToKeyId(event.data1)).removeClass('pressed');
-      });
     }
+
+    // Animate keys
+    midi.onMessage(function (event) {
+      console.log(event);
+      if(event.type == 0x9 && event.data2 > 0)
+        element.find('#' + keyboard.keyId(event.data1)).addClass('pressed');
+
+      if((event.type == 0x9 && event.data2 == 0) || event.type == 0x8)
+        element.find('#' + keyboard.keyId(event.data1)).removeClass('pressed');
+    });
   },
 
-  noteName: function(note) {
-    var notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-    var name = notes[Math.round(note) % 12];
-    var octave = Math.floor(Math.round(note) / 12);
-    return name + octave;
-  },
-
-  noteToKeyId: function(note) {
-    return keyboard.noteName(note).replace('#', 'sharp');
+  keyId: function(note) {
+    return notes.name(note).replace('#', 'sharp');
   }
-
-
 
 };

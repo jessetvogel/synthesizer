@@ -73,7 +73,7 @@ bool Server::handle(int clientSocket) {
         return Error::respond(&request, &response, 400);
     
     bool success = callback(&request, &response);
-    close(clientSocket); // TODO check for error
+    close(clientSocket);
     return success;
 }
 

@@ -43,8 +43,8 @@ bool MIDIDevices::stop() {
         MIDIDevice* device = *it;
         success = success && device->stop();
     }
-    active = false;
     mutex.unlock();
+    active = false;
     return success;
 }
 
@@ -63,6 +63,9 @@ bool MIDIDevices::update() {
 bool MIDIDevices::add(int n) {
     // Make sure the given id is actually an midi input device
     if(!isInput(n)) return false;
+    
+    // Make sure it isn't added already
+    if(get(n) != NULL) return true;
     
     // Add new device to the list
     mutex.lock();

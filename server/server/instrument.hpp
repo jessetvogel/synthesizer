@@ -10,7 +10,6 @@
 class Instrument {
 
     static std::regex regexInstrumentMain;
-    static std::regex regexInstrumentResource;
     
 public:
     

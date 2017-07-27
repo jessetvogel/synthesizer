@@ -8,4 +8,7 @@ dependencies: \
   /Users/jessetvogel/Projects/synthesizer/server/server/api.hpp \
   /Users/jessetvogel/Projects/synthesizer/server/server/web.hpp \
   /Users/jessetvogel/Projects/synthesizer/server/server/instrument.hpp \
+  /Users/jessetvogel/Projects/synthesizer/server/server/data.hpp \
+  /Users/jessetvogel/Projects/synthesizer/server/server/info.hpp \
+  /Users/jessetvogel/Projects/synthesizer/server/server/program.hpp \
   /Users/jessetvogel/Projects/synthesizer/server/server/error.hpp

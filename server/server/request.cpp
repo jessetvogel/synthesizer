@@ -1,8 +1,10 @@
 #include "request.hpp"
 #include <unistd.h>
-#include <iostream>
+#include "util.hpp"
 
 #define REQUEST_BUFFER_SIZE (128)
+#define MAX_BODY_SIZE (2048)
+#define READ_PER_BYTES (256)
 
 #define REGEX_METHOD "GET|POST"
 #define REGEX_REQUEST_URI "\\S+"
@@ -44,6 +46,28 @@ bool Request::read() {
         headers.set(cm[1], cm[2]);
     }
     
+    // Read body in case of POST request
+    if(method.compare("POST") == 0) {
+        std::string contentLength = headers.get("Content-Length");
+        if(contentLength.length() == 0) return false;
+        if(!Util::isInteger(contentLength)) return false;
+        int length = stoi(contentLength);
+        if(length > MAX_BODY_SIZE) return false;
+        
+        char buffer[length];
+        char* ptr = buffer;
+        size_t bytes = 0;
+        do {
+            bytes += ::read(socket, ptr, READ_PER_BYTES - bytes);
+            ptr += bytes;
+        }
+        while(bytes < length);
+        body = std::string(buffer, length);
+    }
+    else {
+        body = "";
+    }
+    
     return true;
 }
 
@@ -57,3 +81,4 @@ std::string Request::readLine() {
     if(length < 0) length = 0;
     return std::string(buffer, length);
 }
+

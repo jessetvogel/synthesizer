@@ -18,8 +18,8 @@ class Request {
     std::string method;
     std::string requestURI;
     std::string httpVersion;
-    
     Headers headers;
+    std::string body;
     
     bool badRequest;
     
@@ -37,6 +37,7 @@ public:
     inline std::string getRequestURI() { return requestURI; }
     inline std::string getHTTPVersion() { return httpVersion; }
     inline std::string getHeader(std::string field) { return headers.get(field); }
+    inline std::string getBody() { return body; }
     
 };
 

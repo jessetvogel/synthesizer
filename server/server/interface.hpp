@@ -12,18 +12,19 @@ class Interface {
     
     std::string readLine();
     
-    std::mutex mutex;
+    std::mutex mutexIO;
+    std::mutex mutexRunning;
     
 public:
-    
-    bool child;
     
     Interface();
     
     bool start();
+    bool restart();
     bool stop();
     std::string command(std::string);
-
+    
+    void wait();
 };
 
 #endif

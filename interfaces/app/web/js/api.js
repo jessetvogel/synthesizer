@@ -1,13 +1,15 @@
 var api = {
 
-  command: function (command) {
-    $.ajax('/api/' + command).done(api.handle);
+  command: function (command, callback) {
+    if(callback == undefined) callback = api.handle;
+    (function (callback) {
+      $.ajax('/api/' + command.replace(/\s+/g, '+')).done(function (data) { // TODO: fix this
+        callback(data);
+      });
+    })(callback);
   },
 
-  handle: function (json) {
-    // Handle the response
-    var data = JSON.parse(json);
-
+  handle: function (data) {
     for(var key in data) {
       // Skip loop if the property is from prototype
       if (!data.hasOwnProperty(key)) continue;
@@ -29,16 +31,16 @@ var api = {
           break;
 
         case 'midiDevices':
-          devices.setMIDIDevices(data[key]);
+          midi.setDevices(data[key]);
           break;
 
-        case 'inputDevices':
-          devices.setInputDevices(data[key]);
-          break;
-
-        case 'outputDevices':
-          devices.setOutputDevices(data[key]);
-          break;
+        // case 'inputDevices':
+        //   devices.setInputDevices(data[key]);
+        //   break;
+        //
+        // case 'outputDevices':
+        //   devices.setOutputDevices(data[key]);
+        //   break;
       }
     }
   }

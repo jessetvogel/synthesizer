@@ -9,7 +9,7 @@
 
 class API {
 
-    static std::regex regexRequestURI;
+    static std::regex regexAPI;
     
 public:
     

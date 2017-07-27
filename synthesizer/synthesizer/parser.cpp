@@ -22,7 +22,7 @@ Parser::Parser(Controller* controller) {
 bool Parser::parseFile(std::string filepath) {
     // Store filepath and determine the directory
     this->filepath = filepath;
-    directory = filepath.substr(0, filepath.find_last_of(DIRECTORY_SEPARATOR));
+    directory = filepath.substr(0, filepath.find_last_of(DIRECTORY_SEPARATOR) + 1);
     
     // Read file line by line, and parse them
     std::ifstream input(filepath);
@@ -101,7 +101,7 @@ bool Parser::parseLine(std::string line) {
     // include <filename>
     if(std::regex_search(str, cm, Commands::regexInclude)) {
         Parser parser(controller);
-        parser.parseFile(directory + DIRECTORY_SEPARATOR + std::string(cm[1]));
+        parser.parseFile(directory + std::string(cm[1]));
         return true;
     }
     

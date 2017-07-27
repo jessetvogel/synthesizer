@@ -18,13 +18,62 @@
   --base0F: #d27b53;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
+body {
+  font-family: Museo Sans;
   background-color: var(--base07);
 }
 
+.centered {
+  width: 512px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+.page-title {
+  font-size: 24px;
+  line-height: 64px;
+  color: var(--base01);
+}
+
+.header {
+  font-size: 16px;
+  line-height: 64px;
+  color: var(--base05);
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.items > div {
+  margin: 16px;
+}
+
+.toggle-box {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: var(--base04);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-box .title {
+  height: 64px;
+  line-height: 64px;
+  padding-left: 16px;
+  color: white;
+  font-size: 16px;
+}
+
+.toggle-box .title span {
+  margin-right: 16px;
+}
+
+.toggle-box .content {
+  padding: 0px 16px 16px 16px;
+  display: none;
+  color: white;
+}
 
 .button {
   width: 64px;
@@ -34,10 +83,17 @@ html, body {
   color: var(--base07);
   font-size: 24px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--base04);
+}
+
+.button.large {
+  width: 160px;
+  height: 160px;
+  line-height: 160px;
 }
 
 .button:hover {
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
   cursor: pointer;
 }
 
@@ -45,12 +101,85 @@ html, body {
   position: absolute;
   right: 16px;
   bottom: 16px;
-  background-color: var(--base04);
 }
 
 #button-fullscreen {
   position: absolute;
   right: 96px;
   bottom: 16px;
-  background-color: var(--base04);
+}
+
+label {
+  margin: 0px;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.input-line {
+  line-height: 32px;
+}
+
+.input-line > span {
+  display: inline-block;
+  width: 192px;
+}
+
+/* input */
+input[type=checkbox] {
+  display: none;
+}
+
+input[type=checkbox] + span {
+  display: inline-block;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  background-color: var(--base05);
+  border-radius: 2px;
+  margin-left: 8px;
+  margin-right: 8px;
+  font-size: 14px;
+  color: var(--base01);
+}
+
+input[type=checkbox] + span > span { margin-top: 3px; /* TODO: ? */ opacity: 0.0; }
+input[type=checkbox]:checked + span > span { opacity: 1.0; }
+
+input[type=radio] {
+  display: none;
+}
+
+input[type=radio] + span {
+  display: inline-block;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  background-color: var(--base05);
+  border-radius: 16px;
+  margin-left: 8px;
+  margin-right: 8px;
+  font-size: 19px;
+  color: var(--base01);
+}
+
+input[type=radio] + span > span { opacity: 0.0; }
+input[type=radio]:checked + span > span { opacity: 1.0; }
+
+input[type=text] {
+  background-color: var(--base07);
+  border: 0;
+  outline: none;
+  color: var(--base01);
+  text-align: center;
+  padding-left: 8px;
+  padding-right: 8px;
+  height: 26px;
+}
+
+#instruments {
+  width: 576px;
 }

@@ -382,12 +382,18 @@ bool Nodes::clear() {
     mutex.lock();
     for(auto it = nodes.begin(); it != nodes.end(); ++it)
         delete *it;
-    nodes.clear();
     
     for(auto it = constants.begin(); it != constants.end(); ++it)
         delete *it;
-    constants.clear();
     // Note that all other lists (parameters, collectors, audio_output's, etc.) are subsets of nodes. Only constants is not.
+    
+    // Clear all lists
+    nodes.clear();
+    collectors.clear();
+    audioOutputs.clear();
+    parameters.clear();
+    constants.clear();
+    
     mutex.unlock();
     
     // Recreate default nodes

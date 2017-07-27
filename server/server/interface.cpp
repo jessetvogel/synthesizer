@@ -1,7 +1,8 @@
 #include "interface.hpp"
 #include <unistd.h>
 #include <stdio.h>
-#include <iostream>
+
+                        #include <iostream>
 
 #define READ_FD  (0)
 #define WRITE_FD (1)
@@ -18,7 +19,7 @@
 #define INTERFACE_BUFFER_SIZE (1024)
 
 Interface::Interface() {
-
+    mutexRunning.lock();
 }
 
 bool Interface::start() {
@@ -27,8 +28,6 @@ bool Interface::start() {
     pipe(pipes[PARENT_WRITE_PIPE]);
     
     if(!fork()) {
-        child = true;
-        
         // Child process
         dup2(CHILD_READ_FD, STDIN_FILENO);
         dup2(CHILD_WRITE_FD, STDOUT_FILENO);
@@ -51,32 +50,42 @@ bool Interface::start() {
         execv(argv[0], argv);
     } else {
         // Parent process
-        child = false;
         
-        // close file descriptors not required by parent
+        // Close file descriptors that are not required by parent
         close(CHILD_READ_FD);
         close(CHILD_WRITE_FD);
         
         // Read from child's stdout
         std::string line;
         line = readLine();
-//        std::cout << line << std::endl; TODO wat doen we hiermee?
+        std::cout << line << std::endl; // TODO wat doen we hiermee?
     }
     return true;
 }
 
+bool Interface::restart() {
+    command("exit");
+    return start();
+}
+
 bool Interface::stop() {
-    command("exit"); // TODO triggers SIGPIPE when already closed sometimes
+    std::cout << command("exit") << std::endl;
+    mutexRunning.unlock();
     return true;
 }
 
 std::string Interface::command(std::string command) {
-    mutex.lock();
+    mutexIO.lock();
     ::write(PARENT_WRITE_FD, command.c_str(), command.length());
     ::write(PARENT_WRITE_FD, "\n", 1);
     std::string line = readLine();
-    mutex.unlock();
+    mutexIO.unlock();
     return line;
+}
+
+void Interface::wait() {
+    mutexRunning.lock();
+    mutexRunning.unlock();
 }
 
 std::string Interface::readLine() {

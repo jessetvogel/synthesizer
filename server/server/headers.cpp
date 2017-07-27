@@ -7,7 +7,7 @@ void Headers::set(std::string field, std::string value) {
 
 std::string Headers::get(std::string field) {
     auto position = headers.find(field);
-    if(position == headers.end()) return NULL;
+    if(position == headers.end()) return "";
     return position->second;
 }
 

@@ -1,6 +1,7 @@
 #ifndef controller_hpp
 #define controller_hpp
 
+#include <mutex>
 #include <string>
 
 class Settings;
@@ -20,6 +21,8 @@ class Controller {
     Monitor* monitor;
     
     bool active;
+    
+    std::mutex mutex;
     
 public:
     
