@@ -65,13 +65,13 @@ bool Controller::stop() {
 }
 
 bool Controller::clear() {
-    // Must be non-active to clear
-    if(active) return false;
+    // Need to be stopped to clear
+    bool wasActive = active;
+    if(active) stop();
 
-    bool success = true;
+    bool success = nodes->clear();
     
-    success = success && nodes->clear();
-    
+    if(wasActive) start();
     return success;
 }
 
@@ -89,7 +89,6 @@ bool Controller::update() {
     success = success && nodes->apply();
     
     mutex.unlock();
-    
     return success;
 }
 
@@ -100,6 +99,6 @@ bool Controller::play(std::string state) {
     if(state.compare("stop") == 0)      return stop();
     if(state.compare("toggle") == 0)    return active ? stop() : start();
     
-    Status::addError("unknown state. groetjes van controller");
+    Status::addError("Invalid argument provided");
     return false;
 }

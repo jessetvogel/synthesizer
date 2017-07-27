@@ -22,7 +22,7 @@ class Nodes {
     std::vector<Node*> nodes;
     std::vector<NodeCollector*> collectors;
     std::vector<NodeAudioOutput*> audioOutputs;
-    std::unordered_map<int, NodeParameter*> parameters;
+    std::vector<NodeParameter*> parameters;
     
     std::vector<NodeConstant*> constants;
     
@@ -46,7 +46,7 @@ public:
     bool removeAudioOutput(NodeAudioOutput*);
     
     bool addNodeParameter(NodeParameter*);
-    NodeParameter* getNodeParameter(int);
+    bool updateNodeParameter(int, double);
     bool removeNodeParameter(NodeParameter*);
     
     KeyEvent* currentKey;

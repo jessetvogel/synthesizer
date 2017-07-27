@@ -17,6 +17,8 @@ std::vector<Message> Status::error;
 
 std::vector<std::string> Status::extra;
 
+std::string Status::command;
+
 void Status::addInfo(std::string message) {
     Message i;
     i.message = message;
@@ -143,6 +145,7 @@ void Status::printExtra(Controller* controller, std::string extra) {
     if(extra.compare("settings") == 0) return controller->getSettings()->printSettings();
     if(extra.compare("monitor") == 0) return controller->getMonitor()->printMonitor();
     if(extra.compare("state") == 0) return controller->printState();
+    if(extra.compare("command") == 0) return printCommand();
     
     std::size_t pos = extra.find(":");
     if(pos != std::string::npos) {
@@ -157,6 +160,12 @@ void Status::printExtra(Controller* controller, std::string extra) {
 }
 
 // ----------------------------------------------------------------
+
+void Status::printCommand() {
+    
+    std::cout << "\"command\":\"" << command << "\"";
+    
+}
 
 void MIDIDevices::printMIDIDevices() {
     

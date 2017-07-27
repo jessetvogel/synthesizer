@@ -3,7 +3,6 @@
 #include "nodeinput.hpp"
 #include "nodeoutput.hpp"
 #include "options.hpp"
-#include "function.hpp"
 
 NodeFuzz::NodeFuzz(Controller* controller, Options options) : Node(controller) {
     // Set type
@@ -26,5 +25,9 @@ void NodeFuzz::apply() {
     float* output = this->output->getBuffer();
     
     for(int x = 0;x < framesPerBuffer; ++x)
-        output[x] = Function::fuzz(input[x], inputGain[x]);
+        output[x] = fuzz(input[x], inputGain[x]);
+}
+
+double NodeFuzz::fuzz(double input, double inputGain) {
+    return ((input > 0.0) ? 1.0 : ((input < 0.0) ? -1.0 : 0.0)) * (1.0 - std::exp(- inputGain * std::abs(input))) / (1.0 - std::exp(- inputGain));
 }

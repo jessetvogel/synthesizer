@@ -26,18 +26,13 @@ bool Parser::parseFile(std::string filepath) {
     
     // Read file line by line, and parse them
     std::ifstream input(filepath);
-    if(input.fail()) {
-        Status::addError("Failed to open file");
-        return false;
-    }
+    if(input.fail()) { Status::addError("Failed to open file"); return false; }
     
     int lineNumber = 1;
     std::string line;
     while(std::getline(input, line)) {
-        if(!parseLine(line)) {
-            Status::addError(line);
+        if(!parseLine(line))
             return false;
-        }
         
         ++ lineNumber;
     }
@@ -52,10 +47,7 @@ bool Parser::parseLine(std::string line) {
     std::cmatch cm;
 
     // Remove all surrounding whitespace and comments
-    if(!std::regex_search(line.c_str(), cm, Commands::regexPreprocess)) {
-        Status::addError("Unable to parse line");
-        return false;
-    }
+    if(!std::regex_search(line.c_str(), cm, Commands::regexPreprocess)) { Status::addError("Unable to parse line"); return false; }
     std::string command = std::string(cm[1]);
     if(command.length() == 0) return true;
     const char* str = command.c_str();

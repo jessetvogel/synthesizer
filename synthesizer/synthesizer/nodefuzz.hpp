@@ -10,6 +10,8 @@ class NodeFuzz : public Node {
     
     NodeOutput* output;
     
+    static double fuzz(double, double);
+    
 public:
     
     NodeFuzz(Controller*, Options);

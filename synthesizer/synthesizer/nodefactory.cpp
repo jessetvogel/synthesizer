@@ -7,7 +7,6 @@
 #include "nodeoscillator.hpp"
 #include "nodeconstant.hpp"
 #include "nodeadder.hpp"
-#include "nodefunction.hpp"
 #include "nodeADSR.hpp"
 #include "nodelowpass.hpp"
 #include "nodehighpass.hpp"
@@ -53,7 +52,6 @@ Node* NodeFactory::create(Controller* controller, std::string type, std::string 
     else if(type.compare("highpass") == 0)          node = new NodeHighpass(controller, options);
     else if(type.compare("bandpass") == 0)          node = new NodeBandpass(controller, options);
     else if(type.compare("oscillator") == 0)        node = new NodeOscillator(controller, options);
-    else if(type.compare("function") == 0)          node = new NodeFunction(controller, options);
     else if(type.compare("ADSR") == 0)              node = new NodeADSR(controller, options);
     else if(type.compare("conditional") == 0)       node = new NodeConditional(controller, options);
     else if(type.compare("fuzz") == 0)              node = new NodeFuzz(controller, options);

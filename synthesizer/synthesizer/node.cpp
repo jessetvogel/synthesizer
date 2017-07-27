@@ -29,10 +29,6 @@ Node::~Node() {
 }
 
 Node* Node::setId(std::string id) {
-    //    // Only allowed to change id when not yet set
-    //    if(this->id.compare(NODE_DEFAULT_ID) != 0) {
-    //        return false;
-    //    }
     this->id = id;
     return this;
 }
@@ -71,7 +67,7 @@ bool Node::dependsOn(Node* node) {
 
 bool Node::addInput(std::string label, NodeInput* input) {
     auto position = inputs.find(label);
-    if(position != inputs.end()) return false; // TODO
+    if(position != inputs.end()) { Status::addError("Label for input is already used"); return false; }
     
     inputs[label] = input;
     return true;
@@ -79,7 +75,7 @@ bool Node::addInput(std::string label, NodeInput* input) {
 
 bool Node::addOutput(std::string label, NodeOutput* output) {
     auto position = outputs.find(label);
-    if(position != outputs.end()) return false; // TODO
+    if(position != outputs.end()) { Status::addError("Label for output is already used"); return false; }
     
     outputs[label] = output;
     return true;

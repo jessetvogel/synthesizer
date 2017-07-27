@@ -19,16 +19,10 @@ MIDIDevice::MIDIDevice(Controller* controller, int deviceId) {
 
 bool MIDIDevice::start() {
     // Make sure device did not already start
-    if(active) {
-        Status::addError("MIDI device already started");
-        return false;
-    }
+    if(active) return true;
     
     const PmDeviceInfo* info = Pm_GetDeviceInfo(deviceId);
-    if(info == NULL) {
-        Status::addError("MIDI device does not exist");
-        return false;
-    }
+    if(info == NULL) { Status::addError("MIDI device does not exist"); return false; }
     
     PmError err = Pm_OpenInput(&inputStream,
                                deviceId,
@@ -37,10 +31,7 @@ bool MIDIDevice::start() {
                                NULL,
                                (void*) NULL); // void * time_info
     
-    if(err != pmNoError) {
-        Status::addError("Failed to open MIDI device");
-        return false;
-    }
+    if(err != pmNoError) { Status::addError("Failed to open MIDI device"); return false; }
     
     /*
      Pm_SetFilter(midi_in, PM_FILT_REALTIME | PM_FILT_AFTERTOUCH |
@@ -67,10 +58,7 @@ bool MIDIDevice::stop() {
 
 bool MIDIDevice::update() {
     // Make sure device started
-    if(!active) {
-        Status::addError("MIDI device not yet started");
-        return false;
-    }
+    if(!active) { Status::addError("MIDI device not yet started"); return false; }
     
     // Read all incoming messages
     PmError result;
@@ -85,10 +73,7 @@ bool MIDIDevice::update() {
         controller->getMidiState()->addEvent(status, data1, data2);
     }
     
-    if(result != pmNoError) {
-        Status::addError("Error in reading from MIDI device");
-        return false;
-    }
+    if(result != pmNoError) { Status::addError("Error in reading from MIDI device"); return false; }
     
     controller->getMidiState()->update();
     return true;

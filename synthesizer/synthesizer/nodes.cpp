@@ -40,7 +40,7 @@ Nodes::~Nodes() {
 bool Nodes::create(std::string type, std::string id, std::string args) {
     // Check if node with this id already exists
     Node* node = getNode(id);
-    if(node != NULL) return false; // TODO: (search for 'return false')
+    if(node != NULL) { Status::addError("Node id is already used"); return false; }
     
     // Create new node
     Options options(controller, args);
@@ -67,12 +67,14 @@ bool Nodes::destroy(std::string id) {
             break;
         }
     }
+    mutex.unlock();
 
     // In case it does not exists, return
-    if(node == NULL) return false;
+    if(node == NULL) { Status::addError("Provided node does not exist"); return false; }
     
     // Make sure there are no references to this node
     bool reference = false;
+    mutex.lock();
     for(auto it = nodes.begin(); it != nodes.end(); ++it) {
         if((*it)->dependsOn(node)) {
             reference = true;
@@ -80,7 +82,7 @@ bool Nodes::destroy(std::string id) {
         }
     }
     mutex.unlock();
-    if(reference) return false;
+    if(reference) { Status::addError("Cannot delete node as other nodes depend on it"); return false; }
     
     // Remove node from (other) relevant lists
     std::string nodeType = node->getType();
@@ -97,24 +99,24 @@ bool Nodes::destroy(std::string id) {
 
 bool Nodes::rename(std::string oldId, std::string newId) {
     Node* node = getNode(oldId);
-    if(node == NULL) return false; // TODO
+    if(node == NULL) { Status::addError("Provided node does not exist"); return false; }
     
     Node* nodeNew = getNode(newId);
-    if(nodeNew != NULL) return false;
+    if(nodeNew != NULL) { Status::addError("Node id is already used"); return false; }
     
     return node->setId(newId);
 }
 
 bool Nodes::set(std::string strNodeInput, std::string value) {
     NodeInput* nodeInput = getNodeInput(strNodeInput);
-    if(nodeInput == NULL) return false; // TODO
+    if(nodeInput == NULL) { Status::addError("Provided node input does not exist"); return false; }
     
     return nodeInput->set(value);
 }
 
 bool Nodes::hide(std::string id) {
     Node* node = getNode(id);
-    if(node == NULL) return false; // TODO
+    if(node == NULL) { Status::addError("Provided node does not exist"); return false; }
     
     node->hide();
     return true;
@@ -122,7 +124,7 @@ bool Nodes::hide(std::string id) {
 
 bool Nodes::info(std::string id) {
     Node* node = getNode(id);
-    if(node == NULL) return false; // TODO
+    if(node == NULL) { Status::addError("Provided node does not exist"); return false; }
 
     Status::addExtra(std::string("info:").append(id));
     return true;
@@ -130,11 +132,11 @@ bool Nodes::info(std::string id) {
 
 bool Nodes::addInput(std::string id, std::string label, std::string nodeInput) {
     Node* node = getNode(id);
-    if(node == NULL) return false;
-    if(node->getType().compare("custom") != 0) return false;
+    if(node == NULL) { Status::addError("Provided node does not exist"); return false; }
+    if(node->getType().compare("custom") != 0) { Status::addError("Can only add inputs to custom nodes"); return false; }
     
     NodeInput* input = getNodeInput(nodeInput);
-    if(input == NULL) return false; // TODO
+    if(input == NULL) { Status::addError("Provided node input does not exist"); return false; }
     
     bool success = node->addInput(label, input);
     if(success) {
@@ -147,11 +149,11 @@ bool Nodes::addInput(std::string id, std::string label, std::string nodeInput) {
 
 bool Nodes::addOutput(std::string id, std::string label, std::string nodeOutput) {
     Node* node = getNode(id);
-    if(node == NULL) return false;
-    if(node->getType().compare("custom") != 0) return false;
+    if(node == NULL) { Status::addError("Provided node does not exist"); return false; }
+    if(node->getType().compare("custom") != 0) { Status::addError("Can only add outputs to custom nodes"); return false; }
     
     NodeOutput* output = getNodeOutput(nodeOutput);
-    if(output == NULL) return false; // TODO
+    if(output == NULL) { Status::addError("Provided node output does not exist"); return false; }
     
     bool success = node->addOutput(label, output);
     if(success) {
@@ -164,12 +166,13 @@ bool Nodes::addOutput(std::string id, std::string label, std::string nodeOutput)
 
 bool Nodes::attach(std::string id, std::string attachment) {
     Node* node = getNode(id);
-    if(node == NULL) return false;
-    if(node->getType().compare("custom") != 0) return false;
+    if(node == NULL) { Status::addError("Provided node does not exist"); return false; }
+    if(node->getType().compare("custom") != 0) { Status::addError("Nodes can only be attached to custom nodes"); return false; }
     NodeCustom* nodeCustom = (NodeCustom*) node;
     
     node = getNode(attachment);
-    if(node == NULL) return false;
+    if(node == NULL) { Status::addError("Provided node does not exist"); return false; }
+    if(node == nodeCustom) { Status::addError("Cannot attach node to itself"); return false; }
     
     bool success = nodeCustom->attach(node);
     if(success) {
@@ -267,30 +270,26 @@ bool Nodes::removeAudioOutput(NodeAudioOutput* output) {
 
 bool Nodes::addNodeParameter(NodeParameter* parameter) {
     mutex.lock();
-    bool success = false;
-    int midiCC = parameter->getMidiCC();
-    if(parameters.find(midiCC) == parameters.end()) {
-        parameters[midiCC] = parameter;
-        success = true;
-    }
+    parameters.push_back(parameter);
     mutex.unlock();
-    return success;
+    return true;
 }
 
-NodeParameter* Nodes::getNodeParameter(int midiCC) {
+bool Nodes::updateNodeParameter(int midiCC, double value) {
     mutex.lock();
-    NodeParameter* parameter = NULL;
-    auto position = parameters.find(midiCC);
-    if(position != parameters.end())
-        parameter = position->second;
+    for(auto it = parameters.begin();it != parameters.end(); ++it) {
+        NodeParameter* parameter = *it;
+        if(parameter->getMidiCC() == midiCC)
+            parameter->setValue(value);
+    }
     mutex.unlock();
-    return parameter;
+    return true;
 }
 
 bool Nodes::removeNodeParameter(NodeParameter* parameter) {
     bool found = false;
     mutex.lock();
-    auto position = parameters.find(parameter->getMidiCC());
+    auto position = std::find(parameters.begin(), parameters.end(), parameter);
     if(position != parameters.end()) {
         parameters.erase(position);
         found = true;

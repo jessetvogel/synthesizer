@@ -9,7 +9,7 @@ class NodeInput {
 
 public:
     
-    enum Type { NODE, NODE_KEY_INDEPENDENT, SAMPLE, CURVE, FUNCTION };
+    enum Type { NODE, NODE_KEY_INDEPENDENT, SAMPLE, CURVE }; // TODO rename
     
 private:
     

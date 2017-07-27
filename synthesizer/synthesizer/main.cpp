@@ -8,7 +8,6 @@
 
 #include "sample.hpp"
 #include "curve.hpp"
-#include "function.hpp"
 
 #include "status.hpp"
 
@@ -42,8 +41,14 @@ int main(int argc, char *argv[]) {
         // Try to parse the given line
         bool success = parser.parseLine(line);
         
-        if(!success && Status::noErrors())
-            Status::addError("Unknown error");
+        if(!success && Status::noErrors()) {
+            Status::addError("Unknown error occured");
+        }
+        
+        if(!Status::noErrors()) {
+            Status::addExtra("command");
+            Status::setCommand(line);
+        }
         
         Status::print(&controller);
     }
@@ -64,11 +69,9 @@ void initialize() {
     Pa_Initialize();
     Sample::initialize();
     Curve::initialize();
-    Function::initialize();
 }
 
 void destruct() {
-    Function::destruct();
     Curve::destruct();
     Sample::destruct();
     Pa_Terminate();

@@ -30,10 +30,9 @@ MidiState::MidiState(Controller* controller) {
 }
 
 void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned char data2) {
-    NodeParameter* parameter;
     
     unsigned char type = status >> 4;
-//    unsigned char channel = status & 0xF; // Don't need channels for now
+//    unsigned char channel = status & 0xF; // Don't need channels for now TODO: future?
     
     switch(type) {
         case MIDI_NOTE_OFF:
@@ -63,9 +62,7 @@ void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned cha
             }
             
             // If not one of the default, set belonging NodeParameter if it exists
-            parameter = controller->getNodes()->getNodeParameter(data1);
-            if(parameter == NULL) return;
-            parameter->setValue((double) data2 / 127.0);
+            controller->getNodes()->updateNodeParameter(data1, (double) data2 / 127.0);
             return;
         
         case MIDI_PITCH_WHEEL:

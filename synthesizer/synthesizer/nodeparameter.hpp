@@ -6,6 +6,7 @@
 
 class NodeParameter : public Node {
     
+    NodeInput* cc;
     NodeInput* min;
     NodeInput* max;
     NodeInput* curve;

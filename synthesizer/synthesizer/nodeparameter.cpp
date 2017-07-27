@@ -14,10 +14,8 @@ NodeParameter::NodeParameter(Controller* controller, Options options) : Node(con
     midiCC = options.getInteger("midiCC", -1);
     value = options.getDouble("initial", 0.0);
     
-    // Hidden
-    hidden = true;
-    
     // Set inputs and outputs
+    addInput("midiCC", cc = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, std::to_string(midiCC)));
     addInput("min", min = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
     addInput("max", max = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
     addInput("curve", curve = new NodeInput(controller, NodeInput::CURVE, "linear"));
@@ -26,9 +24,13 @@ NodeParameter::NodeParameter(Controller* controller, Options options) : Node(con
 }
 
 void NodeParameter::apply() {
+    float* cc = ((NodeOutput*) this->cc->pointer)->getBuffer();
     float* min = ((NodeOutput*) this->min->pointer)->getBuffer();
     float* max = ((NodeOutput*) this->max->pointer)->getBuffer();
     Curve* curve = (Curve*) (this->curve->pointer);
+    
+    // Determine midiCC
+    midiCC = (int) cc[0];
     
     float* output = this->output->getBuffer();
     

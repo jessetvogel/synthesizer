@@ -21,6 +21,8 @@ class Status {
     static std::vector<Message> error;
     static std::vector<std::string> extra;
     
+    static std::string command;
+    
 public:
     
     inline static bool noErrors() { return error.empty(); }
@@ -36,6 +38,9 @@ public:
     static void printWarning();
     static void printError();
     static void printExtra(Controller*, std::string);
+    
+    inline static void setCommand(std::string command) { Status::command = command; }
+    static void printCommand();
     
     static bool print(Controller*);
     

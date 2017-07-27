@@ -62,7 +62,7 @@ bool MIDIDevices::update() {
 
 bool MIDIDevices::add(int n) {
     // Make sure the given id is actually an midi input device
-    if(!isInput(n)) return false;
+    if(!isInput(n)) { Status::addError("Provided MIDI device does not exist"); return false; }
     
     // Make sure it isn't added already
     if(get(n) != NULL) return true;
@@ -113,10 +113,7 @@ int MIDIDevices::amountOfDevices() {
 
 const char* MIDIDevices::deviceName(int n) {
     const PmDeviceInfo* info = Pm_GetDeviceInfo(n);
-    if(info == NULL) {
-        Status::addError("MIDI device does not exist");
-        return NULL;
-    }
+    if(info == NULL) { Status::addError("Provided MIDI device does not exist"); return NULL; }
     return Pm_GetDeviceInfo(n)->name;
 }
 

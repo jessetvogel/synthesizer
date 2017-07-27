@@ -30,10 +30,7 @@ Settings::Settings(std::string filepath) {
 bool Settings::load(std::string filepath) {
     // Read file line by line, and parse them
     std::ifstream input(filepath);
-    if(input.fail()) {
-        Status::addError("Failed to open settings file");
-        return false;
-    }
+    if(input.fail()) { Status::addError("Failed to open settings file"); return false; }
     
     int lineNumber = 1;
     std::string line;
@@ -53,10 +50,7 @@ bool Settings::parseLine(std::string line) {
     std::cmatch cm;
     
     // Remove all surrounding whitespace and comments
-    if(!std::regex_search(line.c_str(), cm, Commands::regexPreprocess)) {
-        Status::addError("Unable to parse line");
-        return false;
-    }
+    if(!std::regex_search(line.c_str(), cm, Commands::regexPreprocess)) { Status::addError("Unable to parse line"); return false; }
     std::string command = std::string(cm[1]);
     if(command.length() == 0) return true;
     const char* str = command.c_str();
@@ -93,6 +87,8 @@ bool Settings::set(std::string key, std::string value) {
             sustainPedalPolarity = false;
             return true;
         }
+        
+        Status::addError("Invalid argument provided");
         return false;
     }
     
@@ -101,9 +97,11 @@ bool Settings::set(std::string key, std::string value) {
             pitchWheelRange = stod(value);
             return true;
         }
+        
+        Status::addError("Invalid argument provided");
         return false;
     }
     
+    Status::addError("Invalid setting provided");
     return false;
 }
-

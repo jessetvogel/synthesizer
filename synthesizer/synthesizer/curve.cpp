@@ -4,6 +4,8 @@
 
 double Curve::ease(double min, double max, double x, Curve* curve) {
     double f;
+    if(x < 0) x = 0.0;
+    if(x > 1) x = 1.0;
     
     if(curve == Linear) {
         f = linear(x);

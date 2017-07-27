@@ -8,7 +8,6 @@
 #include "nodeconstant.hpp"
 #include "util.hpp"
 #include "curve.hpp"
-#include "function.hpp"
 
 #include "status.hpp"
 
@@ -29,7 +28,7 @@ bool NodeInput::set(std::string value) {
             if(value.compare("square") == 0)    { pointer = Sample::square; expression = value; return true; }
             if(value.compare("triangle") == 0)  { pointer = Sample::triangle; expression = value; return true; }
             if(value.compare("sawtooth") == 0)  { pointer = Sample::sawtooth; expression = value; return true; }
-            Status::addError("Sample does not exist");
+            Status::addError("Provided sample does not exist");
             return false;
             
         case CURVE:
@@ -40,14 +39,7 @@ bool NodeInput::set(std::string value) {
             if(value.compare("quartin") == 0)       { pointer = Curve::QuartIn; expression = value; return true; }
             if(value.compare("quartout") == 0)      { pointer = Curve::QuartOut; expression = value; return true; }
             if(value.compare("exponential") == 0)   { pointer = Curve::Exponential; expression = value; return true; }
-            Status::addError("Curve does not exist");
-            return false;
-            
-            
-        case FUNCTION:
-            if(value.compare("identity") == 0)  { pointer = Function::Identity; expression = value; return true; }
-            if(value.compare("pow10") == 0)     { pointer = Function::Pow10; expression = value; return true; }
-            Status::addError("Function does not exist");
+            Status::addError("Provided curve does not exist");
             return false;
             
         case NODE:
@@ -69,7 +61,7 @@ bool NodeInput::set(std::string value) {
                 }
             }
             
-            if(nodeOutput == NULL) return false; // TODO
+            if(nodeOutput == NULL) { Status::addError("Provided node output does not exist"); return false; }
             
             // If we are overwriting a node constant, delete the old constant
             if(pointer != NULL) {
@@ -90,8 +82,5 @@ std::string NodeInput::typeToString(Type type) {
         case NODE_KEY_INDEPENDENT: return "node";
         case SAMPLE: return "sample";
         case CURVE: return "curve";
-        case FUNCTION: return "function";
     }
 }
-
-
