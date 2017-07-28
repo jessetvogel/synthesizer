@@ -1,5 +1,9 @@
 var midi = {
 
+  NOTE_OFF: 0x8,
+  NOTE_ON: 0x9,
+  CONTROL_CHANGE: 0xB, 
+
   access: null,
 
   devices: [],
@@ -15,7 +19,7 @@ var midi = {
         var inputs = midi.access.inputs.values();
         for(var input = inputs.next(); input && !input.done; input = inputs.next()) {
           console.log('[MIDI DEVICE] ' + input.value.name);
-          input.value.onmidimessage = midi.messageHandler;
+          input.value.onmidimessage = midi.onMessage;
         }
       }, function (error) {
         // In case of no access, show error message
@@ -30,13 +34,13 @@ var midi = {
     api.command('status midi_devices');
   },
 
-  messageHandlers: [],
+  eventHandlers: [],
 
-  onMessage: function (handler) {
-    midi.messageHandlers.push(handler);
+  onEvent: function (handler) {
+    midi.eventHandlers.push(handler);
   },
 
-  messageHandler: function (message) {
+  onMessage: function (message) {
     // Check if this message is to be handled
     var sourceDevice = midi.getDevice(message.srcElement.name);
     if(sourceDevice == null || !sourceDevice.active) return;
@@ -50,8 +54,8 @@ var midi = {
     event.data2 = data[2];
 
     // Send it to all message handlers
-    for(var i = 0;i < midi.messageHandlers.length;i ++)
-      midi.messageHandlers[i](event);
+    for(var i = 0;i < midi.eventHandlers.length;i ++)
+      midi.eventHandlers[i](event);
   },
 
   setDevices: function (data) {

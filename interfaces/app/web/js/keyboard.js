@@ -1,6 +1,6 @@
 var keyboard = {
 
-  set: function (element, low, high) {
+  create: function (id, low, high) {
     if(low === undefined) low = 'A0';
     if(high === undefined) high = 'C8';
 
@@ -11,58 +11,63 @@ var keyboard = {
     if(noteLow > noteHigh) return;
     if(notes.isSharp(noteLow) || notes.isSharp(noteHigh)) return;
 
-    // Create keyboard
-    element.addClass('keyboard');
+    return new function () {
+        // Variables
+        this.element = $(document.getElementById(id));
+        this.low = noteLow;
+        this.high = noteHigh;
 
-    // Compute widths
-    var amountOfWhite = 0;
-    for(var i = noteLow;i <= noteHigh;i ++) {
-      if(!notes.isSharp(i)) amountOfWhite ++;
-    }
-    var margin = 0.999; // This seems to work...
-    var width_white = (element.width() - margin * (amountOfWhite - 1)) / amountOfWhite;
-    var width_black = width_white / 1.5;
+        // Visuals
+        this.element.addClass('keyboard');
 
-    // Place keys
-    var x = 0;
-    var previous_key_type = null;
-    var current_key_type = null;
+        // Compute widths
+        var amountOfWhite = 0;
+        for(var i = noteLow;i <= noteHigh;i ++) {
+          if(!notes.isSharp(i)) amountOfWhite ++;
+        }
+        var margin = 0.999; // This seems to work...
+        var width_white = (this.element.width() - margin * (amountOfWhite - 1)) / amountOfWhite;
+        var width_black = width_white / 1.5;
 
-    for(var i = noteLow;i <= noteHigh;i ++) {
-      // Create key
-      var key = $('<div>').prop('id', keyboard.keyId(i)).addClass('key');
+        // Place keys
+        var x = 0;
+        var previous_key_type = null;
+        var current_key_type = null;
 
-      if(notes.isSharp(i)) {
-        key.addClass('black');
-        key.css({ width: width_black + 'px' });
-        current_key_type = 'black';
-      }
-      else {
-        key.addClass('white');
-        key.css({ width: width_white + 'px' });
-        current_key_type = 'white';
-      }
+        for(var i = noteLow;i <= noteHigh;i ++) {
+          // Create key
+          var key = $('<div>').prop('id', keyboard.keyId(i)).addClass('key');
 
-      if(previous_key_type != null) {
-        if(previous_key_type == 'white' && current_key_type == 'white') x += width_white + margin;
-        if(previous_key_type == 'white' && current_key_type == 'black') x += width_white + margin / 2 - width_black / 2;
-        if(previous_key_type == 'black' && current_key_type == 'white') x += width_black / 2 + margin / 2;
-      }
+          if(notes.isSharp(i)) {
+            key.addClass('black').css({ width: width_black + 'px' });
+            current_key_type = 'black';
+          }
+          else {
+            key.addClass('white').css({ width: width_white + 'px' });
+            current_key_type = 'white';
+          }
 
-      key.css({ left: x + 'px' });
-      element.append(key);
-      previous_key_type = current_key_type;
-    }
+          if(previous_key_type != null) {
+            if(previous_key_type == 'white' && current_key_type == 'white') x += width_white + margin;
+            if(previous_key_type == 'white' && current_key_type == 'black') x += width_white + margin / 2 - width_black / 2;
+            if(previous_key_type == 'black' && current_key_type == 'white') x += width_black / 2 + margin / 2;
+          }
 
-    // Animate keys
-    midi.onMessage(function (event) {
-      console.log(event);
-      if(event.type == 0x9 && event.data2 > 0)
-        element.find('#' + keyboard.keyId(event.data1)).addClass('pressed');
+          key.css({ left: x + 'px' });
+          this.element.append(key);
+          previous_key_type = current_key_type;
+        }
 
-      if((event.type == 0x9 && event.data2 == 0) || event.type == 0x8)
-        element.find('#' + keyboard.keyId(event.data1)).removeClass('pressed');
-    });
+        // Let it respond to midi
+        (function (_) { midi.onEvent(function (event) {
+          console.log(event);
+          if(event.type == midi.NOTE_ON && event.data2 > 0)
+            _.element.find('#' + keyboard.keyId(event.data1)).addClass('pressed');
+
+          if((event.type == midi.NOTE_ON && event.data2 == 0) || event.type == midi.NOTE_OFF)
+            _.element.find('#' + keyboard.keyId(event.data1)).removeClass('pressed');
+        }); })(this);
+    };
   },
 
   keyId: function(note) {
