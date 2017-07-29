@@ -335,12 +335,14 @@ void Monitor::printMonitor() {
     
     unsigned long framesPerBuffer = controller->getSettings()->bufferSize;
     float* buffer = nodeOutput->getBuffer();
+    controller->getMutex()->lock();
     bool comma = false;
     for(int x = 0;x < framesPerBuffer; ++x) {
         if(comma) std::cout << ","; else comma = true;
 //        std::cout << buffer[x];
         printf("%.4f", buffer[x]);
     }
+    controller->getMutex()->unlock();
     
     std::cout << "]";
     

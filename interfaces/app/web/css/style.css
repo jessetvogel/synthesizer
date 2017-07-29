@@ -18,9 +18,29 @@
   --base0F: #d27b53;
 }
 
+/*:root {
+  --base00: #2C3E50;
+  --base01: #34495E;
+  --base02: #7F8C8D;
+  --base03: #95A5A6;
+  --base04: #BDC3C7;
+  --base05: #e0e0e0;
+  --base06: #f5f5f5;
+  --base07: #ECF0F1;
+  --base08: #E74C3C;
+  --base09: #E67E22;
+  --base0A: #F1C40F;
+  --base0B: #2ECC71;
+  --base0C: #1ABC9C;
+  --base0D: #3498DB;
+  --base0E: #9B59B6;
+  --base0F: #be643c;
+}*/
+
 body {
-  font-family: Museo Sans;
   background-color: var(--base07);
+  font-family: Museo Sans;
+  color: var(--base01);
 }
 
 .centered {
@@ -37,7 +57,7 @@ body {
 
 .header {
   font-size: 16px;
-  line-height: 64px;
+  line-height: 32px;
   color: var(--base05);
 }
 
@@ -180,6 +200,31 @@ input[type=text] {
   height: 26px;
 }
 
-#instruments {
-  width: 576px;
+.controls {
+  display: flex;
+  justify-content: space-around;
+  margin: 8px 0px 8px 0px;
 }
+
+.controls > div {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  background-color: var(--base02);
+  border-radius: 16px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+
+.controls > div.disabled { opacity: 0.5; cursor: initial; }
+
+.controls > div:not(.disabled):hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+.controls > div > span { margin-top: 7px; } /* TODO: fix this*/
+
+/*.controls > div.play { color: var(--base0B); }*/
+/*.controls > div.stop { color: var(--base08); }*/

@@ -8,9 +8,9 @@ Interface* API::interface;
 
 bool API::handle(Request* request, Response* response) {
     // Check if we are to handle this request
-    std::string requestURI = request->getRequestURI();
+    std::string requestPath = request->getRequestPath();
     std::cmatch cm;
-    if(!std::regex_match(requestURI.c_str(), cm, regexAPI)) return false;
+    if(!std::regex_match(requestPath.c_str(), cm, regexAPI)) return false;
     
     std::string line = interface->command(cm[1]);
     

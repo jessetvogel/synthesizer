@@ -16,7 +16,6 @@ public:
     
     static Interface* interface;
     
-    
     static bool handle(Request*, Response*);
     
 };

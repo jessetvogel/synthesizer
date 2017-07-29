@@ -8,9 +8,9 @@ std::regex Info::regexInfo("^\\/info\\/(\\w+)$");
 
 bool Info::handle(Request* request, Response* response) {
     // Check if we are to handle this request
-    std::string requestURI = request->getRequestURI();
+    std::string requestPath = request->getRequestPath();
     std::cmatch cm;
-    if(!std::regex_match(requestURI.c_str(), cm, regexInfo)) return false;
+    if(!std::regex_match(requestPath.c_str(), cm, regexInfo)) return false;
     
     if(cm[1].compare("instruments") == 0) {
         std::stringstream oss;
@@ -38,6 +38,7 @@ bool Info::handle(Request* request, Response* response) {
 
 bool Info::writeJSON(Request* request, Response* response, std::string json) {
     response->setHeader("Content-Type", Util::MIMEType("json"));
+    response->setHeader("Content-Length", std::to_string(json.length()));
     
     response->writeStatus();
     response->writeHeaders();

@@ -12,8 +12,9 @@
 #define REGEX_HEADER_KEY "\\S+"
 #define REGEX_HEADER_VALUE ".+"
 
-std::regex Request::requestLine("^(" REGEX_METHOD ") (" REGEX_REQUEST_URI ") (" REGEX_HTTP_VERSION ")$");
-std::regex Request::requestHeader("^(" REGEX_HEADER_KEY "): (" REGEX_HEADER_VALUE ")$");
+std::regex Request::regexRequestLine("^(" REGEX_METHOD ") (" REGEX_REQUEST_URI ") (" REGEX_HTTP_VERSION ")$");
+std::regex Request::regexRequestHeader("^(" REGEX_HEADER_KEY "): (" REGEX_HEADER_VALUE ")$");
+std::regex Request::regexRequestURI("^(\\/.*?)(?:\\?(.*))?$");
 
 Request::Request(int socket) {
     this->socket = socket;
@@ -26,7 +27,7 @@ bool Request::read() {
     
     // Read request line
     line = readLine();
-    if(!std::regex_search(line.c_str(), cm, requestLine)) return false;
+    if(!std::regex_search(line.c_str(), cm, regexRequestLine)) return false;
     
     method = cm[1];
     requestURI = cm[2];
@@ -35,6 +36,11 @@ bool Request::read() {
     // Decode request URI     // TODO properly decode url
     for(int i = 0;i < requestURI.length(); ++i) if(requestURI[i] == '+') requestURI[i] = ' ';
     
+    // Parse URI
+    if(!std::regex_search(requestURI.c_str(), cm, regexRequestURI)) return false;
+    requestPath = cm[1];
+    requestQuery = cm[2];
+    
     // May not contain '..'
     if(requestURI.find("..") != std::string::npos) return false;
     
@@ -42,7 +48,7 @@ bool Request::read() {
     while(true) {
         line = readLine();
         if(line.length() == 0) break;
-        if(!std::regex_search(line.c_str(), cm, requestHeader)) return false;
+        if(!std::regex_search(line.c_str(), cm, regexRequestHeader)) return false;
         headers.set(cm[1], cm[2]);
     }
     

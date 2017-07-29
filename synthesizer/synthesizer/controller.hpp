@@ -36,6 +36,8 @@ public:
     inline Nodes* getNodes() { return nodes; }
     inline Monitor* getMonitor() { return monitor; }
 
+    inline std::mutex* getMutex() { return &mutex; }
+    
     bool start();
     bool stop();
     bool clear();

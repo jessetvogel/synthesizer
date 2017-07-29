@@ -16,7 +16,7 @@
 #define CHILD_READ_FD   ( pipes[PARENT_WRITE_PIPE][READ_FD]  )
 #define CHILD_WRITE_FD  ( pipes[PARENT_READ_PIPE][WRITE_FD]  )
 
-#define INTERFACE_BUFFER_SIZE (1024)
+#define INTERFACE_BUFFER_SIZE (8192)
 
 Interface::Interface() {
     mutexRunning.lock();
@@ -65,6 +65,9 @@ bool Interface::start() {
 
 bool Interface::restart() {
     command("exit");
+    int status;
+    ::wait(&status);
+    std::cout << "status: " << status << std::endl;
     return start();
 }
 
@@ -89,7 +92,7 @@ void Interface::wait() {
 }
 
 std::string Interface::readLine() {
-    char buffer[INTERFACE_BUFFER_SIZE];
+    char buffer[INTERFACE_BUFFER_SIZE]; // TODO: make sure we don't overgo INTERFACE_BUFFER_SIZE
     char* ptr = buffer;
     ssize_t bytes;
     do bytes = ::read(PARENT_READ_FD, ptr, 1);

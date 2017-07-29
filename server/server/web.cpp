@@ -2,18 +2,18 @@
 #include "util.hpp"
 #include "error.hpp"
 
-std::regex Web::regexPages("^\\/(settings|help)?$");
+std::regex Web::regexPages("^\\/(settings|help|debug)?$");
 std::regex Web::regexGeneralResource("^\\/((?:js|css|fonts)\\/.*|favicon\\.ico)$");
 std::regex Web::regexInstrumentResource("^\\/instrument\\/(\\w+\\/.+)$");
 std::regex Web::regexExtension("^.*?(?:\\.(\\w+))?$");
 
 bool Web::handle(Request* request, Response* response) {
     // Check if we are to handle this request
-    std::string requestURI = request->getRequestURI();
+    std::string requestPath = request->getRequestPath();
     std::cmatch cm;
     
     // General resources
-    if(std::regex_match(requestURI.c_str(), cm, regexGeneralResource)) {
+    if(std::regex_match(requestPath.c_str(), cm, regexGeneralResource)) {
         char buffer[256];
         snprintf(buffer, sizeof(buffer), "../web/%s", std::string(cm[1]).c_str());
         std::string path(buffer);
@@ -21,7 +21,7 @@ bool Web::handle(Request* request, Response* response) {
     }
     
     // Instrument resource
-    if(std::regex_match(requestURI.c_str(), cm, regexInstrumentResource)) {
+    if(std::regex_match(requestPath.c_str(), cm, regexInstrumentResource)) {
         char buffer[256];
         snprintf(buffer, sizeof(buffer), "../instruments/%s", std::string(cm[1]).c_str());
         std::string path(buffer);
@@ -29,11 +29,12 @@ bool Web::handle(Request* request, Response* response) {
     }
     
     // Pages
-    if(std::regex_match(requestURI.c_str(), cm, regexPages)) {
+    if(std::regex_match(requestPath.c_str(), cm, regexPages)) {
         std::string page = cm[1];
         if(page.compare("") == 0)            return Web::sendFile(request, response, "../web/pages/main.html");
         if(page.compare("settings") == 0)    return Web::sendFile(request, response, "../web/pages/settings.html");
         if(page.compare("help") == 0)        return Web::sendFile(request, response, "../web/pages/help.html");
+        if(page.compare("debug") == 0)        return Web::sendFile(request, response, "../web/pages/debug.html");
         
         return Error::respond(request, response, 404);
     }

@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <title>Debug</title>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/oscilloscope.css" />
+    <link rel="stylesheet" type="text/css" href="/css/debug.css" />
+    <!-- JS -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/script.js"></script>
+    <script type="text/javascript" src="/js/api.js"></script>
+    <script type="text/javascript" src="/js/info.js"></script>
+    <script type="text/javascript" src="/js/oscilloscope.js"></script>
+    <script type="text/javascript" src="/js/debug.js"></script>
+  </head>
+  <body>
+      <div class="page-title centered">Debug</div>
+
+      <div class="toggle-box centered">
+        <div class="title">Monitor</div>
+        <div class="content">
+          <div class="input-line"><span>Node output</span><input type="text" id="input-monitor" /></div>
+          <div id="oscilloscope"></div>
+          <div class="controls">
+            <div id="monitor-play" class="play"><span class="glyphicon glyphicon-play"></span></div>
+            <div id="monitor-stop" class="stop"><span class="glyphicon glyphicon-stop"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="toggle-box centered">
+        <div class="title">Nodes</div>
+        <div class="content">
+          <div id="nodes">
+            <div id="node-list"></div>
+            <div id="node-info"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="button-settings" class="button"><span class="glyphicon glyphicon-cog"></span></div>
+
+  </body>
+</html>

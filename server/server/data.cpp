@@ -13,11 +13,11 @@ std::regex Data::regexInstrumentStore("^\\/data\\/instrument\\/(\\w+)\\/store$")
 
 bool Data::handle(Request* request, Response* response) {
     // Check if we are to handle this request
-    std::string requestURI = request->getRequestURI();
+    std::string requestPath = request->getRequestPath();
     std::cmatch cm;
     
     // Settings
-    if(std::regex_match(requestURI.c_str(), cm, regexSettingsStore)) {
+    if(std::regex_match(requestPath.c_str(), cm, regexSettingsStore)) {
         if(Data::store("../settings/settings", request->getBody()))
             return Info::writeJSON(request, response, "{}");
         else
@@ -25,7 +25,7 @@ bool Data::handle(Request* request, Response* response) {
     }
     
     // Instruments
-    if(std::regex_match(requestURI.c_str(), cm, regexInstrumentData)) {
+    if(std::regex_match(requestPath.c_str(), cm, regexInstrumentData)) {
         char buffer[256];
         snprintf(buffer, sizeof(buffer), "../instruments/%s/data.json", std::string(cm[1]).c_str());
         std::string path(buffer);
@@ -33,7 +33,7 @@ bool Data::handle(Request* request, Response* response) {
         return Web::sendFile(request, response, path);
     }
     
-    if(std::regex_match(requestURI.c_str(), cm, regexInstrumentStore)) {
+    if(std::regex_match(requestPath.c_str(), cm, regexInstrumentStore)) {
         char buffer[256];
         snprintf(buffer, sizeof(buffer), "../instruments/%s/data.json", std::string(cm[1]).c_str());
         std::string path(buffer);

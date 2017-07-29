@@ -1,0 +1,10 @@
+.oscilloscope {
+  background-color: var(--base05);
+  background-size: 30px 30px;
+  background-image: linear-gradient(to right, var(--base04) 1px, transparent 1px), linear-gradient(to bottom, var(--base04) 1px, transparent 1px);
+}
+
+.oscilloscope canvas {
+  width: 100%;
+  height: 100%;
+}

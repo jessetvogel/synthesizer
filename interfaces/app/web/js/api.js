@@ -1,12 +1,9 @@
 var api = {
 
-  command: function (command, callback) {
+  command: function (command, callback, fail) {
     if(callback == undefined) callback = api.handle;
-    (function (callback) {
-      $.ajax('/api/' + command.replace(/\s+/g, '+')).done(function (data) { // TODO: fix this
-        callback(data);
-      });
-    })(callback);
+    var request = $.ajax('/api/' + command.replace(/\s+/g, '+')).done(callback);
+    if(fail !== undefined) request.fail(fail);
   },
 
   handle: function (data) {

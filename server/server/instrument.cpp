@@ -11,11 +11,11 @@ Interface* Instrument::interface;
 
 bool Instrument::handle(Request* request, Response* response) {
     // Check if we are to handle this request
-    std::string requestURI = request->getRequestURI();
+    std::string requestPath = request->getRequestPath();
     std::cmatch cm;
     
     // Instrument main page
-    if(std::regex_match(requestURI.c_str(), cm, regexInstrumentMain)) {
+    if(std::regex_match(requestPath.c_str(), cm, regexInstrumentMain)) {
         char buffer[256];
         const char* instrument = std::string(cm[1]).c_str();
         snprintf(buffer, sizeof(buffer), "../instruments/%s/head.html", instrument);
