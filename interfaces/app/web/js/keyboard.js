@@ -60,7 +60,6 @@ var keyboard = {
 
         // Let it respond to midi
         (function (_) { midi.onEvent(function (event) {
-          console.log(event);
           if(event.type == midi.NOTE_ON && event.data2 > 0)
             _.element.find('#' + keyboard.keyId(event.data1)).addClass('pressed');
 

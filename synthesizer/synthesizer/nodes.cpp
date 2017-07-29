@@ -456,13 +456,15 @@ bool Nodes::apply() {
     }
     
     // Add all outputs to the buffer
+    double volume = controller->getMidiState()->mainVolume;
+    volume *= volume;
     for(auto it = audioOutputs.begin();it != audioOutputs.end(); ++it) {
         NodeAudioOutput* audioOutput = *it;
         int channelCount = controller->getAudioDevices()->getOutputChannelCount();
         for(int channel = 0;channel < channelCount; ++channel) {
             float* output = audioOutput->getChannel(channel)->getBuffer();
             for(int x = 0;x < framesPerBuffer; ++x)
-                buffer[x * channelCount + channel] += output[x];
+                buffer[x * channelCount + channel] += output[x] * volume;
         }
     }
     

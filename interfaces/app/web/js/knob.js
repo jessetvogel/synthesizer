@@ -16,7 +16,7 @@ var knob = {
     this.element.append(container);
 
     var circle = $('<div>').addClass('circle');
-    (function (_) { circle.click(function () { _.detect(!_.detecting); }); })(this);
+    (function (_) { circle.click(function () { if(!_.detecting) _.midiCC = -1; _.detect(!_.detecting); }); })(this);
     container.append(circle);
 
     var popup = $('<div>').addClass('popup')
@@ -62,7 +62,7 @@ var knob = {
       }
 
       if(event.type == midi.CONTROL_CHANGE && event.data1 == _.midiCC) {
-        _.setValue(data2 / 127.0);
+        _.setValue(event.data2 / 127.0);
       }
     }); })(this);
 

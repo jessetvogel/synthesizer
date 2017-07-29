@@ -67,7 +67,6 @@ bool Interface::restart() {
     command("exit");
     int status;
     ::wait(&status);
-    std::cout << "status: " << status << std::endl;
     return start();
 }
 
