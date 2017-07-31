@@ -1,7 +1,7 @@
 #include "options.hpp"
 #include "util.hpp"
 
-std::regex Options::regexOption("(\\w+)\\s*=\\s*(\\w+)");
+std::regex Options::regexOption("(\\w+)\\s*=\\s*([\\w.]+)");
 
 Options::Options(Controller* controller, std::string args) {
     // Store pointer to controller

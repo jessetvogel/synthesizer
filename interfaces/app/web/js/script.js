@@ -1,15 +1,21 @@
 $(document).ready(function () {
-
+  // Initialize MIDI
   if(window.midi) midi.initialize();
 
+  // Navigation
   $('#button-settings').click(function () {
     window.open("/settings", "_blank");
+  });
+
+  $('#button-home').click(function () {
+    window.location.href = "/";
   });
 
   $('#button-fullscreen').click(function () {
     fullscreen.toggle(document.body);
   })
 
+  // Toggle boxes
   $('.toggle-box .title').prepend($('<span>').addClass('glyphicon glyphicon-triangle-right')).click(function () {
     var content = $(this).next();
     if(content.is(':visible')) {

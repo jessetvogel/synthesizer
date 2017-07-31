@@ -7,7 +7,7 @@ var slider = {
     this.value = 0.0;
     this.detecting = false;
 
-    this.onChangeValue = function () {};
+    this.onChangeMIDICC = null;
 
     // Visuals
     this.element.addClass('slider');
@@ -16,7 +16,7 @@ var slider = {
     this.element.append(container);
 
     var box = $('<div>').addClass('box');
-    (function (_) { box.click(function () { if(!_.detecting) _.midiCC = -1; _.detect(!_.detecting); }); })(this);
+    (function (_) { box.click(function () { if(!_.detecting) _.setMIDICC(-1); _.detect(!_.detecting); }); })(this);
     box.append($('<div>').addClass('lever'));
     container.append(box);
 
@@ -31,13 +31,17 @@ var slider = {
       this.value = value;
       var lever = this.element.find('.lever');
       lever.css({ top: ((1.0 - value) * (this.element.height() - lever.height())) + 'px' });
-      this.onChangeValue();
       return this;
     }
 
     this.setText = function (string) {
       this.element.find('.text').text(string);
       return this;
+    }
+
+    this.setMIDICC = function (midiCC) {
+      this.midiCC = midiCC;
+      if(this.onChangeMIDICC !== null) this.onChangeMIDICC(midiCC);
     }
 
     this.detect = function (x) {
@@ -59,7 +63,7 @@ var slider = {
     // Let it respond to midi
     (function (_) { midi.onEvent(function (event) {
       if(event.type == midi.CONTROL_CHANGE && _.detecting) {
-          _.midiCC = event.data1;
+          _.setMIDICC(event.data1);
           _.detect(false);
       }
 

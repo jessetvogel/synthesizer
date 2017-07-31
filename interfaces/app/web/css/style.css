@@ -1,3 +1,5 @@
+/* colors */
+
 /* https://chriskempson.github.io/base16/ */
 :root {
   --base00: #2d2d2d;
@@ -37,12 +39,17 @@
   --base0F: #be643c;
 }*/
 
+/* for reasons */
+html, body { min-height: 100%; }
+
+/* default colors and fonts */
 body {
   background-color: var(--base07);
   font-family: Museo Sans;
   color: var(--base01);
 }
 
+/* standard classes */
 .centered {
   width: 512px;
   margin-left: auto;
@@ -55,19 +62,15 @@ body {
   color: var(--base01);
 }
 
+.page-title > .glyphicon {
+  vertical-align: -3px;
+  margin-right: 8px;
+}
+
 .header {
   font-size: 16px;
   line-height: 32px;
   color: var(--base05);
-}
-
-.items {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.items > div {
-  margin: 16px;
 }
 
 .toggle-box {
@@ -104,29 +107,15 @@ body {
   font-size: 24px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   background-color: var(--base04);
-}
-
-.button.large {
-  width: 160px;
-  height: 160px;
-  line-height: 160px;
+  cursor: pointer;
 }
 
 .button:hover {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
 }
 
-#button-settings {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-}
-
-#button-fullscreen {
-  position: absolute;
-  right: 96px;
-  bottom: 16px;
+.button > .glyphicon {
+  vertical-align: -2px;
 }
 
 label {
@@ -142,6 +131,44 @@ label {
 .input-line > span {
   display: inline-block;
   width: 192px;
+}
+
+.grid {
+  width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+}
+
+.grid > .block {
+  position: relative;
+  border: 1px solid var(--base05);
+  border-radius: 8px;
+}
+
+.grid > .block > .caption {
+  position: absolute;
+  left: 0px;
+  top: 100%;
+  width: 100%;
+  margin-top: -9px;
+  text-align: center;
+  color: var(--base04);
+  font-size: 13px;
+}
+
+.grid > .block > .caption > span {
+  display: inline-block;
+  background-color: var(--base07);
+  /*border: 1px solid var(--base05);*/
+  border-radius: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 /* input */
@@ -200,31 +227,40 @@ input[type=text] {
   height: 26px;
 }
 
-.controls {
+/* 'HUD' */
+#navigation {
+  position: absolute;
   display: flex;
-  justify-content: space-around;
-  margin: 8px 0px 8px 0px;
+  right: 16px;
+  bottom: 16px;
 }
 
-.controls > div {
-  width: 32px;
+#navigation > .button {
+  margin-left: 16px;
+}
+
+#master-volume {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  width: 256px;
   height: 32px;
   line-height: 32px;
-  background-color: var(--base02);
-  border-radius: 16px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  color: white;
+  color: var(--base04);
+}
+
+#master-volume .volume {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 16px;
+  background-color: var(--base05);
+  width: 128px;
+  height: 24px;
   cursor: pointer;
 }
 
-.controls > div.disabled { opacity: 0.5; cursor: initial; }
-
-.controls > div:not(.disabled):hover {
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+#master-volume .volume > div {
+  width: 50%;
+  height: 24px;
+  background-color: var(--base04);
 }
-
-.controls > div > span { margin-top: 7px; } /* TODO: fix this*/
-
-/*.controls > div.play { color: var(--base0B); }*/
-/*.controls > div.stop { color: var(--base08); }*/

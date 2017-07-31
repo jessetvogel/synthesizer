@@ -22,7 +22,6 @@ MidiState::MidiState(Controller* controller) {
     
     pitchWheel = 0.0;
     modulationWheel = 0.0;
-    mainVolume = 1.0;
     sustainPedal = 0.0;
     
     leadKey.stage = KeyEvent::Off;
@@ -49,10 +48,6 @@ void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned cha
                 case MIDI_MODULATION_WHEEL:
                     modulationWheel = (double) data2 / 127.0;
                     return;
-                    
-                case MIDI_MAIN_VOLUME:
-                    mainVolume = (double) data2 / 127.0;
-                    return;
                 
                 case MIDI_SUSTAIN_PEDAL:
                     sustainPedal = (double) data2 / 127.0;
@@ -60,6 +55,9 @@ void MidiState::addEvent(unsigned char status, unsigned char data1, unsigned cha
                         sustainPedal = 1.0 - sustainPedal;
                     return;
             }
+            
+            if(data1 == controller->getSettings()->masterVolumeCC)
+                controller->getSettings()->masterVolume = (double) data2 / 127.0;
             
             // If not one of the default, set belonging NodeParameter if it exists
             controller->getNodes()->updateNodeParameter(data1, (double) data2 / 127.0);

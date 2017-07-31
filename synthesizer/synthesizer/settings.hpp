@@ -28,6 +28,8 @@ public:
     unsigned long bufferSize;
     
     // Changeable
+    double masterVolume;
+    int masterVolumeCC;
     double frequencies[AMOUNT_OF_KEYS];
     double pitchWheelRange;
     bool sustainPedalPolarity;

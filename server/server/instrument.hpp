@@ -11,6 +11,8 @@ class Instrument {
 
     static std::regex regexInstrumentMain;
     
+    static std::string currentInstrument;
+    
 public:
     
     static Interface* interface;

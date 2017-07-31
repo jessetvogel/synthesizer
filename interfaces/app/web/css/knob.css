@@ -22,7 +22,16 @@
   cursor: pointer;
 }
 
-.knob .circle::before { content: '|'; }
+.knob .circle .mark {
+  padding: 0px;
+  background-color: white;
+  height: 30%;
+  width: 2px;
+  margin-left: 47.5%;
+  margin-right: 47.5%;
+  position: relative;
+  top: 10%;
+}
 
 .knob .circle.detecting { background-color: var(--base0F); }
 

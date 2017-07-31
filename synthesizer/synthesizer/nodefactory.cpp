@@ -13,6 +13,7 @@
 #include "nodebandpass.hpp"
 #include "nodelabel.hpp"
 #include "nodeconditional.hpp"
+#include "nodeglider.hpp"
 #include "nodefuzz.hpp"
 #include "nodedelay.hpp"
 #include "nodePWM.hpp"
@@ -54,6 +55,7 @@ Node* NodeFactory::create(Controller* controller, std::string type, std::string 
     else if(type.compare("oscillator") == 0)        node = new NodeOscillator(controller, options);
     else if(type.compare("ADSR") == 0)              node = new NodeADSR(controller, options);
     else if(type.compare("conditional") == 0)       node = new NodeConditional(controller, options);
+    else if(type.compare("glider") == 0)            node = new NodeGlider(controller, options);
     else if(type.compare("fuzz") == 0)              node = new NodeFuzz(controller, options);
     else if(type.compare("PWM") == 0)               node = new NodePWM(controller, options);
     else if(type.compare("follower") == 0)          node = new NodeFollower(controller, options);

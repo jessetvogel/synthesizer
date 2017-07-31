@@ -456,7 +456,7 @@ bool Nodes::apply() {
     }
     
     // Add all outputs to the buffer
-    double volume = controller->getMidiState()->mainVolume;
+    double volume = controller->getSettings()->masterVolume;
     volume *= volume;
     for(auto it = audioOutputs.begin();it != audioOutputs.end(); ++it) {
         NodeAudioOutput* audioOutput = *it;

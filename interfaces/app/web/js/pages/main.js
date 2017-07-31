@@ -4,9 +4,7 @@ $(document).ready(function () {
     console.log(data);
     var instruments = data.instruments;
     for(var i = 0;i < instruments.length;i ++) {
-      var instrument = $('<div>')
-        .addClass('button large')
-        .text(instruments[i]);
+      var instrument = $('<div>').text(instruments[i]);
 
       (function (x) { instrument.click(function () {
         window.location = '/instrument/' + x + '/';

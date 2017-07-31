@@ -40,7 +40,6 @@ public:
     
     double pitchWheel;
     double modulationWheel;
-    double mainVolume;
     double sustainPedal;
     
     KeyEvent leadKey;

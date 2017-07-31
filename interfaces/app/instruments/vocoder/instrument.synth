@@ -1,0 +1,183 @@
+# Source: http://musicfromouterspace.com/analogsynth_new/VOCODER2013/images/vocoderblockdiag.gif
+
+# Modulator
+node_create lowpass BP_MOD_1    [order = 3]
+node_create bandpass BP_MOD_2   [order = 3]
+node_create bandpass BP_MOD_3   [order = 3]
+node_create bandpass BP_MOD_4   [order = 3]
+node_create bandpass BP_MOD_5   [order = 3]
+node_create bandpass BP_MOD_6   [order = 3]
+node_create bandpass BP_MOD_7   [order = 3]
+node_create bandpass BP_MOD_8   [order = 3]
+node_create bandpass BP_MOD_9   [order = 3]
+node_create bandpass BP_MOD_10  [order = 3]
+node_create bandpass BP_MOD_11  [order = 3]
+node_create highpass BP_MOD_12  [order = 3]
+
+node_set BP_MOD_2.bandwidth                   1.2 # BANDWIDTH
+node_set BP_MOD_3.bandwidth                   1.2 # BANDWIDTH
+node_set BP_MOD_4.bandwidth                   1.2 # BANDWIDTH
+node_set BP_MOD_5.bandwidth                   1.2 # BANDWIDTH
+node_set BP_MOD_6.bandwidth                   1.2 # BANDWIDTH
+node_set BP_MOD_7.bandwidth                   1.2 # BANDWIDTH
+node_set BP_MOD_8.bandwidth                   1.2 # BANDWIDTH
+node_set BP_MOD_9.bandwidth                   1.2 # BANDWIDTH
+node_set BP_MOD_10.bandwidth                  1.2 # BANDWIDTH
+node_set BP_MOD_11.bandwidth                  1.2 # BANDWIDTH
+
+node_create audio_input modulator
+
+node_set BP_MOD_1.input                       modulator
+node_set BP_MOD_2.input                       modulator
+node_set BP_MOD_3.input                       modulator
+node_set BP_MOD_4.input                       modulator
+node_set BP_MOD_5.input                       modulator
+node_set BP_MOD_6.input                       modulator
+node_set BP_MOD_7.input                       modulator
+node_set BP_MOD_8.input                       modulator
+node_set BP_MOD_9.input                       modulator
+node_set BP_MOD_10.input                      modulator
+node_set BP_MOD_11.input                      modulator
+node_set BP_MOD_12.input                      modulator
+
+
+# Volume
+node_create follower BP_MOD_1_VOLUME
+node_create follower BP_MOD_2_VOLUME
+node_create follower BP_MOD_3_VOLUME
+node_create follower BP_MOD_4_VOLUME
+node_create follower BP_MOD_5_VOLUME
+node_create follower BP_MOD_6_VOLUME
+node_create follower BP_MOD_7_VOLUME
+node_create follower BP_MOD_8_VOLUME
+node_create follower BP_MOD_9_VOLUME
+node_create follower BP_MOD_10_VOLUME
+node_create follower BP_MOD_11_VOLUME
+node_create follower BP_MOD_12_VOLUME
+
+node_set BP_MOD_1_VOLUME.input                BP_MOD_1
+node_set BP_MOD_2_VOLUME.input                BP_MOD_2
+node_set BP_MOD_3_VOLUME.input                BP_MOD_3
+node_set BP_MOD_4_VOLUME.input                BP_MOD_4
+node_set BP_MOD_5_VOLUME.input                BP_MOD_5
+node_set BP_MOD_6_VOLUME.input                BP_MOD_6
+node_set BP_MOD_7_VOLUME.input                BP_MOD_7
+node_set BP_MOD_8_VOLUME.input                BP_MOD_8
+node_set BP_MOD_9_VOLUME.input                BP_MOD_9
+node_set BP_MOD_10_VOLUME.input               BP_MOD_10
+node_set BP_MOD_11_VOLUME.input               BP_MOD_11
+node_set BP_MOD_12_VOLUME.input               BP_MOD_12
+
+
+# Carrier
+node_create lowpass BP_CAR_1    [order = 3]
+node_create bandpass BP_CAR_2   [order = 3]
+node_create bandpass BP_CAR_3   [order = 3]
+node_create bandpass BP_CAR_4   [order = 3]
+node_create bandpass BP_CAR_5   [order = 3]
+node_create bandpass BP_CAR_6   [order = 3]
+node_create bandpass BP_CAR_7   [order = 3]
+node_create bandpass BP_CAR_8   [order = 3]
+node_create bandpass BP_CAR_9   [order = 3]
+node_create bandpass BP_CAR_10  [order = 3]
+node_create bandpass BP_CAR_11  [order = 3]
+node_create highpass BP_CAR_12  [order = 3]
+
+node_set BP_CAR_2.bandwidth                   1.2 # BANDWIDTH
+node_set BP_CAR_3.bandwidth                   1.2 # BANDWIDTH
+node_set BP_CAR_4.bandwidth                   1.2 # BANDWIDTH
+node_set BP_CAR_5.bandwidth                   1.2 # BANDWIDTH
+node_set BP_CAR_6.bandwidth                   1.2 # BANDWIDTH
+node_set BP_CAR_7.bandwidth                   1.2 # BANDWIDTH
+node_set BP_CAR_8.bandwidth                   1.2 # BANDWIDTH
+node_set BP_CAR_9.bandwidth                   1.2 # BANDWIDTH
+node_set BP_CAR_10.bandwidth                  1.2 # BANDWIDTH
+node_set BP_CAR_11.bandwidth                  1.2 # BANDWIDTH
+
+node_create collector carrier
+
+node_set BP_CAR_1.input                       carrier
+node_set BP_CAR_2.input                       carrier
+node_set BP_CAR_3.input                       carrier
+node_set BP_CAR_4.input                       carrier
+node_set BP_CAR_5.input                       carrier
+node_set BP_CAR_6.input                       carrier
+node_set BP_CAR_7.input                       carrier
+node_set BP_CAR_8.input                       carrier
+node_set BP_CAR_9.input                       carrier
+node_set BP_CAR_10.input                      carrier
+node_set BP_CAR_11.input                      carrier
+node_set BP_CAR_12.input                      carrier
+
+
+# Frequencies
+node_set BP_MOD_1.cutoff                      50
+node_set BP_CAR_1.cutoff                      50
+node_set BP_MOD_2.center                      83
+node_set BP_CAR_2.center                      83
+node_set BP_MOD_3.center                      137
+node_set BP_CAR_3.center                      137
+node_set BP_MOD_4.center                      227
+node_set BP_CAR_4.center                      227
+node_set BP_MOD_5.center                      376
+node_set BP_CAR_5.center                      376
+node_set BP_MOD_6.center                      622
+node_set BP_CAR_6.center                      622
+node_set BP_MOD_7.center                      1029
+node_set BP_CAR_7.center                      1029
+node_set BP_MOD_8.center                      1704
+node_set BP_CAR_8.center                      1704
+node_set BP_MOD_9.center                      2821
+node_set BP_CAR_9.center                      2821
+node_set BP_MOD_10.center                     4670
+node_set BP_CAR_10.center                     4670
+node_set BP_MOD_11.center                     7731
+node_set BP_CAR_11.center                     7731
+node_set BP_MOD_12.cutoff                     12800
+node_set BP_CAR_12.cutoff                     12800
+
+
+# Output
+node_create adder vocoder_output [n = 12]
+
+node_set vocoder_output.input_1               BP_CAR_1
+node_set vocoder_output.input_2               BP_CAR_2
+node_set vocoder_output.input_3               BP_CAR_3
+node_set vocoder_output.input_4               BP_CAR_4
+node_set vocoder_output.input_5               BP_CAR_5
+node_set vocoder_output.input_6               BP_CAR_6
+node_set vocoder_output.input_7               BP_CAR_7
+node_set vocoder_output.input_8               BP_CAR_8
+node_set vocoder_output.input_9               BP_CAR_9
+node_set vocoder_output.input_10              BP_CAR_10
+node_set vocoder_output.input_11              BP_CAR_11
+node_set vocoder_output.input_12              BP_CAR_12
+
+node_set vocoder_output.gain_1                BP_MOD_1_VOLUME
+node_set vocoder_output.gain_2                BP_MOD_2_VOLUME
+node_set vocoder_output.gain_3                BP_MOD_3_VOLUME
+node_set vocoder_output.gain_4                BP_MOD_4_VOLUME
+node_set vocoder_output.gain_5                BP_MOD_5_VOLUME
+node_set vocoder_output.gain_6                BP_MOD_6_VOLUME
+node_set vocoder_output.gain_7                BP_MOD_7_VOLUME
+node_set vocoder_output.gain_8                BP_MOD_8_VOLUME
+node_set vocoder_output.gain_9                BP_MOD_9_VOLUME
+node_set vocoder_output.gain_10               BP_MOD_10_VOLUME
+node_set vocoder_output.gain_11               BP_MOD_11_VOLUME
+node_set vocoder_output.gain_12               BP_MOD_12_VOLUME
+
+node_create adder vocoder_output_total [n = 1]
+node_set vocoder_output_total.input_1         vocoder_output
+node_set vocoder_output_total.gain_1          25.0
+
+
+# Key output
+node_create oscillator wave [key = true]
+node_set wave.sample                          sawtooth
+node_set wave.frequency                       key_frequency
+node_set wave.amplitude                       key_velocity
+
+node_set carrier.input                        wave
+
+node_create audio_output output
+node_set output.channel_1                     vocoder_output_total

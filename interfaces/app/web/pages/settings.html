@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/css/fonts.css" />
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <link rel="stylesheet" type="text/css" href="/css/messages.css" />
+    <link rel="stylesheet" type="text/css" href="/css/pages/settings.css" />
     <!-- JS -->
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
@@ -19,7 +20,7 @@
     <script type="text/javascript" src="/js/pages/settings.js"></script>
   </head>
   <body>
-      <div class="page-title centered">Settings</div>
+      <div class="page-title centered"><span class="glyphicon glyphicon-cog"></span>Settings</div>
 
       <div class="toggle-box centered">
         <div class="title">General</div>
@@ -39,6 +40,17 @@
           <div class="header">Output devices</div>
           <div id="output-devices"></div>
         </div>
+      </div>
+
+      <div class="centered">
+        <div class="button-row">
+          <div id="button-exit" class="button"><span class="glyphicon glyphicon-remove"></span></div>
+          <div id="button-restart" class="button"><span class="glyphicon glyphicon-refresh"></span></div>
+        </div>
+      </div>
+
+      <div id="navigation">
+        <div id="button-home" class="button"><span class="glyphicon glyphicon-home"></span></div>
       </div>
 
       <div id="messages"></div>

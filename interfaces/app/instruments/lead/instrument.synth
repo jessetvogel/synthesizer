@@ -1,0 +1,115 @@
+# Gliding
+node_create conditional glider_dt
+node_set glider_dt.input                lead_key_pressing
+node_set glider_dt.low                  0.5
+node_set glider_dt.high                 0.5
+node_set glider_dt.output_low           0.0
+node_set glider_dt.output_high          0.2
+
+node_create glider main_frequency
+node_set main_frequency.destination     lead_key_frequency
+node_set main_frequency.doubling_time   glider_dt
+
+# Envelope
+node_create parameter attack_time [initial = 0.1]
+node_set attack_time.min                0.001
+node_set attack_time.max                1.000
+node_set attack_time.curve              exponential
+
+node_create parameter decay_time [initial = 0.05]
+node_set decay_time.min                 0.001
+node_set decay_time.max                 1.000
+node_set decay_time.curve               exponential
+
+node_create parameter sustain_level [initial = 0.05]
+node_set sustain_level.min              0.0
+node_set sustain_level.max              1.0
+
+node_create parameter release_time [initial = 0.1]
+node_set release_time.min               0.001
+node_set release_time.max               1.000
+node_set release_time.curve             exponential
+
+node_create ADSR envelope
+node_set envelope.attack_time           attack_time
+node_set envelope.decay_time            decay_time
+node_set envelope.sustain_level         sustain_level
+node_set envelope.release_time          release_time
+node_set envelope.attack_curve          quadin
+node_set envelope.decay_curve           quadin
+node_set envelope.release_curve         quadin
+
+node_create adder amplitude [n = 1]
+node_set amplitude.input_1              lead_key_velocity
+node_set amplitude.gain_1               envelope
+
+# Vibrato
+node_create adder vibrato_amplitude [n = 1]
+node_set vibrato_amplitude.input_1      modulation_wheel
+node_set vibrato_amplitude.gain_1       0.059463
+
+node_create adder vibrato_frequency [n = 2]
+node_set vibrato_frequency.input_1      modulation_wheel
+node_set vibrato_frequency.gain_1       3.0
+node_set vibrato_frequency.input_2      3.0
+
+node_create oscillator vibrato
+node_set vibrato.mean                   1.0
+node_set vibrato.amplitude              vibrato_amplitude
+node_set vibrato.frequency              vibrato_frequency
+node_set vibrato.sample                 sine
+
+node_create adder frequency [n = 1]
+node_set frequency.input_1              main_frequency
+node_set frequency.gain_1               vibrato
+
+# Lead
+node_create oscillator lead
+node_set lead.sample                    sine
+node_set lead.frequency                 frequency
+node_set lead.amplitude                 amplitude
+
+# Fuzz
+node_create parameter fuzz_gain [initial = 0.5]
+node_set fuzz_gain.min                  0.1
+node_set fuzz_gain.max                  100.0
+node_set fuzz_gain.curve                exponential
+
+node_create fuzz fuzz
+node_set fuzz.input                     lead
+node_set fuzz.input_gain                fuzz_gain
+
+# Delay
+node_create parameter delay_gain
+node_set delay_gain.min                 0.0
+node_set delay_gain.max                 1.0
+
+node_create parameter delay_time
+node_set delay_time.min                 0.234375
+node_set delay_time.max                 0.468750
+
+node_create delay delay [n = 1, T = 1.0]
+node_set delay.input                    fuzz
+node_set delay.time_1                   delay_time
+node_set delay.gain_1                   delay_gain
+node_set delay.feedback                 1.0
+
+# Bandpass
+node_create parameter bandpass_center [initial = 0.5]
+node_set bandpass_center.min            100
+node_set bandpass_center.max            11000
+node_set bandpass_center.curve          exponential
+
+node_create parameter bandpass_width [initial = 0.5]
+node_set bandpass_width.min             1.0
+node_set bandpass_width.max             8.0
+node_set bandpass_width.curve           exponential
+
+node_create bandpass bp [order = 3]
+node_set bp.input                       delay
+node_set bp.center                      bandpass_center
+node_set bp.bandwidth                   bandpass_width
+
+# Output
+node_create audio_output output
+node_set output.channel_1               bp

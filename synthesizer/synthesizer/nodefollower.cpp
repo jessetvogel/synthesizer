@@ -15,7 +15,7 @@ NodeFollower::NodeFollower(Controller* controller, Options options) : Node(contr
     RMSAverage = 0.0;
     
     // Set inputs and outputs
-    addInput("output", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }

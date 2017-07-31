@@ -4,6 +4,7 @@
 #include "settings.hpp"
 #include "commands.hpp"
 #include "util.hpp"
+#include "midistate.hpp"
 
 #include "status.hpp"
 
@@ -12,6 +13,8 @@ Settings::Settings(std::string filepath) {
     sampleRate = DEFAULT_SAMPLE_RATE;
     bufferSize = DEFAULT_BUFFER_SIZE;
     
+    masterVolume = 1.0;
+    masterVolumeCC = MIDI_MAIN_VOLUME;
     pitchWheelRange = DEFAULT_PITCH_WHEEL_RANGE;
     sustainPedalPolarity = DEFAULT_SUSTAIN_PEDAL_POLARITY;
     for(int i = 0;i < AMOUNT_OF_KEYS; i ++)
@@ -77,6 +80,14 @@ bool Settings::parseLine(std::string line) {
 }
 
 bool Settings::set(std::string key, std::string value) {
+    if(key.compare("master_volume_cc") == 0) {
+        if(Util::isInteger(value)) {
+            masterVolumeCC = stoi(value);
+            return true;
+        }
+        return false;
+    }
+    
     if(key.compare("sustain_pedal_polarity") == 0) {
         if(value.compare("inverted") == 0) {
             sustainPedalPolarity = true;

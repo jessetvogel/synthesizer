@@ -1,0 +1,33 @@
+ #keyboard {
+  width: 1024px;
+  height: 96px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 32px;
+}
+
+.knob-row {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  height: 96px;
+}
+
+.knob {
+  width: 64px;
+  height: 64px;
+}
+
+.slider-row {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  height: 128px;
+}
+
+.slider {
+  width: 32px;
+  height: 96px;
+}

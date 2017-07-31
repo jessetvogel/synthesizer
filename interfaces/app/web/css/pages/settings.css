@@ -1,0 +1,16 @@
+#button-restart {
+  background-color: var(--base0D);
+  margin-right: 16px;
+}
+
+#button-exit {
+  background-color: var(--base08);
+}
+
+.button-row {
+  display: flex;
+  height: 64px;
+  line-height: 64px;
+  font-size: 16px;
+  flex-direction: row-reverse;
+}
