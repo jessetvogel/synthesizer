@@ -1,9 +1,42 @@
 var api = {
 
   command: function (command, callback, fail) {
+    console.log('[COMMAND] ' + command);
     if(callback == undefined) callback = api.handle;
-    var request = $.ajax('/api/' + command.replace(/\s+/g, '+')).done(callback);
+    var request = $.ajax('/api/' + command.replace(/\s+/g, '+')).done(callback); // TODO
     if(fail !== undefined) request.fail(fail);
+  },
+
+  restart: function (callback, fail) {
+    console.log('[RESTART]');
+    if(callback == undefined) callback = api.handle;
+    var request = $.ajax('/restart').done(callback);
+    if(fail !== undefined) request.fail(fail);
+  },
+
+  exit: function (callback, fail) {
+    console.log('[EXIT]');
+    if(callback == undefined) callback = api.handle;
+    var request = $.ajax('/exit').done(callback);
+    if(fail !== undefined) request.fail(fail);
+  },
+
+  setInstrumentData: function (data, callback) {
+    if(callback == undefined) callback = api.handle;
+    $.ajax({
+      method: 'POST',
+      url: '/data/instrument/set',
+      data: JSON.stringify(data),
+      contentType: 'application/json'
+    }).done(callback);
+  },
+
+  getInstrumentData: function (callback) {
+    $.ajax('/data/instrument/get').done(callback);
+  },
+
+  getInfo: function (info, callback) {
+    $.ajax('/info/' + info).done(callback);
   },
 
   handle: function (data) {

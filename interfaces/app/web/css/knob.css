@@ -35,7 +35,7 @@
 
 .knob .circle.detecting { background-color: var(--base0F); }
 
-.knob .text {
+.knob .caption {
   position: absolute;
   width: 96px;
   left: -48px;

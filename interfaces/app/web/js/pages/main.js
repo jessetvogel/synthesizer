@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
-  info.request("instruments", function (data) {
-    console.log(data);
+  api.getInfo('instruments', function (data) {
     var instruments = data.instruments;
     for(var i = 0;i < instruments.length;i ++) {
       var instrument = $('<div>').text(instruments[i]);

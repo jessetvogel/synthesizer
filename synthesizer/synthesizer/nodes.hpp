@@ -10,7 +10,6 @@ class Controller;
 class Node;
 class NodeCollector;
 class NodeAudioOutput;
-class NodeConstant;
 class NodeParameter;
 class NodeInput;
 class NodeOutput;
@@ -24,7 +23,7 @@ class Nodes {
     std::vector<NodeAudioOutput*> audioOutputs;
     std::vector<NodeParameter*> parameters;
     
-    std::vector<NodeConstant*> constants;
+    std::vector<NodeOutput*> constants;
     
     std::mutex mutex;
     
@@ -36,8 +35,8 @@ public:
     bool addNode(Node*);
     Node* getNode(std::string);
     
-    NodeConstant* createConstant(double);
-    bool deleteConstant(NodeConstant*);
+    NodeOutput* createConstant(double);
+    bool deleteConstant(NodeOutput*);
     
     bool addCollector(NodeCollector*);
     bool removeCollector(NodeCollector*);

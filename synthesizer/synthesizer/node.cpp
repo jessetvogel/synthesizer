@@ -44,7 +44,9 @@ void Node::update() {
         for(auto it = inputs.begin(); it != inputs.end(); ++it) {
             NodeInput* input = it->second;
             if(input->getType() == NodeInput::NODE || input->getType() == NodeInput::NODE_KEY_INDEPENDENT) {
-                ((NodeOutput*) input->pointer)->getNode()->update();
+                Node* node = ((NodeOutput*) input->pointer)->getNode();
+                if(node != NULL)
+                    node->update();
             }
 
         }

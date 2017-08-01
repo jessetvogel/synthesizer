@@ -5,7 +5,6 @@
 #include "nodes.hpp"
 #include "node.hpp"
 #include "sample.hpp"
-#include "nodeconstant.hpp"
 #include "util.hpp"
 #include "curve.hpp"
 
@@ -48,8 +47,8 @@ bool NodeInput::set(std::string value) {
             NodeOutput* nodeOutput = NULL;
             // Check if it is a number
             if(Util::isNumber(value)) {
-                // Create a new node constant
-                nodeOutput = controller->getNodes()->createConstant(stod(value))->getOutput();
+                // Create a new constant
+                nodeOutput = controller->getNodes()->createConstant(stod(value));
             }
             
             // Check if it is a node output
@@ -63,11 +62,11 @@ bool NodeInput::set(std::string value) {
             
             if(nodeOutput == NULL) { Status::addError("Provided node output does not exist"); return false; }
             
-            // If we are overwriting a node constant, delete the old constant
+            // If we are overwriting a node output which has NULL node, delete it
             if(pointer != NULL) {
                 Node* node = ((NodeOutput*) pointer)->getNode();
-                if(node->getType().compare("constant") == 0)
-                    controller->getNodes()->deleteConstant((NodeConstant*) node);
+                if(node == NULL)
+                    delete node;
             }
             
             pointer = nodeOutput;

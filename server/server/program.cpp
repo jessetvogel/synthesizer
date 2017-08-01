@@ -1,5 +1,6 @@
 #include "program.hpp"
 #include "info.hpp"
+#include "instrument.hpp"
 
 std::regex Program::regexRestart("^\\/restart$");
 std::regex Program::regexExit("^\\/exit$");
@@ -12,7 +13,7 @@ bool Program::handle(Request* request, Response* response) {
     std::cmatch cm;
 
     if(std::regex_match(requestPath.c_str(), cm, regexRestart)) {
-        if(interface->restart())
+        if(interface->restart() && Instrument::reset())
             return Info::writeJSON(request, response, "{}");
         else
             return Info::writeJSON(request, response, "{\"error\":[{\"message\":\"Unable to restart\"}]}");

@@ -8,9 +8,9 @@
 
 class Data {
 
-    static std::regex regexSettingsStore;
-    static std::regex regexInstrumentData;
-    static std::regex regexInstrumentStore;
+    static std::regex regexSettingsSet;
+    static std::regex regexInstrumentSet;
+    static std::regex regexInstrumentGet;
     
 public:
 

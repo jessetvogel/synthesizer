@@ -11,14 +11,16 @@ class Instrument {
 
     static std::regex regexInstrumentMain;
     
-    static std::string currentInstrument;
+    static std::string current;
     
 public:
     
     static Interface* interface;
     
-    static bool handle(Request*, Response*);
+    inline static std::string getCurrent() { return current; };
     
+    static bool handle(Request*, Response*);
+    static bool reset();
 };
 
 #endif

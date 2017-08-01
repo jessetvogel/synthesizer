@@ -1,15 +1,16 @@
 #include "data.hpp"
 #include "web.hpp"
 #include "info.hpp"
+#include "instrument.hpp"
 #include "error.hpp"
 #include "util.hpp"
 #include <fstream>
 
 #include <iostream>
 
-std::regex Data::regexSettingsStore("^\\/data\\/settings\\/store$");
-std::regex Data::regexInstrumentData("^\\/data\\/instrument\\/(\\w+)\\/get$");
-std::regex Data::regexInstrumentStore("^\\/data\\/instrument\\/(\\w+)\\/store$");
+std::regex Data::regexSettingsSet("^\\/data\\/settings\\/set$");
+std::regex Data::regexInstrumentSet("^\\/data\\/instrument\\/set$");
+std::regex Data::regexInstrumentGet("^\\/data\\/instrument\\/get$");
 
 bool Data::handle(Request* request, Response* response) {
     // Check if we are to handle this request
@@ -17,7 +18,7 @@ bool Data::handle(Request* request, Response* response) {
     std::cmatch cm;
     
     // Settings
-    if(std::regex_match(requestPath.c_str(), cm, regexSettingsStore)) {
+    if(std::regex_match(requestPath.c_str(), cm, regexSettingsSet)) {
         if(Data::store("../settings/settings", request->getBody()))
             return Info::writeJSON(request, response, "{}");
         else
@@ -25,17 +26,13 @@ bool Data::handle(Request* request, Response* response) {
     }
     
     // Instruments
-    if(std::regex_match(requestPath.c_str(), cm, regexInstrumentData)) {
+    if(std::regex_match(requestPath.c_str(), cm, regexInstrumentSet)) {
+        std::string instrument = Instrument::getCurrent();
+        if(instrument.length() == 0)
+            return Error::respond(request, response, 403); // TODO: ?
+            
         char buffer[256];
-        snprintf(buffer, sizeof(buffer), "../instruments/%s/data.json", std::string(cm[1]).c_str());
-        std::string path(buffer);
-        if(!Util::fileExists(path)) Data::store(path, "{}");
-        return Web::sendFile(request, response, path);
-    }
-    
-    if(std::regex_match(requestPath.c_str(), cm, regexInstrumentStore)) {
-        char buffer[256];
-        snprintf(buffer, sizeof(buffer), "../instruments/%s/data.json", std::string(cm[1]).c_str());
+        snprintf(buffer, sizeof(buffer), "../instruments/%s/data.json", instrument.c_str());
         std::string path(buffer);
         if(!Util::fileExists(path)) {
             std::cout << "file '" << path << "' does not exist!" << std::endl;
@@ -46,6 +43,18 @@ bool Data::handle(Request* request, Response* response) {
             return Info::writeJSON(request, response, "{}");
         else
             return Info::writeJSON(request, response, "{\"error\":[{\"message\":\"Unable to store settings\"}]}");
+    }
+    
+    if(std::regex_match(requestPath.c_str(), cm, regexInstrumentGet)) {
+        std::string instrument = Instrument::getCurrent();
+        if(instrument.length() == 0)
+            return Error::respond(request, response, 403); // TODO: ?
+        
+        char buffer[256];
+        snprintf(buffer, sizeof(buffer), "../instruments/%s/data.json", instrument.c_str());
+        std::string path(buffer);
+        if(!Util::fileExists(path)) Data::store(path, "{}");
+        return Web::sendFile(request, response, path);
     }
     
     return false;

@@ -7,7 +7,7 @@
 
 std::regex Instrument::regexInstrumentMain("^\\/instrument\\/(\\w+)\\/$");
 
-std::string Instrument::currentInstrument = "";
+std::string Instrument::current = "";
 
 Interface* Instrument::interface;
 
@@ -32,13 +32,13 @@ bool Instrument::handle(Request* request, Response* response) {
             return Error::respond(request, response, 500);
         
         // Check if this is a new instrument
-        if(currentInstrument.compare(instrument) != 0) {
+        if(current.compare(instrument) != 0) {
             // If so, load instrument
             interface->command("play stop");
             interface->command("clear");
             interface->command("include " + pathInstrument);
             interface->command("play start");
-            currentInstrument = instrument;
+            current = instrument;
         }
         
         // Construct page
@@ -56,4 +56,9 @@ bool Instrument::handle(Request* request, Response* response) {
     }
     
     return false;
+}
+
+bool Instrument::reset() {
+    current = "";
+    return true;
 }

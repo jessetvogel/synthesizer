@@ -65,20 +65,14 @@ $(document).ready(function () {
 
   // Buttons
   $('#button-restart').click(function () {
-    $.ajax({ // TODO: make it api.restart()
-      method: 'GET',
-      url: '/restart'
-    }).done(function (data) {
+    api.restart(function (data) {
       if(data.error == undefined)
         window.location.reload();
     });
   });
 
   $('#button-exit').click(function () {
-    $.ajax({ // TODO: make it api.exit()
-      method: 'GET',
-      url: '/exit'
-    }).done(function (data) {
+    api.exit(function (data) {
       if(data.error == undefined)
         window.close();
     });

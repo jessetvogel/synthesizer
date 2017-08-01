@@ -10,6 +10,7 @@ class NodeParameter : public Node {
     NodeInput* min;
     NodeInput* max;
     NodeInput* curve;
+    NodeInput* valueInput;
     
     NodeOutput* output;
     

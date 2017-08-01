@@ -30,7 +30,7 @@ bool callback(Request* request, Response* response) {
     return Error::respond(request, response, 400);
 }
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     // Create interface
     Interface interface;
     
@@ -43,7 +43,7 @@ int main(int argc, const char * argv[]) {
     interface.start();
     
     // Create and start server
-    Server server(8080, &callback, 10);
+    Server server(8081, &callback, 10);
     if(!server.start()) {
         interface.stop();
         return 0;

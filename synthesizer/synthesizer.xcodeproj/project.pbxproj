@@ -19,6 +19,7 @@
 		3111D6E41F0FF5FF000AEE3C /* nodecollector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3111D6E21F0FF5FF000AEE3C /* nodecollector.cpp */; };
 		3111D6E71F101677000AEE3C /* nodeaudiooutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3111D6E51F101677000AEE3C /* nodeaudiooutput.cpp */; };
 		312D2EA71ED1C6F1005B4508 /* keyevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312D2EA61ED1C6F1005B4508 /* keyevent.cpp */; };
+		312FB1DE1F30C1C6003F92B2 /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312FB1DC1F30C1C6003F92B2 /* log.cpp */; };
 		31377D341F2F47AD00BE26B1 /* nodeglider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31377D321F2F47AD00BE26B1 /* nodeglider.cpp */; };
 		314323ED1F1A615F00325B06 /* nodeoutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 314323EB1F1A615F00325B06 /* nodeoutput.cpp */; };
 		314323F01F1A914300325B06 /* nodecustom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 314323EE1F1A914300325B06 /* nodecustom.cpp */; };
@@ -37,7 +38,6 @@
 		31D719811ECE317B00A4C9E0 /* commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31D7197F1ECE317B00A4C9E0 /* commands.cpp */; };
 		31DE9FF91ED337D4003F5291 /* nodelabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31DE9FF71ED337D4003F5291 /* nodelabel.cpp */; };
 		31EC60321ECF264F004671E2 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC60301ECF264F004671E2 /* util.cpp */; };
-		31EC60351ECF2811004671E2 /* nodeconstant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC60331ECF2811004671E2 /* nodeconstant.cpp */; };
 		31EC60381ECF3169004671E2 /* nodeoscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC60361ECF3169004671E2 /* nodeoscillator.cpp */; };
 		31EC603B1ECF3CC1004671E2 /* nodemodulationwheel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC60391ECF3CC1004671E2 /* nodemodulationwheel.cpp */; };
 		31EC60411ECF45BE004671E2 /* nodeadder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31EC603F1ECF45BD004671E2 /* nodeadder.cpp */; };
@@ -91,6 +91,8 @@
 		3111D6E61F101677000AEE3C /* nodeaudiooutput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodeaudiooutput.hpp; sourceTree = "<group>"; };
 		312D2EA41ED1B72D005B4508 /* keyevent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keyevent.hpp; sourceTree = "<group>"; };
 		312D2EA61ED1C6F1005B4508 /* keyevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = keyevent.cpp; sourceTree = "<group>"; };
+		312FB1DC1F30C1C6003F92B2 /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
+		312FB1DD1F30C1C6003F92B2 /* log.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = log.hpp; sourceTree = "<group>"; };
 		31377D321F2F47AD00BE26B1 /* nodeglider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodeglider.cpp; sourceTree = "<group>"; };
 		31377D331F2F47AD00BE26B1 /* nodeglider.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodeglider.hpp; sourceTree = "<group>"; };
 		314323EB1F1A615F00325B06 /* nodeoutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodeoutput.cpp; sourceTree = "<group>"; };
@@ -127,8 +129,6 @@
 		31DE9FF81ED337D4003F5291 /* nodelabel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodelabel.hpp; sourceTree = "<group>"; };
 		31EC60301ECF264F004671E2 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
 		31EC60311ECF264F004671E2 /* util.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = util.hpp; sourceTree = "<group>"; };
-		31EC60331ECF2811004671E2 /* nodeconstant.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodeconstant.cpp; sourceTree = "<group>"; };
-		31EC60341ECF2811004671E2 /* nodeconstant.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodeconstant.hpp; sourceTree = "<group>"; };
 		31EC60361ECF3169004671E2 /* nodeoscillator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodeoscillator.cpp; sourceTree = "<group>"; };
 		31EC60371ECF3169004671E2 /* nodeoscillator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodeoscillator.hpp; sourceTree = "<group>"; };
 		31EC60391ECF3CC1004671E2 /* nodemodulationwheel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodemodulationwheel.cpp; sourceTree = "<group>"; };
@@ -355,8 +355,6 @@
 		886F98AD1ED72840003B8235 /* constant */ = {
 			isa = PBXGroup;
 			children = (
-				31EC60331ECF2811004671E2 /* nodeconstant.cpp */,
-				31EC60341ECF2811004671E2 /* nodeconstant.hpp */,
 				31DE9FF71ED337D4003F5291 /* nodelabel.cpp */,
 				31DE9FF81ED337D4003F5291 /* nodelabel.hpp */,
 				88F58ABF1EE6CBD8004F1945 /* nodeparameter.cpp */,
@@ -410,6 +408,8 @@
 				3174D24D1EFEB8EF00A229A8 /* IIRfilter.hpp */,
 				31F610731F27B1C9002D2546 /* monitor.cpp */,
 				31F610741F27B1C9002D2546 /* monitor.hpp */,
+				312FB1DC1F30C1C6003F92B2 /* log.cpp */,
+				312FB1DD1F30C1C6003F92B2 /* log.hpp */,
 			);
 			name = other;
 			sourceTree = "<group>";
@@ -488,10 +488,10 @@
 				31D719601ECC4E5700A4C9E0 /* nodeADSR.cpp in Sources */,
 				310285661EC8E9A600B4A5F6 /* mididevices.cpp in Sources */,
 				8835ABB11EF82EF7006C3F91 /* nodeaudioinput.cpp in Sources */,
+				312FB1DE1F30C1C6003F92B2 /* log.cpp in Sources */,
 				314323ED1F1A615F00325B06 /* nodeoutput.cpp in Sources */,
 				88B0640D1EDDA86C00DE06E7 /* nodeconditional.cpp in Sources */,
 				88846F6A1EE961D000745184 /* nodebandpass.cpp in Sources */,
-				31EC60351ECF2811004671E2 /* nodeconstant.cpp in Sources */,
 				31EC60381ECF3169004671E2 /* nodeoscillator.cpp in Sources */,
 				31D7196B1ECDEE2E00A4C9E0 /* node.cpp in Sources */,
 				885048851EFBE4560045B9C8 /* nodefollower.cpp in Sources */,

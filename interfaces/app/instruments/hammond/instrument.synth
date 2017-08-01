@@ -1,13 +1,13 @@
 # Drawbars
-node_create parameter drawbar_1 [initial = 1.0]
-node_create parameter drawbar_2 [initial = 1.0]
-node_create parameter drawbar_3 [initial = 1.0]
-node_create parameter drawbar_4 [initial = 0.0]
-node_create parameter drawbar_5 [initial = 0.0]
-node_create parameter drawbar_6 [initial = 0.0]
-node_create parameter drawbar_7 [initial = 0.0]
-node_create parameter drawbar_8 [initial = 0.0]
-node_create parameter drawbar_9 [initial = 0.0]
+node_create parameter drawbar_1 [value = 1.0]
+node_create parameter drawbar_2 [value = 1.0]
+node_create parameter drawbar_3 [value = 1.0]
+node_create parameter drawbar_4 [value = 0.0]
+node_create parameter drawbar_5 [value = 0.0]
+node_create parameter drawbar_6 [value = 0.0]
+node_create parameter drawbar_7 [value = 0.0]
+node_create parameter drawbar_8 [value = 0.0]
+node_create parameter drawbar_9 [value = 0.0]
 
 node_set drawbar_1.curve                quadin
 node_set drawbar_2.curve                quadin

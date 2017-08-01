@@ -13,4 +13,6 @@
   line-height: 64px;
   font-size: 16px;
   flex-direction: row-reverse;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }

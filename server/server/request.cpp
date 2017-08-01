@@ -4,7 +4,6 @@
 
 #define REQUEST_BUFFER_SIZE (128)
 #define MAX_BODY_SIZE (2048)
-#define READ_PER_BYTES (256)
 
 #define REGEX_METHOD "GET|POST"
 #define REGEX_REQUEST_URI "\\S+"
@@ -64,7 +63,7 @@ bool Request::read() {
         char* ptr = buffer;
         size_t bytes = 0;
         do {
-            bytes += ::read(socket, ptr, READ_PER_BYTES - bytes);
+            bytes += ::read(socket, ptr, length - bytes);
             ptr += bytes;
         }
         while(bytes < length);

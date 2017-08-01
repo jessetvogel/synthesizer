@@ -60,13 +60,13 @@ double IIRFilter::apply(double sample) {
             output[i] = 0.0;
         
         // print coefficients
-        for(int i = 0;i <= FFFO; ++i)
-            std::cout << "b[" << i << "] = " << beta[i] << std::endl;
-        
-        for(int i = 0;i <= FBFO; ++i)
-            std::cout << "a[" << i << "] = " << alpha[i] << std::endl;
-        
-        std::cout << "gain = " << gain << std::endl << std::endl;
+//        for(int i = 0;i <= FFFO; ++i)
+//            std::cout << "b[" << i << "] = " << beta[i] << std::endl;
+//        
+//        for(int i = 0;i <= FBFO; ++i)
+//            std::cout << "a[" << i << "] = " << alpha[i] << std::endl;
+//        
+//        std::cout << "gain = " << gain << std::endl << std::endl;
     }
     
     // Return output

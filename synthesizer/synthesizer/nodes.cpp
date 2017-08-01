@@ -7,7 +7,6 @@
 #include "audiodevices.hpp"
 #include "settings.hpp"
 #include "nodecustom.hpp"
-#include "nodeconstant.hpp"
 #include "nodeparameter.hpp"
 #include "nodeaudiooutput.hpp"
 #include "nodecollector.hpp"
@@ -30,10 +29,10 @@ Nodes::~Nodes() {
     mutex.lock();
     for(auto it = nodes.begin(); it != nodes.end(); ++it)
         delete *it;
+    // Note that all other lists (parameters, collectors, audio_output's, etc.) are subsets of nodes
     
     for(auto it = constants.begin(); it != constants.end(); ++it)
         delete *it;
-    // Note that all other lists (parameters, collectors, audio_output's, etc.) are subsets of nodes. Only constants is not.
     mutex.unlock();
 }
 
@@ -209,21 +208,21 @@ Node* Nodes::getNode(std::string id) {
     return node;
 }
 
-NodeConstant* Nodes::createConstant(double value) {
-    NodeConstant* constant = new NodeConstant(controller, value);
-    mutex.lock();
-    constants.push_back(constant);
-    mutex.unlock();
-    return constant;
+NodeOutput* Nodes::createConstant(double value) {
+    NodeOutput* nodeOutput = new NodeOutput(controller, NULL);
+    unsigned long framesPerBuffer = controller->getSettings()->bufferSize;
+    float* buffer = nodeOutput->getBuffer();
+    for(int x = 0;x < framesPerBuffer; ++x)
+        buffer[x] = value;
+    return nodeOutput;
 }
 
-bool Nodes::deleteConstant(NodeConstant* constant) {
-    mutex.lock();
+bool Nodes::deleteConstant(NodeOutput* nodeOutput) {
     bool found = false;
-    auto position = std::find(constants.begin(), constants.end(), constant);
+    mutex.lock();
+    auto position = std::find(constants.begin(), constants.end(), nodeOutput);
     if(position != constants.end()) {
         constants.erase(position);
-        delete constant;
         found = true;
     }
     mutex.unlock();
@@ -381,17 +380,16 @@ bool Nodes::clear() {
     mutex.lock();
     for(auto it = nodes.begin(); it != nodes.end(); ++it)
         delete *it;
+    // Note that all other lists (parameters, collectors, audio_output's, etc.) are subsets of nodes
     
     for(auto it = constants.begin(); it != constants.end(); ++it)
         delete *it;
-    // Note that all other lists (parameters, collectors, audio_output's, etc.) are subsets of nodes. Only constants is not.
     
     // Clear all lists
     nodes.clear();
     collectors.clear();
     audioOutputs.clear();
     parameters.clear();
-    constants.clear();
     
     mutex.unlock();
     

@@ -5,7 +5,6 @@
 #include "options.hpp"
 
 #include "nodeoscillator.hpp"
-#include "nodeconstant.hpp"
 #include "nodeadder.hpp"
 #include "nodeADSR.hpp"
 #include "nodelowpass.hpp"

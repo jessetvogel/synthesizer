@@ -6,8 +6,10 @@ var knob = {
     this.midiCC = -1;
     this.value = 0.0;
     this.detecting = false;
+    this.id = null;
 
-    this.onChangeMIDICC = null;
+    // Add this knob to the list of parameters
+    parameters.list.push(this);
 
     // Visuals
     this.element.addClass('knob');
@@ -23,12 +25,19 @@ var knob = {
       .css({ left: (this.element.width() + 8) + 'px', top: (this.element.height() / 2 - 32) + 'px' });
     container.append(popup);
 
-    container.append($('<div>').addClass('text'));
+    container.append($('<div>').addClass('caption'));
 
     // Methods
+    this.setId = function (id) {
+      this.id = id;
+      return this;
+    }
+
     this.setMIDICC = function (midiCC) {
       this.midiCC = midiCC;
-      if(this.onChangeMIDICC !== null) this.onChangeMIDICC(midiCC);
+      if(this.id !== null)
+        api.command('node_set ' + this.id + '.midi_cc ' + midiCC);
+      return this;
     }
 
     this.setValue = function (value) {
@@ -37,8 +46,13 @@ var knob = {
       return this;
     }
 
-    this.setText = function (text) {
-      this.element.find('.text').text(text);
+    this.pushValue = function () {
+      api.command('node_set ' + this.id + '.value ' + this.value);
+      return this;
+    }
+
+    this.setCaption = function (caption) {
+      this.element.find('.caption').text(caption);
       return this;
     }
 
@@ -53,6 +67,7 @@ var knob = {
         this.element.find('.circle').removeClass('detecting');
         popup.text('' + (this.midiCC == -1 ? 'none' : this.midiCC));
       }
+      return this;
     }
 
     this.setValue(0.0);

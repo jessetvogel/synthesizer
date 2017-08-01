@@ -6,8 +6,10 @@ var slider = {
     this.midiCC = -1;
     this.value = 0.0;
     this.detecting = false;
+    this.id = null;
 
-    this.onChangeMIDICC = null;
+    // Add this slider to the list of parameters
+    parameters.list.push(this);
 
     // Visuals
     this.element.addClass('slider');
@@ -24,9 +26,14 @@ var slider = {
       .css({ left: (this.element.width() + 8) + 'px', top: (this.element.height() / 2 - 32) + 'px' });
     container.append(popup);
 
-    container.append($('<div>').addClass('text'));
+    container.append($('<div>').addClass('caption'));
 
     // Methods
+    this.setId = function (id) {
+      this.id = id;
+      return this;
+    }
+
     this.setValue = function (value) {
       this.value = value;
       var lever = this.element.find('.lever');
@@ -34,14 +41,21 @@ var slider = {
       return this;
     }
 
-    this.setText = function (string) {
-      this.element.find('.text').text(string);
+    this.pushValue = function () {
+      api.command('node_set ' + this.id + '.value ' + this.value);
+      return this;
+    }
+
+    this.setCaption = function (string) {
+      this.element.find('.caption').text(string);
       return this;
     }
 
     this.setMIDICC = function (midiCC) {
       this.midiCC = midiCC;
-      if(this.onChangeMIDICC !== null) this.onChangeMIDICC(midiCC);
+      if(this.id !== null)
+        api.command('node_set ' + this.id + '.midi_cc ' + midiCC);
+      return this;
     }
 
     this.detect = function (x) {
@@ -55,6 +69,7 @@ var slider = {
         this.element.find('.box').removeClass('detecting');
         popup.text('' + (this.midiCC == -1 ? 'none' : this.midiCC));
       }
+      return this;
     }
 
     this.setValue(0.0);
