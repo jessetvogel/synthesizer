@@ -22,6 +22,7 @@ public:
     bool getBool(std::string, bool);
     int getInteger(std::string, int);
     double getDouble(std::string, double);
+    std::string getString(std::string, std::string);
     
 };
 

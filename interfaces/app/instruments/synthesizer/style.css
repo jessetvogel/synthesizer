@@ -1,0 +1,51 @@
+ #keyboard {
+  grid-row: 3 / 4;
+  grid-column: 1 / 13;
+  width: 100%;
+  height: 96px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.knob-row {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 16px;
+}
+
+.knob {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 32px;
+}
+
+.slider-row {
+  display: flex;
+  justify-content: space-around;
+  height: 128px;
+}
+
+.slider {
+  width: 32px;
+  height: 96px;
+}
+
+#controllers {
+  grid-column: 1 / 4;
+  grid-row: 1 / 3;
+}
+
+#oscillators {
+  grid-column: 4 / 8;
+  grid-row: 1 / 3;
+}
+
+#envelope {
+  grid-column: 8 / 13;
+  grid-row: 2 / 3;
+}
+
+#filter {
+  grid-column: 8 / 13;
+  grid-row: 1 / 2;
+}

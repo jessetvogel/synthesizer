@@ -52,4 +52,4 @@
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
 }
 
-.controls > div > span { margin-top: 7px; } /* TODO: fix this*/
+.controls > div > span { vertical-align: -1px; }

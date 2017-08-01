@@ -23,6 +23,7 @@
 		31377D341F2F47AD00BE26B1 /* nodeglider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31377D321F2F47AD00BE26B1 /* nodeglider.cpp */; };
 		314323ED1F1A615F00325B06 /* nodeoutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 314323EB1F1A615F00325B06 /* nodeoutput.cpp */; };
 		314323F01F1A914300325B06 /* nodecustom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 314323EE1F1A914300325B06 /* nodecustom.cpp */; };
+		3173D3A91F3102B900F4DA14 /* noderounder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3173D3A71F3102B900F4DA14 /* noderounder.cpp */; };
 		3174D24E1EFEB8EF00A229A8 /* IIRfilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3174D24C1EFEB8EF00A229A8 /* IIRfilter.cpp */; };
 		319C90071EF6EB900041705D /* mididevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 319C90051EF6EB900041705D /* mididevice.cpp */; };
 		319C900D1EF70C3D0041705D /* nodes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 319C900B1EF70C3D0041705D /* nodes.cpp */; };
@@ -99,6 +100,8 @@
 		314323EC1F1A615F00325B06 /* nodeoutput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodeoutput.hpp; sourceTree = "<group>"; };
 		314323EE1F1A914300325B06 /* nodecustom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodecustom.cpp; sourceTree = "<group>"; };
 		314323EF1F1A914300325B06 /* nodecustom.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodecustom.hpp; sourceTree = "<group>"; };
+		3173D3A71F3102B900F4DA14 /* noderounder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = noderounder.cpp; sourceTree = "<group>"; };
+		3173D3A81F3102B900F4DA14 /* noderounder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = noderounder.hpp; sourceTree = "<group>"; };
 		3174D24C1EFEB8EF00A229A8 /* IIRfilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IIRfilter.cpp; sourceTree = "<group>"; };
 		3174D24D1EFEB8EF00A229A8 /* IIRfilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IIRfilter.hpp; sourceTree = "<group>"; };
 		319C90051EF6EB900041705D /* mididevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mididevice.cpp; sourceTree = "<group>"; };
@@ -383,6 +386,8 @@
 				88B0640C1EDDA86C00DE06E7 /* nodeconditional.hpp */,
 				31377D321F2F47AD00BE26B1 /* nodeglider.cpp */,
 				31377D331F2F47AD00BE26B1 /* nodeglider.hpp */,
+				3173D3A71F3102B900F4DA14 /* noderounder.cpp */,
+				3173D3A81F3102B900F4DA14 /* noderounder.hpp */,
 			);
 			name = functions;
 			sourceTree = "<group>";
@@ -500,6 +505,7 @@
 				31EC60411ECF45BE004671E2 /* nodeadder.cpp in Sources */,
 				312D2EA71ED1C6F1005B4508 /* keyevent.cpp in Sources */,
 				886F98A51ED7245E003B8235 /* nodeleadkeyinfo.cpp in Sources */,
+				3173D3A91F3102B900F4DA14 /* noderounder.cpp in Sources */,
 				88DC88AA1F0ADAF50083DF20 /* nodefactory.cpp in Sources */,
 				88F6E7721EF3196B006E6D49 /* nodeinput.cpp in Sources */,
 				311049AB1ED0D375000E89F1 /* nodehighpass.cpp in Sources */,

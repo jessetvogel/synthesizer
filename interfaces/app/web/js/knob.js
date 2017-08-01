@@ -18,7 +18,7 @@ var knob = {
     this.element.append(container);
 
     var circle = $('<div>').addClass('circle').append($('<div>').addClass('mark'));
-    (function (_) { circle.click(function () { if(!_.detecting) _.setMIDICC(-1); _.detect(!_.detecting); }); })(this);
+    (function (_) { circle.click(function () { _.setMIDICC(-1); _.detect(!_.detecting); }); })(this);
     container.append(circle);
 
     var popup = $('<div>').addClass('popup')
@@ -35,6 +35,7 @@ var knob = {
 
     this.setMIDICC = function (midiCC) {
       this.midiCC = midiCC;
+      popup.text('' + (this.midiCC == -1 ? 'none' : this.midiCC));
       if(this.id !== null)
         api.command('node_set ' + this.id + '.midi_cc ' + midiCC);
       return this;
@@ -65,13 +66,12 @@ var knob = {
       else {
         this.detecting = false;
         this.element.find('.circle').removeClass('detecting');
-        popup.text('' + (this.midiCC == -1 ? 'none' : this.midiCC));
       }
       return this;
     }
 
     this.setValue(0.0);
-    this.detect(false);
+    this.setMIDICC(-1);
 
     // Let it respond to midi
     (function (_) { midi.onEvent(function (event) {

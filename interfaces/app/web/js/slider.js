@@ -18,7 +18,7 @@ var slider = {
     this.element.append(container);
 
     var box = $('<div>').addClass('box');
-    (function (_) { box.click(function () { if(!_.detecting) _.setMIDICC(-1); _.detect(!_.detecting); }); })(this);
+    (function (_) { box.click(function () { _.setMIDICC(-1); _.detect(!_.detecting); }); })(this);
     box.append($('<div>').addClass('lever'));
     container.append(box);
 
@@ -53,6 +53,7 @@ var slider = {
 
     this.setMIDICC = function (midiCC) {
       this.midiCC = midiCC;
+      popup.text('' + (this.midiCC == -1 ? 'none' : this.midiCC));
       if(this.id !== null)
         api.command('node_set ' + this.id + '.midi_cc ' + midiCC);
       return this;
@@ -67,13 +68,12 @@ var slider = {
       else {
         this.detecting = false;
         this.element.find('.box').removeClass('detecting');
-        popup.text('' + (this.midiCC == -1 ? 'none' : this.midiCC));
       }
       return this;
     }
 
     this.setValue(0.0);
-    this.detect(false);
+    this.setMIDICC(-1);
 
     // Let it respond to midi
     (function (_) { midi.onEvent(function (event) {

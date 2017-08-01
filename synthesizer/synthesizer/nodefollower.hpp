@@ -6,10 +6,12 @@
 class NodeFollower : public Node {
     
     NodeInput* input;
+    NodeInput* attackTime;
+    NodeInput* decayTime;
     
     NodeOutput* output;
     
-    float RMSAverage;
+    double value;
     
 public:
     

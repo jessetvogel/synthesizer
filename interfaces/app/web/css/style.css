@@ -191,7 +191,7 @@ input[type=checkbox] + span {
   color: var(--base01);
 }
 
-input[type=checkbox] + span > span { margin-top: 3px; /* TODO: ? */ opacity: 0.0; }
+input[type=checkbox] + span > span { vertical-align: -1px; opacity: 0.0; }
 input[type=checkbox]:checked + span > span { opacity: 1.0; }
 
 input[type=radio] {
@@ -231,12 +231,13 @@ input[type=text] {
 #navigation {
   position: absolute;
   display: flex;
-  right: 16px;
-  bottom: 16px;
+  flex-direction: column;
+  left: 16px;
+  top: 16px;
 }
 
 #navigation > .button {
-  margin-left: 16px;
+  margin-bottom: 16px;
 }
 
 #master-volume {

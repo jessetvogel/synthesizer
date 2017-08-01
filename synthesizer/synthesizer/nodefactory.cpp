@@ -6,6 +6,7 @@
 
 #include "nodeoscillator.hpp"
 #include "nodeadder.hpp"
+#include "noderounder.hpp"
 #include "nodeADSR.hpp"
 #include "nodelowpass.hpp"
 #include "nodehighpass.hpp"
@@ -58,6 +59,7 @@ Node* NodeFactory::create(Controller* controller, std::string type, std::string 
     else if(type.compare("fuzz") == 0)              node = new NodeFuzz(controller, options);
     else if(type.compare("PWM") == 0)               node = new NodePWM(controller, options);
     else if(type.compare("follower") == 0)          node = new NodeFollower(controller, options);
+    else if(type.compare("rounder") == 0)           node = new NodeRounder(controller, options);
     else if(type.compare("label") == 0)             node = new NodeLabel(controller, options);
     else if(type.compare("parameter") == 0)         node = new NodeParameter(controller, options);
     else if(type.compare("collector") == 0)         node = new NodeCollector(controller, options);

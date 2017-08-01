@@ -38,3 +38,10 @@ double Options::getDouble(std::string key, double standard) {
     
     return stod(position->second);
 }
+
+std::string Options::getString(std::string key, std::string standard) {
+    auto position = map.find(key);
+    if(position == map.end()) return standard;
+    
+    return position->second;
+}
