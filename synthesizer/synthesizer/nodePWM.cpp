@@ -18,10 +18,11 @@ NodePWM::NodePWM(Controller* controller, Options options) : Node(controller) {
     voiceDependent = options.getBool("voice", false);
     
     // Set inputs and outputs
-    addInput("frequency", frequency = new NodeInput(controller, voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE, "0.0"));
-    addInput("duty", duty = new NodeInput(controller, voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE, "0.0"));
-    addInput("low", low = new NodeInput(controller, voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE, "0.0"));
-    addInput("high", high = new NodeInput(controller, voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE, "1.0"));
+    NodeInput::Type ___ = voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE;
+    addInput("frequency", frequency = new NodeInput(controller, ___, "0.0"));
+    addInput("duty", duty = new NodeInput(controller, ___, "0.0"));
+    addInput("low", low = new NodeInput(controller, ___, "0.0"));
+    addInput("high", high = new NodeInput(controller, ___, "1.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
     

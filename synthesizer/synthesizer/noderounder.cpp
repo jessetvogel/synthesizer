@@ -6,7 +6,7 @@ NodeRounder::NodeRounder(Controller* controller, Options options) : Node(control
     type = "rounder";
     
     // Set options
-//    voiceDependent = options.getBool("voice", false);
+    voiceDependent = options.getBool("voice", false);
     std::string f = options.getString("function", "round");
     if(f.compare("round") == 0) function = Round; else
     if(f.compare("floor") == 0) function = Floor; else
@@ -21,7 +21,6 @@ NodeRounder::NodeRounder(Controller* controller, Options options) : Node(control
 
 void NodeRounder::apply() {
     float* input = this->input->pointer->getBuffer();
-    
     float* output = this->output->getBuffer();
     
     switch(function) {

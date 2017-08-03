@@ -9,7 +9,7 @@ NodeADSR::NodeADSR(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "ADSR";
     
-    // Set options
+    // Must be voice dependent
     voiceDependent = true;
     
     // Set inputs and outputs
