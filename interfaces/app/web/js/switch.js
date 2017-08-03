@@ -1,26 +1,28 @@
-var slider = {
+var Switch = {
 
   create: function (id) { return new function () {
     // Variables
-    this.type = 'slider';
+    this.type = 'switch';
     this.element = $(document.getElementById(id));
     this.midiCC = -1;
-    this.value = 0.0;
+    this.value = false;
     this.detecting = false;
     this.id = null;
 
-    // Add this slider to the list of parameters
+    this.handlerOn = function () {};
+    this.handlerOff = function () {};
+
+    // Add this switch to the list of parameters
     parameters.list.push(this);
 
     // Visuals
-    this.element.addClass('slider');
+    this.element.addClass('switch');
 
-    var container = $('<div>').addClass('slider-container');
+    var container = $('<div>').addClass('switch-container');
     this.element.append(container);
 
-    var box = $('<div>').addClass('box');
+    var box = $('<div>').addClass('box').append($('<div>').addClass('light'));
     (function (_) { box.click(function () { _.setMIDICC(-1); _.detect(!_.detecting); }); })(this);
-    box.append($('<div>').addClass('lever'));
     container.append(box);
 
     var popup = $('<div>').addClass('popup')
@@ -35,28 +37,27 @@ var slider = {
       return this;
     }
 
-    this.setValue = function (value) {
-      this.value = value;
-      var lever = this.element.find('.lever');
-      lever.css({ top: ((1.0 - value) * (this.element.height() - lever.height())) + 'px' });
-      return this;
-    }
-
-    this.pushValue = function () {
-      api.command('node_set ' + this.id + '.value ' + this.value);
-      return this;
-    }
-
-    this.setCaption = function (string) {
-      this.element.find('.caption').text(string);
-      return this;
-    }
-
     this.setMIDICC = function (midiCC) {
       this.midiCC = midiCC;
       popup.text('' + (this.midiCC == -1 ? 'none' : this.midiCC));
-      if(this.id !== null)
-        api.command('node_set ' + this.id + '.midi_cc ' + midiCC);
+      return this;
+    }
+
+    this.setValue = function (value) {
+      this.value = value;
+      if(value) {
+        this.handlerOn();
+        this.element.find('.light').addClass('on');
+      }
+      else {
+        this.handlerOff();
+        this.element.find('.light').removeClass('on');
+      }
+      return this;
+    }
+
+    this.setCaption = function (caption) {
+      this.element.find('.caption').text(caption);
       return this;
     }
 
@@ -73,6 +74,9 @@ var slider = {
       return this;
     }
 
+    this.onOn = function (handler) { this.handlerOn = handler; return this; };
+    this.onOff = function (handler) { this.handlerOff = handler; return this; };
+
     this.setValue(0.0);
     this.setMIDICC(-1);
 
@@ -84,10 +88,11 @@ var slider = {
       }
 
       if(event.type == midi.CONTROL_CHANGE && event.data1 == _.midiCC) {
-        _.setValue(event.data2 / 127.0);
+        if(event.data2 == 127)
+          _.setValue(!_.value);
       }
     }); })(this);
 
-  };},
+  }}
 
 };

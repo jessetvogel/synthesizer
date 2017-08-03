@@ -2,6 +2,7 @@ var knob = {
 
   create: function (id) { return new function () {
     // Variables
+    this.type = 'knob';
     this.element = $(document.getElementById(id));
     this.midiCC = -1;
     this.value = 0.0;

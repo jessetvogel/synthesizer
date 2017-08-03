@@ -4,6 +4,10 @@ $(document).ready(function () {
   knob.create('knob-delay-gain').setCaption('Delay gain');
   knob.create('knob-delay-time').setCaption('Delay time');
 
+  Switch.create('switch-1').setId('switch-1').setCaption('Oscillator 1').onOn(function () { console.log('On! (1)'); }).onOff(function () { console.log('Off! (1)'); });
+  Switch.create('switch-2').setId('switch-2').setCaption('Oscillator 2').onOn(function () { console.log('On! (2)'); }).onOff(function () { console.log('Off! (2)'); });
+  Switch.create('switch-3').setId('switch-3').setCaption('Oscillator 3').onOn(function () { console.log('On! (3)'); }).onOff(function () { console.log('Off! (3)'); });
+
   knob.create('knob-waveform-1');
   knob.create('knob-waveform-2');
   knob.create('knob-waveform-3').setCaption('Waveform');
@@ -29,6 +33,6 @@ $(document).ready(function () {
   knob.create('knob-filter-cutoff').setCaption('Cutoff');
   knob.create('knob-range').setCaption('Range');
 
-  keyboard.create('keyboard', 'F1', 'C7');
+  keyboard.create('keyboard', 'A0', 'C8');
 
 });

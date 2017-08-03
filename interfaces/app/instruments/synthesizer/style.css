@@ -13,7 +13,7 @@
   padding-top: 16px;
 }
 
-.knob {
+.knob, .switch {
   width: 48px;
   height: 48px;
   margin-bottom: 32px;
