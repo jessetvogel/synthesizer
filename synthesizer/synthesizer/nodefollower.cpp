@@ -11,21 +11,22 @@ NodeFollower::NodeFollower(Controller* controller, Options options) : Node(contr
     type = "follower";
     
     // Set options
-    keyNode = options.getBool("key", false);
+    voiceDependent = options.getBool("voice", false);
     value = 0.0;
     
     // Set inputs and outputs
-    addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("attack_time", attackTime = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.01")); // TODO
-    addInput("decay_time", decayTime = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.01")); // TODO
+    NodeInput::Type ___ = voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE;
+    addInput("input", input = new NodeInput(controller, ___, "0.0"));
+    addInput("attack_time", attackTime = new NodeInput(controller, ___, "0.01")); // TODO
+    addInput("decay_time", decayTime = new NodeInput(controller, ___, "0.01")); // TODO
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }
 
 void NodeFollower::apply() {
-    float* input = ((NodeOutput*) this->input->pointer)->getBuffer();
-    float* attackTime = ((NodeOutput*) this->attackTime->pointer)->getBuffer();
-    float* decayTime = ((NodeOutput*) this->decayTime->pointer)->getBuffer();
+    float* input = this->input->pointer->getBuffer();
+    float* attackTime = this->attackTime->pointer->getBuffer();
+    float* decayTime = this->decayTime->pointer->getBuffer();
     
     float* output = this->output->getBuffer();
     

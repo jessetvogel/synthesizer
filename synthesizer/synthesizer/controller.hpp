@@ -7,7 +7,7 @@
 class Settings;
 class MIDIDevices;
 class AudioDevices;
-class MidiState;
+class KeyState;
 class Nodes;
 class Monitor;
 
@@ -16,7 +16,7 @@ class Controller {
     Settings* settings;
     MIDIDevices* midiDevices;
     AudioDevices* audioDevices;
-    MidiState* midiState;
+    KeyState* keyState;
     Nodes* nodes;
     Monitor* monitor;
     
@@ -32,7 +32,7 @@ public:
     inline Settings* getSettings() { return settings; }
     inline MIDIDevices* getMIDIDevices() { return midiDevices; }
     inline AudioDevices* getAudioDevices() { return audioDevices; }
-    inline MidiState* getMidiState() { return midiState; }
+    inline KeyState* getKeyState() { return keyState; }
     inline Nodes* getNodes() { return nodes; }
     inline Monitor* getMonitor() { return monitor; }
 

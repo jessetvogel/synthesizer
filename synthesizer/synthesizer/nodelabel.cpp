@@ -9,16 +9,16 @@ NodeLabel::NodeLabel(Controller* controller, Options options) : Node(controller)
     type = "label";
     
     // Key dependence
-    keyNode = options.getBool("key", false);
+    voiceDependent = options.getBool("voice", false);
     
     // Set inputs and outputs
-    addInput("value", value = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("value", value = new NodeInput(controller, voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE, "0.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }
 
 void NodeLabel::apply() {
-    float* value = ((NodeOutput*) this->value->pointer)->getBuffer();
+    float* value = this->value->pointer->getBuffer();
     
     float* output = this->output->getBuffer();
     

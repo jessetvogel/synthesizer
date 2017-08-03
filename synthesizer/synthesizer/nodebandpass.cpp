@@ -18,9 +18,10 @@ NodeBandpass::NodeBandpass(Controller* controller, Options options) : Node(contr
     order = options.getInteger("order", 1);
     
     // Set inputs and outputs
-    addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("center", center = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1000.0"));
-    addInput("bandwidth", bandwidth = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.5")); // TODO: come up with some standard values
+    NodeInput::Type ___ = voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE;
+    addInput("input", input = new NodeInput(controller, ___, "0.0"));
+    addInput("center", center = new NodeInput(controller, ___, "1000.0"));
+    addInput("bandwidth", bandwidth = new NodeInput(controller, ___, "0.5")); // TODO: come up with some standard values
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
     
@@ -28,9 +29,9 @@ NodeBandpass::NodeBandpass(Controller* controller, Options options) : Node(contr
 }
 
 void NodeBandpass::apply() {
-    float* input = ((NodeOutput*) this->input->pointer)->getBuffer();
-    float* center = ((NodeOutput*) this->center->pointer)->getBuffer();
-    float* bandwidth = ((NodeOutput*) this->bandwidth->pointer)->getBuffer();
+    float* input = this->input->pointer->getBuffer();
+    float* center = this->center->pointer->getBuffer();
+    float* bandwidth = this->bandwidth->pointer->getBuffer();
     
     float* output = this->output->getBuffer();
     
@@ -58,8 +59,6 @@ void NodeBandpass::apply() {
 
 void NodeBandpass::updateFilter() {
     // See: 'Audio Effects - Theory, Implementation and Application' pp. 59--87
-    
-    // TODO: copy parts from nodelowpass.cpp and nodehighpass.cpp
     
     // Change cut-off frequency
     double betaL = 2.0 / (1.0 + tan(0.5 * omegaL)) - 1.0;

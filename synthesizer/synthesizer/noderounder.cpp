@@ -6,19 +6,21 @@ NodeRounder::NodeRounder(Controller* controller, Options options) : Node(control
     type = "rounder";
     
     // Set options
+//    voiceDependent = options.getBool("voice", false);
     std::string f = options.getString("function", "round");
     if(f.compare("round") == 0) function = Round; else
     if(f.compare("floor") == 0) function = Floor; else
     if(f.compare("ceil") == 0) function = Ceil;
     
     // Set inputs and outputs
-    addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    NodeInput::Type ___ = voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE;
+    addInput("input", input = new NodeInput(controller, ___, "0.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }
 
 void NodeRounder::apply() {
-    float* input = ((NodeOutput*) this->input->pointer)->getBuffer();
+    float* input = this->input->pointer->getBuffer();
     
     float* output = this->output->getBuffer();
     

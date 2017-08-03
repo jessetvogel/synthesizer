@@ -10,15 +10,15 @@ NodeGlider::NodeGlider(Controller* controller, Options options) : Node(controlle
     DT = 0.0;
     
     // Set inputs and outputs
-    addInput("destination", destination = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
-    addInput("doubling_time", doublingTime = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("destination", destination = new NodeInput(controller, NodeInput::NODE, "1.0"));
+    addInput("doubling_time", doublingTime = new NodeInput(controller, NodeInput::NODE, "0.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }
 
 void NodeGlider::apply() {
-    float* destination = ((NodeOutput*) this->destination->pointer)->getBuffer();
-    float* doublingTime = ((NodeOutput*) this->doublingTime->pointer)->getBuffer();
+    float* destination = this->destination->pointer->getBuffer();
+    float* doublingTime = this->doublingTime->pointer->getBuffer();
 
     float* output = this->output->getBuffer();
     

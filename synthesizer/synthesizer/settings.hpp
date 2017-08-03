@@ -2,10 +2,11 @@
 #define settings_hpp
 
 #define AMOUNT_OF_KEYS (128)
-#define SETTINGS_POLYPHONY (256)
+#define SETTINGS_MAX_VOICES (256)
 
 #define DEFAULT_SAMPLE_RATE (44100)
 #define DEFAULT_BUFFER_SIZE (64)
+#define DEFAULT_VOICES      (8)
 
 #define NOTE_A4 (69)
 
@@ -26,6 +27,7 @@ public:
     // Constant
     double sampleRate;
     unsigned long bufferSize;
+    int voices;
     
     // Changeable
     double masterVolume;

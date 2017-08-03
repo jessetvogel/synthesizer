@@ -4,7 +4,7 @@
 #include <vector>
 #include <unordered_map>
 #include <mutex>
-#include "keyevent.hpp"
+#include "keystate.hpp"
 
 class Controller;
 class Node;
@@ -13,6 +13,7 @@ class NodeAudioOutput;
 class NodeParameter;
 class NodeInput;
 class NodeOutput;
+class Voice;
 
 class Nodes {
     
@@ -48,11 +49,11 @@ public:
     bool updateNodeParameter(int, double);
     bool removeNodeParameter(NodeParameter*);
     
-    KeyEvent* currentKey;
+    Voice* currentVoice;
     void addKeyEvent(KeyEvent*);
     
     void resetNodes();
-    void resetNodesKeyDependent();
+    void resetNodesVoiceDependent();
     
     bool apply();
     

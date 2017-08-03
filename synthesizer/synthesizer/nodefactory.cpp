@@ -20,11 +20,11 @@
 #include "nodeparameter.hpp"
 #include "nodefollower.hpp"
 #include "nodekeyinfo.hpp"
-#include "nodeleadkeyinfo.hpp"
 #include "nodemodulationwheel.hpp"
 #include "nodeaudioinput.hpp"
 #include "nodeaudiooutput.hpp"
-#include "nodecollector.hpp"
+#include "nodecollectorlead.hpp"
+#include "nodecollectorpoly.hpp"
 #include "nodecustom.hpp"
 
 #include "status.hpp"
@@ -34,12 +34,6 @@ void NodeFactory::createDefaultNodes(Controller* controller, Nodes* nodes) {
     nodes->addNode((new NodeKeyInfo(controller, NodeKeyInfo::Velocity))->setId("key_velocity"));
     nodes->addNode((new NodeKeyInfo(controller, NodeKeyInfo::Duration))->setId("key_duration"));
     nodes->addNode((new NodeKeyInfo(controller, NodeKeyInfo::Release))->setId("key_release"));
-    
-    nodes->addNode((new NodeLeadKeyInfo(controller, NodeLeadKeyInfo::Frequency))->setId("lead_key_frequency"));
-    nodes->addNode((new NodeLeadKeyInfo(controller, NodeLeadKeyInfo::Velocity))->setId("lead_key_velocity"));
-    nodes->addNode((new NodeLeadKeyInfo(controller, NodeLeadKeyInfo::Duration))->setId("lead_key_duration"));
-    nodes->addNode((new NodeLeadKeyInfo(controller, NodeLeadKeyInfo::Release))->setId("lead_key_release"));
-    nodes->addNode((new NodeLeadKeyInfo(controller, NodeLeadKeyInfo::Pressing))->setId("lead_key_pressing"));
     
     nodes->addNode((new NodeModulationWheel(controller))->setId("modulation_wheel"));
 }
@@ -62,7 +56,8 @@ Node* NodeFactory::create(Controller* controller, std::string type, std::string 
     else if(type.compare("rounder") == 0)           node = new NodeRounder(controller, options);
     else if(type.compare("label") == 0)             node = new NodeLabel(controller, options);
     else if(type.compare("parameter") == 0)         node = new NodeParameter(controller, options);
-    else if(type.compare("collector") == 0)         node = new NodeCollector(controller, options);
+    else if(type.compare("collector_lead") == 0)    node = new NodeCollectorLead(controller, options);
+    else if(type.compare("collector_poly") == 0)    node = new NodeCollectorPoly(controller, options);
     else if(type.compare("audio_input") == 0)       node = new NodeAudioInput(controller, options);
     else if(type.compare("audio_output") == 0)      node = new NodeAudioOutput(controller, options);
     else if(type.compare("custom") == 0)            node = new NodeCustom(controller, options);

@@ -2,6 +2,7 @@
 #include "controller.hpp"
 #include "nodes.hpp"
 #include "nodeoutput.hpp"
+#include "voice.hpp"
 
 NodeKeyInfo::NodeKeyInfo(Controller* controller, InfoType infoType) : Node(controller) {
     // Set type
@@ -14,7 +15,7 @@ NodeKeyInfo::NodeKeyInfo(Controller* controller, InfoType infoType) : Node(contr
     hidden = true;
     
     // Obviously key dependent
-    keyNode = true;
+    voiceDependent = true;
     
     // Set outputs
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
@@ -23,32 +24,32 @@ NodeKeyInfo::NodeKeyInfo(Controller* controller, InfoType infoType) : Node(contr
 void NodeKeyInfo::apply() {
     float* output = this->output->getBuffer();
     
-    KeyEvent* keyEvent = controller->getNodes()->currentKey;
+    Voice* voice = controller->getNodes()->currentVoice;
     double frequency, velocity, duration, release, t;
 
     switch(infoType) {
         case Frequency:
-            frequency = keyEvent->frequency;
+            frequency = voice->frequency;
             for(int x = 0;x < framesPerBuffer; ++x)
                 output[x] = frequency;
             break;
             
         case Velocity:
-            velocity = keyEvent->velocity;
+            velocity = voice->velocity;
             for(int x = 0;x < framesPerBuffer; ++x)
                 output[x] = velocity;
             break;
             
         case Duration:
-            duration = keyEvent->duration;
-            t = (keyEvent->stage == KeyEvent::Press || keyEvent->stage == KeyEvent::Sustain) ? 1.0 / sampleRate : 0.0;
+            duration = voice->duration;
+            t = (voice->stage == Voice::Press || voice->stage == Voice::Sustain) ? 1.0 / sampleRate : 0.0;
             for(int x = 0;x < framesPerBuffer; ++x)
                 output[x] = duration + t * x;
             break;
             
         case Release:
-            release = keyEvent->release;
-            t = (keyEvent->stage == KeyEvent::Released) ? 1.0 / sampleRate : 0.0;
+            release = voice->release;
+            t = (voice->stage == Voice::Released) ? 1.0 / sampleRate : 0.0;
             for(int x = 0;x < framesPerBuffer; ++x)
                 output[x] = release + t * x;
             break;

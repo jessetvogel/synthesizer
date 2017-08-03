@@ -9,26 +9,27 @@ NodeConditional::NodeConditional(Controller* controller, Options options) : Node
     type = "conditional";
     
     // Set options
-    keyNode = options.getBool("key", false);
+    voiceDependent = options.getBool("voice", false);
     
     // Set inputs and outputs
-    addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("low", low = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("high", high = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("output_low", outputLow = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("output_middle", outputMiddle = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("output_high", outputHigh = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    NodeInput::Type ___ = voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE;
+    addInput("input", input = new NodeInput(controller, ___, "0.0"));
+    addInput("low", low = new NodeInput(controller, ___, "0.0"));
+    addInput("high", high = new NodeInput(controller, ___, "0.0"));
+    addInput("output_low", outputLow = new NodeInput(controller, ___, "0.0"));
+    addInput("output_middle", outputMiddle = new NodeInput(controller, ___, "0.0"));
+    addInput("output_high", outputHigh = new NodeInput(controller, ___, "0.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }
 
 void NodeConditional::apply() {
-    float* input = ((NodeOutput*) this->input->pointer)->getBuffer();
-    float* low = ((NodeOutput*) this->low->pointer)->getBuffer();
-    float* high = ((NodeOutput*) this->high->pointer)->getBuffer();
-    float* outputLow = ((NodeOutput*) this->outputLow->pointer)->getBuffer();
-    float* outputMiddle = ((NodeOutput*) this->outputMiddle->pointer)->getBuffer();
-    float* outputHigh = ((NodeOutput*) this->outputHigh->pointer)->getBuffer();
+    float* input = this->input->pointer->getBuffer();
+    float* low = this->low->pointer->getBuffer();
+    float* high = this->high->pointer->getBuffer();
+    float* outputLow = this->outputLow->pointer->getBuffer();
+    float* outputMiddle = this->outputMiddle->pointer->getBuffer();
+    float* outputHigh = this->outputHigh->pointer->getBuffer();
     
     float* output = this->output->getBuffer();
     

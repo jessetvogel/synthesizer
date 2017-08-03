@@ -6,7 +6,7 @@
 #include "audiodevices.hpp"
 #include "nodes.hpp"
 #include "monitor.hpp"
-#include "midistate.hpp"
+#include "keystate.hpp"
 #include "status.hpp"
 
 Controller::Controller(Settings* settings) {
@@ -18,7 +18,7 @@ Controller::Controller(Settings* settings) {
     audioDevices = new AudioDevices(this);
     nodes = new Nodes(this);
     monitor = new Monitor(this);
-    midiState = new MidiState(this);
+    keyState = new KeyState(this);
         
     // Default values
     active = false;
@@ -29,7 +29,7 @@ Controller::~Controller() {
     delete audioDevices;
     delete nodes;
     delete monitor;
-    delete midiState;
+    delete keyState;
 }
 
 bool Controller::start() {

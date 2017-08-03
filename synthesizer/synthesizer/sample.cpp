@@ -30,6 +30,15 @@ std::string Sample::getId() {
     return "undefined";
 }
 
+Sample* Sample::get(double x) {
+    if(x >= SAMPLE_SINE && x < SAMPLE_SINE + 1.0) return sine;
+    if(x >= SAMPLE_TRIANGLE && x < SAMPLE_TRIANGLE + 1.0) return triangle;
+    if(x >= SAMPLE_SAWTOOTH && x < SAMPLE_SAWTOOTH + 1.0) return sawtooth;
+    if(x >= SAMPLE_SQUARE && x < SAMPLE_SQUARE + 1.0) return square;
+    
+    return sine; // TODO: add warning?
+}
+
 Sample* Sample::sine;
 Sample* Sample::square;
 Sample* Sample::triangle;

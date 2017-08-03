@@ -2,30 +2,21 @@
 #define nodecollector_hpp
 
 #include "node.hpp"
-#include "keyevent.hpp"
+#include "keystate.hpp"
 
 class NodeCollector : public Node {
     
+protected:
+    
     NodeInput* input;
-    NodeInput* releaseTime;
-    
     NodeOutput* output;
-    
-    std::vector<KeyEvent*> keyEvents;
     
 public:
     
     NodeCollector(Controller*, Options);
     
-    void addKeyEvent(KeyEvent*);
-    inline std::vector<KeyEvent*>* getKeyEvents() { return &keyEvents; }
-    
-    double getReleaseTime();
-    
-    inline NodeOutput* getOutput() { return output; }
-    inline NodeInput* getInput() { return input; }
-    
-    inline void apply() {}
+    virtual inline void addKeyEvent(KeyEvent*) {};
+    virtual inline void apply() {}
     
 };
 

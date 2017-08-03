@@ -1,1 +1,1 @@
-{"parameters":[]}
+{"parameters":[{"id":"attack_time","midiCC":-1,"value":0},{"id":"decay_time","midiCC":-1,"value":0},{"id":"sustain_level","midiCC":-1,"value":1},{"id":"release_time","midiCC":-1,"value":1},{"id":"bandpass_center","midiCC":-1,"value":0.49606299212598426},{"id":"bandpass_width","midiCC":-1,"value":0.6220472440944882},{"id":"fuzz_gain","midiCC":-1,"value":0.6220472440944882},{"id":"delay_gain","midiCC":-1,"value":0},{"id":"delay_time","midiCC":-1,"value":0}]}

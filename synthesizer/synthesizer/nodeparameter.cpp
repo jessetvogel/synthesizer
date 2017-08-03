@@ -17,21 +17,23 @@ NodeParameter::NodeParameter(Controller* controller, Options options) : Node(con
     value = options.getDouble("value", 0.0);
     
     // Set inputs and outputs
-    addInput("midi_cc", cc = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, std::to_string(midiCC)));
-    addInput("min", min = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("max", max = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
+    addInput("midi_cc", cc = new NodeInput(controller, NodeInput::NODE, std::to_string(midiCC)));
+    addInput("min", min = new NodeInput(controller, NodeInput::NODE, "0.0"));
+    addInput("max", max = new NodeInput(controller, NodeInput::NODE, "1.0"));
     addInput("curve", curve = new NodeInput(controller, NodeInput::CURVE, "linear"));
-    addInput("value", valueInput = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "-1.0"));
+    addInput("value", valueInput = new NodeInput(controller, NodeInput::NODE, "-1.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }
 
 void NodeParameter::apply() {
-    float* cc = ((NodeOutput*) this->cc->pointer)->getBuffer();
-    float* min = ((NodeOutput*) this->min->pointer)->getBuffer();
-    float* max = ((NodeOutput*) this->max->pointer)->getBuffer();
-    Curve* curve = (Curve*) (this->curve->pointer);
-    float* valueInput = ((NodeOutput*) this->valueInput->pointer)->getBuffer();
+    float* cc = this->cc->pointer->getBuffer();
+    float* min = this->min->pointer->getBuffer();
+    float* max = this->max->pointer->getBuffer();
+    Curve* curve = Curve::get(this->curve->pointer->getBuffer()[0]);
+    float* valueInput = this->valueInput->pointer->getBuffer();
+    
+    float* output = this->output->getBuffer();
     
     // In case value is manually set, update it and set valueInput again to -1.0
     if(valueInput[0] >= 0.0 && valueInput[0] <= 1.0) {
@@ -41,8 +43,6 @@ void NodeParameter::apply() {
     
     // Determine midiCC
     midiCC = (int) cc[0];
-    
-    float* output = this->output->getBuffer();
     
     // Linearly interpolate between min and max
     for(int x = 0;x < framesPerBuffer; ++x)

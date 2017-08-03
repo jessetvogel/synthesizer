@@ -9,18 +9,19 @@ NodeFuzz::NodeFuzz(Controller* controller, Options options) : Node(controller) {
     type = "fuzz";
     
     // Set options
-    keyNode = options.getBool("key", false);
+    voiceDependent = options.getBool("voice", false);
     
     // Set inputs and outputs
-    addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("input_gain", inputGain = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
+    NodeInput::Type ___ = voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE;
+    addInput("input", input = new NodeInput(controller, ___, "0.0"));
+    addInput("input_gain", inputGain = new NodeInput(controller, ___, "1.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }
 
 void NodeFuzz::apply() {
-    float* input = ((NodeOutput*) this->input->pointer)->getBuffer();
-    float* inputGain = ((NodeOutput*) this->inputGain->pointer)->getBuffer();
+    float* input = this->input->pointer->getBuffer();
+    float* inputGain = this->inputGain->pointer->getBuffer();
     
     float* output = this->output->getBuffer();
     

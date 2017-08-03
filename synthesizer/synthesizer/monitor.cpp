@@ -14,7 +14,7 @@ bool Monitor::monitor(std::string nodeOutputLabel) {
     nodeOutput = controller->getNodes()->getNodeOutput(nodeOutputLabel);
     
     if(nodeOutput == NULL) { Status::addError("Provided node output not found"); return false; }
-    if(nodeOutput->getNode()->isKeyDependent()) { Status::addError("Cannot monitor key dependent node output"); return false; }
+    if(nodeOutput->getNode()->isVoiceDependent()) { Status::addError("Cannot monitor voice dependent node output"); return false; }
     
     Status::addExtra("monitor");
     return true;

@@ -17,8 +17,9 @@ NodeLowpass::NodeLowpass(Controller* controller, Options options) : Node(control
     order = options.getInteger("order", 1); // TODO: check for valid values
     
     // Set inputs and outputs
-    addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("cutoff", cutOff = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1000.0"));
+    NodeInput::Type ___ = voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE;
+    addInput("input", input = new NodeInput(controller, ___, "0.0"));
+    addInput("cutoff", cutOff = new NodeInput(controller, ___, "1000.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
     
@@ -31,8 +32,8 @@ NodeLowpass::~NodeLowpass() {
 }
 
 void NodeLowpass::apply() {
-    float* input = ((NodeOutput*) this->input->pointer)->getBuffer();
-    float* cutOff = ((NodeOutput*) this->cutOff->pointer)->getBuffer();
+    float* input = this->input->pointer->getBuffer();
+    float* cutOff = this->cutOff->pointer->getBuffer();
     
     float* output = this->output->getBuffer();
     

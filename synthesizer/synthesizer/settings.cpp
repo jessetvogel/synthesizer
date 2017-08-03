@@ -4,7 +4,7 @@
 #include "settings.hpp"
 #include "commands.hpp"
 #include "util.hpp"
-#include "midistate.hpp"
+#include "keystate.hpp"
 
 #include "status.hpp"
 
@@ -12,6 +12,7 @@ Settings::Settings(std::string filepath) {
     // Set default values
     sampleRate = DEFAULT_SAMPLE_RATE;
     bufferSize = DEFAULT_BUFFER_SIZE;
+    voices = DEFAULT_VOICES;
     
     masterVolume = 1.0;
     masterVolumeCC = MIDI_MAIN_VOLUME;

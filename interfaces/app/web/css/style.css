@@ -238,7 +238,14 @@ input[type=text] {
 
 #navigation > .button {
   margin-bottom: 16px;
+  font-family: 'Glyphicons Halflings';
+  font-weight: 400;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
 }
+
+#button-home::before { content: "\e021"; }
+#button-settings::before { content: "\e019"; }
 
 #master-volume {
   position: absolute;

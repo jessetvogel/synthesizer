@@ -15,7 +15,7 @@ NodeAudioOutput::NodeAudioOutput(Controller* controller, Options options) : Node
     for(int i = 0;i < channelCount; i ++) {
         char strChannel[12]; // Just to be safe it is 12, but probably any number above 9 would suffice
         sprintf(strChannel, "channel_%d", i+1);
-        addInput(strChannel, channels[i] = new NodeInput(controller, NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+        addInput(strChannel, channels[i] = new NodeInput(controller, NodeInput::NODE, "0.0"));
     }
 }
 
@@ -24,6 +24,5 @@ NodeAudioOutput::~NodeAudioOutput() {
 }
 
 NodeOutput* NodeAudioOutput::getChannel(int channel) {
-    NodeOutput* node = (NodeOutput*) (channels[channel % channelCount]->pointer);
-    return node;
+    return channels[channel % channelCount]->pointer;
 }

@@ -5,6 +5,14 @@
 
 class Controller;
 
+#define CURVE_LINEAR        (0.0)
+#define CURVE_EXPONENTIAL   (1.0)
+#define CURVE_SINE          (2.0)
+#define CURVE_QUADIN        (3.0)
+#define CURVE_QUADOUT       (4.0)
+#define CURVE_QUARTIN       (5.0)
+#define CURVE_QUARTOUT      (6.0)
+
 class Curve {
 
 public:
@@ -15,6 +23,8 @@ public:
     static void destruct();
     
     std::string getId();
+    
+    static Curve* get(double);
     
     static Curve* Linear;
     static Curve* Sine;

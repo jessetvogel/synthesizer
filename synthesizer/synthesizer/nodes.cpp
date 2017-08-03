@@ -10,7 +10,7 @@
 #include "nodeparameter.hpp"
 #include "nodeaudiooutput.hpp"
 #include "nodecollector.hpp"
-#include "midistate.hpp"
+#include "keystate.hpp"
 
 #include "nodefactory.hpp"
 #include "options.hpp"
@@ -50,7 +50,7 @@ bool Nodes::create(std::string type, std::string id, std::string args) {
     addNode(node);
     std::string nodeType = node->getType();
     if(nodeType.compare("parameter") == 0) addNodeParameter((NodeParameter*) node);
-    if(nodeType.compare("collector") == 0) addCollector((NodeCollector*) node);
+    if(nodeType.compare(0, 9, "collector") == 0) addCollector((NodeCollector*) node); // TODO
     if(nodeType.compare("audio_output") == 0) addAudioOutput((NodeAudioOutput*) node);
     return true;
 }
@@ -298,17 +298,10 @@ bool Nodes::removeNodeParameter(NodeParameter* parameter) {
 }
 
 void Nodes::addKeyEvent(KeyEvent* keyEvent) {
-    // Add a copy of this key event to all collectors
+    // Send this key event to all collectors
     mutex.lock();
     for(auto it = collectors.begin(); it != collectors.end(); ++it) {
-        KeyEvent* k = new KeyEvent();
-        k->key = keyEvent->key;
-        k->stage = keyEvent->stage;
-        k->velocity = keyEvent->velocity;
-        k->frequency = keyEvent->frequency;
-        k->duration = keyEvent->duration;
-        k->release = keyEvent->release;
-        (*it)->addKeyEvent(k);
+        (*it)->addKeyEvent(keyEvent);
     }
     mutex.unlock();
 }
@@ -320,14 +313,14 @@ void Nodes::resetNodes() {
     mutex.unlock();
 }
 
-void Nodes::resetNodesKeyDependent() {
-    mutex.lock();
+void Nodes::resetNodesVoiceDependent() {
+//    mutex.lock(); // TODO: tmp solution
     for(auto it = nodes.begin(); it != nodes.end(); ++it) {
         Node* node = *it;
-        if(node->isKeyDependent())
+        if(node->isVoiceDependent())
             node->reset();
     }
-    mutex.unlock();
+//    mutex.unlock();
 }
 
 NodeInput* Nodes::getNodeInput(std::string str) {
@@ -409,55 +402,13 @@ bool Nodes::apply() {
     resetNodes();
     
     mutex.lock();
-
-    // Update all collectors
-    for(auto it = collectors.begin();it != collectors.end(); ++it) {
-        NodeCollector* collector = *it;
-        float* collectorBuffer = collector->getOutput()->getBuffer();
-        memset(collectorBuffer, 0, sizeof(float) * framesPerBuffer);
-        
-        // Loop through its list of key events
-        MidiState* midiState = controller->getMidiState();
-        std::vector<KeyEvent*>* keyEvents = collector->getKeyEvents();
-        for(auto it = keyEvents->end() - 1;it != keyEvents->begin() - 1; --it) {
-            // Delete the once that have expired
-            KeyEvent* keyEvent = *it;
-            double releaseTime = collector->getReleaseTime();
-            if(keyEvent->release > releaseTime) {
-                keyEvents->erase(it);
-                delete keyEvent;
-                continue;
-            }
-            
-            // Update the output of this event
-            midiState->updateKeyEvent(keyEvent);
-            mutex.unlock();
-            resetNodesKeyDependent();
-            mutex.lock();
-            
-            NodeOutput* input = (NodeOutput*) collector->getInput()->pointer;
-            currentKey = keyEvent;
-            input->getNode()->update();
-            
-            // Add output of node
-            float* inputOutput = input->getBuffer();
-            for(int x = 0;x < framesPerBuffer; ++x)
-                collectorBuffer[x] += inputOutput[x];
-        }
-    }
     
-    // Update all nodes
-    for(auto it = nodes.begin();it != nodes.end(); ++it) {
-        Node* node = *it;
-        if(!node->isKeyDependent())
-            node->update();
-    }
-    
-    // Add all outputs to the buffer
+    // Update all audio outputs, and add them to the buffer
     double volume = controller->getSettings()->masterVolume;
     volume *= volume;
     for(auto it = audioOutputs.begin();it != audioOutputs.end(); ++it) {
         NodeAudioOutput* audioOutput = *it;
+        audioOutput->update();
         int channelCount = controller->getAudioDevices()->getOutputChannelCount();
         for(int channel = 0;channel < channelCount; ++channel) {
             float* output = audioOutput->getChannel(channel)->getBuffer();

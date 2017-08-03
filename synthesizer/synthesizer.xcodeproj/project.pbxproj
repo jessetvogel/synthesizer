@@ -13,12 +13,12 @@
 		310285631EC8E87400B4A5F6 /* audiodevices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 310285611EC8E87400B4A5F6 /* audiodevices.cpp */; };
 		310285661EC8E9A600B4A5F6 /* mididevices.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 310285641EC8E9A600B4A5F6 /* mididevices.cpp */; };
 		3102856A1EC8F7C300B4A5F6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 310285531EC8DB5600B4A5F6 /* main.cpp */; };
-		310EFDF31ECA384100F28034 /* midistate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 310EFDF11ECA384100F28034 /* midistate.cpp */; };
+		310EFDF31ECA384100F28034 /* keystate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 310EFDF11ECA384100F28034 /* keystate.cpp */; };
 		311049A81ED0C873000E89F1 /* nodelowpass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 311049A61ED0C873000E89F1 /* nodelowpass.cpp */; };
 		311049AB1ED0D375000E89F1 /* nodehighpass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 311049A91ED0D375000E89F1 /* nodehighpass.cpp */; };
 		3111D6E41F0FF5FF000AEE3C /* nodecollector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3111D6E21F0FF5FF000AEE3C /* nodecollector.cpp */; };
 		3111D6E71F101677000AEE3C /* nodeaudiooutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3111D6E51F101677000AEE3C /* nodeaudiooutput.cpp */; };
-		312D2EA71ED1C6F1005B4508 /* keyevent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312D2EA61ED1C6F1005B4508 /* keyevent.cpp */; };
+		312D2EA71ED1C6F1005B4508 /* voice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312D2EA61ED1C6F1005B4508 /* voice.cpp */; };
 		312FB1DE1F30C1C6003F92B2 /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 312FB1DC1F30C1C6003F92B2 /* log.cpp */; };
 		31377D341F2F47AD00BE26B1 /* nodeglider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31377D321F2F47AD00BE26B1 /* nodeglider.cpp */; };
 		314323ED1F1A615F00325B06 /* nodeoutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 314323EB1F1A615F00325B06 /* nodeoutput.cpp */; };
@@ -45,11 +45,12 @@
 		31F610751F27B1C9002D2546 /* monitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31F610731F27B1C9002D2546 /* monitor.cpp */; };
 		8835ABB11EF82EF7006C3F91 /* nodeaudioinput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8835ABAF1EF82EF7006C3F91 /* nodeaudioinput.cpp */; };
 		885048851EFBE4560045B9C8 /* nodefollower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 885048831EFBE4560045B9C8 /* nodefollower.cpp */; };
-		886F98A51ED7245E003B8235 /* nodeleadkeyinfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 886F98A31ED7245E003B8235 /* nodeleadkeyinfo.cpp */; };
 		8870D9501EEC014600674DFC /* status.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8870D94E1EEC014600674DFC /* status.cpp */; };
 		88846F6A1EE961D000745184 /* nodebandpass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88846F681EE961D000745184 /* nodebandpass.cpp */; };
 		8888FE1D1EDF5D1000B5D5BC /* nodefuzz.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8888FE1B1EDF5D1000B5D5BC /* nodefuzz.cpp */; };
 		88A285331EE010B900066E68 /* nodedelay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88A285311EE010B900066E68 /* nodedelay.cpp */; };
+		88AA81BF1F33575E0007E297 /* nodecollectorlead.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AA81BD1F33575E0007E297 /* nodecollectorlead.cpp */; };
+		88AA81C21F33725A0007E297 /* nodecollectorpoly.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88AA81C01F33725A0007E297 /* nodecollectorpoly.cpp */; };
 		88B0640D1EDDA86C00DE06E7 /* nodeconditional.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88B0640B1EDDA86C00DE06E7 /* nodeconditional.cpp */; };
 		88DC88AA1F0ADAF50083DF20 /* nodefactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88DC88A81F0ADAF50083DF20 /* nodefactory.cpp */; };
 		88F58AC11EE6CBD8004F1945 /* nodeparameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 88F58ABF1EE6CBD8004F1945 /* nodeparameter.cpp */; };
@@ -80,8 +81,8 @@
 		310285621EC8E87400B4A5F6 /* audiodevices.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = audiodevices.hpp; sourceTree = "<group>"; };
 		310285641EC8E9A600B4A5F6 /* mididevices.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mididevices.cpp; sourceTree = "<group>"; };
 		310285651EC8E9A600B4A5F6 /* mididevices.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = mididevices.hpp; sourceTree = "<group>"; };
-		310EFDF11ECA384100F28034 /* midistate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = midistate.cpp; sourceTree = "<group>"; };
-		310EFDF21ECA384100F28034 /* midistate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = midistate.hpp; sourceTree = "<group>"; };
+		310EFDF11ECA384100F28034 /* keystate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = keystate.cpp; sourceTree = "<group>"; };
+		310EFDF21ECA384100F28034 /* keystate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keystate.hpp; sourceTree = "<group>"; };
 		311049A61ED0C873000E89F1 /* nodelowpass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodelowpass.cpp; sourceTree = "<group>"; };
 		311049A71ED0C873000E89F1 /* nodelowpass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodelowpass.hpp; sourceTree = "<group>"; };
 		311049A91ED0D375000E89F1 /* nodehighpass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodehighpass.cpp; sourceTree = "<group>"; };
@@ -90,8 +91,8 @@
 		3111D6E31F0FF5FF000AEE3C /* nodecollector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodecollector.hpp; sourceTree = "<group>"; };
 		3111D6E51F101677000AEE3C /* nodeaudiooutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodeaudiooutput.cpp; sourceTree = "<group>"; };
 		3111D6E61F101677000AEE3C /* nodeaudiooutput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodeaudiooutput.hpp; sourceTree = "<group>"; };
-		312D2EA41ED1B72D005B4508 /* keyevent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = keyevent.hpp; sourceTree = "<group>"; };
-		312D2EA61ED1C6F1005B4508 /* keyevent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = keyevent.cpp; sourceTree = "<group>"; };
+		312D2EA41ED1B72D005B4508 /* voice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = voice.hpp; sourceTree = "<group>"; };
+		312D2EA61ED1C6F1005B4508 /* voice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = voice.cpp; sourceTree = "<group>"; };
 		312FB1DC1F30C1C6003F92B2 /* log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = log.cpp; sourceTree = "<group>"; };
 		312FB1DD1F30C1C6003F92B2 /* log.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = log.hpp; sourceTree = "<group>"; };
 		31377D321F2F47AD00BE26B1 /* nodeglider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodeglider.cpp; sourceTree = "<group>"; };
@@ -144,8 +145,6 @@
 		8835ABB01EF82EF7006C3F91 /* nodeaudioinput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodeaudioinput.hpp; sourceTree = "<group>"; };
 		885048831EFBE4560045B9C8 /* nodefollower.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodefollower.cpp; sourceTree = "<group>"; };
 		885048841EFBE4560045B9C8 /* nodefollower.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodefollower.hpp; sourceTree = "<group>"; };
-		886F98A31ED7245E003B8235 /* nodeleadkeyinfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodeleadkeyinfo.cpp; sourceTree = "<group>"; };
-		886F98A41ED7245E003B8235 /* nodeleadkeyinfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodeleadkeyinfo.hpp; sourceTree = "<group>"; };
 		8870D94E1EEC014600674DFC /* status.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = status.cpp; sourceTree = "<group>"; };
 		8870D94F1EEC014600674DFC /* status.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = status.hpp; sourceTree = "<group>"; };
 		88846F681EE961D000745184 /* nodebandpass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodebandpass.cpp; sourceTree = "<group>"; };
@@ -154,6 +153,10 @@
 		8888FE1C1EDF5D1000B5D5BC /* nodefuzz.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodefuzz.hpp; sourceTree = "<group>"; };
 		88A285311EE010B900066E68 /* nodedelay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodedelay.cpp; sourceTree = "<group>"; };
 		88A285321EE010B900066E68 /* nodedelay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodedelay.hpp; sourceTree = "<group>"; };
+		88AA81BD1F33575E0007E297 /* nodecollectorlead.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodecollectorlead.cpp; sourceTree = "<group>"; };
+		88AA81BE1F33575E0007E297 /* nodecollectorlead.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodecollectorlead.hpp; sourceTree = "<group>"; };
+		88AA81C01F33725A0007E297 /* nodecollectorpoly.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodecollectorpoly.cpp; sourceTree = "<group>"; };
+		88AA81C11F33725A0007E297 /* nodecollectorpoly.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodecollectorpoly.hpp; sourceTree = "<group>"; };
 		88B0640B1EDDA86C00DE06E7 /* nodeconditional.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodeconditional.cpp; sourceTree = "<group>"; };
 		88B0640C1EDDA86C00DE06E7 /* nodeconditional.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = nodeconditional.hpp; sourceTree = "<group>"; };
 		88DC88A81F0ADAF50083DF20 /* nodefactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = nodefactory.cpp; sourceTree = "<group>"; };
@@ -228,8 +231,6 @@
 				31D7196A1ECDEE2E00A4C9E0 /* node.hpp */,
 				88DC88A81F0ADAF50083DF20 /* nodefactory.cpp */,
 				88DC88A91F0ADAF50083DF20 /* nodefactory.hpp */,
-				3111D6E21F0FF5FF000AEE3C /* nodecollector.cpp */,
-				3111D6E31F0FF5FF000AEE3C /* nodecollector.hpp */,
 				314323EE1F1A914300325B06 /* nodecustom.cpp */,
 				314323EF1F1A914300325B06 /* nodecustom.hpp */,
 			);
@@ -262,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				3111D6E91F103FC7000AEE3C /* core */,
+				88AA81BC1F33563C0007E297 /* collectors */,
 				3111D6E81F103FB2000AEE3C /* audio */,
 				886F98AD1ED72840003B8235 /* constant */,
 				886F98AA1ED7275E003B8235 /* info */,
@@ -334,8 +336,6 @@
 			children = (
 				31D719741ECE1BE000A4C9E0 /* nodekeyinfo.cpp */,
 				31D719751ECE1BE000A4C9E0 /* nodekeyinfo.hpp */,
-				886F98A31ED7245E003B8235 /* nodeleadkeyinfo.cpp */,
-				886F98A41ED7245E003B8235 /* nodeleadkeyinfo.hpp */,
 				31EC60391ECF3CC1004671E2 /* nodemodulationwheel.cpp */,
 				31EC603A1ECF3CC1004671E2 /* nodemodulationwheel.hpp */,
 			);
@@ -392,15 +392,28 @@
 			name = functions;
 			sourceTree = "<group>";
 		};
+		88AA81BC1F33563C0007E297 /* collectors */ = {
+			isa = PBXGroup;
+			children = (
+				3111D6E21F0FF5FF000AEE3C /* nodecollector.cpp */,
+				3111D6E31F0FF5FF000AEE3C /* nodecollector.hpp */,
+				88AA81BD1F33575E0007E297 /* nodecollectorlead.cpp */,
+				88AA81BE1F33575E0007E297 /* nodecollectorlead.hpp */,
+				88AA81C01F33725A0007E297 /* nodecollectorpoly.cpp */,
+				88AA81C11F33725A0007E297 /* nodecollectorpoly.hpp */,
+			);
+			name = collectors;
+			sourceTree = "<group>";
+		};
 		88D021D41F0B8561001FBB0C /* other */ = {
 			isa = PBXGroup;
 			children = (
 				31D0317C1F2768FA0031732B /* options.cpp */,
 				31D0317D1F2768FA0031732B /* options.hpp */,
-				310EFDF11ECA384100F28034 /* midistate.cpp */,
-				310EFDF21ECA384100F28034 /* midistate.hpp */,
-				312D2EA61ED1C6F1005B4508 /* keyevent.cpp */,
-				312D2EA41ED1B72D005B4508 /* keyevent.hpp */,
+				310EFDF11ECA384100F28034 /* keystate.cpp */,
+				310EFDF21ECA384100F28034 /* keystate.hpp */,
+				312D2EA61ED1C6F1005B4508 /* voice.cpp */,
+				312D2EA41ED1B72D005B4508 /* voice.hpp */,
 				31D719581ECB0BAE00A4C9E0 /* sample.cpp */,
 				31D719591ECB0BAE00A4C9E0 /* sample.hpp */,
 				31D719611ECC9D9800A4C9E0 /* curve.cpp */,
@@ -482,13 +495,14 @@
 				31377D341F2F47AD00BE26B1 /* nodeglider.cpp in Sources */,
 				31D0317E1F2768FA0031732B /* options.cpp in Sources */,
 				319C900D1EF70C3D0041705D /* nodes.cpp in Sources */,
+				88AA81BF1F33575E0007E297 /* nodecollectorlead.cpp in Sources */,
 				314323F01F1A914300325B06 /* nodecustom.cpp in Sources */,
 				31DE9FF91ED337D4003F5291 /* nodelabel.cpp in Sources */,
 				31D719811ECE317B00A4C9E0 /* commands.cpp in Sources */,
 				3111D6E41F0FF5FF000AEE3C /* nodecollector.cpp in Sources */,
 				88A285331EE010B900066E68 /* nodedelay.cpp in Sources */,
 				31D719761ECE1BE000A4C9E0 /* nodekeyinfo.cpp in Sources */,
-				310EFDF31ECA384100F28034 /* midistate.cpp in Sources */,
+				310EFDF31ECA384100F28034 /* keystate.cpp in Sources */,
 				31D7197E1ECE2E4500A4C9E0 /* parser.cpp in Sources */,
 				31D719601ECC4E5700A4C9E0 /* nodeADSR.cpp in Sources */,
 				310285661EC8E9A600B4A5F6 /* mididevices.cpp in Sources */,
@@ -503,8 +517,7 @@
 				31BB3B0F1EE33FD80077FA4D /* nodePWM.cpp in Sources */,
 				311049A81ED0C873000E89F1 /* nodelowpass.cpp in Sources */,
 				31EC60411ECF45BE004671E2 /* nodeadder.cpp in Sources */,
-				312D2EA71ED1C6F1005B4508 /* keyevent.cpp in Sources */,
-				886F98A51ED7245E003B8235 /* nodeleadkeyinfo.cpp in Sources */,
+				312D2EA71ED1C6F1005B4508 /* voice.cpp in Sources */,
 				3173D3A91F3102B900F4DA14 /* noderounder.cpp in Sources */,
 				88DC88AA1F0ADAF50083DF20 /* nodefactory.cpp in Sources */,
 				88F6E7721EF3196B006E6D49 /* nodeinput.cpp in Sources */,
@@ -514,6 +527,7 @@
 				31D719571ECB04BA00A4C9E0 /* settings.cpp in Sources */,
 				8888FE1D1EDF5D1000B5D5BC /* nodefuzz.cpp in Sources */,
 				31D719631ECC9D9800A4C9E0 /* curve.cpp in Sources */,
+				88AA81C21F33725A0007E297 /* nodecollectorpoly.cpp in Sources */,
 				3102856A1EC8F7C300B4A5F6 /* main.cpp in Sources */,
 				310285631EC8E87400B4A5F6 /* audiodevices.cpp in Sources */,
 				88F58AC11EE6CBD8004F1945 /* nodeparameter.cpp in Sources */,

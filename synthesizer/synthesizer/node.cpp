@@ -39,17 +39,14 @@ void Node::update() {
     
     updated = true;
     
-    if(updateNodeInputs) {
-        // Update all node inputs
-        for(auto it = inputs.begin(); it != inputs.end(); ++it) {
-            NodeInput* input = it->second;
-            if(input->getType() == NodeInput::NODE || input->getType() == NodeInput::NODE_KEY_INDEPENDENT) {
-                Node* node = ((NodeOutput*) input->pointer)->getNode();
-                if(node != NULL)
-                    node->update();
-            }
-
-        }
+    // Update all node inputs
+    for(auto it = inputs.begin(); it != inputs.end(); ++it) {
+        NodeInput* input = it->second;
+        if(!input->autoUpdate) continue;
+        
+        Node* node = it->second->pointer->getNode();
+        if(node != NULL)
+            node->update();
     }
     
     apply();
@@ -58,11 +55,8 @@ void Node::update() {
 bool Node::dependsOn(Node* node) {
     for(auto it = inputs.begin(); it != inputs.end(); ++it) {
         NodeInput* input = it->second;
-        if(input->getType() == NodeInput::NODE || input->getType() == NodeInput::NODE_KEY_INDEPENDENT) {
-            NodeOutput* output = (NodeOutput*) input->pointer;
-            if(output->getNode() == node)
-                return true;
-        }
+        if(input->pointer->getNode() == node)
+            return true;
     }
     return false;
 }

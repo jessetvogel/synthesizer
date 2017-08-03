@@ -84,6 +84,17 @@ std::string Curve::getId() {
     return "undefined";
 }
 
+Curve* Curve::get(double x) {
+    if(x >= CURVE_LINEAR && x < CURVE_LINEAR + 1.0)             return Linear;
+    if(x >= CURVE_EXPONENTIAL && x < CURVE_EXPONENTIAL + 1.0)   return Exponential;
+    if(x >= CURVE_SINE && x < CURVE_SINE + 1.0)                 return Sine;
+    if(x >= CURVE_QUADIN && x < CURVE_QUADIN + 1.0)             return QuadIn;
+    if(x >= CURVE_QUADOUT && x < CURVE_QUADOUT + 1.0)           return QuadOut;
+    if(x >= CURVE_QUARTIN && x < CURVE_QUARTIN + 1.0)           return QuartIn;
+    if(x >= CURVE_QUARTOUT && x < CURVE_QUARTOUT + 1.0)         return QuartOut;
+    
+    return Linear; // TODO
+}
 
 Curve* Curve::Linear;
 Curve* Curve::Sine;

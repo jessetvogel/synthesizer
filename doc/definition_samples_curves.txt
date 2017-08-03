@@ -1,0 +1,26 @@
+Samples:
+
+0.0 <= x < 1.0:	sine
+1.0 <= x < 2.0:	triangle
+2.0 <= x < 3.0:	sawtooth
+3.0 <= x < 4.0:	square
+
+Curves:
+
+0.0 <= x < 1.0:	
+1.0 <= x < 2.0:	
+2.0 <= x < 3.0:	
+3.0 <= x < 4.0:	
+
+
+
+
+
+0x0000000100318eb0
+
+
+include /Users/Jesse/Projects/synthesizer/interfaces/app/instruments/lead/instrument.synth
+midi_add_device 1
+play start
+node_set release_time.value 1.0
+node_set sustain_level.value 1.0

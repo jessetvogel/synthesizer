@@ -1,16 +1,16 @@
-#ifndef keyevent_hpp
-#define keyevent_hpp
+#ifndef voice_hpp
+#define voice_hpp
 
 #include "settings.hpp"
 
-class KeyEvent {
+class Voice {
     
-    static bool idUsed[SETTINGS_POLYPHONY];
+    static bool idUsed[SETTINGS_MAX_VOICES];
     
 public:
 
-    KeyEvent();
-    ~KeyEvent();
+    Voice();
+    ~Voice();
     
     enum Stage { Off, Press, Sustain, Released };
     

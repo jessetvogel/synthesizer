@@ -3,6 +3,11 @@
 
 #include <string>
 
+#define SAMPLE_SINE         (0.0)
+#define SAMPLE_TRIANGLE     (1.0)
+#define SAMPLE_SAWTOOTH     (2.0)
+#define SAMPLE_SQUARE       (3.0)
+
 class Controller;
 
 class Sample {
@@ -22,10 +27,13 @@ public:
     float getValue(double);
     std::string getId();
     
+    static Sample* get(double);
+    
     static Sample* sine;
-    static Sample* square;
     static Sample* triangle;
     static Sample* sawtooth;
+    static Sample* square;
+    
 };
 
 #endif

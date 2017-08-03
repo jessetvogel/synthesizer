@@ -4,12 +4,13 @@
 #include <string>
 
 class Controller;
+class NodeOutput;
 
 class NodeInput {
 
 public:
     
-    enum Type { NODE, NODE_KEY_INDEPENDENT, SAMPLE, CURVE }; // TODO rename
+    enum Type { NODE, NODE_VOICE, SAMPLE, CURVE }; // TODO rename
     
 private:
     
@@ -22,12 +23,14 @@ public:
     
     NodeInput(Controller*, Type, std::string);
     
+    bool autoUpdate;
+    
     inline Type getType() { return type; }
     inline std::string getExpression() { return expression; }
     
     bool set(std::string);
     
-    void* pointer;
+    NodeOutput* pointer;
     
     static std::string typeToString(Type);
 

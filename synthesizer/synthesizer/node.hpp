@@ -33,9 +33,8 @@ protected:
     std::unordered_map<std::string, NodeInput*> inputs;
     std::unordered_map<std::string, NodeOutput*> outputs;
     
-    bool keyNode = false;
+    bool voiceDependent = false;
     bool hidden = false;
-    bool updateNodeInputs = true;
     
     unsigned long framesPerBuffer;
     double sampleRate;
@@ -63,7 +62,7 @@ public:
     inline void reset() { updated = false; };
     void update();
     
-    inline bool isKeyDependent() { return keyNode; };
+    inline bool isVoiceDependent() { return voiceDependent; };
     inline void hide() { hidden = true; id = NODE_HIDDEN_ID; }
     inline bool isHidden() { return hidden; };
   

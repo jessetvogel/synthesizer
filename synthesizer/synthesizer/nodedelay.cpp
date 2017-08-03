@@ -16,9 +16,9 @@ NodeDelay::NodeDelay(Controller* controller, Options options) : Node(controller)
     double T = options.getDouble("T", 1.0);
     
     // Set inputs and outputs
-    addInput("input", input = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("gain", gain = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
-    addInput("feedback", feedback = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+    addInput("input", input = new NodeInput(controller, NodeInput::NODE, "0.0"));
+    addInput("gain", gain = new NodeInput(controller, NodeInput::NODE, "1.0"));
+    addInput("feedback", feedback = new NodeInput(controller, NodeInput::NODE, "0.0"));
     
     gains = new NodeInput*[n];
     times = new NodeInput*[n];
@@ -27,8 +27,8 @@ NodeDelay::NodeDelay(Controller* controller, Options options) : Node(controller)
         char strTime[12];
         sprintf(strGain, "gain_%d", i+1);
         sprintf(strTime, "time_%d", i+1);
-        addInput(strGain, gains[i] = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-        addInput(strTime, times[i] = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
+        addInput(strGain, gains[i] = new NodeInput(controller, NodeInput::NODE, "0.0"));
+        addInput(strTime, times[i] = new NodeInput(controller, NodeInput::NODE, "0.0"));
     }
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
@@ -46,9 +46,9 @@ NodeDelay::~NodeDelay() {
 }
 
 void NodeDelay::apply() {
-    float* input = ((NodeOutput*) this->input->pointer)->getBuffer();
-    float* gain = ((NodeOutput*) this->gain->pointer)->getBuffer();
-    float* feedback = ((NodeOutput*) this->feedback->pointer)->getBuffer();
+    float* input = this->input->pointer->getBuffer();
+    float* gain = this->gain->pointer->getBuffer();
+    float* feedback = this->feedback->pointer->getBuffer();
     
     float* output = this->output->getBuffer();
     
@@ -59,8 +59,8 @@ void NodeDelay::apply() {
     float* ptr = memory + memoryLength - framesPerBuffer;
     for(int x = 0;x < framesPerBuffer; ++x, ++ptr) {
         for(int i = 0;i < n;i ++) {
-            float* gain = ((NodeOutput*) gains[i]->pointer)->getBuffer();
-            float* time = ((NodeOutput*) times[i]->pointer)->getBuffer();
+            float* gain = gains[i]->pointer->getBuffer();
+            float* time = times[i]->pointer->getBuffer();
             
             double samples = time[x] * sampleRate;
             int samplesLow = (int) samples;

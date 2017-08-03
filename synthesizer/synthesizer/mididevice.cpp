@@ -1,6 +1,6 @@
 #include "mididevice.hpp"
 #include "controller.hpp"
-#include "midistate.hpp"
+#include "keystate.hpp"
 
 #include "status.hpp"
 
@@ -70,11 +70,11 @@ bool MIDIDevice::update() {
         unsigned char status = Pm_MessageStatus(message);
         unsigned char data1 = Pm_MessageData1(message);
         unsigned char data2 = Pm_MessageData2(message);
-        controller->getMidiState()->addEvent(status, data1, data2);
+        controller->getKeyState()->addMIDIEvent(status, data1, data2);
     }
     
     if(result != pmNoError) { Status::addError("Error in reading from MIDI device"); return false; }
     
-    controller->getMidiState()->update();
+    controller->getKeyState()->update();
     return true;
 }

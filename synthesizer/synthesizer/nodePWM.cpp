@@ -8,26 +8,28 @@
 #include "nodeoutput.hpp"
 #include "settings.hpp"
 #include "options.hpp"
+#include "voice.hpp"
 
 NodePWM::NodePWM(Controller* controller, Options options) : Node(controller) {
     // Set type
     type = "PWM";
     
     // Set options
-    keyNode = options.getBool("key", false);
+    voiceDependent = options.getBool("voice", false);
     
     // Set inputs and outputs
-    addInput("frequency", frequency = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("duty", duty = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("low", low = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-    addInput("high", high = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
+    addInput("frequency", frequency = new NodeInput(controller, voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE, "0.0"));
+    addInput("duty", duty = new NodeInput(controller, voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE, "0.0"));
+    addInput("low", low = new NodeInput(controller, voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE, "0.0"));
+    addInput("high", high = new NodeInput(controller, voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE, "1.0"));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
     
     // Create arrays
-    if(keyNode) {
-        phase = new double[SETTINGS_POLYPHONY];
-        memset(phase, 0, sizeof(double) * SETTINGS_POLYPHONY);
+    if(voiceDependent) {
+        int voices = controller->getSettings()->voices;
+        phase = new double[voices];
+        memset(phase, 0, sizeof(double) * voices);
     }
     else {
         phase = new double[1];
@@ -40,15 +42,15 @@ NodePWM::~NodePWM() {
 }
 
 void NodePWM::apply() {
-    float* frequency = ((NodeOutput*) this->frequency->pointer)->getBuffer();
-    float* duty = ((NodeOutput*) this->duty->pointer)->getBuffer();
-    float* low = ((NodeOutput*) this->low->pointer)->getBuffer();
-    float* high = ((NodeOutput*) this->high->pointer)->getBuffer();
+    float* frequency = this->frequency->pointer->getBuffer();
+    float* duty = this->duty->pointer->getBuffer();
+    float* low = this->low->pointer->getBuffer();
+    float* high =  this->high->pointer->getBuffer();
    
     float* output = this->output->getBuffer();
     
     double t = 1.0 / sampleRate;
-    int i = keyNode ? controller->getNodes()->currentKey->id : 0;
+    int i = voiceDependent ? controller->getNodes()->currentVoice->id : 0;
     
     for(int x = 0;x < framesPerBuffer; ++x) {
         output[x] = phase[i] < duty[x] ? high[x] : low[x];

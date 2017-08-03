@@ -1,5 +1,15 @@
-unit_create oscillator x
-unit_set x frequency          lead_key_frequency
+node_create oscillator wave [key = true]
+node_set wave.frequency key_frequency
+node_set wave.amplitude key_velocity
 
-instrument_create i
-instrument_set_output i x
+node_create collector_lead collector
+node_set collector.input wave
+node_set collector.release_time 0.5
+
+node_create audio_output output
+node_set output.channel_1 collector
+
+
+# testing
+midi_add_device 1
+play start

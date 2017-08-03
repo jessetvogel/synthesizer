@@ -252,7 +252,7 @@ void Nodes::printNodes() {
         
         std::cout << "\"id\":\"" << node->getId() << "\",";
         std::cout << "\"type\":\"" << node->getType() << "\",";
-        std::cout << "\"keyNode\":" << (node->isKeyDependent() ? "true" : "false");
+        std::cout << "\"voiceDependent\":" << (node->isVoiceDependent() ? "true" : "false");
         
         std::cout << "}";
     }
@@ -267,7 +267,7 @@ void Node::printNode() {
     
     std::cout << "\"id\":\"" << id << "\",";
     std::cout << "\"type\":\"" << type << "\",";
-    std::cout << "\"keyNode\":" << (keyNode ? "true" : "false") << ",";
+    std::cout << "\"voiceDependent\":" << (voiceDependent ? "true" : "false") << ",";
     std::cout << "\"inputs\":[";
     
     bool comma = false;

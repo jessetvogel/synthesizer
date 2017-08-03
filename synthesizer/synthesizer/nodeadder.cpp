@@ -9,12 +9,13 @@ const int NodeAdder::maxN = 16;
 NodeAdder::NodeAdder(Controller* controller, Options options) : Node(controller) {
     // Set options
     n = options.getInteger("n", 1);
-    keyNode = options.getBool("key", false);
+    voiceDependent = options.getBool("voice", false);
     
     // Set type
     type = "adder";
     
     // Set inputs and outputs
+    NodeInput::Type ___ = voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE;
     inputs = new NodeInput*[n];
     gains = new NodeInput*[n];
     for(int i = 0;i < n; i ++) {
@@ -22,8 +23,8 @@ NodeAdder::NodeAdder(Controller* controller, Options options) : Node(controller)
         char strGain[12];
         sprintf(strInput, "input_%d", i+1);
         sprintf(strGain, "gain_%d", i+1);
-        addInput(strInput, inputs[i] = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "0.0"));
-        addInput(strGain, gains[i] = new NodeInput(controller, keyNode ? NodeInput::NODE : NodeInput::NODE_KEY_INDEPENDENT, "1.0"));
+        addInput(strInput, inputs[i] = new NodeInput(controller, ___, "0.0"));
+        addInput(strGain, gains[i] = new NodeInput(controller, ___, "1.0"));
     }
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
@@ -36,10 +37,11 @@ NodeAdder::~NodeAdder() {
 
 void NodeAdder::apply() {
     float* output = this->output->getBuffer();
+    
     memset(output, 0, sizeof(float) * framesPerBuffer);
     for(int i = 0;i < n; i++) {
-        float* input = ((NodeOutput*) inputs[i]->pointer)->getBuffer();
-        float* gain = ((NodeOutput*) gains[i]->pointer)->getBuffer();
+        float* input = inputs[i]->pointer->getBuffer();
+        float* gain = gains[i]->pointer->getBuffer();
 
         for(int x = 0;x < framesPerBuffer; ++x)
             output[x] += input[x] * gain[x];
