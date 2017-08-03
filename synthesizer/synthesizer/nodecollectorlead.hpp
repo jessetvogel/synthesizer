@@ -8,6 +8,7 @@ class Voice;
 class NodeCollectorLead : public NodeCollector {
     
     NodeInput* releaseTime;
+    NodeInput* glide;
     
     Voice* voice;
     
@@ -19,7 +20,6 @@ public:
     void addKeyEvent(KeyEvent*);
     void apply();
     
-    double getReleaseTime();
 };
 
 #endif

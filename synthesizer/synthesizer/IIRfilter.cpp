@@ -52,7 +52,7 @@ double IIRFilter::apply(double sample) {
     
     output[0] /= alpha[0];
     
-    // TODO: this is safety, remove this
+    // TODO: this is safety, remove this, but also come up with a way to prevent it from happening
     if(output[0] != output[0] || output[0] == std::numeric_limits<double>::infinity()) {
         for(int i = 0;i <= FFFO; ++i)
             input[i] = 0.0;

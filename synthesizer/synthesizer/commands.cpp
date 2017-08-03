@@ -48,7 +48,7 @@ std::regex Commands::regexStatus("^status\\s+([\\w\\s]+)$");
 std::regex Commands::regexMonitor("^monitor\\s+(" REGEX_NODE_OUTPUT ")$");
 
 // Commands for synths
-std::regex Commands::regexInclude("^include\\s+(.*)$"); // TODO
+std::regex Commands::regexInclude("^include\\s+(.*)$");
 
 // Commands for nodes
 std::regex Commands::regexNodeCreate("^node_create\\s+(" REGEX_NODE_TYPE ")\\s+(" REGEX_NODE_ID ")\\s*(" REGEX_OPTIONS ")?$");

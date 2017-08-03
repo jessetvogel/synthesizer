@@ -13,6 +13,7 @@ NodeCollectorLead::NodeCollectorLead(Controller* controller, Options options) : 
     
     // Set inputs and outputs
     addInput("release_time", releaseTime = new NodeInput(controller, NodeInput::NODE, "0.0"));
+    addInput("glide", glide = new NodeInput(controller, NodeInput::NODE, "0.0"));
     
     // Create new voice
     voice = new Voice();
@@ -28,6 +29,8 @@ void NodeCollectorLead::addKeyEvent(KeyEvent* keyEvent) {
         case KeyEvent::Pressed:
             // Use this key as lead
             voice->key = keyEvent->key;
+            if(voice->stage != Voice::Press && voice->stage != Voice::Sustain)
+                voice->frequency = keyState->frequency[voice->key];
             voice->stage = Voice::Press;
             voice->release = 0.0;
             break;
@@ -35,7 +38,7 @@ void NodeCollectorLead::addKeyEvent(KeyEvent* keyEvent) {
         case KeyEvent::Released:
             if(keyEvent->key == voice->key) {
                 // If other keys are pressed, use that as lead
-                double minDuration = 99999.0; // TODO: less magic..
+                double minDuration = 99999.0; // TODO: less magic.. (altough it does account for 27 hours)
                 for(int i = 0;i < AMOUNT_OF_KEYS; ++i) {
                     if(keyState->duration[i] > 0.0 && keyState->duration[i] < minDuration) {
                         voice->key = i;
@@ -54,6 +57,9 @@ void NodeCollectorLead::apply() {
     KeyState* keyState = controller->getKeyState();
     Nodes* nodes = controller->getNodes();
     
+    double releaseTime = this->releaseTime->pointer->getBuffer()[0];
+    double glide = this->glide->pointer->getBuffer()[0];
+    
     // Update release
     if(voice->stage == Voice::Released)
         voice->release += settings->bufferSize / settings->sampleRate;
@@ -70,11 +76,21 @@ void NodeCollectorLead::apply() {
     if(voice->stage == Voice::Press || voice->stage == Voice::Sustain)
         voice->duration = keyState->duration[voice->key];
     
-    if(voice->stage == Voice::Released && voice->release >= getReleaseTime())
+    if(voice->stage == Voice::Released && voice->release >= releaseTime)
         voice->stage = Voice::Off;
     
     // Update frequency
-    voice->frequency = keyState->frequency[voice->key];
+    double frequency = keyState->frequency[voice->key];
+    if(glide <= 0.0)
+        voice->frequency = frequency;
+    else if(voice->frequency < frequency) {
+        voice->frequency *= std::pow(2.0, (double) framesPerBuffer / (glide * sampleRate));
+        if(voice->frequency > frequency) voice->frequency = frequency;
+    }
+    else if(voice->frequency > frequency) {
+        voice->frequency *= std::pow(2.0, - (double) framesPerBuffer / (glide * sampleRate));
+        if(voice->frequency < frequency) voice->frequency = frequency;
+    }
     
     // Update velocity only if pressing
     if(voice->stage == Voice::Press)
@@ -99,6 +115,3 @@ void NodeCollectorLead::apply() {
     }
 }
 
-double NodeCollectorLead::getReleaseTime() {
-    return releaseTime->pointer->getBuffer()[0];
-}
