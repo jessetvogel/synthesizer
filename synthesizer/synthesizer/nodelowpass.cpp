@@ -2,9 +2,12 @@
 
 #include "nodelowpass.hpp"
 #include "controller.hpp"
+#include "nodes.hpp"
+#include "voice.hpp"
 #include "nodeinput.hpp"
 #include "nodeoutput.hpp"
 #include "IIRfilter.hpp"
+#include "settings.hpp"
 #include "options.hpp"
 
 const int NodeLowpass::maxOrder = 5;
@@ -14,6 +17,7 @@ NodeLowpass::NodeLowpass(Controller* controller, Options options) : Node(control
     type = "lowpass";
     
     // Set options
+    voiceDependent = options.getBool("voice", false);
     order = options.getInteger("order", 1); // TODO: check for valid values
     
     // Set inputs and outputs
@@ -23,19 +27,29 @@ NodeLowpass::NodeLowpass(Controller* controller, Options options) : Node(control
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
     
-    // Create filter
-    filter = new IIRFilter(order, order);
+    // Create arrays
+    voices = voiceDependent ? controller->getSettings()->voices : 1;
+    filters = new IIRFilter*[voices];
+    for(int i = 0;i < voices; ++i)
+        filters[i] = new IIRFilter(order, order);
+    
+    omegaC = new double[voices];
+    memset(omegaC, 0, sizeof(double) * voices);
 }
 
 NodeLowpass::~NodeLowpass() {
-    delete filter;
+    for(int i = 0;i < voices; ++i)
+        delete filters[i];
+    delete filters;
+    delete omegaC;
 }
 
 void NodeLowpass::apply() {
     float* input = this->input->pointer->getBuffer();
     float* cutOff = this->cutOff->pointer->getBuffer();
-    
     float* output = this->output->getBuffer();
+    
+    int i = voiceDependent ? controller->getNodes()->currentVoice->id : 0;
     
     // Bound cutoff frequency
     double wc = 2.0 * M_PI * cutOff[0] / sampleRate;
@@ -43,17 +57,17 @@ void NodeLowpass::apply() {
     if(wc > M_PI - 0.001) wc = M_PI - 0.001;
     
     // Check if cutoff frequency has changed, if so: update the filter
-    if(wc != omegaC) {
-        omegaC = wc;
-        updateFilter();
+    if(wc != omegaC[i]) {
+        omegaC[i] = wc;
+        updateFilter(i);
     }
     
     // Simply apply the filter
     for(int x = 0;x < framesPerBuffer; ++x)
-        output[x] = filter->apply(input[x]);
+        output[x] = filters[i]->apply(input[x]);
 }
 
-void NodeLowpass::updateFilter() {
+void NodeLowpass::updateFilter(int i) {
     // See: 'Audio Effects - Theory, Implementation and Application' pp. 59--87
     
     // Create array of poles (p2, since they are complex, store the product p*\bar{p}) and roots (q), and determine gain (prototype filter)
@@ -85,7 +99,7 @@ void NodeLowpass::updateFilter() {
     }
     
     // Change cut-off frequency
-    double beta = 2.0 / (1.0 + tan(0.5 * omegaC)) - 1.0;
+    double beta = 2.0 / (1.0 + tan(0.5 * omegaC[i])) - 1.0;
     
     for(int n = 0;n < qLength; ++n) {
         // Update roots
@@ -147,9 +161,9 @@ void NodeLowpass::updateFilter() {
     
     // Dividing by z^n translates into 'reversing the coefficients'
     for(int n = 0;n <= order; ++n) {
-        filter->alpha[n] = a[order - n];
-        filter->beta[n] = b[order - n];
+        filters[i]->alpha[n] = a[order - n];
+        filters[i]->beta[n] = b[order - n];
     }
     
-    filter->gain = gain;
+    filters[i]->gain = gain;
 }

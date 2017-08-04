@@ -69,6 +69,8 @@ public:
     bool set(std::string, std::string);
     bool hide(std::string);
     bool info(std::string);
+    bool activate(std::string);
+    bool deactivate(std::string);
     
     bool addInput(std::string, std::string, std::string);
     bool addOutput(std::string, std::string, std::string);

@@ -49,6 +49,8 @@ public:
     static std::regex regexNodeHide;
     static std::regex regexNodeSet;
     static std::regex regexNodeInfo;
+    static std::regex regexNodeActivate;
+    static std::regex regexNodeDeactivate;
     
     // Commands for custom nodes
     static std::regex regexNodeAddInput;

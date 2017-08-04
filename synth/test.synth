@@ -1,9 +1,32 @@
-node_create oscillator wave [key = true]
+node_create oscillator wave [voice = true]
+node_set wave.sample sawtooth
 node_set wave.frequency key_frequency
 node_set wave.amplitude key_velocity
 
-node_create collector_lead collector
-node_set collector.input wave
+
+
+node_create ADSR filter_envelope
+node_set filter_envelope.attack_time    0.25
+node_set filter_envelope.decay_time     0.25
+node_set filter_envelope.release_time   0.25
+
+node_set filter_envelope.start_level    20000
+node_set filter_envelope.attack_level   50
+node_set filter_envelope.sustain_level  50
+node_set filter_envelope.release_level  50
+
+node_set filter_envelope.attack_curve   exponential
+node_set filter_envelope.decay_curve    exponential
+node_set filter_envelope.release_curve  exponential
+
+node_create highpass lowpass [voice = true, n = 4]
+node_set lowpass.input wave
+node_set lowpass.cutoff filter_envelope
+
+
+
+node_create collector_poly collector
+node_set collector.input lowpass
 node_set collector.release_time 0.5
 
 node_create audio_output output

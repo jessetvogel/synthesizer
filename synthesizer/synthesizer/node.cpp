@@ -17,6 +17,11 @@ Node::Node(Controller* controller) {
     // Store some variables
     framesPerBuffer = controller->getSettings()->bufferSize;
     sampleRate = controller->getSettings()->sampleRate;
+    
+    // Default values
+    voiceDependent = false;
+    hidden = false;
+    active = true;
 }
 
 Node::~Node() {
@@ -34,17 +39,23 @@ Node* Node::setId(std::string id) {
 }
 
 void Node::update() {
-    if(updated)
-        return;
-    
+    // If already updated, don't do anything
+    if(updated) return;
     updated = true;
     
-    // Update all node inputs
+    // If non-active, set all outputs to zero and stop
+    if(!active) {
+        for(auto it = outputs.begin(); it != outputs.end(); ++it)
+            memset(it->second->getBuffer(), 0, sizeof(float) * framesPerBuffer); // TODO: this done correctly?
+        return;
+    }
+    
+    // Update all node inputs (except if specified not to)
     for(auto it = inputs.begin(); it != inputs.end(); ++it) {
         NodeInput* input = it->second;
         if(!input->autoUpdate) continue;
         
-        Node* node = it->second->pointer->getNode();
+        Node* node = input->pointer->getNode();
         if(node != NULL)
             node->update();
     }

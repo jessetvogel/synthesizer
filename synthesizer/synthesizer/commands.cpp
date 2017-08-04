@@ -57,6 +57,8 @@ std::regex Commands::regexNodeDelete("^node_delete\\s+(" REGEX_NODE_ID ")$");
 std::regex Commands::regexNodeSet("^node_set\\s+(" REGEX_NODE_INPUT ")\\s+(" REGEX_VALUE ")$");
 std::regex Commands::regexNodeHide("^node_hide\\s+(" REGEX_NODE_ID ")$");
 std::regex Commands::regexNodeInfo("^node_info\\s+(" REGEX_NODE_ID ")$");
+std::regex Commands::regexNodeActivate("^node_activate\\s+(" REGEX_NODE_ID ")$");
+std::regex Commands::regexNodeDeactivate("^node_deactivate\\s+(" REGEX_NODE_ID ")$");
 
 // Commands for custom nodes
 std::regex Commands::regexNodeAddInput("^node_add_input\\s+(" REGEX_NODE_ID ")\\s+(" REGEX_LABEL ")\\s+(" REGEX_NODE_INPUT ")$");

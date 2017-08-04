@@ -28,15 +28,9 @@ NodeOscillator::NodeOscillator(Controller* controller, Options options) : Node(c
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
     
     // Create arrays
-    if(voiceDependent) {
-        int voices = controller->getSettings()->voices;
-        phase = new double[voices];
-        memset(phase, 0, sizeof(double) * voices);
-    }
-    else {
-        phase = new double[1];
-        phase[0] = 0.0;
-    }
+    int voices = voiceDependent ? controller->getSettings()->voices : 1;
+    phase = new double[voices];
+    memset(phase, 0, sizeof(double) * voices);
 }
 
 NodeOscillator::~NodeOscillator() {

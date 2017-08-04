@@ -4,21 +4,21 @@ $(document).ready(function () {
   knob.create('knob-delay-gain').setCaption('Delay gain');
   knob.create('knob-delay-time').setCaption('Delay time');
 
-  Switch.create('switch-1').setId('switch-1').setCaption('Oscillator 1').onOn(function () { console.log('On! (1)'); }).onOff(function () { console.log('Off! (1)'); });
-  Switch.create('switch-2').setId('switch-2').setCaption('Oscillator 2').onOn(function () { console.log('On! (2)'); }).onOff(function () { console.log('Off! (2)'); });
-  Switch.create('switch-3').setId('switch-3').setCaption('Oscillator 3').onOn(function () { console.log('On! (3)'); }).onOff(function () { console.log('Off! (3)'); });
+  Switch.create('switch-1').setId('switch-1').setCaption('Oscillator 1').onOn(function () { api.command('node_activate oscillator_1'); }).onOff(function () { api.command('node_deactivate oscillator_1'); });
+  Switch.create('switch-2').setId('switch-2').setCaption('Oscillator 2').onOn(function () { api.command('node_activate oscillator_2'); }).onOff(function () { api.command('node_deactivate oscillator_2'); });
+  Switch.create('switch-3').setId('switch-3').setCaption('Oscillator 3').onOn(function () { api.command('node_activate oscillator_3'); }).onOff(function () { api.command('node_deactivate oscillator_3'); })
 
-  knob.create('knob-waveform-1');
-  knob.create('knob-waveform-2');
-  knob.create('knob-waveform-3').setCaption('Waveform');
+  knob.create('knob-waveform-1').setId('waveform_1');
+  knob.create('knob-waveform-2').setId('waveform_2');
+  knob.create('knob-waveform-3').setId('waveform_3').setCaption('Waveform');
 
-  knob.create('knob-harmonic-1');
-  knob.create('knob-harmonic-2');
-  knob.create('knob-harmonic-3').setCaption('Harmonic');
+  knob.create('knob-harmonic-1').setId('harmonic_1');
+  knob.create('knob-harmonic-2').setId('harmonic_2');
+  knob.create('knob-harmonic-3').setId('harmonic_3').setCaption('Harmonic');
 
-  knob.create('knob-gain-1');
-  knob.create('knob-gain-2');
-  knob.create('knob-gain-3').setCaption('Gain');
+  knob.create('knob-gain-1').setId('gain_1');
+  knob.create('knob-gain-2').setId('gain_2');
+  knob.create('knob-gain-3').setId('gain_3').setCaption('Gain');
 
   knob.create('knob-attack').setCaption('Attack');
   knob.create('knob-decay').setCaption('Decay');

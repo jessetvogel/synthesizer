@@ -1,0 +1,80 @@
+# Parameters
+node_create parameter waveform_1 [min = 0.0, max = 3.999]
+node_create parameter waveform_2 [min = 0.0, max = 3.999]
+node_create parameter waveform_3 [min = 0.0, max = 3.999]
+
+node_create parameter harmonic_1 [min = 1.0, max = 6.0]
+node_create parameter harmonic_2 [min = 1.0, max = 6.0]
+node_create parameter harmonic_3 [min = 1.0, max = 6.0]
+
+node_create parameter gain_1 [min = 0.0, max = 1.0]
+node_create parameter gain_2 [min = 0.0, max = 1.0]
+node_create parameter gain_3 [min = 0.0, max = 1.0]
+
+# Vibrato
+node_create adder vibrato_amplitude [n = 1]
+node_set vibrato_amplitude.input_1 modulation_wheel
+node_set vibrato_amplitude.gain_1 0.059463
+
+node_create adder vibrato_frequency [n = 2]
+node_set vibrato_frequency.input_1 modulation_wheel
+node_set vibrato_frequency.gain_1 3.0
+node_set vibrato_frequency.input_2 3.0
+
+node_create oscillator vibrato
+node_set vibrato.mean 1.0
+node_set vibrato.amplitude vibrato_amplitude
+node_set vibrato.frequency vibrato_frequency
+node_set vibrato.sample sine
+
+node_create adder main_frequency [voice = true, n = 1]
+node_set main_frequency.input_1 key_frequency
+node_set main_frequency.gain_1 vibrato
+
+# Frequencies
+node_create rounder harmonic_1_rounded [voice = true, function = round]
+node_set harmonic_1_rounded.input harmonic_1
+node_create rounder harmonic_2_rounded [voice = true, function = round]
+node_set harmonic_2_rounded.input harmonic_2
+node_create rounder harmonic_3_rounded [voice = true, function = round]
+node_set harmonic_3_rounded.input harmonic_3
+
+node_create adder frequency_1 [voice = true]
+node_set frequency_1.input_1 main_frequency
+node_set frequency_1.gain_1 harmonic_1_rounded
+node_create adder frequency_2 [voice = true]
+node_set frequency_2.input_1 main_frequency
+node_set frequency_2.gain_1 harmonic_2_rounded
+node_create adder frequency_3 [voice = true]
+node_set frequency_3.input_1 main_frequency
+node_set frequency_3.gain_1 harmonic_3_rounded
+
+# Oscillators
+node_create oscillator oscillator_1 [voice = true]
+node_create oscillator oscillator_2 [voice = true]
+node_create oscillator oscillator_3 [voice = true]
+node_set oscillator_1.sample waveform_1
+node_set oscillator_2.sample waveform_2
+node_set oscillator_3.sample waveform_3
+node_set oscillator_1.frequency frequency_1
+node_set oscillator_2.frequency frequency_2
+node_set oscillator_3.frequency frequency_3
+node_set oscillator_1.amplitude 1.0 # key_velocity # amplitude_1
+node_set oscillator_2.amplitude 1.0 # key_velocity # amplitude_2
+node_set oscillator_3.amplitude 1.0 # key_velocity # amplitude_3
+
+node_create adder voice_output [voice = true, n = 3]
+node_set voice_output.input_1 oscillator_1
+node_set voice_output.gain_1 gain_1
+node_set voice_output.input_2 oscillator_2
+node_set voice_output.gain_2 gain_2
+node_set voice_output.input_3 oscillator_3
+node_set voice_output.gain_3 gain_3
+
+# Collector
+node_create collector_poly collector
+node_set collector.input voice_output
+
+# Output
+node_create audio_output output
+node_set output.channel_1 collector

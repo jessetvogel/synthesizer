@@ -129,6 +129,22 @@ bool Nodes::info(std::string id) {
     return true;
 }
 
+bool Nodes::activate(std::string id) {
+    Node* node = getNode(id);
+    if(node == NULL) { Status::addError("Provided node does not exist"); return false; }
+    
+    node->setActive(true);
+    return true;
+}
+
+bool Nodes::deactivate(std::string id) {
+    Node* node = getNode(id);
+    if(node == NULL) { Status::addError("Provided node does not exist"); return false; }
+    
+    node->setActive(false);
+    return true;
+}
+
 bool Nodes::addInput(std::string id, std::string label, std::string nodeInput) {
     Node* node = getNode(id);
     if(node == NULL) { Status::addError("Provided node does not exist"); return false; }

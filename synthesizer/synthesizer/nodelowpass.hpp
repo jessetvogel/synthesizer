@@ -13,11 +13,12 @@ class NodeLowpass : public Node {
     NodeOutput* output;
     
     int order;
-    double omegaC;
     
-    IIRFilter* filter;
+    int voices;
+    double* omegaC;
+    IIRFilter** filters;
     
-    void updateFilter();
+    void updateFilter(int);
     
 public:
     
