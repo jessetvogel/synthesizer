@@ -3,13 +3,29 @@ node_create parameter waveform_1 [min = 0.0, max = 3.999]
 node_create parameter waveform_2 [min = 0.0, max = 3.999]
 node_create parameter waveform_3 [min = 0.0, max = 3.999]
 
-node_create parameter harmonic_1 [min = 1.0, max = 6.0]
-node_create parameter harmonic_2 [min = 1.0, max = 6.0]
-node_create parameter harmonic_3 [min = 1.0, max = 6.0]
+node_create parameter harmonic_1 [min = 1.0, max = 12.0]
+node_create parameter harmonic_2 [min = 1.0, max = 12.0]
+node_create parameter harmonic_3 [min = 1.0, max = 12.0]
 
 node_create parameter gain_1 [min = 0.0, max = 1.0]
 node_create parameter gain_2 [min = 0.0, max = 1.0]
 node_create parameter gain_3 [min = 0.0, max = 1.0]
+
+node_create parameter glide [min = 0.0, max = 1.0]
+
+node_create parameter attack_time [value = 0.1, min = 0.001, max = 1.000]
+node_set attack_time.curve exponential
+node_create parameter decay_time [value = 0.05, min = 0.001, max = 1.000]
+node_set decay_time.curve exponential
+node_create parameter sustain_level [value = 0.05, min = 0.0, max = 1.0]
+node_create parameter release_time [value = 0.1, min = 0.001, max = 1.000]
+node_set release_time.curve exponential
+
+node_create parameter delay_gain [min = 0.0, max = 1.0]
+node_create parameter delay_time [min = 0.234375, max = 0.468750]
+
+node_create parameter cutoff [min = 20.0, max = 15000.0]
+node_set cutoff.curve exponential
 
 # Vibrato
 node_create adder vibrato_amplitude [n = 1]
@@ -49,6 +65,16 @@ node_create adder frequency_3 [voice = true]
 node_set frequency_3.input_1 main_frequency
 node_set frequency_3.gain_1 harmonic_3_rounded
 
+# Envelope
+node_create ADSR envelope [voice = true]
+node_set envelope.attack_time attack_time
+node_set envelope.decay_time decay_time
+node_set envelope.sustain_level sustain_level
+node_set envelope.release_time release_time
+node_set envelope.attack_curve quadin
+node_set envelope.decay_curve quadin
+node_set envelope.release_curve quadin
+
 # Oscillators
 node_create oscillator oscillator_1 [voice = true]
 node_create oscillator oscillator_2 [voice = true]
@@ -59,9 +85,9 @@ node_set oscillator_3.sample waveform_3
 node_set oscillator_1.frequency frequency_1
 node_set oscillator_2.frequency frequency_2
 node_set oscillator_3.frequency frequency_3
-node_set oscillator_1.amplitude 1.0 # key_velocity # amplitude_1
-node_set oscillator_2.amplitude 1.0 # key_velocity # amplitude_2
-node_set oscillator_3.amplitude 1.0 # key_velocity # amplitude_3
+node_set oscillator_1.amplitude envelope # key_velocity # amplitude_1
+node_set oscillator_2.amplitude envelope # key_velocity # amplitude_2
+node_set oscillator_3.amplitude envelope # key_velocity # amplitude_3
 
 node_create adder voice_output [voice = true, n = 3]
 node_set voice_output.input_1 oscillator_1
@@ -71,10 +97,24 @@ node_set voice_output.gain_2 gain_2
 node_set voice_output.input_3 oscillator_3
 node_set voice_output.gain_3 gain_3
 
+# Filter
+node_create highpass filter [voice = true, n = 2]
+node_set filter.input voice_output
+node_set filter.cutoff cutoff
+
 # Collector
-node_create collector_poly collector
-node_set collector.input voice_output
+node_create collector_lead collector
+node_set collector.input filter
+node_set collector.release_time 1.0
+node_set collector.glide glide
+
+# Delay
+node_create delay delay [n = 1, T = 1.0]
+node_set delay.input collector
+node_set delay.time_1 delay_time
+node_set delay.gain_1 delay_gain
+node_set delay.feedback 1.0
 
 # Output
 node_create audio_output output
-node_set output.channel_1 collector
+node_set output.channel_1 delay

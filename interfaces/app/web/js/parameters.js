@@ -20,10 +20,11 @@ var parameters = {
     if(data == undefined || data == null) return;
     for(var i = 0;i < data.length;i ++) {
       var parameter = parameters.get(data[i].id);
-      if(parameter != null)
+      if(parameter != null) {
         parameter.setMIDICC(data[i].midiCC).setValue(data[i].value)
-      if(parameter.type == 'knob' || parameter.type == 'slider')
-        parameter.pushValue();
+        if(parameter.type == 'knob' || parameter.type == 'slider')
+          parameter.pushValue();
+      }
     }
   },
 

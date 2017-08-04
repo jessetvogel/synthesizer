@@ -70,8 +70,10 @@ void NodeCollectorPoly::apply() {
         }
         
         // Update duration
-        if(voice->stage == Voice::Press || voice->stage == Voice::Sustain)
+        if(voice->stage == Voice::Press)
             voice->duration = keyState->duration[voice->key];
+        if(voice->stage == Voice::Sustain)
+            voice->duration += settings->bufferSize / settings->sampleRate;
     
         if(voice->stage == Voice::Released && voice->release >= getReleaseTime()) {
             // Delete voice and continue
