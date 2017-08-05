@@ -14,6 +14,7 @@ NodeCollectorLead::NodeCollectorLead(Controller* controller, Options options) : 
     // Set inputs and outputs
     addInput("release_time", releaseTime = new NodeInput(controller, NodeInput::NODE, "0.0"));
     addInput("glide", glide = new NodeInput(controller, NodeInput::NODE, "0.0"));
+    addInput("glide_type", glideType = new NodeInput(controller, NodeInput::NODE, "0.0"));
     
     // Create new voice
     voice = new Voice();
@@ -33,6 +34,9 @@ void NodeCollectorLead::addKeyEvent(KeyEvent* keyEvent) {
                 voice->frequency = keyState->frequency[voice->key];
             voice->stage = Voice::Press;
             voice->release = 0.0;
+            
+            // Restart glide timer
+            glideTimer = 0.0;
             break;
             
         case KeyEvent::Released:
@@ -41,10 +45,14 @@ void NodeCollectorLead::addKeyEvent(KeyEvent* keyEvent) {
                 double minDuration = 99999.0; // TODO: less magic.. (altough it does account for 27 hours)
                 for(int i = 0;i < AMOUNT_OF_KEYS; ++i) {
                     if(keyState->duration[i] > 0.0 && keyState->duration[i] < minDuration) {
+                        // Use this key
                         voice->key = i;
                         voice->stage = Voice::Press;
                         voice->release = 0.0;
                         minDuration = keyState->duration[i];
+                        
+                        // Restart glide timer
+                        glideTimer = 0.0;
                     }
                 }
             }
@@ -59,6 +67,7 @@ void NodeCollectorLead::apply() {
     
     double releaseTime = this->releaseTime->pointer->getBuffer()[0];
     double glide = this->glide->pointer->getBuffer()[0];
+    bool glideType = this->glideType->pointer->getBuffer()[0] > 0.5;
     
     // Update release
     if(voice->stage == Voice::Released)
@@ -83,16 +92,33 @@ void NodeCollectorLead::apply() {
     
     // Update frequency
     double frequency = keyState->frequency[voice->key];
-    if(glide <= 0.0)
-        voice->frequency = frequency;
-    else if(voice->frequency < frequency) {
-        voice->frequency *= std::pow(2.0, (double) framesPerBuffer / (glide * sampleRate));
-        if(voice->frequency > frequency) voice->frequency = frequency;
+    
+    // Constant RATE gliding
+    if(glideType) {
+        if(glide <= 0.0)
+            voice->frequency = frequency;
+        else if(voice->frequency < frequency) {
+            voice->frequency *= std::pow(2.0, (double) framesPerBuffer / (glide * sampleRate));
+            if(voice->frequency > frequency) voice->frequency = frequency;
+        }
+        else if(voice->frequency > frequency) {
+            voice->frequency *= std::pow(2.0, - (double) framesPerBuffer / (glide * sampleRate));
+            if(voice->frequency < frequency) voice->frequency = frequency;
+        }
     }
-    else if(voice->frequency > frequency) {
-        voice->frequency *= std::pow(2.0, - (double) framesPerBuffer / (glide * sampleRate));
-        if(voice->frequency < frequency) voice->frequency = frequency;
+    
+    // Constant TIME gliding
+    else {
+        if(glide - glideTimer <= 0.0)
+            voice->frequency = frequency;
+        else {
+            double dt = settings->bufferSize / sampleRate;
+            voice->frequency *= std::pow(frequency / voice->frequency, dt / (glide - glideTimer));
+            glideTimer += dt;
+        }
     }
+    
+    
     
     // Update velocity only if pressing
     if(voice->stage == Voice::Press)

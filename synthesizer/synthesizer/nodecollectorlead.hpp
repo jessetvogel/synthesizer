@@ -9,8 +9,11 @@ class NodeCollectorLead : public NodeCollector {
     
     NodeInput* releaseTime;
     NodeInput* glide;
+    NodeInput* glideType;
     
     Voice* voice;
+    
+    double glideTimer;
     
 public:
     

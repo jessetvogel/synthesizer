@@ -13,6 +13,8 @@
 #define DEFAULT_PITCH_WHEEL_RANGE (2.0)
 #define DEFAULT_SUSTAIN_PEDAL_POLARITY (false)
 
+#define M_2PI (2.0 * M_PI)
+
 #include <string>
 
 class Settings {

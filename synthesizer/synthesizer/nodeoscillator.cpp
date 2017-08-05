@@ -50,6 +50,7 @@ void NodeOscillator::apply() {
     
     for(int x = 0;x < framesPerBuffer; ++x) {
         output[x] = mean[x] + amplitude[x] * sample->getValue(phase[i]);
-        phase[i] += t * frequency[x] * 2.0 * M_PI;
+        phase[i] += t * frequency[x] * M_2PI;
+        while(phase[i] > M_2PI) phase[i] -= M_2PI;
     }
 }
