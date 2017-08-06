@@ -94,7 +94,7 @@ node_set BP_CAR_9.bandwidth                   1.2 # BANDWIDTH
 node_set BP_CAR_10.bandwidth                  1.2 # BANDWIDTH
 node_set BP_CAR_11.bandwidth                  1.2 # BANDWIDTH
 
-node_create collector carrier
+node_create collector_poly carrier
 
 node_set BP_CAR_1.input                       carrier
 node_set BP_CAR_2.input                       carrier
@@ -172,7 +172,7 @@ node_set vocoder_output_total.gain_1          25.0
 
 
 # Key output
-node_create oscillator wave [key = true]
+node_create oscillator wave [voice = true]
 node_set wave.sample                          sawtooth
 node_set wave.frequency                       key_frequency
 node_set wave.amplitude                       key_velocity

@@ -3,6 +3,7 @@
 
 #include "node.hpp"
 #include "keystate.hpp"
+#include "voice.hpp"
 
 class NodeCollector : public Node {
     
@@ -14,6 +15,7 @@ protected:
 public:
     
     NodeCollector(Controller*, Options);
+    virtual inline ~NodeCollector() {};
     
     virtual inline void addKeyEvent(KeyEvent*) {};
     virtual inline void apply() {}

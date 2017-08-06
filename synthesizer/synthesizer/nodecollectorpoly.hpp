@@ -12,6 +12,7 @@ class NodeCollectorPoly : public NodeCollector {
     NodeInput* releaseTime;
     
     std::vector<Voice*> voices;
+    bool* idUsed;
     
 public:
     
@@ -19,9 +20,9 @@ public:
     ~NodeCollectorPoly();
     
     void addKeyEvent(KeyEvent*);
+    Voice* createVoice();
     void apply();
     
-    double getReleaseTime();
 };
 
 #endif

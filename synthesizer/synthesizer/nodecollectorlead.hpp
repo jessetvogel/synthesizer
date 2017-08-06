@@ -3,8 +3,6 @@
 
 #include "nodecollector.hpp"
 
-class Voice;
-
 class NodeCollectorLead : public NodeCollector {
     
     NodeInput* releaseTime;

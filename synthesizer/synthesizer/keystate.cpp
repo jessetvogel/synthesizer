@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "keystate.hpp"
 #include "controller.hpp"
 #include "nodes.hpp"
@@ -16,6 +14,7 @@ KeyState::KeyState(Controller* controller) {
     for(int i = 0;i < AMOUNT_OF_KEYS;i ++) {
         velocity[i] = 0.0;
         previousVelocity[i] = 0.0;
+        duration[i] = 0.0;
     }
     
     pitchWheel = 0.0;

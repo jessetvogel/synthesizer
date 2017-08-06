@@ -45,7 +45,7 @@ protected:
 public:
     
     Node(Controller*);
-    ~Node();
+    virtual ~Node();
     
     Node* setId(std::string);
     inline std::string getId() { return id; }

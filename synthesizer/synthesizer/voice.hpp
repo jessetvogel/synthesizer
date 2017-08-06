@@ -5,12 +5,9 @@
 
 class Voice {
     
-    static bool idUsed[SETTINGS_MAX_VOICES];
-    
 public:
 
     Voice();
-    ~Voice();
     
     enum Stage { Off, Press, Sustain, Released };
     

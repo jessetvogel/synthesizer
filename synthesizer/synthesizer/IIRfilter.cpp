@@ -32,7 +32,7 @@ IIRFilter::~IIRFilter() {
 }
 
 #include <limits>
-#include <iostream>
+#include "log.hpp"
 
 double IIRFilter::apply(double sample) {
     // Shift input / output arrays
@@ -58,6 +58,8 @@ double IIRFilter::apply(double sample) {
             input[i] = 0.0;
         for(int i = 0;i <= FBFO; ++i)
             output[i] = 0.0;
+        
+        Log::writeLine("IIRFilter crashed kinda?");
         
         // print coefficients
 //        for(int i = 0;i <= FFFO; ++i)

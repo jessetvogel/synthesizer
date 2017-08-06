@@ -1,0 +1,172 @@
+[14:54:47] play stop
+[14:54:47] {"state":{"playing":false}}
+[14:54:47] clear
+[14:54:47] {}
+[14:54:47] include ../instruments/synthesizer/instrument.synth
+[14:54:47] {}
+[14:54:47] play start
+[14:54:47] {"state":{"playing":true}}
+[14:54:48] status midi_devices
+[14:54:48] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[14:54:48] node_set glide.midi_cc 28
+[14:54:48] {}
+[14:54:48] node_set glide.value 0.15748031496062992
+[14:54:48] {}
+[14:54:48] node_set delay_gain.midi_cc -1
+[14:54:48] {}
+[14:54:48] node_set delay_gain.value 0
+[14:54:48] {}
+[14:54:49] node_set delay_time.midi_cc -1
+[14:54:49] {}
+[14:54:49] node_set delay_time.value 0
+[14:54:49] {}
+[14:54:49] node_activate oscillator_1
+[14:54:49] {}
+[14:54:49] node_activate oscillator_2
+[14:54:49] {}
+[14:54:49] node_activate oscillator_3
+[14:54:49] {}
+[14:54:49] node_set waveform_1.midi_cc 21
+[14:54:49] {}
+[14:54:49] node_set waveform_1.value 0.8346456692913385
+[14:54:49] {}
+[14:54:49] node_set waveform_2.midi_cc 22
+[14:54:49] {}
+[14:54:49] node_set waveform_2.value 0.3858267716535433
+[14:54:49] {}
+[14:54:49] node_set waveform_3.midi_cc 23
+[14:54:49] {}
+[14:54:49] node_set waveform_3.value 0.4566929133858268
+[14:54:49] {}
+[14:54:49] node_set harmonic_1.midi_cc 41
+[14:54:49] {}
+[14:54:49] node_set harmonic_1.value 0
+[14:54:49] {}
+[14:54:49] node_set harmonic_2.midi_cc 42
+[14:54:49] {}
+[14:54:49] node_set harmonic_2.value 0.23622047244094488
+[14:54:49] {}
+[14:54:49] node_set harmonic_3.midi_cc 43
+[14:54:49] {}
+[14:54:49] node_set harmonic_3.value 0.3858267716535433
+[14:54:49] {}
+[14:54:49] node_set gain_1.midi_cc 24
+[14:54:49] {}
+[14:54:49] node_set gain_1.value 0.14960629921259844
+[14:54:49] {}
+[14:54:49] node_set gain_2.midi_cc 25
+[14:54:49] {}
+[14:54:49] node_set gain_2.value 0.47244094488188976
+[14:54:49] {}
+[14:54:49] node_set gain_3.midi_cc 26
+[14:54:49] {}
+[14:54:49] node_set gain_3.value 0.3858267716535433
+[14:54:49] {}
+[14:54:49] node_set attack_time.midi_cc 45
+[14:54:49] {}
+[14:54:49] node_set attack_time.value 0
+[14:54:49] {}
+[14:54:49] node_set decay_time.midi_cc 46
+[14:54:49] {}
+[14:54:49] node_set decay_time.value 0
+[14:54:49] {}
+[14:54:49] node_set sustain_level.midi_cc 47
+[14:54:49] {}
+[14:54:49] node_set sustain_level.value 0.7401574803149606
+[14:54:49] {}
+[14:54:49] node_set release_time.midi_cc 48
+[14:54:49] {}
+[14:54:49] node_set release_time.value 0
+[14:54:49] {}
+[14:54:49] node_set cutoff.midi_cc 44
+[14:54:49] {}
+[14:54:49] node_set cutoff.value 0
+[14:54:49] {}
+[14:54:55] status midi_devices input_devices output_devices settings
+[14:54:55] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[14:54:57] midi_add_device 1
+[14:54:57] {}
+[14:54:59] status midi_devices
+[14:54:59] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[14:54:59] node_set glide.midi_cc 28
+[14:54:59] {}
+[14:54:59] node_set glide.value 0.15748031496062992
+[14:54:59] {}
+[14:54:59] node_set delay_gain.midi_cc -1
+[14:54:59] {}
+[14:54:59] node_set delay_gain.value 0
+[14:54:59] {}
+[14:54:59] node_set delay_time.midi_cc -1
+[14:54:59] {}
+[14:54:59] node_set delay_time.value 0
+[14:54:59] {}
+[14:54:59] node_activate oscillator_1
+[14:54:59] {}
+[14:54:59] node_activate oscillator_2
+[14:54:59] {}
+[14:54:59] node_activate oscillator_3
+[14:54:59] {}
+[14:54:59] node_set waveform_1.midi_cc 21
+[14:54:59] {}
+[14:54:59] node_set waveform_1.value 0.8346456692913385
+[14:54:59] {}
+[14:54:59] node_set waveform_2.midi_cc 22
+[14:54:59] {}
+[14:54:59] node_set waveform_2.value 0.3858267716535433
+[14:54:59] {}
+[14:54:59] node_set waveform_3.midi_cc 23
+[14:54:59] {}
+[14:54:59] node_set waveform_3.value 0.4566929133858268
+[14:54:59] {}
+[14:55:00] node_set harmonic_1.midi_cc 41
+[14:55:00] {}
+[14:55:00] node_set harmonic_1.value 0
+[14:55:00] {}
+[14:55:00] node_set harmonic_2.midi_cc 42
+[14:55:00] {}
+[14:55:00] node_set harmonic_2.value 0.23622047244094488
+[14:55:00] {}
+[14:55:00] node_set harmonic_3.midi_cc 43
+[14:55:00] {}
+[14:55:00] node_set harmonic_3.value 0.3858267716535433
+[14:55:00] {}
+[14:55:00] node_set gain_1.midi_cc 24
+[14:55:00] {}
+[14:55:00] node_set gain_1.value 0.14960629921259844
+[14:55:00] {}
+[14:55:00] node_set gain_2.midi_cc 25
+[14:55:00] {}
+[14:55:00] node_set gain_2.value 0.47244094488188976
+[14:55:00] {}
+[14:55:00] node_set gain_3.midi_cc 26
+[14:55:00] {}
+[14:55:00] node_set gain_3.value 0.3858267716535433
+[14:55:00] {}
+[14:55:00] node_set attack_time.midi_cc 45
+[14:55:00] {}
+[14:55:00] node_set attack_time.value 0
+[14:55:00] {}
+[14:55:00] node_set decay_time.midi_cc 46
+[14:55:00] {}
+[14:55:00] node_set decay_time.value 0
+[14:55:00] {}
+[14:55:00] node_set sustain_level.midi_cc 47
+[14:55:00] {}
+[14:55:00] node_set sustain_level.value 0.7401574803149606
+[14:55:00] {}
+[14:55:00] node_set release_time.midi_cc 48
+[14:55:00] {}
+[14:55:00] node_set release_time.value 0
+[14:55:00] {}
+[14:55:00] node_set cutoff.midi_cc 44
+[14:55:00] {}
+[14:55:00] node_set cutoff.value 0
+[14:55:00] {}
+[14:55:20] node_set delay_gain.midi_cc -1
+[14:55:20] {}
+[14:55:20] node_set delay_gain.midi_cc 27
+[14:55:20] {}
+[14:57:43] node_deactivate oscillator_1
+[14:57:43] {}
+[14:57:51] node_activate oscillator_1
+[14:57:51] {}

@@ -11,14 +11,15 @@ node_create parameter gain_1 [min = 0.0, max = 1.0]
 node_create parameter gain_2 [min = 0.0, max = 1.0]
 node_create parameter gain_3 [min = 0.0, max = 1.0]
 
-node_create parameter glide [min = 0.0, max = 1.0]
+node_create parameter glide [min = 0.01, max = 1.00]
+node_set glide.curve exponential
 
-node_create parameter attack_time [value = 0.1, min = 0.001, max = 1.000]
+node_create parameter attack_time [value = 0.1, min = 0.005, max = 1.000]
 node_set attack_time.curve exponential
-node_create parameter decay_time [value = 0.05, min = 0.001, max = 1.000]
+node_create parameter decay_time [value = 0.05, min = 0.005, max = 1.000]
 node_set decay_time.curve exponential
 node_create parameter sustain_level [value = 0.05, min = 0.0, max = 1.0]
-node_create parameter release_time [value = 0.1, min = 0.001, max = 1.000]
+node_create parameter release_time [value = 0.1, min = 0.005, max = 1.000]
 node_set release_time.curve exponential
 
 node_create parameter delay_gain [min = 0.0, max = 1.0]

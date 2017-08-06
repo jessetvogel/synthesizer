@@ -1,10 +1,7 @@
 #include "nodecollectorlead.hpp"
 #include "controller.hpp"
 #include "keystate.hpp"
-#include "voice.hpp"
 #include "nodes.hpp"
-#include "nodeinput.hpp"
-#include "nodeoutput.hpp"
 #include "options.hpp"
 
 NodeCollectorLead::NodeCollectorLead(Controller* controller, Options options) : NodeCollector(controller, options) {
@@ -18,6 +15,7 @@ NodeCollectorLead::NodeCollectorLead(Controller* controller, Options options) : 
     
     // Create new voice
     voice = new Voice();
+    voice->id = 0;
 }
 
 NodeCollectorLead::~NodeCollectorLead() {
@@ -30,8 +28,11 @@ void NodeCollectorLead::addKeyEvent(KeyEvent* keyEvent) {
         case KeyEvent::Pressed:
             // Use this key as lead
             voice->key = keyEvent->key;
+            
+            // If we don't 'come from' another key, immediately use this frequency (i.e. no gliding)
             if(voice->stage != Voice::Press && voice->stage != Voice::Sustain)
                 voice->frequency = keyState->frequency[voice->key];
+            
             voice->stage = Voice::Press;
             voice->release = 0.0;
             
@@ -41,8 +42,8 @@ void NodeCollectorLead::addKeyEvent(KeyEvent* keyEvent) {
             
         case KeyEvent::Released:
             if(keyEvent->key == voice->key) {
-                // If other keys are pressed, use that as lead
-                double minDuration = 99999.0; // TODO: less magic.. (altough it does account for 27 hours)
+                // If other keys are pressed, use the one that is pressed shortest as lead
+                double minDuration = 99999.0; // TODO: less magic numbers.. (altough it does account for 27 hours)
                 for(int i = 0;i < AMOUNT_OF_KEYS; ++i) {
                     if(keyState->duration[i] > 0.0 && keyState->duration[i] < minDuration) {
                         // Use this key
@@ -94,7 +95,7 @@ void NodeCollectorLead::apply() {
     double frequency = keyState->frequency[voice->key];
     
     // Constant RATE gliding
-    if(glideType) {
+    if(!glideType) {
         if(glide <= 0.0)
             voice->frequency = frequency;
         else if(voice->frequency < frequency) {
@@ -117,8 +118,6 @@ void NodeCollectorLead::apply() {
             glideTimer += dt;
         }
     }
-    
-    
     
     // Update velocity only if pressing
     if(voice->stage == Voice::Press)

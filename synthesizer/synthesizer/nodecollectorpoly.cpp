@@ -7,7 +7,7 @@
 #include "nodeoutput.hpp"
 #include "options.hpp"
 
-#include <iostream>
+#include "log.hpp"
 
 NodeCollectorPoly::NodeCollectorPoly(Controller* controller, Options options) : NodeCollector(controller, options) {
     // Set type
@@ -15,6 +15,11 @@ NodeCollectorPoly::NodeCollectorPoly(Controller* controller, Options options) : 
     
     // Set inputs and outputs
     addInput("release_time", releaseTime = new NodeInput(controller, NodeInput::NODE, "0.0"));
+    
+    // Create arrays
+    int voices = controller->getSettings()->voices;
+    idUsed = new bool[voices];
+    memset(idUsed, 0, sizeof(bool) * voices);
 }
 
 NodeCollectorPoly::~NodeCollectorPoly() {
@@ -23,25 +28,17 @@ NodeCollectorPoly::~NodeCollectorPoly() {
 }
 
 void NodeCollectorPoly::addKeyEvent(KeyEvent* keyEvent) {
-    Settings* settings = controller->getSettings();
     KeyState* keyState = controller->getKeyState();
     
     Voice* voice;
     switch(keyEvent->type) {
         case KeyEvent::Pressed:
-            // If we reached voice limit, remove (and delete) the first voice
-            if(voices.size() >= settings->voices) {
-                delete *(voices.begin());
-                voices.erase(voices.begin());
-            }
-            
             // Create new voice
-            voice = new Voice();
+            voice = createVoice();
             voice->key = keyEvent->key;
             voice->stage = Voice::Press;
             voice->velocity = keyState->velocity[voice->key];
             voice->release = 0.0;
-            voices.push_back(voice);
             break;
             
         default: break;
@@ -52,6 +49,8 @@ void NodeCollectorPoly::apply() {
     Settings* settings = controller->getSettings();
     KeyState* keyState = controller->getKeyState();
     Nodes* nodes = controller->getNodes();
+    
+    double releaseTime = this->releaseTime->pointer->getBuffer()[0];
     
     memset(output->getBuffer(), 0, sizeof(float) * framesPerBuffer);
     for(auto it = voices.begin();it != voices.end(); ++it) {
@@ -75,8 +74,9 @@ void NodeCollectorPoly::apply() {
         if(voice->stage == Voice::Sustain)
             voice->duration += settings->bufferSize / settings->sampleRate;
     
-        if(voice->stage == Voice::Released && voice->release >= getReleaseTime()) {
+        if(voice->stage == Voice::Released && voice->release >= releaseTime) {
             // Delete voice and continue
+            idUsed[voice->id] = false;
             delete voice;
             voices.erase(it);
             -- it;
@@ -86,7 +86,7 @@ void NodeCollectorPoly::apply() {
         // Update frequency
         voice->frequency = keyState->frequency[voice->key];
     
-//      // Update velocity only if pressing TODO: do we want to update the velocity?
+//      // Update velocity only if pressing TODO: do we want to update the velocity? We do not want it in the case of pressing a key twice
 //        if(voice->stage == Voice::Press)
 //            voice->velocity = keyState->velocity[voice->key];
     
@@ -97,7 +97,7 @@ void NodeCollectorPoly::apply() {
         // Update node on which input depends
         input->pointer->getNode()->update();
         
-        // Add output
+        // Add to output
         float* input = this->input->pointer->getBuffer();
         float* output = this->output->getBuffer();
         for(int x = 0;x < framesPerBuffer; ++x)
@@ -105,6 +105,35 @@ void NodeCollectorPoly::apply() {
     }
 }
 
-double NodeCollectorPoly::getReleaseTime() {
-    return releaseTime->pointer->getBuffer()[0];
+Voice* NodeCollectorPoly::createVoice() {
+    Settings* settings = controller->getSettings();
+    
+    // If we reached limit, remove (and delete) the first voice
+    if(voices.size() >= settings->voices) {
+        Voice* voice = *(voices.begin());
+        idUsed[voice->id] = false;
+        delete voice;
+        voices.erase(voices.begin());
+    }
+    
+    // Search for unused id
+    int id = -1;
+    for(int i = 0;i < settings->voices; ++i) {
+        if(!idUsed[i]) {
+            id = i;
+            break;
+        }
+    }
+    
+    // TODO: remove this
+    if(id == -1) {
+        Log::writeLine("Geen ID gevonden????");
+    }
+    
+    idUsed[id] = true;
+    
+    Voice* voice = new Voice();
+    voice->id = id;
+    voices.push_back(voice);
+    return voice;
 }

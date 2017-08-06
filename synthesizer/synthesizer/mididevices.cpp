@@ -1,4 +1,3 @@
-#include <iostream>
 #include <portmidi.h>
 
 #include "controller.hpp"

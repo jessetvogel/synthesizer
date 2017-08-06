@@ -1,8 +1,11 @@
 #include "interface.hpp"
 #include <unistd.h>
 #include <stdio.h>
+#include <sys/wait.h>
 
-                        #include <iostream>
+//                        #include "log.hpp"
+//                        #include <iostream>
+//                        #include <time.h>
 
 #define READ_FD  (0)
 #define WRITE_FD (1)
@@ -58,7 +61,7 @@ bool Interface::start() {
         // Read from child's stdout
         std::string line;
         line = readLine();
-        std::cout << line << std::endl; // TODO wat doen we hiermee?
+//        std::cout << line << std::endl; // TODO wat doen we hiermee?
     }
     return true;
 }
@@ -71,16 +74,33 @@ bool Interface::restart() {
 }
 
 bool Interface::stop() {
-    std::cout << command("exit") << std::endl;
+    command("exit");
     mutexRunning.unlock();
     return true;
 }
 
 std::string Interface::command(std::string command) {
     mutexIO.lock();
+    
+//                char buffer[32];
+//                time_t rawtime;
+//                struct tm * timeinfo;
+//                time(&rawtime);
+//                timeinfo = localtime(&rawtime);
+//                strftime(buffer, 32, "[%H:%M:%S] ", timeinfo);
+//
+//                Log::write(buffer);
+//                Log::writeLine(command);
+    
     ::write(PARENT_WRITE_FD, command.c_str(), command.length());
     ::write(PARENT_WRITE_FD, "\n", 1);
     std::string line = readLine();
+    
+    
+//                Log::write(buffer);
+//                Log::writeLine(line);
+    
+    
     mutexIO.unlock();
     return line;
 }

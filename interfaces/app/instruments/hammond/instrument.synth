@@ -35,95 +35,95 @@ node_set vibrato.amplitude              vibrato_amplitude
 node_set vibrato.frequency              vibrato_frequency
 node_set vibrato.sample                 sine
 
-node_create adder frequency [n = 1, key = true]
+node_create adder frequency [n = 1, voice = true]
 node_set frequency.input_1              key_frequency
 node_set frequency.gain_1               vibrato
 
 # Define frequencies
-node_create adder frequency_1 [n = 1, key = true]
+node_create adder frequency_1 [n = 1, voice = true]
 node_set frequency_1.input_1            frequency
 node_set frequency_1.gain_1             0.5
 
-node_create adder frequency_2 [n = 1, key = true]
+node_create adder frequency_2 [n = 1, voice = true]
 node_set frequency_2.input_1            frequency
 node_set frequency_2.gain_1             1.4983
 
-node_create adder frequency_3 [n = 1, key = true]
+node_create adder frequency_3 [n = 1, voice = true]
 node_set frequency_3.input_1            frequency
 node_set frequency_3.gain_1             1.0
 
-node_create adder frequency_4 [n = 1, key = true]
+node_create adder frequency_4 [n = 1, voice = true]
 node_set frequency_4.input_1            frequency
 node_set frequency_4.gain_1             2.0
 
-node_create adder frequency_5 [n = 1, key = true]
+node_create adder frequency_5 [n = 1, voice = true]
 node_set frequency_5.input_1            frequency
 node_set frequency_5.gain_1             2.9966
 
-node_create adder frequency_6 [n = 1, key = true]
+node_create adder frequency_6 [n = 1, voice = true]
 node_set frequency_6.input_1            frequency
 node_set frequency_6.gain_1             4.0
 
-node_create adder frequency_7 [n = 1, key = true]
+node_create adder frequency_7 [n = 1, voice = true]
 node_set frequency_7.input_1            frequency
 node_set frequency_7.gain_1             5.0397
 
-node_create adder frequency_8 [n = 1, key = true]
+node_create adder frequency_8 [n = 1, voice = true]
 node_set frequency_8.input_1            frequency
 node_set frequency_8.gain_1             5.9932
 
-node_create adder frequency_9 [n = 1, key = true]
+node_create adder frequency_9 [n = 1, voice = true]
 node_set frequency_9.input_1            frequency
 node_set frequency_9.gain_1             8.0
 
 # Create waves
-node_create oscillator wave_1 [key = true]
+node_create oscillator wave_1 [voice = true]
 node_set wave_1.sample                  sine
 node_set wave_1.frequency               frequency_1
 node_set wave_1.amplitude               drawbar_1
 
-node_create oscillator wave_2 [key = true]
+node_create oscillator wave_2 [voice = true]
 node_set wave_2.sample                  sine
 node_set wave_2.frequency               frequency_2
 node_set wave_2.amplitude               drawbar_2
 
-node_create oscillator wave_3 [key = true]
+node_create oscillator wave_3 [voice = true]
 node_set wave_3.sample                  sine
 node_set wave_3.frequency               frequency_3
 node_set wave_3.amplitude               drawbar_3
 
-node_create oscillator wave_4 [key = true]
+node_create oscillator wave_4 [voice = true]
 node_set wave_4.sample                  sine
 node_set wave_4.frequency               frequency_4
 node_set wave_4.amplitude               drawbar_4
 
-node_create oscillator wave_5 [key = true]
+node_create oscillator wave_5 [voice = true]
 node_set wave_5.sample                  sine
 node_set wave_5.frequency               frequency_5
 node_set wave_5.amplitude               drawbar_5
 
-node_create oscillator wave_6 [key = true]
+node_create oscillator wave_6 [voice = true]
 node_set wave_6.sample                  sine
 node_set wave_6.frequency               frequency_6
 node_set wave_6.amplitude               drawbar_6
 
-node_create oscillator wave_7 [key = true]
+node_create oscillator wave_7 [voice = true]
 node_set wave_7.sample                  sine
 node_set wave_7.frequency               frequency_7
 node_set wave_7.amplitude               drawbar_7
 
-node_create oscillator wave_8 [key = true]
+node_create oscillator wave_8 [voice = true]
 node_set wave_8.sample                  sine
 node_set wave_8.frequency               frequency_8
 node_set wave_8.amplitude               drawbar_8
 
-node_create oscillator wave_9 [key = true]
+node_create oscillator wave_9 [voice = true]
 node_set wave_9.sample                  sine
 node_set wave_9.frequency               frequency_9
 node_set wave_9.amplitude               drawbar_9
 
 # Add all waves
-node_create adder sum [n = 9, key = true]
+node_create adder sum [n = 9, voice = true]
 node_set sum.input_1                    wave_1
 node_set sum.input_2                    wave_2
 node_set sum.input_3                    wave_3
@@ -135,7 +135,7 @@ node_set sum.input_8                    wave_8
 node_set sum.input_9                    wave_9
 
 # Envelope
-node_create ADSR envelope [key = true]
+node_create ADSR envelope [voice = true]
 node_set envelope.attack_time           0.05
 node_set envelope.decay_time            0.05
 node_set envelope.sustain_level         0.5
@@ -144,11 +144,11 @@ node_set envelope.attack_curve          quadin
 node_set envelope.decay_curve           quadin
 node_set envelope.release_curve         quadin
 
-node_create adder key_total [n = 1, key = true]
+node_create adder key_total [n = 1, voice = true]
 node_set key_total.input_1              sum
 node_set key_total.gain_1               envelope
 
-node_create collector collector
+node_create collector_poly collector
 node_set collector.input                key_total
 node_set collector.release_time         0.05
 
