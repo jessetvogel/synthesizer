@@ -51,12 +51,14 @@ bool Controller::start() {
 bool Controller::stop() {
     if(!active) return true;
     
-    mutex.lock();
-    
     // Stop all devices
     bool success = true;
+    
+    success = success && audioDevices->stop(); // Outside mutex, as otherwise it could wait on Controller::update while vice versa
+    
+    mutex.lock();
+
     success = success && midiDevices->stop();
-    success = success && audioDevices->stop();
     
     mutex.unlock();
     

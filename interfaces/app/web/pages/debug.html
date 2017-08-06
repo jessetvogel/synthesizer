@@ -9,15 +9,17 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/fonts.css" />
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/messages.css" />
     <link rel="stylesheet" type="text/css" href="/css/oscilloscope.css" />
     <link rel="stylesheet" type="text/css" href="/css/pages/debug.css" />
     <!-- JS -->
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/script.js"></script>
+    <script type="text/javascript" src="/js/messages.js"></script>
     <script type="text/javascript" src="/js/api.js"></script>
     <script type="text/javascript" src="/js/oscilloscope.js"></script>
-    <script type="text/javascript" src="/js/debug.js"></script>
+    <script type="text/javascript" src="/js/pages/debug.js"></script>
   </head>
   <body>
       <div class="page-title centered"><span class="glyphicon glyphicon-stats"></span>Debug</div>
@@ -44,9 +46,19 @@
         </div>
       </div>
 
+      <div class="toggle-box centered">
+        <div class="title">Command Prompt</div>
+        <div class="content">
+          <div id="command-prompt"><div class="symbol"><span></span></div><div class="input"><input type="text" /></div></div>
+          <div id="command-result"></div>
+        </div>
+      </div>
+
       <div id="navigation">
         <div id="button-settings" class="button"></div>
       </div>
+
+      <div id="messages"></div>
 
   </body>
 </html>

@@ -23,8 +23,8 @@ NodeAdder::NodeAdder(Controller* controller, Options options) : Node(controller)
         char strGain[12];
         sprintf(strInput, "input_%d", i+1);
         sprintf(strGain, "gain_%d", i+1);
-        addInput(strInput, inputs[i] = new NodeInput(controller, ___, "0.0"));
-        addInput(strGain, gains[i] = new NodeInput(controller, ___, "1.0"));
+        addInput(strInput, inputs[i] = new NodeInput(controller, ___, options.getString(strInput, "0.0")));
+        addInput(strGain, gains[i] = new NodeInput(controller, ___, options.getString(strGain, "1.0")));
     }
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));

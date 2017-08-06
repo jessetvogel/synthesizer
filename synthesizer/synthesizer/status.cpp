@@ -340,7 +340,7 @@ void Monitor::printMonitor() {
     for(int x = 0;x < framesPerBuffer; ++x) {
         if(comma) std::cout << ","; else comma = true;
 //        std::cout << buffer[x];
-        printf("%.4f", buffer[x]);
+        printf("%.3f", buffer[x]);
     }
     controller->getMutex()->unlock();
     

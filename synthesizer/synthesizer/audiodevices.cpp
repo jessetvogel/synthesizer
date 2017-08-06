@@ -97,6 +97,7 @@ bool AudioDevices::start() {
     }
     else {
         inputParametersAddr = NULL;
+        inputChannelCount = 0;
     }
     
     PaError err = Pa_OpenStream(
@@ -127,7 +128,7 @@ bool AudioDevices::start() {
 bool AudioDevices::stop() {
     if(!active) return true;
     
-    PaError err = Pa_CloseStream(stream);
+    PaError err = Pa_StopStream(stream);
     if(err != paNoError) { Status::addError("Failed to close stream"); return false; }
 
     // Deallocate buffers

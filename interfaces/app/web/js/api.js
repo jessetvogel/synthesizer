@@ -3,22 +3,22 @@ var api = {
   command: function (command, callback, fail) {
     console.log('[COMMAND] ' + command);
     if(callback == undefined) callback = api.handle;
-    var request = $.ajax('/api/' + command.replace(/\s+/g, '+')).done(callback); // TODO
-    if(fail !== undefined) request.fail(fail);
+    if(fail == undefined) fail = api.fail;
+    var request = $.ajax('/api/' + command.replace(/\s+/g, '+')).done(callback).fail(fail); // TODO
   },
 
   restart: function (callback, fail) {
     console.log('[RESTART]');
     if(callback == undefined) callback = api.handle;
-    var request = $.ajax('/restart').done(callback);
-    if(fail !== undefined) request.fail(fail);
+    if(fail == undefined) fail = api.fail;
+    var request = $.ajax('/restart').done(callback).fail(fail);
   },
 
   exit: function (callback, fail) {
     console.log('[EXIT]');
     if(callback == undefined) callback = api.handle;
-    var request = $.ajax('/exit').done(callback);
-    if(fail !== undefined) request.fail(fail);
+    if(fail == undefined) fail = api.fail;
+    var request = $.ajax('/exit').done(callback).fail(fail);
   },
 
   setInstrumentData: function (data, callback) {
@@ -73,5 +73,9 @@ var api = {
         //   break;
       }
     }
+  },
+
+  fail: function (data) {
+    messages.addError('Program does not respond!');
   }
 };

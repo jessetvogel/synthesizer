@@ -16,9 +16,9 @@ NodeFollower::NodeFollower(Controller* controller, Options options) : Node(contr
     
     // Set inputs and outputs
     NodeInput::Type ___ = voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE;
-    addInput("input", input = new NodeInput(controller, ___, "0.0"));
-    addInput("attack_time", attackTime = new NodeInput(controller, ___, "0.01")); // TODO
-    addInput("decay_time", decayTime = new NodeInput(controller, ___, "0.01")); // TODO
+    addInput("input", input = new NodeInput(controller, ___, options.getString("input", "0.0")));
+    addInput("attack_time", attackTime = new NodeInput(controller, ___, options.getString("attack_time", "0.01"))); // TODO
+    addInput("decay_time", decayTime = new NodeInput(controller, ___, options.getString("decay_time", "0.01"))); // TODO
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }

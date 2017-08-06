@@ -22,8 +22,8 @@ NodeLowpass::NodeLowpass(Controller* controller, Options options) : Node(control
     
     // Set inputs and outputs
     NodeInput::Type ___ = voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE;
-    addInput("input", input = new NodeInput(controller, ___, "0.0"));
-    addInput("cutoff", cutOff = new NodeInput(controller, ___, "1000.0"));
+    addInput("input", input = new NodeInput(controller, ___, options.getString("input", "0.0")));
+    addInput("cutoff", cutOff = new NodeInput(controller, ___, options.getString("cutoff", "1000.0")));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
     

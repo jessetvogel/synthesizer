@@ -18,6 +18,18 @@ $(document).ready(function () {
   // Nodes list
   refreshNodes();
 
+  // Command prompt
+  $('#command-prompt input').keypress(function (e) {
+    if(e.which == 13) {
+      $('#command-prompt input').prop('disabled', 'disabled');
+      api.command($(this).val(), function (data) {
+        $('#command-result').text(JSON.stringify(data, null, 2));
+        $('#command-prompt input').prop('disabled', false).val("");
+      });
+
+    }
+  });
+
 });
 
 function monitorUpdate() {

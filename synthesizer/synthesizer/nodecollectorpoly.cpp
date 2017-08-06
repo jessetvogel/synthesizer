@@ -14,7 +14,7 @@ NodeCollectorPoly::NodeCollectorPoly(Controller* controller, Options options) : 
     type = "collector_poly";
     
     // Set inputs and outputs
-    addInput("release_time", releaseTime = new NodeInput(controller, NodeInput::NODE, "0.0"));
+    addInput("release_time", releaseTime = new NodeInput(controller, NodeInput::NODE, options.getString("release_time", "0.0")));
     
     // Create arrays
     int voices = controller->getSettings()->voices;

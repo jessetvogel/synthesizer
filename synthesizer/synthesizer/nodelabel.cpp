@@ -12,7 +12,7 @@ NodeLabel::NodeLabel(Controller* controller, Options options) : Node(controller)
     voiceDependent = options.getBool("voice", false);
     
     // Set inputs and outputs
-    addInput("value", value = new NodeInput(controller, voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE, "0.0"));
+    addInput("value", value = new NodeInput(controller, voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE, options.getString("value", "0.0")));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }

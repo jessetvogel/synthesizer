@@ -13,8 +13,8 @@ NodeFuzz::NodeFuzz(Controller* controller, Options options) : Node(controller) {
     
     // Set inputs and outputs
     NodeInput::Type ___ = voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE;
-    addInput("input", input = new NodeInput(controller, ___, "0.0"));
-    addInput("input_gain", inputGain = new NodeInput(controller, ___, "1.0"));
+    addInput("input", input = new NodeInput(controller, ___, options.getString("input", "0.0")));
+    addInput("input_gain", inputGain = new NodeInput(controller, ___, options.getString("input_gain", "1.0")));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }

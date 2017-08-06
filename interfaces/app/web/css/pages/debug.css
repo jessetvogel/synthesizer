@@ -53,3 +53,44 @@
 }
 
 .controls > div > span { vertical-align: -1px; }
+
+#command-prompt {
+  display: flex;
+}
+
+#command-prompt .symbol {
+  width: 16px;
+  height: 26px;
+  background-color: var(--base07);
+  color: var(--base02);
+}
+
+#command-prompt .symbol span::before {
+  content: '>';
+}
+
+#command-prompt .symbol span {
+  font-family: Monaco, Consolas;
+  line-height: 26px;
+  margin-left: 8px;
+}
+
+#command-prompt .input {
+  flex-grow: 1;
+}
+
+#command-prompt input {
+  width: 100%;
+  text-align: left;
+  font-family: Monaco, Consolas;
+}
+
+#command-prompt input[disabled] {
+  color: var(--base04);
+}
+
+#command-result {
+  margin-top: 16px;
+  font-family: Monaco, Consolas;
+  white-space: pre;
+}

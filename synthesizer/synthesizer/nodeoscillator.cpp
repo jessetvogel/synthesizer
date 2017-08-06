@@ -20,10 +20,10 @@ NodeOscillator::NodeOscillator(Controller* controller, Options options) : Node(c
     
     // Set inputs and outputs
     NodeInput::Type ___ = voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE;
-    addInput("sample", sample = new NodeInput(controller, NodeInput::SAMPLE, "sine"));
-    addInput("frequency", frequency = new NodeInput(controller, ___, "0.0"));
-    addInput("amplitude", amplitude = new NodeInput(controller, ___, "1.0"));
-    addInput("mean", mean = new NodeInput(controller, ___, "0.0"));
+    addInput("sample", sample = new NodeInput(controller, NodeInput::SAMPLE, options.getString("sample", "sine")));
+    addInput("frequency", frequency = new NodeInput(controller, ___, options.getString("frequency", "0.0")));
+    addInput("amplitude", amplitude = new NodeInput(controller, ___, options.getString("amplitude", "1.0")));
+    addInput("mean", mean = new NodeInput(controller, ___, options.getString("mean", "0.0")));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
     

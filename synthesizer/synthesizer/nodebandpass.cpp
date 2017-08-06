@@ -19,9 +19,9 @@ NodeBandpass::NodeBandpass(Controller* controller, Options options) : Node(contr
     
     // Set inputs and outputs
     NodeInput::Type ___ = voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE;
-    addInput("input", input = new NodeInput(controller, ___, "0.0"));
-    addInput("center", center = new NodeInput(controller, ___, "1000.0"));
-    addInput("bandwidth", bandwidth = new NodeInput(controller, ___, "0.5")); // TODO: come up with some standard values
+    addInput("input", input = new NodeInput(controller, ___, options.getString("input", "0.0")));
+    addInput("center", center = new NodeInput(controller, ___, options.getString("center", "1000.0")));
+    addInput("bandwidth", bandwidth = new NodeInput(controller, ___, options.getString("bandwidth", "1.0"))); // TODO: come up with some standard values
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
     

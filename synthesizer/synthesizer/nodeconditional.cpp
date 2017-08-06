@@ -13,12 +13,12 @@ NodeConditional::NodeConditional(Controller* controller, Options options) : Node
     
     // Set inputs and outputs
     NodeInput::Type ___ = voiceDependent ? NodeInput::NODE_VOICE : NodeInput::NODE;
-    addInput("input", input = new NodeInput(controller, ___, "0.0"));
-    addInput("low", low = new NodeInput(controller, ___, "0.0"));
-    addInput("high", high = new NodeInput(controller, ___, "0.0"));
-    addInput("output_low", outputLow = new NodeInput(controller, ___, "0.0"));
-    addInput("output_middle", outputMiddle = new NodeInput(controller, ___, "0.0"));
-    addInput("output_high", outputHigh = new NodeInput(controller, ___, "0.0"));
+    addInput("input", input = new NodeInput(controller, ___, options.getString("input", "0.0")));
+    addInput("low", low = new NodeInput(controller, ___, options.getString("low", "0.0")));
+    addInput("high", high = new NodeInput(controller, ___, options.getString("high", "0.0")));
+    addInput("output_low", outputLow = new NodeInput(controller, ___, options.getString("output_low", "0.0")));
+    addInput("output_middle", outputMiddle = new NodeInput(controller, ___, options.getString("output_middle", "0.0")));
+    addInput("output_high", outputHigh = new NodeInput(controller, ___, options.getString("output_high", "0.0")));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }

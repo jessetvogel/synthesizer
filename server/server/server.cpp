@@ -32,7 +32,19 @@ bool Server::start() {
     serverSocketInfo.sin_port = htons(port);
     
     // Bind server_socket_information to the opened socket
-    if(bind(mainSocket, (struct sockaddr*) &serverSocketInfo, sizeof(sockaddr)) < 0) { fail("binding"); return false; }
+    int _port = port;
+    while(bind(mainSocket, (struct sockaddr*) &serverSocketInfo, sizeof(sockaddr)) < 0) {
+        // Try at most 10 different ports
+        if(_port - port < 10) {
+            _port ++;
+            serverSocketInfo.sin_port = htons(_port);
+            continue;
+        }
+        
+        fail("binding");
+        return false;
+    }
+    port = _port;
 
     // Create a new thread to run the server in
     std::thread thread(&Server::run, this);

@@ -7,7 +7,7 @@ NodeCollector::NodeCollector(Controller* controller, Options options) : Node(con
     type = "collector";
     
     // Set inputs and outputs
-    addInput("input", input = new NodeInput(controller, NodeInput::NODE_VOICE, "0.0"));
+    addInput("input", input = new NodeInput(controller, NodeInput::NODE_VOICE, options.getString("input", "0.0")));
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
     
     input->autoUpdate = false;

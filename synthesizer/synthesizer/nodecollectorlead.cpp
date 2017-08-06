@@ -9,9 +9,9 @@ NodeCollectorLead::NodeCollectorLead(Controller* controller, Options options) : 
     type = "collector_lead";
     
     // Set inputs and outputs
-    addInput("release_time", releaseTime = new NodeInput(controller, NodeInput::NODE, "0.0"));
-    addInput("glide", glide = new NodeInput(controller, NodeInput::NODE, "0.0"));
-    addInput("glide_type", glideType = new NodeInput(controller, NodeInput::NODE, "0.0"));
+    addInput("release_time", releaseTime = new NodeInput(controller, NodeInput::NODE, options.getString("release_time", "0.0")));
+    addInput("glide", glide = new NodeInput(controller, NodeInput::NODE, options.getString("glide", "0.0")));
+    addInput("glide_type", glideType = new NodeInput(controller, NodeInput::NODE, options.getString("glide_type", "0.0")));
     
     // Create new voice
     voice = new Voice();

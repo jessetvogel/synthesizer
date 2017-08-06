@@ -13,21 +13,21 @@ NodeADSR::NodeADSR(Controller* controller, Options options) : Node(controller) {
     voiceDependent = true;
     
     // Set inputs and outputs
-    addInput("start_level", startLevel = new NodeInput(controller, NodeInput::NODE_VOICE, "0.0"));
-    addInput("attack_level", attackLevel = new NodeInput(controller, NodeInput::NODE_VOICE, "1.0"));
-    addInput("sustain_level", sustainLevel = new NodeInput(controller, NodeInput::NODE_VOICE, "1.0"));
-    addInput("release_level", releaseLevel = new NodeInput(controller, NodeInput::NODE_VOICE, "0.0"));
+    addInput("start_level", startLevel = new NodeInput(controller, NodeInput::NODE_VOICE, options.getString("start_level", "0.0")));
+    addInput("attack_level", attackLevel = new NodeInput(controller, NodeInput::NODE_VOICE, options.getString("attack_level", "1.0")));
+    addInput("sustain_level", sustainLevel = new NodeInput(controller, NodeInput::NODE_VOICE, options.getString("sustain_level", "1.0")));
+    addInput("release_level", releaseLevel = new NodeInput(controller, NodeInput::NODE_VOICE, options.getString("release_level", "0.0")));
     
-    addInput("attack_time", attackTime = new NodeInput(controller, NodeInput::NODE_VOICE, "0.0"));
-    addInput("decay_time", decayTime = new NodeInput(controller, NodeInput::NODE_VOICE, "0.0"));
-    addInput("release_time", releaseTime = new NodeInput(controller, NodeInput::NODE_VOICE, "0.0"));
+    addInput("attack_time", attackTime = new NodeInput(controller, NodeInput::NODE_VOICE, options.getString("attack_time", "0.0")));
+    addInput("decay_time", decayTime = new NodeInput(controller, NodeInput::NODE_VOICE, options.getString("decay_time", "0.0")));
+    addInput("release_time", releaseTime = new NodeInput(controller, NodeInput::NODE_VOICE, options.getString("release_time", "0.0")));
     
-    addInput("duration", duration = new NodeInput(controller, NodeInput::NODE_VOICE, "key_duration"));
-    addInput("release", release = new NodeInput(controller, NodeInput::NODE_VOICE, "key_release"));
+    addInput("duration", duration = new NodeInput(controller, NodeInput::NODE_VOICE, options.getString("duration", "key_duration")));
+    addInput("release", release = new NodeInput(controller, NodeInput::NODE_VOICE, options.getString("release", "key_release")));
     
-    addInput("attack_curve", attackCurve = new NodeInput(controller, NodeInput::CURVE, "linear"));
-    addInput("decay_curve", decayCurve = new NodeInput(controller, NodeInput::CURVE, "linear"));
-    addInput("release_curve", releaseCurve = new NodeInput(controller, NodeInput::CURVE, "linear"));
+    addInput("attack_curve", attackCurve = new NodeInput(controller, NodeInput::CURVE, options.getString("attack_curve", "linear")));
+    addInput("decay_curve", decayCurve = new NodeInput(controller, NodeInput::CURVE, options.getString("decay_curve", "linear")));
+    addInput("release_curve", releaseCurve = new NodeInput(controller, NodeInput::CURVE, options.getString("release_curve", "linear")));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }

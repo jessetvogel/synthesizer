@@ -16,15 +16,12 @@ NodeParameter::NodeParameter(Controller* controller, Options options) : Node(con
     midiCC = options.getInteger("midi_cc", -1);
     value = options.getDouble("value", 0.0);
     
-    double _min = options.getDouble("min" ,0.0);
-    double _max = options.getDouble("max" ,1.0);
-    
     // Set inputs and outputs
-    addInput("midi_cc", cc = new NodeInput(controller, NodeInput::NODE, std::to_string(midiCC)));
-    addInput("min", min = new NodeInput(controller, NodeInput::NODE, std::to_string(_min)));
-    addInput("max", max = new NodeInput(controller, NodeInput::NODE, std::to_string(_max)));
-    addInput("curve", curve = new NodeInput(controller, NodeInput::CURVE, "linear"));
-    addInput("value", valueInput = new NodeInput(controller, NodeInput::NODE, "-1.0"));
+    addInput("midi_cc", cc = new NodeInput(controller, NodeInput::NODE, options.getString("midi_cc", "-1")));
+    addInput("min", min = new NodeInput(controller, NodeInput::NODE, options.getString("min", "0.0")));
+    addInput("max", max = new NodeInput(controller, NodeInput::NODE, options.getString("max", "1.0")));
+    addInput("curve", curve = new NodeInput(controller, NodeInput::CURVE, options.getString("curve", "linear")));
+    addInput("value", valueInput = new NodeInput(controller, NodeInput::NODE, options.getString("value", "-1.0")));
     
     addOutput(NODE_OUTPUT_DEFAULT, output = new NodeOutput(controller, this));
 }
