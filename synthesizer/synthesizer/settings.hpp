@@ -37,6 +37,7 @@ public:
     double frequencies[AMOUNT_OF_KEYS];
     double pitchWheelRange;
     bool sustainPedalPolarity;
+    std::string rootDirectory;
     
     // Commands
     bool set(std::string, std::string);

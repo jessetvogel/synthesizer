@@ -19,6 +19,7 @@ Settings::Settings(std::string filepath) {
     sustainPedalPolarity = DEFAULT_SUSTAIN_PEDAL_POLARITY;
     for(int i = 0;i < AMOUNT_OF_KEYS; i ++)
         frequencies[i] = 440.0 * std::pow(2.0, (double) (i - NOTE_A4) / 12.0);
+    rootDirectory = "";
     
     if(filepath.length() == 0) {
         Status::addWarning("No settings were provided");
@@ -111,6 +112,11 @@ bool Settings::set(std::string key, std::string value) {
         
         Status::addError("Invalid argument provided");
         return false;
+    }
+    
+    if(key.compare("root_directory") == 0) {
+        rootDirectory = value;
+        return true;
     }
     
     Status::addError("Invalid setting provided");

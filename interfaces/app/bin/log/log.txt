@@ -1,0 +1,424 @@
+[15:54:07] status midi_devices
+[15:54:07] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[15:54:08] include settings_16.synth
+[15:54:08] {}
+[15:54:19] node_set bandwidth.midi_cc -1
+[15:54:19] {}
+[15:54:20] node_set bandwidth.midi_cc 21
+[15:54:20] {}
+[15:54:33] include settings_8.synth
+[15:54:33] {}
+[15:54:34] include settings_24.synth
+[15:54:34] {}
+[15:54:35] include settings_32.synth
+[15:54:35] {}
+[15:54:39] include settings_8.synth
+[15:54:39] {}
+[15:54:40] include settings_16.synth
+[15:54:40] {}
+[15:54:40] include settings_24.synth
+[15:54:40] {}
+[15:54:41] include settings_32.synth
+[15:54:41] {}
+[15:54:58] status nodes
+[15:54:58] {"nodes":[{"id":"bandwidth","type":"parameter","voiceDependent":false},{"id":"eq_1","type":"parameter","voiceDependent":false},{"id":"eq_2","type":"parameter","voiceDependent":false},{"id":"eq_3","type":"parameter","voiceDependent":false},{"id":"eq_4","type":"parameter","voiceDependent":false},{"id":"eq_5","type":"parameter","voiceDependent":false},{"id":"eq_6","type":"parameter","voiceDependent":false},{"id":"eq_7","type":"parameter","voiceDependent":false},{"id":"eq_8","type":"parameter","voiceDependent":false},{"id":"wave","type":"oscillator","voiceDependent":true},{"id":"carrier","type":"collector_poly","voiceDependent":false},{"id":"vocoder_output","type":"label","voiceDependent":false},{"id":"output","type":"audio_output","voiceDependent":false},{"id":"MOD_LP","type":"lowpass","voiceDependent":false},{"id":"MOD_BP_1","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_2","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_3","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_4","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_5","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_6","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_7","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_8","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_9","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_10","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_11","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_12","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_13","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_14","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_15","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_16","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_17","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_18","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_19","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_20","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_21","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_22","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_23","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_24","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_25","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_26","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_27","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_28","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_29","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_30","type":"bandpass","voiceDependent":false},{"id":"MOD_HP","type":"highpass","voiceDependent":false},{"id":"MOD_FOLLOWER_LP","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_1","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_2","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_3","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_4","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_5","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_6","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_7","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_8","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_9","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_10","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_11","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_12","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_13","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_14","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_15","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_16","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_17","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_18","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_19","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_20","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_21","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_22","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_23","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_24","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_25","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_26","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_27","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_28","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_29","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_30","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_HP","type":"follower","voiceDependent":false},{"id":"CAR_LP","type":"lowpass","voiceDependent":false},{"id":"CAR_BP_1","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_2","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_3","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_4","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_5","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_6","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_7","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_8","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_9","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_10","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_11","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_12","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_13","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_14","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_15","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_16","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_17","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_18","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_19","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_20","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_21","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_22","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_23","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_24","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_25","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_26","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_27","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_28","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_29","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_30","type":"bandpass","voiceDependent":false},{"id":"CAR_HP","type":"highpass","voiceDependent":false},{"id":"MOD_EQ_GAIN_LP","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_1","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_2","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_3","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_4","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_5","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_6","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_7","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_8","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_9","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_10","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_11","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_12","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_13","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_14","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_15","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_16","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_17","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_18","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_19","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_20","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_21","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_22","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_23","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_24","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_25","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_26","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_27","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_28","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_29","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_30","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_HP","type":"adder","voiceDependent":false},{"id":"vocoder_output_8","type":"adder","voiceDependent":false},{"id":"vocoder_output_16","type":"adder","voiceDependent":false},{"id":"vocoder_output_24","type":"adder","voiceDependent":false},{"id":"vocoder_output_32","type":"adder","voiceDependent":false}]}
+[15:55:18] include settings_16.synth
+[15:55:18] {}
+[15:55:33] status
+[15:55:33] {"error":[{"message":"Command not recognised"}],"command":"status"}
+[15:55:36] status
+[15:55:36] {"error":[{"message":"Command not recognised"}],"command":"status"}
+[15:55:38] x
+[15:55:38] {"error":[{"message":"Command not recognised"}],"command":"x"}
+[15:55:45] include settings_16.synth
+[15:55:45] {}
+[15:56:02] play stop
+[15:56:02] {"state":{"playing":false}}
+[15:56:09] play start
+[15:56:09] {"state":{"playing":true}}
+[15:56:12] play stop
+[15:56:12] {"state":{"playing":false}}
+[15:56:19] monitor eq_1
+[15:56:19] {"monitor":[1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000]}
+[15:56:24] monitor eq_2
+[15:56:24] {"monitor":[1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000]}
+[15:56:28] monitor MOD_EQ_GAIN_2
+[15:56:28] {"monitor":[nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan]}
+[15:56:39] status midi_devices
+[15:56:39] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[15:56:39] include settings_16.synth
+[15:56:39] {}
+[15:56:39] node_set bandwidth.midi_cc 21
+[15:56:39] {}
+[15:56:39] node_set bandwidth.value 0.5511811023622047
+[15:56:39] {}
+[15:56:45] include settings_24.synth
+[15:56:45] {}
+[15:56:45] include settings_32.synth
+[15:56:45] {}
+[15:56:46] include settings_8.synth
+[15:56:46] {}
+[15:57:16] play stop
+[15:57:16] {"state":{"playing":false}}
+[15:57:16] clear
+[15:57:16] {}
+[15:57:16] settings_set root_directory ../instruments/vocoder
+[15:57:16] {}
+[15:57:16] include instrument.synth
+[15:57:16] {}
+[15:57:17] play start
+[15:57:17] {"state":{"playing":true}}
+[15:57:18] status midi_devices
+[15:57:18] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[15:57:18] include settings_16.synth
+[15:57:18] {}
+[15:57:18] node_set bandwidth.midi_cc 21
+[15:57:18] {}
+[15:57:18] node_set bandwidth.value 0.5511811023622047
+[15:57:18] {}
+[15:57:22] node_set eq_1.midi_cc -1
+[15:57:22] {}
+[15:57:26] status midi_devices input_devices output_devices settings
+[15:57:26] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[15:57:27] midi_add_device 1
+[15:57:27] {}
+[15:57:28] audio_set_input_device 0
+[15:57:28] {}
+[15:57:30] audio_set_input_device 2
+[15:57:30] {}
+[15:57:33] status midi_devices
+[15:57:33] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[15:57:34] include settings_16.synth
+[15:57:34] {}
+[15:57:34] node_set eq_1.midi_cc -1
+[15:57:34] {}
+[15:57:34] node_set eq_1.value 0.5
+[15:57:34] {}
+[15:57:34] node_set eq_2.midi_cc -1
+[15:57:34] {}
+[15:57:34] node_set eq_2.value 0.5
+[15:57:34] {}
+[15:57:34] node_set eq_3.midi_cc -1
+[15:57:34] {}
+[15:57:34] node_set eq_3.value 0.5
+[15:57:34] {}
+[15:57:34] node_set eq_4.midi_cc -1
+[15:57:34] {}
+[15:57:34] node_set eq_4.value 0.5
+[15:57:34] {}
+[15:57:34] node_set eq_5.midi_cc -1
+[15:57:34] {}
+[15:57:34] node_set eq_5.value 0.5
+[15:57:34] {}
+[15:57:34] node_set eq_6.midi_cc -1
+[15:57:34] {}
+[15:57:34] node_set eq_6.value 0.5
+[15:57:34] {}
+[15:57:34] node_set eq_7.midi_cc -1
+[15:57:34] {}
+[15:57:34] node_set eq_7.value 0.5
+[15:57:34] {}
+[15:57:34] node_set eq_8.midi_cc -1
+[15:57:34] {}
+[15:57:34] node_set eq_8.value 0.5
+[15:57:34] {}
+[15:57:34] node_set bandwidth.midi_cc 21
+[15:57:34] {}
+[15:57:34] node_set bandwidth.value 0.5511811023622047
+[15:57:34] {}
+[15:57:34] node_set eq_1.midi_cc -1
+[15:57:34] {}
+[15:57:35] node_set eq_1.midi_cc 42
+[15:57:35] {}
+[15:57:37] node_set eq_2.midi_cc -1
+[15:57:37] {}
+[15:57:37] node_set eq_2.midi_cc 43
+[15:57:37] {}
+[15:57:43] node_set eq_1.midi_cc -1
+[15:57:43] {}
+[15:57:43] node_set eq_1.midi_cc 41
+[15:57:43] {}
+[15:57:44] node_set eq_2.midi_cc -1
+[15:57:44] {}
+[15:57:44] node_set eq_2.midi_cc 42
+[15:57:44] {}
+[15:57:45] node_set eq_3.midi_cc -1
+[15:57:45] {}
+[15:57:45] node_set eq_3.midi_cc 43
+[15:57:45] {}
+[15:57:46] node_set eq_4.midi_cc -1
+[15:57:46] {}
+[15:57:46] node_set eq_4.midi_cc 44
+[15:57:46] {}
+[15:57:47] node_set eq_5.midi_cc -1
+[15:57:47] {}
+[15:57:47] node_set eq_5.midi_cc 45
+[15:57:47] {}
+[15:57:48] node_set eq_6.midi_cc -1
+[15:57:48] {}
+[15:57:48] node_set eq_6.midi_cc 46
+[15:57:48] {}
+[15:57:49] node_set eq_7.midi_cc -1
+[15:57:49] {}
+[15:57:49] node_set eq_7.midi_cc 47
+[15:57:49] {}
+[15:57:50] node_set eq_8.midi_cc -1
+[15:57:50] {}
+[15:57:50] node_set eq_8.midi_cc 48
+[15:57:50] {}
+[15:58:27] include settings_8.synth
+[15:58:27] {}
+[15:58:30] include settings_16.synth
+[15:58:30] {}
+[15:58:33] include settings_24.synth
+[15:58:33] {}
+[15:58:34] include settings_24.synth
+[15:58:34] {}
+[15:58:37] include settings_32.synth
+[15:58:37] {}
+[15:59:35] include settings_16.synth
+[15:59:35] {}
+[15:59:56] status midi_devices input_devices output_devices settings
+[15:59:56] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":true},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[15:59:58] audio_set_input_device 0
+[15:59:58] {}
+[16:00:23] audio_set_input_device 2
+[16:00:23] {}
+[16:02:58] status midi_devices input_devices output_devices settings
+[16:02:58] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":true},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[16:03:01] audio_set_input_device 0
+[16:03:01] {}
+[16:07:52] include settings_24.synth
+[16:07:52] {}
+[16:11:19] include settings_32.synth
+[16:11:19] {}
+[16:11:21] include settings_32.synth
+[16:11:21] {}
+[16:12:33] include settings_24.synth
+[16:12:33] {}
+[16:12:38] include settings_16.synth
+[16:12:38] {}
+[16:14:46] status nodes
+[16:14:46] {"nodes":[{"id":"bandwidth","type":"parameter","voiceDependent":false},{"id":"eq_1","type":"parameter","voiceDependent":false},{"id":"eq_2","type":"parameter","voiceDependent":false},{"id":"eq_3","type":"parameter","voiceDependent":false},{"id":"eq_4","type":"parameter","voiceDependent":false},{"id":"eq_5","type":"parameter","voiceDependent":false},{"id":"eq_6","type":"parameter","voiceDependent":false},{"id":"eq_7","type":"parameter","voiceDependent":false},{"id":"eq_8","type":"parameter","voiceDependent":false},{"id":"wave","type":"oscillator","voiceDependent":true},{"id":"carrier","type":"collector_poly","voiceDependent":false},{"id":"vocoder_output","type":"label","voiceDependent":false},{"id":"output","type":"audio_output","voiceDependent":false},{"id":"MOD_LP","type":"lowpass","voiceDependent":false},{"id":"MOD_BP_1","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_2","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_3","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_4","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_5","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_6","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_7","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_8","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_9","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_10","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_11","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_12","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_13","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_14","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_15","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_16","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_17","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_18","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_19","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_20","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_21","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_22","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_23","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_24","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_25","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_26","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_27","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_28","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_29","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_30","type":"bandpass","voiceDependent":false},{"id":"MOD_HP","type":"highpass","voiceDependent":false},{"id":"MOD_FOLLOWER_LP","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_1","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_2","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_3","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_4","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_5","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_6","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_7","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_8","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_9","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_10","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_11","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_12","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_13","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_14","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_15","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_16","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_17","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_18","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_19","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_20","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_21","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_22","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_23","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_24","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_25","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_26","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_27","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_28","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_29","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_30","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_HP","type":"follower","voiceDependent":false},{"id":"CAR_LP","type":"lowpass","voiceDependent":false},{"id":"CAR_BP_1","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_2","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_3","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_4","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_5","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_6","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_7","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_8","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_9","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_10","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_11","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_12","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_13","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_14","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_15","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_16","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_17","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_18","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_19","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_20","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_21","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_22","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_23","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_24","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_25","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_26","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_27","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_28","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_29","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_30","type":"bandpass","voiceDependent":false},{"id":"CAR_HP","type":"highpass","voiceDependent":false},{"id":"MOD_EQ_GAIN_LP","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_1","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_2","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_3","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_4","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_5","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_6","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_7","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_8","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_9","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_10","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_11","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_12","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_13","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_14","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_15","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_16","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_17","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_18","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_19","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_20","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_21","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_22","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_23","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_24","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_25","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_26","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_27","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_28","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_29","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_30","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_HP","type":"adder","voiceDependent":false},{"id":"vocoder_output_8","type":"adder","voiceDependent":false},{"id":"vocoder_output_16","type":"adder","voiceDependent":false},{"id":"vocoder_output_24","type":"adder","voiceDependent":false},{"id":"vocoder_output_32","type":"adder","voiceDependent":false}]}
+[16:14:58] node_set bandwidth.min 0.5
+[16:14:58] {}
+[16:15:06] node_set bandwidth.max 2.0
+[16:15:06] {}
+[16:18:23] include settings_24.synth
+[16:18:23] {}
+[16:20:57] include settings_32.synth
+[16:20:57] {}
+[16:23:25] status midi_devices
+[16:23:25] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[16:23:25] include settings_32.synth
+[16:23:25] {}
+[16:23:25] node_set eq_1.midi_cc 41
+[16:23:25] {}
+[16:23:25] node_set eq_1.value 0.6771653543307087
+[16:23:25] {}
+[16:23:25] node_set eq_2.midi_cc 42
+[16:23:25] {}
+[16:23:25] node_set eq_2.value 0.7007874015748031
+[16:23:25] {}
+[16:23:25] node_set eq_3.midi_cc 43
+[16:23:25] {}
+[16:23:25] node_set eq_3.value 0.6929133858267716
+[16:23:25] {}
+[16:23:25] node_set eq_4.midi_cc 44
+[16:23:25] {}
+[16:23:25] node_set eq_4.value 0.6377952755905512
+[16:23:25] {}
+[16:23:25] node_set eq_5.midi_cc 45
+[16:23:25] {}
+[16:23:25] node_set eq_5.value 0.7559055118110236
+[16:23:25] {}
+[16:23:25] node_set eq_6.midi_cc 46
+[16:23:25] {}
+[16:23:25] node_set eq_6.value 0.7952755905511811
+[16:23:25] {}
+[16:23:25] node_set eq_7.midi_cc 47
+[16:23:25] {}
+[16:23:25] node_set eq_7.value 0.7952755905511811
+[16:23:25] {}
+[16:23:25] node_set eq_8.midi_cc 48
+[16:23:25] {}
+[16:23:25] node_set bandwidth.midi_cc 21
+[16:23:25] {}
+[16:23:25] node_set eq_8.value 0.5984251968503937
+[16:23:25] {}
+[16:23:25] node_set bandwidth.value 0.2992125984251969
+[16:23:25] {}
+[16:29:09] include settings_24.synth
+[16:29:09] {}
+[16:29:13] include settings_16.synth
+[16:29:13] {}
+[16:29:16] include settings_24.synth
+[16:29:16] {}
+[16:29:16] include settings_8.synth
+[16:29:16] {}
+[16:29:25] include settings_32.synth
+[16:29:25] {}
+[16:29:27] include settings_32.synth
+[16:29:27] {}
+[16:29:29] include settings_24.synth
+[16:29:29] {}
+[16:29:32] include settings_16.synth
+[16:29:32] {}
+[16:29:49] status midi_devices input_devices output_devices settings
+[16:29:49] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":true},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[16:29:51] status nodes
+[16:29:51] {"nodes":[{"id":"bandwidth","type":"parameter","voiceDependent":false},{"id":"eq_1","type":"parameter","voiceDependent":false},{"id":"eq_2","type":"parameter","voiceDependent":false},{"id":"eq_3","type":"parameter","voiceDependent":false},{"id":"eq_4","type":"parameter","voiceDependent":false},{"id":"eq_5","type":"parameter","voiceDependent":false},{"id":"eq_6","type":"parameter","voiceDependent":false},{"id":"eq_7","type":"parameter","voiceDependent":false},{"id":"eq_8","type":"parameter","voiceDependent":false},{"id":"wave","type":"oscillator","voiceDependent":true},{"id":"carrier","type":"collector_poly","voiceDependent":false},{"id":"vocoder_output","type":"label","voiceDependent":false},{"id":"output","type":"audio_output","voiceDependent":false},{"id":"MOD_LP","type":"lowpass","voiceDependent":false},{"id":"MOD_BP_1","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_2","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_3","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_4","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_5","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_6","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_7","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_8","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_9","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_10","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_11","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_12","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_13","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_14","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_15","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_16","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_17","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_18","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_19","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_20","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_21","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_22","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_23","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_24","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_25","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_26","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_27","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_28","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_29","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_30","type":"bandpass","voiceDependent":false},{"id":"MOD_HP","type":"highpass","voiceDependent":false},{"id":"MOD_FOLLOWER_LP","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_1","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_2","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_3","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_4","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_5","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_6","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_7","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_8","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_9","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_10","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_11","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_12","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_13","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_14","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_15","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_16","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_17","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_18","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_19","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_20","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_21","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_22","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_23","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_24","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_25","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_26","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_27","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_28","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_29","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_30","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_HP","type":"follower","voiceDependent":false},{"id":"CAR_LP","type":"lowpass","voiceDependent":false},{"id":"CAR_BP_1","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_2","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_3","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_4","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_5","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_6","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_7","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_8","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_9","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_10","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_11","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_12","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_13","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_14","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_15","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_16","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_17","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_18","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_19","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_20","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_21","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_22","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_23","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_24","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_25","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_26","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_27","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_28","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_29","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_30","type":"bandpass","voiceDependent":false},{"id":"CAR_HP","type":"highpass","voiceDependent":false},{"id":"MOD_EQ_GAIN_LP","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_1","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_2","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_3","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_4","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_5","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_6","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_7","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_8","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_9","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_10","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_11","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_12","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_13","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_14","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_15","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_16","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_17","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_18","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_19","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_20","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_21","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_22","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_23","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_24","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_25","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_26","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_27","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_28","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_29","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_30","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_HP","type":"adder","voiceDependent":false},{"id":"vocoder_output_8","type":"adder","voiceDependent":false},{"id":"vocoder_output_16","type":"adder","voiceDependent":false},{"id":"vocoder_output_24","type":"adder","voiceDependent":false},{"id":"vocoder_output_32","type":"adder","voiceDependent":false}]}
+[16:29:57] monitor eq_1
+[16:29:57] {"monitor":[5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113]}
+[16:30:02] monitor MOD_EQ_GAIN_2
+[16:30:02] {"monitor":[0.235,0.235,0.235,0.236,0.236,0.236,0.236,0.236,0.236,0.237,0.237,0.237,0.237,0.237,0.238,0.238,0.238,0.238,0.238,0.239,0.239,0.239,0.239,0.240,0.240,0.240,0.240,0.240,0.241,0.241,0.241,0.241,0.242,0.242,0.242,0.242,0.242,0.243,0.243,0.243,0.243,0.243,0.244,0.244,0.244,0.244,0.244,0.245,0.245,0.245,0.245,0.245,0.246,0.246,0.246,0.246,0.246,0.246,0.247,0.247,0.247,0.247,0.247,0.247,0.247,0.248,0.248,0.248,0.248,0.248,0.248,0.248,0.248,0.248,0.248,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.248,0.248,0.248,0.248,0.248,0.248,0.248,0.248,0.248,0.247,0.247,0.247,0.247,0.247,0.247,0.246,0.246,0.246,0.246,0.246,0.245,0.245,0.245,0.245,0.244,0.244,0.244,0.243,0.243,0.243,0.242,0.242,0.242]}
+[16:30:22] monitor vocoder_output
+[16:30:22] {"monitor":[nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan]}
+[16:30:35] status midi_devices
+[16:30:35] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[16:30:35] include settings_16.synth
+[16:30:35] {}
+[16:30:35] node_set eq_1.midi_cc 41
+[16:30:35] {}
+[16:30:35] node_set eq_1.value 0.6771653543307087
+[16:30:35] {}
+[16:30:35] node_set eq_2.midi_cc 42
+[16:30:35] {}
+[16:30:35] node_set eq_2.value 0.7007874015748031
+[16:30:35] {}
+[16:30:35] node_set eq_3.midi_cc 43
+[16:30:35] {}
+[16:30:35] node_set eq_3.value 0.6929133858267716
+[16:30:35] {}
+[16:30:35] node_set eq_4.midi_cc 44
+[16:30:35] {}
+[16:30:35] node_set eq_4.value 0.6377952755905512
+[16:30:35] {}
+[16:30:35] node_set eq_5.midi_cc 45
+[16:30:35] {}
+[16:30:35] node_set eq_5.value 0.7559055118110236
+[16:30:35] {}
+[16:30:35] node_set eq_6.midi_cc 46
+[16:30:35] {}
+[16:30:35] node_set eq_6.value 0.7952755905511811
+[16:30:35] {}
+[16:30:35] node_set eq_7.midi_cc 47
+[16:30:35] {}
+[16:30:35] node_set eq_7.value 0.7716535433070866
+[16:30:35] {}
+[16:30:35] node_set eq_8.value 0.5275590551181102
+[16:30:35] {}
+[16:30:35] node_set eq_8.midi_cc 48
+[16:30:35] {}
+[16:30:35] node_set bandwidth.midi_cc 21
+[16:30:35] {}
+[16:30:35] node_set bandwidth.value 0.30708661417322836
+[16:30:35] {}
+[16:30:44] play stop
+[16:30:44] {"state":{"playing":false}}
+[16:30:44] clear
+[16:30:44] {}
+[16:30:44] settings_set root_directory ../instruments/vocoder
+[16:30:44] {}
+[16:30:44] include instrument.synth
+[16:30:44] {}
+[16:30:45] play start
+[16:30:45] {"state":{"playing":true}}
+[16:30:45] status midi_devices
+[16:30:45] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[16:30:46] include settings_16.synth
+[16:30:46] {}
+[16:30:46] node_set eq_1.midi_cc 41
+[16:30:46] {}
+[16:30:46] node_set eq_1.value 0.6771653543307087
+[16:30:46] {}
+[16:30:46] node_set eq_2.midi_cc 42
+[16:30:46] {}
+[16:30:46] node_set eq_2.value 0.7007874015748031
+[16:30:46] {}
+[16:30:46] node_set eq_3.midi_cc 43
+[16:30:46] {}
+[16:30:46] node_set eq_3.value 0.6929133858267716
+[16:30:46] {}
+[16:30:46] node_set eq_4.midi_cc 44
+[16:30:46] {}
+[16:30:46] node_set eq_4.value 0.6377952755905512
+[16:30:46] {}
+[16:30:46] node_set eq_5.midi_cc 45
+[16:30:46] {}
+[16:30:46] node_set eq_5.value 0.7559055118110236
+[16:30:46] {}
+[16:30:46] node_set eq_6.midi_cc 46
+[16:30:46] {}
+[16:30:46] node_set eq_6.value 0.7952755905511811
+[16:30:46] {}
+[16:30:46] node_set eq_7.midi_cc 47
+[16:30:46] {}
+[16:30:46] node_set eq_7.value 0.7716535433070866
+[16:30:46] {}
+[16:30:46] node_set eq_8.midi_cc 48
+[16:30:46] {}
+[16:30:46] node_set eq_8.value 0.5275590551181102
+[16:30:46] {}
+[16:30:46] node_set bandwidth.midi_cc 21
+[16:30:46] {}
+[16:30:46] node_set bandwidth.value 0.30708661417322836
+[16:30:46] {}
+[16:30:49] status midi_devices input_devices output_devices settings
+[16:30:49] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[16:30:51] midi_add_device 1
+[16:30:51] {}
+[16:30:52] audio_set_input_device 0
+[16:30:52] {}
+[16:30:54] status midi_devices
+[16:30:54] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[16:30:55] include settings_16.synth
+[16:30:55] {}
+[16:30:55] node_set eq_1.midi_cc 41
+[16:30:55] {}
+[16:30:55] node_set eq_1.value 0.6771653543307087
+[16:30:55] {}
+[16:30:55] node_set eq_2.midi_cc 42
+[16:30:55] {}
+[16:30:55] node_set eq_2.value 0.7007874015748031
+[16:30:55] {}
+[16:30:55] node_set eq_3.midi_cc 43
+[16:30:55] {}
+[16:30:55] node_set eq_3.value 0.6929133858267716
+[16:30:55] {}
+[16:30:55] node_set eq_4.midi_cc 44
+[16:30:55] {}
+[16:30:55] node_set eq_4.value 0.6377952755905512
+[16:30:55] {}
+[16:30:55] node_set eq_5.midi_cc 45
+[16:30:55] {}
+[16:30:55] node_set eq_5.value 0.7559055118110236
+[16:30:55] {}
+[16:30:55] node_set eq_6.midi_cc 46
+[16:30:55] {}
+[16:30:55] node_set eq_6.value 0.7952755905511811
+[16:30:55] {}
+[16:30:55] node_set eq_7.midi_cc 47
+[16:30:55] {}
+[16:30:55] node_set eq_7.value 0.7716535433070866
+[16:30:55] {}
+[16:30:55] node_set eq_8.midi_cc 48
+[16:30:55] {}
+[16:30:55] node_set eq_8.value 0.5275590551181102
+[16:30:55] {}
+[16:30:55] node_set bandwidth.midi_cc 21
+[16:30:55] {}
+[16:30:55] node_set bandwidth.value 0.30708661417322836
+[16:30:55] {}
+[16:30:58] include settings_32.synth
+[16:30:58] {}
+[16:31:48] include settings_24.synth
+[16:31:48] {}
+[16:32:54] include settings_32.synth
+[16:32:54] {}
+[16:34:22] include settings_24.synth
+[16:34:22] {}
+[16:34:56] status midi_devices input_devices output_devices settings
+[16:34:56] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":true},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[16:34:57] exit
+[16:34:57] {"info":[{"message":"Program ended"}]}

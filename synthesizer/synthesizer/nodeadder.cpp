@@ -4,7 +4,7 @@
 #include "nodeoutput.hpp"
 #include "options.hpp"
 
-const int NodeAdder::maxN = 16;
+const int NodeAdder::maxN = 32;
 
 NodeAdder::NodeAdder(Controller* controller, Options options) : Node(controller) {
     // Set options

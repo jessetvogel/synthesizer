@@ -3,9 +3,9 @@
 #include <stdio.h>
 #include <sys/wait.h>
 
-//                        #include "log.hpp"
-//                        #include <iostream>
-//                        #include <time.h>
+                        #include "log.hpp"
+                        #include <iostream>
+                        #include <time.h>
 
 #define READ_FD  (0)
 #define WRITE_FD (1)
@@ -19,7 +19,7 @@
 #define CHILD_READ_FD   ( pipes[PARENT_WRITE_PIPE][READ_FD]  )
 #define CHILD_WRITE_FD  ( pipes[PARENT_READ_PIPE][WRITE_FD]  )
 
-#define INTERFACE_BUFFER_SIZE (8192)
+#define INTERFACE_BUFFER_SIZE (8192*2)
 
 Interface::Interface() {
     mutexRunning.lock();
@@ -79,26 +79,31 @@ bool Interface::stop() {
     return true;
 }
 
+bool logging = true;
+
 std::string Interface::command(std::string command) {
     mutexIO.lock();
     
-//                char buffer[32];
-//                time_t rawtime;
-//                struct tm * timeinfo;
-//                time(&rawtime);
-//                timeinfo = localtime(&rawtime);
-//                strftime(buffer, 32, "[%H:%M:%S] ", timeinfo);
-//
-//                Log::write(buffer);
-//                Log::writeLine(command);
+                char buffer[32];
+    if(logging) {
+                time_t rawtime;
+                struct tm * timeinfo;
+                time(&rawtime);
+                timeinfo = localtime(&rawtime);
+                strftime(buffer, 32, "[%H:%M:%S] ", timeinfo);
+
+                Log::write(buffer);
+                Log::writeLine(command);
+    }
     
     ::write(PARENT_WRITE_FD, command.c_str(), command.length());
     ::write(PARENT_WRITE_FD, "\n", 1);
     std::string line = readLine();
     
-    
-//                Log::write(buffer);
-//                Log::writeLine(line);
+    if(logging) {
+                Log::write(buffer);
+                Log::writeLine(line);
+    }
     
     
     mutexIO.unlock();

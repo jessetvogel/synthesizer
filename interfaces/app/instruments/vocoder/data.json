@@ -1,1 +1,1 @@
-{"parameters":[]}
+{"parameters":[{"id":"bands-8","midiCC":51,"value":false},{"id":"bands-16","midiCC":52,"value":false},{"id":"bands-24","midiCC":53,"value":true},{"id":"bands-32","midiCC":54,"value":false},{"id":"eq_1","midiCC":41,"value":1},{"id":"eq_2","midiCC":42,"value":1},{"id":"eq_3","midiCC":43,"value":1},{"id":"eq_4","midiCC":44,"value":1},{"id":"eq_5","midiCC":45,"value":1},{"id":"eq_6","midiCC":46,"value":1},{"id":"eq_7","midiCC":47,"value":1},{"id":"eq_8","midiCC":48,"value":1},{"id":"bandwidth","midiCC":21,"value":0.3700787401574803}]}

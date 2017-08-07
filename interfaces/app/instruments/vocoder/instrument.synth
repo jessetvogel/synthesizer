@@ -1,183 +1,337 @@
 # Source: http://musicfromouterspace.com/analogsynth_new/VOCODER2013/images/vocoderblockdiag.gif
 
-# Modulator
-node_create lowpass BP_MOD_1    [order = 3]
-node_create bandpass BP_MOD_2   [order = 3]
-node_create bandpass BP_MOD_3   [order = 3]
-node_create bandpass BP_MOD_4   [order = 3]
-node_create bandpass BP_MOD_5   [order = 3]
-node_create bandpass BP_MOD_6   [order = 3]
-node_create bandpass BP_MOD_7   [order = 3]
-node_create bandpass BP_MOD_8   [order = 3]
-node_create bandpass BP_MOD_9   [order = 3]
-node_create bandpass BP_MOD_10  [order = 3]
-node_create bandpass BP_MOD_11  [order = 3]
-node_create highpass BP_MOD_12  [order = 3]
+# Parameters
+node_create parameter bandwidth [min = 0.25, max = 4.0, curve = exponential, value = 1.0]
 
-node_set BP_MOD_2.bandwidth                   1.2 # BANDWIDTH
-node_set BP_MOD_3.bandwidth                   1.2 # BANDWIDTH
-node_set BP_MOD_4.bandwidth                   1.2 # BANDWIDTH
-node_set BP_MOD_5.bandwidth                   1.2 # BANDWIDTH
-node_set BP_MOD_6.bandwidth                   1.2 # BANDWIDTH
-node_set BP_MOD_7.bandwidth                   1.2 # BANDWIDTH
-node_set BP_MOD_8.bandwidth                   1.2 # BANDWIDTH
-node_set BP_MOD_9.bandwidth                   1.2 # BANDWIDTH
-node_set BP_MOD_10.bandwidth                  1.2 # BANDWIDTH
-node_set BP_MOD_11.bandwidth                  1.2 # BANDWIDTH
+node_create parameter eq_1 [min = 0.01, max = 100, curve = exponential, value = 0.5]
+node_create parameter eq_2 [min = 0.01, max = 100, curve = exponential, value = 0.5]
+node_create parameter eq_3 [min = 0.01, max = 100, curve = exponential, value = 0.5]
+node_create parameter eq_4 [min = 0.01, max = 100, curve = exponential, value = 0.5]
+node_create parameter eq_5 [min = 0.01, max = 100, curve = exponential, value = 0.5]
+node_create parameter eq_6 [min = 0.01, max = 100, curve = exponential, value = 0.5]
+node_create parameter eq_7 [min = 0.01, max = 100, curve = exponential, value = 0.5]
+node_create parameter eq_8 [min = 0.01, max = 100, curve = exponential, value = 0.5]
 
+# Modulator signal
 node_create audio_input modulator
 
-node_set BP_MOD_1.input                       modulator
-node_set BP_MOD_2.input                       modulator
-node_set BP_MOD_3.input                       modulator
-node_set BP_MOD_4.input                       modulator
-node_set BP_MOD_5.input                       modulator
-node_set BP_MOD_6.input                       modulator
-node_set BP_MOD_7.input                       modulator
-node_set BP_MOD_8.input                       modulator
-node_set BP_MOD_9.input                       modulator
-node_set BP_MOD_10.input                      modulator
-node_set BP_MOD_11.input                      modulator
-node_set BP_MOD_12.input                      modulator
+# Carrier signal
+node_create oscillator wave [voice = true, sample = sawtooth, frequency = key_frequency, amplitude = 1.0]
+node_create collector_poly carrier [input = wave]
 
-
-# Volume
-node_create follower BP_MOD_1_VOLUME
-node_create follower BP_MOD_2_VOLUME
-node_create follower BP_MOD_3_VOLUME
-node_create follower BP_MOD_4_VOLUME
-node_create follower BP_MOD_5_VOLUME
-node_create follower BP_MOD_6_VOLUME
-node_create follower BP_MOD_7_VOLUME
-node_create follower BP_MOD_8_VOLUME
-node_create follower BP_MOD_9_VOLUME
-node_create follower BP_MOD_10_VOLUME
-node_create follower BP_MOD_11_VOLUME
-node_create follower BP_MOD_12_VOLUME
-
-node_set BP_MOD_1_VOLUME.input                BP_MOD_1
-node_set BP_MOD_2_VOLUME.input                BP_MOD_2
-node_set BP_MOD_3_VOLUME.input                BP_MOD_3
-node_set BP_MOD_4_VOLUME.input                BP_MOD_4
-node_set BP_MOD_5_VOLUME.input                BP_MOD_5
-node_set BP_MOD_6_VOLUME.input                BP_MOD_6
-node_set BP_MOD_7_VOLUME.input                BP_MOD_7
-node_set BP_MOD_8_VOLUME.input                BP_MOD_8
-node_set BP_MOD_9_VOLUME.input                BP_MOD_9
-node_set BP_MOD_10_VOLUME.input               BP_MOD_10
-node_set BP_MOD_11_VOLUME.input               BP_MOD_11
-node_set BP_MOD_12_VOLUME.input               BP_MOD_12
-
-
-# Carrier
-node_create lowpass BP_CAR_1    [order = 3]
-node_create bandpass BP_CAR_2   [order = 3]
-node_create bandpass BP_CAR_3   [order = 3]
-node_create bandpass BP_CAR_4   [order = 3]
-node_create bandpass BP_CAR_5   [order = 3]
-node_create bandpass BP_CAR_6   [order = 3]
-node_create bandpass BP_CAR_7   [order = 3]
-node_create bandpass BP_CAR_8   [order = 3]
-node_create bandpass BP_CAR_9   [order = 3]
-node_create bandpass BP_CAR_10  [order = 3]
-node_create bandpass BP_CAR_11  [order = 3]
-node_create highpass BP_CAR_12  [order = 3]
-
-node_set BP_CAR_2.bandwidth                   1.2 # BANDWIDTH
-node_set BP_CAR_3.bandwidth                   1.2 # BANDWIDTH
-node_set BP_CAR_4.bandwidth                   1.2 # BANDWIDTH
-node_set BP_CAR_5.bandwidth                   1.2 # BANDWIDTH
-node_set BP_CAR_6.bandwidth                   1.2 # BANDWIDTH
-node_set BP_CAR_7.bandwidth                   1.2 # BANDWIDTH
-node_set BP_CAR_8.bandwidth                   1.2 # BANDWIDTH
-node_set BP_CAR_9.bandwidth                   1.2 # BANDWIDTH
-node_set BP_CAR_10.bandwidth                  1.2 # BANDWIDTH
-node_set BP_CAR_11.bandwidth                  1.2 # BANDWIDTH
-
-node_create collector_poly carrier
-
-node_set BP_CAR_1.input                       carrier
-node_set BP_CAR_2.input                       carrier
-node_set BP_CAR_3.input                       carrier
-node_set BP_CAR_4.input                       carrier
-node_set BP_CAR_5.input                       carrier
-node_set BP_CAR_6.input                       carrier
-node_set BP_CAR_7.input                       carrier
-node_set BP_CAR_8.input                       carrier
-node_set BP_CAR_9.input                       carrier
-node_set BP_CAR_10.input                      carrier
-node_set BP_CAR_11.input                      carrier
-node_set BP_CAR_12.input                      carrier
-
-
-# Frequencies
-node_set BP_MOD_1.cutoff                      50
-node_set BP_CAR_1.cutoff                      50
-node_set BP_MOD_2.center                      83
-node_set BP_CAR_2.center                      83
-node_set BP_MOD_3.center                      137
-node_set BP_CAR_3.center                      137
-node_set BP_MOD_4.center                      227
-node_set BP_CAR_4.center                      227
-node_set BP_MOD_5.center                      376
-node_set BP_CAR_5.center                      376
-node_set BP_MOD_6.center                      622
-node_set BP_CAR_6.center                      622
-node_set BP_MOD_7.center                      1029
-node_set BP_CAR_7.center                      1029
-node_set BP_MOD_8.center                      1704
-node_set BP_CAR_8.center                      1704
-node_set BP_MOD_9.center                      2821
-node_set BP_CAR_9.center                      2821
-node_set BP_MOD_10.center                     4670
-node_set BP_CAR_10.center                     4670
-node_set BP_MOD_11.center                     7731
-node_set BP_CAR_11.center                     7731
-node_set BP_MOD_12.cutoff                     12800
-node_set BP_CAR_12.cutoff                     12800
-
-
-# Output
-node_create adder vocoder_output [n = 12]
-
-node_set vocoder_output.input_1               BP_CAR_1
-node_set vocoder_output.input_2               BP_CAR_2
-node_set vocoder_output.input_3               BP_CAR_3
-node_set vocoder_output.input_4               BP_CAR_4
-node_set vocoder_output.input_5               BP_CAR_5
-node_set vocoder_output.input_6               BP_CAR_6
-node_set vocoder_output.input_7               BP_CAR_7
-node_set vocoder_output.input_8               BP_CAR_8
-node_set vocoder_output.input_9               BP_CAR_9
-node_set vocoder_output.input_10              BP_CAR_10
-node_set vocoder_output.input_11              BP_CAR_11
-node_set vocoder_output.input_12              BP_CAR_12
-
-node_set vocoder_output.gain_1                BP_MOD_1_VOLUME
-node_set vocoder_output.gain_2                BP_MOD_2_VOLUME
-node_set vocoder_output.gain_3                BP_MOD_3_VOLUME
-node_set vocoder_output.gain_4                BP_MOD_4_VOLUME
-node_set vocoder_output.gain_5                BP_MOD_5_VOLUME
-node_set vocoder_output.gain_6                BP_MOD_6_VOLUME
-node_set vocoder_output.gain_7                BP_MOD_7_VOLUME
-node_set vocoder_output.gain_8                BP_MOD_8_VOLUME
-node_set vocoder_output.gain_9                BP_MOD_9_VOLUME
-node_set vocoder_output.gain_10               BP_MOD_10_VOLUME
-node_set vocoder_output.gain_11               BP_MOD_11_VOLUME
-node_set vocoder_output.gain_12               BP_MOD_12_VOLUME
-
-node_create adder vocoder_output_total [n = 1]
-node_set vocoder_output_total.input_1         vocoder_output
-node_set vocoder_output_total.gain_1          25.0
-
-
-# Key output
-node_create oscillator wave [voice = true]
-node_set wave.sample                          sawtooth
-node_set wave.frequency                       key_frequency
-node_set wave.amplitude                       key_velocity
-
-node_set carrier.input                        wave
-
+# Audio output
+node_create label vocoder_output
 node_create audio_output output
-node_set output.channel_1                     vocoder_output_total
+node_set output.channel_1 vocoder_output
+
+# Modulator filters
+node_create lowpass MOD_LP [order = 3, input = modulator]
+node_create bandpass MOD_BP_1 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_2 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_3 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_4 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_5 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_6 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_7 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_8 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_9 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_10 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_11 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_12 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_13 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_14 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_15 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_16 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_17 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_18 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_19 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_20 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_21 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_22 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_23 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_24 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_25 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_26 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_27 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_28 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_29 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_30 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create highpass MOD_HP [order = 3, input = modulator]
+
+# Envelope followers
+node_create follower MOD_FOLLOWER_LP [input = MOD_LP]
+node_create follower MOD_FOLLOWER_BP_1 [input = MOD_BP_1]
+node_create follower MOD_FOLLOWER_BP_2 [input = MOD_BP_2]
+node_create follower MOD_FOLLOWER_BP_3 [input = MOD_BP_3]
+node_create follower MOD_FOLLOWER_BP_4 [input = MOD_BP_4]
+node_create follower MOD_FOLLOWER_BP_5 [input = MOD_BP_5]
+node_create follower MOD_FOLLOWER_BP_6 [input = MOD_BP_6]
+node_create follower MOD_FOLLOWER_BP_7 [input = MOD_BP_7]
+node_create follower MOD_FOLLOWER_BP_8 [input = MOD_BP_8]
+node_create follower MOD_FOLLOWER_BP_9 [input = MOD_BP_9]
+node_create follower MOD_FOLLOWER_BP_10 [input = MOD_BP_10]
+node_create follower MOD_FOLLOWER_BP_11 [input = MOD_BP_11]
+node_create follower MOD_FOLLOWER_BP_12 [input = MOD_BP_12]
+node_create follower MOD_FOLLOWER_BP_13 [input = MOD_BP_13]
+node_create follower MOD_FOLLOWER_BP_14 [input = MOD_BP_14]
+node_create follower MOD_FOLLOWER_BP_15 [input = MOD_BP_15]
+node_create follower MOD_FOLLOWER_BP_16 [input = MOD_BP_16]
+node_create follower MOD_FOLLOWER_BP_17 [input = MOD_BP_17]
+node_create follower MOD_FOLLOWER_BP_18 [input = MOD_BP_18]
+node_create follower MOD_FOLLOWER_BP_19 [input = MOD_BP_19]
+node_create follower MOD_FOLLOWER_BP_20 [input = MOD_BP_20]
+node_create follower MOD_FOLLOWER_BP_21 [input = MOD_BP_21]
+node_create follower MOD_FOLLOWER_BP_22 [input = MOD_BP_22]
+node_create follower MOD_FOLLOWER_BP_23 [input = MOD_BP_23]
+node_create follower MOD_FOLLOWER_BP_24 [input = MOD_BP_24]
+node_create follower MOD_FOLLOWER_BP_25 [input = MOD_BP_25]
+node_create follower MOD_FOLLOWER_BP_26 [input = MOD_BP_26]
+node_create follower MOD_FOLLOWER_BP_27 [input = MOD_BP_27]
+node_create follower MOD_FOLLOWER_BP_28 [input = MOD_BP_28]
+node_create follower MOD_FOLLOWER_BP_29 [input = MOD_BP_29]
+node_create follower MOD_FOLLOWER_BP_30 [input = MOD_BP_30]
+node_create follower MOD_FOLLOWER_HP [input = MOD_HP]
+
+# Carrier filters
+node_create lowpass CAR_LP [order = 3, input = carrier]
+node_create bandpass CAR_BP_1 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_2 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_3 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_4 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_5 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_6 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_7 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_8 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_9 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_10 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_11 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_12 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_13 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_14 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_15 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_16 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_17 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_18 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_19 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_20 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_21 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_22 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_23 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_24 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_25 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_26 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_27 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_28 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_29 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_30 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create highpass CAR_HP [order = 3, input = carrier]
+
+# Equalizer
+node_create adder MOD_EQ_GAIN_LP [n = 1, input_1 = MOD_FOLLOWER_LP]
+node_create adder MOD_EQ_GAIN_1 [n = 1, input_1 = MOD_FOLLOWER_BP_1]
+node_create adder MOD_EQ_GAIN_2 [n = 1, input_1 = MOD_FOLLOWER_BP_2]
+node_create adder MOD_EQ_GAIN_3 [n = 1, input_1 = MOD_FOLLOWER_BP_3]
+node_create adder MOD_EQ_GAIN_4 [n = 1, input_1 = MOD_FOLLOWER_BP_4]
+node_create adder MOD_EQ_GAIN_5 [n = 1, input_1 = MOD_FOLLOWER_BP_5]
+node_create adder MOD_EQ_GAIN_6 [n = 1, input_1 = MOD_FOLLOWER_BP_6]
+node_create adder MOD_EQ_GAIN_7 [n = 1, input_1 = MOD_FOLLOWER_BP_7]
+node_create adder MOD_EQ_GAIN_8 [n = 1, input_1 = MOD_FOLLOWER_BP_8]
+node_create adder MOD_EQ_GAIN_9 [n = 1, input_1 = MOD_FOLLOWER_BP_9]
+node_create adder MOD_EQ_GAIN_10 [n = 1, input_1 = MOD_FOLLOWER_BP_10]
+node_create adder MOD_EQ_GAIN_11 [n = 1, input_1 = MOD_FOLLOWER_BP_11]
+node_create adder MOD_EQ_GAIN_12 [n = 1, input_1 = MOD_FOLLOWER_BP_12]
+node_create adder MOD_EQ_GAIN_13 [n = 1, input_1 = MOD_FOLLOWER_BP_13]
+node_create adder MOD_EQ_GAIN_14 [n = 1, input_1 = MOD_FOLLOWER_BP_14]
+node_create adder MOD_EQ_GAIN_15 [n = 1, input_1 = MOD_FOLLOWER_BP_15]
+node_create adder MOD_EQ_GAIN_16 [n = 1, input_1 = MOD_FOLLOWER_BP_16]
+node_create adder MOD_EQ_GAIN_17 [n = 1, input_1 = MOD_FOLLOWER_BP_17]
+node_create adder MOD_EQ_GAIN_18 [n = 1, input_1 = MOD_FOLLOWER_BP_18]
+node_create adder MOD_EQ_GAIN_19 [n = 1, input_1 = MOD_FOLLOWER_BP_19]
+node_create adder MOD_EQ_GAIN_20 [n = 1, input_1 = MOD_FOLLOWER_BP_20]
+node_create adder MOD_EQ_GAIN_21 [n = 1, input_1 = MOD_FOLLOWER_BP_21]
+node_create adder MOD_EQ_GAIN_22 [n = 1, input_1 = MOD_FOLLOWER_BP_22]
+node_create adder MOD_EQ_GAIN_23 [n = 1, input_1 = MOD_FOLLOWER_BP_23]
+node_create adder MOD_EQ_GAIN_24 [n = 1, input_1 = MOD_FOLLOWER_BP_24]
+node_create adder MOD_EQ_GAIN_25 [n = 1, input_1 = MOD_FOLLOWER_BP_25]
+node_create adder MOD_EQ_GAIN_26 [n = 1, input_1 = MOD_FOLLOWER_BP_26]
+node_create adder MOD_EQ_GAIN_27 [n = 1, input_1 = MOD_FOLLOWER_BP_27]
+node_create adder MOD_EQ_GAIN_28 [n = 1, input_1 = MOD_FOLLOWER_BP_28]
+node_create adder MOD_EQ_GAIN_29 [n = 1, input_1 = MOD_FOLLOWER_BP_29]
+node_create adder MOD_EQ_GAIN_30 [n = 1, input_1 = MOD_FOLLOWER_BP_30]
+node_create adder MOD_EQ_GAIN_HP [n = 1, input_1 = MOD_FOLLOWER_HP]
+
+# Adders
+node_create adder vocoder_output_8 [n = 8]
+node_set vocoder_output_8.input_1 CAR_LP
+node_set vocoder_output_8.input_2 CAR_BP_1
+node_set vocoder_output_8.input_3 CAR_BP_2
+node_set vocoder_output_8.input_4 CAR_BP_3
+node_set vocoder_output_8.input_5 CAR_BP_4
+node_set vocoder_output_8.input_6 CAR_BP_5
+node_set vocoder_output_8.input_7 CAR_BP_6
+node_set vocoder_output_8.input_8 CAR_HP
+
+node_set vocoder_output_8.gain_1 MOD_EQ_GAIN_LP
+node_set vocoder_output_8.gain_2 MOD_EQ_GAIN_1
+node_set vocoder_output_8.gain_3 MOD_EQ_GAIN_2
+node_set vocoder_output_8.gain_4 MOD_EQ_GAIN_3
+node_set vocoder_output_8.gain_5 MOD_EQ_GAIN_4
+node_set vocoder_output_8.gain_6 MOD_EQ_GAIN_5
+node_set vocoder_output_8.gain_7 MOD_EQ_GAIN_6
+node_set vocoder_output_8.gain_8 MOD_EQ_GAIN_HP
+
+node_create adder vocoder_output_16 [n = 16]
+node_set vocoder_output_16.input_1 CAR_LP
+node_set vocoder_output_16.input_2 CAR_BP_1
+node_set vocoder_output_16.input_3 CAR_BP_2
+node_set vocoder_output_16.input_4 CAR_BP_3
+node_set vocoder_output_16.input_5 CAR_BP_4
+node_set vocoder_output_16.input_6 CAR_BP_5
+node_set vocoder_output_16.input_7 CAR_BP_6
+node_set vocoder_output_16.input_8 CAR_BP_7
+node_set vocoder_output_16.input_9 CAR_BP_8
+node_set vocoder_output_16.input_10 CAR_BP_9
+node_set vocoder_output_16.input_11 CAR_BP_10
+node_set vocoder_output_16.input_12 CAR_BP_11
+node_set vocoder_output_16.input_13 CAR_BP_12
+node_set vocoder_output_16.input_14 CAR_BP_13
+node_set vocoder_output_16.input_15 CAR_BP_14
+node_set vocoder_output_16.input_16 CAR_HP
+
+node_set vocoder_output_16.gain_1 MOD_EQ_GAIN_LP
+node_set vocoder_output_16.gain_2 MOD_EQ_GAIN_1
+node_set vocoder_output_16.gain_3 MOD_EQ_GAIN_2
+node_set vocoder_output_16.gain_4 MOD_EQ_GAIN_3
+node_set vocoder_output_16.gain_5 MOD_EQ_GAIN_4
+node_set vocoder_output_16.gain_6 MOD_EQ_GAIN_5
+node_set vocoder_output_16.gain_7 MOD_EQ_GAIN_6
+node_set vocoder_output_16.gain_8 MOD_EQ_GAIN_7
+node_set vocoder_output_16.gain_9 MOD_EQ_GAIN_8
+node_set vocoder_output_16.gain_10 MOD_EQ_GAIN_9
+node_set vocoder_output_16.gain_11 MOD_EQ_GAIN_10
+node_set vocoder_output_16.gain_12 MOD_EQ_GAIN_11
+node_set vocoder_output_16.gain_13 MOD_EQ_GAIN_12
+node_set vocoder_output_16.gain_14 MOD_EQ_GAIN_13
+node_set vocoder_output_16.gain_15 MOD_EQ_GAIN_14
+node_set vocoder_output_16.gain_16 MOD_EQ_GAIN_HP
+
+node_create adder vocoder_output_24 [n = 24]
+node_set vocoder_output_24.input_1 CAR_LP
+node_set vocoder_output_24.input_2 CAR_BP_1
+node_set vocoder_output_24.input_3 CAR_BP_2
+node_set vocoder_output_24.input_4 CAR_BP_3
+node_set vocoder_output_24.input_5 CAR_BP_4
+node_set vocoder_output_24.input_6 CAR_BP_5
+node_set vocoder_output_24.input_7 CAR_BP_6
+node_set vocoder_output_24.input_8 CAR_BP_7
+node_set vocoder_output_24.input_9 CAR_BP_8
+node_set vocoder_output_24.input_10 CAR_BP_9
+node_set vocoder_output_24.input_11 CAR_BP_10
+node_set vocoder_output_24.input_12 CAR_BP_11
+node_set vocoder_output_24.input_13 CAR_BP_12
+node_set vocoder_output_24.input_14 CAR_BP_13
+node_set vocoder_output_24.input_15 CAR_BP_14
+node_set vocoder_output_24.input_16 CAR_BP_15
+node_set vocoder_output_24.input_17 CAR_BP_16
+node_set vocoder_output_24.input_18 CAR_BP_17
+node_set vocoder_output_24.input_19 CAR_BP_18
+node_set vocoder_output_24.input_20 CAR_BP_19
+node_set vocoder_output_24.input_21 CAR_BP_20
+node_set vocoder_output_24.input_22 CAR_BP_21
+node_set vocoder_output_24.input_23 CAR_BP_22
+node_set vocoder_output_24.input_24 CAR_HP
+
+node_set vocoder_output_24.gain_1 MOD_EQ_GAIN_LP
+node_set vocoder_output_24.gain_2 MOD_EQ_GAIN_1
+node_set vocoder_output_24.gain_3 MOD_EQ_GAIN_2
+node_set vocoder_output_24.gain_4 MOD_EQ_GAIN_3
+node_set vocoder_output_24.gain_5 MOD_EQ_GAIN_4
+node_set vocoder_output_24.gain_6 MOD_EQ_GAIN_5
+node_set vocoder_output_24.gain_7 MOD_EQ_GAIN_6
+node_set vocoder_output_24.gain_8 MOD_EQ_GAIN_7
+node_set vocoder_output_24.gain_9 MOD_EQ_GAIN_8
+node_set vocoder_output_24.gain_10 MOD_EQ_GAIN_9
+node_set vocoder_output_24.gain_11 MOD_EQ_GAIN_10
+node_set vocoder_output_24.gain_12 MOD_EQ_GAIN_11
+node_set vocoder_output_24.gain_13 MOD_EQ_GAIN_12
+node_set vocoder_output_24.gain_14 MOD_EQ_GAIN_13
+node_set vocoder_output_24.gain_15 MOD_EQ_GAIN_14
+node_set vocoder_output_24.gain_16 MOD_EQ_GAIN_15
+node_set vocoder_output_24.gain_17 MOD_EQ_GAIN_16
+node_set vocoder_output_24.gain_18 MOD_EQ_GAIN_17
+node_set vocoder_output_24.gain_19 MOD_EQ_GAIN_18
+node_set vocoder_output_24.gain_20 MOD_EQ_GAIN_19
+node_set vocoder_output_24.gain_21 MOD_EQ_GAIN_20
+node_set vocoder_output_24.gain_22 MOD_EQ_GAIN_21
+node_set vocoder_output_24.gain_23 MOD_EQ_GAIN_22
+node_set vocoder_output_24.gain_24 MOD_EQ_GAIN_HP
+
+node_create adder vocoder_output_32 [n = 32]
+node_set vocoder_output_32.input_1 CAR_LP
+node_set vocoder_output_32.input_2 CAR_BP_1
+node_set vocoder_output_32.input_3 CAR_BP_2
+node_set vocoder_output_32.input_4 CAR_BP_3
+node_set vocoder_output_32.input_5 CAR_BP_4
+node_set vocoder_output_32.input_6 CAR_BP_5
+node_set vocoder_output_32.input_7 CAR_BP_6
+node_set vocoder_output_32.input_8 CAR_BP_7
+node_set vocoder_output_32.input_9 CAR_BP_8
+node_set vocoder_output_32.input_10 CAR_BP_9
+node_set vocoder_output_32.input_11 CAR_BP_10
+node_set vocoder_output_32.input_12 CAR_BP_11
+node_set vocoder_output_32.input_13 CAR_BP_12
+node_set vocoder_output_32.input_14 CAR_BP_13
+node_set vocoder_output_32.input_15 CAR_BP_14
+node_set vocoder_output_32.input_16 CAR_BP_15
+node_set vocoder_output_32.input_17 CAR_BP_16
+node_set vocoder_output_32.input_18 CAR_BP_17
+node_set vocoder_output_32.input_19 CAR_BP_18
+node_set vocoder_output_32.input_20 CAR_BP_19
+node_set vocoder_output_32.input_21 CAR_BP_20
+node_set vocoder_output_32.input_22 CAR_BP_21
+node_set vocoder_output_32.input_23 CAR_BP_22
+node_set vocoder_output_32.input_24 CAR_BP_23
+node_set vocoder_output_32.input_25 CAR_BP_24
+node_set vocoder_output_32.input_26 CAR_BP_25
+node_set vocoder_output_32.input_27 CAR_BP_26
+node_set vocoder_output_32.input_28 CAR_BP_27
+node_set vocoder_output_32.input_29 CAR_BP_28
+node_set vocoder_output_32.input_30 CAR_BP_29
+node_set vocoder_output_32.input_31 CAR_BP_30
+node_set vocoder_output_32.input_32 CAR_HP
+
+node_set vocoder_output_32.gain_1 MOD_EQ_GAIN_LP
+node_set vocoder_output_32.gain_2 MOD_EQ_GAIN_1
+node_set vocoder_output_32.gain_3 MOD_EQ_GAIN_2
+node_set vocoder_output_32.gain_4 MOD_EQ_GAIN_3
+node_set vocoder_output_32.gain_5 MOD_EQ_GAIN_4
+node_set vocoder_output_32.gain_6 MOD_EQ_GAIN_5
+node_set vocoder_output_32.gain_7 MOD_EQ_GAIN_6
+node_set vocoder_output_32.gain_8 MOD_EQ_GAIN_7
+node_set vocoder_output_32.gain_9 MOD_EQ_GAIN_8
+node_set vocoder_output_32.gain_10 MOD_EQ_GAIN_9
+node_set vocoder_output_32.gain_11 MOD_EQ_GAIN_10
+node_set vocoder_output_32.gain_12 MOD_EQ_GAIN_11
+node_set vocoder_output_32.gain_13 MOD_EQ_GAIN_12
+node_set vocoder_output_32.gain_14 MOD_EQ_GAIN_13
+node_set vocoder_output_32.gain_15 MOD_EQ_GAIN_14
+node_set vocoder_output_32.gain_16 MOD_EQ_GAIN_15
+node_set vocoder_output_32.gain_17 MOD_EQ_GAIN_16
+node_set vocoder_output_32.gain_18 MOD_EQ_GAIN_17
+node_set vocoder_output_32.gain_19 MOD_EQ_GAIN_18
+node_set vocoder_output_32.gain_20 MOD_EQ_GAIN_19
+node_set vocoder_output_32.gain_21 MOD_EQ_GAIN_20
+node_set vocoder_output_32.gain_22 MOD_EQ_GAIN_21
+node_set vocoder_output_32.gain_23 MOD_EQ_GAIN_22
+node_set vocoder_output_32.gain_24 MOD_EQ_GAIN_23
+node_set vocoder_output_32.gain_25 MOD_EQ_GAIN_24
+node_set vocoder_output_32.gain_26 MOD_EQ_GAIN_25
+node_set vocoder_output_32.gain_27 MOD_EQ_GAIN_26
+node_set vocoder_output_32.gain_28 MOD_EQ_GAIN_27
+node_set vocoder_output_32.gain_29 MOD_EQ_GAIN_28
+node_set vocoder_output_32.gain_30 MOD_EQ_GAIN_29
+node_set vocoder_output_32.gain_31 MOD_FOLLOWER_BP_30
+node_set vocoder_output_32.gain_32 MOD_FOLLOWER_HP
+
+# Default settings
+include settings_8.synth

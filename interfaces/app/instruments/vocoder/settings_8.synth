@@ -1,0 +1,35 @@
+# Cutoff frequencies
+node_set MOD_LP.cutoff    50
+node_set CAR_LP.cutoff    50
+node_set MOD_BP_1.center  110
+node_set CAR_BP_1.center  110
+node_set MOD_BP_2.center  244
+node_set CAR_BP_2.center  244
+node_set MOD_BP_3.center  538
+node_set CAR_BP_3.center  538
+node_set MOD_BP_4.center  1189
+node_set CAR_BP_4.center  1189
+node_set MOD_BP_5.center  2625
+node_set CAR_BP_5.center  2625
+node_set MOD_BP_6.center  5797
+node_set CAR_BP_6.center  5797
+node_set MOD_HP.cutoff    12800
+node_set CAR_HP.cutoff    12800
+
+# Equalizer
+node_set MOD_EQ_GAIN_LP.gain_1 eq_1
+node_set MOD_EQ_GAIN_1.gain_1 eq_2
+node_set MOD_EQ_GAIN_2.gain_1 eq_3
+node_set MOD_EQ_GAIN_3.gain_1 eq_4
+node_set MOD_EQ_GAIN_4.gain_1 eq_5
+node_set MOD_EQ_GAIN_5.gain_1 eq_6
+node_set MOD_EQ_GAIN_6.gain_1 eq_7
+node_set MOD_EQ_GAIN_HP.gain_1 eq_8
+
+# (de)activate nodes
+node_activate vocoder_output_8
+node_deactivate vocoder_output_16
+node_deactivate vocoder_output_24
+node_deactivate vocoder_output_32
+
+node_set vocoder_output.value vocoder_output_8

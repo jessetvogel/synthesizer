@@ -171,6 +171,17 @@ label {
   padding-right: 2px;
 }
 
+.block-row {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.block-row > .slider, .block-row > .knob, .block-row > .switch {
+  margin: auto;
+}
+
 /* input */
 input[type=checkbox] {
   display: none;
