@@ -1,0 +1,130 @@
+# Parameters
+node_create label bandwidth [value = 1.25]
+
+# Carrier / modulator signal
+node_create audio_input modulator
+node_create label carrier [value = collector]
+
+# Modulator filters
+node_create lowpass MOD_LP [order = 3, input = modulator]
+node_create bandpass MOD_BP_1 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_2 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_3 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_4 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_5 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_6 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_7 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_8 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_9 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_10 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_11 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_12 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_13 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create bandpass MOD_BP_14 [order = 3, input = modulator, bandwidth = bandwidth]
+node_create highpass MOD_HP [order = 3, input = modulator]
+
+# Envelope followers
+node_create follower MOD_FOLLOWER_LP [input = MOD_LP]
+node_create follower MOD_FOLLOWER_BP_1 [input = MOD_BP_1]
+node_create follower MOD_FOLLOWER_BP_2 [input = MOD_BP_2]
+node_create follower MOD_FOLLOWER_BP_3 [input = MOD_BP_3]
+node_create follower MOD_FOLLOWER_BP_4 [input = MOD_BP_4]
+node_create follower MOD_FOLLOWER_BP_5 [input = MOD_BP_5]
+node_create follower MOD_FOLLOWER_BP_6 [input = MOD_BP_6]
+node_create follower MOD_FOLLOWER_BP_7 [input = MOD_BP_7]
+node_create follower MOD_FOLLOWER_BP_8 [input = MOD_BP_8]
+node_create follower MOD_FOLLOWER_BP_9 [input = MOD_BP_9]
+node_create follower MOD_FOLLOWER_BP_10 [input = MOD_BP_10]
+node_create follower MOD_FOLLOWER_BP_11 [input = MOD_BP_11]
+node_create follower MOD_FOLLOWER_BP_12 [input = MOD_BP_12]
+node_create follower MOD_FOLLOWER_BP_13 [input = MOD_BP_13]
+node_create follower MOD_FOLLOWER_BP_14 [input = MOD_BP_14]
+node_create follower MOD_FOLLOWER_HP [input = MOD_HP]
+
+# Carrier filters
+node_create lowpass CAR_LP [order = 3, input = carrier]
+node_create bandpass CAR_BP_1 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_2 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_3 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_4 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_5 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_6 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_7 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_8 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_9 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_10 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_11 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_12 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_13 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create bandpass CAR_BP_14 [order = 3, input = carrier, bandwidth = bandwidth]
+node_create highpass CAR_HP [order = 3, input = carrier]
+
+# Adder
+node_create adder vocoder [n = 16]
+node_set vocoder.input_1 CAR_LP
+node_set vocoder.input_2 CAR_BP_1
+node_set vocoder.input_3 CAR_BP_2
+node_set vocoder.input_4 CAR_BP_3
+node_set vocoder.input_5 CAR_BP_4
+node_set vocoder.input_6 CAR_BP_5
+node_set vocoder.input_7 CAR_BP_6
+node_set vocoder.input_8 CAR_BP_7
+node_set vocoder.input_9 CAR_BP_8
+node_set vocoder.input_10 CAR_BP_9
+node_set vocoder.input_11 CAR_BP_10
+node_set vocoder.input_12 CAR_BP_11
+node_set vocoder.input_13 CAR_BP_12
+node_set vocoder.input_14 CAR_BP_13
+node_set vocoder.input_15 CAR_BP_14
+node_set vocoder.input_16 CAR_HP
+
+node_set vocoder.gain_1 MOD_FOLLOWER_LP
+node_set vocoder.gain_2 MOD_FOLLOWER_BP_1
+node_set vocoder.gain_3 MOD_FOLLOWER_BP_2
+node_set vocoder.gain_4 MOD_FOLLOWER_BP_3
+node_set vocoder.gain_5 MOD_FOLLOWER_BP_4
+node_set vocoder.gain_6 MOD_FOLLOWER_BP_5
+node_set vocoder.gain_7 MOD_FOLLOWER_BP_6
+node_set vocoder.gain_8 MOD_FOLLOWER_BP_7
+node_set vocoder.gain_9 MOD_FOLLOWER_BP_8
+node_set vocoder.gain_10 MOD_FOLLOWER_BP_9
+node_set vocoder.gain_11 MOD_FOLLOWER_BP_10
+node_set vocoder.gain_12 MOD_FOLLOWER_BP_11
+node_set vocoder.gain_13 MOD_FOLLOWER_BP_12
+node_set vocoder.gain_14 MOD_FOLLOWER_BP_13
+node_set vocoder.gain_15 MOD_FOLLOWER_BP_14
+node_set vocoder.gain_16 MOD_FOLLOWER_HP
+
+# Cutoff frequencies
+node_set MOD_LP.cutoff    50
+node_set CAR_LP.cutoff    50
+node_set MOD_BP_1.center  72
+node_set CAR_BP_1.center  72
+node_set MOD_BP_2.center  105
+node_set CAR_BP_2.center  105
+node_set MOD_BP_3.center  152
+node_set CAR_BP_3.center  152
+node_set MOD_BP_4.center  219
+node_set CAR_BP_4.center  219
+node_set MOD_BP_5.center  317
+node_set CAR_BP_5.center  317
+node_set MOD_BP_6.center  459
+node_set CAR_BP_6.center  459
+node_set MOD_BP_7.center  665
+node_set CAR_BP_7.center  665
+node_set MOD_BP_8.center  962
+node_set CAR_BP_8.center  962
+node_set MOD_BP_9.center  1393
+node_set CAR_BP_9.center  1393
+node_set MOD_BP_10.center  2016
+node_set CAR_BP_10.center  2016
+node_set MOD_BP_11.center  2918
+node_set CAR_BP_11.center  2918
+node_set MOD_BP_12.center  4222
+node_set CAR_BP_12.center  4222
+node_set MOD_BP_13.center  6111
+node_set CAR_BP_13.center  6111
+node_set MOD_BP_14.center  8844
+node_set CAR_BP_14.center  8844
+node_set MOD_HP.cutoff    12800
+node_set CAR_HP.cutoff    12800

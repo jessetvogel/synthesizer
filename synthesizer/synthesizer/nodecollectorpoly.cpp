@@ -95,7 +95,8 @@ void NodeCollectorPoly::apply() {
         nodes->resetNodesVoiceDependent();
         
         // Update node on which input depends
-        input->pointer->getNode()->update();
+        Node* node = input->pointer->getNode();
+        if(node != NULL) node->update();
         
         // Add to output
         float* input = this->input->pointer->getBuffer();

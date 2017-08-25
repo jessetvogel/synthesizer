@@ -1,424 +1,2632 @@
-[15:54:07] status midi_devices
-[15:54:07] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
-[15:54:08] include settings_16.synth
-[15:54:08] {}
-[15:54:19] node_set bandwidth.midi_cc -1
-[15:54:19] {}
-[15:54:20] node_set bandwidth.midi_cc 21
-[15:54:20] {}
-[15:54:33] include settings_8.synth
-[15:54:33] {}
-[15:54:34] include settings_24.synth
-[15:54:34] {}
-[15:54:35] include settings_32.synth
-[15:54:35] {}
-[15:54:39] include settings_8.synth
-[15:54:39] {}
-[15:54:40] include settings_16.synth
-[15:54:40] {}
-[15:54:40] include settings_24.synth
-[15:54:40] {}
-[15:54:41] include settings_32.synth
-[15:54:41] {}
-[15:54:58] status nodes
-[15:54:58] {"nodes":[{"id":"bandwidth","type":"parameter","voiceDependent":false},{"id":"eq_1","type":"parameter","voiceDependent":false},{"id":"eq_2","type":"parameter","voiceDependent":false},{"id":"eq_3","type":"parameter","voiceDependent":false},{"id":"eq_4","type":"parameter","voiceDependent":false},{"id":"eq_5","type":"parameter","voiceDependent":false},{"id":"eq_6","type":"parameter","voiceDependent":false},{"id":"eq_7","type":"parameter","voiceDependent":false},{"id":"eq_8","type":"parameter","voiceDependent":false},{"id":"wave","type":"oscillator","voiceDependent":true},{"id":"carrier","type":"collector_poly","voiceDependent":false},{"id":"vocoder_output","type":"label","voiceDependent":false},{"id":"output","type":"audio_output","voiceDependent":false},{"id":"MOD_LP","type":"lowpass","voiceDependent":false},{"id":"MOD_BP_1","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_2","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_3","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_4","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_5","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_6","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_7","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_8","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_9","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_10","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_11","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_12","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_13","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_14","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_15","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_16","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_17","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_18","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_19","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_20","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_21","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_22","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_23","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_24","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_25","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_26","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_27","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_28","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_29","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_30","type":"bandpass","voiceDependent":false},{"id":"MOD_HP","type":"highpass","voiceDependent":false},{"id":"MOD_FOLLOWER_LP","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_1","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_2","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_3","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_4","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_5","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_6","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_7","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_8","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_9","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_10","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_11","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_12","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_13","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_14","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_15","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_16","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_17","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_18","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_19","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_20","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_21","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_22","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_23","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_24","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_25","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_26","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_27","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_28","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_29","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_30","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_HP","type":"follower","voiceDependent":false},{"id":"CAR_LP","type":"lowpass","voiceDependent":false},{"id":"CAR_BP_1","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_2","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_3","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_4","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_5","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_6","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_7","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_8","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_9","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_10","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_11","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_12","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_13","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_14","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_15","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_16","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_17","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_18","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_19","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_20","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_21","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_22","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_23","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_24","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_25","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_26","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_27","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_28","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_29","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_30","type":"bandpass","voiceDependent":false},{"id":"CAR_HP","type":"highpass","voiceDependent":false},{"id":"MOD_EQ_GAIN_LP","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_1","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_2","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_3","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_4","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_5","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_6","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_7","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_8","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_9","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_10","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_11","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_12","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_13","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_14","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_15","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_16","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_17","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_18","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_19","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_20","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_21","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_22","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_23","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_24","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_25","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_26","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_27","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_28","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_29","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_30","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_HP","type":"adder","voiceDependent":false},{"id":"vocoder_output_8","type":"adder","voiceDependent":false},{"id":"vocoder_output_16","type":"adder","voiceDependent":false},{"id":"vocoder_output_24","type":"adder","voiceDependent":false},{"id":"vocoder_output_32","type":"adder","voiceDependent":false}]}
-[15:55:18] include settings_16.synth
-[15:55:18] {}
-[15:55:33] status
-[15:55:33] {"error":[{"message":"Command not recognised"}],"command":"status"}
-[15:55:36] status
-[15:55:36] {"error":[{"message":"Command not recognised"}],"command":"status"}
-[15:55:38] x
-[15:55:38] {"error":[{"message":"Command not recognised"}],"command":"x"}
-[15:55:45] include settings_16.synth
-[15:55:45] {}
-[15:56:02] play stop
-[15:56:02] {"state":{"playing":false}}
-[15:56:09] play start
-[15:56:09] {"state":{"playing":true}}
-[15:56:12] play stop
-[15:56:12] {"state":{"playing":false}}
-[15:56:19] monitor eq_1
-[15:56:19] {"monitor":[1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000]}
-[15:56:24] monitor eq_2
-[15:56:24] {"monitor":[1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000,1.000]}
-[15:56:28] monitor MOD_EQ_GAIN_2
-[15:56:28] {"monitor":[nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan]}
-[15:56:39] status midi_devices
-[15:56:39] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
-[15:56:39] include settings_16.synth
-[15:56:39] {}
-[15:56:39] node_set bandwidth.midi_cc 21
-[15:56:39] {}
-[15:56:39] node_set bandwidth.value 0.5511811023622047
-[15:56:39] {}
-[15:56:45] include settings_24.synth
-[15:56:45] {}
-[15:56:45] include settings_32.synth
-[15:56:45] {}
-[15:56:46] include settings_8.synth
-[15:56:46] {}
-[15:57:16] play stop
-[15:57:16] {"state":{"playing":false}}
-[15:57:16] clear
-[15:57:16] {}
-[15:57:16] settings_set root_directory ../instruments/vocoder
-[15:57:16] {}
-[15:57:16] include instrument.synth
-[15:57:16] {}
-[15:57:17] play start
-[15:57:17] {"state":{"playing":true}}
-[15:57:18] status midi_devices
-[15:57:18] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
-[15:57:18] include settings_16.synth
-[15:57:18] {}
-[15:57:18] node_set bandwidth.midi_cc 21
-[15:57:18] {}
-[15:57:18] node_set bandwidth.value 0.5511811023622047
-[15:57:18] {}
-[15:57:22] node_set eq_1.midi_cc -1
-[15:57:22] {}
-[15:57:26] status midi_devices input_devices output_devices settings
-[15:57:26] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
-[15:57:27] midi_add_device 1
-[15:57:27] {}
-[15:57:28] audio_set_input_device 0
-[15:57:28] {}
-[15:57:30] audio_set_input_device 2
-[15:57:30] {}
-[15:57:33] status midi_devices
-[15:57:33] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
-[15:57:34] include settings_16.synth
-[15:57:34] {}
-[15:57:34] node_set eq_1.midi_cc -1
-[15:57:34] {}
-[15:57:34] node_set eq_1.value 0.5
-[15:57:34] {}
-[15:57:34] node_set eq_2.midi_cc -1
-[15:57:34] {}
-[15:57:34] node_set eq_2.value 0.5
-[15:57:34] {}
-[15:57:34] node_set eq_3.midi_cc -1
-[15:57:34] {}
-[15:57:34] node_set eq_3.value 0.5
-[15:57:34] {}
-[15:57:34] node_set eq_4.midi_cc -1
-[15:57:34] {}
-[15:57:34] node_set eq_4.value 0.5
-[15:57:34] {}
-[15:57:34] node_set eq_5.midi_cc -1
-[15:57:34] {}
-[15:57:34] node_set eq_5.value 0.5
-[15:57:34] {}
-[15:57:34] node_set eq_6.midi_cc -1
-[15:57:34] {}
-[15:57:34] node_set eq_6.value 0.5
-[15:57:34] {}
-[15:57:34] node_set eq_7.midi_cc -1
-[15:57:34] {}
-[15:57:34] node_set eq_7.value 0.5
-[15:57:34] {}
-[15:57:34] node_set eq_8.midi_cc -1
-[15:57:34] {}
-[15:57:34] node_set eq_8.value 0.5
-[15:57:34] {}
-[15:57:34] node_set bandwidth.midi_cc 21
-[15:57:34] {}
-[15:57:34] node_set bandwidth.value 0.5511811023622047
-[15:57:34] {}
-[15:57:34] node_set eq_1.midi_cc -1
-[15:57:34] {}
-[15:57:35] node_set eq_1.midi_cc 42
-[15:57:35] {}
-[15:57:37] node_set eq_2.midi_cc -1
-[15:57:37] {}
-[15:57:37] node_set eq_2.midi_cc 43
-[15:57:37] {}
-[15:57:43] node_set eq_1.midi_cc -1
-[15:57:43] {}
-[15:57:43] node_set eq_1.midi_cc 41
-[15:57:43] {}
-[15:57:44] node_set eq_2.midi_cc -1
-[15:57:44] {}
-[15:57:44] node_set eq_2.midi_cc 42
-[15:57:44] {}
-[15:57:45] node_set eq_3.midi_cc -1
-[15:57:45] {}
-[15:57:45] node_set eq_3.midi_cc 43
-[15:57:45] {}
-[15:57:46] node_set eq_4.midi_cc -1
-[15:57:46] {}
-[15:57:46] node_set eq_4.midi_cc 44
-[15:57:46] {}
-[15:57:47] node_set eq_5.midi_cc -1
-[15:57:47] {}
-[15:57:47] node_set eq_5.midi_cc 45
-[15:57:47] {}
-[15:57:48] node_set eq_6.midi_cc -1
-[15:57:48] {}
-[15:57:48] node_set eq_6.midi_cc 46
-[15:57:48] {}
-[15:57:49] node_set eq_7.midi_cc -1
-[15:57:49] {}
-[15:57:49] node_set eq_7.midi_cc 47
-[15:57:49] {}
-[15:57:50] node_set eq_8.midi_cc -1
-[15:57:50] {}
-[15:57:50] node_set eq_8.midi_cc 48
-[15:57:50] {}
-[15:58:27] include settings_8.synth
-[15:58:27] {}
-[15:58:30] include settings_16.synth
-[15:58:30] {}
-[15:58:33] include settings_24.synth
-[15:58:33] {}
-[15:58:34] include settings_24.synth
-[15:58:34] {}
-[15:58:37] include settings_32.synth
-[15:58:37] {}
-[15:59:35] include settings_16.synth
-[15:59:35] {}
-[15:59:56] status midi_devices input_devices output_devices settings
-[15:59:56] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":true},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
-[15:59:58] audio_set_input_device 0
-[15:59:58] {}
-[16:00:23] audio_set_input_device 2
-[16:00:23] {}
-[16:02:58] status midi_devices input_devices output_devices settings
-[16:02:58] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":true},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
-[16:03:01] audio_set_input_device 0
-[16:03:01] {}
-[16:07:52] include settings_24.synth
-[16:07:52] {}
-[16:11:19] include settings_32.synth
-[16:11:19] {}
-[16:11:21] include settings_32.synth
-[16:11:21] {}
-[16:12:33] include settings_24.synth
-[16:12:33] {}
-[16:12:38] include settings_16.synth
-[16:12:38] {}
-[16:14:46] status nodes
-[16:14:46] {"nodes":[{"id":"bandwidth","type":"parameter","voiceDependent":false},{"id":"eq_1","type":"parameter","voiceDependent":false},{"id":"eq_2","type":"parameter","voiceDependent":false},{"id":"eq_3","type":"parameter","voiceDependent":false},{"id":"eq_4","type":"parameter","voiceDependent":false},{"id":"eq_5","type":"parameter","voiceDependent":false},{"id":"eq_6","type":"parameter","voiceDependent":false},{"id":"eq_7","type":"parameter","voiceDependent":false},{"id":"eq_8","type":"parameter","voiceDependent":false},{"id":"wave","type":"oscillator","voiceDependent":true},{"id":"carrier","type":"collector_poly","voiceDependent":false},{"id":"vocoder_output","type":"label","voiceDependent":false},{"id":"output","type":"audio_output","voiceDependent":false},{"id":"MOD_LP","type":"lowpass","voiceDependent":false},{"id":"MOD_BP_1","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_2","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_3","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_4","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_5","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_6","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_7","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_8","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_9","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_10","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_11","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_12","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_13","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_14","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_15","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_16","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_17","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_18","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_19","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_20","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_21","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_22","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_23","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_24","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_25","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_26","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_27","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_28","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_29","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_30","type":"bandpass","voiceDependent":false},{"id":"MOD_HP","type":"highpass","voiceDependent":false},{"id":"MOD_FOLLOWER_LP","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_1","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_2","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_3","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_4","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_5","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_6","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_7","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_8","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_9","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_10","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_11","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_12","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_13","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_14","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_15","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_16","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_17","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_18","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_19","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_20","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_21","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_22","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_23","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_24","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_25","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_26","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_27","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_28","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_29","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_30","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_HP","type":"follower","voiceDependent":false},{"id":"CAR_LP","type":"lowpass","voiceDependent":false},{"id":"CAR_BP_1","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_2","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_3","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_4","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_5","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_6","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_7","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_8","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_9","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_10","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_11","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_12","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_13","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_14","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_15","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_16","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_17","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_18","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_19","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_20","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_21","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_22","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_23","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_24","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_25","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_26","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_27","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_28","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_29","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_30","type":"bandpass","voiceDependent":false},{"id":"CAR_HP","type":"highpass","voiceDependent":false},{"id":"MOD_EQ_GAIN_LP","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_1","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_2","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_3","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_4","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_5","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_6","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_7","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_8","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_9","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_10","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_11","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_12","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_13","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_14","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_15","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_16","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_17","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_18","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_19","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_20","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_21","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_22","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_23","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_24","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_25","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_26","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_27","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_28","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_29","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_30","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_HP","type":"adder","voiceDependent":false},{"id":"vocoder_output_8","type":"adder","voiceDependent":false},{"id":"vocoder_output_16","type":"adder","voiceDependent":false},{"id":"vocoder_output_24","type":"adder","voiceDependent":false},{"id":"vocoder_output_32","type":"adder","voiceDependent":false}]}
-[16:14:58] node_set bandwidth.min 0.5
-[16:14:58] {}
-[16:15:06] node_set bandwidth.max 2.0
-[16:15:06] {}
-[16:18:23] include settings_24.synth
-[16:18:23] {}
-[16:20:57] include settings_32.synth
-[16:20:57] {}
-[16:23:25] status midi_devices
-[16:23:25] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
-[16:23:25] include settings_32.synth
-[16:23:25] {}
-[16:23:25] node_set eq_1.midi_cc 41
-[16:23:25] {}
-[16:23:25] node_set eq_1.value 0.6771653543307087
-[16:23:25] {}
-[16:23:25] node_set eq_2.midi_cc 42
-[16:23:25] {}
-[16:23:25] node_set eq_2.value 0.7007874015748031
-[16:23:25] {}
-[16:23:25] node_set eq_3.midi_cc 43
-[16:23:25] {}
-[16:23:25] node_set eq_3.value 0.6929133858267716
-[16:23:25] {}
-[16:23:25] node_set eq_4.midi_cc 44
-[16:23:25] {}
-[16:23:25] node_set eq_4.value 0.6377952755905512
-[16:23:25] {}
-[16:23:25] node_set eq_5.midi_cc 45
-[16:23:25] {}
-[16:23:25] node_set eq_5.value 0.7559055118110236
-[16:23:25] {}
-[16:23:25] node_set eq_6.midi_cc 46
-[16:23:25] {}
-[16:23:25] node_set eq_6.value 0.7952755905511811
-[16:23:25] {}
-[16:23:25] node_set eq_7.midi_cc 47
-[16:23:25] {}
-[16:23:25] node_set eq_7.value 0.7952755905511811
-[16:23:25] {}
-[16:23:25] node_set eq_8.midi_cc 48
-[16:23:25] {}
-[16:23:25] node_set bandwidth.midi_cc 21
-[16:23:25] {}
-[16:23:25] node_set eq_8.value 0.5984251968503937
-[16:23:25] {}
-[16:23:25] node_set bandwidth.value 0.2992125984251969
-[16:23:25] {}
-[16:29:09] include settings_24.synth
-[16:29:09] {}
-[16:29:13] include settings_16.synth
-[16:29:13] {}
-[16:29:16] include settings_24.synth
-[16:29:16] {}
-[16:29:16] include settings_8.synth
-[16:29:16] {}
-[16:29:25] include settings_32.synth
-[16:29:25] {}
-[16:29:27] include settings_32.synth
-[16:29:27] {}
-[16:29:29] include settings_24.synth
-[16:29:29] {}
-[16:29:32] include settings_16.synth
-[16:29:32] {}
-[16:29:49] status midi_devices input_devices output_devices settings
-[16:29:49] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":true},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
-[16:29:51] status nodes
-[16:29:51] {"nodes":[{"id":"bandwidth","type":"parameter","voiceDependent":false},{"id":"eq_1","type":"parameter","voiceDependent":false},{"id":"eq_2","type":"parameter","voiceDependent":false},{"id":"eq_3","type":"parameter","voiceDependent":false},{"id":"eq_4","type":"parameter","voiceDependent":false},{"id":"eq_5","type":"parameter","voiceDependent":false},{"id":"eq_6","type":"parameter","voiceDependent":false},{"id":"eq_7","type":"parameter","voiceDependent":false},{"id":"eq_8","type":"parameter","voiceDependent":false},{"id":"wave","type":"oscillator","voiceDependent":true},{"id":"carrier","type":"collector_poly","voiceDependent":false},{"id":"vocoder_output","type":"label","voiceDependent":false},{"id":"output","type":"audio_output","voiceDependent":false},{"id":"MOD_LP","type":"lowpass","voiceDependent":false},{"id":"MOD_BP_1","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_2","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_3","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_4","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_5","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_6","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_7","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_8","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_9","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_10","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_11","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_12","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_13","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_14","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_15","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_16","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_17","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_18","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_19","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_20","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_21","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_22","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_23","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_24","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_25","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_26","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_27","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_28","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_29","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_30","type":"bandpass","voiceDependent":false},{"id":"MOD_HP","type":"highpass","voiceDependent":false},{"id":"MOD_FOLLOWER_LP","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_1","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_2","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_3","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_4","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_5","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_6","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_7","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_8","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_9","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_10","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_11","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_12","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_13","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_14","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_15","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_16","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_17","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_18","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_19","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_20","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_21","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_22","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_23","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_24","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_25","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_26","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_27","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_28","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_29","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_30","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_HP","type":"follower","voiceDependent":false},{"id":"CAR_LP","type":"lowpass","voiceDependent":false},{"id":"CAR_BP_1","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_2","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_3","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_4","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_5","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_6","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_7","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_8","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_9","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_10","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_11","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_12","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_13","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_14","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_15","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_16","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_17","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_18","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_19","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_20","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_21","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_22","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_23","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_24","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_25","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_26","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_27","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_28","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_29","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_30","type":"bandpass","voiceDependent":false},{"id":"CAR_HP","type":"highpass","voiceDependent":false},{"id":"MOD_EQ_GAIN_LP","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_1","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_2","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_3","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_4","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_5","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_6","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_7","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_8","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_9","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_10","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_11","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_12","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_13","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_14","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_15","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_16","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_17","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_18","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_19","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_20","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_21","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_22","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_23","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_24","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_25","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_26","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_27","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_28","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_29","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_30","type":"adder","voiceDependent":false},{"id":"MOD_EQ_GAIN_HP","type":"adder","voiceDependent":false},{"id":"vocoder_output_8","type":"adder","voiceDependent":false},{"id":"vocoder_output_16","type":"adder","voiceDependent":false},{"id":"vocoder_output_24","type":"adder","voiceDependent":false},{"id":"vocoder_output_32","type":"adder","voiceDependent":false}]}
-[16:29:57] monitor eq_1
-[16:29:57] {"monitor":[5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113,5.113]}
-[16:30:02] monitor MOD_EQ_GAIN_2
-[16:30:02] {"monitor":[0.235,0.235,0.235,0.236,0.236,0.236,0.236,0.236,0.236,0.237,0.237,0.237,0.237,0.237,0.238,0.238,0.238,0.238,0.238,0.239,0.239,0.239,0.239,0.240,0.240,0.240,0.240,0.240,0.241,0.241,0.241,0.241,0.242,0.242,0.242,0.242,0.242,0.243,0.243,0.243,0.243,0.243,0.244,0.244,0.244,0.244,0.244,0.245,0.245,0.245,0.245,0.245,0.246,0.246,0.246,0.246,0.246,0.246,0.247,0.247,0.247,0.247,0.247,0.247,0.247,0.248,0.248,0.248,0.248,0.248,0.248,0.248,0.248,0.248,0.248,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.249,0.248,0.248,0.248,0.248,0.248,0.248,0.248,0.248,0.248,0.247,0.247,0.247,0.247,0.247,0.247,0.246,0.246,0.246,0.246,0.246,0.245,0.245,0.245,0.245,0.244,0.244,0.244,0.243,0.243,0.243,0.242,0.242,0.242]}
-[16:30:22] monitor vocoder_output
-[16:30:22] {"monitor":[nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan,nan]}
-[16:30:35] status midi_devices
-[16:30:35] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
-[16:30:35] include settings_16.synth
-[16:30:35] {}
-[16:30:35] node_set eq_1.midi_cc 41
-[16:30:35] {}
-[16:30:35] node_set eq_1.value 0.6771653543307087
-[16:30:35] {}
-[16:30:35] node_set eq_2.midi_cc 42
-[16:30:35] {}
-[16:30:35] node_set eq_2.value 0.7007874015748031
-[16:30:35] {}
-[16:30:35] node_set eq_3.midi_cc 43
-[16:30:35] {}
-[16:30:35] node_set eq_3.value 0.6929133858267716
-[16:30:35] {}
-[16:30:35] node_set eq_4.midi_cc 44
-[16:30:35] {}
-[16:30:35] node_set eq_4.value 0.6377952755905512
-[16:30:35] {}
-[16:30:35] node_set eq_5.midi_cc 45
-[16:30:35] {}
-[16:30:35] node_set eq_5.value 0.7559055118110236
-[16:30:35] {}
-[16:30:35] node_set eq_6.midi_cc 46
-[16:30:35] {}
-[16:30:35] node_set eq_6.value 0.7952755905511811
-[16:30:35] {}
-[16:30:35] node_set eq_7.midi_cc 47
-[16:30:35] {}
-[16:30:35] node_set eq_7.value 0.7716535433070866
-[16:30:35] {}
-[16:30:35] node_set eq_8.value 0.5275590551181102
-[16:30:35] {}
-[16:30:35] node_set eq_8.midi_cc 48
-[16:30:35] {}
-[16:30:35] node_set bandwidth.midi_cc 21
-[16:30:35] {}
-[16:30:35] node_set bandwidth.value 0.30708661417322836
-[16:30:35] {}
-[16:30:44] play stop
-[16:30:44] {"state":{"playing":false}}
-[16:30:44] clear
-[16:30:44] {}
-[16:30:44] settings_set root_directory ../instruments/vocoder
-[16:30:44] {}
-[16:30:44] include instrument.synth
-[16:30:44] {}
-[16:30:45] play start
-[16:30:45] {"state":{"playing":true}}
-[16:30:45] status midi_devices
-[16:30:45] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
-[16:30:46] include settings_16.synth
-[16:30:46] {}
-[16:30:46] node_set eq_1.midi_cc 41
-[16:30:46] {}
-[16:30:46] node_set eq_1.value 0.6771653543307087
-[16:30:46] {}
-[16:30:46] node_set eq_2.midi_cc 42
-[16:30:46] {}
-[16:30:46] node_set eq_2.value 0.7007874015748031
-[16:30:46] {}
-[16:30:46] node_set eq_3.midi_cc 43
-[16:30:46] {}
-[16:30:46] node_set eq_3.value 0.6929133858267716
-[16:30:46] {}
-[16:30:46] node_set eq_4.midi_cc 44
-[16:30:46] {}
-[16:30:46] node_set eq_4.value 0.6377952755905512
-[16:30:46] {}
-[16:30:46] node_set eq_5.midi_cc 45
-[16:30:46] {}
-[16:30:46] node_set eq_5.value 0.7559055118110236
-[16:30:46] {}
-[16:30:46] node_set eq_6.midi_cc 46
-[16:30:46] {}
-[16:30:46] node_set eq_6.value 0.7952755905511811
-[16:30:46] {}
-[16:30:46] node_set eq_7.midi_cc 47
-[16:30:46] {}
-[16:30:46] node_set eq_7.value 0.7716535433070866
-[16:30:46] {}
-[16:30:46] node_set eq_8.midi_cc 48
-[16:30:46] {}
-[16:30:46] node_set eq_8.value 0.5275590551181102
-[16:30:46] {}
-[16:30:46] node_set bandwidth.midi_cc 21
-[16:30:46] {}
-[16:30:46] node_set bandwidth.value 0.30708661417322836
-[16:30:46] {}
-[16:30:49] status midi_devices input_devices output_devices settings
-[16:30:49] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
-[16:30:51] midi_add_device 1
-[16:30:51] {}
-[16:30:52] audio_set_input_device 0
-[16:30:52] {}
-[16:30:54] status midi_devices
-[16:30:54] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
-[16:30:55] include settings_16.synth
-[16:30:55] {}
-[16:30:55] node_set eq_1.midi_cc 41
-[16:30:55] {}
-[16:30:55] node_set eq_1.value 0.6771653543307087
-[16:30:55] {}
-[16:30:55] node_set eq_2.midi_cc 42
-[16:30:55] {}
-[16:30:55] node_set eq_2.value 0.7007874015748031
-[16:30:55] {}
-[16:30:55] node_set eq_3.midi_cc 43
-[16:30:55] {}
-[16:30:55] node_set eq_3.value 0.6929133858267716
-[16:30:55] {}
-[16:30:55] node_set eq_4.midi_cc 44
-[16:30:55] {}
-[16:30:55] node_set eq_4.value 0.6377952755905512
-[16:30:55] {}
-[16:30:55] node_set eq_5.midi_cc 45
-[16:30:55] {}
-[16:30:55] node_set eq_5.value 0.7559055118110236
-[16:30:55] {}
-[16:30:55] node_set eq_6.midi_cc 46
-[16:30:55] {}
-[16:30:55] node_set eq_6.value 0.7952755905511811
-[16:30:55] {}
-[16:30:55] node_set eq_7.midi_cc 47
-[16:30:55] {}
-[16:30:55] node_set eq_7.value 0.7716535433070866
-[16:30:55] {}
-[16:30:55] node_set eq_8.midi_cc 48
-[16:30:55] {}
-[16:30:55] node_set eq_8.value 0.5275590551181102
-[16:30:55] {}
-[16:30:55] node_set bandwidth.midi_cc 21
-[16:30:55] {}
-[16:30:55] node_set bandwidth.value 0.30708661417322836
-[16:30:55] {}
-[16:30:58] include settings_32.synth
-[16:30:58] {}
-[16:31:48] include settings_24.synth
-[16:31:48] {}
-[16:32:54] include settings_32.synth
-[16:32:54] {}
-[16:34:22] include settings_24.synth
-[16:34:22] {}
-[16:34:56] status midi_devices input_devices output_devices settings
-[16:34:56] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":true},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
-[16:34:57] exit
-[16:34:57] {"info":[{"message":"Program ended"}]}
+[14:00:09] play stop
+[14:00:09] {"state":{"playing":false}}
+[14:00:09] clear
+[14:00:09] {}
+[14:00:09] settings_set root_directory ../instruments/synthesizer
+[14:00:09] {}
+[14:00:09] include instrument.synth
+[14:00:09] {}
+[14:00:09] play start
+[14:00:09] {"state":{"playing":true}}
+[14:00:10] status midi_devices
+[14:00:10] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[14:00:11] node_set glide.midi_cc 28
+[14:00:11] {}
+[14:00:11] node_set glide.value 0.49606299212598426
+[14:00:11] {}
+[14:00:11] node_set delay_gain.midi_cc 27
+[14:00:11] {}
+[14:00:11] node_set delay_gain.value 0.3228346456692913
+[14:00:11] {}
+[14:00:11] node_set delay_time.midi_cc -1
+[14:00:11] {}
+[14:00:11] node_set delay_time.value 0
+[14:00:11] {}
+[14:00:11] node_set collector.value collector_poly
+[14:00:11] {}
+[14:00:11] node_activate oscillator_1
+[14:00:11] {}
+[14:00:11] node_activate oscillator_2
+[14:00:11] {}
+[14:00:11] node_activate oscillator_3
+[14:00:11] {}
+[14:00:11] node_set waveform_1.midi_cc 21
+[14:00:11] {}
+[14:00:11] node_set waveform_1.value 0.5511811023622047
+[14:00:11] {}
+[14:00:11] node_set waveform_2.midi_cc 22
+[14:00:11] {}
+[14:00:11] node_set waveform_2.value 0.6220472440944882
+[14:00:11] {}
+[14:00:11] node_set waveform_3.midi_cc 23
+[14:00:11] {}
+[14:00:11] node_set waveform_3.value 0.6692913385826772
+[14:00:11] {}
+[14:00:11] node_set harmonic_1.midi_cc 41
+[14:00:11] {}
+[14:00:11] node_set harmonic_1.value 0
+[14:00:11] {}
+[14:00:11] node_set harmonic_2.midi_cc 42
+[14:00:11] {}
+[14:00:11] node_set harmonic_2.value 0.14173228346456693
+[14:00:11] {}
+[14:00:11] node_set harmonic_3.midi_cc 43
+[14:00:11] {}
+[14:00:11] node_set harmonic_3.value 0.2677165354330709
+[14:00:11] {}
+[14:00:11] node_set detune_1.midi_cc 44
+[14:00:11] {}
+[14:00:11] node_set detune_1.value 0.5039370078740157
+[14:00:11] {}
+[14:00:11] node_set detune_2.midi_cc 45
+[14:00:11] {}
+[14:00:11] node_set detune_2.value 0.7007874015748031
+[14:00:11] {}
+[14:00:11] node_set detune_3.midi_cc 46
+[14:00:11] {}
+[14:00:11] node_set detune_3.value 0.4881889763779528
+[14:00:11] {}
+[14:00:11] node_set gain_1.midi_cc 24
+[14:00:11] {}
+[14:00:11] node_set gain_1.value 0.8503937007874016
+[14:00:11] {}
+[14:00:11] node_set gain_2.midi_cc 25
+[14:00:11] {}
+[14:00:11] node_set gain_2.value 0.2440944881889764
+[14:00:11] {}
+[14:00:11] node_set gain_3.midi_cc 26
+[14:00:11] {}
+[14:00:11] node_set gain_3.value 0.29133858267716534
+[14:00:11] {}
+[14:00:11] node_set attack_time.midi_cc 47
+[14:00:11] {}
+[14:00:11] node_set attack_time.value 0
+[14:00:11] {}
+[14:00:11] node_set decay_time.midi_cc -1
+[14:00:11] {}
+[14:00:12] node_set decay_time.value 0
+[14:00:12] {}
+[14:00:12] node_set sustain_level.midi_cc -1
+[14:00:12] {}
+[14:00:12] node_set sustain_level.value 1
+[14:00:12] {}
+[14:00:12] node_set release_time.midi_cc 48
+[14:00:12] {}
+[14:00:12] node_set release_time.value 0.4094488188976378
+[14:00:12] {}
+[14:00:12] node_set cutoff.midi_cc -1
+[14:00:12] {}
+[14:00:12] node_set cutoff.value 0.25984251968503935
+[14:00:12] {}
+[14:15:50] node_set collector.value collector_lead
+[14:15:50] {}
+[14:15:57] node_set collector.value collector_poly
+[14:15:57] {}
+[14:21:13] status midi_devices input_devices output_devices settings
+[14:21:13] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[14:21:14] exit
+[14:21:14] {"info":[{"message":"Program ended"}]}
+[13:51:03] status midi_devices input_devices output_devices settings
+[13:51:03] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[13:51:05] midi_add_device 1
+[13:51:05] {}
+[13:51:08] status midi_devices input_devices output_devices settings
+[13:51:08] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[13:51:10] audio_set_input_device 2
+[13:51:10] {}
+[13:51:13] play stop
+[13:51:13] {"state":{"playing":false}}
+[13:51:13] clear
+[13:51:13] {}
+[13:51:13] settings_set root_directory ../instruments/synthesizer
+[13:51:13] {}
+[13:51:13] include instrument.synth
+[13:51:13] {}
+[13:51:14] play start
+[13:51:14] {"state":{"playing":true}}
+[13:51:15] status midi_devices
+[13:51:15] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[13:51:16] node_set glide.midi_cc 28
+[13:51:16] {}
+[13:51:16] node_set glide.value 0.33070866141732286
+[13:51:16] {}
+[13:51:17] node_set delay_gain.midi_cc 27
+[13:51:17] {}
+[13:51:17] node_set delay_gain.value 0.3228346456692913
+[13:51:17] {}
+[13:51:18] node_set delay_time.midi_cc -1
+[13:51:18] {}
+[13:51:18] node_set delay_time.value 0
+[13:51:18] {}
+[13:51:18] node_set collector.value collector_poly
+[13:51:18] {}
+[13:51:19] node_activate oscillator_1
+[13:51:19] {}
+[13:51:19] node_activate oscillator_2
+[13:51:19] {}
+[13:51:20] node_activate oscillator_3
+[13:51:20] {}
+[13:51:20] node_set waveform_1.midi_cc 21
+[13:51:20] {}
+[13:51:20] node_set waveform_1.value 0.5511811023622047
+[13:51:20] {}
+[13:51:20] node_set waveform_2.midi_cc 22
+[13:51:20] {}
+[13:51:21] node_set waveform_2.value 0.6220472440944882
+[13:51:21] {}
+[13:51:21] node_set waveform_3.midi_cc 23
+[13:51:21] {}
+[13:51:22] node_set waveform_3.value 0.6692913385826772
+[13:51:22] {}
+[13:51:22] node_set harmonic_1.midi_cc 41
+[13:51:22] {}
+[13:51:22] node_set harmonic_1.value 0
+[13:51:22] {}
+[13:51:22] node_set harmonic_2.midi_cc 42
+[13:51:22] {}
+[13:51:22] node_set harmonic_2.value 0.14173228346456693
+[13:51:22] {}
+[13:51:23] node_set harmonic_3.midi_cc 43
+[13:51:23] {}
+[13:51:23] node_set harmonic_3.value 0.2677165354330709
+[13:51:23] {}
+[13:51:24] node_set detune_1.midi_cc 44
+[13:51:24] {}
+[13:51:24] node_set detune_1.value 0.49606299212598426
+[13:51:24] {}
+[13:51:24] node_set detune_2.midi_cc 45
+[13:51:24] {}
+[13:51:24] node_set detune_2.value 0.5590551181102362
+[13:51:24] {}
+[13:51:24] node_set detune_3.midi_cc 46
+[13:51:24] {}
+[13:51:24] node_set detune_3.value 0.4409448818897638
+[13:51:24] {}
+[13:51:24] node_set gain_1.midi_cc 24
+[13:51:24] {}
+[13:51:24] node_set gain_1.value 0.8503937007874016
+[13:51:24] {}
+[13:51:24] node_set gain_2.midi_cc 25
+[13:51:24] {}
+[13:51:24] node_set gain_2.value 0.2440944881889764
+[13:51:24] {}
+[13:51:25] node_set gain_3.midi_cc 26
+[13:51:25] {}
+[13:51:25] node_set gain_3.value 0.29133858267716534
+[13:51:25] {}
+[13:51:25] node_set attack_time.midi_cc 47
+[13:51:25] {}
+[13:51:26] node_set attack_time.value 0.2047244094488189
+[13:51:26] {}
+[13:51:26] node_set decay_time.midi_cc -1
+[13:51:26] {}
+[13:51:26] node_set decay_time.value 0
+[13:51:26] {}
+[13:51:26] node_set sustain_level.midi_cc -1
+[13:51:26] {}
+[13:51:26] node_set sustain_level.value 1
+[13:51:26] {}
+[13:51:26] node_set release_time.midi_cc 48
+[13:51:26] {}
+[13:51:26] node_set release_time.value 0.5039370078740157
+[13:51:26] {}
+[13:51:26] node_set cutoff.midi_cc -1
+[13:51:26] {}
+[13:51:27] node_set cutoff.value 0.25984251968503935
+[13:51:27] {}
+[14:00:15] status midi_devices
+[14:00:15] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[14:00:16] node_set glide.midi_cc 28
+[14:00:16] {}
+[14:00:16] node_set glide.value 0.33070866141732286
+[14:00:16] {}
+[14:00:16] node_set delay_gain.midi_cc 27
+[14:00:16] {}
+[14:00:16] node_set delay_gain.value 0.3228346456692913
+[14:00:16] {}
+[14:00:16] node_set delay_time.midi_cc -1
+[14:00:16] {}
+[14:00:16] node_set delay_time.value 0
+[14:00:16] {}
+[14:00:16] node_set collector.value collector_poly
+[14:00:16] {}
+[14:00:16] node_activate oscillator_1
+[14:00:16] {}
+[14:00:16] node_activate oscillator_2
+[14:00:16] {}
+[14:00:16] node_activate oscillator_3
+[14:00:16] {}
+[14:00:16] node_set waveform_1.midi_cc 21
+[14:00:16] {}
+[14:00:16] node_set waveform_1.value 0.5511811023622047
+[14:00:16] {}
+[14:00:16] node_set waveform_2.midi_cc 22
+[14:00:16] {}
+[14:00:16] node_set waveform_2.value 0.6220472440944882
+[14:00:16] {}
+[14:00:16] node_set waveform_3.midi_cc 23
+[14:00:16] {}
+[14:00:16] node_set waveform_3.value 0.6692913385826772
+[14:00:16] {}
+[14:00:16] node_set harmonic_1.midi_cc 41
+[14:00:16] {}
+[14:00:16] node_set harmonic_1.value 0
+[14:00:16] {}
+[14:00:16] node_set harmonic_2.midi_cc 42
+[14:00:16] {}
+[14:00:16] node_set harmonic_2.value 0.14173228346456693
+[14:00:16] {}
+[14:00:16] node_set harmonic_3.midi_cc 43
+[14:00:16] {}
+[14:00:16] node_set harmonic_3.value 0.2677165354330709
+[14:00:16] {}
+[14:00:16] node_set detune_1.midi_cc 44
+[14:00:16] {}
+[14:00:16] node_set detune_1.value 0.49606299212598426
+[14:00:16] {}
+[14:00:16] node_set detune_2.midi_cc 45
+[14:00:16] {}
+[14:00:16] node_set detune_2.value 0.5590551181102362
+[14:00:16] {}
+[14:00:16] node_set detune_3.midi_cc 46
+[14:00:16] {}
+[14:00:16] node_set detune_3.value 0.4409448818897638
+[14:00:16] {}
+[14:00:16] node_set gain_1.midi_cc 24
+[14:00:16] {}
+[14:00:16] node_set gain_1.value 0.8503937007874016
+[14:00:16] {}
+[14:00:16] node_set gain_2.midi_cc 25
+[14:00:16] {}
+[14:00:16] node_set gain_2.value 0.2440944881889764
+[14:00:16] {}
+[14:00:16] node_set gain_3.midi_cc 26
+[14:00:16] {}
+[14:00:16] node_set gain_3.value 0.29133858267716534
+[14:00:16] {}
+[14:00:16] node_set attack_time.midi_cc 47
+[14:00:16] {}
+[14:00:16] node_set attack_time.value 0.2047244094488189
+[14:00:16] {}
+[14:00:16] node_set decay_time.midi_cc -1
+[14:00:16] {}
+[14:00:16] node_set decay_time.value 0
+[14:00:16] {}
+[14:00:16] node_set sustain_level.midi_cc -1
+[14:00:16] {}
+[14:00:16] node_set sustain_level.value 1
+[14:00:16] {}
+[14:00:16] node_set release_time.midi_cc 48
+[14:00:16] {}
+[14:00:16] node_set release_time.value 0.5039370078740157
+[14:00:16] {}
+[14:00:16] node_set cutoff.midi_cc -1
+[14:00:16] {}
+[14:00:16] node_set cutoff.value 0.25984251968503935
+[14:00:16] {}
+[14:00:21] play stop
+[14:00:21] {"state":{"playing":false}}
+[14:00:21] clear
+[14:00:21] {}
+[14:00:21] settings_set root_directory ../instruments/hammond
+[14:00:21] {}
+[14:00:21] include instrument.synth
+[14:00:21] {}
+[14:00:21] play start
+[14:00:21] {"state":{"playing":true}}
+[14:00:21] status midi_devices
+[14:00:21] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[14:00:22] node_set drawbar_1.midi_cc 41
+[14:00:22] {}
+[14:00:22] node_set drawbar_1.value 0.984251968503937
+[14:00:22] {}
+[14:00:22] node_set drawbar_2.midi_cc 42
+[14:00:22] {}
+[14:00:22] node_set drawbar_2.value 0.5984251968503937
+[14:00:22] {}
+[14:00:22] node_set drawbar_3.midi_cc 43
+[14:00:22] {}
+[14:00:22] node_set drawbar_3.value 0.7952755905511811
+[14:00:22] {}
+[14:00:22] node_set drawbar_4.midi_cc 44
+[14:00:22] {}
+[14:00:22] node_set drawbar_4.value 0.7480314960629921
+[14:00:22] {}
+[14:00:22] node_set drawbar_5.midi_cc 45
+[14:00:22] {}
+[14:00:22] node_set drawbar_5.value 0.2204724409448819
+[14:00:22] {}
+[14:00:22] node_set drawbar_6.midi_cc 46
+[14:00:22] {}
+[14:00:22] node_set drawbar_6.value 0.4015748031496063
+[14:00:22] {}
+[14:00:22] node_set drawbar_7.midi_cc 47
+[14:00:22] {}
+[14:00:22] node_set drawbar_7.value 0.4251968503937008
+[14:00:22] {}
+[14:00:22] node_set drawbar_8.midi_cc 48
+[14:00:22] {}
+[14:00:22] node_set drawbar_8.value 0.6377952755905512
+[14:00:22] {}
+[14:00:22] node_set drawbar_9.midi_cc 7
+[14:00:22] {}
+[14:00:22] node_set drawbar_9.value 0.4330708661417323
+[14:00:22] {}
+[14:00:28] play stop
+[14:00:28] {"state":{"playing":false}}
+[14:00:28] clear
+[14:00:28] {}
+[14:00:28] settings_set root_directory ../instruments/vocoder
+[14:00:28] {}
+[14:00:28] include instrument.synth
+[14:00:28] {}
+[14:00:29] play start
+[14:00:29] {"state":{"playing":true}}
+[14:00:29] status midi_devices
+[14:00:29] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[14:00:29] include settings_24.synth
+[14:00:29] {}
+[14:00:29] node_set eq_1.midi_cc 41
+[14:00:29] {}
+[14:00:29] node_set eq_1.value 1
+[14:00:29] {}
+[14:00:29] node_set eq_2.midi_cc 42
+[14:00:29] {}
+[14:00:30] node_set eq_2.value 1
+[14:00:30] {}
+[14:00:30] node_set eq_3.midi_cc 43
+[14:00:30] {}
+[14:00:30] node_set eq_3.value 1
+[14:00:30] {}
+[14:00:30] node_set eq_4.midi_cc 44
+[14:00:30] {}
+[14:00:30] node_set eq_4.value 1
+[14:00:30] {}
+[14:00:30] node_set eq_5.midi_cc 45
+[14:00:30] {}
+[14:00:30] node_set eq_5.value 1
+[14:00:30] {}
+[14:00:30] node_set eq_6.midi_cc 46
+[14:00:30] {}
+[14:00:30] node_set eq_6.value 1
+[14:00:30] {}
+[14:00:30] node_set eq_7.midi_cc 47
+[14:00:30] {}
+[14:00:30] node_set eq_7.value 1
+[14:00:30] {}
+[14:00:30] node_set eq_8.midi_cc 48
+[14:00:30] {}
+[14:00:30] node_set eq_8.value 1
+[14:00:30] {}
+[14:00:30] node_set bandwidth.midi_cc 21
+[14:00:30] {}
+[14:00:30] node_set bandwidth.value 0.3700787401574803
+[14:00:30] {}
+[14:02:03] status midi_devices
+[14:02:03] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[14:02:04] include settings_24.synth
+[14:02:04] {}
+[14:02:04] node_set eq_1.midi_cc 41
+[14:02:04] {}
+[14:02:04] node_set eq_1.value 1
+[14:02:04] {}
+[14:02:04] node_set eq_2.midi_cc 42
+[14:02:04] {}
+[14:02:04] node_set eq_2.value 1
+[14:02:04] {}
+[14:02:04] node_set eq_3.midi_cc 43
+[14:02:04] {}
+[14:02:04] node_set eq_3.value 1
+[14:02:04] {}
+[14:02:04] node_set eq_4.midi_cc 44
+[14:02:04] {}
+[14:02:04] node_set eq_4.value 1
+[14:02:04] {}
+[14:02:04] node_set eq_5.midi_cc 45
+[14:02:04] {}
+[14:02:04] node_set eq_5.value 1
+[14:02:04] {}
+[14:02:04] node_set eq_6.midi_cc 46
+[14:02:04] {}
+[14:02:04] node_set eq_6.value 1
+[14:02:04] {}
+[14:02:04] node_set eq_7.midi_cc 47
+[14:02:04] {}
+[14:02:04] node_set eq_7.value 1
+[14:02:04] {}
+[14:02:04] node_set eq_8.midi_cc 48
+[14:02:04] {}
+[14:02:04] node_set eq_8.value 1
+[14:02:04] {}
+[14:02:04] node_set bandwidth.midi_cc 21
+[14:02:04] {}
+[14:02:04] node_set bandwidth.value 0.3700787401574803
+[14:02:04] {}
+[14:02:21] include settings_16.synth
+[14:02:21] {}
+[14:02:22] include settings_8.synth
+[14:02:22] {}
+[14:02:22] include settings_16.synth
+[14:02:22] {}
+[14:02:22] include settings_24.synth
+[14:02:22] {}
+[14:02:22] include settings_32.synth
+[14:02:22] {}
+[14:02:28] play stop
+[14:02:28] {"state":{"playing":false}}
+[14:02:28] clear
+[14:02:28] {}
+[14:02:28] settings_set root_directory ../instruments/synthesizer
+[14:02:28] {}
+[14:02:28] include instrument.synth
+[14:02:28] {}
+[14:02:28] play start
+[14:02:28] {"state":{"playing":true}}
+[14:02:29] status midi_devices
+[14:02:29] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[14:02:30] node_set collector.value collector_poly
+[14:02:30] {}
+[14:02:30] node_set sound.value collector
+[14:02:30] {}
+[14:02:30] node_set glide.midi_cc 28
+[14:02:30] {}
+[14:02:30] node_set glide.value 0.33070866141732286
+[14:02:30] {}
+[14:02:30] node_set delay_gain.midi_cc 27
+[14:02:30] {}
+[14:02:30] node_set delay_gain.value 0.3228346456692913
+[14:02:30] {}
+[14:02:30] node_set delay_time.midi_cc -1
+[14:02:30] {}
+[14:02:30] node_set delay_time.value 0
+[14:02:30] {}
+[14:02:30] node_activate oscillator_1
+[14:02:30] {}
+[14:02:30] node_activate oscillator_2
+[14:02:30] {}
+[14:02:30] node_activate oscillator_3
+[14:02:30] {}
+[14:02:30] node_set waveform_1.midi_cc 21
+[14:02:30] {}
+[14:02:30] node_set waveform_1.value 0.5511811023622047
+[14:02:30] {}
+[14:02:30] node_set waveform_2.midi_cc 22
+[14:02:30] {}
+[14:02:30] node_set waveform_2.value 0.6220472440944882
+[14:02:30] {}
+[14:02:30] node_set waveform_3.midi_cc 23
+[14:02:30] {}
+[14:02:30] node_set waveform_3.value 0.6692913385826772
+[14:02:30] {}
+[14:02:30] node_set harmonic_1.midi_cc 41
+[14:02:30] {}
+[14:02:30] node_set harmonic_1.value 0
+[14:02:30] {}
+[14:02:30] node_set harmonic_2.value 0.14173228346456693
+[14:02:30] {}
+[14:02:30] node_set harmonic_2.midi_cc 42
+[14:02:30] {}
+[14:02:30] node_set harmonic_3.midi_cc 43
+[14:02:30] {}
+[14:02:30] node_set harmonic_3.value 0.2677165354330709
+[14:02:30] {}
+[14:02:30] node_set detune_1.midi_cc 44
+[14:02:30] {}
+[14:02:30] node_set detune_1.value 0.49606299212598426
+[14:02:30] {}
+[14:02:30] node_set detune_2.midi_cc 45
+[14:02:30] {}
+[14:02:30] node_set detune_2.value 0.5590551181102362
+[14:02:30] {}
+[14:02:30] node_set detune_3.midi_cc 46
+[14:02:30] {}
+[14:02:31] node_set detune_3.value 0.4409448818897638
+[14:02:31] {}
+[14:02:31] node_set gain_1.midi_cc 24
+[14:02:31] {}
+[14:02:31] node_set gain_1.value 0.8503937007874016
+[14:02:31] {}
+[14:02:31] node_set gain_2.midi_cc 25
+[14:02:31] {}
+[14:02:31] node_set gain_2.value 0.2440944881889764
+[14:02:31] {}
+[14:02:31] node_set gain_3.midi_cc 26
+[14:02:31] {}
+[14:02:31] node_set gain_3.value 0.29133858267716534
+[14:02:31] {}
+[14:02:31] node_set attack_time.midi_cc 47
+[14:02:31] {}
+[14:02:31] node_set attack_time.value 0.2047244094488189
+[14:02:31] {}
+[14:02:31] node_set decay_time.midi_cc -1
+[14:02:31] {}
+[14:02:31] node_set decay_time.value 0
+[14:02:31] {}
+[14:02:31] node_set sustain_level.midi_cc -1
+[14:02:31] {}
+[14:02:31] node_set sustain_level.value 1
+[14:02:31] {}
+[14:02:31] node_set release_time.midi_cc 48
+[14:02:31] {}
+[14:02:31] node_set release_time.value 0.5039370078740157
+[14:02:31] {}
+[14:02:31] node_set cutoff.midi_cc -1
+[14:02:31] {}
+[14:02:31] node_set cutoff.value 0.25984251968503935
+[14:02:31] {}
+[14:02:37] node_set sound.value vocoder
+[14:02:37] {}
+[14:02:59] node_set sound.value collector
+[14:02:59] {}
+[14:03:42] node_deactivate oscillator_2
+[14:03:42] {}
+[14:03:42] node_deactivate oscillator_3
+[14:03:42] {}
+[14:03:49] node_activate oscillator_2
+[14:03:49] {}
+[14:03:49] node_activate oscillator_3
+[14:03:49] {}
+[14:04:33] node_set collector.value collector_lead
+[14:04:33] {}
+[14:04:44] node_set sound.value vocoder
+[14:04:44] {}
+[14:04:48] node_set collector.value collector_poly
+[14:04:48] {}
+[14:05:10] node_deactivate oscillator_2
+[14:05:10] {}
+[14:05:10] node_deactivate oscillator_3
+[14:05:10] {}
+[14:05:45] node_set sound.value collector
+[14:05:45] {}
+[14:05:53] node_activate oscillator_2
+[14:05:53] {}
+[14:06:28] node_activate oscillator_3
+[14:06:28] {}
+[14:06:46] node_set collector.value collector_lead
+[14:06:46] {}
+[14:07:43] node_set sound.value vocoder
+[14:07:43] {}
+[14:07:53] node_set collector.value collector_poly
+[14:07:53] {}
+[14:09:17] node_set sound.value collector
+[14:09:17] {}
+[14:10:25] node_set sound.value vocoder
+[14:10:25] {}
+[14:10:34] node_set sound.value collector
+[14:10:34] {}
+[14:10:55] node_set sound.value vocoder
+[14:10:55] {}
+[14:15:24] node_set sound.value collector
+[14:15:24] {}
+[14:38:01] node_set collector.value collector_lead
+[14:38:01] {}
+[14:40:08] node_set collector.value collector_poly
+[14:40:08] {}
+[14:41:23] node_set collector.value collector_lead
+[14:41:23] {}
+[14:41:35] node_set collector.value collector_poly
+[14:41:35] {}
+[14:41:38] node_set collector.value collector_lead
+[14:41:38] {}
+[14:44:40] node_set sound.value vocoder
+[14:44:40] {}
+[14:44:53] node_set sound.value collector
+[14:44:53] {}
+[14:44:57] node_set sound.value vocoder
+[14:44:57] {}
+[14:44:57] node_set collector.value collector_poly
+[14:44:57] {}
+[14:45:00] node_set sound.value collector
+[14:45:00] {}
+[14:45:01] node_set sound.value vocoder
+[14:45:01] {}
+[14:45:02] node_set collector.value collector_lead
+[14:45:02] {}
+[14:45:16] node_set collector.value collector_poly
+[14:45:16] {}
+[14:45:28] node_deactivate oscillator_3
+[14:45:28] {}
+[14:45:29] node_deactivate oscillator_2
+[14:45:29] {}
+[14:45:43] node_activate oscillator_3
+[14:45:43] {}
+[14:45:44] node_activate oscillator_2
+[14:45:44] {}
+[14:45:44] node_deactivate oscillator_1
+[14:45:44] {}
+[14:46:09] status midi_devices input_devices output_devices settings
+[14:46:09] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":true},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[14:46:10] status nodes
+[14:46:10] {"nodes":[{"id":"waveform_1","type":"parameter","voiceDependent":false},{"id":"waveform_2","type":"parameter","voiceDependent":false},{"id":"waveform_3","type":"parameter","voiceDependent":false},{"id":"harmonic_1","type":"parameter","voiceDependent":false},{"id":"harmonic_2","type":"parameter","voiceDependent":false},{"id":"harmonic_3","type":"parameter","voiceDependent":false},{"id":"detune_1","type":"parameter","voiceDependent":false},{"id":"detune_2","type":"parameter","voiceDependent":false},{"id":"detune_3","type":"parameter","voiceDependent":false},{"id":"gain_1","type":"parameter","voiceDependent":false},{"id":"gain_2","type":"parameter","voiceDependent":false},{"id":"gain_3","type":"parameter","voiceDependent":false},{"id":"glide","type":"parameter","voiceDependent":false},{"id":"attack_time","type":"parameter","voiceDependent":false},{"id":"decay_time","type":"parameter","voiceDependent":false},{"id":"sustain_level","type":"parameter","voiceDependent":false},{"id":"release_time","type":"parameter","voiceDependent":false},{"id":"delay_gain","type":"parameter","voiceDependent":false},{"id":"delay_time","type":"parameter","voiceDependent":false},{"id":"cutoff","type":"parameter","voiceDependent":false},{"id":"vibrato_amplitude","type":"adder","voiceDependent":false},{"id":"vibrato_frequency","type":"adder","voiceDependent":false},{"id":"vibrato","type":"oscillator","voiceDependent":false},{"id":"main_frequency","type":"adder","voiceDependent":true},{"id":"harmonic_1_rounded","type":"rounder","voiceDependent":true},{"id":"harmonic_2_rounded","type":"rounder","voiceDependent":true},{"id":"harmonic_3_rounded","type":"rounder","voiceDependent":true},{"id":"frequency_1","type":"adder","voiceDependent":true},{"id":"frequency_2","type":"adder","voiceDependent":true},{"id":"frequency_3","type":"adder","voiceDependent":true},{"id":"frequency_1_detuned","type":"adder","voiceDependent":true},{"id":"frequency_2_detuned","type":"adder","voiceDependent":true},{"id":"frequency_3_detuned","type":"adder","voiceDependent":true},{"id":"envelope","type":"ADSR","voiceDependent":true},{"id":"oscillator_1","type":"oscillator","voiceDependent":true},{"id":"oscillator_2","type":"oscillator","voiceDependent":true},{"id":"oscillator_3","type":"oscillator","voiceDependent":true},{"id":"voice_output","type":"adder","voiceDependent":true},{"id":"filter","type":"highpass","voiceDependent":true},{"id":"collector_lead","type":"collector_lead","voiceDependent":false},{"id":"collector_poly","type":"collector_poly","voiceDependent":false},{"id":"collector","type":"label","voiceDependent":false},{"id":"sound","type":"label","voiceDependent":false},{"id":"delay","type":"delay","voiceDependent":false},{"id":"output","type":"audio_output","voiceDependent":false},{"id":"bandwidth","type":"label","voiceDependent":false},{"id":"carrier","type":"label","voiceDependent":false},{"id":"MOD_LP","type":"lowpass","voiceDependent":false},{"id":"MOD_BP_1","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_2","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_3","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_4","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_5","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_6","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_7","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_8","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_9","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_10","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_11","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_12","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_13","type":"bandpass","voiceDependent":false},{"id":"MOD_BP_14","type":"bandpass","voiceDependent":false},{"id":"MOD_HP","type":"highpass","voiceDependent":false},{"id":"MOD_FOLLOWER_LP","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_1","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_2","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_3","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_4","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_5","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_6","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_7","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_8","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_9","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_10","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_11","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_12","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_13","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_BP_14","type":"follower","voiceDependent":false},{"id":"MOD_FOLLOWER_HP","type":"follower","voiceDependent":false},{"id":"CAR_LP","type":"lowpass","voiceDependent":false},{"id":"CAR_BP_1","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_2","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_3","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_4","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_5","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_6","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_7","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_8","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_9","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_10","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_11","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_12","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_13","type":"bandpass","voiceDependent":false},{"id":"CAR_BP_14","type":"bandpass","voiceDependent":false},{"id":"CAR_HP","type":"highpass","voiceDependent":false},{"id":"vocoder","type":"adder","voiceDependent":false}]}
+[14:46:18] node_set bandwidth.value 1.0
+[14:46:18] {}
+[14:46:27] node_set bandwidth.value 1.25
+[14:46:27] {}
+[14:47:02] node_info bandwidth
+[14:47:02] {"node":{"id":"bandwidth","type":"label","voiceDependent":false,"inputs":[{"label":"value","type":"node","value":"1.25"}],"outputs":[{"label":"default"}]}}
+[14:47:18] status midi_devices
+[14:47:18] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[14:47:19] node_set glide.value 0.5669291338582677
+[14:47:19] {}
+[14:47:19] node_set delay_gain.value 0.18110236220472442
+[14:47:19] {}
+[14:47:19] node_set collector.value collector_poly
+[14:47:19] {}
+[14:47:19] node_set sound.value vocoder
+[14:47:19] {}
+[14:47:19] node_set glide.midi_cc 28
+[14:47:19] {}
+[14:47:19] node_set delay_gain.midi_cc 27
+[14:47:19] {}
+[14:47:19] node_set delay_time.midi_cc -1
+[14:47:19] {}
+[14:47:19] node_set delay_time.value 0
+[14:47:19] {}
+[14:47:19] node_deactivate oscillator_1
+[14:47:19] {}
+[14:47:19] node_activate oscillator_2
+[14:47:19] {}
+[14:47:19] node_activate oscillator_3
+[14:47:19] {}
+[14:47:19] node_set waveform_1.midi_cc 21
+[14:47:19] {}
+[14:47:19] node_set waveform_1.value 0.6377952755905512
+[14:47:19] {}
+[14:47:19] node_set waveform_2.midi_cc 22
+[14:47:19] {}
+[14:47:19] node_set waveform_2.value 0.6377952755905512
+[14:47:19] {}
+[14:47:19] node_set waveform_3.value 0.5433070866141733
+[14:47:19] {}
+[14:47:19] node_set waveform_3.midi_cc 23
+[14:47:19] {}
+[14:47:19] node_set harmonic_1.midi_cc 41
+[14:47:19] {}
+[14:47:19] node_set harmonic_1.value 0
+[14:47:19] {}
+[14:47:19] node_set harmonic_2.midi_cc 42
+[14:47:19] {}
+[14:47:19] node_set harmonic_2.value 0.10236220472440945
+[14:47:19] {}
+[14:47:19] node_set harmonic_3.value 0.13385826771653545
+[14:47:19] {}
+[14:47:19] node_set harmonic_3.midi_cc 43
+[14:47:19] {}
+[14:47:19] node_set detune_1.midi_cc 44
+[14:47:19] {}
+[14:47:19] node_set detune_1.value 0.49606299212598426
+[14:47:19] {}
+[14:47:19] node_set detune_2.midi_cc 45
+[14:47:19] {}
+[14:47:19] node_set detune_2.value 0.6062992125984252
+[14:47:19] {}
+[14:47:19] node_set detune_3.value 0.4251968503937008
+[14:47:19] {}
+[14:47:19] node_set gain_1.midi_cc 24
+[14:47:19] {}
+[14:47:19] node_set detune_3.midi_cc 46
+[14:47:19] {}
+[14:47:19] node_set gain_1.value 0.5039370078740157
+[14:47:19] {}
+[14:47:19] node_set gain_2.value 0.6299212598425197
+[14:47:19] {}
+[14:47:19] node_set gain_2.midi_cc 25
+[14:47:19] {}
+[14:47:19] node_set gain_3.midi_cc 26
+[14:47:19] {}
+[14:47:19] node_set gain_3.value 0.6299212598425197
+[14:47:19] {}
+[14:47:19] node_set attack_time.value 0
+[14:47:19] {}
+[14:47:19] node_set attack_time.midi_cc 47
+[14:47:19] {}
+[14:47:19] node_set decay_time.midi_cc -1
+[14:47:19] {}
+[14:47:19] node_set decay_time.value 0
+[14:47:19] {}
+[14:47:19] node_set release_time.value 0.48031496062992124
+[14:47:19] {}
+[14:47:19] node_set sustain_level.midi_cc -1
+[14:47:19] {}
+[14:47:19] node_set sustain_level.value 1
+[14:47:19] {}
+[14:47:19] node_set release_time.midi_cc 48
+[14:47:19] {}
+[14:47:19] node_set cutoff.midi_cc -1
+[14:47:19] {}
+[14:47:19] node_set cutoff.value 0.25984251968503935
+[14:47:19] {}
+[14:47:21] play stop
+[14:47:21] {"state":{"playing":false}}
+[14:47:21] clear
+[14:47:21] {}
+[14:47:21] settings_set root_directory ../instruments/hammond
+[14:47:21] {}
+[14:47:21] include instrument.synth
+[14:47:21] {}
+[14:47:21] play start
+[14:47:21] {"state":{"playing":true}}
+[14:47:22] status midi_devices
+[14:47:22] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[14:47:22] node_set drawbar_1.midi_cc 41
+[14:47:22] {}
+[14:47:22] node_set drawbar_1.value 0.984251968503937
+[14:47:22] {}
+[14:47:22] node_set drawbar_2.midi_cc 42
+[14:47:22] {}
+[14:47:22] node_set drawbar_2.value 0.5984251968503937
+[14:47:22] {}
+[14:47:22] node_set drawbar_3.midi_cc 43
+[14:47:22] {}
+[14:47:22] node_set drawbar_3.value 0.7952755905511811
+[14:47:22] {}
+[14:47:22] node_set drawbar_4.midi_cc 44
+[14:47:22] {}
+[14:47:22] node_set drawbar_4.value 0.7480314960629921
+[14:47:22] {}
+[14:47:22] node_set drawbar_5.midi_cc 45
+[14:47:22] {}
+[14:47:22] node_set drawbar_5.value 0.2204724409448819
+[14:47:22] {}
+[14:47:22] node_set drawbar_6.midi_cc 46
+[14:47:22] {}
+[14:47:22] node_set drawbar_6.value 0.4015748031496063
+[14:47:22] {}
+[14:47:22] node_set drawbar_7.midi_cc 47
+[14:47:22] {}
+[14:47:22] node_set drawbar_7.value 0.4251968503937008
+[14:47:22] {}
+[14:47:22] node_set drawbar_8.midi_cc 48
+[14:47:22] {}
+[14:47:22] node_set drawbar_8.value 0.6377952755905512
+[14:47:22] {}
+[14:47:22] node_set drawbar_9.midi_cc 7
+[14:47:22] {}
+[14:47:22] node_set drawbar_9.value 0.4330708661417323
+[14:47:22] {}
+[14:47:25] status midi_devices input_devices output_devices settings
+[14:47:25] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":true},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[14:47:28] play stop
+[14:47:28] {"state":{"playing":false}}
+[14:47:28] clear
+[14:47:28] {}
+[14:47:28] settings_set root_directory ../instruments/synthesizer
+[14:47:28] {}
+[14:47:28] include instrument.synth
+[14:47:28] {}
+[14:47:29] play start
+[14:47:29] {"state":{"playing":true}}
+[14:47:29] status midi_devices
+[14:47:29] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[14:47:30] node_set collector.value collector_poly
+[14:47:30] {}
+[14:47:30] node_set sound.value vocoder
+[14:47:30] {}
+[14:47:30] node_set glide.midi_cc 28
+[14:47:30] {}
+[14:47:30] node_set glide.value 0.5669291338582677
+[14:47:30] {}
+[14:47:30] node_set delay_gain.midi_cc 27
+[14:47:30] {}
+[14:47:30] node_set delay_gain.value 0.18110236220472442
+[14:47:30] {}
+[14:47:30] node_set delay_time.midi_cc -1
+[14:47:30] {}
+[14:47:30] node_set delay_time.value 0
+[14:47:30] {}
+[14:47:30] node_deactivate oscillator_1
+[14:47:30] {}
+[14:47:30] node_activate oscillator_2
+[14:47:30] {}
+[14:47:30] node_activate oscillator_3
+[14:47:30] {}
+[14:47:30] node_set waveform_1.midi_cc 21
+[14:47:30] {}
+[14:47:30] node_set waveform_1.value 0.6377952755905512
+[14:47:30] {}
+[14:47:30] node_set waveform_2.midi_cc 22
+[14:47:30] {}
+[14:47:30] node_set waveform_2.value 0.6377952755905512
+[14:47:30] {}
+[14:47:30] node_set waveform_3.midi_cc 23
+[14:47:30] {}
+[14:47:30] node_set waveform_3.value 0.5433070866141733
+[14:47:30] {}
+[14:47:30] node_set harmonic_1.midi_cc 41
+[14:47:30] {}
+[14:47:30] node_set harmonic_1.value 0
+[14:47:30] {}
+[14:47:30] node_set harmonic_2.midi_cc 42
+[14:47:30] {}
+[14:47:30] node_set harmonic_2.value 0.10236220472440945
+[14:47:30] {}
+[14:47:30] node_set harmonic_3.midi_cc 43
+[14:47:30] {}
+[14:47:30] node_set harmonic_3.value 0.13385826771653545
+[14:47:30] {}
+[14:47:30] node_set detune_1.midi_cc 44
+[14:47:30] {}
+[14:47:30] node_set detune_1.value 0.49606299212598426
+[14:47:30] {}
+[14:47:30] node_set detune_2.midi_cc 45
+[14:47:30] {}
+[14:47:30] node_set detune_2.value 0.6062992125984252
+[14:47:30] {}
+[14:47:30] node_set detune_3.midi_cc 46
+[14:47:30] {}
+[14:47:30] node_set detune_3.value 0.4251968503937008
+[14:47:30] {}
+[14:47:30] node_set gain_1.midi_cc 24
+[14:47:30] {}
+[14:47:30] node_set gain_1.value 0.5039370078740157
+[14:47:30] {}
+[14:47:30] node_set gain_2.midi_cc 25
+[14:47:30] {}
+[14:47:30] node_set gain_2.value 0.6299212598425197
+[14:47:30] {}
+[14:47:30] node_set gain_3.midi_cc 26
+[14:47:30] {}
+[14:47:30] node_set gain_3.value 0.6299212598425197
+[14:47:30] {}
+[14:47:30] node_set attack_time.midi_cc 47
+[14:47:30] {}
+[14:47:30] node_set attack_time.value 0
+[14:47:30] {}
+[14:47:30] node_set decay_time.midi_cc -1
+[14:47:30] {}
+[14:47:30] node_set decay_time.value 0
+[14:47:30] {}
+[14:47:30] node_set sustain_level.midi_cc -1
+[14:47:30] {}
+[14:47:30] node_set cutoff.midi_cc -1
+[14:47:30] {}
+[14:47:30] node_set cutoff.value 0.25984251968503935
+[14:47:30] {}
+[14:47:30] node_set sustain_level.value 1
+[14:47:30] {}
+[14:47:30] node_set release_time.value 0.48031496062992124
+[14:47:30] {}
+[14:47:30] node_set release_time.midi_cc 48
+[14:47:30] {}
+[14:47:33] node_set sound.value collector
+[14:47:33] {}
+[14:47:41] status midi_devices input_devices output_devices settings
+[14:47:41] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":true},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[14:47:41] exit
+[14:47:41] {"info":[{"message":"Program ended"}]}
+[14:47:53] play stop
+[14:47:53] {"state":{"playing":false}}
+[14:47:53] clear
+[14:47:53] {}
+[14:47:53] settings_set root_directory ../instruments/synthesizer
+[14:47:53] {}
+[14:47:53] include instrument.synth
+[14:47:53] {}
+[14:47:54] play start
+[14:47:54] {"state":{"playing":true}}
+[14:47:54] status midi_devices
+[14:47:54] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[14:47:55] node_set collector.value collector_poly
+[14:47:55] {}
+[14:47:55] node_set sound.value vocoder
+[14:47:55] {}
+[14:47:55] node_set glide.midi_cc 28
+[14:47:55] {}
+[14:47:55] node_set glide.value 0.5669291338582677
+[14:47:55] {}
+[14:47:55] node_set delay_gain.midi_cc 27
+[14:47:55] {}
+[14:47:55] node_set delay_gain.value 0.18110236220472442
+[14:47:55] {}
+[14:47:55] node_set delay_time.midi_cc -1
+[14:47:55] {}
+[14:47:55] node_set delay_time.value 0
+[14:47:55] {}
+[14:47:55] node_deactivate oscillator_1
+[14:47:55] {}
+[14:47:55] node_activate oscillator_2
+[14:47:55] {}
+[14:47:55] node_activate oscillator_3
+[14:47:55] {}
+[14:47:55] node_set waveform_1.midi_cc 21
+[14:47:55] {}
+[14:47:55] node_set waveform_1.value 0.6377952755905512
+[14:47:55] {}
+[14:47:55] node_set waveform_2.midi_cc 22
+[14:47:55] {}
+[14:47:55] node_set waveform_2.value 0.6377952755905512
+[14:47:55] {}
+[14:47:55] node_set waveform_3.midi_cc 23
+[14:47:55] {}
+[14:47:55] node_set waveform_3.value 0.5433070866141733
+[14:47:55] {}
+[14:47:55] node_set harmonic_1.midi_cc 41
+[14:47:55] {}
+[14:47:55] node_set harmonic_1.value 0
+[14:47:55] {}
+[14:47:55] node_set harmonic_2.midi_cc 42
+[14:47:55] {}
+[14:47:55] node_set harmonic_2.value 0.10236220472440945
+[14:47:55] {}
+[14:47:56] node_set harmonic_3.midi_cc 43
+[14:47:56] {}
+[14:47:56] node_set harmonic_3.value 0.13385826771653545
+[14:47:56] {}
+[14:47:56] node_set detune_1.midi_cc 44
+[14:47:56] {}
+[14:47:56] node_set detune_1.value 0.49606299212598426
+[14:47:56] {}
+[14:47:56] node_set detune_2.midi_cc 45
+[14:47:56] {}
+[14:47:56] node_set detune_2.value 0.6062992125984252
+[14:47:56] {}
+[14:47:56] node_set detune_3.midi_cc 46
+[14:47:56] {}
+[14:47:56] node_set detune_3.value 0.4251968503937008
+[14:47:56] {}
+[14:47:56] node_set gain_1.midi_cc 24
+[14:47:56] {}
+[14:47:56] node_set gain_1.value 0.5039370078740157
+[14:47:56] {}
+[14:47:56] node_set gain_2.midi_cc 25
+[14:47:56] {}
+[14:47:56] node_set gain_2.value 0.6299212598425197
+[14:47:56] {}
+[14:47:56] node_set gain_3.midi_cc 26
+[14:47:56] {}
+[14:47:56] node_set gain_3.value 0.6299212598425197
+[14:47:56] {}
+[14:47:56] node_set attack_time.midi_cc 47
+[14:47:56] {}
+[14:47:56] node_set attack_time.value 0
+[14:47:56] {}
+[14:47:56] node_set decay_time.midi_cc -1
+[14:47:56] {}
+[14:47:56] node_set decay_time.value 0
+[14:47:56] {}
+[14:47:56] node_set sustain_level.midi_cc -1
+[14:47:56] {}
+[14:47:56] node_set sustain_level.value 1
+[14:47:56] {}
+[14:47:56] node_set release_time.midi_cc 48
+[14:47:56] {}
+[14:47:56] node_set release_time.value 0.48031496062992124
+[14:47:56] {}
+[14:47:56] node_set cutoff.midi_cc -1
+[14:47:56] {}
+[14:47:56] node_set cutoff.value 0.25984251968503935
+[14:47:56] {}
+[14:47:57] status midi_devices input_devices output_devices settings
+[14:47:57] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[14:47:58] midi_add_device 1
+[14:47:58] {}
+[14:47:59] audio_set_input_device 2
+[14:47:59] {}
+[14:48:01] status midi_devices
+[14:48:01] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[14:48:02] node_set collector.value collector_poly
+[14:48:02] {}
+[14:48:02] node_set sound.value vocoder
+[14:48:02] {}
+[14:48:02] node_set glide.midi_cc 28
+[14:48:02] {}
+[14:48:02] node_set glide.value 0.5669291338582677
+[14:48:02] {}
+[14:48:02] node_set delay_gain.midi_cc 27
+[14:48:02] {}
+[14:48:02] node_set delay_gain.value 0.18110236220472442
+[14:48:02] {}
+[14:48:02] node_set delay_time.midi_cc -1
+[14:48:02] {}
+[14:48:02] node_set delay_time.value 0
+[14:48:02] {}
+[14:48:02] node_deactivate oscillator_1
+[14:48:02] {}
+[14:48:02] node_activate oscillator_2
+[14:48:02] {}
+[14:48:02] node_activate oscillator_3
+[14:48:02] {}
+[14:48:02] node_set waveform_1.midi_cc 21
+[14:48:02] {}
+[14:48:02] node_set waveform_1.value 0.6377952755905512
+[14:48:02] {}
+[14:48:02] node_set waveform_2.midi_cc 22
+[14:48:02] {}
+[14:48:02] node_set waveform_2.value 0.6377952755905512
+[14:48:02] {}
+[14:48:02] node_set waveform_3.midi_cc 23
+[14:48:02] {}
+[14:48:02] node_set waveform_3.value 0.5433070866141733
+[14:48:02] {}
+[14:48:02] node_set harmonic_1.midi_cc 41
+[14:48:02] {}
+[14:48:02] node_set harmonic_1.value 0
+[14:48:02] {}
+[14:48:02] node_set harmonic_2.midi_cc 42
+[14:48:02] {}
+[14:48:02] node_set harmonic_2.value 0.10236220472440945
+[14:48:02] {}
+[14:48:02] node_set harmonic_3.midi_cc 43
+[14:48:02] {}
+[14:48:02] node_set harmonic_3.value 0.13385826771653545
+[14:48:02] {}
+[14:48:02] node_set detune_1.midi_cc 44
+[14:48:02] {}
+[14:48:02] node_set detune_1.value 0.49606299212598426
+[14:48:02] {}
+[14:48:02] node_set detune_2.midi_cc 45
+[14:48:02] {}
+[14:48:02] node_set detune_2.value 0.6062992125984252
+[14:48:02] {}
+[14:48:02] node_set detune_3.midi_cc 46
+[14:48:02] {}
+[14:48:02] node_set detune_3.value 0.4251968503937008
+[14:48:02] {}
+[14:48:02] node_set gain_1.midi_cc 24
+[14:48:02] {}
+[14:48:02] node_set gain_1.value 0.5039370078740157
+[14:48:02] {}
+[14:48:02] node_set gain_2.midi_cc 25
+[14:48:02] {}
+[14:48:02] node_set gain_2.value 0.6299212598425197
+[14:48:02] {}
+[14:48:02] node_set gain_3.midi_cc 26
+[14:48:02] {}
+[14:48:02] node_set gain_3.value 0.6299212598425197
+[14:48:02] {}
+[14:48:02] node_set attack_time.midi_cc 47
+[14:48:02] {}
+[14:48:02] node_set attack_time.value 0
+[14:48:02] {}
+[14:48:02] node_set decay_time.midi_cc -1
+[14:48:02] {}
+[14:48:02] node_set decay_time.value 0
+[14:48:02] {}
+[14:48:02] node_set sustain_level.midi_cc -1
+[14:48:02] {}
+[14:48:02] node_set sustain_level.value 1
+[14:48:02] {}
+[14:48:02] node_set release_time.midi_cc 48
+[14:48:02] {}
+[14:48:02] node_set release_time.value 0.48031496062992124
+[14:48:02] {}
+[14:48:02] node_set cutoff.midi_cc -1
+[14:48:02] {}
+[14:48:02] node_set cutoff.value 0.25984251968503935
+[14:48:02] {}
+[14:48:06] node_set sound.value collector
+[14:48:06] {}
+[14:48:27] node_set sound.value vocoder
+[14:48:27] {}
+[14:48:39] node_activate oscillator_1
+[14:48:39] {}
+[14:48:43] node_deactivate oscillator_1
+[14:48:43] {}
+[14:50:00] node_set sound.value collector
+[14:50:00] {}
+[14:50:03] node_set sound.value vocoder
+[14:50:03] {}
+[14:52:48] status midi_devices input_devices output_devices settings
+[14:52:48] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":true},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[14:52:49] audio_set_input_device 0
+[14:52:49] {}
+[14:54:58] node_activate oscillator_1
+[14:54:58] {}
+[15:04:05] play stop
+[15:04:05] {"state":{"playing":false}}
+[15:04:05] clear
+[15:04:05] {}
+[15:04:05] settings_set root_directory ../instruments/hammond
+[15:04:05] {}
+[15:04:05] include instrument.synth
+[15:04:05] {}
+[15:04:05] play start
+[15:04:05] {"state":{"playing":true}}
+[15:04:05] status midi_devices
+[15:04:05] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[15:04:06] node_set drawbar_1.midi_cc 41
+[15:04:06] {}
+[15:04:06] node_set drawbar_1.value 0.984251968503937
+[15:04:06] {}
+[15:04:06] node_set drawbar_2.midi_cc 42
+[15:04:06] {}
+[15:04:06] node_set drawbar_2.value 0.5984251968503937
+[15:04:06] {}
+[15:04:06] node_set drawbar_3.midi_cc 43
+[15:04:06] {}
+[15:04:06] node_set drawbar_3.value 0.7952755905511811
+[15:04:06] {}
+[15:04:06] node_set drawbar_4.midi_cc 44
+[15:04:06] {}
+[15:04:06] node_set drawbar_4.value 0.7480314960629921
+[15:04:06] {}
+[15:04:06] node_set drawbar_5.midi_cc 45
+[15:04:06] {}
+[15:04:06] node_set drawbar_5.value 0.2204724409448819
+[15:04:06] {}
+[15:04:06] node_set drawbar_6.midi_cc 46
+[15:04:06] {}
+[15:04:06] node_set drawbar_6.value 0.4015748031496063
+[15:04:06] {}
+[15:04:06] node_set drawbar_7.midi_cc 47
+[15:04:06] {}
+[15:04:06] node_set drawbar_7.value 0.4251968503937008
+[15:04:06] {}
+[15:04:06] node_set drawbar_8.midi_cc 48
+[15:04:06] {}
+[15:04:06] node_set drawbar_8.value 0.6377952755905512
+[15:04:06] {}
+[15:04:06] node_set drawbar_9.midi_cc 7
+[15:04:06] {}
+[15:04:06] node_set drawbar_9.value 0.4330708661417323
+[15:04:06] {}
+[15:04:15] play stop
+[15:04:15] {"state":{"playing":false}}
+[15:04:15] clear
+[15:04:15] {}
+[15:04:15] settings_set root_directory ../instruments/synthesizer
+[15:04:15] {}
+[15:04:15] include instrument.synth
+[15:04:15] {"error":[{"message":"Provided node input does not exist"}],"command":"include instrument.synth"}
+[15:04:15] play start
+[15:04:15] {"state":{"playing":true}}
+[15:04:16] status midi_devices
+[15:04:16] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[15:04:16] node_set collector.value collector_poly
+[15:04:16] {}
+[15:04:16] node_set sound.value vocoder
+[15:04:16] {}
+[15:04:16] node_set glide.midi_cc 28
+[15:04:16] {}
+[15:04:16] node_set glide.value 0.5669291338582677
+[15:04:16] {}
+[15:04:16] node_set delay_gain.midi_cc 27
+[15:04:16] {}
+[15:04:16] node_set delay_gain.value 0.23622047244094488
+[15:04:16] {}
+[15:04:16] node_set delay_time.midi_cc -1
+[15:04:16] {}
+[15:04:16] node_set delay_time.value 0
+[15:04:16] {}
+[15:04:16] node_activate oscillator_1
+[15:04:16] {}
+[15:04:16] node_activate oscillator_2
+[15:04:16] {}
+[15:04:16] node_activate oscillator_3
+[15:04:16] {}
+[15:04:16] node_set waveform_1.value 0.6614173228346457
+[15:04:16] {}
+[15:04:16] node_set waveform_1.midi_cc 21
+[15:04:16] {}
+[15:04:16] node_set waveform_2.midi_cc 22
+[15:04:16] {}
+[15:04:16] node_set waveform_2.value 0.6220472440944882
+[15:04:16] {}
+[15:04:16] node_set waveform_3.midi_cc 23
+[15:04:16] {}
+[15:04:17] node_set waveform_3.value 0.6062992125984252
+[15:04:17] {}
+[15:04:17] node_set harmonic_1.midi_cc 41
+[15:04:17] {}
+[15:04:17] node_set harmonic_1.value 0
+[15:04:17] {}
+[15:04:17] node_set harmonic_2.midi_cc 42
+[15:04:17] {}
+[15:04:17] node_set harmonic_2.value 0.10236220472440945
+[15:04:17] {}
+[15:04:17] node_set harmonic_3.midi_cc 43
+[15:04:17] {}
+[15:04:17] node_set harmonic_3.value 0.13385826771653545
+[15:04:17] {}
+[15:04:17] node_set detune_1.midi_cc 44
+[15:04:17] {}
+[15:04:17] node_set detune_1.value 0.49606299212598426
+[15:04:17] {}
+[15:04:17] node_set detune_2.midi_cc 45
+[15:04:17] {}
+[15:04:17] node_set detune_2.value 0.4094488188976378
+[15:04:17] {}
+[15:04:17] node_set detune_3.midi_cc 46
+[15:04:17] {}
+[15:04:17] node_set detune_3.value 0.5196850393700787
+[15:04:17] {}
+[15:04:17] node_set gain_1.midi_cc 24
+[15:04:17] {}
+[15:04:17] node_set gain_1.value 0.5039370078740157
+[15:04:17] {}
+[15:04:17] node_set gain_2.midi_cc 25
+[15:04:17] {}
+[15:04:17] node_set gain_2.value 0.6299212598425197
+[15:04:17] {}
+[15:04:17] node_set release_time.value 0
+[15:04:17] {}
+[15:04:17] node_set gain_3.midi_cc 26
+[15:04:17] {}
+[15:04:17] node_set gain_3.value 0.6299212598425197
+[15:04:17] {}
+[15:04:17] node_set attack_time.midi_cc 47
+[15:04:17] {}
+[15:04:17] node_set attack_time.value 0
+[15:04:17] {}
+[15:04:17] node_set decay_time.midi_cc -1
+[15:04:17] {}
+[15:04:17] node_set decay_time.value 0
+[15:04:17] {}
+[15:04:17] node_set sustain_level.midi_cc -1
+[15:04:17] {}
+[15:04:17] node_set sustain_level.value 1
+[15:04:17] {}
+[15:04:17] node_set release_time.midi_cc 48
+[15:04:17] {}
+[15:04:17] node_set cutoff.midi_cc -1
+[15:04:17] {}
+[15:04:17] node_set cutoff.value 0.25984251968503935
+[15:04:17] {}
+[15:06:02] status midi_devices input_devices output_devices settings
+[15:06:02] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":true},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[15:06:06] status midi_devices input_devices output_devices settings
+[15:06:06] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":true},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[15:06:10] play stop
+[15:06:10] {"state":{"playing":false}}
+[15:06:10] clear
+[15:06:10] {}
+[15:06:10] settings_set root_directory ../instruments/example
+[15:06:10] {}
+[15:06:10] include instrument.synth
+[15:06:10] {"error":[{"message":"Node cannot depend on voice dependent node"}],"command":"include instrument.synth"}
+[15:06:10] play start
+[15:06:10] {"state":{"playing":true}}
+[15:06:10] status midi_devices
+[15:06:10] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[15:06:12] play stop
+[15:06:12] {"state":{"playing":false}}
+[15:06:13] clear
+[15:06:13] {}
+[15:06:13] settings_set root_directory ../instruments/synthesizer
+[15:06:13] {}
+[15:06:13] include instrument.synth
+[15:06:13] {}
+[15:06:13] play start
+[15:06:13] {"state":{"playing":true}}
+[15:06:13] status midi_devices
+[15:06:13] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[15:06:14] node_set collector.value collector_poly
+[15:06:14] {}
+[15:06:14] node_set sound.value vocoder
+[15:06:14] {}
+[15:06:14] node_set glide.midi_cc 28
+[15:06:14] {}
+[15:06:14] node_set glide.value 0.5669291338582677
+[15:06:14] {}
+[15:06:14] node_set delay_gain.midi_cc 27
+[15:06:14] {}
+[15:06:14] node_set delay_gain.value 0.14173228346456693
+[15:06:14] {}
+[15:06:14] node_set delay_time.midi_cc -1
+[15:06:14] {}
+[15:06:14] node_set delay_time.value 0
+[15:06:14] {}
+[15:06:14] node_activate oscillator_1
+[15:06:14] {}
+[15:06:14] node_activate oscillator_2
+[15:06:14] {}
+[15:06:14] node_activate oscillator_3
+[15:06:14] {}
+[15:06:14] node_set waveform_1.midi_cc 21
+[15:06:14] {}
+[15:06:14] node_set waveform_1.value 0.6614173228346457
+[15:06:14] {}
+[15:06:14] node_set waveform_2.midi_cc 22
+[15:06:14] {}
+[15:06:14] node_set waveform_2.value 0.6220472440944882
+[15:06:14] {}
+[15:06:14] node_set waveform_3.midi_cc 23
+[15:06:14] {}
+[15:06:14] node_set waveform_3.value 0.6062992125984252
+[15:06:14] {}
+[15:06:14] node_set harmonic_1.midi_cc 41
+[15:06:14] {}
+[15:06:14] node_set harmonic_1.value 0
+[15:06:14] {}
+[15:06:14] node_set harmonic_2.midi_cc 42
+[15:06:14] {}
+[15:06:14] node_set harmonic_2.value 0.10236220472440945
+[15:06:14] {}
+[15:06:14] node_set harmonic_3.midi_cc 43
+[15:06:14] {}
+[15:06:14] node_set harmonic_3.value 0.13385826771653545
+[15:06:14] {}
+[15:06:14] node_set detune_1.midi_cc 44
+[15:06:14] {}
+[15:06:14] node_set detune_1.value 0.49606299212598426
+[15:06:14] {}
+[15:06:14] node_set detune_2.midi_cc 45
+[15:06:14] {}
+[15:06:14] node_set detune_2.value 0.4094488188976378
+[15:06:14] {}
+[15:06:14] node_set detune_3.midi_cc 46
+[15:06:14] {}
+[15:06:14] node_set detune_3.value 0.5196850393700787
+[15:06:14] {}
+[15:06:14] node_set gain_1.midi_cc 24
+[15:06:14] {}
+[15:06:14] node_set gain_1.value 0.5039370078740157
+[15:06:14] {}
+[15:06:14] node_set gain_2.midi_cc 25
+[15:06:14] {}
+[15:06:14] node_set gain_2.value 0.6299212598425197
+[15:06:14] {}
+[15:06:14] node_set gain_3.midi_cc 26
+[15:06:14] {}
+[15:06:14] node_set gain_3.value 0.6299212598425197
+[15:06:14] {}
+[15:06:14] node_set attack_time.midi_cc 47
+[15:06:14] {}
+[15:06:14] node_set attack_time.value 0
+[15:06:14] {}
+[15:06:14] node_set decay_time.midi_cc -1
+[15:06:14] {}
+[15:06:14] node_set decay_time.value 0
+[15:06:14] {}
+[15:06:14] node_set sustain_level.midi_cc -1
+[15:06:14] {}
+[15:06:14] node_set sustain_level.value 1
+[15:06:14] {}
+[15:06:15] node_set release_time.midi_cc 48
+[15:06:15] {}
+[15:06:15] node_set release_time.value 0
+[15:06:15] {}
+[15:06:15] node_set cutoff.midi_cc -1
+[15:06:15] {}
+[15:06:15] node_set cutoff.value 0.25984251968503935
+[15:06:15] {}
+[15:14:00] node_set collector.value collector_lead
+[15:14:00] {}
+[15:15:13] node_set sound.value collector
+[15:15:13] {}
+[15:15:37] node_set sound.value vocoder
+[15:15:37] {}
+[15:19:22] node_set sound.value collector
+[15:19:22] {}
+[15:19:24] node_set sound.value vocoder
+[15:19:24] {}
+[15:19:24] node_set collector.value collector_poly
+[15:19:24] {}
+[15:23:12] node_set collector.value collector_lead
+[15:23:12] {}
+[15:25:31] node_set sound.value collector
+[15:25:31] {}
+[15:25:33] node_set sound.value vocoder
+[15:25:33] {}
+[15:25:33] node_set collector.value collector_poly
+[15:25:33] {}
+[15:25:58] node_set collector.value collector_lead
+[15:25:58] {}
+[15:31:10] node_set collector.value collector_poly
+[15:31:10] {}
+[15:40:18] status midi_devices input_devices output_devices settings
+[15:40:18] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":true},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[15:40:18] exit
+[15:40:18] {"info":[{"message":"Program ended"}]}
+[16:42:05] status midi_devices input_devices output_devices settings
+[16:42:05] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[16:42:07] midi_add_device 1
+[16:42:07] {}
+[16:42:08] play stop
+[16:42:08] {"state":{"playing":false}}
+[16:42:08] clear
+[16:42:08] {}
+[16:42:08] settings_set root_directory ../instruments/synthesizer
+[16:42:08] {}
+[16:42:08] include instrument.synth
+[16:42:08] {}
+[16:42:08] play start
+[16:42:08] {"state":{"playing":true}}
+[16:42:09] status midi_devices
+[16:42:09] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[16:42:09] node_set collector.value collector_poly
+[16:42:09] {}
+[16:42:09] node_set glide.value 0.7480314960629921
+[16:42:09] {}
+[16:42:09] node_set delay_gain.value 0.14960629921259844
+[16:42:09] {}
+[16:42:09] node_set sound.value vocoder
+[16:42:09] {}
+[16:42:09] node_set glide.midi_cc 28
+[16:42:09] {}
+[16:42:09] node_set delay_gain.midi_cc 27
+[16:42:09] {}
+[16:42:09] node_set delay_time.midi_cc -1
+[16:42:09] {}
+[16:42:09] node_set delay_time.value 0
+[16:42:09] {}
+[16:42:09] node_activate oscillator_1
+[16:42:09] {}
+[16:42:09] node_activate oscillator_2
+[16:42:09] {}
+[16:42:09] node_activate oscillator_3
+[16:42:09] {}
+[16:42:09] node_set waveform_1.midi_cc 21
+[16:42:09] {}
+[16:42:09] node_set waveform_1.value 0.6377952755905512
+[16:42:09] {}
+[16:42:09] node_set waveform_2.value 0.6299212598425197
+[16:42:09] {}
+[16:42:09] node_set waveform_3.value 0.6299212598425197
+[16:42:09] {}
+[16:42:09] node_set waveform_2.midi_cc 22
+[16:42:09] {}
+[16:42:09] node_set waveform_3.midi_cc 23
+[16:42:09] {}
+[16:42:09] node_set harmonic_1.midi_cc 41
+[16:42:09] {}
+[16:42:09] node_set harmonic_1.value 0
+[16:42:09] {}
+[16:42:09] node_set harmonic_2.midi_cc 42
+[16:42:09] {}
+[16:42:09] node_set harmonic_2.value 0.06299212598425197
+[16:42:09] {}
+[16:42:09] node_set harmonic_3.value 0.07874015748031496
+[16:42:09] {}
+[16:42:09] node_set detune_2.value 0.49606299212598426
+[16:42:09] {}
+[16:42:09] node_set detune_3.value 0.4330708661417323
+[16:42:09] {}
+[16:42:09] node_set harmonic_3.midi_cc 43
+[16:42:09] {}
+[16:42:09] node_set gain_2.value 0.3700787401574803
+[16:42:09] {}
+[16:42:09] node_set gain_3.value 0.7244094488188977
+[16:42:09] {}
+[16:42:09] node_set detune_1.midi_cc 44
+[16:42:09] {}
+[16:42:09] node_set detune_1.value 0.49606299212598426
+[16:42:09] {}
+[16:42:09] node_set detune_2.midi_cc 45
+[16:42:09] {}
+[16:42:09] node_set detune_3.midi_cc 46
+[16:42:09] {}
+[16:42:09] node_set gain_1.midi_cc 24
+[16:42:09] {}
+[16:42:09] node_set gain_1.value 0.5039370078740157
+[16:42:09] {}
+[16:42:09] node_set gain_2.midi_cc 25
+[16:42:09] {}
+[16:42:09] node_set gain_3.midi_cc 26
+[16:42:09] {}
+[16:42:09] node_set attack_time.midi_cc 47
+[16:42:09] {}
+[16:42:09] node_set attack_time.value 0
+[16:42:09] {}
+[16:42:09] node_set decay_time.midi_cc -1
+[16:42:09] {}
+[16:42:09] node_set decay_time.value 0
+[16:42:09] {}
+[16:42:09] node_set release_time.value 0.1732283464566929
+[16:42:09] {}
+[16:42:09] node_set sustain_level.midi_cc -1
+[16:42:09] {}
+[16:42:09] node_set sustain_level.value 1
+[16:42:09] {}
+[16:42:09] node_set release_time.midi_cc 48
+[16:42:09] {}
+[16:42:09] node_set cutoff.midi_cc -1
+[16:42:09] {}
+[16:42:09] node_set cutoff.value 0.25984251968503935
+[16:42:09] {}
+[16:42:10] node_set sound.value collector
+[16:42:10] {}
+[16:43:25] node_set collector.value collector_lead
+[16:43:25] {}
+[16:44:19] node_set cutoff.midi_cc -1
+[16:44:19] {}
+[16:44:19] node_set cutoff.midi_cc 28
+[16:44:19] {}
+[16:44:27] node_set cutoff.midi_cc -1
+[16:44:27] {}
+[16:44:28] node_set cutoff.midi_cc -1
+[16:44:28] {}
+[16:44:32] node_set collector.value collector_poly
+[16:44:32] {}
+[16:44:35] node_set collector.value collector_lead
+[16:44:35] {}
+[16:44:36] node_set collector.value collector_poly
+[16:44:36] {}
+[16:44:38] node_deactivate oscillator_2
+[16:44:38] {}
+[16:44:38] node_deactivate oscillator_3
+[16:44:38] {}
+[16:44:39] node_deactivate oscillator_1
+[16:44:39] {}
+[16:44:40] node_activate oscillator_2
+[16:44:40] {}
+[16:44:40] node_activate oscillator_3
+[16:44:40] {}
+[16:45:06] node_activate oscillator_1
+[16:45:06] {}
+[16:47:17] node_set collector.value collector_lead
+[16:47:17] {}
+[16:50:22] node_set collector.value collector_poly
+[16:50:22] {}
+[16:50:27] node_set collector.value collector_lead
+[16:50:27] {}
+[16:50:29] node_set collector.value collector_poly
+[16:50:29] {}
+[16:50:30] node_set collector.value collector_lead
+[16:50:30] {}
+[16:50:32] node_set collector.value collector_poly
+[16:50:32] {}
+[16:53:03] node_set collector.value collector_lead
+[16:53:03] {}
+[16:53:23] node_set collector.value collector_poly
+[16:53:23] {}
+[16:54:29] node_set collector.value collector_lead
+[16:54:29] {}
+[17:07:47] node_set collector.value collector_poly
+[17:07:47] {}
+[17:07:49] node_set sound.value vocoder
+[17:07:49] {}
+[17:07:49] node_set collector.value collector_lead
+[17:07:49] {}
+[17:07:50] node_set sound.value collector
+[17:07:50] {}
+[17:07:51] node_set sound.value vocoder
+[17:07:51] {}
+[17:07:52] node_set sound.value collector
+[17:07:52] {}
+[17:08:04] node_set sound.value vocoder
+[17:08:04] {}
+[17:08:05] node_set sound.value collector
+[17:08:05] {}
+[17:08:05] node_set collector.value collector_poly
+[17:08:05] {}
+[17:11:13] node_set collector.value collector_lead
+[17:11:13] {}
+[13:14:08] play stop
+[13:14:08] {"state":{"playing":false}}
+[13:14:08] clear
+[13:14:08] {}
+[13:14:09] settings_set root_directory ../instruments/synthesizer
+[13:14:09] {}
+[13:14:09] include instrument.synth
+[13:14:09] {}
+[13:14:09] play start
+[13:14:09] {"state":{"playing":true}}
+[13:14:10] status midi_devices
+[13:14:10] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[13:14:11] node_set collector.value collector_lead
+[13:14:11] {}
+[13:14:11] node_set sound.value collector
+[13:14:11] {}
+[13:14:11] node_set glide.midi_cc 28
+[13:14:11] {}
+[13:14:11] node_set glide.value 0.6377952755905512
+[13:14:11] {}
+[13:14:11] node_set delay_gain.midi_cc 27
+[13:14:11] {}
+[13:14:11] node_set delay_gain.value 0.12598425196850394
+[13:14:11] {}
+[13:14:11] node_set delay_time.midi_cc -1
+[13:14:11] {}
+[13:14:12] node_set delay_time.value 0
+[13:14:12] {}
+[13:14:12] node_activate oscillator_1
+[13:14:12] {}
+[13:14:12] node_activate oscillator_2
+[13:14:12] {}
+[13:14:12] node_activate oscillator_3
+[13:14:12] {}
+[13:14:13] node_set waveform_1.midi_cc 21
+[13:14:13] {}
+[13:14:13] node_set waveform_1.value 0.6377952755905512
+[13:14:13] {}
+[13:14:13] node_set waveform_2.midi_cc 22
+[13:14:13] {}
+[13:14:14] node_set waveform_2.value 0.8976377952755905
+[13:14:14] {}
+[13:14:14] node_set waveform_3.midi_cc 23
+[13:14:14] {}
+[13:14:15] node_set waveform_3.value 0.6299212598425197
+[13:14:15] {}
+[13:14:15] node_set harmonic_1.midi_cc 41
+[13:14:15] {}
+[13:14:15] node_set harmonic_1.value 0
+[13:14:15] {}
+[13:14:16] node_set harmonic_2.value 0.11811023622047244
+[13:14:16] {}
+[13:14:16] node_set harmonic_2.midi_cc 42
+[13:14:16] {}
+[13:14:17] node_set harmonic_3.midi_cc 43
+[13:14:17] {}
+[13:14:17] node_set harmonic_3.value 0.12598425196850394
+[13:14:17] {}
+[13:14:18] node_set detune_1.midi_cc 44
+[13:14:18] {}
+[13:14:18] node_set detune_1.value 0.49606299212598426
+[13:14:18] {}
+[13:14:18] node_set detune_2.midi_cc 45
+[13:14:18] {}
+[13:14:19] node_set detune_2.value 0.49606299212598426
+[13:14:19] {}
+[13:14:19] node_set detune_3.midi_cc 46
+[13:14:19] {}
+[13:14:19] node_set detune_3.value 0.5669291338582677
+[13:14:19] {}
+[13:14:20] node_set gain_1.midi_cc 24
+[13:14:20] {}
+[13:14:20] node_set gain_1.value 0.5039370078740157
+[13:14:20] {}
+[13:14:20] node_set gain_2.midi_cc 25
+[13:14:20] {}
+[13:14:20] node_set gain_2.value 0.3700787401574803
+[13:14:20] {}
+[13:14:20] node_set gain_3.midi_cc 26
+[13:14:20] {}
+[13:14:21] node_set gain_3.value 0.7244094488188977
+[13:14:21] {}
+[13:14:21] node_set attack_time.midi_cc 47
+[13:14:21] {}
+[13:14:21] node_set attack_time.value 0
+[13:14:21] {}
+[13:14:22] node_set decay_time.midi_cc -1
+[13:14:22] {}
+[13:14:22] node_set decay_time.value 0
+[13:14:22] {}
+[13:14:22] node_set sustain_level.midi_cc -1
+[13:14:22] {}
+[13:14:22] node_set sustain_level.value 1
+[13:14:22] {}
+[13:14:23] node_set release_time.midi_cc 48
+[13:14:23] {}
+[13:14:23] node_set release_time.value 0.2677165354330709
+[13:14:23] {}
+[13:14:23] node_set cutoff.midi_cc -1
+[13:14:23] {}
+[13:14:23] node_set cutoff.value 0
+[13:14:23] {}
+[13:14:24] status midi_devices input_devices output_devices settings
+[13:14:24] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[13:14:25] midi_add_device 1
+[13:14:25] {}
+[13:14:35] audio_set_output_device 2
+[13:14:35] {}
+[13:16:58] status midi_devices
+[13:16:58] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[13:16:59] node_set collector.value collector_lead
+[13:16:59] {}
+[13:16:59] node_set sound.value collector
+[13:16:59] {}
+[13:16:59] node_set glide.midi_cc 28
+[13:16:59] {}
+[13:16:59] node_set glide.value 0.6377952755905512
+[13:16:59] {}
+[13:16:59] node_set delay_gain.midi_cc 27
+[13:16:59] {}
+[13:16:59] node_set delay_gain.value 0.12598425196850394
+[13:16:59] {}
+[13:16:59] node_set delay_time.midi_cc -1
+[13:16:59] {}
+[13:16:59] node_set delay_time.value 0
+[13:16:59] {}
+[13:16:59] node_activate oscillator_1
+[13:16:59] {}
+[13:16:59] node_activate oscillator_2
+[13:16:59] {}
+[13:16:59] node_activate oscillator_3
+[13:16:59] {}
+[13:16:59] node_set waveform_1.midi_cc 21
+[13:16:59] {}
+[13:16:59] node_set waveform_1.value 0.6377952755905512
+[13:16:59] {}
+[13:16:59] node_set waveform_2.midi_cc 22
+[13:16:59] {}
+[13:16:59] node_set waveform_2.value 0.8976377952755905
+[13:16:59] {}
+[13:16:59] node_set waveform_3.midi_cc 23
+[13:16:59] {}
+[13:16:59] node_set waveform_3.value 0.6299212598425197
+[13:16:59] {}
+[13:16:59] node_set harmonic_1.midi_cc 41
+[13:16:59] {}
+[13:16:59] node_set harmonic_1.value 0
+[13:16:59] {}
+[13:16:59] node_set harmonic_2.midi_cc 42
+[13:16:59] {}
+[13:16:59] node_set harmonic_2.value 0.11811023622047244
+[13:16:59] {}
+[13:16:59] node_set harmonic_3.midi_cc 43
+[13:16:59] {}
+[13:16:59] node_set harmonic_3.value 0.12598425196850394
+[13:16:59] {}
+[13:16:59] node_set detune_1.midi_cc 44
+[13:16:59] {}
+[13:16:59] node_set detune_1.value 0.49606299212598426
+[13:16:59] {}
+[13:16:59] node_set detune_2.midi_cc 45
+[13:16:59] {}
+[13:16:59] node_set detune_2.value 0.49606299212598426
+[13:16:59] {}
+[13:16:59] node_set detune_3.midi_cc 46
+[13:16:59] {}
+[13:16:59] node_set detune_3.value 0.5669291338582677
+[13:16:59] {}
+[13:16:59] node_set gain_1.midi_cc 24
+[13:16:59] {}
+[13:16:59] node_set gain_1.value 0.5039370078740157
+[13:16:59] {}
+[13:16:59] node_set gain_2.midi_cc 25
+[13:16:59] {}
+[13:16:59] node_set gain_2.value 0.3700787401574803
+[13:16:59] {}
+[13:16:59] node_set gain_3.midi_cc 26
+[13:16:59] {}
+[13:16:59] node_set gain_3.value 0.7244094488188977
+[13:16:59] {}
+[13:16:59] node_set attack_time.midi_cc 47
+[13:16:59] {}
+[13:16:59] node_set attack_time.value 0
+[13:16:59] {}
+[13:16:59] node_set decay_time.midi_cc -1
+[13:16:59] {}
+[13:16:59] node_set decay_time.value 0
+[13:16:59] {}
+[13:16:59] node_set sustain_level.midi_cc -1
+[13:16:59] {}
+[13:16:59] node_set sustain_level.value 1
+[13:16:59] {}
+[13:16:59] node_set release_time.midi_cc 48
+[13:16:59] {}
+[13:16:59] node_set release_time.value 0.2677165354330709
+[13:16:59] {}
+[13:16:59] node_set cutoff.midi_cc -1
+[13:16:59] {}
+[13:16:59] node_set cutoff.value 0
+[13:16:59] {}
+[13:16:59] node_set collector.value collector_poly
+[13:16:59] {}
+[13:18:03] node_set collector.value collector_lead
+[13:18:03] {}
+[13:18:26] node_set collector.value collector_poly
+[13:18:26] {}
+[13:19:53] node_set collector.value collector_lead
+[13:19:53] {}
+[13:20:15] status midi_devices input_devices output_devices settings
+[13:20:15] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":false},{"id":2,"name":"Soundflower (2ch)","active":true},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[13:20:18] audio_set_output_device 1
+[13:20:18] {}
+[13:20:27] audio_set_output_device 2
+[13:20:27] {}
+[13:20:42] node_set collector.value collector_poly
+[13:20:42] {}
+[13:21:02] node_set collector.value collector_lead
+[13:21:02] {}
+[13:49:30] node_set collector.value collector_poly
+[13:49:30] {}
+[14:23:53] node_deactivate oscillator_1
+[14:23:53] {}
+[14:23:53] node_deactivate oscillator_2
+[14:23:53] {}
+[14:23:54] node_deactivate oscillator_3
+[14:23:54] {}
+[14:23:54] node_set collector.value collector_lead
+[14:23:54] {}
+[19:55:52] play stop
+[19:55:52] {"state":{"playing":false}}
+[19:55:52] clear
+[19:55:52] {}
+[19:55:52] settings_set root_directory ../instruments/synthesizer
+[19:55:52] {}
+[19:55:52] include instrument.synth
+[19:55:52] {}
+[19:55:52] play start
+[19:55:52] {"state":{"playing":true}}
+[19:55:53] status midi_devices
+[19:55:53] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false}]}
+[19:55:53] node_set collector.value collector_lead
+[19:55:53] {}
+[19:55:53] node_set sound.value collector
+[19:55:53] {}
+[19:55:53] node_set glide.midi_cc 28
+[19:55:53] {}
+[19:55:53] node_set glide.value 0.5433070866141733
+[19:55:53] {}
+[19:55:53] node_set delay_gain.midi_cc 27
+[19:55:53] {}
+[19:55:53] node_set delay_gain.value 0.12598425196850394
+[19:55:53] {}
+[19:55:53] node_set delay_time.midi_cc -1
+[19:55:53] {}
+[19:55:53] node_set delay_time.value 0
+[19:55:53] {}
+[19:55:53] node_deactivate oscillator_1
+[19:55:53] {}
+[19:55:53] node_deactivate oscillator_2
+[19:55:53] {}
+[19:55:53] node_deactivate oscillator_3
+[19:55:53] {}
+[19:55:53] node_set waveform_1.value 0.5196850393700787
+[19:55:53] {}
+[19:55:53] node_set waveform_2.value 0.6535433070866141
+[19:55:53] {}
+[19:55:53] node_set waveform_1.midi_cc 21
+[19:55:53] {}
+[19:55:53] node_set waveform_3.value 0.6220472440944882
+[19:55:53] {}
+[19:55:53] node_set harmonic_2.value 0
+[19:55:53] {}
+[19:55:53] node_set harmonic_3.midi_cc 43
+[19:55:53] {}
+[19:55:53] node_set harmonic_2.midi_cc 42
+[19:55:53] {}
+[19:55:53] node_set harmonic_1.value 0
+[19:55:53] {}
+[19:55:53] node_set waveform_3.midi_cc 23
+[19:55:53] {}
+[19:55:53] node_set waveform_2.midi_cc 22
+[19:55:53] {}
+[19:55:53] node_set harmonic_1.midi_cc 41
+[19:55:53] {}
+[19:55:53] node_set harmonic_3.value 0.12598425196850394
+[19:55:53] {}
+[19:55:53] node_set detune_1.midi_cc 44
+[19:55:53] {}
+[19:55:53] node_set detune_1.value 0
+[19:55:53] {}
+[19:55:53] node_set detune_2.value 0.5196850393700787
+[19:55:53] {}
+[19:55:53] node_set detune_2.midi_cc 45
+[19:55:53] {}
+[19:55:53] node_set detune_3.value 0.6377952755905512
+[19:55:53] {}
+[19:55:53] node_set detune_3.midi_cc 46
+[19:55:53] {}
+[19:55:53] node_set gain_1.midi_cc 24
+[19:55:53] {}
+[19:55:53] node_set gain_1.value 0.023622047244094488
+[19:55:53] {}
+[19:55:53] node_set gain_2.midi_cc 25
+[19:55:53] {}
+[19:55:53] node_set gain_2.value 0.14960629921259844
+[19:55:53] {}
+[19:55:53] node_set gain_3.value 0.16535433070866143
+[19:55:53] {}
+[19:55:53] node_set gain_3.midi_cc 26
+[19:55:53] {}
+[19:55:53] node_set attack_time.midi_cc 47
+[19:55:53] {}
+[19:55:53] node_set attack_time.value 0
+[19:55:53] {}
+[19:55:53] node_set decay_time.midi_cc -1
+[19:55:53] {}
+[19:55:53] node_set decay_time.value 0
+[19:55:53] {}
+[19:55:53] node_set sustain_level.midi_cc -1
+[19:55:53] {}
+[19:55:53] node_set sustain_level.value 1
+[19:55:53] {}
+[19:55:53] node_set release_time.midi_cc 48
+[19:55:53] {}
+[19:55:53] node_set release_time.value 0.2677165354330709
+[19:55:53] {}
+[19:55:53] node_set cutoff.midi_cc -1
+[19:55:53] {}
+[19:55:53] node_set cutoff.value 0
+[19:55:53] {}
+[19:56:12] status midi_devices input_devices output_devices settings
+[19:56:12] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[19:56:15] exit
+[19:56:15] {"info":[{"message":"Program ended"}]}
+[19:56:16] status midi_devices input_devices output_devices settings
+[19:56:16] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[19:56:17] midi_add_device 1
+[19:56:17] {}
+[19:56:19] audio_set_input_device 0
+[19:56:19] {}
+[19:56:24] play stop
+[19:56:24] {"state":{"playing":false}}
+[19:56:24] clear
+[19:56:24] {}
+[19:56:24] settings_set root_directory ../instruments/synthesizer
+[19:56:24] {}
+[19:56:24] include instrument.synth
+[19:56:24] {}
+[19:56:24] play start
+[19:56:24] {"state":{"playing":true}}
+[19:56:24] status midi_devices
+[19:56:24] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[19:56:24] node_set collector.value collector_lead
+[19:56:24] {}
+[19:56:24] node_set sound.value collector
+[19:56:24] {}
+[19:56:24] node_set glide.midi_cc 28
+[19:56:24] {}
+[19:56:24] node_set glide.value 0.5433070866141733
+[19:56:24] {}
+[19:56:24] node_set delay_gain.midi_cc 27
+[19:56:24] {}
+[19:56:24] node_set delay_gain.value 0.12598425196850394
+[19:56:24] {}
+[19:56:24] node_set delay_time.midi_cc -1
+[19:56:24] {}
+[19:56:24] node_set delay_time.value 0
+[19:56:24] {}
+[19:56:24] node_deactivate oscillator_1
+[19:56:24] {}
+[19:56:24] node_deactivate oscillator_2
+[19:56:24] {}
+[19:56:24] node_deactivate oscillator_3
+[19:56:24] {}
+[19:56:24] node_set waveform_1.midi_cc 21
+[19:56:24] {}
+[19:56:24] node_set waveform_1.value 0.5196850393700787
+[19:56:24] {}
+[19:56:24] node_set waveform_2.midi_cc 22
+[19:56:24] {}
+[19:56:24] node_set waveform_2.value 0.6535433070866141
+[19:56:24] {}
+[19:56:24] node_set waveform_3.midi_cc 23
+[19:56:24] {}
+[19:56:24] node_set waveform_3.value 0.6220472440944882
+[19:56:24] {}
+[19:56:24] node_set harmonic_1.midi_cc 41
+[19:56:24] {}
+[19:56:24] node_set harmonic_1.value 0
+[19:56:24] {}
+[19:56:25] node_set harmonic_2.midi_cc 42
+[19:56:25] {}
+[19:56:25] node_set harmonic_3.midi_cc 43
+[19:56:25] {}
+[19:56:25] node_set harmonic_2.value 0
+[19:56:25] {}
+[19:56:25] node_set harmonic_3.value 0.12598425196850394
+[19:56:25] {}
+[19:56:25] node_set detune_1.midi_cc 44
+[19:56:25] {}
+[19:56:25] node_set detune_1.value 0
+[19:56:25] {}
+[19:56:25] node_set detune_2.midi_cc 45
+[19:56:25] {}
+[19:56:25] node_set detune_2.value 0.5196850393700787
+[19:56:25] {}
+[19:56:25] node_set detune_3.midi_cc 46
+[19:56:25] {}
+[19:56:25] node_set detune_3.value 0.6377952755905512
+[19:56:25] {}
+[19:56:25] node_set gain_1.midi_cc 24
+[19:56:25] {}
+[19:56:25] node_set gain_1.value 0.023622047244094488
+[19:56:25] {}
+[19:56:25] node_set gain_2.midi_cc 25
+[19:56:25] {}
+[19:56:25] node_set gain_2.value 0.14960629921259844
+[19:56:25] {}
+[19:56:25] node_set gain_3.midi_cc 26
+[19:56:25] {}
+[19:56:25] node_set gain_3.value 0.16535433070866143
+[19:56:25] {}
+[19:56:25] node_set attack_time.midi_cc 47
+[19:56:25] {}
+[19:56:25] node_set attack_time.value 0
+[19:56:25] {}
+[19:56:25] node_set decay_time.midi_cc -1
+[19:56:25] {}
+[19:56:25] node_set decay_time.value 0
+[19:56:25] {}
+[19:56:25] node_set sustain_level.midi_cc -1
+[19:56:25] {}
+[19:56:25] node_set sustain_level.value 1
+[19:56:25] {}
+[19:56:25] node_set release_time.midi_cc 48
+[19:56:25] {}
+[19:56:25] node_set release_time.value 0.2677165354330709
+[19:56:25] {}
+[19:56:25] node_set cutoff.midi_cc -1
+[19:56:25] {}
+[19:56:25] node_set cutoff.value 0
+[19:56:25] {}
+[19:56:34] node_activate oscillator_1
+[19:56:34] {}
+[19:56:35] node_activate oscillator_2
+[19:56:35] {}
+[19:56:35] node_activate oscillator_3
+[19:56:35] {}
+[19:57:15] node_set collector.value collector_poly
+[19:57:15] {}
+[19:57:19] node_set collector.value collector_lead
+[19:57:19] {}
+[19:57:33] node_set sound.value vocoder
+[19:57:33] {}
+[19:57:34] node_set sound.value collector
+[19:57:34] {}
+[19:57:49] node_set sound.value vocoder
+[19:57:49] {}
+[19:58:01] node_set sound.value collector
+[19:58:01] {}
+[19:58:03] node_set sound.value vocoder
+[19:58:03] {}
+[19:58:03] node_set collector.value collector_poly
+[19:58:03] {}
+[20:13:34] node_set sound.value collector
+[20:13:34] {}
+[20:13:54] node_set sound.value vocoder
+[20:13:54] {}
+[20:24:31] node_set collector.value collector_lead
+[20:24:31] {}
+[20:53:45] node_set collector.value collector_poly
+[20:53:45] {}
+[20:55:29] status midi_devices input_devices output_devices settings
+[20:55:29] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":true},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[20:55:31] audio_set_output_device 2
+[20:55:31] {}
+[21:02:26] node_set sound.value collector
+[21:02:26] {}
+[21:02:44] node_set sound.value vocoder
+[21:02:44] {}
+[21:05:30] node_set sound.value collector
+[21:05:30] {}
+[21:05:43] node_deactivate oscillator_2
+[21:05:43] {}
+[21:05:44] node_activate oscillator_2
+[21:05:44] {}
+[21:05:44] node_deactivate oscillator_3
+[21:05:44] {}
+[21:05:45] node_activate oscillator_3
+[21:05:45] {}
+[21:05:59] node_set sound.value vocoder
+[21:05:59] {}
+[21:07:43] node_set collector.value collector_lead
+[21:07:43] {}
+[21:08:21] node_set collector.value collector_poly
+[21:08:21] {}
+[21:08:52] node_set collector.value collector_lead
+[21:08:52] {}
+[21:09:03] node_set collector.value collector_poly
+[21:09:03] {}
+[18:50:17] status midi_devices input_devices output_devices settings
+[18:50:17] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[18:50:18] midi_add_device 1
+[18:50:18] {}
+[18:50:21] play stop
+[18:50:21] {"state":{"playing":false}}
+[18:50:21] clear
+[18:50:21] {}
+[18:50:21] settings_set root_directory ../instruments/synthesizer
+[18:50:21] {}
+[18:50:21] include instrument.synth
+[18:50:21] {}
+[18:50:21] play start
+[18:50:21] {"state":{"playing":true}}
+[18:50:22] status midi_devices
+[18:50:22] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[18:50:22] node_set collector.value collector_poly
+[18:50:22] {}
+[18:50:22] node_set glide.value 0.4015748031496063
+[18:50:22] {}
+[18:50:22] node_set delay_gain.value 0
+[18:50:22] {}
+[18:50:22] node_set sound.value vocoder
+[18:50:22] {}
+[18:50:22] node_activate oscillator_1
+[18:50:22] {}
+[18:50:22] node_activate oscillator_2
+[18:50:22] {}
+[18:50:22] node_activate oscillator_3
+[18:50:22] {}
+[18:50:22] node_set waveform_1.midi_cc 21
+[18:50:22] {}
+[18:50:22] node_set waveform_1.value 0.6141732283464567
+[18:50:22] {}
+[18:50:22] node_set waveform_2.midi_cc 22
+[18:50:22] {}
+[18:50:22] node_set harmonic_2.value 0.2283464566929134
+[18:50:22] {}
+[18:50:22] node_set harmonic_3.value 0.2125984251968504
+[18:50:22] {}
+[18:50:22] node_set waveform_2.value 0.6535433070866141
+[18:50:22] {}
+[18:50:22] node_set waveform_3.midi_cc 23
+[18:50:22] {}
+[18:50:22] node_set waveform_3.value 0.6220472440944882
+[18:50:22] {}
+[18:50:22] node_set harmonic_1.midi_cc 41
+[18:50:22] {}
+[18:50:22] node_set harmonic_1.value 0
+[18:50:22] {}
+[18:50:22] node_set harmonic_2.midi_cc 42
+[18:50:22] {}
+[18:50:22] node_set detune_1.value 0.5039370078740157
+[18:50:22] {}
+[18:50:22] node_set glide.midi_cc 28
+[18:50:22] {}
+[18:50:22] node_set detune_2.value 0.5433070866141733
+[18:50:22] {}
+[18:50:22] node_set detune_1.midi_cc 44
+[18:50:22] {}
+[18:50:22] node_set harmonic_3.midi_cc 43
+[18:50:22] {}
+[18:50:22] node_set detune_2.midi_cc 45
+[18:50:22] {}
+[18:50:22] node_set delay_time.value 0
+[18:50:22] {}
+[18:50:22] node_set delay_time.midi_cc -1
+[18:50:22] {}
+[18:50:22] node_set delay_gain.midi_cc 27
+[18:50:22] {}
+[18:50:22] node_set detune_3.midi_cc 46
+[18:50:22] {}
+[18:50:22] node_set detune_3.value 0.4094488188976378
+[18:50:22] {}
+[18:50:22] node_set gain_1.midi_cc 24
+[18:50:22] {}
+[18:50:22] node_set gain_1.value 0.29133858267716534
+[18:50:22] {}
+[18:50:23] node_set gain_2.value 0.14960629921259844
+[18:50:23] {}
+[18:50:23] node_set gain_2.midi_cc 25
+[18:50:23] {}
+[18:50:23] node_set gain_3.midi_cc 26
+[18:50:23] {}
+[18:50:23] node_set gain_3.value 0.16535433070866143
+[18:50:23] {}
+[18:50:23] node_set attack_time.midi_cc 47
+[18:50:23] {}
+[18:50:23] node_set attack_time.value 0
+[18:50:23] {}
+[18:50:23] node_set decay_time.midi_cc -1
+[18:50:23] {}
+[18:50:23] node_set decay_time.value 0
+[18:50:23] {}
+[18:50:23] node_set sustain_level.value 1
+[18:50:23] {}
+[18:50:23] node_set sustain_level.midi_cc -1
+[18:50:23] {}
+[18:50:23] node_set release_time.midi_cc 48
+[18:50:23] {}
+[18:50:23] node_set release_time.value 0
+[18:50:23] {}
+[18:50:23] node_set cutoff.midi_cc -1
+[18:50:23] {}
+[18:50:23] node_set cutoff.value 0
+[18:50:23] {}
+[18:50:30] node_set sound.value collector
+[18:50:30] {}
+[18:53:01] node_set collector.value collector_lead
+[18:53:01] {}
+[18:53:54] node_deactivate oscillator_2
+[18:53:54] {}
+[18:53:54] node_deactivate oscillator_3
+[18:53:54] {}
+[18:54:34] node_activate oscillator_3
+[18:54:34] {}
+[18:54:36] node_activate oscillator_2
+[18:54:36] {}
+[18:54:36] node_deactivate oscillator_3
+[18:54:36] {}
+[18:54:36] node_deactivate oscillator_2
+[18:54:36] {}
+[18:54:39] node_activate oscillator_2
+[18:54:39] {}
+[18:54:39] node_activate oscillator_3
+[18:54:39] {}
+[18:57:38] node_set collector.value collector_poly
+[18:57:38] {}
+[18:59:34] node_set collector.value collector_lead
+[18:59:34] {}
+[19:04:02] node_set delay_time.midi_cc -1
+[19:04:02] {}
+[19:04:04] node_set delay_time.midi_cc 28
+[19:04:04] {}
+[19:05:29] node_set delay_time.midi_cc -1
+[19:05:29] {}
+[19:05:29] node_set delay_time.midi_cc -1
+[19:05:29] {}
+[19:07:15] node_set collector.value collector_poly
+[19:07:15] {}
+[19:07:31] node_set collector.value collector_lead
+[19:07:31] {}
+[19:13:41] node_set collector.value collector_poly
+[19:13:41] {}
+[19:13:43] node_set collector.value collector_lead
+[19:13:43] {}
+[19:15:30] status midi_devices input_devices output_devices settings
+[19:15:30] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[19:15:33] audio_set_output_device 2
+[19:15:33] {}
+[20:09:58] status midi_devices input_devices output_devices settings
+[20:09:58] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":false},{"id":2,"name":"Soundflower (2ch)","active":true},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[20:09:59] midi_remove_device 1
+[20:09:59] {}
+[20:10:00] midi_add_device 1
+[20:10:00] {}
+[20:10:02] audio_set_input_device 0
+[20:10:02] {}
+[20:10:03] audio_set_output_device 1
+[20:10:03] {}
+[20:10:03] audio_set_output_device 2
+[20:10:03] {}
+[20:10:12] node_set collector.value collector_poly
+[20:10:12] {}
+[20:18:14] node_set sound.value vocoder
+[20:18:14] {}
+[20:18:16] node_set collector.value collector_lead
+[20:18:16] {}
+[20:18:20] node_set collector.value collector_poly
+[20:18:20] {}
+[20:19:29] node_set sound.value collector
+[20:19:29] {}
+[20:19:50] node_deactivate oscillator_2
+[20:19:50] {}
+[20:19:51] node_deactivate oscillator_3
+[20:19:51] {}
+[20:19:52] node_activate oscillator_2
+[20:19:52] {}
+[20:19:53] node_deactivate oscillator_2
+[20:19:53] {}
+[20:19:53] node_activate oscillator_2
+[20:19:53] {}
+[20:19:55] node_deactivate oscillator_2
+[20:19:55] {}
+[20:19:58] node_activate oscillator_2
+[20:19:58] {}
+[20:19:59] node_deactivate oscillator_2
+[20:19:59] {}
+[20:20:01] node_activate oscillator_2
+[20:20:01] {}
+[20:20:03] node_deactivate oscillator_2
+[20:20:03] {}
+[20:20:04] node_activate oscillator_2
+[20:20:04] {}
+[20:20:06] node_deactivate oscillator_2
+[20:20:06] {}
+[20:20:07] node_activate oscillator_2
+[20:20:07] {}
+[20:20:07] node_activate oscillator_3
+[20:20:07] {}
+[20:20:08] node_deactivate oscillator_3
+[20:20:08] {}
+[20:20:09] node_activate oscillator_3
+[20:20:09] {}
+[20:20:24] node_set sound.value vocoder
+[20:20:24] {}
+[20:21:34] node_deactivate oscillator_3
+[20:21:34] {}
+[20:21:35] node_deactivate oscillator_2
+[20:21:35] {}
+[20:22:53] node_set collector.value collector_lead
+[20:22:53] {}
+[20:23:05] node_deactivate oscillator_1
+[20:23:05] {}
+[20:23:05] node_activate oscillator_3
+[20:23:05] {}
+[20:23:05] node_activate oscillator_2
+[20:23:05] {}
+[20:23:17] node_activate oscillator_1
+[20:23:17] {}
+[20:23:17] node_deactivate oscillator_3
+[20:23:17] {}
+[20:24:54] node_set collector.value collector_poly
+[20:24:54] {}
+[20:25:12] node_activate oscillator_3
+[20:25:12] {}
+[20:25:57] audio_set_output_device 1
+[20:25:57] {}
+[20:29:29] node_set collector.value collector_lead
+[20:29:29] {}
+[20:29:59] node_set collector.value collector_poly
+[20:29:59] {}
+[20:58:35] exit
+[20:58:35] {"info":[{"message":"Program ended"}]}
+[20:58:36] status midi_devices input_devices output_devices settings
+[20:58:36] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"USB Midi        ","active":false},{"id":2,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":3,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":false},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[20:58:38] midi_add_device 1
+[20:58:38] {}
+[20:58:41] audio_set_input_device 0
+[20:58:41] {}
+[20:58:43] play stop
+[20:58:43] {"state":{"playing":false}}
+[20:58:43] clear
+[20:58:43] {}
+[20:58:43] settings_set root_directory ../instruments/synthesizer
+[20:58:43] {}
+[20:58:43] include instrument.synth
+[20:58:43] {}
+[20:58:43] play start
+[20:58:43] {"state":{"playing":true}}
+[20:58:44] status midi_devices
+[20:58:44] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"USB Midi        ","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":3,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[20:58:44] node_set collector.value collector_poly
+[20:58:44] {}
+[20:58:44] node_set sound.value vocoder
+[20:58:44] {}
+[20:58:44] node_set glide.midi_cc 28
+[20:58:44] {}
+[20:58:44] node_set glide.value 0.5905511811023622
+[20:58:44] {}
+[20:58:44] node_set delay_gain.midi_cc 27
+[20:58:44] {}
+[20:58:44] node_set delay_gain.value 0
+[20:58:44] {}
+[20:58:44] node_set delay_time.midi_cc -1
+[20:58:44] {}
+[20:58:44] node_set delay_time.value 0.5905511811023622
+[20:58:44] {}
+[20:58:44] node_activate oscillator_1
+[20:58:44] {}
+[20:58:44] node_activate oscillator_2
+[20:58:44] {}
+[20:58:44] node_activate oscillator_3
+[20:58:44] {}
+[20:58:44] node_set waveform_1.midi_cc 21
+[20:58:44] {}
+[20:58:44] node_set waveform_1.value 0.6929133858267716
+[20:58:44] {}
+[20:58:44] node_set waveform_2.midi_cc 22
+[20:58:44] {}
+[20:58:44] node_set waveform_2.value 0.5826771653543307
+[20:58:44] {}
+[20:58:44] node_set waveform_3.midi_cc 23
+[20:58:44] {}
+[20:58:44] node_set waveform_3.value 0.5669291338582677
+[20:58:44] {}
+[20:58:44] node_set harmonic_1.midi_cc 41
+[20:58:44] {}
+[20:58:44] node_set harmonic_1.value 0
+[20:58:44] {}
+[20:58:44] node_set harmonic_2.midi_cc 42
+[20:58:44] {}
+[20:58:44] node_set harmonic_2.value 0
+[20:58:44] {}
+[20:58:44] node_set harmonic_3.midi_cc 43
+[20:58:44] {}
+[20:58:44] node_set harmonic_3.value 0.2440944881889764
+[20:58:44] {}
+[20:58:44] node_set detune_1.midi_cc 44
+[20:58:44] {}
+[20:58:44] node_set detune_1.value 0.49606299212598426
+[20:58:44] {}
+[20:58:44] node_set detune_2.midi_cc 45
+[20:58:44] {}
+[20:58:44] node_set detune_2.value 0.29133858267716534
+[20:58:44] {}
+[20:58:44] node_set detune_3.midi_cc 46
+[20:58:44] {}
+[20:58:44] node_set detune_3.value 0.7401574803149606
+[20:58:44] {}
+[20:58:44] node_set gain_1.midi_cc 24
+[20:58:44] {}
+[20:58:44] node_set gain_1.value 0.6771653543307087
+[20:58:44] {}
+[20:58:44] node_set gain_2.midi_cc 25
+[20:58:44] {}
+[20:58:44] node_set gain_2.value 0.6377952755905512
+[20:58:44] {}
+[20:58:44] node_set gain_3.value 0.1889763779527559
+[20:58:44] {}
+[20:58:44] node_set gain_3.midi_cc 26
+[20:58:44] {}
+[20:58:44] node_set attack_time.midi_cc 47
+[20:58:44] {}
+[20:58:44] node_set attack_time.value 0
+[20:58:44] {}
+[20:58:44] node_set decay_time.midi_cc -1
+[20:58:44] {}
+[20:58:44] node_set decay_time.value 0
+[20:58:44] {}
+[20:58:44] node_set sustain_level.midi_cc -1
+[20:58:44] {}
+[20:58:44] node_set sustain_level.value 1
+[20:58:44] {}
+[20:58:44] node_set release_time.value 0.2204724409448819
+[20:58:44] {}
+[20:58:44] node_set release_time.midi_cc 48
+[20:58:44] {}
+[20:58:44] node_set cutoff.midi_cc -1
+[20:58:44] {}
+[20:58:44] node_set cutoff.value 0
+[20:58:44] {}
+[20:58:52] status midi_devices input_devices output_devices settings
+[20:58:52] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"USB Midi        ","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey MIDI","active":false},{"id":3,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":true},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[20:58:53] midi_add_device 2
+[20:58:53] {}
+[20:59:41] status midi_devices input_devices output_devices settings
+[20:59:41] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"USB Midi        ","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":3,"name":"Launchkey MK2 49 Launchkey InControl","active":false}],"inputDevices":[{"id":"0","name":"Built-in Input","active":true},{"id":"2","name":"Soundflower (2ch)","active":false},{"id":"3","name":"Soundflower (64ch)","active":false}],"outputDevices":[{"id":1,"name":"Built-in Output","active":true},{"id":2,"name":"Soundflower (2ch)","active":false},{"id":3,"name":"Soundflower (64ch)","active":false}],"settings":{"sampleRate":44100,"bufferSize":128,"sustainPedalPolarity":"normal","pitchWheelRange":2}}
+[20:59:58] status midi_devices
+[20:59:58] {"midiDevices":[{"id":0,"name":"IAC Driver Bus 1","active":false},{"id":1,"name":"USB Midi        ","active":true},{"id":2,"name":"Launchkey MK2 49 Launchkey MIDI","active":true},{"id":3,"name":"Launchkey MK2 49 Launchkey InControl","active":false}]}
+[20:59:59] node_set collector.value collector_poly
+[20:59:59] {}
+[20:59:59] node_set sound.value vocoder
+[20:59:59] {}
+[20:59:59] node_set glide.midi_cc 28
+[20:59:59] {}
+[20:59:59] node_set glide.value 0.5905511811023622
+[20:59:59] {}
+[20:59:59] node_set delay_gain.midi_cc 27
+[20:59:59] {}
+[20:59:59] node_set delay_gain.value 0
+[20:59:59] {}
+[20:59:59] node_set delay_time.value 0.5905511811023622
+[20:59:59] {}
+[20:59:59] node_set delay_time.midi_cc -1
+[20:59:59] {}
+[20:59:59] node_activate oscillator_1
+[20:59:59] {}
+[20:59:59] node_activate oscillator_2
+[20:59:59] {}
+[20:59:59] node_activate oscillator_3
+[20:59:59] {}
+[20:59:59] node_set waveform_1.midi_cc 21
+[20:59:59] {}
+[20:59:59] node_set waveform_1.value 0.6929133858267716
+[20:59:59] {}
+[20:59:59] node_set waveform_2.midi_cc 22
+[20:59:59] {}
+[20:59:59] node_set waveform_2.value 0.5826771653543307
+[20:59:59] {}
+[20:59:59] node_set waveform_3.midi_cc 23
+[20:59:59] {}
+[20:59:59] node_set waveform_3.value 0.5669291338582677
+[20:59:59] {}
+[20:59:59] node_set harmonic_1.midi_cc 41
+[20:59:59] {}
+[20:59:59] node_set harmonic_1.value 0
+[20:59:59] {}
+[20:59:59] node_set harmonic_2.midi_cc 42
+[20:59:59] {}
+[20:59:59] node_set harmonic_2.value 0
+[20:59:59] {}
+[20:59:59] node_set harmonic_3.midi_cc 43
+[20:59:59] {}
+[20:59:59] node_set harmonic_3.value 0.2440944881889764
+[20:59:59] {}
+[20:59:59] node_set detune_1.midi_cc 44
+[20:59:59] {}
+[20:59:59] node_set detune_1.value 0.49606299212598426
+[20:59:59] {}
+[20:59:59] node_set detune_2.midi_cc 45
+[20:59:59] {}
+[20:59:59] node_set detune_2.value 0.29133858267716534
+[20:59:59] {}
+[20:59:59] node_set detune_3.midi_cc 46
+[20:59:59] {}
+[20:59:59] node_set detune_3.value 0.7401574803149606
+[20:59:59] {}
+[20:59:59] node_set gain_1.midi_cc 24
+[20:59:59] {}
+[20:59:59] node_set gain_1.value 0.6771653543307087
+[20:59:59] {}
+[20:59:59] node_set gain_2.midi_cc 25
+[20:59:59] {}
+[20:59:59] node_set gain_2.value 0.6377952755905512
+[20:59:59] {}
+[20:59:59] node_set gain_3.midi_cc 26
+[20:59:59] {}
+[20:59:59] node_set gain_3.value 0.1889763779527559
+[20:59:59] {}
+[20:59:59] node_set attack_time.midi_cc 47
+[20:59:59] {}
+[20:59:59] node_set attack_time.value 0
+[20:59:59] {}
+[20:59:59] node_set decay_time.midi_cc -1
+[20:59:59] {}
+[20:59:59] node_set decay_time.value 0
+[20:59:59] {}
+[20:59:59] node_set sustain_level.midi_cc -1
+[20:59:59] {}
+[20:59:59] node_set sustain_level.value 1
+[20:59:59] {}
+[20:59:59] node_set release_time.midi_cc 48
+[20:59:59] {}
+[20:59:59] node_set release_time.value 0.2204724409448819
+[20:59:59] {}
+[20:59:59] node_set cutoff.midi_cc -1
+[20:59:59] {}
+[20:59:59] node_set cutoff.value 0
+[20:59:59] {}
+[20:59:59] node_set sound.value collector
+[20:59:59] {}
+[21:02:12] node_set sound.value vocoder
+[21:02:12] {}
+[21:04:03] node_set collector.value collector_lead
+[21:04:03] {}
+[21:04:30] node_set collector.value collector_poly
+[21:04:30] {}
+[21:06:47] node_set collector.value collector_lead
+[21:06:47] {}
+[21:07:00] node_deactivate oscillator_3
+[21:07:00] {}
+[21:07:02] node_activate oscillator_3
+[21:07:02] {}
+[21:07:03] node_deactivate oscillator_2
+[21:07:03] {}
+[21:07:04] node_deactivate oscillator_1
+[21:07:04] {}
+[21:07:06] node_activate oscillator_2
+[21:07:06] {}
+[21:07:06] node_activate oscillator_1
+[21:07:06] {}
+[21:10:06] node_set collector.value collector_poly
+[21:10:06] {}
+[21:10:13] node_set collector.value collector_lead
+[21:10:13] {}
+[21:10:41] node_set collector.value collector_poly
+[21:10:41] {}
+[21:11:24] node_set collector.value collector_lead
+[21:11:24] {}
+[21:12:08] node_set collector.value collector_poly
+[21:12:08] {}
+[21:16:07] node_set collector.value collector_lead
+[21:16:07] {}
+[21:16:33] node_set collector.value collector_poly
+[21:16:33] {}
+[21:17:32] node_set collector.value collector_lead
+[21:17:32] {}
+[21:17:48] node_set collector.value collector_poly
+[21:17:48] {}
+[21:18:26] node_set collector.value collector_lead
+[21:18:26] {}
+[21:19:33] node_set sound.value collector
+[21:19:33] {}
+[21:19:34] node_set sound.value vocoder
+[21:19:34] {}
+[21:20:47] node_set collector.value collector_poly
+[21:20:47] {}
+[21:22:59] node_set collector.value collector_lead
+[21:22:59] {}
+[21:23:03] node_set collector.value collector_poly
+[21:23:03] {}
+[21:23:11] node_set collector.value collector_lead
+[21:23:11] {}
+[21:23:12] node_set collector.value collector_poly
+[21:23:12] {}
+[21:25:53] node_set collector.value collector_lead
+[21:25:53] {}
+[21:29:02] node_set sound.value collector
+[21:29:02] {}
+[21:29:25] node_set sound.value vocoder
+[21:29:25] {}
+[21:29:30] node_set collector.value collector_poly
+[21:29:30] {}
+[21:29:32] node_set collector.value collector_lead
+[21:29:32] {}
+[21:32:25] node_set collector.value collector_poly
+[21:32:25] {}
+[21:32:40] node_set collector.value collector_lead
+[21:32:40] {}
+[21:33:46] node_set collector.value collector_poly
+[21:33:46] {}
+[21:39:50] node_set collector.value collector_lead
+[21:39:50] {}
+[21:39:59] node_set collector.value collector_poly
+[21:39:59] {}
+[21:40:27] node_set collector.value collector_lead
+[21:40:27] {}
+[21:40:37] node_set collector.value collector_poly
+[21:40:37] {}
+[21:44:02] node_set collector.value collector_lead
+[21:44:02] {}
+[21:44:04] node_set collector.value collector_poly
+[21:44:04] {}
+[21:47:35] node_set collector.value collector_lead
+[21:47:35] {}
+[21:47:53] node_set collector.value collector_poly
+[21:47:53] {}
+[21:49:01] node_set sound.value collector
+[21:49:01] {}
+[21:49:30] node_set sound.value vocoder
+[21:49:30] {}
+[21:50:38] node_set collector.value collector_lead
+[21:50:38] {}
+[21:52:35] node_set collector.value collector_poly
+[21:52:35] {}
+[21:53:21] node_set collector.value collector_lead
+[21:53:21] {}
+[21:55:12] node_set collector.value collector_poly
+[21:55:12] {}
+[21:56:35] node_set sound.value collector
+[21:56:35] {}
+[21:57:24] node_set collector.value collector_lead
+[21:57:24] {}
+[21:59:10] node_set sound.value vocoder
+[21:59:10] {}
+[21:59:13] node_set collector.value collector_poly
+[21:59:13] {}
