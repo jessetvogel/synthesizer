@@ -2,6 +2,7 @@ $(document).ready(function () {
 
   Switch.create('switch-polyphonic').setId('switch-polyphonic').setCaption('Polyphonic').onOn(function () { api.command('node_set collector.value collector_poly'); }).onOff(function () { api.command('node_set collector.value collector_lead'); })
   Switch.create('switch-vocoder').setId('switch-vocoder').setCaption('Vocoder').onOn(function () { api.command('node_set sound.value vocoder'); }).onOff(function () { api.command('node_set sound.value collector'); })
+  knob.create('knob-gain').setId('gain').setCaption('Gain');
 
   knob.create('knob-glide').setId('glide').setCaption('Glide');
   knob.create('knob-delay-gain').setId('delay_gain').setCaption('Delay gain');
@@ -32,13 +33,18 @@ $(document).ready(function () {
   knob.create('knob-sustain').setId('sustain_level').setCaption('Sustain');
   knob.create('knob-release').setId('release_time').setCaption('Release');
 
-  knob.create('knob-filter-attack').setCaption('Attack');
-  knob.create('knob-filter-decay').setCaption('Decay');
-  knob.create('knob-filter-sustain').setCaption('Sustain');
-  knob.create('knob-filter-release').setCaption('Release');
+  // knob.create('knob-filter-attack').setCaption('Attack');
+  // knob.create('knob-filter-decay').setCaption('Decay');
+  // knob.create('knob-filter-sustain').setCaption('Sustain');
+  // knob.create('knob-filter-release').setCaption('Release');
 
-  knob.create('knob-filter-cutoff').setId('cutoff').setCaption('Cutoff');
-  knob.create('knob-range').setCaption('Range');
+  knob.create('knob-low-cutoff').setId('low_cutoff').setCaption('Lowpass');
+  knob.create('knob-high-cutoff').setId('high_cutoff').setCaption('Highpass');
+
+  knob.create('knob-mod-low-cutoff').setId('mod_low_cutoff').setCaption('Lowpass (mic)');
+  knob.create('knob-mod-high-cutoff').setId('mod_high_cutoff').setCaption('Highpass (mic)');
+
+  // knob.create('knob-range').setCaption('Range');
 
   keyboard.create('keyboard', 'A0', 'C8');
 

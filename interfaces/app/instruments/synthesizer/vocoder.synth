@@ -1,8 +1,13 @@
 # Parameters
-node_create label bandwidth [value = 1.25]
+node_create parameter bandwidth [min = 0.5, max = 2.0, curve = exponential, value = 0.5]
+
+node_create parameter mod_low_cutoff [min = 20.0, max = 15000.0, curve = exponential, value = 1.0]
+node_create parameter mod_high_cutoff [min = 20.0, max = 15000.0, curve = exponential, value = 0.0]
 
 # Carrier / modulator signal
-node_create audio_input modulator
+node_create audio_input audio_input
+node_create lowpass mod_lowpass [order = 2, input = audio_input, cutoff = mod_low_cutoff]
+node_create highpass modulator [order = 2, input = mod_lowpass, cutoff = mod_high_cutoff]
 node_create label carrier [value = collector]
 
 # Modulator filters

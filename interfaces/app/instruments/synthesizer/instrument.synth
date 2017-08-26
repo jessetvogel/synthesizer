@@ -3,9 +3,9 @@ node_create parameter waveform_1 [min = 0.0, max = 3.999]
 node_create parameter waveform_2 [min = 0.0, max = 3.999]
 node_create parameter waveform_3 [min = 0.0, max = 3.999]
 
-node_create parameter harmonic_1 [min = 1.0, max = 12.0]
-node_create parameter harmonic_2 [min = 1.0, max = 12.0]
-node_create parameter harmonic_3 [min = 1.0, max = 12.0]
+node_create parameter harmonic_1 [min = 1.0, max = 5.0]
+node_create parameter harmonic_2 [min = 1.0, max = 5.0]
+node_create parameter harmonic_3 [min = 1.0, max = 5.0]
 
 node_create parameter detune_1 [min = 0.98566319864024, max = 1.014545334937465, curve = exponential]
 node_create parameter detune_2 [min = 0.98566319864024, max = 1.014545334937465, curve = exponential]
@@ -25,7 +25,10 @@ node_create parameter release_time [value = 0.1, min = 0.005, max = 1.000, curve
 node_create parameter delay_gain [min = 0.0, max = 1.0]
 node_create parameter delay_time [min = 0.234375, max = 0.468750]
 
-node_create parameter cutoff [min = 20.0, max = 15000.0, curve = exponential]
+node_create parameter low_cutoff [min = 20.0, max = 15000.0, curve = exponential, value = 1.0]
+node_create parameter high_cutoff [min = 20.0, max = 15000.0, curve = exponential, value = 0.0]
+
+node_create parameter gain [min = 0.01, max = 100.0, curve = exponential, value = 0.5]
 
 # Vibrato
 node_create adder vibrato_amplitude [n = 1, input_1 = modulation_wheel, gain_1 = 0.059463]
@@ -69,12 +72,9 @@ node_set voice_output.gain_2 gain_2
 node_set voice_output.input_3 oscillator_3
 node_set voice_output.gain_3 gain_3
 
-# Filter
-node_create highpass filter [voice = true, n = 2, input = voice_output, cutoff = cutoff]
-
 # Collectors
-node_create collector_lead collector_lead [release_time = 1.0, glide = glide, input = filter]
-node_create collector_poly collector_poly [release_time = release_time, input = filter]
+node_create collector_lead collector_lead [release_time = 1.0, glide = glide, input = voice_output]
+node_create collector_poly collector_poly [release_time = release_time, input = voice_output]
 node_create label collector [value = collector_lead]
 
 # ...
@@ -83,8 +83,15 @@ node_create label sound [value = collector]
 # Delay
 node_create delay delay [n = 1, T = 1.0, input = sound, time_1 = delay_time, gain_1 = delay_gain, feedback = 1.0]
 
+# Low- / highpass filters
+node_create lowpass lowpass [order = 2, input = delay, cutoff = low_cutoff]
+node_create highpass highpass [order = 2, input = lowpass, cutoff = high_cutoff]
+
+# Gain
+node_create adder amplifier [input_1 = highpass, gain_1 = gain]
+
 # Output
-node_create audio_output output [channel_1 = delay]
+node_create audio_output output [channel_1 = amplifier]
 
 
 # Vocoder options

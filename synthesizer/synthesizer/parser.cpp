@@ -10,8 +10,9 @@
 #include "node.hpp"
 #include "monitor.hpp"
 #include "settings.hpp"
-
 #include "status.hpp"
+
+#include "log.hpp"
 
 Parser::Parser(Controller* controller) {
     // Store pointer to controller
@@ -30,8 +31,10 @@ bool Parser::parseFile(std::string filepath) {
     int lineNumber = 1;
     std::string line;
     while(std::getline(input, line)) {
-        if(!parseLine(line))
+        if(!parseLine(line) || !Status::noErrors()) {
+            Log::writeLine("Failed to parse line " + std::to_string(lineNumber) + " of " + filepath + ":\n\t" + line);
             return false;
+        }
         
         ++ lineNumber;
     }
@@ -97,8 +100,8 @@ bool Parser::parseLine(std::string line) {
             dir = directory;
         else
             dir = controller->getSettings()->rootDirectory;
-        parser.parseFile(dir + DIRECTORY_SEPARATOR + std::string(cm[1]));
-        return true;
+
+        return parser.parseFile(dir + DIRECTORY_SEPARATOR + std::string(cm[1]));
     }
     
     // Nodes
