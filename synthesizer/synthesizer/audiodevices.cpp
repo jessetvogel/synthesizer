@@ -1,6 +1,9 @@
+#include <fstream>
+
 #include "audiodevices.hpp"
 #include "controller.hpp"
 #include "settings.hpp"
+#include "commands.hpp"
 
 #include "status.hpp"
 
@@ -17,6 +20,67 @@ AudioDevices::AudioDevices(Controller* controller) {
     setOutputDeviceId(DEVICE_ID_DEFAULT);
     inputChannelCount = 1;
     outputChannelCount = 1;
+    
+    // Load
+    load();
+}
+
+bool AudioDevices::load() {
+    std::string settingsDirectory = controller->getSettings()->directory;
+    if(settingsDirectory.length() == 0) return true;
+    
+    std::ifstream inputInputDevice(settingsDirectory + DIRECTORY_SEPARATOR + "input_devices");
+    if(inputInputDevice.fail()) { Status::addError("Failed to open input devices file to load data"); return false; }
+    
+    // Take the first available device you can find
+    std::string line;
+    int n = amountOfDevices();
+    bool done = false;
+    while(!done && std::getline(inputInputDevice, line)) {
+        for(int i = 0;i < n; ++i) {
+            if(line.compare(deviceName(i)) == 0) {
+                setInputDeviceId(i);
+                done = true;
+                break;
+            }
+        }
+    }
+    
+    // Same for output device
+    std::ifstream inputOutputDevice(settingsDirectory + DIRECTORY_SEPARATOR + "output_devices");
+    if(inputOutputDevice.fail()) { Status::addError("Failed to open output devices file to load data"); return false; }
+
+    done = false;
+    while(!done && std::getline(inputOutputDevice, line)) {
+        for(int i = 0;i < n; ++i) {
+            if(line.compare(deviceName(i)) == 0) {
+                setOutputDeviceId(i);
+                done = true;
+                break;
+            }
+        }
+    }
+    
+    return true;
+}
+
+bool AudioDevices::store() {
+    std::string settingsDirectory = controller->getSettings()->directory;
+    if(settingsDirectory.length() == 0) return true;
+    
+    // Write input devices file
+    std::ofstream outputInputDevice(settingsDirectory + DIRECTORY_SEPARATOR + "input_devices");
+    if(outputInputDevice.fail()) { Status::addError("Failed to open input devices file to store data"); return false; }
+    outputInputDevice << deviceName(inputDeviceId) << std::endl;
+    outputInputDevice.close();
+    
+    // Write output devices file
+    std::ofstream outputOutputDevice(settingsDirectory + DIRECTORY_SEPARATOR + "output_devices");
+    if(outputOutputDevice.fail()) { Status::addError("Failed to open output devices file to store data"); return false; }
+    outputOutputDevice << deviceName(outputDeviceId) << std::endl;
+    outputOutputDevice.close();
+    
+    return true;
 }
 
 bool AudioDevices::setInputDeviceId(int n) {

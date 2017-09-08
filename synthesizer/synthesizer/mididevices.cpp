@@ -1,8 +1,11 @@
 #include <portmidi.h>
+#include <fstream>
 
 #include "controller.hpp"
+#include "settings.hpp"
 #include "mididevices.hpp"
 #include "mididevice.hpp"
+#include "commands.hpp"
 
 #include "status.hpp"
 
@@ -12,6 +15,9 @@ MIDIDevices::MIDIDevices(Controller* controller) {
     
     // By default, not active
     active = false;
+    
+    // Load
+    load();
 }
 
 MIDIDevices::~MIDIDevices() {
@@ -19,6 +25,42 @@ MIDIDevices::~MIDIDevices() {
     for(auto it = devices.begin(); it != devices.end(); ++it)
         delete (*it);
     mutex.unlock();
+}
+
+bool MIDIDevices::load() {
+    std::string settingsDirectory = controller->getSettings()->directory;
+    if(settingsDirectory.length() == 0) return true;
+    
+    std::ifstream input(settingsDirectory + DIRECTORY_SEPARATOR + "midi_devices");
+    if(input.fail()) { Status::addError("Failed to open midi devices file to load data"); return false; }
+    
+    // Add all listed devices (if available) and add them to the list of preferered devices
+    std::string line;
+    int n = amountOfDevices();
+    while(std::getline(input, line)) {
+        for(int i = 0;i < n; ++i) {
+            if(line.compare(deviceName(i)) == 0)
+                add(i);
+        }
+        preferredDevices.push_back(line);
+    }
+    input.close();
+    return true;
+}
+
+bool MIDIDevices::store() {
+    std::string settingsDirectory = controller->getSettings()->directory;
+    if(settingsDirectory.length() == 0) return true;
+
+    std::ofstream output(settingsDirectory + DIRECTORY_SEPARATOR + "midi_devices");
+    if(output.fail()) { Status::addError("Failed to open midi devices file to store data"); return false; }
+    
+    // Output all preferred devices
+    for(auto it = preferredDevices.begin();it != preferredDevices.end(); ++it)
+        output << *it << std::endl;
+
+    output.close();
+    return true;
 }
 
 bool MIDIDevices::start() {
@@ -72,6 +114,12 @@ bool MIDIDevices::add(int n) {
     if(active) device->start();
     devices.push_back(device);
     mutex.unlock();
+    
+    // If not yet in the preferred list, put it
+    std::string name = deviceName(n);
+    if(std::find(preferredDevices.begin(), preferredDevices.end(), name) == preferredDevices.end())
+        preferredDevices.push_back(name);
+    
     return true;
 }
 
@@ -103,6 +151,10 @@ bool MIDIDevices::remove(int n) {
         }
     }
     mutex.unlock();
+    
+    // If in the list of preferred devices, remove it
+    preferredDevices.erase(std::remove(preferredDevices.begin(), preferredDevices.end(), deviceName(n)), preferredDevices.end());
+    
     return found;
 }
 

@@ -19,17 +19,25 @@
 
 class Settings {
    
-    bool load(std::string);
+    bool load();
     bool parseLine(std::string);
     
 public:
     
+    const std::string directory;
+    
     Settings(std::string);
+    bool store();
     
     // Constant
     double sampleRate;
     unsigned long bufferSize;
     int voices;
+
+    // In case of updated constants
+    double newSampleRate;
+    unsigned long newBufferSize;
+    int newVoices;
     
     // Changeable
     double masterVolume;

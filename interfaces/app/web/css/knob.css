@@ -60,6 +60,7 @@
   text-align: center;
   z-index: 2;
   display: none;
+  color: var(--base00);
 }
 
 .knob .circle:hover + .popup {

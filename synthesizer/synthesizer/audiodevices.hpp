@@ -22,12 +22,16 @@ class AudioDevices {
     
     static int callback(const void*, void*, unsigned long, const PaStreamCallbackTimeInfo*, PaStreamCallbackFlags, void*);
     
+    bool load();
+    
 public:
     
     const static int DEVICE_ID_DEFAULT;
     const static int DEVICE_ID_NONE;
     
     AudioDevices(Controller*);
+    
+    bool store();
     
     bool start();
     bool stop();

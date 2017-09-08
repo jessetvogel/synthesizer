@@ -57,21 +57,21 @@ bool Parser::parseLine(std::string line) {
     // MIDI
 
     // midi_add_device <input_device>
-    if(std::regex_search(str, cm, Commands::regexMidiAddDevice))            return controller->getMIDIDevices()->add(stoi(cm[1]));
+    if(std::regex_search(str, cm, Commands::regexMidiAddDevice))            return controller->getMIDIDevices()->add(stoi(cm[1])) && controller->getMIDIDevices()->store();
     // midi_remove_device <input_device>
-    if(std::regex_search(str, cm, Commands::regexMidiRemoveDevice))         return controller->getMIDIDevices()->remove(stoi(cm[1]));
+    if(std::regex_search(str, cm, Commands::regexMidiRemoveDevice))         return controller->getMIDIDevices()->remove(stoi(cm[1])) && controller->getMIDIDevices()->store();
     
     // Audio
     
     // audio_set_input_device <input_device>
-    if(std::regex_search(str, cm, Commands::regexAudioSetInputDevice))      return controller->getAudioDevices()->setInputDeviceId(stoi(cm[1]));
+    if(std::regex_search(str, cm, Commands::regexAudioSetInputDevice))      return controller->getAudioDevices()->setInputDeviceId(stoi(cm[1])) && controller->getAudioDevices()->store();
     // audio_set_output_device <input_device>
-    if(std::regex_search(str, cm, Commands::regexAudioSetOutputDevice))     return controller->getAudioDevices()->setOutputDeviceId(stoi(cm[1]));
+    if(std::regex_search(str, cm, Commands::regexAudioSetOutputDevice))     return controller->getAudioDevices()->setOutputDeviceId(stoi(cm[1])) && controller->getAudioDevices()->store();
     
     // Settings
     
     // settings_set <parameter> <value>
-    if(std::regex_search(str, cm, Commands::regexSettingsSet))              return controller->getSettings()->set(cm[1], cm[2]);
+    if(std::regex_search(str, cm, Commands::regexSettingsSet))              return controller->getSettings()->set(cm[1], cm[2]) && controller->getSettings()->store(); // TODO: is this the best place to store settings? Same holds for audio and midi devices
     
     // Controller
     

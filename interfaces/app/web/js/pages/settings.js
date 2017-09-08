@@ -1,4 +1,5 @@
 var settings;
+var masterVolume;
 
 $(document).ready(function () {
 
@@ -18,6 +19,7 @@ $(document).ready(function () {
     }
 
     var inputDevices = data.inputDevices;
+    var inputDeviceIsNone = true;
     for(var i = 0;i < inputDevices.length;i ++) {
       var inputDevice = $('<div>').addClass('input-line');
       var radioId = 'radio-input-' + inputDevices[i].id;
@@ -27,7 +29,13 @@ $(document).ready(function () {
         if($(this).is(':checked'))
           api.command('audio_set_input_device ' + id);
       }); })(inputDevices[i].id);
+      if(inputDevices[i].active) inputDeviceIsNone = false;
     }
+    $('#radio-input-none').prop('checked', inputDeviceIsNone).change(function () {
+      if($(this).is(':checked'))
+        api.command('audio_set_input_device -1');
+    });
+
 
     var outputDevices = data.outputDevices;
     for(var i = 0;i < outputDevices.length;i ++) {
@@ -42,24 +50,23 @@ $(document).ready(function () {
     }
 
     settings = data.settings;
-    settings.store = function () {
-      $.ajax({
-        method: 'POST',
-        url: '/data/settings/store',
-        data: 'settings_set sample_rate ' + settings.sampleRate + '\nsettings_set buffer_size ' + settings.bufferSize,
-    	  contentType: 'text/plain',
-        success: api.handle
-      });
-    }
 
     $('#input-sample-rate').val(settings.sampleRate).change(function () {
       settings.sampleRate = $(this).val();
-      settings.store();
+      api.command('settings_set sample_rate ' + settings.sampleRate);
     });
+
     $('#input-buffer-size').val(settings.bufferSize).change(function () {
       settings.bufferSize = $(this).val();
-      settings.store();
+      api.command('settings_set buffer_size ' + settings.bufferSize);
     });
+
+    $('#input-voices').val(settings.voices).change(function () {
+      settings.voices = $(this).val();
+      api.command('settings_set voices ' + settings.voices);
+    });
+
+    masterVolume.setMidiCC(settings.masterVolumeCC, false);
 
   });
 
@@ -77,5 +84,15 @@ $(document).ready(function () {
         window.close();
     });
   });
+
+  // Controls
+  masterVolume = knob.create('knob-volume').setCaption('Master volume');
+  masterVolume.setMidiCC = function (midiCC, update) {
+    this.midiCC = midiCC;
+    this.popup.text('' + (this.midiCC == -1 ? 'none' : this.midiCC));
+    if(update === undefined || update === true)
+      api.command('settings_set master_volume_cc ' + midiCC);
+    return this;
+  };
 
 });

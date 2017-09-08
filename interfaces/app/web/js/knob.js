@@ -10,7 +10,8 @@ var knob = {
     this.id = null;
 
     // Add this knob to the list of parameters
-    parameters.list.push(this);
+    if(typeof parameters !== "undefined")
+      parameters.list.push(this);
 
     // Visuals
     this.element.addClass('knob');
@@ -22,9 +23,9 @@ var knob = {
     (function (_) { circle.click(function () { _.setMIDICC(-1); _.detect(!_.detecting); }); })(this);
     container.append(circle);
 
-    var popup = $('<div>').addClass('popup')
+    this.popup = $('<div>').addClass('popup')
       .css({ left: (this.element.width() + 8) + 'px', top: (this.element.height() / 2 - 32) + 'px' });
-    container.append(popup);
+    container.append(this.popup);
 
     container.append($('<div>').addClass('caption'));
 
@@ -36,7 +37,7 @@ var knob = {
 
     this.setMIDICC = function (midiCC) {
       this.midiCC = midiCC;
-      popup.text('' + (this.midiCC == -1 ? 'none' : this.midiCC));
+      this.popup.text('' + (this.midiCC == -1 ? 'none' : this.midiCC));
       if(this.id !== null)
         api.command('node_set ' + this.id + '.midi_cc ' + midiCC);
       return this;
@@ -62,7 +63,7 @@ var knob = {
       if(x === true || x === undefined) {
         this.detecting = true;
         this.element.find('.circle').addClass('detecting');
-        popup.text('...');
+        this.popup.text('...');
       }
       else {
         this.detecting = false;

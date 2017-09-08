@@ -16,3 +16,25 @@
   margin-top: 16px;
   margin-bottom: 16px;
 }
+
+#control-knobs {
+  margin-left: 32px;
+  margin-bottom: 24px;
+}
+
+.knob {
+  width: 48px;
+  height: 48px;
+}
+
+.knob .caption {
+  color: var(--base06);
+}
+
+.note {
+  line-height: 32px;
+  text-align: center;
+  /*color: rgb(165, 72, 72);*/
+  color: red;
+  opacity: 0.333;
+}

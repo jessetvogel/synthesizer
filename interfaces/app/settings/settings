@@ -1,2 +1,6 @@
 settings_set sample_rate 44100
 settings_set buffer_size 128
+settings_set voices 12
+settings_set master_volume_cc 7
+settings_set sustain_pedal_polarity normal
+settings_set pitch_wheel_range 2

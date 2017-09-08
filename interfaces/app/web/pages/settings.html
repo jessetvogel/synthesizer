@@ -9,12 +9,15 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/fonts.css" />
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/knob.css" />
     <link rel="stylesheet" type="text/css" href="/css/messages.css" />
     <link rel="stylesheet" type="text/css" href="/css/pages/settings.css" />
     <!-- JS -->
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/script.js"></script>
+    <script type="text/javascript" src="/js/midi.js"></script>
+    <script type="text/javascript" src="/js/knob.js"></script>
     <script type="text/javascript" src="/js/api.js"></script>
     <script type="text/javascript" src="/js/messages.js"></script>
     <script type="text/javascript" src="/js/pages/settings.js"></script>
@@ -25,8 +28,10 @@
       <div class="toggle-box centered">
         <div class="title">General</div>
         <div class="content">
+          <div class="note">Changes will only apply after a restart!</div>
           <div class="input-line"><span>Sample rate</span><input type="text" id="input-sample-rate" /></div>
           <div class="input-line"><span>Buffer size</span><input type="text" id="input-buffer-size" /></div>
+          <div class="input-line"><span>Voices</span><input type="text" id="input-voices" /></div>
         </div>
       </div>
 
@@ -36,9 +41,20 @@
           <div class="header">MIDI devices</div>
           <div id="midi-devices"></div>
           <div class="header">Input devices</div>
-          <div id="input-devices"></div>
+          <div id="input-devices">
+            <div class="input-line"><label for="radio-input-none"><input type="radio" name="input-device" id="radio-input-none"><span><span>•</span></span><span>None</span></label></div>
+          </div>
           <div class="header">Output devices</div>
           <div id="output-devices"></div>
+        </div>
+      </div>
+
+      <div class="toggle-box centered">
+        <div class="title">Controls</div>
+        <div class="content">
+          <div id="control-knobs">
+            <div id="knob-volume"></div>
+          </div>
         </div>
       </div>
 

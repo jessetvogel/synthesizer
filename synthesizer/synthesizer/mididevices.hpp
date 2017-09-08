@@ -17,10 +17,14 @@ class MIDIDevices {
     
     bool active;
     
+    bool load();
+    std::vector<std::string> preferredDevices;
+    
 public:
     
     MIDIDevices(Controller*);
     ~MIDIDevices();
+    bool store();
     
     bool start();
     bool stop();

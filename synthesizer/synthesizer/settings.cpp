@@ -7,11 +7,11 @@
 
 #include "status.hpp"
 
-Settings::Settings(std::string filepath) {
-    // Set default values
-    sampleRate = DEFAULT_SAMPLE_RATE;
-    bufferSize = DEFAULT_BUFFER_SIZE;
-    voices = DEFAULT_VOICES;
+Settings::Settings(std::string dir) : directory(dir) {
+    // Set default values (note the end of this function)
+    newSampleRate = DEFAULT_SAMPLE_RATE;
+    newBufferSize = DEFAULT_BUFFER_SIZE;
+    newVoices = DEFAULT_VOICES;
     
     masterVolume = 1.0;
     masterVolumeCC = MIDI_MAIN_VOLUME;
@@ -21,20 +21,25 @@ Settings::Settings(std::string filepath) {
         frequencies[i] = 440.0 * std::pow(2.0, (double) (i - NOTE_A4) / 12.0);
     rootDirectory = "";
     
-    if(filepath.length() == 0) {
-        Status::addWarning("No settings were provided");
-        return;
+    if(directory.length() == 0) {
+        Status::addWarning("No settings directory was provided");
+    }
+    else {
+        // Load settings
+        if(!load())
+        Status::addError("Failed to load settings");
     }
     
-    // Load settings
-    if(!load(filepath))
-        Status::addError("Failed to load settings");
+    // Set constants to the ones loaded just now
+    sampleRate = newSampleRate;
+    bufferSize = newBufferSize;
+    voices = newVoices;
 }
 
-bool Settings::load(std::string filepath) {
+bool Settings::load() {
     // Read file line by line, and parse them
-    std::ifstream input(filepath);
-    if(input.fail()) { Status::addError("Failed to open settings file"); return false; }
+    std::ifstream input(directory + DIRECTORY_SEPARATOR + "settings");
+    if(input.fail()) { Status::addError("Failed to open settings file to load data"); return false; }
     
     int lineNumber = 1;
     std::string line;
@@ -44,6 +49,28 @@ bool Settings::load(std::string filepath) {
         ++ lineNumber;
     }
     input.close();
+    return true;
+}
+
+bool Settings::store() {
+    // If no filepath given, just don't store.
+    if(directory.length() == 0) return true;
+    
+    // Write file line by line
+    std::ofstream output(directory + DIRECTORY_SEPARATOR + "settings");
+    if(output.fail()) { Status::addError("Failed to open settings file to store data"); return false; }
+    
+    // Constants
+    output << "settings_set sample_rate " << newSampleRate << std::endl;
+    output << "settings_set buffer_size " << newBufferSize << std::endl;
+    output << "settings_set voices " << newVoices << std::endl;
+    
+    // Changeable
+    output << "settings_set master_volume_cc " << masterVolumeCC << std::endl;
+    output << "settings_set sustain_pedal_polarity " << (sustainPedalPolarity ? "inverted" : "normal") << std::endl;
+    output << "settings_set pitch_wheel_range " << pitchWheelRange << std::endl;
+    
+    output.close();
     return true;
 }
 
@@ -62,30 +89,49 @@ bool Settings::parseLine(std::string line) {
     // Settings
     
     // settings_set <parameter> <value>
-    if(std::regex_search(str, cm, Commands::regexSettingsSet)) {
-        if(cm[1].compare("sample_rate") == 0) {
-            sampleRate = stod(cm[2]);
-            return true;
-        }
-        
-        if(cm[1].compare("buffer_size") == 0) {
-            bufferSize = stoi(cm[2]);
-            return true;
-        }
-        
+    if(std::regex_search(str, cm, Commands::regexSettingsSet))
         return set(cm[1], cm[2]);
-    }
     
     Status::addError("Command not recognised");
     return false;
 }
 
 bool Settings::set(std::string key, std::string value) {
+    // Constants (we use 'new...' because we shouldn't use these, only save them so that we can use them next time)
+    if(key.compare("sample_rate") == 0) {
+        if(Util::isNumber(value)) {
+            newSampleRate = stod(value);
+            return true;
+        }
+        Status::addError("Invalid argument provided");
+        return false;
+    }
+    
+    if(key.compare("buffer_size") == 0) {
+        if(Util::isInteger(value)) {
+            newBufferSize = stod(value);
+            return true;
+        }
+        Status::addError("Invalid argument provided");
+        return false;
+    }
+    
+    if(key.compare("voices") == 0) {
+        if(Util::isNumber(value)) {
+            newVoices = stod(value);
+            return true;
+        }
+        Status::addError("Invalid argument provided");
+        return false;
+    }
+    
+    // Changeable
     if(key.compare("master_volume_cc") == 0) {
         if(Util::isInteger(value)) {
             masterVolumeCC = stoi(value);
             return true;
         }
+        Status::addError("Invalid argument provided");
         return false;
     }
     
@@ -99,7 +145,6 @@ bool Settings::set(std::string key, std::string value) {
             sustainPedalPolarity = false;
             return true;
         }
-        
         Status::addError("Invalid argument provided");
         return false;
     }
@@ -109,7 +154,6 @@ bool Settings::set(std::string key, std::string value) {
             pitchWheelRange = stod(value);
             return true;
         }
-        
         Status::addError("Invalid argument provided");
         return false;
     }

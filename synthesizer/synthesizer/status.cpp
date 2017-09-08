@@ -321,9 +321,11 @@ void Settings::printSettings() {
     
     std::cout << "\"sampleRate\":" << sampleRate << ",";
     std::cout << "\"bufferSize\":" << bufferSize << ",";
+    std::cout << "\"voices\":" << voices << ",";
     
     std::cout << "\"sustainPedalPolarity\":\"" << (sustainPedalPolarity ? "inverted" : "normal") << "\",";
-    std::cout << "\"pitchWheelRange\":" << pitchWheelRange << "";
+    std::cout << "\"pitchWheelRange\":" << pitchWheelRange << ",";
+    std::cout << "\"masterVolumeCC\":" << masterVolumeCC << "";
     
     std::cout << "}";
     

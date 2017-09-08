@@ -43,7 +43,7 @@ bool Interface::start() {
         char command[128];
         char argument[128];
         strncpy(command, "./synthesizer", 128);
-        strncpy(argument, "../settings/settings", 128);
+        strncpy(argument, "../settings", 128);
         
         char* argv[3];
         argv[0] = command;
